@@ -9,7 +9,7 @@
  
 int main()
 {
-    fair_shared_mutex m;
+    fsm::fair_shared_mutex m;
     auto acquireLockAndPrint = [&m](uint32_t threadPriority, uint32_t preLockTimer = 0, uint32_t postLockTimer = 0){
         auto threadID = std::this_thread::get_id();
         auto startTime = std::chrono::system_clock::now();
