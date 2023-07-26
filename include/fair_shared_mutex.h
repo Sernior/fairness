@@ -1,7 +1,8 @@
-#include <iostream>
+
 #include <mutex>
 #include <condition_variable>
 #include <set>
+#include <stdexcept>
 
 /*
 Pro and cons of having 2 condition_variable
@@ -18,20 +19,33 @@ Con:
 
 #define DEBUGGIN_FSM
 namespace fsm{
+
+    typedef uint32_t _Priority_t;
+    typedef uint16_t _Read_cnt_t;
+    typedef uint16_t _Write_cnt_t;
+    typedef uint32_t _TotRead_cnt_t;
+    static constexpr _TotRead_cnt_t _Max_readers = _TotRead_cnt_t(-1);
+
     struct threadPriority{
-        uint32_t prio{};
-        mutable uint32_t writers_waiting{};
-        mutable uint32_t readers_waiting{};
+        _Priority_t prio{};
+        mutable _Write_cnt_t writers_waiting{};
+        mutable _Read_cnt_t readers_waiting{};
         mutable std::condition_variable writer_queue;
         mutable std::condition_variable reader_queue;
-        threadPriority(uint32_t priority){
+        threadPriority(_Priority_t priority){
             prio = priority;
         }
         bool operator<(threadPriority const& other) const{
             return prio < other.prio;
         }
-        bool operator<(uint32_t priority) const{
+        bool operator<(_Priority_t priority) const{
             return prio < priority;
+        }
+        bool operator==(threadPriority const& other) const{
+            return prio == other.priority;
+        }
+        bool operator==(_Priority_t priority) const{
+            return prio == priority;
         }
     };
 
@@ -44,19 +58,24 @@ namespace fsm{
     class fair_shared_mutex{
         public:
 
-        void lock(uint32_t priority = 0){
+        void lock(_Priority_t priority = 0){
             #ifdef DEBUGGIN_FSM
             auto threadID = std::this_thread::get_id();
             #endif
 
             std::unique_lock<std::mutex> lock(_internalMtx);
             auto& myPriority = *(_priorities.emplace(priority).first);
-            while (_lockOwned){ 
+
+            while (_lockOwned || _totalCurrentReaders > 0){ 
                 myPriority.writers_waiting++;
                 myPriority.writer_queue.wait(lock);
                 myPriority.writers_waiting--;
             }
+
             _lockOwned = true;
+
+            //while (_totalCurrentReaders > 0) // can we do this? is it good? (P0)
+            //    myPriority.writer_queue.wait(lock);
         }
 
         void unlock(){
@@ -91,9 +110,38 @@ namespace fsm{
                 }
             }
         }
-        //void lock_shared(uint32_t priority = 0){
+        void lock_shared(_Priority_t priority = 0){
+            #ifdef DEBUGGIN_FSM
+            auto threadID = std::this_thread::get_id();
+            #endif
 
-        //}
+            std::unique_lock<std::mutex> lock(_internalMtx);
+            auto& myPriority = *(_priorities.emplace(priority).first);
+
+            #ifdef DEBUGGIN_FSM
+            if (_lockOwned && _totalCurrentReaders > 0){// this could actually be good if we put another check in the lock() for readers > 0 (P0)
+            //I ultimatly think this condition should be kept as an invalid state as there is no guarantee that by fishing in the writer_queue
+            //we would catch again the right thread (the one who got to the second while) on the first try... thus causing many writers to wake up
+            //for no reason.
+                throw std::exception("The lock is being owned uniquely while there are readers.");
+            }
+            if (_totalCurrentReaders == _Max_readers){
+                throw std::exception("Unsupported number of readers.");
+            }
+            #endif
+
+            // do we starve writers? maybe we need to check the currently served priority or maybe we could just accept that if
+            // a thread A comes and tries to acquire the shared_lock while others are reading... even if A has lower priority then the current ones
+            // we could just let him pass anyways.
+            while (_lockOwned || _totalCurrentReaders == _Max_readers){
+                myPriority.readers_waiting++;
+                myPriority.writer_queue.wait(lock);
+                myPriority.readers_waiting--;
+            }
+
+            _totalCurrentReaders++;
+
+        }
         //void unlock_shared(){
 
         //}
@@ -102,9 +150,7 @@ namespace fsm{
         std::mutex _internalMtx;
         std::set<threadPriority> _priorities;
         bool _lockOwned{};
-
-        //this variable might be usefull in the future if we want to make the mutex also unlock lower priority readers
-        //uint32_t _totalCurrentReaders{};
+        _TotRead_cnt_t _totalCurrentReaders{};
 
     };
 }
