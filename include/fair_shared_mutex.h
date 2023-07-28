@@ -27,11 +27,13 @@ namespace fsm{
     static constexpr _TotRead_cnt_t _Max_readers = _TotRead_cnt_t(-1);
 
     struct threadPriority{
+
         _Priority_t prio{};
         mutable _Write_cnt_t writers_waiting{};
         mutable _Read_cnt_t readers_waiting{};
         mutable std::condition_variable writer_queue;
         mutable std::condition_variable reader_queue;
+
         threadPriority(_Priority_t priority){
             prio = priority;
         }
@@ -67,7 +69,7 @@ namespace fsm{
             auto& myPriority = *(_priorities.emplace(priority).first);
 
             while (_lockOwned || _totalCurrentReaders > 0){ 
-                myPriority.writers_waiting++;
+                myPriority.writers_waiting++;//overflow risk? we could leave it unchecked I doubt anyone will ever use more than 60k threads
                 myPriority.writer_queue.wait(lock);
                 myPriority.writers_waiting--;
             }
@@ -87,7 +89,8 @@ namespace fsm{
             std::lock_guard<std::mutex> lock(_internalMtx);
             _lockOwned = false;
             }
-            for (auto& p : _priorities){
+
+            for (auto& p : _priorities){// iterating _priorities is a race condition with lock and lock_shared... we should find the next priority to serve within the lockguard and copy it
                 if constexpr (P == ReaderWriterPriority::writer){
                     if (p.writers_waiting > 0){
                         p.writer_queue.notify_one();
@@ -132,9 +135,9 @@ namespace fsm{
 
             // do we starve writers? maybe we need to check the currently served priority or maybe we could just accept that if
             // a thread A comes and tries to acquire the shared_lock while others are reading... even if A has lower priority then the current ones
-            // we could just let him pass anyways.
+            // we could just let him pass anyways... No I think I want to check the currently served priority and not risk starving writers
             while (_lockOwned || _totalCurrentReaders == _Max_readers){
-                myPriority.readers_waiting++;
+                myPriority.readers_waiting++;//overflow risk here? we could leave it unchecked I doubt anyone will ever use more than 60k threads
                 myPriority.writer_queue.wait(lock);
                 myPriority.readers_waiting--;
             }
@@ -142,9 +145,40 @@ namespace fsm{
             _totalCurrentReaders++;
 
         }
-        //void unlock_shared(){
 
-        //}
+        void unlock_shared(){
+            #ifdef DEBUGGIN_FSM
+            auto threadID = std::this_thread::get_id();
+            #endif
+
+            {
+            std::lock_guard<std::mutex> lock(_internalMtx);
+            _totalCurrentReaders--;
+            }
+
+            for (auto& p : _priorities){// iterating _priorities is a race condition with lock and lock_shared... we should find the next priority to serve within the lockguard and copy it
+                if constexpr (P == ReaderWriterPriority::writer){
+                    if (p.writers_waiting > 0){
+                        p.writer_queue.notify_one();
+                        break;
+                    }
+                    else if (p.readers_waiting > 0){
+                        p.reader_queue.notify_all();
+                        break;
+                    }
+                }
+                else {
+                    if (p.readers_waiting > 0){
+                        p.reader_queue.notify_all();
+                        break;
+                    }
+                    else if (p.writers_waiting > 0){
+                        p.writer_queue.notify_one();
+                        break;
+                    }
+                }
+            }
+        }
 
         private:
         std::mutex _internalMtx;
@@ -154,4 +188,3 @@ namespace fsm{
 
     };
 }
-
