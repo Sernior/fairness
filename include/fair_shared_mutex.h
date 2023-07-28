@@ -2,22 +2,12 @@
 #include <mutex>
 #include <condition_variable>
 #include <set>
-#include <stdexcept>
-
-/*
-Pro and cons of having 2 condition_variable
-
-Pro:
-- when there is an unlock or the readers count reach 0 we can selectively notify all readers or one writer so not to unlock threads for no reason.
-- would most likely simplify the lock and shared lock as we don`t have to take into account the case "I got notified for no reason and I need to reenter the lock".
-- would allow us more control.
-
-Con:
-- we need to decide which get selected first creating an implicit fairness policy (if we have two cv we need to choose which we notify first instead of delegating this decision to the scheduler).
-- more memory wasted as we are creating 1 more cv for each threadPriority.
-*/
 
 #define DEBUGGIN_FSM
+
+#ifdef DEBUGGIN_FSM
+#include <stdexcept>
+#endif
 namespace fsm{
 
     typedef uint32_t _Priority_t;
@@ -85,34 +75,34 @@ namespace fsm{
             auto threadID = std::this_thread::get_id();
             #endif
 
+            const threadPriority* p;
+
             {
             std::lock_guard<std::mutex> lock(_internalMtx);
             _lockOwned = false;
+            p = _find_first_priority();
             }
 
-            for (auto& p : _priorities){// iterating _priorities is a race condition with lock and lock_shared... we should find the next priority to serve within the lockguard and copy it
-                if constexpr (P == ReaderWriterPriority::writer){
-                    if (p.writers_waiting > 0){
-                        p.writer_queue.notify_one();
-                        break;
-                    }
-                    else if (p.readers_waiting > 0){
-                        p.reader_queue.notify_all();
-                        break;
-                    }
+            if (p == nullptr) return; // there is no one waiting
+
+            if constexpr (P == ReaderWriterPriority::writer){
+                if (p->writers_waiting > 0){
+                    p->writer_queue.notify_one();
                 }
-                else {
-                    if (p.readers_waiting > 0){
-                        p.reader_queue.notify_all();
-                        break;
-                    }
-                    else if (p.writers_waiting > 0){
-                        p.writer_queue.notify_one();
-                        break;
-                    }
+                else if (p->readers_waiting > 0){
+                    p->reader_queue.notify_all();
+                }
+            }
+            else {
+                if (p->readers_waiting > 0){
+                    p->reader_queue.notify_all();
+                }
+                else if (p->writers_waiting > 0){
+                    p->writer_queue.notify_one();
                 }
             }
         }
+
         void lock_shared(_Priority_t priority = 0){
             #ifdef DEBUGGIN_FSM
             auto threadID = std::this_thread::get_id();
@@ -135,7 +125,7 @@ namespace fsm{
 
             // do we starve writers? maybe we need to check the currently served priority or maybe we could just accept that if
             // a thread A comes and tries to acquire the shared_lock while others are reading... even if A has lower priority then the current ones
-            // we could just let him pass anyways... No I think I want to check the currently served priority and not risk starving writers
+            // we could just let him pass anyways... No I think I want to check the currently served priority and not risk starving writers with higher prioirity
             while (_lockOwned || _totalCurrentReaders == _Max_readers){
                 myPriority.readers_waiting++;//overflow risk here? we could leave it unchecked I doubt anyone will ever use more than 60k threads
                 myPriority.writer_queue.wait(lock);
@@ -151,40 +141,51 @@ namespace fsm{
             auto threadID = std::this_thread::get_id();
             #endif
 
+            const threadPriority* p;
+
             {
             std::lock_guard<std::mutex> lock(_internalMtx);
             _totalCurrentReaders--;
+            p = _find_first_priority();
             }
 
-            for (auto& p : _priorities){// iterating _priorities is a race condition with lock and lock_shared... we should find the next priority to serve within the lockguard and copy it
-                if constexpr (P == ReaderWriterPriority::writer){
-                    if (p.writers_waiting > 0){
-                        p.writer_queue.notify_one();
-                        break;
-                    }
-                    else if (p.readers_waiting > 0){
-                        p.reader_queue.notify_all();
-                        break;
-                    }
-                }
-                else {
-                    if (p.readers_waiting > 0){
-                        p.reader_queue.notify_all();
-                        break;
-                    }
-                    else if (p.writers_waiting > 0){
-                        p.writer_queue.notify_one();
-                        break;
-                    }
-                }
+            if (p == nullptr) return; // there is no one waiting
+
+            if constexpr (P == ReaderWriterPriority::writer){
+                if (p->writers_waiting > 0)
+                    p->writer_queue.notify_one();
+                else if (p->readers_waiting > 0)
+                    p->reader_queue.notify_all();
+            }
+            else {
+                if (p->readers_waiting > 0)
+                    p->reader_queue.notify_all();
+                else if (p->writers_waiting > 0)
+                    p->writer_queue.notify_one();
             }
         }
 
         private:
         std::mutex _internalMtx;
         std::set<threadPriority> _priorities;
-        bool _lockOwned{};
+        bool _lockOwned{};// probably this will have to become a threadID when we implement recursive locks
         _TotRead_cnt_t _totalCurrentReaders{};
+
+        //DO NOT EVER MODIFY threadPriority::prio of the returned threadPriority*
+        //Will find the first priority where there is at least 1 thread waiting
+        const threadPriority* _find_first_priority(){
+            for (auto& p : _priorities){
+                if constexpr (P == ReaderWriterPriority::reader){
+                    if (p.readers_waiting > 0 || p.writers_waiting > 0)
+                        return &p;
+                }
+                else{
+                    if (p.writers_waiting > 0 || p.readers_waiting > 0)
+                        return &p;
+                }
+            }
+            return nullptr;
+        }
 
     };
 }
