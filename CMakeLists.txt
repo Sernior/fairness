@@ -10,7 +10,7 @@ target_compile_features(fsm INTERFACE cxx_std_17)
     # Add include/ subdir to have VS show the header files.
 #option(LIBTR_COMPILE_TESTS "Build the trlib tests" OFF)
 
-#option(LIBTR_COMPILE_BENCH "Build the trlib benchmarks" OFF)
+option(LIBFSM_COMPILE_TESTS "Build the libfsm tests" OFF)
 
 #add_subdirectory(include)
 
@@ -18,9 +18,9 @@ target_compile_features(fsm INTERFACE cxx_std_17)
 #    add_subdirectory(tests)
 #endif()
 
-#if(LIBTR_COMPILE_BENCH)
-#    add_subdirectory(benchmark)
-#endif()
+if(LIBFSM_COMPILE_TESTS)
+    add_subdirectory(tests)
+endif()
 
 set(CMAKE_CXX_STANDARD 20)
 

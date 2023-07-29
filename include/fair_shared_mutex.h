@@ -42,7 +42,7 @@ namespace fsm{
             return prio < priority;
         }
         bool operator==(threadPriority const& other) const{
-            return prio == other.priority;
+            return prio == other.prio;
         }
         bool operator==(_Priority_t priority) const{
             return prio == priority;

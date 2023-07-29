@@ -18,12 +18,12 @@ int main()
         auto afterLockTime = std::chrono::system_clock::now();
         std::osyncstream(std::cout) << "Thread: "
                 << threadID << " entered critical section with priority: " << threadPriority
-                << " (" << afterLockTime-startTime << ')' << '\n';
+                << " - (executed in " << (afterLockTime-startTime).count() << " ns)" << '\n';
         std::this_thread::sleep_for(std::chrono::milliseconds(postLockTimer));
         auto afterComputationTime = std::chrono::system_clock::now();
         std::osyncstream(std::cout) << "Thread: "
                 << threadID << " finished its computations with priority: " << threadPriority
-                << " (" << afterComputationTime-startTime << ')' << '\n';
+                << " - (executed in " << (afterComputationTime-startTime).count() << " ns)" << '\n';
         m.unlock();
     };
 
