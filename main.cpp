@@ -1,6 +1,4 @@
 #include <iostream>
-#include <mutex>
-#include <shared_mutex>
 #include <syncstream>
 #include <thread>
 #include <fair_shared_mutex.h>
@@ -37,21 +35,4 @@ int main()
     thread3.join();
     thread4.join();
     thread5.join();
-    /*ThreadSafeCounter counter;
- 
-    auto increment_and_print = [&counter]()
-    {
-        for (int i{}; i != 3; ++i)
-        {
-            counter.increment();
-            std::osyncstream(std::cout)
-                << std::this_thread::get_id() << ' ' << counter.get() << '\n';
-        }
-    };
- 
-    std::thread thread1(increment_and_print);
-    std::thread thread2(increment_and_print);
- 
-    thread1.join();
-    thread2.join();*/
 }

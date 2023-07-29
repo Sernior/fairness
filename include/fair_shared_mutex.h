@@ -85,7 +85,7 @@ namespace fsm{
 
             if (p == nullptr) return; // there is no one waiting
 
-            if constexpr (P == ReaderWriterPriority::writer){
+            if (P == ReaderWriterPriority::writer){
                 if (p->writers_waiting > 0){
                     p->writer_queue.notify_one();
                 }
@@ -128,7 +128,7 @@ namespace fsm{
             // we could just let him pass anyways... No I think I want to check the currently served priority and not risk starving writers with higher prioirity
             while (_lockOwned || _totalCurrentReaders == _Max_readers){
                 myPriority.readers_waiting++;//overflow risk here? we could leave it unchecked I doubt anyone will ever use more than 60k threads
-                myPriority.writer_queue.wait(lock);
+                myPriority.reader_queue.wait(lock);
                 myPriority.readers_waiting--;
             }
 
@@ -151,7 +151,7 @@ namespace fsm{
 
             if (p == nullptr) return; // there is no one waiting
 
-            if constexpr (P == ReaderWriterPriority::writer){
+            if (P == ReaderWriterPriority::writer){
                 if (p->writers_waiting > 0)
                     p->writer_queue.notify_one();
                 else if (p->readers_waiting > 0)
@@ -171,11 +171,10 @@ namespace fsm{
         bool _lockOwned{};// probably this will have to become a threadID when we implement recursive locks
         _TotRead_cnt_t _totalCurrentReaders{};
 
-        //DO NOT EVER MODIFY threadPriority::prio of the returned threadPriority*
         //Will find the first priority where there is at least 1 thread waiting
         const threadPriority* _find_first_priority(){
             for (auto& p : _priorities){
-                if constexpr (P == ReaderWriterPriority::reader){
+                if (P == ReaderWriterPriority::reader){
                     if (p.readers_waiting > 0 || p.writers_waiting > 0)
                         return &p;
                 }
@@ -186,6 +185,5 @@ namespace fsm{
             }
             return nullptr;
         }
-
     };
 }
