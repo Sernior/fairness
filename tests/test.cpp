@@ -2,8 +2,8 @@
 #include <fair_shared_mutex.h>
 
 TEST(FairSharedMutexTest, LockTest) {
-    EXPECT_EQ(Add(2, 3), 5);
-    EXPECT_EQ(Add(0, 0), 0);
+    EXPECT_EQ(2, 5);
+    EXPECT_EQ(5, 0);
 }
 
 int main(int argc, char* argv[]) {

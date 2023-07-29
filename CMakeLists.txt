@@ -27,5 +27,5 @@ set(CMAKE_CXX_STANDARD 20)
 set(SOURCE_LIST
     main.cpp)
 
-add_executable(tests ${SOURCE_LIST})
-target_link_libraries(tests PRIVATE fsm) 
+add_executable(test ${SOURCE_LIST})
+target_link_libraries(test PRIVATE fsm) 
