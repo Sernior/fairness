@@ -9,7 +9,7 @@ int main()
 {
     fsm::fair_shared_mutex m;
     auto startTime = std::chrono::system_clock::now();
-    auto acquireLockAndPrint = [&m, &startTime](uint32_t threadPriority, uint32_t preLockTimer = 0, uint32_t postLockTimer = 0){
+    auto acquireLockAndPrint = [&m, &startTime](uint32_t threadPriority = 0, uint32_t preLockTimer = 0, uint32_t criticalSectionTimer = 0, uint32_t postUnlockTimer = 0){
         auto threadID = std::this_thread::get_id();
         std::this_thread::sleep_for(std::chrono::microseconds(preLockTimer));
         m.lock(threadPriority);
@@ -17,12 +17,13 @@ int main()
         std::osyncstream(std::cout) << "Thread: "
                 << threadID << " entered critical section with priority: " << threadPriority
                 << " (" << (afterLockTime-startTime).count() << " ns)" << '\n';
-        std::this_thread::sleep_for(std::chrono::microseconds(postLockTimer));
+        std::this_thread::sleep_for(std::chrono::microseconds(criticalSectionTimer));
         auto afterComputationTime = std::chrono::system_clock::now();
         std::osyncstream(std::cout) << "Thread: "
                 << threadID << " finished its computations with priority: " << threadPriority
                 << " (" << (afterComputationTime-startTime).count() << " ns)" << '\n';
         m.unlock();
+        std::this_thread::sleep_for(std::chrono::microseconds(postUnlockTimer));
     };
 
     std::thread thread1([&]{acquireLockAndPrint(0,0,2000);});
