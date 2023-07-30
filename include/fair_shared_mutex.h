@@ -59,9 +59,14 @@ namespace fsm{
             std::unique_lock<std::mutex> lock(_internalMtx);
             auto& myPriority = *(_priorities.emplace(priority).first);
 
-            while (_lockOwned || _totalCurrentReaders > 0){ 
+            //when we first emplace a priority that does not exist we are not checking
+            //the existance of lower priorities writers_wating.
+            auto* max_p = _find_first_priority();
+
+            while (_lockOwned || _totalCurrentReaders > 0 || (max_p != nullptr) && (*max_p < myPriority) ){ 
                 myPriority.writers_waiting++;//overflow risk? we could leave it unchecked I doubt anyone will ever use more than 60k threads
                 myPriority.writer_queue.wait(lock);
+                max_p = _find_first_priority();
                 myPriority.writers_waiting--;
             }
 

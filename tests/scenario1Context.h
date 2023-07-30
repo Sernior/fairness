@@ -62,13 +62,13 @@ namespace scenario1{
         AcquireLock.unlock();
 
         std::this_thread::sleep_for(std::chrono::microseconds(criticalSectionVector[i]));
-
-        m.unlock();
         
         std::unique_lock<std::mutex> ReleaseLock(ReleaseMtx);
         threadStates[i].state = thread_state_t::RUNNING_NOT_CRITICAL;
         releaseMutexVector.push_back(threadStates[i].id);
         ReleaseLock.unlock();
+
+        m.unlock();
 
         std::this_thread::sleep_for(std::chrono::microseconds(postLockTimerVector[i]));
 
