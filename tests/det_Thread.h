@@ -9,35 +9,43 @@ isn`t it ironic?
 */
 
 namespace det_thread_utils {
+    enum class tick_tock_t{
+        TICK,
+        TOCK
+    };
+
     class this_thread {
     public:
-        explicit this_thread() : mutex_(), tick_tock() {}
+    
+        this_thread(const  this_thread& other) = delete;
+        this_thread(this_thread&& other) noexcept : mutex_(), tick_tock(), tick_tock_v(tick_tock_t::TOCK) {}
+        this_thread& operator=(const  this_thread& other) = delete;
+        this_thread& operator=(this_thread&& other) noexcept = delete;
 
         void tock() {
             {
                 std::unique_lock<std::mutex> lock(mutex_);
-                didTock = true;
+                tick_tock_v = tick_tock_t::TOCK;
             }
             tick_tock.notify_one();
         }
 
         void wait_for_tick(){
             std::unique_lock<std::mutex> lock(mutex_);
-            while (!didTick)
+            while (tick_tock_v == tick_tock_t::TOCK) // while it is tock the other thread is going
                 tick_tock.wait(lock);
         }
 
         std::mutex mutex_;
         std::condition_variable tick_tock;
-        bool didTick{};
-        bool didTock{};
+        tick_tock_t tick_tock_v;
     };
 }
 
 class DeterministicThread {
 public:
     template <typename Func, typename... Args>
-    explicit DeterministicThread(Func&& func, Args&&... args, det_thread_utils::this_thread& t)
+    explicit DeterministicThread(Func&& func, Args&&... args, det_thread_utils::this_thread&& t)
         : thread_(std::forward<Func>(func), std::forward<Args>(args)...), _this_thread(t) {}
 
     void join() {
@@ -47,14 +55,14 @@ public:
     void tick() {
         {
             std::unique_lock<std::mutex> lock(_this_thread.mutex_);
-            _this_thread.didTick = true;
+            _this_thread.tick_tock_v = det_thread_utils::tick_tock_t::TICK;
         }
         _this_thread.tick_tock.notify_one();
     }
 
     void wait_for_tock(){
         std::unique_lock<std::mutex> lock(_this_thread.mutex_);
-        while (!_this_thread.didTock)
+        while (_this_thread.tick_tock_v == det_thread_utils::tick_tock_t::TICK)// while it is tick the other thread is going
             _this_thread.tick_tock.wait(lock);
     }
 
