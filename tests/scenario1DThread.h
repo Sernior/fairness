@@ -9,12 +9,13 @@ namespace scenario1DT{
     static std::vector<int> exp = {0, 1, 1, 1, 2, 2, 3, 2, 4, 3, 5, 3, 6, 4, 7, 4, 8, 5, 9, 5, 10, 6, 11, 6};
 
     void threadFunction(det_thread_utils::this_thread* t) {
+        t->wait_for_tick();
         while (index < in.size()){
-            t->wait_for_tick();
             out.push_back(index);
             out.push_back(in[index]);
             index++;
             t->tock();
+            t->wait_for_tick();
         }
     }
 }

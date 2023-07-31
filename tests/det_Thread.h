@@ -42,7 +42,7 @@ class DeterministicThread {
 public:
     template <typename Func, typename... Args>
     explicit DeterministicThread(Func&& func, Args&&... args, det_thread_utils::this_thread* t)
-        : thread_(std::forward<Func>(func), std::forward<Args>(args)..., t), _this_thread(t) {}
+        : thread_(std::forward<Func>(func), std::forward<Args>(args)...), _this_thread(t) {}
 
     void join() {
         thread_.join();

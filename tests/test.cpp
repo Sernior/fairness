@@ -41,17 +41,16 @@ TEST(DeterministicThread, Scenario1) {
 int main(int argc, char* argv[]) {
     // Create an array of threads
     //std::vector<std::thread> threads(scenario1::THREAD_COUNT);
-    auto* threadUtil = new det_thread_utils::this_thread();
-    DeterministicThread my_thread([](det_thread_utils::this_thread* threadUtil) {
-    // Perform some work in the thread
-    scenario1DT::threadFunction(threadUtil);
-    } , threadUtil);
 
-    auto* threadUtil2 = new det_thread_utils::this_thread();
-    DeterministicThread my_thread2([](det_thread_utils::this_thread* threadUtil) {
-    // Perform some work in the thread
-    scenario1DT::threadFunction(threadUtil);
-    } , threadUtil2);
+    det_thread_utils::this_thread threadUtil;
+    DeterministicThread my_thread([&threadUtil]() {
+    scenario1DT::threadFunction(&threadUtil);
+    } , &threadUtil);
+
+    det_thread_utils::this_thread threadUtil2;
+    DeterministicThread my_thread2([&threadUtil2]() {
+    scenario1DT::threadFunction(&threadUtil2);
+    } , &threadUtil2);
 
     my_thread.tick();
     my_thread.wait_for_tock();
@@ -77,6 +76,10 @@ int main(int argc, char* argv[]) {
     my_thread.wait_for_tock();
     my_thread2.tick();
     my_thread2.wait_for_tock();
+    my_thread.tick();
+    my_thread2.tick();
+    my_thread.join();
+    my_thread2.join();
 
     // Start the threads
     //for (int i = 0; i < scenario1::THREAD_COUNT; i++) {
