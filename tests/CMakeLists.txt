@@ -1,7 +1,8 @@
 include("../cmake/GoogleTest.cmake")
+include("../cmake/DeterministicConcurrency.cmake")
 
-add_executable(fsm_test test.cpp scenario1Context.h scenario2Context.h scenario1DThread.h det_Thread.h)
+add_executable(fsm_test test.cpp scenario1Context.h scenario2Context.h)
 
 target_compile_features(fsm_test PUBLIC cxx_std_20)
 
-target_link_libraries(fsm_test gtest_main fsm)
+target_link_libraries(fsm_test gtest_main fsm deterministic_concurrency)
