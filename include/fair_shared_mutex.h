@@ -173,6 +173,11 @@ namespace fsm{
 
         private:
         std::mutex _internalMtx;
+        // there is a discussion to be made about not using a set and instead using a simple pre filled ordered vector since I think I ll end up using an uint8 for priorities
+        // there can only be 256 priorities and I do not like the complexity of a red-black tree.
+        // using an ordered vector would end up with log search with binary search and N/2 avarage insert complexity.
+        // If I prefill it with all the 256 priorities I could save that N/2 complexity in exchange of wasting memory.
+        // I think the best approach here is just to use an ordered vector and just fill it on need eating the N/2.
         std::set<threadPriority> _priorities;
         bool _lockOwned{};// probably this will have to become a threadID when we implement recursive locks
         _TotRead_cnt_t _totalCurrentReaders{};
