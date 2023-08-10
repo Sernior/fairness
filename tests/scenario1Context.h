@@ -43,4 +43,23 @@ namespace scenario1{
         thread_0, thread_1, thread_2, thread_3, thread_4, ctrlThread
     );
 
+    static constexpr auto executeSchedulingSequence = []{
+        sch.switchContextTo(CTRLTHREAD);// give control to the control thread first so it acquires the lock
+        sch.proceed(// allow all the other thread to proceed
+            THREAD1,
+            THREAD2,
+            THREAD3,
+            THREAD4,
+            THREAD5
+        );
+        sch.waitUntilAllThreadStatus<thread_status_t::WAITING_EXTERNAL>(// wait until all of them are waiting on the lock
+            THREAD1,
+            THREAD2,
+            THREAD3,
+            THREAD4,
+            THREAD5
+        );
+        sch.switchContextTo(CTRLTHREAD);// at this point the the control thread can end and all the others should respect their priority
+        sch.joinAll();
+    };
 }
