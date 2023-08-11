@@ -118,10 +118,7 @@ namespace fsm{
             auto& myPriority = *(_priorities.emplace(priority).first);
 
             #ifdef DEBUGGIN_FSM
-            if (_lockOwned && _totalCurrentReaders > 0){// this could actually be good if we put another check in the lock() for readers > 0 (P0)
-            //I ultimatly think this condition should be kept as an invalid state as there is no guarantee that by fishing in the writer_queue
-            //we would catch again the right thread (the one who got to the second while) on the first try... thus causing many writers to wake up
-            //for no reason.
+            if (_lockOwned && _totalCurrentReaders > 0){
                 throw std::exception("The lock is being owned uniquely while there are readers.");
             }
             if (_totalCurrentReaders == _Max_readers){
@@ -173,11 +170,6 @@ namespace fsm{
 
         private:
         std::mutex _internalMtx;
-        // there is a discussion to be made about not using a set and instead using a simple pre filled ordered vector since I think I ll end up using an uint8 for priorities
-        // there can only be 256 priorities and I do not like the complexity of a red-black tree.
-        // using an ordered vector would end up with log search with binary search and N/2 avarage insert complexity.
-        // If I prefill it with all the 256 priorities I could save that N/2 complexity in exchange of wasting memory.
-        // I think the best approach here is just to use an ordered vector and just fill it on need eating the N/2.
         std::set<threadPriority> _priorities;
         bool _lockOwned{};// probably this will have to become a threadID when we implement recursive locks
         _TotRead_cnt_t _totalCurrentReaders{};
