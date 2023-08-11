@@ -39,12 +39,10 @@ namespace PrioSync{// the name has yet to be chosen
 
             std::unique_lock<std::mutex> lock(_internalMtx);
             auto& myPriority = _priorities[priority];
-            auto max_p = _find_first_priority();
 
-            while (_lockOwned || max_p < priority ){ 
+            while (_lockOwned || _find_first_priority() < priority ){ 
                 myPriority.waiting++;
                 myPriority.thread_queue.wait(lock);
-                max_p = _find_first_priority();
                 myPriority.waiting--;
             }
 
@@ -71,8 +69,7 @@ namespace PrioSync{// the name has yet to be chosen
             auto max_p = _find_first_priority();
             if (_lockOwned || max_p < priority)
                 return false;
-            _lockOwned = true;
-            return true;
+            return _lockOwned = true;
         }
 
 
