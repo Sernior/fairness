@@ -40,7 +40,7 @@ namespace PrioSync{// the name has yet to be chosen
             std::unique_lock<std::mutex> lock(_internalMtx);
             auto& myPriority = _priorities[priority];
 
-            while (_lockOwned || _find_first_priority() < priority ){ 
+            while (_lockOwned || _find_first_priority(priority) < priority ){ 
                 myPriority.waiting++;
                 myPriority.thread_queue.wait(lock);
                 myPriority.waiting--;
@@ -58,15 +58,14 @@ namespace PrioSync{// the name has yet to be chosen
             p = _find_first_priority();
             }
 
-            if (p == _max_priority) return;
-
-            _priorities[p].thread_queue.notify_one();
+            if (p != _max_priority)
+                _priorities[p].thread_queue.notify_one();
 
         }
 
         [[nodiscard]] bool try_lock(Priority_t priority = 0){
             std::lock_guard<std::mutex> lock(_internalMtx);
-            auto max_p = _find_first_priority();
+            auto max_p = _find_first_priority(priority);
             if (_lockOwned || max_p < priority)
                 return false;
             return _lockOwned = true;
@@ -78,8 +77,8 @@ namespace PrioSync{// the name has yet to be chosen
         std::array<threadPriority, N> _priorities;
         bool _lockOwned{};
 
-        Priority_t _find_first_priority(){
-            for (Priority_t i = 0; i < N; i++){
+        Priority_t _find_first_priority(Priority_t priority = _max_priority){
+            for (Priority_t i = 0; i < priority == _max_priority ? N : priority; i++){
                 if (_priorities[i].waiting > 0)
                     return i;
             }
