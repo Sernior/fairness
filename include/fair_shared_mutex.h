@@ -118,10 +118,7 @@ namespace fsm{
             auto& myPriority = *(_priorities.emplace(priority).first);
 
             #ifdef DEBUGGIN_FSM
-            if (_lockOwned && _totalCurrentReaders > 0){// this could actually be good if we put another check in the lock() for readers > 0 (P0)
-            //I ultimatly think this condition should be kept as an invalid state as there is no guarantee that by fishing in the writer_queue
-            //we would catch again the right thread (the one who got to the second while) on the first try... thus causing many writers to wake up
-            //for no reason.
+            if (_lockOwned && _totalCurrentReaders > 0){
                 throw std::exception("The lock is being owned uniquely while there are readers.");
             }
             if (_totalCurrentReaders == _Max_readers){

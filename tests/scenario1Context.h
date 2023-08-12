@@ -1,77 +1,66 @@
+#include <priority_mutex.h>
 #include <fair_shared_mutex.h>
+#include <DeterministicConcurrency>
 #include <vector>
 namespace scenario1{
+    using namespace DeterministicConcurrency;
 
-    const int THREAD_COUNT = 5; // Number of threads in the array
-    static std::mutex AcquireMtx; // Mutex to synchronize access to the acquireMutexVector
-    static std::mutex ReleaseMtx; // Mutex to synchronize access to the releaseMutexVector
-    static fsm::fair_shared_mutex m;
+    PrioSync::priority_mutex<5> m;
 
-    static std::vector<int> acquireMutexVector; // The vector of int, used to log the acquire of the threads
-    static std::vector<int> releaseMutexVector; // The vector of int, used to log the release of the threads
+    std::vector<int> ret;
 
-    static std::vector<int> expectedAcquireMutexVector1{
-        0, 4, 2, 1, 3
-    }; // The vector of int, used to compare the acquireMutexVector vector
-    static std::vector<int> expectedAcquireMutexVector2{
-        0, 2, 4, 1, 3
-    }; // The vector of int, used to compare the acquireMutexVector vector
-
-
-    static std::vector<int> expectedReleaseMutexVector1{
-        0, 4, 2, 1, 3
-    }; // The vector of int, used to compare the releaseMutexVector vector
-    static std::vector<int> expectedReleaseMutexVector2{
-        0, 2, 4, 1, 3
-    }; // The vector of int, used to compare the releaseMutexVector vector
-
-    static std::vector<int> priorityVector =        {0,     1,    0,    2,    0};
-    static std::vector<int> preLockTimerVector =    {0,     200,  300,  100,  200};
-    static std::vector<int> criticalSectionVector = {2000,  400,  400,  200,  300};
-    static std::vector<int> postLockTimerVector =   {0,     200,  300,  100,  200};
-
-    enum class thread_state_t {
-        ERROR,
-        INACTIVE,
-        WAITING,
-        RUNNING_NOT_CRITICAL,
-        RUNNING_CRITICAL
-    };
-    struct ThreadState {
-        uint32_t id;
-        thread_state_t state = thread_state_t::INACTIVE;
-
-        // Add any other data you want to associate with each thread
-        // For example: int progress, std::string name, etc.
+    std::vector<int> expected{
+        0, 1, 2, 3, 4
     };
 
-    // Create an array of thread states
-    static std::vector<ThreadState> threadStates(THREAD_COUNT);
 
-    // Function to be executed by each thread
-    void threadFunction(int i) {
-        // Modify the state of the thread (this is a simple example)
-        threadStates[i].state = thread_state_t::RUNNING_NOT_CRITICAL;
-        std::this_thread::sleep_for(std::chrono::microseconds(preLockTimerVector[i]));
-
-        m.lock(priorityVector[i]);
-
-        std::unique_lock<std::mutex> AcquireLock(AcquireMtx);
-        threadStates[i].state = thread_state_t::RUNNING_CRITICAL;
-        acquireMutexVector.push_back(threadStates[i].id);
-        AcquireLock.unlock();
-
-        std::this_thread::sleep_for(std::chrono::microseconds(criticalSectionVector[i]));
-        
-        std::unique_lock<std::mutex> ReleaseLock(ReleaseMtx);
-        threadStates[i].state = thread_state_t::RUNNING_NOT_CRITICAL;
-        releaseMutexVector.push_back(threadStates[i].id);
-        ReleaseLock.unlock();
-
+    void threadFunction(thread_context* c ,int i) {
+        c->uniqueLock(&m,i);
+        ret.push_back(i);
         m.unlock();
-
-        std::this_thread::sleep_for(std::chrono::microseconds(postLockTimerVector[i]));
-
-        threadStates[i].state = thread_state_t::INACTIVE;
     }
+
+    void controlThread(thread_context* c) {
+        c->uniqueLock(&m);
+        c->switchContext();
+        m.unlock();
+    }
+
+    static auto thread_0 = std::tuple{&threadFunction, 0};
+    static auto thread_1 = std::tuple{&threadFunction, 1};
+    static auto thread_2 = std::tuple{&threadFunction, 2};
+    static auto thread_3 = std::tuple{&threadFunction, 3};
+    static auto thread_4 = std::tuple{&threadFunction, 4};
+    static auto ctrlThread = std::tuple{&controlThread};
+
+    static size_t THREAD0 = 0;
+    static size_t THREAD1 = 1;
+    static size_t THREAD2 = 2;
+    static size_t THREAD3 = 3;
+    static size_t THREAD4 = 4;
+    static size_t CTRLTHREAD = 5;
+    
+    static auto sch = make_UserControlledScheduler(
+        scenario1::thread_0, scenario1::thread_1, scenario1::thread_2, scenario1::thread_3, scenario1::thread_4, scenario1::ctrlThread
+    );
+    
+    static constexpr auto executeSchedulingSequence = []{
+        sch.switchContextTo(CTRLTHREAD);// give control to the control thread first so it acquires the lock
+        sch.proceed(// allow all the other thread to proceed
+            THREAD0,
+            THREAD1,
+            THREAD2,
+            THREAD3,
+            THREAD4
+        );
+        sch.waitUntilAllThreadStatus<thread_status_t::WAITING_EXTERNAL>(// wait until all of them are waiting on the lock
+            THREAD0,
+            THREAD1,
+            THREAD2,
+            THREAD3,
+            THREAD4
+        );
+        sch.switchContextTo(CTRLTHREAD);// at this point the the control thread can end and all the others should respect their priority
+        sch.joinAll();
+    };
 }
