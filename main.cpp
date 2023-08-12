@@ -3,13 +3,14 @@
 #include <thread>
 #include <fair_shared_mutex.h>
 #include <priority_mutex.h>
+#include <priority_shared_mutex.h>
 #include <chrono>
 #include <vector>
 #include <algorithm>
  
 int main()
 {
-    PrioSync::priority_mutex<9> m1;
+    PrioSync::priority_shared_mutex<9> m1;
     fsm::fair_shared_mutex m;
 
 

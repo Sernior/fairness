@@ -4,18 +4,14 @@
 #include <condition_variable>
 #include <array>
 #include <stdexcept>
+#include "priority_t.h"
 
 namespace PrioSync{// the name has yet to be chosen
-
-    using Priority_t = uint8_t;
-    static constexpr Priority_t _max_priority = Priority_t(-1);
 
     template<Priority_t N = 1, typename = std::enable_if_t<(N >= 1 && N <= _max_priority)>>
     class priority_mutex{
 
         using Thread_cnt_t = uint32_t;
-        static constexpr Thread_cnt_t _Max_threads = Thread_cnt_t(-1);
-
         struct threadPriority{
             Thread_cnt_t waiting{};
             std::condition_variable thread_queue;
