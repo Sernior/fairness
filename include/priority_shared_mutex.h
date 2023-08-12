@@ -33,7 +33,7 @@ namespace PrioSync{// the name has yet to be chosen
 
         void lock(Priority_t priority = 0){
 
-            if (priority > N-1)
+            if (priority >= N)
                 throw std::system_error(std::make_error_code(std::errc::invalid_argument));
 
             std::unique_lock<std::mutex> lock(_internalMtx);
@@ -65,7 +65,7 @@ namespace PrioSync{// the name has yet to be chosen
 
         [[nodiscard]] bool try_lock(Priority_t priority = 0){
 
-            if (priority > N-1)
+            if (priority >= N)
                 throw std::system_error(std::make_error_code(std::errc::invalid_argument));
 
             std::lock_guard<std::mutex> lock(_internalMtx);
@@ -77,7 +77,7 @@ namespace PrioSync{// the name has yet to be chosen
 
         void lock_shared(Priority_t priority = 0){
 
-            if (priority > N-1)
+            if (priority >= N)
                 throw std::system_error(std::make_error_code(std::errc::invalid_argument));
 
             std::unique_lock<std::mutex> lock(_internalMtx);
@@ -94,7 +94,7 @@ namespace PrioSync{// the name has yet to be chosen
 
         [[nodiscard]] bool try_lock_shared(Priority_t priority = 0){
 
-            if (priority > N-1)
+            if (priority >= N)
                 throw std::system_error(std::make_error_code(std::errc::invalid_argument));
 
             std::lock_guard<std::mutex> lock(_internalMtx);
