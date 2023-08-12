@@ -11,12 +11,19 @@ TEST(FSMSimple, Scenario1) {
     EXPECT_EQ(scenario1::ret, scenario1::expected);
 }
 
+TEST(FSMSimple, Scenario2) {
+    EXPECT_EQ(scenario2::ret, scenario2::expected);
+}
+
 using namespace DeterministicConcurrency;
 
 int main(int argc, char* argv[]) {
     
     //TEST 1
     scenario1::executeSchedulingSequence();
+    //////////////////////
+    //TEST 2
+    scenario2::executeSchedulingSequence();
     //////////////////////
 
     testing::InitGoogleTest(&argc, argv);
