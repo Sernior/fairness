@@ -5,7 +5,7 @@
 namespace scenario1{
     using namespace DeterministicConcurrency;
 
-    fsm::fair_shared_mutex m;
+    PrioSync::priority_mutex<5> m;
 
     std::vector<int> ret;
 
