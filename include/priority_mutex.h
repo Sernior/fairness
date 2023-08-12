@@ -13,7 +13,7 @@ namespace PrioSync{// the name has yet to be chosen
 
         using Thread_cnt_t = uint32_t;
         struct threadPriority{
-            Thread_cnt_t waiting{};
+            Thread_cnt_t threads_waiting{};
             std::condition_variable thread_queue;
         };
 
@@ -38,9 +38,9 @@ namespace PrioSync{// the name has yet to be chosen
             auto& myPriority = _priorities[priority];
 
             while (_lockOwned || _find_first_priority(priority) < priority ){ 
-                myPriority.waiting++;
+                myPriority.threads_waiting++;
                 myPriority.thread_queue.wait(lock);
-                myPriority.waiting--;
+                myPriority.threads_waiting--;
             }
 
             _lockOwned = true;
@@ -80,7 +80,7 @@ namespace PrioSync{// the name has yet to be chosen
 
         Priority_t _find_first_priority(Priority_t priority = _max_priority){
             for (Priority_t i = 0; i < ((priority == _max_priority) ? N : priority); i++){
-                if (_priorities[i].waiting > 0)
+                if (_priorities[i].threads_waiting > 0)
                     return i;
             }
             return _max_priority;
