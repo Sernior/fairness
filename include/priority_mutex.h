@@ -34,6 +34,7 @@ namespace PrioSync{// the name has yet to be chosen
         ~priority_mutex() = default;
 
         void lock(Priority_t priority = 0){
+
             if (priority > N-1)
                 throw std::system_error(std::make_error_code(std::errc::invalid_argument));
 
@@ -64,6 +65,10 @@ namespace PrioSync{// the name has yet to be chosen
         }
 
         [[nodiscard]] bool try_lock(Priority_t priority = 0){
+
+            if (priority > N-1)
+                throw std::system_error(std::make_error_code(std::errc::invalid_argument));
+
             std::lock_guard<std::mutex> lock(_internalMtx);
             auto max_p = _find_first_priority(priority);
             if (_lockOwned || max_p < priority)
@@ -78,7 +83,7 @@ namespace PrioSync{// the name has yet to be chosen
         bool _lockOwned{};
 
         Priority_t _find_first_priority(Priority_t priority = _max_priority){
-            for (Priority_t i = 0; i < priority == _max_priority ? N : priority; i++){
+            for (Priority_t i = 0; i < ((priority == _max_priority) ? N : priority); i++){
                 if (_priorities[i].waiting > 0)
                     return i;
             }
