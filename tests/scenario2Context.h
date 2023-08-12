@@ -4,7 +4,7 @@
 namespace scenario2{
     using namespace DeterministicConcurrency;
 
-    static fsm::fair_shared_mutex m;
+    fsm::fair_shared_mutex m;
 
     static std::vector<int> ret;
 
@@ -14,37 +14,37 @@ namespace scenario2{
 
 
     void threadFunction(thread_context* c ,int i) {
-        c->tryLock([i]{m.lock(i);});
+        c->uniqueLock(&m,i);
         ret.push_back(i);
         m.unlock();
 
         c->switchContext();
 
-        c->tryLock([i]{m.lock(i);});
+        c->uniqueLock(&m,i);
         ret.push_back(i);
         m.unlock();
 
         c->switchContext();
 
-        c->tryLock([i]{m.lock(i);});
+        c->uniqueLock(&m,i);
         ret.push_back(i);
         m.unlock();
     }
 
     void controlThread(thread_context* c) {
-        c->tryLock([]{m.lock();});
+        c->uniqueLock(&m);
         c->switchContext();
         m.unlock();
 
         c->switchContext();
 
-        c->tryLock([]{m.lock();});
+        c->uniqueLock(&m);
         c->switchContext();
         m.unlock();
 
         c->switchContext();
 
-        c->tryLock([]{m.lock();});
+        c->uniqueLock(&m);
         c->switchContext();
         m.unlock();
     }
@@ -63,10 +63,10 @@ namespace scenario2{
     static size_t THREAD5 = 4;
     static size_t CTRLTHREAD = 5;
 
-    static auto sch = DeterministicConcurrency::make_UserControlledScheduler(
-        thread_0, thread_1, thread_2, thread_3, thread_4, ctrlThread
-    );
-
+    //static auto sch = DeterministicConcurrency::make_UserControlledScheduler(
+    //    thread_0, thread_1, thread_2, thread_3, thread_4, ctrlThread
+    //);
+/*
     static constexpr auto executeSchedulingSequence = []{
         sch.switchContextTo(CTRLTHREAD);// give control to the control thread first so it acquires the lock
         sch.proceed(// allow all the other thread to proceed
@@ -88,5 +88,5 @@ namespace scenario2{
 
     static constexpr auto executeJoinAll = [] {
         sch.joinAll();
-    };
+    };*/
 }
