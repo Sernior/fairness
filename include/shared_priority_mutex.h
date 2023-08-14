@@ -9,7 +9,7 @@
 namespace PrioSync{// the name has yet to be chosen
 
     template<Priority_t N = 1, typename = std::enable_if_t<(N >= 1 && N <= _max_priority)>>
-    class priority_shared_mutex{
+    class shared_priority_mutex{
 
         using Thread_cnt_t = uint32_t;
         static constexpr Thread_cnt_t _max_threads = Thread_cnt_t(-1);
@@ -21,15 +21,15 @@ namespace PrioSync{// the name has yet to be chosen
 
         public:
 
-        priority_shared_mutex() = default;
+        shared_priority_mutex() = default;
 
-        priority_shared_mutex(const priority_shared_mutex&) = delete;
-        priority_shared_mutex& operator=(const priority_shared_mutex&) = delete;
+        shared_priority_mutex(const shared_priority_mutex&) = delete;
+        shared_priority_mutex& operator=(const shared_priority_mutex&) = delete;
 
-        priority_shared_mutex(priority_shared_mutex&&) = delete;
-        priority_shared_mutex& operator=(priority_shared_mutex&&) = delete;
+        shared_priority_mutex(shared_priority_mutex&&) = delete;
+        shared_priority_mutex& operator=(shared_priority_mutex&&) = delete;
 
-        ~priority_shared_mutex() = default;
+        ~shared_priority_mutex() = default;
 
         void lock(Priority_t priority = 0){
 
@@ -41,8 +41,10 @@ namespace PrioSync{// the name has yet to be chosen
 
             while (_lockOwned || _totalCurrentReaders > 0 || _find_first_priority(priority) < priority ){ 
                 myPriority.threads_waiting++;
+                _totalWritersWaiting++;
                 myPriority.thread_queue.wait(lock);
                 myPriority.threads_waiting--;
+                _totalWritersWaiting--;
             }
 
             _lockOwned = true;
@@ -57,9 +59,16 @@ namespace PrioSync{// the name has yet to be chosen
             p = _find_first_priority();
             }
 
-            if (p != _max_priority){
-                _priorities[p].thread_queue.notify_all();
+            if (p == _max_priority)
+                return;
+
+            if (_totalWritersWaiting == 0){
+                _notify_all();
+                return;
             }
+
+            _priorities[p].thread_queue.notify_all();
+
 
         }
 
@@ -69,8 +78,7 @@ namespace PrioSync{// the name has yet to be chosen
                 throw std::system_error(std::make_error_code(std::errc::invalid_argument));
 
             std::lock_guard<std::mutex> lock(_internalMtx);
-            auto max_p = _find_first_priority(priority);
-            if (_lockOwned || _totalCurrentReaders > 0 || max_p < priority)
+            if (_lockOwned || _totalCurrentReaders > 0 || _find_first_priority(priority) < priority)
                 return false;
             return _lockOwned = true;
         }
@@ -98,8 +106,7 @@ namespace PrioSync{// the name has yet to be chosen
                 throw std::system_error(std::make_error_code(std::errc::invalid_argument));
 
             std::lock_guard<std::mutex> lock(_internalMtx);
-            auto max_p = _find_first_priority(priority);
-            if (_lockOwned || _totalCurrentReaders == _max_threads || max_p < priority)
+            if (_lockOwned || _totalCurrentReaders == _max_threads || _find_first_priority(priority) < priority)
                 return false;
             _totalCurrentReaders++;
             return true;
@@ -114,7 +121,15 @@ namespace PrioSync{// the name has yet to be chosen
             p = _find_first_priority();
             }
 
-            if (p != _max_priority){
+            if (p == _max_priority)
+                return;
+
+            if (_totalWritersWaiting == 0){
+                _notify_all();
+                return;
+            }
+
+            if (_totalCurrentReaders == 0){
                 _priorities[p].thread_queue.notify_all();
             }
 
@@ -122,6 +137,7 @@ namespace PrioSync{// the name has yet to be chosen
 
         private:
 
+        Thread_cnt_t _totalWritersWaiting{};
         Thread_cnt_t _totalCurrentReaders{};
         std::mutex _internalMtx;
         std::array<threadPriority, N> _priorities;
@@ -133,6 +149,11 @@ namespace PrioSync{// the name has yet to be chosen
                     return i;
             }
             return _max_priority;
+        }
+
+        void _notify_all(){
+            for (auto& p : _priorities)
+                p.thread_queue.notify_all();
         }
 
     };

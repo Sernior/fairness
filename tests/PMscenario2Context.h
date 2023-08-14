@@ -14,13 +14,13 @@ namespace PMscenario2{
 
 
     void threadFunction(thread_context* c ,int i) {
-        c->uniqueLock(&m);
+        c->lock(&m);
         ret.push_back(i);
         m.unlock();
     }
 
     void controlThread(thread_context* c) {
-        c->uniqueLock(&m);
+        c->lock(&m);
         c->switchContext();
         m.unlock();
     }
