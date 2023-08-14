@@ -1,7 +1,7 @@
 #include <priority_mutex.h>
 #include <DeterministicConcurrency>
 #include <vector>
-namespace scenario1{
+namespace PMscenario2{
     using namespace DeterministicConcurrency;
 
     PrioSync::priority_mutex<5> m;
@@ -9,12 +9,12 @@ namespace scenario1{
     std::vector<int> ret;
 
     std::vector<int> expected{
-        0, 1, 2, 3, 4
+        4, 3, 2, 1, 0
     };
 
 
     void threadFunction(thread_context* c ,int i) {
-        c->uniqueLock(&m,i);
+        c->uniqueLock(&m);
         ret.push_back(i);
         m.unlock();
     }
@@ -40,26 +40,26 @@ namespace scenario1{
     static size_t CTRLTHREAD = 5;
     
     static auto sch = make_UserControlledScheduler(
-        scenario1::thread_0, scenario1::thread_1, scenario1::thread_2, scenario1::thread_3, scenario1::thread_4, scenario1::ctrlThread
+        thread_0, thread_1, thread_2, thread_3, thread_4, ctrlThread
     );
     
     static constexpr auto executeSchedulingSequence = []{
         sch.switchContextTo(CTRLTHREAD);// give control to the control thread first so it acquires the lock
-        sch.proceed(// allow all the other thread to proceed
-            THREAD0,
-            THREAD1,
-            THREAD2,
-            THREAD3,
+        sch.proceed(// allow thread4 to proceed alone
             THREAD4
         );
-        sch.waitUntilAllThreadStatus<thread_status_t::WAITING_EXTERNAL>(// wait until all of them are waiting on the lock
-            THREAD0,
-            THREAD1,
-            THREAD2,
-            THREAD3,
+        sch.waitUntilAllThreadStatus<thread_status_t::WAITING_EXTERNAL>(// wait until thread4 is waiting for lock
             THREAD4
         );
-        sch.switchContextTo(CTRLTHREAD);// at this point the the control thread can end and all the others should respect their priority
+        sch.switchContextTo(CTRLTHREAD);// at this point the the control thread can end and thread 4 who is the only one in the lock can proceed
+        sch.waitUntilAllThreadStatus<thread_status_t::FINISHED>(// wait until thread4 has finished so the lock now is free
+            THREAD4
+        );
+        sch.switchContextTo(THREAD3);
+        sch.switchContextTo(THREAD2);
+        sch.switchContextTo(THREAD2);
+        sch.switchContextTo(THREAD1);
+        sch.switchContextTo(THREAD0);
         sch.joinAll();
     };
 }

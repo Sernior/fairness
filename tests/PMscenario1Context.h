@@ -1,12 +1,10 @@
 #include <priority_mutex.h>
 #include <DeterministicConcurrency>
 #include <vector>
-namespace scenario2{
+namespace PMscenario1{
     using namespace DeterministicConcurrency;
 
     PrioSync::priority_mutex<5> m;
-
-    std::mutex stdm;
 
     std::vector<int> ret;
 
@@ -16,24 +14,15 @@ namespace scenario2{
 
 
     void threadFunction(thread_context* c ,int i) {
-        c->uniqueLock(&stdm);
-        c->switchContext();
-        // std::cout<<i<<std::endl;
-        stdm.unlock();
-
-        // std::cout<<i<<std::endl;
-
-        if (m.try_lock(i)) {
-            ret.push_back(i);
-            m.unlock();
-        }
-
+        c->uniqueLock(&m,i);
+        ret.push_back(i);
+        m.unlock();
     }
 
     void controlThread(thread_context* c) {
-        c->uniqueLock(&stdm);
+        c->uniqueLock(&m);
         c->switchContext();
-        stdm.unlock();
+        m.unlock();
     }
 
     static auto thread_0 = std::tuple{&threadFunction, 0};
@@ -71,17 +60,6 @@ namespace scenario2{
             THREAD4
         );
         sch.switchContextTo(CTRLTHREAD);// at this point the the control thread can end and all the others should respect their priority
-
-        sch.waitUntilAllThreadStatus<thread_status_t::WAITING>(THREAD0);
-        sch.switchContextTo(THREAD0);
-        sch.waitUntilAllThreadStatus<thread_status_t::WAITING>(THREAD1);
-        sch.switchContextTo(THREAD1);
-        sch.waitUntilAllThreadStatus<thread_status_t::WAITING>(THREAD2);
-        sch.switchContextTo(THREAD2);
-        sch.waitUntilAllThreadStatus<thread_status_t::WAITING>(THREAD3);
-        sch.switchContextTo(THREAD3);
-        sch.waitUntilAllThreadStatus<thread_status_t::WAITING>(THREAD4);
-        sch.switchContextTo(THREAD4);
         sch.joinAll();
     };
 }
