@@ -4,20 +4,16 @@
 #include <condition_variable>
 #include <array>
 #include <stdexcept>
+#include "priority_t.h"
 
 namespace PrioSync{// the name has yet to be chosen
-
-    using Priority_t = uint8_t;
-    static constexpr Priority_t _max_priority = Priority_t(-1);
 
     template<Priority_t N = 1, typename = std::enable_if_t<(N >= 1 && N <= _max_priority)>>
     class priority_mutex{
 
         using Thread_cnt_t = uint32_t;
-        static constexpr Thread_cnt_t _Max_threads = Thread_cnt_t(-1);
-
         struct threadPriority{
-            Thread_cnt_t waiting{};
+            Thread_cnt_t threads_waiting{};
             std::condition_variable thread_queue;
         };
 
@@ -35,16 +31,16 @@ namespace PrioSync{// the name has yet to be chosen
 
         void lock(Priority_t priority = 0){
 
-            if (priority > N-1)
+            if (priority >= N)
                 throw std::system_error(std::make_error_code(std::errc::invalid_argument));
 
             std::unique_lock<std::mutex> lock(_internalMtx);
             auto& myPriority = _priorities[priority];
 
             while (_lockOwned || _find_first_priority(priority) < priority ){ 
-                myPriority.waiting++;
+                myPriority.threads_waiting++;
                 myPriority.thread_queue.wait(lock);
-                myPriority.waiting--;
+                myPriority.threads_waiting--;
             }
 
             _lockOwned = true;
@@ -66,7 +62,7 @@ namespace PrioSync{// the name has yet to be chosen
 
         [[nodiscard]] bool try_lock(Priority_t priority = 0){
 
-            if (priority > N-1)
+            if (priority >= N)
                 throw std::system_error(std::make_error_code(std::errc::invalid_argument));
 
             std::lock_guard<std::mutex> lock(_internalMtx);
@@ -84,7 +80,7 @@ namespace PrioSync{// the name has yet to be chosen
 
         Priority_t _find_first_priority(Priority_t priority = _max_priority){
             for (Priority_t i = 0; i < ((priority == _max_priority) ? N : priority); i++){
-                if (_priorities[i].waiting > 0)
+                if (_priorities[i].threads_waiting > 0)
                     return i;
             }
             return _max_priority;
