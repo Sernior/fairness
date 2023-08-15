@@ -6,10 +6,12 @@
 #include "PMscenario1Context.h"
 #include "PMscenario2Context.h"
 #include "PMscenario3Context.h"
+#include "PMscenario4Context.h"
 #include "SPMscenario1Context.h"
 #include "SPMscenario2Context.h"
 #include "SPMscenario3Context.h"
 #include "SPMscenario4Context.h"
+#include "SPMscenario5Context.h"
 
 TEST(PriorityMutex_ControlledScheduling, LockUnlockTest) {
     EXPECT_EQ(PMscenario1::ret, PMscenario1::expected);
@@ -21,6 +23,10 @@ TEST(PriorityMutex_ControlledScheduling, LockUnlockTest2) {
 
 TEST(PriorityMutex_ControlledScheduling, TryLockTest) {
     EXPECT_EQ(PMscenario3::ret, PMscenario3::expected);
+}
+
+TEST(PriorityMutex_ControlledScheduling, MutexOrSemaphore) {
+    EXPECT_EQ(PMscenario4::ret, PMscenario4::expected);
 }
 
 TEST(SharedPriorityMutex_ControlledScheduling, LockUnlockTest) {
@@ -39,6 +45,10 @@ TEST(SharedPriorityMutex_ControlledScheduling, LockSharedTest) {
     EXPECT_EQ(SPMscenario4::ret, SPMscenario4::expected);
 }
 
+TEST(SharedPriorityMutex_ControlledScheduling, MutexOrSemaphore) {
+    EXPECT_EQ(SPMscenario5::ret, SPMscenario5::expected);
+}
+
 int main(int argc, char* argv[]) {
 
     /*****************priority_mutex******************/
@@ -52,20 +62,26 @@ int main(int argc, char* argv[]) {
     //TEST 3
     PMscenario3::executeSchedulingSequence();
     //////////////////////
+    //TEST 4
+    PMscenario4::executeSchedulingSequence();
+    //////////////////////
 
     /**************priority_shared_mutex***************/
 
-    //TEST 4
+    //TEST 5
     SPMscenario1::executeSchedulingSequence();
     //////////////////////
-    //TEST 5
+    //TEST 6
     SPMscenario2::executeSchedulingSequence();
     //////////////////////
-    //TEST 6
+    //TEST 7
     SPMscenario3::executeSchedulingSequence();
     //////////////////////
-    //TEST 7
+    //TEST 8
     SPMscenario4::executeSchedulingSequence();
+    //////////////////////
+    //TEST 9
+    SPMscenario5::executeSchedulingSequence();
     //////////////////////
 
 

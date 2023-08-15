@@ -6,10 +6,12 @@ test.cpp
 PMscenario1Context.h
 PMscenario2Context.h
 PMscenario3Context.h
+PMscenario4Context.h
 SPMscenario1Context.h
 SPMscenario2Context.h
 SPMscenario3Context.h
 SPMscenario4Context.h
+SPMscenario5Context.h
 )
 
 target_compile_features(fsm_test PUBLIC cxx_std_20)

@@ -15,6 +15,7 @@ namespace PrioSync{// the name has yet to be chosen
         static constexpr Thread_cnt_t _max_threads = Thread_cnt_t(-1);
 
         struct threadPriority{
+            Thread_cnt_t writers_waiting{};
             Thread_cnt_t threads_waiting{};
             std::condition_variable thread_queue;
         };
@@ -39,15 +40,17 @@ namespace PrioSync{// the name has yet to be chosen
             std::unique_lock<std::mutex> lock(_internalMtx);
             auto& myPriority = _priorities[priority];
 
-            while (_lockOwned || _totalCurrentReaders > 0 || _find_first_priority(priority) < priority ){ 
+            while (_lock_is_owned() || _totalCurrentReaders > 0 || _find_first_priority(priority) < priority ){ 
                 myPriority.threads_waiting++;
+                myPriority.writers_waiting++;
                 _totalWritersWaiting++;
                 myPriority.thread_queue.wait(lock);
                 myPriority.threads_waiting--;
+                myPriority.writers_waiting--;
                 _totalWritersWaiting--;
             }
 
-            _lockOwned = true;
+            _owner = std::this_thread::get_id();
         }
 
         void unlock(){
@@ -55,7 +58,8 @@ namespace PrioSync{// the name has yet to be chosen
 
             {
             std::lock_guard<std::mutex> lock(_internalMtx);
-            _lockOwned = false;
+            if (!_lock_is_owned_by_me())return;
+            _owner = std::thread::id();
             p = _find_first_priority();
             }
 
@@ -78,9 +82,10 @@ namespace PrioSync{// the name has yet to be chosen
                 throw std::system_error(std::make_error_code(std::errc::invalid_argument));
 
             std::lock_guard<std::mutex> lock(_internalMtx);
-            if (_lockOwned || _totalCurrentReaders > 0 || _find_first_priority(priority) < priority)
+            if (_lock_is_owned() || _totalCurrentReaders > 0 || _find_first_priority(priority) < priority)
                 return false;
-            return _lockOwned = true;
+            _owner = std::this_thread::get_id();
+            return true;
         }
 
         void lock_shared(Priority_t priority = 0){
@@ -91,7 +96,10 @@ namespace PrioSync{// the name has yet to be chosen
             std::unique_lock<std::mutex> lock(_internalMtx);
             auto& myPriority = _priorities[priority];
 
-            while (_lockOwned || _totalCurrentReaders == _max_threads || _find_first_priority(priority) < priority ){ 
+            while (_lock_is_owned() ||
+                   _totalCurrentReaders == _max_threads ||
+                   _find_first_priority_with_writers(priority) < priority )
+            {
                 myPriority.threads_waiting++;
                 myPriority.thread_queue.wait(lock);
                 myPriority.threads_waiting--;
@@ -106,7 +114,9 @@ namespace PrioSync{// the name has yet to be chosen
                 throw std::system_error(std::make_error_code(std::errc::invalid_argument));
 
             std::lock_guard<std::mutex> lock(_internalMtx);
-            if (_lockOwned || _totalCurrentReaders == _max_threads || _find_first_priority(priority) < priority)
+            if (_lock_is_owned() ||
+                _totalCurrentReaders == _max_threads ||
+                _find_first_priority_with_writers(priority) < priority)
                 return false;
             _totalCurrentReaders++;
             return true;
@@ -117,6 +127,8 @@ namespace PrioSync{// the name has yet to be chosen
 
             {
             std::lock_guard<std::mutex> lock(_internalMtx);
+            // here I need to find a way to say "you have previously taken the lock_shared" or we could leave this behavior
+            // semaphore like if I can`t figure out a decent, not costly, way of imposing this condition.
             _totalCurrentReaders--;
             p = _find_first_priority();
             }
@@ -141,7 +153,7 @@ namespace PrioSync{// the name has yet to be chosen
         Thread_cnt_t _totalCurrentReaders{};
         std::mutex _internalMtx;
         std::array<threadPriority, N> _priorities;
-        bool _lockOwned{};
+        std::thread::id _owner{};
 
         Priority_t _find_first_priority(Priority_t priority = _max_priority){
             for (Priority_t i = 0; i < ((priority == _max_priority) ? N : priority); i++){
@@ -151,9 +163,25 @@ namespace PrioSync{// the name has yet to be chosen
             return _max_priority;
         }
 
+        Priority_t _find_first_priority_with_writers(Priority_t priority = _max_priority){
+            for (Priority_t i = 0; i < ((priority == _max_priority) ? N : priority); i++){
+                if (_priorities[i].writers_waiting > 0)
+                    return i;
+            }
+            return _max_priority;
+        }
+
         void _notify_all(){
             for (auto& p : _priorities)
                 p.thread_queue.notify_all();
+        }
+
+        bool _lock_is_owned_by_me(){
+            return std::this_thread::get_id() == _owner;
+        }
+
+        bool _lock_is_owned(){
+            return std::thread::id() != _owner;
         }
 
     };
