@@ -12,6 +12,7 @@ SPMscenario2Context.h
 SPMscenario3Context.h
 SPMscenario4Context.h
 SPMscenario5Context.h
+SPMscenario6Context.h
 )
 
 target_compile_features(fsm_test PUBLIC cxx_std_20)

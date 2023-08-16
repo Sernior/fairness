@@ -4,7 +4,7 @@
 namespace PMscenario4{
     using namespace DeterministicConcurrency;
 
-    PrioSync::priority_mutex<5> m;
+    PrioSync::priority_mutex<2> m;
 
     std::vector<int> ret;
 
@@ -21,7 +21,7 @@ namespace PMscenario4{
     }
 
     void threadFunction2(thread_context* c ,int i) {
-        m.unlock();// this unlock should do nothing if you are a mutex and not a semaphore
+        m.unlock();// this unlock should do nothing if m is a mutex and not a semaphore
         c->switchContext();
         c->lock(&m);
         ret.push_back(i);

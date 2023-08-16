@@ -12,6 +12,7 @@
 #include "SPMscenario3Context.h"
 #include "SPMscenario4Context.h"
 #include "SPMscenario5Context.h"
+#include "SPMscenario6Context.h"
 
 TEST(PriorityMutex_ControlledScheduling, LockUnlockTest) {
     EXPECT_EQ(PMscenario1::ret, PMscenario1::expected);
@@ -49,6 +50,10 @@ TEST(SharedPriorityMutex_ControlledScheduling, MutexOrSemaphore) {
     EXPECT_EQ(SPMscenario5::ret, SPMscenario5::expected);
 }
 
+TEST(SharedPriorityMutex_ControlledScheduling, PriorityBehavior) {
+    EXPECT_EQ(SPMscenario6::ret, SPMscenario6::expected);
+}
+
 int main(int argc, char* argv[]) {
 
     /*****************priority_mutex******************/
@@ -66,7 +71,7 @@ int main(int argc, char* argv[]) {
     PMscenario4::executeSchedulingSequence();
     //////////////////////
 
-    /**************priority_shared_mutex***************/
+    /**************shared_priority_mutex***************/
 
     //TEST 5
     SPMscenario1::executeSchedulingSequence();
@@ -82,6 +87,9 @@ int main(int argc, char* argv[]) {
     //////////////////////
     //TEST 9
     SPMscenario5::executeSchedulingSequence();
+    //////////////////////
+    //TEST 10 (This test does have an assert above but not deadlocking is the real assert, read comments in SPMscenario6Conext.h)
+    SPMscenario6::executeSchedulingSequence();
     //////////////////////
 
 
