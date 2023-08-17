@@ -1,8 +1,7 @@
 #include <priority_mutex.h>
-#include <fair_shared_mutex.h>
 #include <DeterministicConcurrency>
 #include <vector>
-namespace scenario1{
+namespace PMscenario1{
     using namespace DeterministicConcurrency;
 
     PrioSync::priority_mutex<5> m;
@@ -15,13 +14,13 @@ namespace scenario1{
 
 
     void threadFunction(thread_context* c ,int i) {
-        c->uniqueLock(&m,i);
+        c->lock(&m,i);
         ret.push_back(i);
         m.unlock();
     }
 
     void controlThread(thread_context* c) {
-        c->uniqueLock(&m);
+        c->lock(&m);
         c->switchContext();
         m.unlock();
     }
@@ -41,7 +40,7 @@ namespace scenario1{
     static size_t CTRLTHREAD = 5;
     
     static auto sch = make_UserControlledScheduler(
-        scenario1::thread_0, scenario1::thread_1, scenario1::thread_2, scenario1::thread_3, scenario1::thread_4, scenario1::ctrlThread
+        thread_0, thread_1, thread_2, thread_3, thread_4, ctrlThread
     );
     
     static constexpr auto executeSchedulingSequence = []{

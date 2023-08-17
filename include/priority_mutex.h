@@ -37,13 +37,13 @@ namespace PrioSync{// the name has yet to be chosen
             std::unique_lock<std::mutex> lock(_internalMtx);
             auto& myPriority = _priorities[priority];
 
-            while (_lockOwned || _find_first_priority(priority) < priority ){ 
+            while (_lock_is_owned() || _find_first_priority(priority) < priority ){ 
                 myPriority.threads_waiting++;
                 myPriority.thread_queue.wait(lock);
                 myPriority.threads_waiting--;
             }
 
-            _lockOwned = true;
+            _owner = std::this_thread::get_id();
         }
 
         void unlock(){
@@ -51,7 +51,8 @@ namespace PrioSync{// the name has yet to be chosen
 
             {
             std::lock_guard<std::mutex> lock(_internalMtx);
-            _lockOwned = false;
+            if (!_lock_is_owned_by_me())return;
+            _owner = std::thread::id();
             p = _find_first_priority();
             }
 
@@ -67,16 +68,17 @@ namespace PrioSync{// the name has yet to be chosen
 
             std::lock_guard<std::mutex> lock(_internalMtx);
             auto max_p = _find_first_priority(priority);
-            if (_lockOwned || max_p < priority)
+            if (_lock_is_owned() || max_p < priority)
                 return false;
-            return _lockOwned = true;
+            _owner = std::this_thread::get_id();
+            return true;
         }
 
 
         private:
         std::mutex _internalMtx;
         std::array<threadPriority, N> _priorities;
-        bool _lockOwned{};
+        std::thread::id _owner{};
 
         Priority_t _find_first_priority(Priority_t priority = _max_priority){
             for (Priority_t i = 0; i < ((priority == _max_priority) ? N : priority); i++){
@@ -84,6 +86,14 @@ namespace PrioSync{// the name has yet to be chosen
                     return i;
             }
             return _max_priority;
+        }
+
+        bool _lock_is_owned_by_me(){
+            return std::this_thread::get_id() == _owner;
+        }
+
+        bool _lock_is_owned(){
+            return std::thread::id() != _owner;
         }
 
     };
