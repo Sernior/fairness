@@ -1,7 +1,6 @@
 #include <iostream>
 #include <syncstream>
 #include <thread>
-#include <fair_shared_mutex.h>
 #include <priority_mutex.h>
 #include <shared_priority_mutex.h>
 #include <chrono>
@@ -11,7 +10,6 @@
 int main()
 {
     PrioSync::shared_priority_mutex<9> m1;
-    fsm::fair_shared_mutex m;
 
 
     auto startTime = std::chrono::system_clock::now();
