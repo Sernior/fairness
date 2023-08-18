@@ -12,6 +12,8 @@ target_compile_features(fsm INTERFACE cxx_std_17)
 
 option(LIBFSM_COMPILE_TESTS "Build the libfsm tests" OFF)
 
+option(LIBFSM_COMPILE_BENCHMARKS "Build the libfsm tests" OFF)
+
 #add_subdirectory(include)
 
 #if(LIBTR_COMPILE_TESTS)
@@ -20,6 +22,10 @@ option(LIBFSM_COMPILE_TESTS "Build the libfsm tests" OFF)
 
 if(LIBFSM_COMPILE_TESTS)
     add_subdirectory(tests)
+endif()
+
+if(LIBFSM_COMPILE_BENCHMARKS)
+    add_subdirectory(benchmarks)
 endif()
 
 set(CMAKE_CXX_STANDARD 20)

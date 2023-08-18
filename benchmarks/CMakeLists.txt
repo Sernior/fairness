@@ -1,0 +1,9 @@
+include("../cmake/GoogleBenchmark.cmake")
+include("../cmake/DeterministicConcurrency.cmake")
+
+add_executable(pm_benchmark benchmark.cpp pipeline_benchmark.cpp)
+target_compile_features(pm_benchmark PUBLIC cxx_std_17)
+target_link_libraries(pm_benchmark benchmark::benchmark fsm deterministic_concurrency)
+if ("${CMAKE_SYSTEM_NAME}" MATCHES "Windows")
+        target_link_libraries(pm_benchmark Shlwapi)
+endif()
