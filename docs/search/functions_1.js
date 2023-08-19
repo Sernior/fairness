@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['lock_0',['lock',['../classfsm_1_1fair__shared__mutex.html#a8a2d124cbeaf65feec5dacb5d970c9ba',1,'fsm::fair_shared_mutex::lock()'],['../classPrioSync_1_1priority__mutex.html#abe12b2049af7271032c0b60efd40443d',1,'PrioSync::priority_mutex::lock()'],['../classPrioSync_1_1shared__priority__mutex.html#ab33933f9a5fbd2d663166ddfceb14c56',1,'PrioSync::shared_priority_mutex::lock()']]],
-  ['lock_5fshared_1',['lock_shared',['../classfsm_1_1fair__shared__mutex.html#abc57c07ebf5c5a4018c8a8cae25a6971',1,'fsm::fair_shared_mutex::lock_shared()'],['../classPrioSync_1_1shared__priority__mutex.html#a19160dfb2e293a0370c83a5cc0beb668',1,'PrioSync::shared_priority_mutex::lock_shared()']]]
+  ['try_5flock_0',['try_lock',['../classPrioSync_1_1priority__mutex.html#a38a4a9fc866bb62cea48c8463754c9e4',1,'PrioSync::priority_mutex::try_lock()'],['../classPrioSync_1_1shared__priority__mutex.html#a5f244eb242ea01e507076177b4346dd5',1,'PrioSync::shared_priority_mutex::try_lock(Priority_t priority=0)']]],
+  ['try_5flock_5fshared_1',['try_lock_shared',['../classPrioSync_1_1shared__priority__mutex.html#ab44b509c0efb59a7c38eef82add8f3dd',1,'PrioSync::shared_priority_mutex']]]
 ];

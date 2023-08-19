@@ -1,3 +1,15 @@
+/**
+ * @file fair_shared_mutex.h
+ * @author F. Abrignani (federignoli@hotmail.it)
+ * @author P. Di Giglio
+ * @author S. Martorana
+ * @brief #TODO
+ * @version 0.1
+ * @date 2023-08-19
+ * 
+ * @copyright Copyright (c) 2023
+ * 
+ */
 #pragma once
 #include <thread>
 #include <mutex>
@@ -17,6 +29,7 @@ namespace fsm{
     typedef uint32_t _TotRead_cnt_t;
     static constexpr _TotRead_cnt_t _Max_readers = _TotRead_cnt_t(-1);
 
+    /// @private
     struct threadPriority{
 
         _Priority_t prio{};
@@ -46,11 +59,24 @@ namespace fsm{
         reader,
         writer
     };
-
+    
     template<ReaderWriterPriority P = ReaderWriterPriority::writer>
     class fair_shared_mutex{
         public:
 
+        /**
+         * @brief #TODO like a `std::mutex.lock()`, plus a priority.
+         * 
+         * @param priority used to set a priority of a lock.
+         * 
+         * \code{.cpp}
+         * void my_function(fsm::fair_shared_mutex fsm, uint32_t priority) {
+         *     //...do something
+         *     fsm.lock(priority);
+         *     //...do something
+         * };
+         * \endcode
+         */
         void lock(_Priority_t priority = 0){
             #ifdef DEBUGGIN_FSM
             auto threadID = std::this_thread::get_id();
@@ -76,6 +102,19 @@ namespace fsm{
             //    myPriority.writer_queue.wait(lock);
         }
 
+        /**
+         * @brief #TODO like a `std::mutex.unlock()`, plus a priority.
+         * 
+         * \code{.cpp}
+         * void my_function(fsm::fair_shared_mutex fsm, uint32_t priority) {
+         *     //...do something
+         *     fsm.lock(priority);
+         *     //...do something
+         *     fsm.unlock();
+         *     //...do something
+         * };
+         * \endcode
+         */
         void unlock(){
             #ifdef DEBUGGIN_FSM
             auto threadID = std::this_thread::get_id();
@@ -109,6 +148,17 @@ namespace fsm{
             }
         }
 
+        /**
+         * @brief #TODO like a `std::mutex.lock()` in shared mode, plus a priority.
+         * 
+         * \code{.cpp}
+         * void my_function(fsm::fair_shared_mutex fsm, uint32_t priority) {
+         *     //...do something
+         *     fsm.lock_shared(priority);
+         *     //...do something
+         * };
+         * \endcode
+         */
         void lock_shared(_Priority_t priority = 0){
             #ifdef DEBUGGIN_FSM
             auto threadID = std::this_thread::get_id();
@@ -139,6 +189,19 @@ namespace fsm{
 
         }
 
+        /**
+         * @brief #TODO like a `std::mutex.unlock()` in shared mode, plus a priority.
+         * 
+         * \code{.cpp}
+         * void my_function(fsm::fair_shared_mutex fsm, uint32_t priority) {
+         *     //...do something
+         *     fsm.shared_lock(priority);
+         *     //...do something
+         *     fsm.shared_unlock();
+         *     //...do something
+         * };
+         * \endcode
+         */
         void unlock_shared(){
             #ifdef DEBUGGIN_FSM
             auto threadID = std::this_thread::get_id();

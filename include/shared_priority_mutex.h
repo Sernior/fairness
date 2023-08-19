@@ -1,3 +1,13 @@
+/**
+ * @file shared_priority_mutex.h
+ * @author F. Abrignani (federignoli@hotmail.it)
+ * @author P. Di Giglio
+ * @author S. Martorana
+ * @brief #TODO
+ * @version 0.1
+ * @date 2023-08-19
+ * @copyright Copyright (c) 2023
+ */
 #pragma once
 #include <thread>
 #include <mutex>
@@ -22,16 +32,37 @@ namespace PrioSync{// the name has yet to be chosen
 
         public:
 
+        /// @private
         shared_priority_mutex() = default;
 
+        /// @private
         shared_priority_mutex(const shared_priority_mutex&) = delete;
+
+        /// @private
         shared_priority_mutex& operator=(const shared_priority_mutex&) = delete;
 
+        /// @private
         shared_priority_mutex(shared_priority_mutex&&) = delete;
+
+        /// @private
         shared_priority_mutex& operator=(shared_priority_mutex&&) = delete;
 
+        /// @private
         ~shared_priority_mutex() = default;
 
+        /**
+         * @brief #TODO like a `std::mutex.lock()`, plus a priority.
+         * 
+         * @param priority used to set a priority of a lock.
+         * 
+         * \code{.cpp}
+         * void my_function(PrioSync::priority_mutex pm, uint8_t priority) {
+         *     //...do something
+         *     pm.lock(priority);
+         *     //...do something
+         * };
+         * \endcode
+         */
         void lock(Priority_t priority = 0){
 
             if (priority >= N)
@@ -53,6 +84,19 @@ namespace PrioSync{// the name has yet to be chosen
             _owner = std::this_thread::get_id();
         }
 
+        /**
+         * @brief #TODO like a `std::mutex.unlock()`, plus a priority.
+         * 
+         * \code{.cpp}
+         * void my_function(PrioSync::priority_mutex pm, uint8_t priority) {
+         *     //...do something
+         *     pm.lock(priority);
+         *     //...do something
+         *     pm.unlock();
+         *     //...do something
+         * };
+         * \endcode
+         */
         void unlock(){
             Priority_t p;
 
@@ -76,6 +120,21 @@ namespace PrioSync{// the name has yet to be chosen
 
         }
 
+        /**
+         * @brief #TODO like a `std::mutex.try_lock()`, plus a priority.
+         * 
+         * @param priority used to set a priority of a lock.
+         * 
+         * \code{.cpp}
+         * void my_function(PrioSync::priority_mutex pm, uint8_t priority) {
+         *     //...do something
+         *     pm.try_lock(priority);
+         *     //...do something
+         * };
+         * \endcode
+         * @return true 
+         * @return false 
+         */
         [[nodiscard]] bool try_lock(Priority_t priority = 0){
 
             if (priority >= N)
@@ -88,6 +147,19 @@ namespace PrioSync{// the name has yet to be chosen
             return true;
         }
 
+        /**
+         * @brief #TODO like a `std::mutex.lock()` in shared mode, plus a priority.
+         * 
+         * @param priority used to set a priority of a lock.
+         * 
+         * \code{.cpp}
+         * void my_function(PrioSync::priority_mutex pm, uint8_t priority) {
+         *     //...do something
+         *     pm.shared_lock(priority);
+         *     //...do something
+         * };
+         * \endcode
+         */
         void lock_shared(Priority_t priority = 0){
 
             if (priority >= N)
@@ -108,6 +180,21 @@ namespace PrioSync{// the name has yet to be chosen
             _totalCurrentReaders++;
         }
 
+        /**
+         * @brief #TODO like a `std::mutex.try_lock()` in shared mode, plus a priority.
+         * 
+         * @param priority used to set a priority of a lock.
+         * 
+         * \code{.cpp}
+         * void my_function(PrioSync::priority_mutex pm, uint8_t priority) {
+         *     //...do something
+         *     pm.try_lock_shared(priority);
+         *     //...do something
+         * };
+         * \endcode
+         * @return true 
+         * @return false 
+         */
         [[nodiscard]] bool try_lock_shared(Priority_t priority = 0){
 
             if (priority >= N)
@@ -122,6 +209,19 @@ namespace PrioSync{// the name has yet to be chosen
             return true;
         }
 
+        /**
+         * @brief #TODO like a `std::mutex.unlock()`, plus a priority.
+         * 
+         * \code{.cpp}
+         * void my_function(PrioSync::priority_mutex pm, uint8_t priority) {
+         *     //...do something
+         *     pm.lock(priority);
+         *     //...do something
+         *     pm.unlock();
+         *     //...do something
+         * };
+         * \endcode
+         */
         void unlock_shared(){
             Priority_t p;
 

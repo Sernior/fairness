@@ -1,4 +1,6 @@
 var searchData=
 [
-  ['expected_0',['expected',['../namespacePMscenario1.html#aa790377a205ab513445896a08edd7220',1,'PMscenario1::expected'],['../namespacePMscenario2.html#a13f7a60a4d06cb41a22699a88c619e5e',1,'PMscenario2::expected'],['../namespacePMscenario3.html#a60f7671ab836726547cf6060a7c071dc',1,'PMscenario3::expected'],['../namespacePMscenario4.html#a407d13385cfc18c1e08a505ad339c03e',1,'PMscenario4::expected'],['../namespaceSPMscenario1.html#a32ed6ab98b803c2190f2d8a0c2b916c0',1,'SPMscenario1::expected'],['../namespaceSPMscenario2.html#a55048b2bc0dbff9f99c7aa141dcd5798',1,'SPMscenario2::expected'],['../namespaceSPMscenario3.html#a42b973d04922386398b2cf42d075a5e6',1,'SPMscenario3::expected'],['../namespaceSPMscenario4.html#adc4ee84c2c9981b5b40a321c1ac861b3',1,'SPMscenario4::expected'],['../namespaceSPMscenario5.html#a64617babfe370e2f806a4ceb5434e59f',1,'SPMscenario5::expected'],['../namespaceSPMscenario6.html#a35de28c380838c17db3bac72e2404d8a',1,'SPMscenario6::expected']]]
+  ['priority_5fmutex_0',['priority_mutex',['../classPrioSync_1_1priority__mutex.html',1,'PrioSync']]],
+  ['priority_5fmutex_2eh_1',['priority_mutex.h',['../priority__mutex_8h.html',1,'']]],
+  ['priority_5ft_2eh_2',['priority_t.h',['../priority__t_8h.html',1,'']]]
 ];

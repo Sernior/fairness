@@ -98,248 +98,214 @@ $(document).ready(function() { init_codefold(0); });
   <div class="headertitle"><div class="title">fair_shared_mutex.h</div></div>
 </div><!--header-->
 <div class="contents">
-<a href="fair__shared__mutex_8h.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno">    1</span><span class="preprocessor">#pragma once</span></div>
-<div class="line"><a id="l00002" name="l00002"></a><span class="lineno">    2</span><span class="preprocessor">#include &lt;thread&gt;</span></div>
-<div class="line"><a id="l00003" name="l00003"></a><span class="lineno">    3</span><span class="preprocessor">#include &lt;mutex&gt;</span></div>
-<div class="line"><a id="l00004" name="l00004"></a><span class="lineno">    4</span><span class="preprocessor">#include &lt;condition_variable&gt;</span></div>
-<div class="line"><a id="l00005" name="l00005"></a><span class="lineno">    5</span><span class="preprocessor">#include &lt;set&gt;</span></div>
-<div class="line"><a id="l00006" name="l00006"></a><span class="lineno">    6</span> </div>
-<div class="line"><a id="l00007" name="l00007"></a><span class="lineno"><a class="line" href="fair__shared__mutex_8h.html#a6b19cf1b25d12e4a163dc08ef05de52b">    7</a></span><span class="preprocessor">#define DEBUGGIN_FSM</span></div>
-<div class="line"><a id="l00008" name="l00008"></a><span class="lineno">    8</span> </div>
-<div class="line"><a id="l00009" name="l00009"></a><span class="lineno">    9</span><span class="preprocessor">#ifdef DEBUGGIN_FSM</span></div>
-<div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span><span class="preprocessor">#include &lt;stdexcept&gt;</span></div>
-<div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span><span class="preprocessor">#endif</span></div>
-<div class="foldopen" id="foldopen00012" data-start="{" data-end="}">
-<div class="line"><a id="l00012" name="l00012"></a><span class="lineno"><a class="line" href="namespacefsm.html">   12</a></span><span class="keyword">namespace </span><a class="code hl_namespace" href="namespacefsm.html">fsm</a>{</div>
-<div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span> </div>
-<div class="line"><a id="l00014" name="l00014"></a><span class="lineno"><a class="line" href="namespacefsm.html#af0db53206c5750b4466546ac234c7f76">   14</a></span>    <span class="keyword">typedef</span> uint32_t <a class="code hl_typedef" href="namespacefsm.html#af0db53206c5750b4466546ac234c7f76">_Priority_t</a>;</div>
-<div class="line"><a id="l00015" name="l00015"></a><span class="lineno"><a class="line" href="namespacefsm.html#a52f2dc65468f8e86fc1626d29d0f266f">   15</a></span>    <span class="keyword">typedef</span> uint16_t <a class="code hl_typedef" href="namespacefsm.html#a52f2dc65468f8e86fc1626d29d0f266f">_Read_cnt_t</a>;</div>
-<div class="line"><a id="l00016" name="l00016"></a><span class="lineno"><a class="line" href="namespacefsm.html#a9efd721fb453a5704d270c40a10c3f0f">   16</a></span>    <span class="keyword">typedef</span> uint16_t <a class="code hl_typedef" href="namespacefsm.html#a9efd721fb453a5704d270c40a10c3f0f">_Write_cnt_t</a>;</div>
-<div class="line"><a id="l00017" name="l00017"></a><span class="lineno"><a class="line" href="namespacefsm.html#a20ae733a81b56d4093df11c8dae33e07">   17</a></span>    <span class="keyword">typedef</span> uint32_t <a class="code hl_typedef" href="namespacefsm.html#a20ae733a81b56d4093df11c8dae33e07">_TotRead_cnt_t</a>;</div>
-<div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span>    <span class="keyword">static</span> <span class="keyword">constexpr</span> <a class="code hl_typedef" href="namespacefsm.html#a20ae733a81b56d4093df11c8dae33e07">_TotRead_cnt_t</a> _Max_readers = <a class="code hl_typedef" href="namespacefsm.html#a20ae733a81b56d4093df11c8dae33e07">_TotRead_cnt_t</a>(-1);</div>
-<div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span> </div>
-<div class="foldopen" id="foldopen00020" data-start="{" data-end="};">
-<div class="line"><a id="l00020" name="l00020"></a><span class="lineno"><a class="line" href="structfsm_1_1threadPriority.html">   20</a></span>    <span class="keyword">struct </span><a class="code hl_struct" href="structfsm_1_1threadPriority.html">threadPriority</a>{</div>
-<div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span> </div>
-<div class="line"><a id="l00022" name="l00022"></a><span class="lineno"><a class="line" href="structfsm_1_1threadPriority.html#ac639a7143deb9a8a82cf2765795ab209">   22</a></span>        <a class="code hl_typedef" href="namespacefsm.html#af0db53206c5750b4466546ac234c7f76">_Priority_t</a> <a class="code hl_variable" href="structfsm_1_1threadPriority.html#ac639a7143deb9a8a82cf2765795ab209">prio</a>{};</div>
-<div class="line"><a id="l00023" name="l00023"></a><span class="lineno"><a class="line" href="structfsm_1_1threadPriority.html#a7eea23f47dd32dfc4b836afec5bb6cd8">   23</a></span>        <span class="keyword">mutable</span> <a class="code hl_typedef" href="namespacefsm.html#a9efd721fb453a5704d270c40a10c3f0f">_Write_cnt_t</a> <a class="code hl_variable" href="structfsm_1_1threadPriority.html#a7eea23f47dd32dfc4b836afec5bb6cd8">writers_waiting</a>{};</div>
-<div class="line"><a id="l00024" name="l00024"></a><span class="lineno"><a class="line" href="structfsm_1_1threadPriority.html#af329b608ab8114c913e1fa539a18a355">   24</a></span>        <span class="keyword">mutable</span> <a class="code hl_typedef" href="namespacefsm.html#a52f2dc65468f8e86fc1626d29d0f266f">_Read_cnt_t</a> <a class="code hl_variable" href="structfsm_1_1threadPriority.html#af329b608ab8114c913e1fa539a18a355">readers_waiting</a>{};</div>
-<div class="line"><a id="l00025" name="l00025"></a><span class="lineno"><a class="line" href="structfsm_1_1threadPriority.html#acf2991a73cfb5e3d99ff8a2c78d85198">   25</a></span>        <span class="keyword">mutable</span> std::condition_variable <a class="code hl_variable" href="structfsm_1_1threadPriority.html#acf2991a73cfb5e3d99ff8a2c78d85198">writer_queue</a>;</div>
-<div class="line"><a id="l00026" name="l00026"></a><span class="lineno"><a class="line" href="structfsm_1_1threadPriority.html#ad50211aacadf7e3517056fa0e300f7e0">   26</a></span>        <span class="keyword">mutable</span> std::condition_variable <a class="code hl_variable" href="structfsm_1_1threadPriority.html#ad50211aacadf7e3517056fa0e300f7e0">reader_queue</a>;</div>
-<div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span> </div>
-<div class="foldopen" id="foldopen00028" data-start="{" data-end="}">
-<div class="line"><a id="l00028" name="l00028"></a><span class="lineno"><a class="line" href="structfsm_1_1threadPriority.html#acc0171b4749cf241e44448e7269448ab">   28</a></span>        <a class="code hl_function" href="structfsm_1_1threadPriority.html#acc0171b4749cf241e44448e7269448ab">threadPriority</a>(<a class="code hl_typedef" href="namespacefsm.html#af0db53206c5750b4466546ac234c7f76">_Priority_t</a> priority){</div>
-<div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span>            <a class="code hl_variable" href="structfsm_1_1threadPriority.html#ac639a7143deb9a8a82cf2765795ab209">prio</a> = priority;</div>
-<div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span>        }</div>
-</div>
-<div class="foldopen" id="foldopen00031" data-start="{" data-end="}">
-<div class="line"><a id="l00031" name="l00031"></a><span class="lineno"><a class="line" href="structfsm_1_1threadPriority.html#a030e6c233bb08840d4a68992c7e7db11">   31</a></span>        <span class="keywordtype">bool</span> <a class="code hl_function" href="structfsm_1_1threadPriority.html#a030e6c233bb08840d4a68992c7e7db11">operator&lt;</a>(<a class="code hl_struct" href="structfsm_1_1threadPriority.html">threadPriority</a> <span class="keyword">const</span>&amp; other)<span class="keyword"> const</span>{</div>
-<div class="line"><a id="l00032" name="l00032"></a><span class="lineno">   32</span>            <span class="keywordflow">return</span> <a class="code hl_variable" href="structfsm_1_1threadPriority.html#ac639a7143deb9a8a82cf2765795ab209">prio</a> &lt; other.<a class="code hl_variable" href="structfsm_1_1threadPriority.html#ac639a7143deb9a8a82cf2765795ab209">prio</a>;</div>
-<div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span>        }</div>
-</div>
-<div class="foldopen" id="foldopen00034" data-start="{" data-end="}">
-<div class="line"><a id="l00034" name="l00034"></a><span class="lineno"><a class="line" href="structfsm_1_1threadPriority.html#a5411cab95f4f9e347cd1374506b60b1b">   34</a></span>        <span class="keywordtype">bool</span> <a class="code hl_function" href="structfsm_1_1threadPriority.html#a5411cab95f4f9e347cd1374506b60b1b">operator&lt;</a>(<a class="code hl_typedef" href="namespacefsm.html#af0db53206c5750b4466546ac234c7f76">_Priority_t</a> priority)<span class="keyword"> const</span>{</div>
-<div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span>            <span class="keywordflow">return</span> <a class="code hl_variable" href="structfsm_1_1threadPriority.html#ac639a7143deb9a8a82cf2765795ab209">prio</a> &lt; priority;</div>
-<div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span>        }</div>
-</div>
-<div class="foldopen" id="foldopen00037" data-start="{" data-end="}">
-<div class="line"><a id="l00037" name="l00037"></a><span class="lineno"><a class="line" href="structfsm_1_1threadPriority.html#a22705867dfaea7e9f7f15fb3bce4d425">   37</a></span>        <span class="keywordtype">bool</span> <a class="code hl_function" href="structfsm_1_1threadPriority.html#a22705867dfaea7e9f7f15fb3bce4d425">operator==</a>(<a class="code hl_struct" href="structfsm_1_1threadPriority.html">threadPriority</a> <span class="keyword">const</span>&amp; other)<span class="keyword"> const</span>{</div>
-<div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span>            <span class="keywordflow">return</span> <a class="code hl_variable" href="structfsm_1_1threadPriority.html#ac639a7143deb9a8a82cf2765795ab209">prio</a> == other.<a class="code hl_variable" href="structfsm_1_1threadPriority.html#ac639a7143deb9a8a82cf2765795ab209">prio</a>;</div>
-<div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span>        }</div>
-</div>
-<div class="foldopen" id="foldopen00040" data-start="{" data-end="}">
-<div class="line"><a id="l00040" name="l00040"></a><span class="lineno"><a class="line" href="structfsm_1_1threadPriority.html#a5c6b993ed188e5ad2cc408159cde04ce">   40</a></span>        <span class="keywordtype">bool</span> <a class="code hl_function" href="structfsm_1_1threadPriority.html#a5c6b993ed188e5ad2cc408159cde04ce">operator==</a>(<a class="code hl_typedef" href="namespacefsm.html#af0db53206c5750b4466546ac234c7f76">_Priority_t</a> priority)<span class="keyword"> const</span>{</div>
-<div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span>            <span class="keywordflow">return</span> <a class="code hl_variable" href="structfsm_1_1threadPriority.html#ac639a7143deb9a8a82cf2765795ab209">prio</a> == priority;</div>
-<div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span>        }</div>
-</div>
-<div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span>    };</div>
-</div>
-<div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span> </div>
-<div class="foldopen" id="foldopen00045" data-start="{" data-end="};">
-<div class="line"><a id="l00045" name="l00045"></a><span class="lineno"><a class="line" href="namespacefsm.html#a9efe723eeb2eaee622ee693cf41c357d">   45</a></span>    <span class="keyword">enum class</span> <a class="code hl_enumeration" href="namespacefsm.html#a9efe723eeb2eaee622ee693cf41c357d">ReaderWriterPriority</a>{</div>
-<div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span>        <a class="code hl_enumvalue" href="namespacefsm.html#a9efe723eeb2eaee622ee693cf41c357da1de9b0a30075ae8c303eb420c103c320">reader</a>,</div>
-<div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span>        <a class="code hl_enumvalue" href="namespacefsm.html#a9efe723eeb2eaee622ee693cf41c357daa82feee3cc1af8bcabda979e8775ef0f">writer</a></div>
-<div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span>    };</div>
-</div>
-<div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span> </div>
-<div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span>    <span class="keyword">template</span>&lt;ReaderWriterPriority P = ReaderWriterPriority::writer&gt;</div>
-<div class="foldopen" id="foldopen00051" data-start="{" data-end="};">
-<div class="line"><a id="l00051" name="l00051"></a><span class="lineno"><a class="line" href="classfsm_1_1fair__shared__mutex.html">   51</a></span>    <span class="keyword">class </span><a class="code hl_class" href="classfsm_1_1fair__shared__mutex.html">fair_shared_mutex</a>{</div>
-<div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span>        <span class="keyword">public</span>:</div>
-<div class="line"><a id="l00053" name="l00053"></a><span class="lineno">   53</span> </div>
-<div class="foldopen" id="foldopen00054" data-start="{" data-end="}">
-<div class="line"><a id="l00054" name="l00054"></a><span class="lineno"><a class="line" href="classfsm_1_1fair__shared__mutex.html#a8a2d124cbeaf65feec5dacb5d970c9ba">   54</a></span>        <span class="keywordtype">void</span> <a class="code hl_function" href="classfsm_1_1fair__shared__mutex.html#a8a2d124cbeaf65feec5dacb5d970c9ba">lock</a>(<a class="code hl_typedef" href="namespacefsm.html#af0db53206c5750b4466546ac234c7f76">_Priority_t</a> priority = 0){</div>
-<div class="line"><a id="l00055" name="l00055"></a><span class="lineno">   55</span><span class="preprocessor">            #ifdef DEBUGGIN_FSM</span></div>
-<div class="line"><a id="l00056" name="l00056"></a><span class="lineno">   56</span>            <span class="keyword">auto</span> threadID = std::this_thread::get_id();</div>
-<div class="line"><a id="l00057" name="l00057"></a><span class="lineno">   57</span><span class="preprocessor">            #endif</span></div>
-<div class="line"><a id="l00058" name="l00058"></a><span class="lineno">   58</span> </div>
-<div class="line"><a id="l00059" name="l00059"></a><span class="lineno">   59</span>            std::unique_lock&lt;std::mutex&gt; <a class="code hl_function" href="classfsm_1_1fair__shared__mutex.html#a8a2d124cbeaf65feec5dacb5d970c9ba">lock</a>(_internalMtx);</div>
-<div class="line"><a id="l00060" name="l00060"></a><span class="lineno">   60</span>            <span class="keyword">auto</span>&amp; myPriority = *(_priorities.emplace(priority).first);</div>
-<div class="line"><a id="l00061" name="l00061"></a><span class="lineno">   61</span> </div>
-<div class="line"><a id="l00062" name="l00062"></a><span class="lineno">   62</span>            <span class="comment">//when we first emplace a priority that does not exist we are not checking</span></div>
-<div class="line"><a id="l00063" name="l00063"></a><span class="lineno">   63</span>            <span class="comment">//the existance of lower priorities writers_wating.</span></div>
-<div class="line"><a id="l00064" name="l00064"></a><span class="lineno">   64</span>            <span class="keyword">auto</span>* max_p = _find_first_priority();</div>
-<div class="line"><a id="l00065" name="l00065"></a><span class="lineno">   65</span> </div>
-<div class="line"><a id="l00066" name="l00066"></a><span class="lineno">   66</span>            <span class="keywordflow">while</span> (_lockOwned || _totalCurrentReaders &gt; 0 || (max_p != <span class="keyword">nullptr</span>) &amp;&amp; (*max_p &lt; myPriority) ){ </div>
-<div class="line"><a id="l00067" name="l00067"></a><span class="lineno">   67</span>                myPriority.writers_waiting++;<span class="comment">//overflow risk? we could leave it unchecked I doubt anyone will ever use more than 60k threads</span></div>
-<div class="line"><a id="l00068" name="l00068"></a><span class="lineno">   68</span>                myPriority.writer_queue.wait(<a class="code hl_function" href="classfsm_1_1fair__shared__mutex.html#a8a2d124cbeaf65feec5dacb5d970c9ba">lock</a>);</div>
-<div class="line"><a id="l00069" name="l00069"></a><span class="lineno">   69</span>                max_p = _find_first_priority();</div>
-<div class="line"><a id="l00070" name="l00070"></a><span class="lineno">   70</span>                myPriority.writers_waiting--;</div>
-<div class="line"><a id="l00071" name="l00071"></a><span class="lineno">   71</span>            }</div>
-<div class="line"><a id="l00072" name="l00072"></a><span class="lineno">   72</span> </div>
-<div class="line"><a id="l00073" name="l00073"></a><span class="lineno">   73</span>            _lockOwned = <span class="keyword">true</span>;</div>
-<div class="line"><a id="l00074" name="l00074"></a><span class="lineno">   74</span> </div>
-<div class="line"><a id="l00075" name="l00075"></a><span class="lineno">   75</span>            <span class="comment">//while (_totalCurrentReaders &gt; 0) // can we do this? is it good? (P0)</span></div>
-<div class="line"><a id="l00076" name="l00076"></a><span class="lineno">   76</span>            <span class="comment">//    myPriority.writer_queue.wait(lock);</span></div>
-<div class="line"><a id="l00077" name="l00077"></a><span class="lineno">   77</span>        }</div>
-</div>
-<div class="line"><a id="l00078" name="l00078"></a><span class="lineno">   78</span> </div>
-<div class="foldopen" id="foldopen00079" data-start="{" data-end="}">
-<div class="line"><a id="l00079" name="l00079"></a><span class="lineno"><a class="line" href="classfsm_1_1fair__shared__mutex.html#a54d278001de536423c0e573609be78a7">   79</a></span>        <span class="keywordtype">void</span> <a class="code hl_function" href="classfsm_1_1fair__shared__mutex.html#a54d278001de536423c0e573609be78a7">unlock</a>(){</div>
-<div class="line"><a id="l00080" name="l00080"></a><span class="lineno">   80</span><span class="preprocessor">            #ifdef DEBUGGIN_FSM</span></div>
-<div class="line"><a id="l00081" name="l00081"></a><span class="lineno">   81</span>            <span class="keyword">auto</span> threadID = std::this_thread::get_id();</div>
-<div class="line"><a id="l00082" name="l00082"></a><span class="lineno">   82</span><span class="preprocessor">            #endif</span></div>
-<div class="line"><a id="l00083" name="l00083"></a><span class="lineno">   83</span> </div>
-<div class="line"><a id="l00084" name="l00084"></a><span class="lineno">   84</span>            <span class="keyword">const</span> <a class="code hl_struct" href="structfsm_1_1threadPriority.html">threadPriority</a>* p;</div>
-<div class="line"><a id="l00085" name="l00085"></a><span class="lineno">   85</span> </div>
-<div class="line"><a id="l00086" name="l00086"></a><span class="lineno">   86</span>            {</div>
-<div class="line"><a id="l00087" name="l00087"></a><span class="lineno">   87</span>            std::lock_guard&lt;std::mutex&gt; <a class="code hl_function" href="classfsm_1_1fair__shared__mutex.html#a8a2d124cbeaf65feec5dacb5d970c9ba">lock</a>(_internalMtx);</div>
-<div class="line"><a id="l00088" name="l00088"></a><span class="lineno">   88</span>            _lockOwned = <span class="keyword">false</span>;</div>
-<div class="line"><a id="l00089" name="l00089"></a><span class="lineno">   89</span>            p = _find_first_priority();</div>
-<div class="line"><a id="l00090" name="l00090"></a><span class="lineno">   90</span>            }</div>
+<a href="fair__shared__mutex_8h.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno">    1</span> </div>
+<div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span><span class="preprocessor">#pragma once</span></div>
+<div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span><span class="preprocessor">#include &lt;thread&gt;</span></div>
+<div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span><span class="preprocessor">#include &lt;mutex&gt;</span></div>
+<div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span><span class="preprocessor">#include &lt;condition_variable&gt;</span></div>
+<div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span><span class="preprocessor">#include &lt;set&gt;</span></div>
+<div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span> </div>
+<div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span><span class="preprocessor">#define DEBUGGIN_FSM</span></div>
+<div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span> </div>
+<div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span><span class="preprocessor">#ifdef DEBUGGIN_FSM</span></div>
+<div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span><span class="preprocessor">#include &lt;stdexcept&gt;</span></div>
+<div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span><span class="preprocessor">#endif</span></div>
+<div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span><span class="keyword">namespace </span>fsm{</div>
+<div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span> </div>
+<div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span>    <span class="keyword">typedef</span> uint32_t _Priority_t;</div>
+<div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span>    <span class="keyword">typedef</span> uint16_t _Read_cnt_t;</div>
+<div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span>    <span class="keyword">typedef</span> uint16_t _Write_cnt_t;</div>
+<div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span>    <span class="keyword">typedef</span> uint32_t _TotRead_cnt_t;</div>
+<div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span>    <span class="keyword">static</span> <span class="keyword">constexpr</span> _TotRead_cnt_t _Max_readers = _TotRead_cnt_t(-1);</div>
+<div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span> </div>
+<div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span>    <span class="keyword">struct </span>threadPriority{</div>
+<div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span> </div>
+<div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span>        _Priority_t prio{};</div>
+<div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span>        <span class="keyword">mutable</span> _Write_cnt_t writers_waiting{};</div>
+<div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span>        <span class="keyword">mutable</span> _Read_cnt_t readers_waiting{};</div>
+<div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span>        <span class="keyword">mutable</span> std::condition_variable writer_queue;</div>
+<div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span>        <span class="keyword">mutable</span> std::condition_variable reader_queue;</div>
+<div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span> </div>
+<div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span>        threadPriority(_Priority_t priority){</div>
+<div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span>            prio = priority;</div>
+<div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span>        }</div>
+<div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span>        <span class="keywordtype">bool</span> operator&lt;(threadPriority <span class="keyword">const</span>&amp; other)<span class="keyword"> const</span>{</div>
+<div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span>            <span class="keywordflow">return</span> prio &lt; other.prio;</div>
+<div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span>        }</div>
+<div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span>        <span class="keywordtype">bool</span> operator&lt;(_Priority_t priority)<span class="keyword"> const</span>{</div>
+<div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span>            <span class="keywordflow">return</span> prio &lt; priority;</div>
+<div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span>        }</div>
+<div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span>        <span class="keywordtype">bool</span> operator==(threadPriority <span class="keyword">const</span>&amp; other)<span class="keyword"> const</span>{</div>
+<div class="line"><a id="l00051" name="l00051"></a><span class="lineno">   51</span>            <span class="keywordflow">return</span> prio == other.prio;</div>
+<div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span>        }</div>
+<div class="line"><a id="l00053" name="l00053"></a><span class="lineno">   53</span>        <span class="keywordtype">bool</span> operator==(_Priority_t priority)<span class="keyword"> const</span>{</div>
+<div class="line"><a id="l00054" name="l00054"></a><span class="lineno">   54</span>            <span class="keywordflow">return</span> prio == priority;</div>
+<div class="line"><a id="l00055" name="l00055"></a><span class="lineno">   55</span>        }</div>
+<div class="line"><a id="l00056" name="l00056"></a><span class="lineno">   56</span>    };</div>
+<div class="line"><a id="l00057" name="l00057"></a><span class="lineno">   57</span> </div>
+<div class="line"><a id="l00058" name="l00058"></a><span class="lineno">   58</span>    <span class="keyword">enum class</span> ReaderWriterPriority{</div>
+<div class="line"><a id="l00059" name="l00059"></a><span class="lineno">   59</span>        reader,</div>
+<div class="line"><a id="l00060" name="l00060"></a><span class="lineno">   60</span>        writer</div>
+<div class="line"><a id="l00061" name="l00061"></a><span class="lineno">   61</span>    };</div>
+<div class="line"><a id="l00062" name="l00062"></a><span class="lineno">   62</span>    </div>
+<div class="line"><a id="l00063" name="l00063"></a><span class="lineno">   63</span>    <span class="keyword">template</span>&lt;ReaderWriterPriority P = ReaderWriterPriority::writer&gt;</div>
+<div class="foldopen" id="foldopen00064" data-start="{" data-end="};">
+<div class="line"><a id="l00064" name="l00064"></a><span class="lineno"><a class="line" href="classfsm_1_1fair__shared__mutex.html">   64</a></span>    <span class="keyword">class </span><a class="code hl_class" href="classfsm_1_1fair__shared__mutex.html">fair_shared_mutex</a>{</div>
+<div class="line"><a id="l00065" name="l00065"></a><span class="lineno">   65</span>        <span class="keyword">public</span>:</div>
+<div class="line"><a id="l00066" name="l00066"></a><span class="lineno">   66</span> </div>
+<div class="foldopen" id="foldopen00080" data-start="{" data-end="}">
+<div class="line"><a id="l00080" name="l00080"></a><span class="lineno"><a class="line" href="classfsm_1_1fair__shared__mutex.html#a8a2d124cbeaf65feec5dacb5d970c9ba">   80</a></span>        <span class="keywordtype">void</span> <a class="code hl_function" href="classfsm_1_1fair__shared__mutex.html#a8a2d124cbeaf65feec5dacb5d970c9ba">lock</a>(_Priority_t priority = 0){</div>
+<div class="line"><a id="l00081" name="l00081"></a><span class="lineno">   81</span><span class="preprocessor">            #ifdef DEBUGGIN_FSM</span></div>
+<div class="line"><a id="l00082" name="l00082"></a><span class="lineno">   82</span>            <span class="keyword">auto</span> threadID = std::this_thread::get_id();</div>
+<div class="line"><a id="l00083" name="l00083"></a><span class="lineno">   83</span><span class="preprocessor">            #endif</span></div>
+<div class="line"><a id="l00084" name="l00084"></a><span class="lineno">   84</span> </div>
+<div class="line"><a id="l00085" name="l00085"></a><span class="lineno">   85</span>            std::unique_lock&lt;std::mutex&gt; <a class="code hl_function" href="classfsm_1_1fair__shared__mutex.html#a8a2d124cbeaf65feec5dacb5d970c9ba">lock</a>(_internalMtx);</div>
+<div class="line"><a id="l00086" name="l00086"></a><span class="lineno">   86</span>            <span class="keyword">auto</span>&amp; myPriority = *(_priorities.emplace(priority).first);</div>
+<div class="line"><a id="l00087" name="l00087"></a><span class="lineno">   87</span> </div>
+<div class="line"><a id="l00088" name="l00088"></a><span class="lineno">   88</span>            <span class="comment">//when we first emplace a priority that does not exist we are not checking</span></div>
+<div class="line"><a id="l00089" name="l00089"></a><span class="lineno">   89</span>            <span class="comment">//the existance of lower priorities writers_wating.</span></div>
+<div class="line"><a id="l00090" name="l00090"></a><span class="lineno">   90</span>            <span class="keyword">auto</span>* max_p = _find_first_priority();</div>
 <div class="line"><a id="l00091" name="l00091"></a><span class="lineno">   91</span> </div>
-<div class="line"><a id="l00092" name="l00092"></a><span class="lineno">   92</span>            <span class="keywordflow">if</span> (p == <span class="keyword">nullptr</span>) <span class="keywordflow">return</span>; <span class="comment">// there is no one waiting</span></div>
-<div class="line"><a id="l00093" name="l00093"></a><span class="lineno">   93</span> </div>
-<div class="line"><a id="l00094" name="l00094"></a><span class="lineno">   94</span>            <span class="keywordflow">if</span> (P == <a class="code hl_enumvalue" href="namespacefsm.html#a9efe723eeb2eaee622ee693cf41c357daa82feee3cc1af8bcabda979e8775ef0f">ReaderWriterPriority::writer</a>){</div>
-<div class="line"><a id="l00095" name="l00095"></a><span class="lineno">   95</span>                <span class="keywordflow">if</span> (p-&gt;<a class="code hl_variable" href="structfsm_1_1threadPriority.html#a7eea23f47dd32dfc4b836afec5bb6cd8">writers_waiting</a> &gt; 0){</div>
-<div class="line"><a id="l00096" name="l00096"></a><span class="lineno">   96</span>                    p-&gt;<a class="code hl_variable" href="structfsm_1_1threadPriority.html#acf2991a73cfb5e3d99ff8a2c78d85198">writer_queue</a>.notify_one();</div>
-<div class="line"><a id="l00097" name="l00097"></a><span class="lineno">   97</span>                }</div>
-<div class="line"><a id="l00098" name="l00098"></a><span class="lineno">   98</span>                <span class="keywordflow">else</span> <span class="keywordflow">if</span> (p-&gt;<a class="code hl_variable" href="structfsm_1_1threadPriority.html#af329b608ab8114c913e1fa539a18a355">readers_waiting</a> &gt; 0){</div>
-<div class="line"><a id="l00099" name="l00099"></a><span class="lineno">   99</span>                    p-&gt;<a class="code hl_variable" href="structfsm_1_1threadPriority.html#ad50211aacadf7e3517056fa0e300f7e0">reader_queue</a>.notify_all();</div>
-<div class="line"><a id="l00100" name="l00100"></a><span class="lineno">  100</span>                }</div>
-<div class="line"><a id="l00101" name="l00101"></a><span class="lineno">  101</span>            }</div>
-<div class="line"><a id="l00102" name="l00102"></a><span class="lineno">  102</span>            <span class="keywordflow">else</span> {</div>
-<div class="line"><a id="l00103" name="l00103"></a><span class="lineno">  103</span>                <span class="keywordflow">if</span> (p-&gt;<a class="code hl_variable" href="structfsm_1_1threadPriority.html#af329b608ab8114c913e1fa539a18a355">readers_waiting</a> &gt; 0){</div>
-<div class="line"><a id="l00104" name="l00104"></a><span class="lineno">  104</span>                    p-&gt;<a class="code hl_variable" href="structfsm_1_1threadPriority.html#ad50211aacadf7e3517056fa0e300f7e0">reader_queue</a>.notify_all();</div>
-<div class="line"><a id="l00105" name="l00105"></a><span class="lineno">  105</span>                }</div>
-<div class="line"><a id="l00106" name="l00106"></a><span class="lineno">  106</span>                <span class="keywordflow">else</span> <span class="keywordflow">if</span> (p-&gt;<a class="code hl_variable" href="structfsm_1_1threadPriority.html#a7eea23f47dd32dfc4b836afec5bb6cd8">writers_waiting</a> &gt; 0){</div>
-<div class="line"><a id="l00107" name="l00107"></a><span class="lineno">  107</span>                    p-&gt;<a class="code hl_variable" href="structfsm_1_1threadPriority.html#acf2991a73cfb5e3d99ff8a2c78d85198">writer_queue</a>.notify_one();</div>
-<div class="line"><a id="l00108" name="l00108"></a><span class="lineno">  108</span>                }</div>
-<div class="line"><a id="l00109" name="l00109"></a><span class="lineno">  109</span>            }</div>
-<div class="line"><a id="l00110" name="l00110"></a><span class="lineno">  110</span>        }</div>
+<div class="line"><a id="l00092" name="l00092"></a><span class="lineno">   92</span>            <span class="keywordflow">while</span> (_lockOwned || _totalCurrentReaders &gt; 0 || (max_p != <span class="keyword">nullptr</span>) &amp;&amp; (*max_p &lt; myPriority) ){ </div>
+<div class="line"><a id="l00093" name="l00093"></a><span class="lineno">   93</span>                myPriority.writers_waiting++;<span class="comment">//overflow risk? we could leave it unchecked I doubt anyone will ever use more than 60k threads</span></div>
+<div class="line"><a id="l00094" name="l00094"></a><span class="lineno">   94</span>                myPriority.writer_queue.wait(<a class="code hl_function" href="classfsm_1_1fair__shared__mutex.html#a8a2d124cbeaf65feec5dacb5d970c9ba">lock</a>);</div>
+<div class="line"><a id="l00095" name="l00095"></a><span class="lineno">   95</span>                max_p = _find_first_priority();</div>
+<div class="line"><a id="l00096" name="l00096"></a><span class="lineno">   96</span>                myPriority.writers_waiting--;</div>
+<div class="line"><a id="l00097" name="l00097"></a><span class="lineno">   97</span>            }</div>
+<div class="line"><a id="l00098" name="l00098"></a><span class="lineno">   98</span> </div>
+<div class="line"><a id="l00099" name="l00099"></a><span class="lineno">   99</span>            _lockOwned = <span class="keyword">true</span>;</div>
+<div class="line"><a id="l00100" name="l00100"></a><span class="lineno">  100</span> </div>
+<div class="line"><a id="l00101" name="l00101"></a><span class="lineno">  101</span>            <span class="comment">//while (_totalCurrentReaders &gt; 0) // can we do this? is it good? (P0)</span></div>
+<div class="line"><a id="l00102" name="l00102"></a><span class="lineno">  102</span>            <span class="comment">//    myPriority.writer_queue.wait(lock);</span></div>
+<div class="line"><a id="l00103" name="l00103"></a><span class="lineno">  103</span>        }</div>
 </div>
-<div class="line"><a id="l00111" name="l00111"></a><span class="lineno">  111</span> </div>
-<div class="foldopen" id="foldopen00112" data-start="{" data-end="}">
-<div class="line"><a id="l00112" name="l00112"></a><span class="lineno"><a class="line" href="classfsm_1_1fair__shared__mutex.html#abc57c07ebf5c5a4018c8a8cae25a6971">  112</a></span>        <span class="keywordtype">void</span> <a class="code hl_function" href="classfsm_1_1fair__shared__mutex.html#abc57c07ebf5c5a4018c8a8cae25a6971">lock_shared</a>(<a class="code hl_typedef" href="namespacefsm.html#af0db53206c5750b4466546ac234c7f76">_Priority_t</a> priority = 0){</div>
-<div class="line"><a id="l00113" name="l00113"></a><span class="lineno">  113</span><span class="preprocessor">            #ifdef DEBUGGIN_FSM</span></div>
-<div class="line"><a id="l00114" name="l00114"></a><span class="lineno">  114</span>            <span class="keyword">auto</span> threadID = std::this_thread::get_id();</div>
-<div class="line"><a id="l00115" name="l00115"></a><span class="lineno">  115</span><span class="preprocessor">            #endif</span></div>
-<div class="line"><a id="l00116" name="l00116"></a><span class="lineno">  116</span> </div>
-<div class="line"><a id="l00117" name="l00117"></a><span class="lineno">  117</span>            std::unique_lock&lt;std::mutex&gt; <a class="code hl_function" href="classfsm_1_1fair__shared__mutex.html#a8a2d124cbeaf65feec5dacb5d970c9ba">lock</a>(_internalMtx);</div>
-<div class="line"><a id="l00118" name="l00118"></a><span class="lineno">  118</span>            <span class="keyword">auto</span>&amp; myPriority = *(_priorities.emplace(priority).first);</div>
-<div class="line"><a id="l00119" name="l00119"></a><span class="lineno">  119</span> </div>
-<div class="line"><a id="l00120" name="l00120"></a><span class="lineno">  120</span><span class="preprocessor">            #ifdef DEBUGGIN_FSM</span></div>
-<div class="line"><a id="l00121" name="l00121"></a><span class="lineno">  121</span>            <span class="keywordflow">if</span> (_lockOwned &amp;&amp; _totalCurrentReaders &gt; 0){</div>
-<div class="line"><a id="l00122" name="l00122"></a><span class="lineno">  122</span>                <span class="keywordflow">throw</span> std::exception(<span class="stringliteral">&quot;The lock is being owned uniquely while there are readers.&quot;</span>);</div>
-<div class="line"><a id="l00123" name="l00123"></a><span class="lineno">  123</span>            }</div>
-<div class="line"><a id="l00124" name="l00124"></a><span class="lineno">  124</span>            <span class="keywordflow">if</span> (_totalCurrentReaders == _Max_readers){</div>
-<div class="line"><a id="l00125" name="l00125"></a><span class="lineno">  125</span>                <span class="keywordflow">throw</span> std::exception(<span class="stringliteral">&quot;Unsupported number of readers.&quot;</span>);</div>
-<div class="line"><a id="l00126" name="l00126"></a><span class="lineno">  126</span>            }</div>
-<div class="line"><a id="l00127" name="l00127"></a><span class="lineno">  127</span><span class="preprocessor">            #endif</span></div>
-<div class="line"><a id="l00128" name="l00128"></a><span class="lineno">  128</span> </div>
-<div class="line"><a id="l00129" name="l00129"></a><span class="lineno">  129</span>            <span class="comment">// do we starve writers? maybe we need to check the currently served priority or maybe we could just accept that if</span></div>
-<div class="line"><a id="l00130" name="l00130"></a><span class="lineno">  130</span>            <span class="comment">// a thread A comes and tries to acquire the shared_lock while others are reading... even if A has lower priority then the current ones</span></div>
-<div class="line"><a id="l00131" name="l00131"></a><span class="lineno">  131</span>            <span class="comment">// we could just let him pass anyways... No I think I want to check the currently served priority and not risk starving writers with higher prioirity</span></div>
-<div class="line"><a id="l00132" name="l00132"></a><span class="lineno">  132</span>            <span class="keywordflow">while</span> (_lockOwned || _totalCurrentReaders == _Max_readers){</div>
-<div class="line"><a id="l00133" name="l00133"></a><span class="lineno">  133</span>                myPriority.readers_waiting++;<span class="comment">//overflow risk here? we could leave it unchecked I doubt anyone will ever use more than 60k threads</span></div>
-<div class="line"><a id="l00134" name="l00134"></a><span class="lineno">  134</span>                myPriority.reader_queue.wait(<a class="code hl_function" href="classfsm_1_1fair__shared__mutex.html#a8a2d124cbeaf65feec5dacb5d970c9ba">lock</a>);</div>
-<div class="line"><a id="l00135" name="l00135"></a><span class="lineno">  135</span>                myPriority.readers_waiting--;</div>
-<div class="line"><a id="l00136" name="l00136"></a><span class="lineno">  136</span>            }</div>
-<div class="line"><a id="l00137" name="l00137"></a><span class="lineno">  137</span> </div>
-<div class="line"><a id="l00138" name="l00138"></a><span class="lineno">  138</span>            _totalCurrentReaders++;</div>
-<div class="line"><a id="l00139" name="l00139"></a><span class="lineno">  139</span> </div>
-<div class="line"><a id="l00140" name="l00140"></a><span class="lineno">  140</span>        }</div>
+<div class="line"><a id="l00104" name="l00104"></a><span class="lineno">  104</span> </div>
+<div class="foldopen" id="foldopen00118" data-start="{" data-end="}">
+<div class="line"><a id="l00118" name="l00118"></a><span class="lineno"><a class="line" href="classfsm_1_1fair__shared__mutex.html#a54d278001de536423c0e573609be78a7">  118</a></span>        <span class="keywordtype">void</span> <a class="code hl_function" href="classfsm_1_1fair__shared__mutex.html#a54d278001de536423c0e573609be78a7">unlock</a>(){</div>
+<div class="line"><a id="l00119" name="l00119"></a><span class="lineno">  119</span><span class="preprocessor">            #ifdef DEBUGGIN_FSM</span></div>
+<div class="line"><a id="l00120" name="l00120"></a><span class="lineno">  120</span>            <span class="keyword">auto</span> threadID = std::this_thread::get_id();</div>
+<div class="line"><a id="l00121" name="l00121"></a><span class="lineno">  121</span><span class="preprocessor">            #endif</span></div>
+<div class="line"><a id="l00122" name="l00122"></a><span class="lineno">  122</span> </div>
+<div class="line"><a id="l00123" name="l00123"></a><span class="lineno">  123</span>            <span class="keyword">const</span> threadPriority* p;</div>
+<div class="line"><a id="l00124" name="l00124"></a><span class="lineno">  124</span> </div>
+<div class="line"><a id="l00125" name="l00125"></a><span class="lineno">  125</span>            {</div>
+<div class="line"><a id="l00126" name="l00126"></a><span class="lineno">  126</span>            std::lock_guard&lt;std::mutex&gt; <a class="code hl_function" href="classfsm_1_1fair__shared__mutex.html#a8a2d124cbeaf65feec5dacb5d970c9ba">lock</a>(_internalMtx);</div>
+<div class="line"><a id="l00127" name="l00127"></a><span class="lineno">  127</span>            _lockOwned = <span class="keyword">false</span>;</div>
+<div class="line"><a id="l00128" name="l00128"></a><span class="lineno">  128</span>            p = _find_first_priority();</div>
+<div class="line"><a id="l00129" name="l00129"></a><span class="lineno">  129</span>            }</div>
+<div class="line"><a id="l00130" name="l00130"></a><span class="lineno">  130</span> </div>
+<div class="line"><a id="l00131" name="l00131"></a><span class="lineno">  131</span>            <span class="keywordflow">if</span> (p == <span class="keyword">nullptr</span>) <span class="keywordflow">return</span>; <span class="comment">// there is no one waiting</span></div>
+<div class="line"><a id="l00132" name="l00132"></a><span class="lineno">  132</span> </div>
+<div class="line"><a id="l00133" name="l00133"></a><span class="lineno">  133</span>            <span class="keywordflow">if</span> (P == ReaderWriterPriority::writer){</div>
+<div class="line"><a id="l00134" name="l00134"></a><span class="lineno">  134</span>                <span class="keywordflow">if</span> (p-&gt;writers_waiting &gt; 0){</div>
+<div class="line"><a id="l00135" name="l00135"></a><span class="lineno">  135</span>                    p-&gt;writer_queue.notify_one();</div>
+<div class="line"><a id="l00136" name="l00136"></a><span class="lineno">  136</span>                }</div>
+<div class="line"><a id="l00137" name="l00137"></a><span class="lineno">  137</span>                <span class="keywordflow">else</span> <span class="keywordflow">if</span> (p-&gt;readers_waiting &gt; 0){</div>
+<div class="line"><a id="l00138" name="l00138"></a><span class="lineno">  138</span>                    p-&gt;reader_queue.notify_all();</div>
+<div class="line"><a id="l00139" name="l00139"></a><span class="lineno">  139</span>                }</div>
+<div class="line"><a id="l00140" name="l00140"></a><span class="lineno">  140</span>            }</div>
+<div class="line"><a id="l00141" name="l00141"></a><span class="lineno">  141</span>            <span class="keywordflow">else</span> {</div>
+<div class="line"><a id="l00142" name="l00142"></a><span class="lineno">  142</span>                <span class="keywordflow">if</span> (p-&gt;readers_waiting &gt; 0){</div>
+<div class="line"><a id="l00143" name="l00143"></a><span class="lineno">  143</span>                    p-&gt;reader_queue.notify_all();</div>
+<div class="line"><a id="l00144" name="l00144"></a><span class="lineno">  144</span>                }</div>
+<div class="line"><a id="l00145" name="l00145"></a><span class="lineno">  145</span>                <span class="keywordflow">else</span> <span class="keywordflow">if</span> (p-&gt;writers_waiting &gt; 0){</div>
+<div class="line"><a id="l00146" name="l00146"></a><span class="lineno">  146</span>                    p-&gt;writer_queue.notify_one();</div>
+<div class="line"><a id="l00147" name="l00147"></a><span class="lineno">  147</span>                }</div>
+<div class="line"><a id="l00148" name="l00148"></a><span class="lineno">  148</span>            }</div>
+<div class="line"><a id="l00149" name="l00149"></a><span class="lineno">  149</span>        }</div>
 </div>
-<div class="line"><a id="l00141" name="l00141"></a><span class="lineno">  141</span> </div>
-<div class="foldopen" id="foldopen00142" data-start="{" data-end="}">
-<div class="line"><a id="l00142" name="l00142"></a><span class="lineno"><a class="line" href="classfsm_1_1fair__shared__mutex.html#a64d7fd5caf139ecb5433d232b635ba06">  142</a></span>        <span class="keywordtype">void</span> <a class="code hl_function" href="classfsm_1_1fair__shared__mutex.html#a64d7fd5caf139ecb5433d232b635ba06">unlock_shared</a>(){</div>
-<div class="line"><a id="l00143" name="l00143"></a><span class="lineno">  143</span><span class="preprocessor">            #ifdef DEBUGGIN_FSM</span></div>
-<div class="line"><a id="l00144" name="l00144"></a><span class="lineno">  144</span>            <span class="keyword">auto</span> threadID = std::this_thread::get_id();</div>
-<div class="line"><a id="l00145" name="l00145"></a><span class="lineno">  145</span><span class="preprocessor">            #endif</span></div>
-<div class="line"><a id="l00146" name="l00146"></a><span class="lineno">  146</span> </div>
-<div class="line"><a id="l00147" name="l00147"></a><span class="lineno">  147</span>            <span class="keyword">const</span> <a class="code hl_struct" href="structfsm_1_1threadPriority.html">threadPriority</a>* p;</div>
-<div class="line"><a id="l00148" name="l00148"></a><span class="lineno">  148</span> </div>
-<div class="line"><a id="l00149" name="l00149"></a><span class="lineno">  149</span>            {</div>
-<div class="line"><a id="l00150" name="l00150"></a><span class="lineno">  150</span>            std::lock_guard&lt;std::mutex&gt; <a class="code hl_function" href="classfsm_1_1fair__shared__mutex.html#a8a2d124cbeaf65feec5dacb5d970c9ba">lock</a>(_internalMtx);</div>
-<div class="line"><a id="l00151" name="l00151"></a><span class="lineno">  151</span>            _totalCurrentReaders--;</div>
-<div class="line"><a id="l00152" name="l00152"></a><span class="lineno">  152</span>            p = _find_first_priority();</div>
-<div class="line"><a id="l00153" name="l00153"></a><span class="lineno">  153</span>            }</div>
-<div class="line"><a id="l00154" name="l00154"></a><span class="lineno">  154</span> </div>
-<div class="line"><a id="l00155" name="l00155"></a><span class="lineno">  155</span>            <span class="keywordflow">if</span> (p == <span class="keyword">nullptr</span>) <span class="keywordflow">return</span>; <span class="comment">// there is no one waiting</span></div>
-<div class="line"><a id="l00156" name="l00156"></a><span class="lineno">  156</span> </div>
-<div class="line"><a id="l00157" name="l00157"></a><span class="lineno">  157</span>            <span class="keywordflow">if</span> (P == <a class="code hl_enumvalue" href="namespacefsm.html#a9efe723eeb2eaee622ee693cf41c357daa82feee3cc1af8bcabda979e8775ef0f">ReaderWriterPriority::writer</a>){</div>
-<div class="line"><a id="l00158" name="l00158"></a><span class="lineno">  158</span>                <span class="keywordflow">if</span> (p-&gt;<a class="code hl_variable" href="structfsm_1_1threadPriority.html#a7eea23f47dd32dfc4b836afec5bb6cd8">writers_waiting</a> &gt; 0)</div>
-<div class="line"><a id="l00159" name="l00159"></a><span class="lineno">  159</span>                    p-&gt;<a class="code hl_variable" href="structfsm_1_1threadPriority.html#acf2991a73cfb5e3d99ff8a2c78d85198">writer_queue</a>.notify_one();</div>
-<div class="line"><a id="l00160" name="l00160"></a><span class="lineno">  160</span>                <span class="keywordflow">else</span> <span class="keywordflow">if</span> (p-&gt;<a class="code hl_variable" href="structfsm_1_1threadPriority.html#af329b608ab8114c913e1fa539a18a355">readers_waiting</a> &gt; 0)</div>
-<div class="line"><a id="l00161" name="l00161"></a><span class="lineno">  161</span>                    p-&gt;<a class="code hl_variable" href="structfsm_1_1threadPriority.html#ad50211aacadf7e3517056fa0e300f7e0">reader_queue</a>.notify_all();</div>
-<div class="line"><a id="l00162" name="l00162"></a><span class="lineno">  162</span>            }</div>
-<div class="line"><a id="l00163" name="l00163"></a><span class="lineno">  163</span>            <span class="keywordflow">else</span> {</div>
-<div class="line"><a id="l00164" name="l00164"></a><span class="lineno">  164</span>                <span class="keywordflow">if</span> (p-&gt;<a class="code hl_variable" href="structfsm_1_1threadPriority.html#af329b608ab8114c913e1fa539a18a355">readers_waiting</a> &gt; 0)</div>
-<div class="line"><a id="l00165" name="l00165"></a><span class="lineno">  165</span>                    p-&gt;<a class="code hl_variable" href="structfsm_1_1threadPriority.html#ad50211aacadf7e3517056fa0e300f7e0">reader_queue</a>.notify_all();</div>
-<div class="line"><a id="l00166" name="l00166"></a><span class="lineno">  166</span>                <span class="keywordflow">else</span> <span class="keywordflow">if</span> (p-&gt;<a class="code hl_variable" href="structfsm_1_1threadPriority.html#a7eea23f47dd32dfc4b836afec5bb6cd8">writers_waiting</a> &gt; 0)</div>
-<div class="line"><a id="l00167" name="l00167"></a><span class="lineno">  167</span>                    p-&gt;<a class="code hl_variable" href="structfsm_1_1threadPriority.html#acf2991a73cfb5e3d99ff8a2c78d85198">writer_queue</a>.notify_one();</div>
-<div class="line"><a id="l00168" name="l00168"></a><span class="lineno">  168</span>            }</div>
-<div class="line"><a id="l00169" name="l00169"></a><span class="lineno">  169</span>        }</div>
-</div>
-<div class="line"><a id="l00170" name="l00170"></a><span class="lineno">  170</span> </div>
-<div class="line"><a id="l00171" name="l00171"></a><span class="lineno">  171</span>        <span class="keyword">private</span>:</div>
-<div class="line"><a id="l00172" name="l00172"></a><span class="lineno">  172</span>        std::mutex _internalMtx;</div>
-<div class="line"><a id="l00173" name="l00173"></a><span class="lineno">  173</span>        std::set&lt;threadPriority&gt; _priorities;</div>
-<div class="line"><a id="l00174" name="l00174"></a><span class="lineno">  174</span>        <span class="keywordtype">bool</span> _lockOwned{};<span class="comment">// probably this will have to become a threadID when we implement recursive locks</span></div>
-<div class="line"><a id="l00175" name="l00175"></a><span class="lineno">  175</span>        <a class="code hl_typedef" href="namespacefsm.html#a20ae733a81b56d4093df11c8dae33e07">_TotRead_cnt_t</a> _totalCurrentReaders{};</div>
-<div class="line"><a id="l00176" name="l00176"></a><span class="lineno">  176</span> </div>
-<div class="line"><a id="l00177" name="l00177"></a><span class="lineno">  177</span>        <span class="comment">//Will find the first priority where there is at least 1 thread waiting</span></div>
-<div class="line"><a id="l00178" name="l00178"></a><span class="lineno">  178</span>        <span class="keyword">const</span> threadPriority* _find_first_priority(){</div>
-<div class="line"><a id="l00179" name="l00179"></a><span class="lineno">  179</span>            <span class="keywordflow">for</span> (<span class="keyword">auto</span>&amp; p : _priorities){</div>
-<div class="line"><a id="l00180" name="l00180"></a><span class="lineno">  180</span>                <span class="keywordflow">if</span> (P == <a class="code hl_enumvalue" href="namespacefsm.html#a9efe723eeb2eaee622ee693cf41c357da1de9b0a30075ae8c303eb420c103c320">ReaderWriterPriority::reader</a>){</div>
-<div class="line"><a id="l00181" name="l00181"></a><span class="lineno">  181</span>                    <span class="keywordflow">if</span> (p.readers_waiting &gt; 0 || p.writers_waiting &gt; 0)</div>
-<div class="line"><a id="l00182" name="l00182"></a><span class="lineno">  182</span>                        <span class="keywordflow">return</span> &amp;p;</div>
-<div class="line"><a id="l00183" name="l00183"></a><span class="lineno">  183</span>                }</div>
-<div class="line"><a id="l00184" name="l00184"></a><span class="lineno">  184</span>                <span class="keywordflow">else</span>{</div>
-<div class="line"><a id="l00185" name="l00185"></a><span class="lineno">  185</span>                    <span class="keywordflow">if</span> (p.writers_waiting &gt; 0 || p.readers_waiting &gt; 0)</div>
-<div class="line"><a id="l00186" name="l00186"></a><span class="lineno">  186</span>                        <span class="keywordflow">return</span> &amp;p;</div>
-<div class="line"><a id="l00187" name="l00187"></a><span class="lineno">  187</span>                }</div>
-<div class="line"><a id="l00188" name="l00188"></a><span class="lineno">  188</span>            }</div>
-<div class="line"><a id="l00189" name="l00189"></a><span class="lineno">  189</span>            <span class="keywordflow">return</span> <span class="keyword">nullptr</span>;</div>
+<div class="line"><a id="l00150" name="l00150"></a><span class="lineno">  150</span> </div>
+<div class="foldopen" id="foldopen00162" data-start="{" data-end="}">
+<div class="line"><a id="l00162" name="l00162"></a><span class="lineno"><a class="line" href="classfsm_1_1fair__shared__mutex.html#abc57c07ebf5c5a4018c8a8cae25a6971">  162</a></span>        <span class="keywordtype">void</span> <a class="code hl_function" href="classfsm_1_1fair__shared__mutex.html#abc57c07ebf5c5a4018c8a8cae25a6971">lock_shared</a>(_Priority_t priority = 0){</div>
+<div class="line"><a id="l00163" name="l00163"></a><span class="lineno">  163</span><span class="preprocessor">            #ifdef DEBUGGIN_FSM</span></div>
+<div class="line"><a id="l00164" name="l00164"></a><span class="lineno">  164</span>            <span class="keyword">auto</span> threadID = std::this_thread::get_id();</div>
+<div class="line"><a id="l00165" name="l00165"></a><span class="lineno">  165</span><span class="preprocessor">            #endif</span></div>
+<div class="line"><a id="l00166" name="l00166"></a><span class="lineno">  166</span> </div>
+<div class="line"><a id="l00167" name="l00167"></a><span class="lineno">  167</span>            std::unique_lock&lt;std::mutex&gt; <a class="code hl_function" href="classfsm_1_1fair__shared__mutex.html#a8a2d124cbeaf65feec5dacb5d970c9ba">lock</a>(_internalMtx);</div>
+<div class="line"><a id="l00168" name="l00168"></a><span class="lineno">  168</span>            <span class="keyword">auto</span>&amp; myPriority = *(_priorities.emplace(priority).first);</div>
+<div class="line"><a id="l00169" name="l00169"></a><span class="lineno">  169</span> </div>
+<div class="line"><a id="l00170" name="l00170"></a><span class="lineno">  170</span><span class="preprocessor">            #ifdef DEBUGGIN_FSM</span></div>
+<div class="line"><a id="l00171" name="l00171"></a><span class="lineno">  171</span>            <span class="keywordflow">if</span> (_lockOwned &amp;&amp; _totalCurrentReaders &gt; 0){</div>
+<div class="line"><a id="l00172" name="l00172"></a><span class="lineno">  172</span>                <span class="keywordflow">throw</span> std::exception(<span class="stringliteral">&quot;The lock is being owned uniquely while there are readers.&quot;</span>);</div>
+<div class="line"><a id="l00173" name="l00173"></a><span class="lineno">  173</span>            }</div>
+<div class="line"><a id="l00174" name="l00174"></a><span class="lineno">  174</span>            <span class="keywordflow">if</span> (_totalCurrentReaders == _Max_readers){</div>
+<div class="line"><a id="l00175" name="l00175"></a><span class="lineno">  175</span>                <span class="keywordflow">throw</span> std::exception(<span class="stringliteral">&quot;Unsupported number of readers.&quot;</span>);</div>
+<div class="line"><a id="l00176" name="l00176"></a><span class="lineno">  176</span>            }</div>
+<div class="line"><a id="l00177" name="l00177"></a><span class="lineno">  177</span><span class="preprocessor">            #endif</span></div>
+<div class="line"><a id="l00178" name="l00178"></a><span class="lineno">  178</span> </div>
+<div class="line"><a id="l00179" name="l00179"></a><span class="lineno">  179</span>            <span class="comment">// do we starve writers? maybe we need to check the currently served priority or maybe we could just accept that if</span></div>
+<div class="line"><a id="l00180" name="l00180"></a><span class="lineno">  180</span>            <span class="comment">// a thread A comes and tries to acquire the shared_lock while others are reading... even if A has lower priority then the current ones</span></div>
+<div class="line"><a id="l00181" name="l00181"></a><span class="lineno">  181</span>            <span class="comment">// we could just let him pass anyways... No I think I want to check the currently served priority and not risk starving writers with higher prioirity</span></div>
+<div class="line"><a id="l00182" name="l00182"></a><span class="lineno">  182</span>            <span class="keywordflow">while</span> (_lockOwned || _totalCurrentReaders == _Max_readers){</div>
+<div class="line"><a id="l00183" name="l00183"></a><span class="lineno">  183</span>                myPriority.readers_waiting++;<span class="comment">//overflow risk here? we could leave it unchecked I doubt anyone will ever use more than 60k threads</span></div>
+<div class="line"><a id="l00184" name="l00184"></a><span class="lineno">  184</span>                myPriority.reader_queue.wait(<a class="code hl_function" href="classfsm_1_1fair__shared__mutex.html#a8a2d124cbeaf65feec5dacb5d970c9ba">lock</a>);</div>
+<div class="line"><a id="l00185" name="l00185"></a><span class="lineno">  185</span>                myPriority.readers_waiting--;</div>
+<div class="line"><a id="l00186" name="l00186"></a><span class="lineno">  186</span>            }</div>
+<div class="line"><a id="l00187" name="l00187"></a><span class="lineno">  187</span> </div>
+<div class="line"><a id="l00188" name="l00188"></a><span class="lineno">  188</span>            _totalCurrentReaders++;</div>
+<div class="line"><a id="l00189" name="l00189"></a><span class="lineno">  189</span> </div>
 <div class="line"><a id="l00190" name="l00190"></a><span class="lineno">  190</span>        }</div>
-<div class="line"><a id="l00191" name="l00191"></a><span class="lineno">  191</span>    };</div>
 </div>
-<div class="line"><a id="l00192" name="l00192"></a><span class="lineno">  192</span>}</div>
+<div class="line"><a id="l00191" name="l00191"></a><span class="lineno">  191</span> </div>
+<div class="foldopen" id="foldopen00205" data-start="{" data-end="}">
+<div class="line"><a id="l00205" name="l00205"></a><span class="lineno"><a class="line" href="classfsm_1_1fair__shared__mutex.html#a64d7fd5caf139ecb5433d232b635ba06">  205</a></span>        <span class="keywordtype">void</span> <a class="code hl_function" href="classfsm_1_1fair__shared__mutex.html#a64d7fd5caf139ecb5433d232b635ba06">unlock_shared</a>(){</div>
+<div class="line"><a id="l00206" name="l00206"></a><span class="lineno">  206</span><span class="preprocessor">            #ifdef DEBUGGIN_FSM</span></div>
+<div class="line"><a id="l00207" name="l00207"></a><span class="lineno">  207</span>            <span class="keyword">auto</span> threadID = std::this_thread::get_id();</div>
+<div class="line"><a id="l00208" name="l00208"></a><span class="lineno">  208</span><span class="preprocessor">            #endif</span></div>
+<div class="line"><a id="l00209" name="l00209"></a><span class="lineno">  209</span> </div>
+<div class="line"><a id="l00210" name="l00210"></a><span class="lineno">  210</span>            <span class="keyword">const</span> threadPriority* p;</div>
+<div class="line"><a id="l00211" name="l00211"></a><span class="lineno">  211</span> </div>
+<div class="line"><a id="l00212" name="l00212"></a><span class="lineno">  212</span>            {</div>
+<div class="line"><a id="l00213" name="l00213"></a><span class="lineno">  213</span>            std::lock_guard&lt;std::mutex&gt; <a class="code hl_function" href="classfsm_1_1fair__shared__mutex.html#a8a2d124cbeaf65feec5dacb5d970c9ba">lock</a>(_internalMtx);</div>
+<div class="line"><a id="l00214" name="l00214"></a><span class="lineno">  214</span>            _totalCurrentReaders--;</div>
+<div class="line"><a id="l00215" name="l00215"></a><span class="lineno">  215</span>            p = _find_first_priority();</div>
+<div class="line"><a id="l00216" name="l00216"></a><span class="lineno">  216</span>            }</div>
+<div class="line"><a id="l00217" name="l00217"></a><span class="lineno">  217</span> </div>
+<div class="line"><a id="l00218" name="l00218"></a><span class="lineno">  218</span>            <span class="keywordflow">if</span> (p == <span class="keyword">nullptr</span>) <span class="keywordflow">return</span>; <span class="comment">// there is no one waiting</span></div>
+<div class="line"><a id="l00219" name="l00219"></a><span class="lineno">  219</span> </div>
+<div class="line"><a id="l00220" name="l00220"></a><span class="lineno">  220</span>            <span class="keywordflow">if</span> (P == ReaderWriterPriority::writer){</div>
+<div class="line"><a id="l00221" name="l00221"></a><span class="lineno">  221</span>                <span class="keywordflow">if</span> (p-&gt;writers_waiting &gt; 0)</div>
+<div class="line"><a id="l00222" name="l00222"></a><span class="lineno">  222</span>                    p-&gt;writer_queue.notify_one();</div>
+<div class="line"><a id="l00223" name="l00223"></a><span class="lineno">  223</span>                <span class="keywordflow">else</span> <span class="keywordflow">if</span> (p-&gt;readers_waiting &gt; 0)</div>
+<div class="line"><a id="l00224" name="l00224"></a><span class="lineno">  224</span>                    p-&gt;reader_queue.notify_all();</div>
+<div class="line"><a id="l00225" name="l00225"></a><span class="lineno">  225</span>            }</div>
+<div class="line"><a id="l00226" name="l00226"></a><span class="lineno">  226</span>            <span class="keywordflow">else</span> {</div>
+<div class="line"><a id="l00227" name="l00227"></a><span class="lineno">  227</span>                <span class="keywordflow">if</span> (p-&gt;readers_waiting &gt; 0)</div>
+<div class="line"><a id="l00228" name="l00228"></a><span class="lineno">  228</span>                    p-&gt;reader_queue.notify_all();</div>
+<div class="line"><a id="l00229" name="l00229"></a><span class="lineno">  229</span>                <span class="keywordflow">else</span> <span class="keywordflow">if</span> (p-&gt;writers_waiting &gt; 0)</div>
+<div class="line"><a id="l00230" name="l00230"></a><span class="lineno">  230</span>                    p-&gt;writer_queue.notify_one();</div>
+<div class="line"><a id="l00231" name="l00231"></a><span class="lineno">  231</span>            }</div>
+<div class="line"><a id="l00232" name="l00232"></a><span class="lineno">  232</span>        }</div>
 </div>
-<div class="ttc" id="aclassfsm_1_1fair__shared__mutex_html"><div class="ttname"><a href="classfsm_1_1fair__shared__mutex.html">fsm::fair_shared_mutex</a></div><div class="ttdef"><b>Definition</b> fair_shared_mutex.h:51</div></div>
-<div class="ttc" id="aclassfsm_1_1fair__shared__mutex_html_a54d278001de536423c0e573609be78a7"><div class="ttname"><a href="classfsm_1_1fair__shared__mutex.html#a54d278001de536423c0e573609be78a7">fsm::fair_shared_mutex::unlock</a></div><div class="ttdeci">void unlock()</div><div class="ttdef"><b>Definition</b> fair_shared_mutex.h:79</div></div>
-<div class="ttc" id="aclassfsm_1_1fair__shared__mutex_html_a64d7fd5caf139ecb5433d232b635ba06"><div class="ttname"><a href="classfsm_1_1fair__shared__mutex.html#a64d7fd5caf139ecb5433d232b635ba06">fsm::fair_shared_mutex::unlock_shared</a></div><div class="ttdeci">void unlock_shared()</div><div class="ttdef"><b>Definition</b> fair_shared_mutex.h:142</div></div>
-<div class="ttc" id="aclassfsm_1_1fair__shared__mutex_html_a8a2d124cbeaf65feec5dacb5d970c9ba"><div class="ttname"><a href="classfsm_1_1fair__shared__mutex.html#a8a2d124cbeaf65feec5dacb5d970c9ba">fsm::fair_shared_mutex::lock</a></div><div class="ttdeci">void lock(_Priority_t priority=0)</div><div class="ttdef"><b>Definition</b> fair_shared_mutex.h:54</div></div>
-<div class="ttc" id="aclassfsm_1_1fair__shared__mutex_html_abc57c07ebf5c5a4018c8a8cae25a6971"><div class="ttname"><a href="classfsm_1_1fair__shared__mutex.html#abc57c07ebf5c5a4018c8a8cae25a6971">fsm::fair_shared_mutex::lock_shared</a></div><div class="ttdeci">void lock_shared(_Priority_t priority=0)</div><div class="ttdef"><b>Definition</b> fair_shared_mutex.h:112</div></div>
-<div class="ttc" id="anamespacefsm_html"><div class="ttname"><a href="namespacefsm.html">fsm</a></div><div class="ttdef"><b>Definition</b> fair_shared_mutex.h:12</div></div>
-<div class="ttc" id="anamespacefsm_html_a20ae733a81b56d4093df11c8dae33e07"><div class="ttname"><a href="namespacefsm.html#a20ae733a81b56d4093df11c8dae33e07">fsm::_TotRead_cnt_t</a></div><div class="ttdeci">uint32_t _TotRead_cnt_t</div><div class="ttdef"><b>Definition</b> fair_shared_mutex.h:17</div></div>
-<div class="ttc" id="anamespacefsm_html_a52f2dc65468f8e86fc1626d29d0f266f"><div class="ttname"><a href="namespacefsm.html#a52f2dc65468f8e86fc1626d29d0f266f">fsm::_Read_cnt_t</a></div><div class="ttdeci">uint16_t _Read_cnt_t</div><div class="ttdef"><b>Definition</b> fair_shared_mutex.h:15</div></div>
-<div class="ttc" id="anamespacefsm_html_a9efd721fb453a5704d270c40a10c3f0f"><div class="ttname"><a href="namespacefsm.html#a9efd721fb453a5704d270c40a10c3f0f">fsm::_Write_cnt_t</a></div><div class="ttdeci">uint16_t _Write_cnt_t</div><div class="ttdef"><b>Definition</b> fair_shared_mutex.h:16</div></div>
-<div class="ttc" id="anamespacefsm_html_a9efe723eeb2eaee622ee693cf41c357d"><div class="ttname"><a href="namespacefsm.html#a9efe723eeb2eaee622ee693cf41c357d">fsm::ReaderWriterPriority</a></div><div class="ttdeci">ReaderWriterPriority</div><div class="ttdef"><b>Definition</b> fair_shared_mutex.h:45</div></div>
-<div class="ttc" id="anamespacefsm_html_a9efe723eeb2eaee622ee693cf41c357da1de9b0a30075ae8c303eb420c103c320"><div class="ttname"><a href="namespacefsm.html#a9efe723eeb2eaee622ee693cf41c357da1de9b0a30075ae8c303eb420c103c320">fsm::ReaderWriterPriority::reader</a></div><div class="ttdeci">@ reader</div></div>
-<div class="ttc" id="anamespacefsm_html_a9efe723eeb2eaee622ee693cf41c357daa82feee3cc1af8bcabda979e8775ef0f"><div class="ttname"><a href="namespacefsm.html#a9efe723eeb2eaee622ee693cf41c357daa82feee3cc1af8bcabda979e8775ef0f">fsm::ReaderWriterPriority::writer</a></div><div class="ttdeci">@ writer</div></div>
-<div class="ttc" id="anamespacefsm_html_af0db53206c5750b4466546ac234c7f76"><div class="ttname"><a href="namespacefsm.html#af0db53206c5750b4466546ac234c7f76">fsm::_Priority_t</a></div><div class="ttdeci">uint32_t _Priority_t</div><div class="ttdef"><b>Definition</b> fair_shared_mutex.h:14</div></div>
-<div class="ttc" id="astructfsm_1_1threadPriority_html"><div class="ttname"><a href="structfsm_1_1threadPriority.html">fsm::threadPriority</a></div><div class="ttdef"><b>Definition</b> fair_shared_mutex.h:20</div></div>
-<div class="ttc" id="astructfsm_1_1threadPriority_html_a030e6c233bb08840d4a68992c7e7db11"><div class="ttname"><a href="structfsm_1_1threadPriority.html#a030e6c233bb08840d4a68992c7e7db11">fsm::threadPriority::operator&lt;</a></div><div class="ttdeci">bool operator&lt;(threadPriority const &amp;other) const</div><div class="ttdef"><b>Definition</b> fair_shared_mutex.h:31</div></div>
-<div class="ttc" id="astructfsm_1_1threadPriority_html_a22705867dfaea7e9f7f15fb3bce4d425"><div class="ttname"><a href="structfsm_1_1threadPriority.html#a22705867dfaea7e9f7f15fb3bce4d425">fsm::threadPriority::operator==</a></div><div class="ttdeci">bool operator==(threadPriority const &amp;other) const</div><div class="ttdef"><b>Definition</b> fair_shared_mutex.h:37</div></div>
-<div class="ttc" id="astructfsm_1_1threadPriority_html_a5411cab95f4f9e347cd1374506b60b1b"><div class="ttname"><a href="structfsm_1_1threadPriority.html#a5411cab95f4f9e347cd1374506b60b1b">fsm::threadPriority::operator&lt;</a></div><div class="ttdeci">bool operator&lt;(_Priority_t priority) const</div><div class="ttdef"><b>Definition</b> fair_shared_mutex.h:34</div></div>
-<div class="ttc" id="astructfsm_1_1threadPriority_html_a5c6b993ed188e5ad2cc408159cde04ce"><div class="ttname"><a href="structfsm_1_1threadPriority.html#a5c6b993ed188e5ad2cc408159cde04ce">fsm::threadPriority::operator==</a></div><div class="ttdeci">bool operator==(_Priority_t priority) const</div><div class="ttdef"><b>Definition</b> fair_shared_mutex.h:40</div></div>
-<div class="ttc" id="astructfsm_1_1threadPriority_html_a7eea23f47dd32dfc4b836afec5bb6cd8"><div class="ttname"><a href="structfsm_1_1threadPriority.html#a7eea23f47dd32dfc4b836afec5bb6cd8">fsm::threadPriority::writers_waiting</a></div><div class="ttdeci">_Write_cnt_t writers_waiting</div><div class="ttdef"><b>Definition</b> fair_shared_mutex.h:23</div></div>
-<div class="ttc" id="astructfsm_1_1threadPriority_html_ac639a7143deb9a8a82cf2765795ab209"><div class="ttname"><a href="structfsm_1_1threadPriority.html#ac639a7143deb9a8a82cf2765795ab209">fsm::threadPriority::prio</a></div><div class="ttdeci">_Priority_t prio</div><div class="ttdef"><b>Definition</b> fair_shared_mutex.h:22</div></div>
-<div class="ttc" id="astructfsm_1_1threadPriority_html_acc0171b4749cf241e44448e7269448ab"><div class="ttname"><a href="structfsm_1_1threadPriority.html#acc0171b4749cf241e44448e7269448ab">fsm::threadPriority::threadPriority</a></div><div class="ttdeci">threadPriority(_Priority_t priority)</div><div class="ttdef"><b>Definition</b> fair_shared_mutex.h:28</div></div>
-<div class="ttc" id="astructfsm_1_1threadPriority_html_acf2991a73cfb5e3d99ff8a2c78d85198"><div class="ttname"><a href="structfsm_1_1threadPriority.html#acf2991a73cfb5e3d99ff8a2c78d85198">fsm::threadPriority::writer_queue</a></div><div class="ttdeci">std::condition_variable writer_queue</div><div class="ttdef"><b>Definition</b> fair_shared_mutex.h:25</div></div>
-<div class="ttc" id="astructfsm_1_1threadPriority_html_ad50211aacadf7e3517056fa0e300f7e0"><div class="ttname"><a href="structfsm_1_1threadPriority.html#ad50211aacadf7e3517056fa0e300f7e0">fsm::threadPriority::reader_queue</a></div><div class="ttdeci">std::condition_variable reader_queue</div><div class="ttdef"><b>Definition</b> fair_shared_mutex.h:26</div></div>
-<div class="ttc" id="astructfsm_1_1threadPriority_html_af329b608ab8114c913e1fa539a18a355"><div class="ttname"><a href="structfsm_1_1threadPriority.html#af329b608ab8114c913e1fa539a18a355">fsm::threadPriority::readers_waiting</a></div><div class="ttdeci">_Read_cnt_t readers_waiting</div><div class="ttdef"><b>Definition</b> fair_shared_mutex.h:24</div></div>
+<div class="line"><a id="l00233" name="l00233"></a><span class="lineno">  233</span> </div>
+<div class="line"><a id="l00234" name="l00234"></a><span class="lineno">  234</span>        <span class="keyword">private</span>:</div>
+<div class="line"><a id="l00235" name="l00235"></a><span class="lineno">  235</span>        std::mutex _internalMtx;</div>
+<div class="line"><a id="l00236" name="l00236"></a><span class="lineno">  236</span>        std::set&lt;threadPriority&gt; _priorities;</div>
+<div class="line"><a id="l00237" name="l00237"></a><span class="lineno">  237</span>        <span class="keywordtype">bool</span> _lockOwned{};<span class="comment">// probably this will have to become a threadID when we implement recursive locks</span></div>
+<div class="line"><a id="l00238" name="l00238"></a><span class="lineno">  238</span>        _TotRead_cnt_t _totalCurrentReaders{};</div>
+<div class="line"><a id="l00239" name="l00239"></a><span class="lineno">  239</span> </div>
+<div class="line"><a id="l00240" name="l00240"></a><span class="lineno">  240</span>        <span class="comment">//Will find the first priority where there is at least 1 thread waiting</span></div>
+<div class="line"><a id="l00241" name="l00241"></a><span class="lineno">  241</span>        <span class="keyword">const</span> threadPriority* _find_first_priority(){</div>
+<div class="line"><a id="l00242" name="l00242"></a><span class="lineno">  242</span>            <span class="keywordflow">for</span> (<span class="keyword">auto</span>&amp; p : _priorities){</div>
+<div class="line"><a id="l00243" name="l00243"></a><span class="lineno">  243</span>                <span class="keywordflow">if</span> (P == ReaderWriterPriority::reader){</div>
+<div class="line"><a id="l00244" name="l00244"></a><span class="lineno">  244</span>                    <span class="keywordflow">if</span> (p.readers_waiting &gt; 0 || p.writers_waiting &gt; 0)</div>
+<div class="line"><a id="l00245" name="l00245"></a><span class="lineno">  245</span>                        <span class="keywordflow">return</span> &amp;p;</div>
+<div class="line"><a id="l00246" name="l00246"></a><span class="lineno">  246</span>                }</div>
+<div class="line"><a id="l00247" name="l00247"></a><span class="lineno">  247</span>                <span class="keywordflow">else</span>{</div>
+<div class="line"><a id="l00248" name="l00248"></a><span class="lineno">  248</span>                    <span class="keywordflow">if</span> (p.writers_waiting &gt; 0 || p.readers_waiting &gt; 0)</div>
+<div class="line"><a id="l00249" name="l00249"></a><span class="lineno">  249</span>                        <span class="keywordflow">return</span> &amp;p;</div>
+<div class="line"><a id="l00250" name="l00250"></a><span class="lineno">  250</span>                }</div>
+<div class="line"><a id="l00251" name="l00251"></a><span class="lineno">  251</span>            }</div>
+<div class="line"><a id="l00252" name="l00252"></a><span class="lineno">  252</span>            <span class="keywordflow">return</span> <span class="keyword">nullptr</span>;</div>
+<div class="line"><a id="l00253" name="l00253"></a><span class="lineno">  253</span>        }</div>
+<div class="line"><a id="l00254" name="l00254"></a><span class="lineno">  254</span>    };</div>
+</div>
+<div class="line"><a id="l00255" name="l00255"></a><span class="lineno">  255</span>}</div>
+<div class="ttc" id="aclassfsm_1_1fair__shared__mutex_html"><div class="ttname"><a href="classfsm_1_1fair__shared__mutex.html">fsm::fair_shared_mutex</a></div><div class="ttdef"><b>Definition</b> fair_shared_mutex.h:64</div></div>
+<div class="ttc" id="aclassfsm_1_1fair__shared__mutex_html_a54d278001de536423c0e573609be78a7"><div class="ttname"><a href="classfsm_1_1fair__shared__mutex.html#a54d278001de536423c0e573609be78a7">fsm::fair_shared_mutex::unlock</a></div><div class="ttdeci">void unlock()</div><div class="ttdoc">#TODO like a std::mutex.unlock(), plus a priority.</div><div class="ttdef"><b>Definition</b> fair_shared_mutex.h:118</div></div>
+<div class="ttc" id="aclassfsm_1_1fair__shared__mutex_html_a64d7fd5caf139ecb5433d232b635ba06"><div class="ttname"><a href="classfsm_1_1fair__shared__mutex.html#a64d7fd5caf139ecb5433d232b635ba06">fsm::fair_shared_mutex::unlock_shared</a></div><div class="ttdeci">void unlock_shared()</div><div class="ttdoc">#TODO like a std::mutex.unlock() in shared mode, plus a priority.</div><div class="ttdef"><b>Definition</b> fair_shared_mutex.h:205</div></div>
+<div class="ttc" id="aclassfsm_1_1fair__shared__mutex_html_a8a2d124cbeaf65feec5dacb5d970c9ba"><div class="ttname"><a href="classfsm_1_1fair__shared__mutex.html#a8a2d124cbeaf65feec5dacb5d970c9ba">fsm::fair_shared_mutex::lock</a></div><div class="ttdeci">void lock(_Priority_t priority=0)</div><div class="ttdoc">#TODO like a std::mutex.lock(), plus a priority.</div><div class="ttdef"><b>Definition</b> fair_shared_mutex.h:80</div></div>
+<div class="ttc" id="aclassfsm_1_1fair__shared__mutex_html_abc57c07ebf5c5a4018c8a8cae25a6971"><div class="ttname"><a href="classfsm_1_1fair__shared__mutex.html#abc57c07ebf5c5a4018c8a8cae25a6971">fsm::fair_shared_mutex::lock_shared</a></div><div class="ttdeci">void lock_shared(_Priority_t priority=0)</div><div class="ttdoc">#TODO like a std::mutex.lock() in shared mode, plus a priority.</div><div class="ttdef"><b>Definition</b> fair_shared_mutex.h:162</div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- HTML footer for doxygen 1.9.3-->
 <!-- start footer part -->

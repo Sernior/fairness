@@ -98,46 +98,39 @@ $(document).ready(function() { init_codefold(0); });
   <div class="headertitle"><div class="title">SPMscenario2Context.h</div></div>
 </div><!--header-->
 <div class="contents">
-<a href="SPMscenario2Context_8h.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno">    1</span><span class="preprocessor">#include &lt;<a class="code" href="shared__priority__mutex_8h.html">shared_priority_mutex.h</a>&gt;</span></div>
+<div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno">    1</span><span class="preprocessor">#include &lt;<a class="code" href="shared__priority__mutex_8h.html">shared_priority_mutex.h</a>&gt;</span></div>
 <div class="line"><a id="l00002" name="l00002"></a><span class="lineno">    2</span><span class="preprocessor">#include &lt;DeterministicConcurrency&gt;</span></div>
 <div class="line"><a id="l00003" name="l00003"></a><span class="lineno">    3</span><span class="preprocessor">#include &lt;vector&gt;</span></div>
-<div class="foldopen" id="foldopen00004" data-start="{" data-end="}">
-<div class="line"><a id="l00004" name="l00004"></a><span class="lineno"><a class="line" href="namespaceSPMscenario2.html">    4</a></span><span class="keyword">namespace </span><a class="code hl_namespace" href="namespaceSPMscenario2.html">SPMscenario2</a>{</div>
+<div class="line"><a id="l00004" name="l00004"></a><span class="lineno">    4</span><span class="keyword">namespace </span>SPMscenario2{</div>
 <div class="line"><a id="l00005" name="l00005"></a><span class="lineno">    5</span>    <span class="keyword">using namespace </span>DeterministicConcurrency;</div>
 <div class="line"><a id="l00006" name="l00006"></a><span class="lineno">    6</span> </div>
-<div class="line"><a id="l00007" name="l00007"></a><span class="lineno"><a class="line" href="namespaceSPMscenario2.html#a9316d0de64a049d7b4f14ce8aac2168b">    7</a></span>    <a class="code hl_class" href="classPrioSync_1_1shared__priority__mutex.html">PrioSync::shared_priority_mutex&lt;5&gt;</a> <a class="code hl_variable" href="namespaceSPMscenario2.html#a9316d0de64a049d7b4f14ce8aac2168b">m</a>;</div>
+<div class="line"><a id="l00007" name="l00007"></a><span class="lineno">    7</span>    <a class="code hl_class" href="classPrioSync_1_1shared__priority__mutex.html">PrioSync::shared_priority_mutex&lt;5&gt;</a> m;</div>
 <div class="line"><a id="l00008" name="l00008"></a><span class="lineno">    8</span> </div>
-<div class="line"><a id="l00009" name="l00009"></a><span class="lineno"><a class="line" href="namespaceSPMscenario2.html#ab4f5faff58764f3505ee020346563d30">    9</a></span>    std::vector&lt;int&gt; <a class="code hl_variable" href="namespaceSPMscenario2.html#ab4f5faff58764f3505ee020346563d30">ret</a>;</div>
+<div class="line"><a id="l00009" name="l00009"></a><span class="lineno">    9</span>    std::vector&lt;int&gt; ret;</div>
 <div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span> </div>
-<div class="foldopen" id="foldopen00011" data-start="{" data-end="};">
-<div class="line"><a id="l00011" name="l00011"></a><span class="lineno"><a class="line" href="namespaceSPMscenario2.html#a55048b2bc0dbff9f99c7aa141dcd5798">   11</a></span>    std::vector&lt;int&gt; <a class="code hl_variable" href="namespaceSPMscenario2.html#a55048b2bc0dbff9f99c7aa141dcd5798">expected</a>{</div>
+<div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span>    std::vector&lt;int&gt; expected{</div>
 <div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span>        4, 3, 2, 1, 0</div>
 <div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span>    };</div>
-</div>
 <div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span> </div>
 <div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span> </div>
-<div class="foldopen" id="foldopen00016" data-start="{" data-end="}">
-<div class="line"><a id="l00016" name="l00016"></a><span class="lineno"><a class="line" href="namespaceSPMscenario2.html#a790bbcbfa457908ee8697b0055f20876">   16</a></span>    <span class="keywordtype">void</span> <a class="code hl_function" href="namespaceSPMscenario2.html#a790bbcbfa457908ee8697b0055f20876">threadFunction</a>(thread_context* c ,<span class="keywordtype">int</span> i) {</div>
-<div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span>        c-&gt;<a class="code hl_function" href="classPrioSync_1_1shared__priority__mutex.html#ab33933f9a5fbd2d663166ddfceb14c56">lock</a>(&amp;<a class="code hl_variable" href="namespaceSPMscenario2.html#a9316d0de64a049d7b4f14ce8aac2168b">m</a>);</div>
-<div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span>        <a class="code hl_variable" href="namespaceSPMscenario2.html#ab4f5faff58764f3505ee020346563d30">ret</a>.push_back(i);</div>
-<div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span>        <a class="code hl_variable" href="namespaceSPMscenario2.html#a9316d0de64a049d7b4f14ce8aac2168b">m</a>.unlock();</div>
+<div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span>    <span class="keywordtype">void</span> threadFunction(thread_context* c ,<span class="keywordtype">int</span> i) {</div>
+<div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span>        c-&gt;lock(&amp;m);</div>
+<div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span>        ret.push_back(i);</div>
+<div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span>        m.unlock();</div>
 <div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span>    }</div>
-</div>
 <div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span> </div>
-<div class="foldopen" id="foldopen00022" data-start="{" data-end="}">
-<div class="line"><a id="l00022" name="l00022"></a><span class="lineno"><a class="line" href="namespaceSPMscenario2.html#aef263b4e163b994056ceff92b4d5fe66">   22</a></span>    <span class="keywordtype">void</span> <a class="code hl_function" href="namespaceSPMscenario2.html#aef263b4e163b994056ceff92b4d5fe66">controlThread</a>(thread_context* c) {</div>
-<div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span>        c-&gt;lock(&amp;<a class="code hl_variable" href="namespaceSPMscenario2.html#a9316d0de64a049d7b4f14ce8aac2168b">m</a>);</div>
+<div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span>    <span class="keywordtype">void</span> controlThread(thread_context* c) {</div>
+<div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span>        c-&gt;lock(&amp;m);</div>
 <div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span>        c-&gt;switchContext();</div>
-<div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span>        <a class="code hl_variable" href="namespaceSPMscenario2.html#a9316d0de64a049d7b4f14ce8aac2168b">m</a>.unlock();</div>
+<div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span>        m.unlock();</div>
 <div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span>    }</div>
-</div>
 <div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span> </div>
-<div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span>    <span class="keyword">static</span> <span class="keyword">auto</span> thread_0 = std::tuple{&amp;<a class="code hl_function" href="namespaceSPMscenario2.html#a790bbcbfa457908ee8697b0055f20876">threadFunction</a>, 0};</div>
-<div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span>    <span class="keyword">static</span> <span class="keyword">auto</span> thread_1 = std::tuple{&amp;<a class="code hl_function" href="namespaceSPMscenario2.html#a790bbcbfa457908ee8697b0055f20876">threadFunction</a>, 1};</div>
-<div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span>    <span class="keyword">static</span> <span class="keyword">auto</span> thread_2 = std::tuple{&amp;<a class="code hl_function" href="namespaceSPMscenario2.html#a790bbcbfa457908ee8697b0055f20876">threadFunction</a>, 2};</div>
-<div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span>    <span class="keyword">static</span> <span class="keyword">auto</span> thread_3 = std::tuple{&amp;<a class="code hl_function" href="namespaceSPMscenario2.html#a790bbcbfa457908ee8697b0055f20876">threadFunction</a>, 3};</div>
-<div class="line"><a id="l00032" name="l00032"></a><span class="lineno">   32</span>    <span class="keyword">static</span> <span class="keyword">auto</span> thread_4 = std::tuple{&amp;<a class="code hl_function" href="namespaceSPMscenario2.html#a790bbcbfa457908ee8697b0055f20876">threadFunction</a>, 4};</div>
-<div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span>    <span class="keyword">static</span> <span class="keyword">auto</span> ctrlThread = std::tuple{&amp;<a class="code hl_function" href="namespaceSPMscenario2.html#aef263b4e163b994056ceff92b4d5fe66">controlThread</a>};</div>
+<div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span>    <span class="keyword">static</span> <span class="keyword">auto</span> thread_0 = std::tuple{&amp;threadFunction, 0};</div>
+<div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span>    <span class="keyword">static</span> <span class="keyword">auto</span> thread_1 = std::tuple{&amp;threadFunction, 1};</div>
+<div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span>    <span class="keyword">static</span> <span class="keyword">auto</span> thread_2 = std::tuple{&amp;threadFunction, 2};</div>
+<div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span>    <span class="keyword">static</span> <span class="keyword">auto</span> thread_3 = std::tuple{&amp;threadFunction, 3};</div>
+<div class="line"><a id="l00032" name="l00032"></a><span class="lineno">   32</span>    <span class="keyword">static</span> <span class="keyword">auto</span> thread_4 = std::tuple{&amp;threadFunction, 4};</div>
+<div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span>    <span class="keyword">static</span> <span class="keyword">auto</span> ctrlThread = std::tuple{&amp;controlThread};</div>
 <div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span> </div>
 <div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span>    <span class="keyword">static</span> <span class="keywordtype">size_t</span> THREAD0 = 0;</div>
 <div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span>    <span class="keyword">static</span> <span class="keywordtype">size_t</span> THREAD1 = 1;</div>
@@ -170,16 +163,8 @@ $(document).ready(function() { init_codefold(0); });
 <div class="line"><a id="l00063" name="l00063"></a><span class="lineno">   63</span>        sch.joinAll();</div>
 <div class="line"><a id="l00064" name="l00064"></a><span class="lineno">   64</span>    };</div>
 <div class="line"><a id="l00065" name="l00065"></a><span class="lineno">   65</span>}</div>
-</div>
-<div class="ttc" id="aclassPrioSync_1_1shared__priority__mutex_html"><div class="ttname"><a href="classPrioSync_1_1shared__priority__mutex.html">PrioSync::shared_priority_mutex</a></div><div class="ttdef"><b>Definition</b> shared_priority_mutex.h:12</div></div>
-<div class="ttc" id="aclassPrioSync_1_1shared__priority__mutex_html_ab33933f9a5fbd2d663166ddfceb14c56"><div class="ttname"><a href="classPrioSync_1_1shared__priority__mutex.html#ab33933f9a5fbd2d663166ddfceb14c56">PrioSync::shared_priority_mutex::lock</a></div><div class="ttdeci">void lock(Priority_t priority=0)</div><div class="ttdef"><b>Definition</b> shared_priority_mutex.h:35</div></div>
-<div class="ttc" id="anamespaceSPMscenario2_html"><div class="ttname"><a href="namespaceSPMscenario2.html">SPMscenario2</a></div><div class="ttdef"><b>Definition</b> SPMscenario2Context.h:4</div></div>
-<div class="ttc" id="anamespaceSPMscenario2_html_a55048b2bc0dbff9f99c7aa141dcd5798"><div class="ttname"><a href="namespaceSPMscenario2.html#a55048b2bc0dbff9f99c7aa141dcd5798">SPMscenario2::expected</a></div><div class="ttdeci">std::vector&lt; int &gt; expected</div><div class="ttdef"><b>Definition</b> SPMscenario2Context.h:11</div></div>
-<div class="ttc" id="anamespaceSPMscenario2_html_a790bbcbfa457908ee8697b0055f20876"><div class="ttname"><a href="namespaceSPMscenario2.html#a790bbcbfa457908ee8697b0055f20876">SPMscenario2::threadFunction</a></div><div class="ttdeci">void threadFunction(thread_context *c, int i)</div><div class="ttdef"><b>Definition</b> SPMscenario2Context.h:16</div></div>
-<div class="ttc" id="anamespaceSPMscenario2_html_a9316d0de64a049d7b4f14ce8aac2168b"><div class="ttname"><a href="namespaceSPMscenario2.html#a9316d0de64a049d7b4f14ce8aac2168b">SPMscenario2::m</a></div><div class="ttdeci">PrioSync::shared_priority_mutex&lt; 5 &gt; m</div><div class="ttdef"><b>Definition</b> SPMscenario2Context.h:7</div></div>
-<div class="ttc" id="anamespaceSPMscenario2_html_ab4f5faff58764f3505ee020346563d30"><div class="ttname"><a href="namespaceSPMscenario2.html#ab4f5faff58764f3505ee020346563d30">SPMscenario2::ret</a></div><div class="ttdeci">std::vector&lt; int &gt; ret</div><div class="ttdef"><b>Definition</b> SPMscenario2Context.h:9</div></div>
-<div class="ttc" id="anamespaceSPMscenario2_html_aef263b4e163b994056ceff92b4d5fe66"><div class="ttname"><a href="namespaceSPMscenario2.html#aef263b4e163b994056ceff92b4d5fe66">SPMscenario2::controlThread</a></div><div class="ttdeci">void controlThread(thread_context *c)</div><div class="ttdef"><b>Definition</b> SPMscenario2Context.h:22</div></div>
-<div class="ttc" id="ashared__priority__mutex_8h_html"><div class="ttname"><a href="shared__priority__mutex_8h.html">shared_priority_mutex.h</a></div></div>
+<div class="ttc" id="aclassPrioSync_1_1shared__priority__mutex_html"><div class="ttname"><a href="classPrioSync_1_1shared__priority__mutex.html">PrioSync::shared_priority_mutex</a></div><div class="ttdef"><b>Definition</b> shared_priority_mutex.h:22</div></div>
+<div class="ttc" id="ashared__priority__mutex_8h_html"><div class="ttname"><a href="shared__priority__mutex_8h.html">shared_priority_mutex.h</a></div><div class="ttdoc">#TODO</div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- HTML footer for doxygen 1.9.3-->
 <!-- start footer part -->
