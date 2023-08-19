@@ -6,7 +6,9 @@
  * @brief #TODO
  * @version 0.1
  * @date 2023-08-19
- * @copyright Copyright (c) 2023
+ * @copyright Copyright (c) 2023 Federico Abrignani (federignoli@hotmail.it).
+ * Distributed under the Boost Software License, Version 1.0. (See accompanying file LICENSE_1_0.txt or copy at http://www.boost.org/LICENSE_1_0.txt).
+ * 
  */
 #pragma once
 #include <thread>
