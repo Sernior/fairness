@@ -1,8 +1,8 @@
 var indexSectionsWithContent =
 {
-  0: "dflpstu",
-  1: "fps",
-  2: "fps",
+  0: "dlpstu",
+  1: "ps",
+  2: "ps",
   3: "ltu",
   4: "d"
 };

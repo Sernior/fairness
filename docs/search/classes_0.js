@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['fair_5fshared_5fmutex_0',['fair_shared_mutex',['../classfsm_1_1fair__shared__mutex.html',1,'fsm']]]
+  ['priority_5fmutex_0',['priority_mutex',['../classPrioSync_1_1priority__mutex.html',1,'PrioSync']]]
 ];

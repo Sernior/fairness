@@ -123,7 +123,7 @@ If you encounter any issues or would like to suggest new features, please don't 
 Distributed under the MIT License. See LICENSE.txt for more information.
 
 ## Documentation
-The documentation is available at the following link: https://sernior.github.io/deterministic-concurrency/
+The documentation is available at the following link: https://sernior.github.io/priority-mutex/
 
 ## Contacts
 

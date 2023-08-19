@@ -97,6 +97,11 @@ $(function() {
   <div class="headertitle"><div class="title">PrioSync::shared_priority_mutex&lt; N, typename &gt; Class Template Reference</div></div>
 </div><!--header-->
 <div class="contents">
+
+<p>#TODO describe the class...  
+ <a href="classPrioSync_1_1shared__priority__mutex.html#details">More...</a></p>
+
+<p><code>#include &lt;<a class="el" href="shared__priority__mutex_8h_source.html">shared_priority_mutex.h</a>&gt;</code></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
@@ -119,7 +124,16 @@ Public Member Functions</h2></td></tr>
 <tr class="memdesc:a9cf102644746f022c22adb1437e0eec1"><td class="mdescLeft">&#160;</td><td class="mdescRight">#TODO like a <code>std::mutex.unlock()</code>, plus a priority.  <br /></td></tr>
 <tr class="separator:a9cf102644746f022c22adb1437e0eec1"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
-<h2 class="groupheader">Member Function Documentation</h2>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><div class="compoundTemplParams">template&lt;Priority_t N = 1, typename = std::enable_if_t&lt;(N &gt;= 1 &amp;&amp; N &lt;= _max_priority)&gt;&gt;<br />
+class PrioSync::shared_priority_mutex&lt; N, typename &gt;</div><p>#TODO describe the class... </p>
+<dl class="tparams"><dt>Template Parameters</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">N</td><td>describe N... </td></tr>
+  </table>
+  </dd>
+</dl>
+</div><h2 class="groupheader">Member Function Documentation</h2>
 <a id="ab33933f9a5fbd2d663166ddfceb14c56" name="ab33933f9a5fbd2d663166ddfceb14c56"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#ab33933f9a5fbd2d663166ddfceb14c56">&#9670;&#160;</a></span>lock()</h2>
 
@@ -158,8 +172,8 @@ template&lt;Priority_t N = 1, typename  = std::enable_if_t&lt;(N &gt;= 1 &amp;&a
 <div class="line">    pm.<a class="code hl_function" href="classPrioSync_1_1priority__mutex.html#abe12b2049af7271032c0b60efd40443d">lock</a>(priority);</div>
 <div class="line">    <span class="comment">//...do something</span></div>
 <div class="line">};</div>
-<div class="ttc" id="aclassPrioSync_1_1priority__mutex_html"><div class="ttname"><a href="classPrioSync_1_1priority__mutex.html">PrioSync::priority_mutex</a></div><div class="ttdef"><b>Definition</b> priority_mutex.h:24</div></div>
-<div class="ttc" id="aclassPrioSync_1_1priority__mutex_html_abe12b2049af7271032c0b60efd40443d"><div class="ttname"><a href="classPrioSync_1_1priority__mutex.html#abe12b2049af7271032c0b60efd40443d">PrioSync::priority_mutex::lock</a></div><div class="ttdeci">void lock(Priority_t priority=0)</div><div class="ttdoc">#TODO like a std::mutex.lock(), plus a priority.</div><div class="ttdef"><b>Definition</b> priority_mutex.h:65</div></div>
+<div class="ttc" id="aclassPrioSync_1_1priority__mutex_html"><div class="ttname"><a href="classPrioSync_1_1priority__mutex.html">PrioSync::priority_mutex</a></div><div class="ttdef"><b>Definition</b> priority_mutex.h:25</div></div>
+<div class="ttc" id="aclassPrioSync_1_1priority__mutex_html_abe12b2049af7271032c0b60efd40443d"><div class="ttname"><a href="classPrioSync_1_1priority__mutex.html#abe12b2049af7271032c0b60efd40443d">PrioSync::priority_mutex::lock</a></div><div class="ttdeci">void lock(Priority_t priority=0)</div><div class="ttdoc">#TODO like a std::mutex.lock(), plus a priority.</div><div class="ttdef"><b>Definition</b> priority_mutex.h:66</div></div>
 </div><!-- fragment --> 
 </div>
 </div>
@@ -242,7 +256,7 @@ template&lt;Priority_t N = 1, typename  = std::enable_if_t&lt;(N &gt;= 1 &amp;&a
 <div class="line">    pm.<a class="code hl_function" href="classPrioSync_1_1priority__mutex.html#a38a4a9fc866bb62cea48c8463754c9e4">try_lock</a>(priority);</div>
 <div class="line">    <span class="comment">//...do something</span></div>
 <div class="line">};</div>
-<div class="ttc" id="aclassPrioSync_1_1priority__mutex_html_a38a4a9fc866bb62cea48c8463754c9e4"><div class="ttname"><a href="classPrioSync_1_1priority__mutex.html#a38a4a9fc866bb62cea48c8463754c9e4">PrioSync::priority_mutex::try_lock</a></div><div class="ttdeci">bool try_lock(Priority_t priority=0)</div><div class="ttdoc">#TODO like a std::mutex.try_lock(), plus a priority.</div><div class="ttdef"><b>Definition</b> priority_mutex.h:125</div></div>
+<div class="ttc" id="aclassPrioSync_1_1priority__mutex_html_a38a4a9fc866bb62cea48c8463754c9e4"><div class="ttname"><a href="classPrioSync_1_1priority__mutex.html#a38a4a9fc866bb62cea48c8463754c9e4">PrioSync::priority_mutex::try_lock</a></div><div class="ttdeci">bool try_lock(Priority_t priority=0)</div><div class="ttdoc">#TODO like a std::mutex.try_lock(), plus a priority.</div><div class="ttdef"><b>Definition</b> priority_mutex.h:126</div></div>
 </div><!-- fragment --> <dl class="section return"><dt>Returns</dt><dd>true </dd>
 <dd>
 false </dd></dl>
@@ -326,7 +340,7 @@ template&lt;Priority_t N = 1, typename  = std::enable_if_t&lt;(N &gt;= 1 &amp;&a
 <div class="line">    pm.<a class="code hl_function" href="classPrioSync_1_1priority__mutex.html#a8cd4afd9716f3ae87a10721ec4d9bb64">unlock</a>();</div>
 <div class="line">    <span class="comment">//...do something</span></div>
 <div class="line">};</div>
-<div class="ttc" id="aclassPrioSync_1_1priority__mutex_html_a8cd4afd9716f3ae87a10721ec4d9bb64"><div class="ttname"><a href="classPrioSync_1_1priority__mutex.html#a8cd4afd9716f3ae87a10721ec4d9bb64">PrioSync::priority_mutex::unlock</a></div><div class="ttdeci">void unlock()</div><div class="ttdoc">#TODO like a std::mutex.unlock(), plus a priority.</div><div class="ttdef"><b>Definition</b> priority_mutex.h:95</div></div>
+<div class="ttc" id="aclassPrioSync_1_1priority__mutex_html_a8cd4afd9716f3ae87a10721ec4d9bb64"><div class="ttname"><a href="classPrioSync_1_1priority__mutex.html#a8cd4afd9716f3ae87a10721ec4d9bb64">PrioSync::priority_mutex::unlock</a></div><div class="ttdeci">void unlock()</div><div class="ttdoc">#TODO like a std::mutex.unlock(), plus a priority.</div><div class="ttdef"><b>Definition</b> priority_mutex.h:96</div></div>
 </div><!-- fragment --> 
 </div>
 </div>

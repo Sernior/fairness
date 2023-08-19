@@ -20,6 +20,11 @@
 
 namespace PrioSync{// the name has yet to be chosen
 
+    /**
+     * @brief #TODO describe the class...
+     * 
+     * @tparam N describe N...
+     */
     template<Priority_t N = 1, typename = std::enable_if_t<(N >= 1 && N <= _max_priority)>>
     class shared_priority_mutex{
 
