@@ -45,7 +45,6 @@ This is a snippet ready-to-use. #TODO
 #include <iostream>
 #include <syncstream>
 #include <thread>
-#include <fair_shared_mutex.h>
 #include <priority_mutex.h>
 #include <shared_priority_mutex.h>
 #include <chrono>
@@ -55,8 +54,6 @@ This is a snippet ready-to-use. #TODO
 int main()
 {
     PrioSync::shared_priority_mutex<9> m1;
-    fsm::fair_shared_mutex m;
-
 
     auto startTime = std::chrono::system_clock::now();
     std::vector<std::thread::id> res;
@@ -108,10 +105,7 @@ int main()
 The output of the above will be:
 
 ```
-I'm writing 1!
-I'm writing 0!
-I'm writing 2!
-I'm writing 3!
+#TODO
 ```
 
 ## Contributing
