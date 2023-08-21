@@ -3,7 +3,7 @@
  * @author F. Abrignani (federignoli@hotmail.it)
  * @author P. Di Giglio
  * @author S. Martorana
- * @brief #TODO
+ * @brief This file contains the implementation of the priority_mutex.
  * @version 0.1
  * @date 2023-08-19
  * 
@@ -21,6 +21,11 @@
 
 namespace PrioSync{// the name has yet to be chosen
 
+    /**
+     * @brief The priority_mutex is an advanced synchronization mechanism that enhances the traditional mutex by introducing a priority-based approach.
+     * 
+     * @tparam N : number of 0 indexed priorities the priority_mutex manages, up to _max_priority.
+     */
     template<Priority_t N = 1, typename = std::enable_if_t<(N >= 1 && N <= _max_priority)>>
     class priority_mutex{
 
@@ -51,16 +56,13 @@ namespace PrioSync{// the name has yet to be chosen
         ~priority_mutex() = default;
 
         /**
-         * @brief #TODO like a `std::mutex.lock()`, plus a priority.
+         * @brief Try to acquire the unique ownership of the priority_mutex, blocking the thread if the priority_mutex was already owned or other threads are waiting with higher priority.
          * 
-         * @param priority used to set a priority of a lock.
+         * @param priority used to set a priority for this thread to aquire the lock.
          * 
          * \code{.cpp}
-         * void my_function(PrioSync::priority_mutex pm, uint8_t priority) {
-         *     //...do something
-         *     pm.lock(priority);
-         *     //...do something
-         * };
+         * priority_mutex<10> m;
+         * m.lock(9);
          * \endcode
          */
         void lock(Priority_t priority = 0){
@@ -81,16 +83,12 @@ namespace PrioSync{// the name has yet to be chosen
         }
 
         /**
-         * @brief #TODO like a `std::mutex.unlock()`, plus a priority.
+         * @brief Release the priority_mutex from unique ownership.
          * 
          * \code{.cpp}
-         * void my_function(PrioSync::priority_mutex pm, uint8_t priority) {
-         *     //...do something
-         *     pm.lock(priority);
-         *     //...do something
-         *     pm.unlock();
-         *     //...do something
-         * };
+         * priority_mutex<10> m;
+         * m.lock(9);
+         * m.unlock();
          * \endcode
          */
         void unlock(){
@@ -109,19 +107,15 @@ namespace PrioSync{// the name has yet to be chosen
         }
 
         /**
-         * @brief #TODO like a `std::mutex.try_lock()`, plus a priority.
+         * @brief Try to acquire the unique ownership of the priority_mutex, if successful will return true, false otherwise.
          * 
-         * @param priority used to set a priority of a lock.
+         * @param priority used to set a priority for this thread to aquire the lock.
          * 
          * \code{.cpp}
-         * void my_function(PrioSync::priority_mutex pm, uint8_t priority) {
-         *     //...do something
-         *     pm.try_lock(priority);
-         *     //...do something
-         * };
+         * priority_mutex<10> m;
+         * m.try_lock(9);
          * \endcode
-         * @return true 
-         * @return false 
+         * @return bool 
          */
         [[nodiscard]] bool try_lock(Priority_t priority = 0){
 

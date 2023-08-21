@@ -3,7 +3,7 @@
  * @author F. Abrignani (federignoli@hotmail.it)
  * @author P. Di Giglio
  * @author S. Martorana
- * @brief #TODO
+ * @brief This file contains the implementation of the shared_priority_mutex.
  * @version 0.1
  * @date 2023-08-19
  * @copyright Copyright (c) 2023 Federico Abrignani (federignoli@hotmail.it).
@@ -21,9 +21,9 @@
 namespace PrioSync{// the name has yet to be chosen
 
     /**
-     * @brief #TODO describe the class...
+     * @brief The shared_priority_mutex is an advanced synchronization mechanism that enhances the traditional shared_mutex by introducing a priority-based approach.
      * 
-     * @tparam N describe N...
+     * @tparam N : number of 0 indexed priorities the shared_priority_mutex manages, up to _max_priority.
      */
     template<Priority_t N = 1, typename = std::enable_if_t<(N >= 1 && N <= _max_priority)>>
     class shared_priority_mutex{
@@ -58,16 +58,13 @@ namespace PrioSync{// the name has yet to be chosen
         ~shared_priority_mutex() = default;
 
         /**
-         * @brief #TODO like a `std::mutex.lock()`, plus a priority.
+         * @brief Try to acquire the unique ownership of the shared_priority_mutex, blocking the thread if the shared_priority_mutex was already owned or other threads are waiting with higher priority.
          * 
-         * @param priority used to set a priority of a lock.
+         * @param priority used to set a priority for this thread to aquire the lock.
          * 
          * \code{.cpp}
-         * void my_function(PrioSync::priority_mutex pm, uint8_t priority) {
-         *     //...do something
-         *     pm.lock(priority);
-         *     //...do something
-         * };
+         * shared_priority_mutex<10> m;
+         * m.lock(9);
          * \endcode
          */
         void lock(Priority_t priority = 0){
@@ -92,16 +89,12 @@ namespace PrioSync{// the name has yet to be chosen
         }
 
         /**
-         * @brief #TODO like a `std::mutex.unlock()`, plus a priority.
+         * @brief Release the shared_priority_mutex from unique ownership.
          * 
          * \code{.cpp}
-         * void my_function(PrioSync::priority_mutex pm, uint8_t priority) {
-         *     //...do something
-         *     pm.lock(priority);
-         *     //...do something
-         *     pm.unlock();
-         *     //...do something
-         * };
+         * shared_priority_mutex<10> m;
+         * m.lock(9);
+         * m.unlock();
          * \endcode
          */
         void unlock(){
@@ -128,19 +121,15 @@ namespace PrioSync{// the name has yet to be chosen
         }
 
         /**
-         * @brief #TODO like a `std::mutex.try_lock()`, plus a priority.
+         * @brief Try to acquire the unique ownership of the shared_priority_mutex, if successful will return true, false otherwise.
          * 
-         * @param priority used to set a priority of a lock.
+         * @param priority used to set a priority for this thread to aquire the lock.
          * 
          * \code{.cpp}
-         * void my_function(PrioSync::priority_mutex pm, uint8_t priority) {
-         *     //...do something
-         *     pm.try_lock(priority);
-         *     //...do something
-         * };
+         * shared_priority_mutex<10> m;
+         * m.try_lock(9);
          * \endcode
-         * @return true 
-         * @return false 
+         * @return bool 
          */
         [[nodiscard]] bool try_lock(Priority_t priority = 0){
 
@@ -155,16 +144,13 @@ namespace PrioSync{// the name has yet to be chosen
         }
 
         /**
-         * @brief #TODO like a `std::mutex.lock()` in shared mode, plus a priority.
+         * @brief Try to acquire the shared ownership of the shared_priority_mutex, blocking the thread if the shared_priority_mutex was already uniquely owned or if another thread is waiting for unique ownership with higher priority.
          * 
-         * @param priority used to set a priority of a lock.
+         * @param priority used to set a priority for this thread to aquire the lock_shared.
          * 
          * \code{.cpp}
-         * void my_function(PrioSync::priority_mutex pm, uint8_t priority) {
-         *     //...do something
-         *     pm.shared_lock(priority);
-         *     //...do something
-         * };
+         * shared_priority_mutex<10> m;
+         * m.lock_shared(9);
          * \endcode
          */
         void lock_shared(Priority_t priority = 0){
@@ -188,19 +174,15 @@ namespace PrioSync{// the name has yet to be chosen
         }
 
         /**
-         * @brief #TODO like a `std::mutex.try_lock()` in shared mode, plus a priority.
+         * @brief Try to acquire the shared ownership of the shared_priority_mutex, if successful will return true, false otherwise.
          * 
-         * @param priority used to set a priority of a lock.
+         * @param priority used to set a priority for this thread to aquire the lock_shared.
          * 
          * \code{.cpp}
-         * void my_function(PrioSync::priority_mutex pm, uint8_t priority) {
-         *     //...do something
-         *     pm.try_lock_shared(priority);
-         *     //...do something
-         * };
+         * shared_priority_mutex<10> m;
+         * m.try_lock_shared(9);
          * \endcode
-         * @return true 
-         * @return false 
+         * @return bool 
          */
         [[nodiscard]] bool try_lock_shared(Priority_t priority = 0){
 
@@ -217,16 +199,12 @@ namespace PrioSync{// the name has yet to be chosen
         }
 
         /**
-         * @brief #TODO like a `std::mutex.unlock()`, plus a priority.
+         * @brief Release the shared_priority_mutex from shared ownership.
          * 
          * \code{.cpp}
-         * void my_function(PrioSync::priority_mutex pm, uint8_t priority) {
-         *     //...do something
-         *     pm.lock(priority);
-         *     //...do something
-         *     pm.unlock();
-         *     //...do something
-         * };
+         * shared_priority_mutex<10> m;
+         * m.lock_shared(9);
+         * m.unlock_shared();
          * \endcode
          */
         void unlock_shared(){
