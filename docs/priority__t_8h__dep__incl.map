@@ -1,8 +1,8 @@
 <map id="include/priority_t.h" name="include/priority_t.h">
-<area shape="rect" id="Node000001" title="#TODO" alt="" coords="957,5,1101,31"/>
-<area shape="rect" id="Node000002" href="$priority__mutex_8h.html" title="#TODO" alt="" coords="473,86,654,111"/>
+<area shape="rect" id="Node000001" title="Alias the type Priority_t. Priority_t is the type of priorities that are used by the priority_mutexes..." alt="" coords="957,5,1101,31"/>
+<area shape="rect" id="Node000002" href="$priority__mutex_8h.html" title="This file contains the implementation of the priority_mutex." alt="" coords="473,86,654,111"/>
 <area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="948,36,632,89,631,83,947,30"/>
-<area shape="rect" id="Node000007" href="$shared__priority__mutex_8h.html" title="#TODO" alt="" coords="1410,79,1581,119"/>
+<area shape="rect" id="Node000007" href="$shared__priority__mutex_8h.html" title="This file contains the implementation of the shared_priority_mutex." alt="" coords="1410,79,1581,119"/>
 <area shape="poly" id="edge6_Node000001_Node000007" title=" " alt="" coords="1111,30,1410,80,1410,86,1110,36"/>
 <area shape="rect" id="Node000003" href="$PMscenario1Context_8h_source.html" title=" " alt="" coords="5,167,209,192"/>
 <area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="484,116,174,169,173,164,483,111"/>

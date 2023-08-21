@@ -26,7 +26,7 @@
 <!-- Make a nice link to github (copied from doxygen-awesome/doxygen-custom/header.html-->
 <!-- https://tholman.com/github-corners/ -->
 <a href="https://github.com/Sernior/priority-mutex" class="github-corner" title="View source on GitHub" target="_blank">
-    <svg viewBox="0 0 250 250" width="80" height="80" style="position: absolute; top: 0; border: 0; right: 0; z-index: 99;" aria-hidden="true">
+    <svg viewBox="0 0 250 250" width="80" height="80" style="position: fixed; top: 0; border: 0; right: 0; z-index: 99;" aria-hidden="true">
     <path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a><style>.github-corner:hover .octo-arm{animation:octocat-wave 560ms ease-in-out}@keyframes octocat-wave{0%,100%{transform:rotate(0)}20%,60%{transform:rotate(-25deg)}40%,80%{transform:rotate(10deg)}}@media (max-width:500px){.github-corner:hover .octo-arm{animation:none}.github-corner .octo-arm{animation:octocat-wave 560ms ease-in-out}}</style>
 <!-- End Make a nice link to github -->
 <div id="top"><!-- do not remove this div, it is closed by doxygen! -->
@@ -96,7 +96,7 @@ $(function() {
 </div><!--header-->
 <div class="contents">
 
-<p>#TODO  
+<p>This file contains the implementation of the priority_mutex.  
 <a href="#details">More...</a></p>
 <div class="textblock"><code>#include &lt;thread&gt;</code><br />
 <code>#include &lt;mutex&gt;</code><br />
@@ -109,7 +109,7 @@ Include dependency graph for priority_mutex.h:</div>
 <div class="dyncontent">
 <div class="center"><img src="priority__mutex_8h__incl.png" border="0" usemap="#ainclude_2priority__mutex_8h" alt=""/></div>
 <map name="ainclude_2priority__mutex_8h" id="ainclude_2priority__mutex_8h">
-<area shape="rect" title="#TODO" alt="" coords="224,5,405,31"/>
+<area shape="rect" title="This file contains the implementation of the priority_mutex." alt="" coords="224,5,405,31"/>
 <area shape="rect" title=" " alt="" coords="5,79,69,104"/>
 <area shape="poly" title=" " alt="" coords="271,33,83,81,82,76,269,28"/>
 <area shape="rect" title=" " alt="" coords="93,79,157,104"/>
@@ -120,7 +120,7 @@ Include dependency graph for priority_mutex.h:</div>
 <area shape="poly" title=" " alt="" coords="327,29,360,66,356,70,323,33"/>
 <area shape="rect" title=" " alt="" coords="430,79,517,104"/>
 <area shape="poly" title=" " alt="" coords="341,28,436,71,434,75,339,33"/>
-<area shape="rect" href="priority__t_8h.html" title="#TODO" alt="" coords="541,79,635,104"/>
+<area shape="rect" href="priority__t_8h.html" title="Alias the type Priority_t. Priority_t is the type of priorities that are used by the priority_mutexes..." alt="" coords="541,79,635,104"/>
 <area shape="poly" title=" " alt="" coords="359,28,531,73,530,78,358,33"/>
 <area shape="rect" title=" " alt="" coords="555,152,621,177"/>
 <area shape="poly" title=" " alt="" coords="591,104,591,138,585,138,585,104"/>
@@ -131,7 +131,7 @@ This graph shows which files directly or indirectly include this file:</div>
 <div class="dyncontent">
 <div class="center"><img src="priority__mutex_8h__dep__incl.png" border="0" usemap="#ainclude_2priority__mutex_8hdep" alt=""/></div>
 <map name="ainclude_2priority__mutex_8hdep" id="ainclude_2priority__mutex_8hdep">
-<area shape="rect" title="#TODO" alt="" coords="358,5,539,31"/>
+<area shape="rect" title="This file contains the implementation of the priority_mutex." alt="" coords="358,5,539,31"/>
 <area shape="rect" href="PMscenario1Context_8h_source.html" title=" " alt="" coords="5,79,209,104"/>
 <area shape="poly" title=" " alt="" coords="381,36,163,81,162,76,380,31"/>
 <area shape="rect" href="PMscenario2Context_8h_source.html" title=" " alt="" coords="233,79,437,104"/>
@@ -148,10 +148,11 @@ This graph shows which files directly or indirectly include this file:</div>
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="nested-classes" name="nested-classes"></a>
 Classes</h2></td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPrioSync_1_1priority__mutex.html">PrioSync::priority_mutex&lt; N, typename &gt;</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">The <a class="el" href="classPrioSync_1_1priority__mutex.html" title="The priority_mutex is an advanced synchronization mechanism that enhances the traditional mutex by in...">priority_mutex</a> is an advanced synchronization mechanism that enhances the traditional mutex by introducing a priority-based approach.  <a href="classPrioSync_1_1priority__mutex.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>#TODO </p>
+<div class="textblock"><p>This file contains the implementation of the priority_mutex. </p>
 <dl class="section author"><dt>Author</dt><dd>F. Abrignani (<a href="#" onclick="location.href='mai'+'lto:'+'fed'+'er'+'ign'+'ol'+'i@h'+'ot'+'mai'+'l.'+'it'; return false;">feder<span class="obfuscator">.nosp@m.</span>igno<span class="obfuscator">.nosp@m.</span>li@ho<span class="obfuscator">.nosp@m.</span>tmai<span class="obfuscator">.nosp@m.</span>l.it</a>) </dd>
 <dd>
 P. Di Giglio </dd>

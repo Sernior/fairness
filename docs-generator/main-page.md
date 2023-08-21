@@ -28,7 +28,7 @@
 ### lock()
 #TODO describe
 
-that's an example of what...
+that's an ```example``` of what...
 ```cpp
 void my_function(PrioSync::priority_mutex pm, uint8_t priority) {
     //...do something

@@ -1,5 +1,5 @@
 <map id="include/priority_mutex.h" name="include/priority_mutex.h">
-<area shape="rect" id="Node000001" title="#TODO" alt="" coords="358,5,539,31"/>
+<area shape="rect" id="Node000001" title="This file contains the implementation of the priority_mutex." alt="" coords="358,5,539,31"/>
 <area shape="rect" id="Node000002" href="$PMscenario1Context_8h_source.html" title=" " alt="" coords="5,79,209,104"/>
 <area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="381,36,163,81,162,76,380,31"/>
 <area shape="rect" id="Node000003" href="$PMscenario2Context_8h_source.html" title=" " alt="" coords="233,79,437,104"/>
