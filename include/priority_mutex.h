@@ -38,7 +38,7 @@ namespace PrioSync{// the name has yet to be chosen
 
         void lock(Priority_t priority = 0){
 
-            if (priority >= N)
+            if (priority >= N)// this check may be wasteful at runtime I might keep this as UB
                 throw std::system_error(std::make_error_code(std::errc::invalid_argument));
 
             std::unique_lock<std::mutex> lock(_internalMtx);
@@ -58,7 +58,7 @@ namespace PrioSync{// the name has yet to be chosen
 
             {
             std::lock_guard<std::mutex> lock(_internalMtx);
-            if (!_lock_is_owned_by_me())return;
+            if (!_lock_is_owned_by_me())return;// this check may be wasteful yes we define a behavior that otherwise would be undefined by at the cost of 1 check which also call a std::thread::id constructor
             _owner = std::thread::id();
             p = _find_first_priority();
             }
@@ -70,7 +70,7 @@ namespace PrioSync{// the name has yet to be chosen
 
         [[nodiscard]] bool try_lock(Priority_t priority = 0){
 
-            if (priority >= N)
+            if (priority >= N)// this check may be wasteful at runtime I might keep this as UB
                 throw std::system_error(std::make_error_code(std::errc::invalid_argument));
 
             std::lock_guard<std::mutex> lock(_internalMtx);
