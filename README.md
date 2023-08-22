@@ -1,24 +1,26 @@
 # Priority Mutex
 
-**#TODO**
+**A collection of mutexes which are able to prioritize threads based on their priority, granting higher-priority threads access to protected resources ahead of lower-priority ones.**
 
-**#TODO**
+**Designed to enhance throughput in pipelines by prioritizing slower threads.**
 
 <a name="readme-top"></a>
 
 <div align="center">
   <p align="center">
-    #TODO
+    A C++ lib containing a collection of advanced mutexes.
   </p>
 </div>
 
 ## About The Project
 
-#TODO
+While the standard library offers various tools for managing concurrency, it lacks effective methods for enforcing fairness policies among threads.<br>
+Tweaking such behaviors can be challenging, and mistakes might lead to issues like thread starvation. These mutexes, if misused, have the potential to cause harm rather than benefit. Careful implementation and understanding are crucial to harness their benefits effectively.<br>
+The priority mutexes in this library do not autonomously adjust priorities, which means there is a risk of thread starvation if new threads are continually created and given high-priority locks; the primary intention behind creating these mutexes is for their utilization within completed pipelines. In this context, the risk of thread starvation is non-existent due to the established pipeline structure.
 
 The assumptions are:
-  - #TODO 
-  - #TODO
+  - The pipeline operates in a multi-threaded manner.
+  - the pipeline is finished.
 ## Getting Started
 
 ### Prerequisites
@@ -28,6 +30,8 @@ If for some reason, on some compilers, it doesn`t work on C++17+ please email me
 
 ### Setup
 
+This is an header only library but you can build the tests using:
+
 Generate ninja build files and build
 
    ```sh
@@ -36,76 +40,65 @@ Generate ninja build files and build
    ```
 
 ### Installation
+Using cmake you can include this lib using:
 
-#TODO
+```
+include(FetchContent)
+
+FetchContent_Declare(
+  fsm
+  GIT_REPOSITORY https://github.com/Sernior/priority-mutex.git
+  GIT_TAG [TAG] #change with the tag you want to use
+)
+
+FetchContent_MakeAvailable(fsm)
+```
+At this point you should be able to link the library simply using:
+```
+target_link_libraries(your_stuff.cpp fsm)
+```
 
 ## Snippet
-This is a snippet ready-to-use. #TODO
+This is a snippet ready-to-use.
 ```cpp
 #include <iostream>
-#include <syncstream>
-#include <thread>
-#include <priority_mutex.h>
-#include <shared_priority_mutex.h>
 #include <chrono>
 #include <vector>
-#include <algorithm>
- 
-int main()
-{
-    PrioSync::shared_priority_mutex<9> m1;
+#include <priority_mutex.h>
 
-    auto startTime = std::chrono::system_clock::now();
-    std::vector<std::thread::id> res;
-    auto acquireLockAndPrint = [&m1, &startTime,&res](uint32_t threadPriority = 0, uint32_t preLockTimer = 0, uint32_t criticalSectionTimer = 0, uint32_t postUnlockTimer = 0){
-        auto threadID = std::this_thread::get_id();
-        std::this_thread::sleep_for(std::chrono::microseconds(preLockTimer));
-        m1.lock(threadPriority);
-        auto afterLockTime = std::chrono::system_clock::now();
-        std::osyncstream(std::cout) << "Thread: "
-                << threadID << " entered critical section with priority: " << threadPriority
-                << " (" << (afterLockTime-startTime).count() << " ns)" << '\n';
-        std::this_thread::sleep_for(std::chrono::microseconds(criticalSectionTimer));
-        auto afterComputationTime = std::chrono::system_clock::now();
-        std::osyncstream(std::cout) << "Thread: "
-                << threadID << " finished its computations with priority: " << threadPriority
-                << " (" << (afterComputationTime-startTime).count() << " ns)" << '\n';
-        res.push_back(threadID);
-        m1.unlock();
-        std::this_thread::sleep_for(std::chrono::microseconds(postUnlockTimer));
-    };
+static PrioSync::priority_mutex<4> m;
 
-    std::thread thread1([&]{acquireLockAndPrint(0,0,2000);});
-    std::thread thread2([&]{acquireLockAndPrint(1,700,400,200);});
-    std::thread thread3([&]{acquireLockAndPrint(2,300,400,300);});
-    std::thread thread4([&]{acquireLockAndPrint(3,100,200,100);});
-    std::thread thread5([&]{acquireLockAndPrint(5,1200,300,200);});
-    std::thread thread6([&]{acquireLockAndPrint(6,300,300,300);});
-    std::thread thread7([&]{acquireLockAndPrint(7,100,100,100);});
-    std::thread thread8([&]{acquireLockAndPrint(8,200,200,200);});
-    thread1.join();
-    thread2.join();
-    thread3.join();
-    thread4.join();
-    thread5.join();
-    thread6.join();
-    thread7.join();
-    thread8.join();
-    bool is_sorted = std::is_sorted(res.begin()+1, res.end());
-    if (is_sorted){
-        std::cout << "Correct";
-        return 0;
+
+void threadFunction(PrioSync::Priority_t prio) {
+    m.lock(prio);
+    std::cout << "Thread with priority : " << int(prio) << " is running." << std::endl;
+    m.unlock();
+}
+
+
+
+int main() {
+    m.lock();
+    std::vector<std::thread> tp;
+    for (int i = 0; i < 4; i++){
+        tp.push_back(std::thread(&threadFunction, i));
     }
-    for (auto& r : res){
-        std::cout << r << "  ";
-    }
+    std::this_thread::sleep_for(std::chrono::milliseconds(10));//make sure the threads lock themselves
+    m.unlock();
+    for (auto& t : tp)
+        t.join();
+
+    return 0;
 }
 ```
 
 The output of the above will be:
 
 ```
-#TODO
+Thread with priority : 0 is running.
+Thread with priority : 1 is running.
+Thread with priority : 2 is running.
+Thread with priority : 3 is running.
 ```
 
 ## Contributing
@@ -114,7 +107,7 @@ If you encounter any issues or would like to suggest new features, please don't 
 
 ## License
 
-Distributed under the MIT License. See LICENSE.txt for more information.
+Distributed under the Boost Software License - Version 1.0. See LICENSE.txt for more information.
 
 ## Documentation
 The documentation is available at the following link: https://sernior.github.io/priority-mutex/
