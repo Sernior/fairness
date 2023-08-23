@@ -8,7 +8,7 @@
 
 <div align="center">
   <p align="center">
-    A C++ lib containing a collection of advanced mutexes.
+    <em>A C++ library containing a collection of advanced mutexes.</em>
   </p>
 </div>
 
@@ -19,7 +19,7 @@ Tweaking such behaviors can be challenging, and mistakes might lead to issues li
 The priority mutexes in this library do not autonomously adjust priorities, which means there is a risk of thread starvation if new threads are continually created and given high-priority locks; the primary intention behind creating these mutexes is for their utilization within completed pipelines. In this context, the risk of thread starvation is non-existent due to the established pipeline structure.
 
 The assumptions are:
-  - The pipeline operates in a multi-threaded manner.
+  - The pipeline operates in a multi-threaded manner;
   - the pipeline is finished.
 ## Getting Started
 
@@ -32,7 +32,7 @@ If for some reason, on some compilers, it doesn`t work on C++17+ please email me
 
 This is an header only library but you can build the tests using:
 
-Generate ninja build files and build
+Generate ninja build files and build:
 
    ```sh
    $ cmake . -B build -G Ninja -DLIBFSM_COMPILE_TESTS=ON
@@ -40,9 +40,9 @@ Generate ninja build files and build
    ```
 
 ### Installation
-Using cmake you can include this lib using:
+Using cmake you can include this library using:
 
-```
+```cmake
 include(FetchContent)
 
 FetchContent_Declare(
@@ -54,7 +54,7 @@ FetchContent_Declare(
 FetchContent_MakeAvailable(fsm)
 ```
 At this point you should be able to link the library simply using:
-```
+```cmake
 target_link_libraries(your_stuff.cpp fsm)
 ```
 
@@ -66,8 +66,9 @@ This is a snippet ready-to-use.
 #include <vector>
 #include <priority_mutex.h>
 
-static PrioSync::priority_mutex<4> m;
+#define NUMBER_OF_PRIORITIES 4
 
+static PrioSync::priority_mutex<NUMBER_OF_PRIORITIES> m;
 
 void threadFunction(PrioSync::Priority_t prio) {
     m.lock(prio);
@@ -75,12 +76,10 @@ void threadFunction(PrioSync::Priority_t prio) {
     m.unlock();
 }
 
-
-
 int main() {
     m.lock();
     std::vector<std::thread> tp;
-    for (int i = 0; i < 4; i++){
+    for (int i = 0; i < NUMBER_OF_PRIORITIES; i++){
         tp.push_back(std::thread(&threadFunction, i));
     }
     std::this_thread::sleep_for(std::chrono::milliseconds(10));//make sure the threads lock themselves
