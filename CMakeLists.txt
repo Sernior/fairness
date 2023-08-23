@@ -25,6 +25,9 @@ if(LIBFSM_COMPILE_TESTS)
 endif()
 
 if(LIBFSM_COMPILE_BENCHMARKS)
+    add_library(tp INTERFACE)
+    target_include_directories(tp INTERFACE thread-pool)
+    target_compile_features(tp INTERFACE cxx_std_17)
     add_subdirectory(benchmarks)
 endif()
 
