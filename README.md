@@ -20,7 +20,7 @@ The priority mutexes in this library do not autonomously adjust priorities, whic
 
 The assumptions are:
   - The pipeline operates in a multi-threaded manner;
-  - the pipeline is finished.
+  - the pipeline is finite.
 ## Getting Started
 
 ### Prerequisites
