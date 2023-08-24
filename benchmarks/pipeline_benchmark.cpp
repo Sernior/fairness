@@ -5,6 +5,7 @@
 #include <tuple>
 #include <BS_thread_pool.hpp>
 #include <semaphore>
+#include <DeterministicConcurrency>
 #define NOW std::chrono::steady_clock::now()
 
 /*
@@ -60,15 +61,14 @@ namespace _PM_pipeline_benchmark{
         busy_wait_nano(postCriticalTime);
     }
 
-    static void thread_loop(int iterations, int p, int preCriticalTime, int criticalTime, int postCriticalTime){
+    static void thread_loop(DeterministicConcurrency::thread_context* c, int iterations, int p, int preCriticalTime, int criticalTime, int postCriticalTime){
         for (;iterations > 0; iterations--){
-            P.acquire();
+            c->switchContext();
             busy_wait_nano(preCriticalTime);
             m.lock(p);
             busy_wait_nano(criticalTime);
             m.unlock();
             busy_wait_nano(postCriticalTime);
-            V.release();
         }
     }
 
@@ -105,15 +105,14 @@ namespace _STD_pipeline_benchmark{
         busy_wait_nano(postCriticalTime);
     }
 
-    static void thread_loop(int iterations, int preCriticalTime, int criticalTime, int postCriticalTime){
+    static void thread_loop(DeterministicConcurrency::thread_context* c, int iterations, int preCriticalTime, int criticalTime, int postCriticalTime){
         for (;iterations > 0; iterations--){
-            P.acquire();
+            c->switchContext();
             busy_wait_nano(preCriticalTime);
             m.lock();
             busy_wait_nano(criticalTime);
             m.unlock();
             busy_wait_nano(postCriticalTime);
-            V.release();
         }
     }
 
