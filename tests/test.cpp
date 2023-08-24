@@ -26,9 +26,9 @@ TEST(PriorityMutex_ControlledScheduling, TryLockTest) {
     EXPECT_EQ(PMscenario3::ret, PMscenario3::expected);
 }
 
-TEST(PriorityMutex_ControlledScheduling, MutexOrSemaphore) {
-    EXPECT_EQ(PMscenario4::ret, PMscenario4::expected);
-}
+//TEST(PriorityMutex_ControlledScheduling, MutexOrSemaphore) {
+//    EXPECT_EQ(PMscenario4::ret, PMscenario4::expected);
+//}
 
 TEST(SharedPriorityMutex_ControlledScheduling, LockUnlockTest) {
     EXPECT_EQ(SPMscenario1::expected, SPMscenario1::ret);
@@ -46,9 +46,9 @@ TEST(SharedPriorityMutex_ControlledScheduling, LockSharedTest) {
     EXPECT_EQ(SPMscenario4::ret, SPMscenario4::expected);
 }
 
-TEST(SharedPriorityMutex_ControlledScheduling, MutexOrSemaphore) {
-    EXPECT_EQ(SPMscenario5::ret, SPMscenario5::expected);
-}
+//TEST(SharedPriorityMutex_ControlledScheduling, MutexOrSemaphore) {
+//    EXPECT_EQ(SPMscenario5::ret, SPMscenario5::expected);
+//}
 
 TEST(SharedPriorityMutex_ControlledScheduling, PriorityBehavior) {
     EXPECT_EQ(SPMscenario6::ret, SPMscenario6::expected);

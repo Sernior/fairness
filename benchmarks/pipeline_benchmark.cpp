@@ -4,31 +4,119 @@
 #include <thread>
 #include <tuple>
 #include <BS_thread_pool.hpp>
+#include <semaphore>
+#define NOW std::chrono::steady_clock::now()
+
+/*
+std::this_thread::sleep_for is too imprecise, and also I could make a bunch of variables during busy waiting to simulate heated cpu caches.
+*/
+
+static void busy_wait_micro(uint32_t microseconds){
+    auto begin = NOW;
+    for(;std::chrono::duration_cast<std::chrono::microseconds>(NOW - begin).count() < microseconds;)
+        continue;
+}
+
+static void busy_wait_milli(uint32_t milliseconds){
+    auto begin = NOW;
+    for(;std::chrono::duration_cast<std::chrono::milliseconds>(NOW - begin).count() < milliseconds;)
+        continue;
+}
+
+static void busy_wait_nano(uint32_t nanoseconds){
+    auto begin = NOW;
+    for(;std::chrono::duration_cast<std::chrono::nanoseconds>(NOW - begin).count() < nanoseconds;)
+        continue;
+}
 
 namespace _PM_pipeline_benchmark{
+
+    static std::counting_semaphore<8> P(0);
+    static std::counting_semaphore<1> V(-7);
 
     static PrioSync::priority_mutex<4> m;
 
     static void thread_function(int p, int preCriticalTime, int criticalTime, int postCriticalTime){
-        std::this_thread::sleep_for(std::chrono::milliseconds(preCriticalTime));
+        busy_wait_milli(preCriticalTime);
         m.lock(p);
-        std::this_thread::sleep_for(std::chrono::milliseconds(criticalTime));
+        busy_wait_milli(criticalTime);
         m.unlock();
-        std::this_thread::sleep_for(std::chrono::milliseconds(postCriticalTime));
+        busy_wait_milli(postCriticalTime);
+    }
+
+    static void thread_function_micro(int p, int preCriticalTime, int criticalTime, int postCriticalTime){
+        busy_wait_micro(preCriticalTime);
+        m.lock(p);
+        busy_wait_micro(criticalTime);
+        m.unlock();
+        busy_wait_micro(postCriticalTime);
+    }
+
+    static void thread_function_nano(int p, int preCriticalTime, int criticalTime, int postCriticalTime){
+        busy_wait_nano(preCriticalTime);
+        m.lock(p);
+        busy_wait_nano(criticalTime);
+        m.unlock();
+        busy_wait_nano(postCriticalTime);
+    }
+
+    static void thread_loop(int iterations, int p, int preCriticalTime, int criticalTime, int postCriticalTime){
+        for (;iterations > 0; iterations--){
+            P.acquire();
+            busy_wait_nano(preCriticalTime);
+            m.lock(p);
+            busy_wait_nano(criticalTime);
+            m.unlock();
+            busy_wait_nano(postCriticalTime);
+            V.release();
+        }
     }
 
 }
 
 namespace _STD_pipeline_benchmark{
 
+    static std::counting_semaphore<8> P(0);
+    static std::counting_semaphore<1> V(-7);
+
     static std::mutex m;
 
     static void thread_function(int preCriticalTime, int criticalTime, int postCriticalTime){
-        std::this_thread::sleep_for(std::chrono::milliseconds(preCriticalTime));
+        busy_wait_milli(preCriticalTime);
         m.lock();
-        std::this_thread::sleep_for(std::chrono::milliseconds(criticalTime));
+        busy_wait_milli(criticalTime);
         m.unlock();
-        std::this_thread::sleep_for(std::chrono::milliseconds(postCriticalTime));
+        busy_wait_milli(postCriticalTime);
+    }
+
+    static void thread_function_micro(int preCriticalTime, int criticalTime, int postCriticalTime){
+        busy_wait_micro(preCriticalTime);
+        m.lock();
+        busy_wait_micro(criticalTime);
+        m.unlock();
+        busy_wait_micro(postCriticalTime);
+    }
+
+    static void thread_function_nano(int preCriticalTime, int criticalTime, int postCriticalTime){
+        busy_wait_nano(preCriticalTime);
+        m.lock();
+        busy_wait_nano(criticalTime);
+        m.unlock();
+        busy_wait_nano(postCriticalTime);
+    }
+
+    static void thread_loop(int iterations, int preCriticalTime, int criticalTime, int postCriticalTime){
+        for (;iterations > 0; iterations--){
+            P.acquire();
+            busy_wait_nano(preCriticalTime);
+            m.lock();
+            busy_wait_nano(criticalTime);
+            m.unlock();
+            busy_wait_nano(postCriticalTime);
+            V.release();
+        }
     }
 
 }
+
+#undef NOW
