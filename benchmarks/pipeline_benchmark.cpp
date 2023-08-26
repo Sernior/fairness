@@ -4,7 +4,6 @@
 #include <thread>
 #include <tuple>
 #include <BS_thread_pool.hpp>
-#include <semaphore>
 #include <DeterministicConcurrency>
 #define NOW std::chrono::steady_clock::now()
 
@@ -31,9 +30,6 @@ static void busy_wait_nano(uint32_t nanoseconds){
 }
 
 namespace _PM_pipeline_benchmark{
-
-    static std::counting_semaphore<8> P(0);
-    static std::counting_semaphore<1> V(-7);
 
     static PrioSync::priority_mutex<4> m;
 

@@ -5,7 +5,6 @@
 #include <shared_mutex>
 #include "pipeline_benchmark.cpp"
 #include <BS_thread_pool.hpp>
-#include <semaphore>
 #include <DeterministicConcurrency>
 
 static void PM_LockUnlock(benchmark::State& state) {
@@ -146,59 +145,28 @@ static void STD_pipeline_benchmark_audio(benchmark::State& state) {
     }
 }
 
-static void PM_pipeline_benchmark_fast(benchmark::State& state) { // order of 10 microseconds (Chaos on avarage seems PM is slightly slower at this level)
+static void STD_pipeline_benchmark_fast(benchmark::State& state) {
+    std::array<int, 8> prios {0, 2, 2, 1, 1, 3, 3, 0};
+    std::array<int, 8> preCT {2000, 1500, 2000, 3000, 1000, 500, 500, 2000};
+    int CT = 1000;
+    std::array<int, 8> postCT {5000, 3000, 2000, 2500, 1000, 1500, 1500, 4500};
 
-    int iterations = 100;
-
-    auto t0 = std::tuple(_PM_pipeline_benchmark::thread_loop, iterations, 0, 2000, 1000, 5000);
-    auto t1 = std::tuple(_PM_pipeline_benchmark::thread_loop, iterations, 2, 1500, 1000, 3000);
-    auto t2 = std::tuple(_PM_pipeline_benchmark::thread_loop, iterations, 2, 2000, 1000, 2000);
-    auto t3 = std::tuple(_PM_pipeline_benchmark::thread_loop, iterations, 1, 3000, 1000, 2500);
-    auto t4 = std::tuple(_PM_pipeline_benchmark::thread_loop, iterations, 1, 1000, 1000, 1000);
-    auto t5 = std::tuple(_PM_pipeline_benchmark::thread_loop, iterations, 3, 500, 1000, 1500);
-    auto t6 = std::tuple(_PM_pipeline_benchmark::thread_loop, iterations, 3, 500, 1000, 1500);
-    auto t7 = std::tuple(_PM_pipeline_benchmark::thread_loop, iterations, 0, 2000, 1000, 4500);
-
-    static auto sch = make_UserControlledScheduler(
-        t0, t1, t2, t3, t4, t5, t6, t7
-    );
-
-    sch.switchContextAll();
-
-    for (auto _ : state){
-        for(;iterations > 0; iterations--){
-            sch.proceed(0,1,2,3,4,5,6,7);
-            sch.wait(0,1,2,3,4,5,6,7);
-        }
+    for (auto _ : state) {
+      _STD_pipeline_benchmark::thread_function_nano(preCT[state.thread_index()], CT, postCT[state.thread_index()]);
     }
-    sch.joinAll();
+
 }
 
-static void STD_pipeline_benchmark_fast(benchmark::State& state) {
-    int iterations = 100;
+static void PM_pipeline_benchmark_fast(benchmark::State& state) {
+    std::array<int, 8> prios {0, 2, 2, 1, 1, 3, 3, 0};
+    std::array<int, 8> preCT {2000, 1500, 2000, 3000, 1000, 500, 500, 2000};
+    int CT = 1000;
+    std::array<int, 8> postCT {5000, 3000, 2000, 2500, 1000, 1500, 1500, 4500};
 
-    auto t0 = std::tuple(_STD_pipeline_benchmark::thread_loop, iterations, 2000, 1000, 5000);
-    auto t1 = std::tuple(_STD_pipeline_benchmark::thread_loop, iterations, 1500, 1000, 3000);
-    auto t2 = std::tuple(_STD_pipeline_benchmark::thread_loop, iterations, 2000, 1000, 2000);
-    auto t3 = std::tuple(_STD_pipeline_benchmark::thread_loop, iterations, 3000, 1000, 2500);
-    auto t4 = std::tuple(_STD_pipeline_benchmark::thread_loop, iterations, 1000, 1000, 1000);
-    auto t5 = std::tuple(_STD_pipeline_benchmark::thread_loop, iterations, 500, 1000, 1500);
-    auto t6 = std::tuple(_STD_pipeline_benchmark::thread_loop, iterations, 500, 1000, 1500);
-    auto t7 = std::tuple(_STD_pipeline_benchmark::thread_loop, iterations, 2000, 1000, 4500);
-
-    static auto sch = make_UserControlledScheduler(
-        t0, t1, t2, t3, t4, t5, t6, t7
-    );
-
-    sch.switchContextAll();
-
-    for (auto _ : state){
-        for(;iterations > 0; iterations--){
-            sch.proceed(0,1,2,3,4,5,6,7);
-            sch.wait(0,1,2,3,4,5,6,7);
-        }
+    for (auto _ : state) {
+      _PM_pipeline_benchmark::thread_function_nano(prios[state.thread_index()] ,preCT[state.thread_index()], CT, postCT[state.thread_index()]);
     }
-    sch.joinAll();
+
 }
 
 BENCHMARK(PM_LockUnlock);
@@ -219,7 +187,7 @@ BENCHMARK(STD_pipeline_benchmark_gaming)->UseRealTime();
 BENCHMARK(PM_pipeline_benchmark_audio)->UseRealTime();
 BENCHMARK(STD_pipeline_benchmark_audio)->UseRealTime();
 
-BENCHMARK(PM_pipeline_benchmark_fast)->Iterations(1);
-BENCHMARK(STD_pipeline_benchmark_fast)->Iterations(1);
+BENCHMARK(PM_pipeline_benchmark_fast)->Threads(8);
+BENCHMARK(STD_pipeline_benchmark_fast)->Threads(8);
 
 BENCHMARK_MAIN();
