@@ -5,7 +5,7 @@
 #include <shared_mutex>
 #include "pipeline_benchmark.cpp"
 #include <BS_thread_pool.hpp>
-#include <semaphore>
+#include <DeterministicConcurrency>
 
 static void PM_LockUnlock(benchmark::State& state) {
     PrioSync::priority_mutex<10> m;
@@ -55,7 +55,7 @@ static void STD_S_SLockSUnlock(benchmark::State& state) {
     }
 }
 
-static void PM_pipeline_benchmark_long(benchmark::State& state) {// simulations and longer pipeline stuff
+static void PM_pipeline_benchmark_long(benchmark::State& state) {// order of 1/10th of a second (PM faster)
     BS::thread_pool pool(8);
     for (auto _ : state){
         pool.push_task(_PM_pipeline_benchmark::thread_function, 0, 20, 10, 50);
@@ -70,7 +70,7 @@ static void PM_pipeline_benchmark_long(benchmark::State& state) {// simulations 
     }
 }
 
-static void STD_pipeline_benchmark_long(benchmark::State& state) {// simulations and longer pipeline stuff
+static void STD_pipeline_benchmark_long(benchmark::State& state) {
     BS::thread_pool pool(8);
     for (auto _ : state){
         pool.push_task(_STD_pipeline_benchmark::thread_function, 20, 10, 50);
@@ -85,7 +85,7 @@ static void STD_pipeline_benchmark_long(benchmark::State& state) {// simulations
     }
 }
 
-static void PM_pipeline_benchmark_gaming(benchmark::State& state) {
+static void PM_pipeline_benchmark_gaming(benchmark::State& state) {// order of 10 to 15 milliseconds (PM faster)
     BS::thread_pool pool(8);
     for (auto _ : state){
         pool.push_task(_PM_pipeline_benchmark::thread_function_micro, 0, 2000, 1000, 5000);
@@ -115,7 +115,7 @@ static void STD_pipeline_benchmark_gaming(benchmark::State& state) {
     }
 }
 
-static void PM_pipeline_benchmark_audio(benchmark::State& state) {
+static void PM_pipeline_benchmark_audio(benchmark::State& state) {// order of 1 to 1.5 millisec (PM faster)
     BS::thread_pool pool(8);
     for (auto _ : state){
         pool.push_task(_PM_pipeline_benchmark::thread_function_micro, 0, 200, 100, 500);
@@ -145,81 +145,29 @@ static void STD_pipeline_benchmark_audio(benchmark::State& state) {
     }
 }
 
+static void STD_pipeline_benchmark_fast(benchmark::State& state) {
+    std::array<int, 8> prios {0, 2, 2, 1, 1, 3, 3, 0};
+    std::array<int, 8> preCT {2000, 1500, 2000, 3000, 1000, 500, 500, 2000};
+    int CT = 1000;
+    std::array<int, 8> postCT {5000, 3000, 2000, 2500, 1000, 1500, 1500, 4500};
 
-static void PM_pipeline_benchmark_fast(benchmark::State& state) { // at this point I need a better way the majority of time is being wasted on the thread pool push_task
-    BS::thread_pool pool(8);
-    for (auto _ : state){
-        pool.push_task(_PM_pipeline_benchmark::thread_function_nano, 0, 2000, 1000, 5000);
-        pool.push_task(_PM_pipeline_benchmark::thread_function_nano, 2, 1500, 1000, 3000);
-        pool.push_task(_PM_pipeline_benchmark::thread_function_nano, 2, 2000, 1000, 2000);
-        pool.push_task(_PM_pipeline_benchmark::thread_function_nano, 1, 3000, 1000, 2500);
-        pool.push_task(_PM_pipeline_benchmark::thread_function_nano, 1, 1000, 1000, 1000);
-        pool.push_task(_PM_pipeline_benchmark::thread_function_nano, 3, 500, 1000, 1500);
-        pool.push_task(_PM_pipeline_benchmark::thread_function_nano, 3, 500, 1000, 1500);
-        pool.push_task(_PM_pipeline_benchmark::thread_function_nano, 0, 2000, 1000, 4500);
-        pool.wait_for_tasks();
+    for (auto _ : state) {
+      _STD_pipeline_benchmark::thread_function_nano(preCT[state.thread_index()], CT, postCT[state.thread_index()]);
     }
+
 }
 
-static void STD_pipeline_benchmark_fast(benchmark::State& state) { // at this point I need a better way the majority of time is being wasted on the thread pool push_task
-    BS::thread_pool pool(8);
-    for (auto _ : state){
-        pool.push_task(_STD_pipeline_benchmark::thread_function_nano, 2000, 1000, 5000);
-        pool.push_task(_STD_pipeline_benchmark::thread_function_nano, 1500, 1000, 3000);
-        pool.push_task(_STD_pipeline_benchmark::thread_function_nano, 2000, 1000, 2000);
-        pool.push_task(_STD_pipeline_benchmark::thread_function_nano, 3000, 1000, 2500);
-        pool.push_task(_STD_pipeline_benchmark::thread_function_nano, 1000, 1000, 1000);
-        pool.push_task(_STD_pipeline_benchmark::thread_function_nano, 500, 1000, 1500);
-        pool.push_task(_STD_pipeline_benchmark::thread_function_nano, 500, 1000, 1500);
-        pool.push_task(_STD_pipeline_benchmark::thread_function_nano, 2000, 1000, 4500);
-        pool.wait_for_tasks();
-    }
-}
+static void PM_pipeline_benchmark_fast(benchmark::State& state) {
+    std::array<int, 8> prios {0, 2, 2, 1, 1, 3, 3, 0};
+    std::array<int, 8> preCT {2000, 1500, 2000, 3000, 1000, 500, 500, 2000};
+    int CT = 1000;
+    std::array<int, 8> postCT {5000, 3000, 2000, 2500, 1000, 1500, 1500, 4500};
 
-/*
-static void PM_pipeline_benchmark_fast(benchmark::State& state) { // 1 iteration only
-    BS::thread_pool pool(8);
-    int iterations = 100;
-    pool.push_task(_PM_pipeline_benchmark::thread_loop, iterations, 0, 2000, 1000, 5000);
-    pool.push_task(_PM_pipeline_benchmark::thread_loop, iterations, 2, 1500, 1000, 3000);
-    pool.push_task(_PM_pipeline_benchmark::thread_loop, iterations, 2, 2000, 1000, 2000);
-    pool.push_task(_PM_pipeline_benchmark::thread_loop, iterations, 1, 3000, 1000, 2500);
-    pool.push_task(_PM_pipeline_benchmark::thread_loop, iterations, 1, 1000, 1000, 1000);
-    pool.push_task(_PM_pipeline_benchmark::thread_loop, iterations, 3, 500, 1000, 1500);
-    pool.push_task(_PM_pipeline_benchmark::thread_loop, iterations, 3, 500, 1000, 1500);
-    pool.push_task(_PM_pipeline_benchmark::thread_loop, iterations, 0, 2000, 1000, 4500);
-    for (auto _ : state){
-        int iterations = 100;
-        for(;iterations != 0; iterations--){
-            _PM_pipeline_benchmark::P.release(8);
-            _PM_pipeline_benchmark::V.acquire();
-            _PM_pipeline_benchmark::V.release(-7);
-        }
+    for (auto _ : state) {
+      _PM_pipeline_benchmark::thread_function_nano(prios[state.thread_index()] ,preCT[state.thread_index()], CT, postCT[state.thread_index()]);
     }
-    pool.wait_for_tasks();
-}
 
-static void STD_pipeline_benchmark_fast(benchmark::State& state) { // 1 iteration only
-    BS::thread_pool pool(8);
-    int iterations = 10000;
-    pool.push_task(_STD_pipeline_benchmark::thread_loop, iterations, 2000, 1000, 5000);
-    pool.push_task(_STD_pipeline_benchmark::thread_loop, iterations, 1500, 1000, 3000);
-    pool.push_task(_STD_pipeline_benchmark::thread_loop, iterations, 2000, 1000, 2000);
-    pool.push_task(_STD_pipeline_benchmark::thread_loop, iterations, 3000, 1000, 2500);
-    pool.push_task(_STD_pipeline_benchmark::thread_loop, iterations, 1000, 1000, 1000);
-    pool.push_task(_STD_pipeline_benchmark::thread_loop, iterations, 500, 1000, 1500);
-    pool.push_task(_STD_pipeline_benchmark::thread_loop, iterations, 500, 1000, 1500);
-    pool.push_task(_STD_pipeline_benchmark::thread_loop, iterations, 2000, 1000, 4500);
-    for (auto _ : state){
-        int iterations = 10000;
-        for(;iterations != 0; iterations--){
-            _STD_pipeline_benchmark::P.release(8);
-            _STD_pipeline_benchmark::V.acquire();
-            _STD_pipeline_benchmark::V.release(-7);
-        }
-    }
-    pool.wait_for_tasks();
-}*/
+}
 
 BENCHMARK(PM_LockUnlock);
 BENCHMARK(STD_LockUnlock);
@@ -239,7 +187,7 @@ BENCHMARK(STD_pipeline_benchmark_gaming)->UseRealTime();
 BENCHMARK(PM_pipeline_benchmark_audio)->UseRealTime();
 BENCHMARK(STD_pipeline_benchmark_audio)->UseRealTime();
 
-BENCHMARK(PM_pipeline_benchmark_fast)->UseRealTime();
-BENCHMARK(STD_pipeline_benchmark_fast)->UseRealTime();
+BENCHMARK(PM_pipeline_benchmark_fast)->Threads(8);
+BENCHMARK(STD_pipeline_benchmark_fast)->Threads(8);
 
 BENCHMARK_MAIN();
