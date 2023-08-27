@@ -8,12 +8,17 @@
 #include <algorithm>
 
 static PrioSync::priority_mutex<8> m;
-static PrioSync::spinlock_priority_mutex ms;
+static PrioSync::spinlock_priority_mutex<4> ms;
 
 
 void threadFunction(PrioSync::Priority_t prio) {
-    ms.lock();
-    std::cout << "Thread : " << int(prio) << " is running." << std::endl;
+
+    ms.lock(prio);
+
+    std::this_thread::sleep_for(std::chrono::milliseconds(1));
+    std::cout << "Thread : " << int(prio) << " is crit." << std::endl;
+
+    
     ms.unlock();
 }
 

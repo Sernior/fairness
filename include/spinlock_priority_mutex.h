@@ -14,6 +14,7 @@
 #pragma once
 #include <thread>
 #include <atomic>
+#include <array>
 #include "priority_t.h"
 
 namespace PrioSync{// the name has yet to be chosen
@@ -58,14 +59,30 @@ namespace PrioSync{// the name has yet to be chosen
          * m.lock(9);
          * \endcode
          */
-        void lock(Priority_t priority = 0){// 2 1 0
-            bool localLockOwned = lockOwned_;
-            while (localLockOwned || !lockOwned_.compare_exchange_weak(localLockOwned, true)){
+        void lock(Priority_t priority = 0){// 0 1 2 3
+            bool localLockOwned = lockOwned_.load(std::memory_order_acquire);
+            Priority_t localCurrentPriority = currentPriority_.load();
+            waiters_[priority].fetch_add(1);
+            while ( 
+                (localCurrentPriority < priority || !currentPriority_.compare_exchange_weak(localCurrentPriority, priority)) ||
+                (localLockOwned || !lockOwned_.compare_exchange_weak(localLockOwned, true))
+            ){
+                lockOwned_.wait(localLockOwned);
+                localLockOwned = lockOwned_;
+                localCurrentPriority = currentPriority_;
+            }
+            waiters_[priority].fetch_sub(1);
+        }
+
+/*
+        void lock(std::string s){
+            bool localLockOwned = lockOwned_.load(std::memory_order_acquire);
+            while ( localLockOwned || !lockOwned_.compare_exchange_weak(localLockOwned, true) )
+            {
                 lockOwned_.wait(localLockOwned);
                 localLockOwned = lockOwned_;
             }
-
-        }
+        }*/
 
         /**
          * @brief Release the priority_mutex from unique ownership.
@@ -77,6 +94,7 @@ namespace PrioSync{// the name has yet to be chosen
          * \endcode
          */
         void unlock(){
+            currentPriority_.store(find_first_priority_(), std::memory_order_release);
             lockOwned_.store(false);
             lockOwned_.notify_all();
         }
@@ -99,9 +117,17 @@ namespace PrioSync{// the name has yet to be chosen
 
 
         private:
+        std::array<std::atomic<uint32_t>, N> waiters_;
+        std::atomic<Priority_t> currentPriority_{255};
+        std::atomic<bool> lockOwned_{};
 
-        std::atomic<Priority_t> currentPriority_{0};
-        std::atomic<bool> lockOwned_{};//?
+        Priority_t find_first_priority_(){
+            for (Priority_t i = 0; i < N; i++){
+                if (waiters_[i] > 0)
+                    return i;
+            }
+            return _max_priority;
+        }
 
     };
 }

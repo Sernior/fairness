@@ -1,5 +1,6 @@
 #include <benchmark/benchmark.h>
 #include <priority_mutex.h>
+#include <spinlock_priority_mutex.h>
 #include <shared_priority_mutex.h>
 #include <mutex>
 #include <shared_mutex>
@@ -9,6 +10,14 @@
 
 static void PM_LockUnlock(benchmark::State& state) {
     PrioSync::priority_mutex<10> m;
+    for (auto _ : state){
+        m.lock();
+        m.unlock();
+    }
+}
+
+static void SPINPM_LockUnlock(benchmark::State& state) {
+    PrioSync::spinlock_priority_mutex m;
     for (auto _ : state){
         m.lock();
         m.unlock();
@@ -169,8 +178,9 @@ static void PM_pipeline_benchmark_fast(benchmark::State& state) {
 
 }
 
-BENCHMARK(PM_LockUnlock);
-BENCHMARK(STD_LockUnlock);
+BENCHMARK(PM_LockUnlock)->Threads(8);
+BENCHMARK(SPINPM_LockUnlock)->Threads(8);
+BENCHMARK(STD_LockUnlock)->Threads(8);
 
 BENCHMARK(PM_S_LockUnlock);
 BENCHMARK(STD_S_LockUnlock);
