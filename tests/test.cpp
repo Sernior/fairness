@@ -68,7 +68,7 @@ int main(int argc, char* argv[]) {
     PMscenario3::executeSchedulingSequence();
     //////////////////////
     //TEST 4
-    //PMscenario4::executeSchedulingSequence();
+    //PMscenario4::executeSchedulingSequence();//not semaphore
     //////////////////////
 
     /**************shared_priority_mutex***************/
@@ -86,7 +86,7 @@ int main(int argc, char* argv[]) {
     SPMscenario4::executeSchedulingSequence();
     //////////////////////
     //TEST 9
-    //SPMscenario5::executeSchedulingSequence();
+    //SPMscenario5::executeSchedulingSequence();//not semaphore
     //////////////////////
     //TEST 10 (This test does have an assert above but not deadlocking is the real assert, read comments in SPMscenario6Conext.h)
     SPMscenario6::executeSchedulingSequence();

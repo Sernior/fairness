@@ -62,9 +62,9 @@ namespace PrioSync{// the name has yet to be chosen
          * \endcode
          */
         void lock(Priority_t priority = 0){
-            Priority_t localCurrentPriority = currentPriority_.load(std::memory_order_relaxed);
-            waiters_[priority].fetch_add(1, std::memory_order_relaxed);
-            uint32_t localWaiters = waiters_[priority].load(std::memory_order_relaxed);
+            Priority_t localCurrentPriority = currentPriority_.load();
+            waiters_[priority].fetch_add(1);
+            uint32_t localWaiters = waiters_[priority].load();
             while ( 
                 (!waiters_[priority].compare_exchange_weak(localWaiters, waiters_[priority]) ) ||
                 (localCurrentPriority < priority || !currentPriority_.compare_exchange_weak(localCurrentPriority, priority)) ||

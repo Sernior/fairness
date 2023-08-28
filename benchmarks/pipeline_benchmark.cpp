@@ -1,4 +1,4 @@
-#include <priority_mutex.h>
+#include <spinlock_priority_mutex.h>
 #include <vector>
 #include <chrono>
 #include <thread>
@@ -31,7 +31,7 @@ static void busy_wait_nano(uint32_t nanoseconds){
 
 namespace _PM_pipeline_benchmark{
 
-    static PrioSync::priority_mutex<4> m;
+    static PrioSync::spinlock_priority_mutex<4> m;
 
     static void thread_function(int p, int preCriticalTime, int criticalTime, int postCriticalTime){
         busy_wait_milli(preCriticalTime);

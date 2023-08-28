@@ -35,11 +35,10 @@ namespace SPMscenario5{
     static size_t THREAD0 = 0;
     static size_t THREAD1 = 1;
     
-    static auto sch = make_UserControlledScheduler(
-        thread_0, thread_1
-    );
-    
     static constexpr auto executeSchedulingSequence = []{
+        auto sch = make_UserControlledScheduler(
+        thread_0, thread_1
+        );
         sch.switchContextTo(THREAD0);
         sch.switchContextTo(THREAD1);
         sch.proceed(THREAD1, THREAD0);// thread 1 here should be stuck on the lock assuming my mutex is a mutex and not a semaphore

@@ -15,7 +15,7 @@ void threadFunction(PrioSync::Priority_t prio) {
 
     ms.lock(prio);
 
-    std::this_thread::sleep_for(std::chrono::milliseconds(1));
+    //std::this_thread::sleep_for(std::chrono::milliseconds(1));
     std::cout << "Thread : " << int(prio) << " is crit." << std::endl;
 
     
@@ -30,8 +30,9 @@ int main()
     std::vector<std::thread> tp;
     for (int i = 0; i < 4; i++){
         tp.push_back(std::thread(&threadFunction, i));
+        tp.push_back(std::thread(&threadFunction, i));
     }
-    std::this_thread::sleep_for(std::chrono::milliseconds(10));//make sure the threads lock themselves
+    //std::this_thread::sleep_for(std::chrono::milliseconds(10));//make sure the threads lock themselves
 
     ms.unlock();
     for (auto& t : tp)
