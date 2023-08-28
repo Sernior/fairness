@@ -26,17 +26,26 @@ void threadFunction(PrioSync::Priority_t prio) {
 
 int main()
 {
-    ms.lock();
-    std::vector<std::thread> tp;
     for (int i = 0; i < 4; i++){
-        tp.push_back(std::thread(&threadFunction, i));
-        tp.push_back(std::thread(&threadFunction, i));
+        ms.lock();
+        std::vector<std::thread> tp;
+        // for (int i = 0; i < 4; i++){
+        //     tp.push_back(std::thread(&threadFunction, i));
+        //     tp.push_back(std::thread(&threadFunction, i));
+        // }
+        tp.push_back(std::thread(&threadFunction, 0));
+        tp.push_back(std::thread(&threadFunction, 1));
+        tp.push_back(std::thread(&threadFunction, 1));
+        tp.push_back(std::thread(&threadFunction, 2));
+        tp.push_back(std::thread(&threadFunction, 2));
+        tp.push_back(std::thread(&threadFunction, 3));
+        tp.push_back(std::thread(&threadFunction, 3));
+        tp.push_back(std::thread(&threadFunction, 0));
+        //std::this_thread::sleep_for(std::chrono::milliseconds(10));//make sure the threads lock themselves
+
+        ms.unlock();
+        for (auto& t : tp)
+            t.join();
     }
-    //std::this_thread::sleep_for(std::chrono::milliseconds(10));//make sure the threads lock themselves
-
-    ms.unlock();
-    for (auto& t : tp)
-        t.join();
-
     return 0;
 }

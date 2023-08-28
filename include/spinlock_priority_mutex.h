@@ -18,8 +18,10 @@
 #include <chrono>
 #include <thread>
 #include "priority_t.h"
+#include <mutex>
 
 namespace PrioSync{// the name has yet to be chosen
+static std::mutex mmm;
 
     /**
      * @brief The priority_mutex is an advanced synchronization mechanism that enhances the traditional mutex by introducing a priority-based approach.
@@ -63,16 +65,18 @@ namespace PrioSync{// the name has yet to be chosen
          */
         void lock(Priority_t priority = 0){
             Priority_t localCurrentPriority = currentPriority_.load();
+            mmm.lock();
             waiters_[priority].fetch_add(1);
-            uint32_t localWaiters = waiters_[priority].load();
+            mmm.unlock();
+            // uint32_t localWaiters = waiters_[priority].load();
             while ( 
-                (!waiters_[priority].compare_exchange_weak(localWaiters, waiters_[priority]) ) ||
+                // (!waiters_[priority].compare_exchange_weak(localWaiters, waiters_[priority]) ) ||
                 (localCurrentPriority < priority || !currentPriority_.compare_exchange_weak(localCurrentPriority, priority)) ||
                 (lockOwned_.test_and_set(std::memory_order_acquire))
             ){
                 lockOwned_.wait(true);
                 localCurrentPriority = currentPriority_;
-                localWaiters = waiters_[priority];
+                // localWaiters = waiters_[priority];
             }
         }
 
@@ -86,11 +90,22 @@ namespace PrioSync{// the name has yet to be chosen
          * \endcode
          */
         void unlock(){
+            // auto localWaiters = waiters_[p];
+            // while(waiters_[p].compare_exchange_weak(localWaiters, localWaiters--))
+            //     continue;
+            // // waiters_[currentPriority_.load()].fetch_sub(1);
+            // auto p = find_first_priority_();
+            // localWaiters = waiters_[p];
+            // while (waiters_[p] > 0 && waiters_[p].compare_exchange_weak(localWaiters, waiters_[find_first_priority_()]))
+            // currentPriority_.store(p);
+            mmm.lock();
             waiters_[currentPriority_.load()].fetch_sub(1);
-            auto p = find_first_priority_();
-            currentPriority_.store(p);
+            currentPriority_.store(find_first_priority_());
+            mmm.unlock();
             lockOwned_.clear(std::memory_order_release);
             lockOwned_.notify_one();
+
+            
         }
 
         /**
