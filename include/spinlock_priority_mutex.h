@@ -61,33 +61,20 @@ namespace PrioSync{// the name has yet to be chosen
          * m.lock(9);
          * \endcode
          */
-        void lock(Priority_t priority = 0){// 0 1 2 3
-            bool localLockOwned = lockOwned_.load(std::memory_order_acquire);
-            Priority_t localCurrentPriority = currentPriority_.load();
-            waiters_[priority].fetch_add(1);
-            uint32_t localWaiters = waiters_[priority];
+        void lock(Priority_t priority = 0){
+            Priority_t localCurrentPriority = currentPriority_.load(std::memory_order_relaxed);
+            waiters_[priority].fetch_add(1, std::memory_order_relaxed);
+            uint32_t localWaiters = waiters_[priority].load(std::memory_order_relaxed);
             while ( 
                 (!waiters_[priority].compare_exchange_weak(localWaiters, waiters_[priority]) ) ||
                 (localCurrentPriority < priority || !currentPriority_.compare_exchange_weak(localCurrentPriority, priority)) ||
-                (localLockOwned || !lockOwned_.compare_exchange_weak(localLockOwned, true))
+                (lockOwned_.test_and_set(std::memory_order_acquire))
             ){
                 lockOwned_.wait(true);
-                // waiters_[priority].wait(localWaiters);
-                localLockOwned = lockOwned_;
                 localCurrentPriority = currentPriority_;
                 localWaiters = waiters_[priority];
             }
         }
-
-/*
-        void lock(std::string s){
-            bool localLockOwned = lockOwned_.load(std::memory_order_acquire);
-            while ( localLockOwned || !lockOwned_.compare_exchange_weak(localLockOwned, true) )
-            {
-                lockOwned_.wait(localLockOwned);
-                localLockOwned = lockOwned_;
-            }
-        }*/
 
         /**
          * @brief Release the priority_mutex from unique ownership.
@@ -99,13 +86,11 @@ namespace PrioSync{// the name has yet to be chosen
          * \endcode
          */
         void unlock(){
+            waiters_[currentPriority_.load()].fetch_sub(1);
             auto p = find_first_priority_();
-            waiters_[p].fetch_sub(1);
-            p = find_first_priority_();
-            currentPriority_.store(p, std::memory_order_release);
-            lockOwned_.store(false);
-            lockOwned_.notify_all();
-            // waiters_[p].notify_one();
+            currentPriority_.store(p);
+            lockOwned_.clear(std::memory_order_release);
+            lockOwned_.notify_one();
         }
 
         /**
@@ -120,15 +105,13 @@ namespace PrioSync{// the name has yet to be chosen
          * @return bool 
          */
         [[nodiscard]] bool try_lock(Priority_t priority = 0){
-            bool FALSE = false;
-            return lockOwned_.compare_exchange_strong(FALSE , true);
+            return (currentPriority_.load(std::memory_order_relaxed) >= priority && !lockOwned_.test_and_set(std::memory_order_acquire));
         }
-
 
         private:
         std::array<std::atomic<uint32_t>, N> waiters_;
-        std::atomic<Priority_t> currentPriority_{255};
-        std::atomic<bool> lockOwned_{};
+        std::atomic<Priority_t> currentPriority_{_max_priority};
+        std::atomic_flag lockOwned_;
 
         Priority_t find_first_priority_(){
             for (Priority_t i = 0; i < N; i++){
