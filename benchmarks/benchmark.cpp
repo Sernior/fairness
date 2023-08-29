@@ -178,24 +178,24 @@ static void PM_pipeline_benchmark_fast(benchmark::State& state) {
 
 }
 
-// BENCHMARK(PM_LockUnlock)->Threads(8);
-// BENCHMARK(SPINPM_LockUnlock)->Threads(8);
-// BENCHMARK(STD_LockUnlock)->Threads(8);
+BENCHMARK(PM_LockUnlock)->Threads(8);
+BENCHMARK(SPINPM_LockUnlock)->Threads(8);
+BENCHMARK(STD_LockUnlock)->Threads(8);
 
-// BENCHMARK(PM_S_LockUnlock);
-// BENCHMARK(STD_S_LockUnlock);
+BENCHMARK(PM_S_LockUnlock);
+BENCHMARK(STD_S_LockUnlock);
 
-// BENCHMARK(PM_S_SLockSUnlock);
-// BENCHMARK(STD_S_SLockSUnlock);
+BENCHMARK(PM_S_SLockSUnlock);
+BENCHMARK(STD_S_SLockSUnlock);
 
-// BENCHMARK(PM_pipeline_benchmark_long)->UseRealTime();
-// BENCHMARK(STD_pipeline_benchmark_long)->UseRealTime();
+BENCHMARK(PM_pipeline_benchmark_long)->UseRealTime();
+BENCHMARK(STD_pipeline_benchmark_long)->UseRealTime();
 
-// BENCHMARK(PM_pipeline_benchmark_gaming)->UseRealTime();
-// BENCHMARK(STD_pipeline_benchmark_gaming)->UseRealTime();
+BENCHMARK(PM_pipeline_benchmark_gaming)->UseRealTime();
+BENCHMARK(STD_pipeline_benchmark_gaming)->UseRealTime();
 
-// BENCHMARK(PM_pipeline_benchmark_audio)->UseRealTime();
-// BENCHMARK(STD_pipeline_benchmark_audio)->UseRealTime();
+BENCHMARK(PM_pipeline_benchmark_audio)->UseRealTime();
+BENCHMARK(STD_pipeline_benchmark_audio)->UseRealTime();
 
 BENCHMARK(PM_pipeline_benchmark_fast)->Threads(8);
 BENCHMARK(STD_pipeline_benchmark_fast)->Threads(8);
