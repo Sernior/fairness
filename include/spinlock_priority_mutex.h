@@ -62,17 +62,17 @@ namespace PrioSync{// the name has yet to be chosen
          * m.lock(9);
          * \endcode
          */
-        void lock(Priority_t priority = 0){
-            Priority_t localCurrentPriority = currentPriority_.load();
-            waiters_[priority].fetch_add(1);
+        void lock(Priority_t const priority = 0){
+            Priority_t localCurrentPriority = currentPriority_.load(std::memory_order_relaxed);
+            waiters_[priority].fetch_add(1, std::memory_order_relaxed);
             while ( 
-                (localCurrentPriority < priority || !currentPriority_.compare_exchange_weak(localCurrentPriority, priority)) ||
+                (localCurrentPriority < priority || !currentPriority_.compare_exchange_weak(localCurrentPriority, priority, std::memory_order_relaxed)) ||
                 (lockOwned_.test_and_set(std::memory_order_acquire))
             ){
                 lockOwned_.wait(true);
                 localCurrentPriority = currentPriority_;
             }
-            waiters_[priority].fetch_sub(1);
+            waiters_[priority].fetch_sub(1, std::memory_order_relaxed);
         }
 
         /**
@@ -85,9 +85,10 @@ namespace PrioSync{// the name has yet to be chosen
          * \endcode
          */
         void unlock(){
-            currentPriority_.store(find_first_priority_());
+            currentPriority_.store(find_first_priority_(), std::memory_order_relaxed);
             lockOwned_.clear(std::memory_order_release);
-            lockOwned_.notify_one();
+            if(currentPriority_.load(std::memory_order_relaxed) != _max_priority)
+                lockOwned_.notify_all();
         }
 
         /**
@@ -101,7 +102,7 @@ namespace PrioSync{// the name has yet to be chosen
          * \endcode
          * @return bool 
          */
-        [[nodiscard]] bool try_lock(Priority_t priority = 0){
+        [[nodiscard]] bool try_lock(Priority_t const priority = 0){
             return (currentPriority_.load(std::memory_order_relaxed) >= priority && !lockOwned_.test_and_set(std::memory_order_acquire));
         }
 
@@ -115,8 +116,7 @@ namespace PrioSync{// the name has yet to be chosen
                 if (waiters_[i] > 0)
                     return i;
             }
-            return N-1;
+            return _max_priority;
         }
-
     };
 }
