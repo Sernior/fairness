@@ -72,9 +72,6 @@ namespace _PM_pipeline_benchmark{
 
 namespace _STD_pipeline_benchmark{
 
-    static std::counting_semaphore<8> P(0);
-    static std::counting_semaphore<1> V(-7);
-
     static std::mutex m;
 
     static void thread_function(int preCriticalTime, int criticalTime, int postCriticalTime){

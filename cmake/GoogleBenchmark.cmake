@@ -1,4 +1,9 @@
-set(BENCHMARK_ENABLE_TESTING NO)
+if (MSVC)
+    set(BENCHMARK_STATIC_DEFINE ON)
+    set(gtest_force_shared_crt on)
+endif()
+
+set(BENCHMARK_ENABLE_TESTING OFF)
 set(CMAKE_BUILD_TYPE Release)
 include(FetchContent)
 
