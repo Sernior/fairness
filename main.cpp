@@ -4,9 +4,10 @@
 #include <chrono>
 #include <vector>
 #include <algorithm>
+#include <BS_thread_pool.hpp>
 
 static PrioSync::spinlock_priority_mutex<4> ms;
-
+#define NOW std::chrono::steady_clock::now()
 
 void threadFunction(PrioSync::Priority_t prio) {
 
@@ -17,18 +18,38 @@ void threadFunction(PrioSync::Priority_t prio) {
     ms.unlock();
 }
 
+static void busy_wait_nano(uint64_t nanoseconds){
+    auto begin = NOW;
+    for(;std::chrono::duration_cast<std::chrono::nanoseconds>(NOW - begin).count() < nanoseconds;)
+        continue;
+}
+
+static void thread_function_nano(int p, int preCriticalTime, int criticalTime, int postCriticalTime){
+    busy_wait_nano(preCriticalTime);
+    ms.lock(p);
+    busy_wait_nano(criticalTime);
+    ms.unlock();
+    busy_wait_nano(postCriticalTime);
+}
+
 
 
 int main()
 {
-    ms.lock();
-    std::vector<std::thread> tp;
-     for (int i = 0; i < 4; i++){
-        tp.emplace_back(threadFunction, i);
-     }
-    std::this_thread::sleep_for(std::chrono::milliseconds(10));//make sure the threads lock themselves
-    ms.unlock();
-    for (auto& t : tp)
-        t.join();
+    busy_wait_nano(10000000000);
+    std::array<int, 8> prios {0, 2, 2, 1, 1, 3, 3, 0};
+    std::array<int, 8> preCT {2000, 1500, 2000, 3000, 1000, 500, 500, 2000};
+    int CT = 1000;
+    std::array<int, 8> postCT {5000, 3000, 2000, 2500, 1000, 1500, 1500, 4500};
+
+    BS::thread_pool pool(8);
+
+    for (int j = 0; j < 2000000; j++){
+        for (int i = 0; i < 8; i++){
+            pool.push_task(thread_function_nano, prios[i], preCT[i], CT, postCT[i]);
+        }
+        pool.wait_for_tasks();
+    }
+
     return 0;
 }
