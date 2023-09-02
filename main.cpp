@@ -36,7 +36,6 @@ static void thread_function_nano(int p, int preCriticalTime, int criticalTime, i
 
 int main()
 {
-    busy_wait_nano(10000000000);
     std::array<int, 8> prios {0, 2, 2, 1, 1, 3, 3, 0};
     std::array<int, 8> preCT {2000, 1500, 2000, 3000, 1000, 500, 500, 2000};
     int CT = 1000;
