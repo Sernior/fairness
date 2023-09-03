@@ -70,7 +70,7 @@ namespace PrioSync{// the name has yet to be chosen
                 (lockOwned_.test_and_set(std::memory_order_acquire))
             ){
                 lockOwned_.wait(true);
-                localCurrentPriority = currentPriority_
+                localCurrentPriority = currentPriority_;
             }
             waiters_[priority].fetch_sub(1, std::memory_order_relaxed);
         }
