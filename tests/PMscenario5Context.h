@@ -1,17 +1,18 @@
-#include <shared_priority_mutex.h>
+#include <spinlock_priority_mutex.h>
 #include <DeterministicConcurrency>
 #include <vector>
+#include <random>
 
-namespace SPMscenario1{
+namespace PMscenario5{
     using namespace DeterministicConcurrency;
 
-    PrioSync::shared_priority_mutex<5> m;
+    PrioSync::spinlock_priority_mutex<8> m;
 
     std::vector<int> ret;
 
-    std::vector<int> expected{
-        0, 1, 2, 3, 4
-    };
+    std::random_device rd;
+    std::mt19937 gen(rd());
+    std::uniform_int_distribution<int> distribution(0, 7);
 
     void threadFunction(thread_context* c ,int i) {
         c->lock(&m,i);
@@ -30,34 +31,45 @@ namespace SPMscenario1{
     static size_t THREAD2 = 2;
     static size_t THREAD3 = 3;
     static size_t THREAD4 = 4;
-    static size_t CTRLTHREAD = 5;
-    
+    static size_t THREAD5 = 5;
+    static size_t THREAD6 = 6;
+    static size_t THREAD7 = 7;
+    static size_t CTRLTHREAD = 8;
+        
     static constexpr auto executeSchedulingSequence = []{
-        auto thread_0 = std::tuple{&threadFunction, 0};
-        auto thread_1 = std::tuple{&threadFunction, 1};
-        auto thread_2 = std::tuple{&threadFunction, 2};
-        auto thread_3 = std::tuple{&threadFunction, 3};
-        auto thread_4 = std::tuple{&threadFunction, 4};
+        auto thread_0 = std::tuple{&threadFunction, distribution(gen)};
+        auto thread_1 = std::tuple{&threadFunction, distribution(gen)};
+        auto thread_2 = std::tuple{&threadFunction, distribution(gen)};
+        auto thread_3 = std::tuple{&threadFunction, distribution(gen)};
+        auto thread_4 = std::tuple{&threadFunction, distribution(gen)};
+        auto thread_5 = std::tuple{&threadFunction, distribution(gen)};
+        auto thread_6 = std::tuple{&threadFunction, distribution(gen)};
+        auto thread_7 = std::tuple{&threadFunction, distribution(gen)};
         auto ctrlThread = std::tuple{&controlThread};
-
+        
         auto sch = make_UserControlledScheduler(
-            thread_0, thread_1, thread_2, thread_3, thread_4, ctrlThread
+            thread_0, thread_1, thread_2, thread_3, thread_4, thread_5, thread_6, thread_7, ctrlThread
         );
-
         sch.switchContextTo(CTRLTHREAD);// give control to the control thread first so it acquires the lock
         sch.proceed(// allow all the other thread to proceed
             THREAD0,
             THREAD1,
             THREAD2,
             THREAD3,
-            THREAD4
+            THREAD4,
+            THREAD5,
+            THREAD6,
+            THREAD7
         );
         sch.waitUntilAllThreadStatus<thread_status_t::WAITING_EXTERNAL>(// wait until all of them are waiting on the lock
             THREAD0,
             THREAD1,
             THREAD2,
             THREAD3,
-            THREAD4
+            THREAD4,
+            THREAD5,
+            THREAD6,
+            THREAD7
         );
         sch.switchContextTo(CTRLTHREAD);// at this point the the control thread can end and all the others should respect their priority
         sch.joinAll();

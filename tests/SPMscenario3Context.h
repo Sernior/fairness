@@ -1,6 +1,7 @@
 #include <shared_priority_mutex.h>
 #include <DeterministicConcurrency>
 #include <vector>
+
 namespace SPMscenario3{
     using namespace DeterministicConcurrency;
 
@@ -11,7 +12,6 @@ namespace SPMscenario3{
     std::vector<bool> expected{
         true, false, false, true, false
     };
-
 
     void threadFunction(thread_context* c ,int i) {
         if (m.try_lock(i)){
@@ -38,13 +38,6 @@ namespace SPMscenario3{
         m.unlock();
     }
 
-    static auto thread_0 = std::tuple{&threadFunction, 0};
-    static auto thread_1 = std::tuple{&threadFunction, 1};
-    static auto thread_2 = std::tuple{&threadFunction, 2};
-    static auto thread_3 = std::tuple{&threadFunction2, 3};
-    static auto thread_4 = std::tuple{&threadFunction, 4};
-    static auto ctrlThread = std::tuple{&controlThread};
-
     static size_t THREAD0 = 0;
     static size_t THREAD1 = 1;
     static size_t THREAD2 = 2;
@@ -52,11 +45,18 @@ namespace SPMscenario3{
     static size_t THREAD4 = 4;
     static size_t CTRLTHREAD = 5;
     
-    static auto sch = make_UserControlledScheduler(
-        thread_0, thread_1, thread_2, thread_3, thread_4, ctrlThread
-    );
-    
     static constexpr auto executeSchedulingSequence = []{
+        auto thread_0 = std::tuple{&threadFunction, 0};
+        auto thread_1 = std::tuple{&threadFunction, 1};
+        auto thread_2 = std::tuple{&threadFunction, 2};
+        auto thread_3 = std::tuple{&threadFunction2, 3};
+        auto thread_4 = std::tuple{&threadFunction, 4};
+        auto ctrlThread = std::tuple{&controlThread};
+
+        auto sch = make_UserControlledScheduler(
+            thread_0, thread_1, thread_2, thread_3, thread_4, ctrlThread
+        );
+
         sch.switchContextTo(THREAD4);// thread4 starts and since he is the first he must be able to aquire the lock and push true
         sch.switchContextTo(CTRLTHREAD);// acquire the lock and then the scheduler reaquire control
         sch.switchContextTo(THREAD2, THREAD0);// thread2 and thread0 aquire control but they cannot aquire the lock so he just push false and finish
