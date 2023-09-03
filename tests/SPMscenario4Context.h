@@ -1,6 +1,7 @@
 #include <shared_priority_mutex.h>
 #include <DeterministicConcurrency>
 #include <vector>
+
 namespace SPMscenario4{
     using namespace DeterministicConcurrency;
 
@@ -26,19 +27,11 @@ namespace SPMscenario4{
         m.unlock();
     }
 
-
     void controlThread(thread_context* c) {
         c->lock(&m);
         c->switchContext();
         m.unlock();
     }
-
-    static auto thread_0 = std::tuple{&threadFunction, 0};
-    static auto thread_1 = std::tuple{&threadFunction, 1};
-    static auto thread_2 = std::tuple{&threadFunction, 2};
-    static auto thread_3 = std::tuple{&threadFunction2, 3};
-    static auto thread_4 = std::tuple{&threadFunction, 4};
-    static auto ctrlThread = std::tuple{&controlThread};
 
     static size_t THREAD0 = 0;
     static size_t THREAD1 = 1;
@@ -47,11 +40,19 @@ namespace SPMscenario4{
     static size_t THREAD4 = 4;
     static size_t CTRLTHREAD = 5;
     
-    static auto sch = make_UserControlledScheduler(
-        thread_0, thread_1, thread_2, thread_3, thread_4, ctrlThread
-    );
     // 0 4 1 2 3
     static constexpr auto executeSchedulingSequence = []{
+        auto thread_0 = std::tuple{&threadFunction, 0};
+        auto thread_1 = std::tuple{&threadFunction, 1};
+        auto thread_2 = std::tuple{&threadFunction, 2};
+        auto thread_3 = std::tuple{&threadFunction2, 3};
+        auto thread_4 = std::tuple{&threadFunction, 4};
+        auto ctrlThread = std::tuple{&controlThread};
+
+        auto sch = make_UserControlledScheduler(
+            thread_0, thread_1, thread_2, thread_3, thread_4, ctrlThread
+        );
+
         sch.switchContextTo(CTRLTHREAD);// acquire the lock and then the scheduler reaquire control
         sch.proceed(THREAD0, THREAD4);
         sch.waitUntilAllThreadStatus<thread_status_t::WAITING_EXTERNAL>(THREAD0, THREAD4);// wait until 0 and 4 are stuck on the lock_shared

@@ -1,6 +1,7 @@
 #include <spinlock_priority_mutex.h>
 #include <DeterministicConcurrency>
 #include <vector>
+
 namespace PMscenario2{
     using namespace DeterministicConcurrency;
 
@@ -11,7 +12,6 @@ namespace PMscenario2{
     std::vector<int> expected{
         4, 3, 2, 1, 0
     };
-
 
     void threadFunction(thread_context* c ,int i) {
         c->lock(&m);
@@ -25,13 +25,6 @@ namespace PMscenario2{
         m.unlock();
     }
 
-    static auto thread_0 = std::tuple{&threadFunction, 0};
-    static auto thread_1 = std::tuple{&threadFunction, 1};
-    static auto thread_2 = std::tuple{&threadFunction, 2};
-    static auto thread_3 = std::tuple{&threadFunction, 3};
-    static auto thread_4 = std::tuple{&threadFunction, 4};
-    static auto ctrlThread = std::tuple{&controlThread};
-
     static size_t THREAD0 = 0;
     static size_t THREAD1 = 1;
     static size_t THREAD2 = 2;
@@ -39,11 +32,17 @@ namespace PMscenario2{
     static size_t THREAD4 = 4;
     static size_t CTRLTHREAD = 5;
     
-    static auto sch = make_UserControlledScheduler(
-        thread_0, thread_1, thread_2, thread_3, thread_4, ctrlThread
-    );
-    
     static constexpr auto executeSchedulingSequence = []{
+        auto thread_0 = std::tuple{&threadFunction, 0};
+        auto thread_1 = std::tuple{&threadFunction, 1};
+        auto thread_2 = std::tuple{&threadFunction, 2};
+        auto thread_3 = std::tuple{&threadFunction, 3};
+        auto thread_4 = std::tuple{&threadFunction, 4};
+        auto ctrlThread = std::tuple{&controlThread};
+
+        auto sch = make_UserControlledScheduler(
+            thread_0, thread_1, thread_2, thread_3, thread_4, ctrlThread
+        );
         sch.switchContextTo(CTRLTHREAD);// give control to the control thread first so it acquires the lock
         sch.proceed(// allow thread4 to proceed alone
             THREAD4
