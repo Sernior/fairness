@@ -16,14 +16,15 @@ option(LIBFSM_COMPILE_TESTS "Build the libfsm tests" OFF)
 
 option(LIBFSM_COMPILE_BENCHMARKS "Build the libfsm tests" OFF)
 
+add_library(tp INTERFACE)# testing
+target_include_directories(tp INTERFACE thread-pool)
+target_compile_features(tp INTERFACE cxx_std_20)
+
 if(LIBFSM_COMPILE_TESTS)
     add_subdirectory(tests)
 endif()
 
 if(LIBFSM_COMPILE_BENCHMARKS)
-    add_library(tp INTERFACE)
-    target_include_directories(tp INTERFACE thread-pool)
-    target_compile_features(tp INTERFACE cxx_std_20)
     add_subdirectory(benchmarks)
 endif()
 
@@ -31,4 +32,4 @@ set(SOURCE_LIST
     main.cpp)
 
 add_executable(test ${SOURCE_LIST})
-target_link_libraries(test PRIVATE fsm) 
+target_link_libraries(test PRIVATE fsm tp) 

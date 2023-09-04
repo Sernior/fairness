@@ -43,15 +43,24 @@ TEST(PriorityMutex_ControlledScheduling, TryLockTest) {
 //    PMscenario4::expected.clear();
 //}
 
+#define RANDOM_TESTS 20000000
+
 TEST(PriorityMutex_ControlledScheduling, RandomizedPriorityTest) {
     bool condition = true;
-    // for (int i = 0; i < 20000000; i++) {
+    for (int i = 0; i < RANDOM_TESTS; i++) {
         PMscenario5::executeSchedulingSequence();
         condition &= std::is_sorted(PMscenario5::ret.cbegin(), PMscenario5::ret.cend());
+
+        if (condition && i % 100 == 0){
+            std::cout << i << std::endl; 
+        }
+
         PMscenario5::ret.clear();
-    // }
+    }
     EXPECT_TRUE(condition);
 }
+
+#undef RANDOM_TESTS
 
 TEST(SharedPriorityMutex_ControlledScheduling, LockUnlockTest) {
     SPMscenario1::executeSchedulingSequence();
