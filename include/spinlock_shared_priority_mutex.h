@@ -22,35 +22,37 @@
 
 namespace PrioSync{// the name has yet to be chosen
 
+    using Thr_cnt_t = uint32_t;
+
     /**
      * @brief The priority_mutex is an advanced synchronization mechanism that enhances the traditional mutex by introducing a priority-based approach.
      * 
      * @tparam N : number of 0 indexed priorities the priority_mutex manages, up to _max_priority.
      */
     template<Priority_t N = 1, typename = std::enable_if_t<(N >= 1 && N <= _max_priority)>>
-    class spinlock_priority_mutex{
+    class spinlock_shared_priority_mutex{
 
         using Thread_cnt_t = uint32_t;
 
         public:
 
         /// @private
-        spinlock_priority_mutex() = default;
+        spinlock_shared_priority_mutex() = default;
 
         /// @private
-        spinlock_priority_mutex(const spinlock_priority_mutex&) = delete;
+        spinlock_shared_priority_mutex(const spinlock_shared_priority_mutex&) = delete;
 
         /// @private
-        spinlock_priority_mutex& operator=(const spinlock_priority_mutex&) = delete;
+        spinlock_shared_priority_mutex& operator=(const spinlock_shared_priority_mutex&) = delete;
 
         /// @private
-        spinlock_priority_mutex(spinlock_priority_mutex&&) = delete;
+        spinlock_shared_priority_mutex(spinlock_shared_priority_mutex&&) = delete;
 
         /// @private
-        spinlock_priority_mutex& operator=(spinlock_priority_mutex&&) = delete;
+        spinlock_shared_priority_mutex& operator=(spinlock_shared_priority_mutex&&) = delete;
 
         /// @private
-        ~spinlock_priority_mutex() = default;
+        ~spinlock_shared_priority_mutex() = default;
 
         /**
          * @brief Try to acquire the unique ownership of the priority_mutex, blocking the thread if the priority_mutex was already owned or other threads are waiting with higher priority.
@@ -64,14 +66,21 @@ namespace PrioSync{// the name has yet to be chosen
          */
         void lock(Priority_t const priority = 0){
             Priority_t localCurrentPriority = currentPriority_.load(std::memory_order_relaxed);
+            Thr_cnt_t localTotalCurrentReaders = tot_current_readers_.load(std::memory_order_relaxed);
             waiters_[priority].fetch_add(1, std::memory_order_relaxed);
+            waiters_waiters_[priority].fetch_add(1, std::memory_order_relaxed);
             while ( 
+                (localTotalCurrentReaders != 0 || !tot_current_readers_.compare_exchange_weak(localTotalCurrentReaders, 0, std::memory_order_relaxed)) ||
                 (localCurrentPriority < priority || !currentPriority_.compare_exchange_weak(localCurrentPriority, priority, std::memory_order_relaxed)) ||
                 (lockOwned_.test_and_set(std::memory_order_acquire))
             ){
                 lockOwned_.wait(true);
+                if (localTotalCurrentReaders != 0)
+                    tot_current_readers_.wait(localTotalCurrentReaders);
                 localCurrentPriority = currentPriority_;
+                localTotalCurrentReaders = tot_current_readers_;
             }
+            waiters_waiters_[priority].fetch_sub(1, std::memory_order_relaxed);
             waiters_[priority].fetch_sub(1, std::memory_order_relaxed);
         }
 
@@ -102,21 +111,63 @@ namespace PrioSync{// the name has yet to be chosen
          * @return bool 
          */
         [[nodiscard]] bool try_lock(Priority_t const priority = 0){
-            /*
-            Priority_t localCurrentPriority = currentPriority_.load(std::memory_order_relaxed);
-            bool ret;
-            while (ret = (localCurrentPriority >= priority && !lockOwned_.test())){
-                if (currentPriority_.compare_exchange_strong(localCurrentPriority, localCurrentPriority))break;
-                continue;
-            }
-            if (ret) lockOwned_.test_and_set();
+            return (tot_current_readers_.load(std::memory_order_relaxed) == 0 && currentPriority_.load(std::memory_order_relaxed) >= priority && !lockOwned_.test_and_set(std::memory_order_acquire));
+        }
+
+        /**
+         * @brief Try to acquire the shared ownership of the shared_priority_mutex, blocking the thread if the shared_priority_mutex was already uniquely owned or if another thread is waiting for unique ownership with higher priority.
+         * 
+         * @param priority used to set a priority for this thread to aquire the lock_shared.
+         * 
+         * \code{.cpp}
+         * shared_priority_mutex<10> m;
+         * m.lock_shared(9);
+         * \endcode
+         */
+        void lock_shared(Priority_t priority = 0){
+            return ;
+        }
+
+        /**
+         * @brief Release the shared_priority_mutex from shared ownership.
+         * 
+         * \code{.cpp}
+         * shared_priority_mutex<10> m;
+         * m.lock_shared(9);
+         * m.unlock_shared();
+         * \endcode
+         */
+        void unlock_shared(){
+                tot_current_readers_.fetch_sub(1);
+                minWriterPriority_.store(_find_first_priority_with_writers());
+                minWriterPriority_.notify_all();
+                tot_current_readers_.notify_all();
+        }
+
+        /**
+         * @brief Try to acquire the shared ownership of the shared_priority_mutex, if successful will return true, false otherwise.
+         * 
+         * @param priority used to set a priority for this thread to aquire the lock_shared.
+         * 
+         * \code{.cpp}
+         * shared_priority_mutex<10> m;
+         * m.try_lock_shared(9);
+         * \endcode
+         * @return bool 
+         */
+        [[nodiscard]] bool try_lock_shared(Priority_t priority = 0){
+            tot_current_readers_.fetch_add(1);
+            bool ret = minWriterPriority_ >= priority && !lockOwned_.test();
+            if (!ret) tot_current_readers_.fetch_sub(1);
             return ret;
-            */
-            return (currentPriority_.load(std::memory_order_relaxed) >= priority && !lockOwned_.test_and_set(std::memory_order_acquire));
         }
 
         private:
-        std::array<std::atomic<uint32_t>, N> waiters_;
+        std::array<std::atomic<Thr_cnt_t>, N> waiters_;
+        std::array<std::atomic<Thr_cnt_t>, N> writer_waiters_;
+        std::atomic<Thr_cnt_t> tot_current_readers_;
+
+        std::atomic<Priority_t> minWriterPriority_{_max_priority};
         std::atomic<Priority_t> currentPriority_{_max_priority};
         std::atomic_flag lockOwned_;
 
@@ -127,5 +178,14 @@ namespace PrioSync{// the name has yet to be chosen
             }
             return _max_priority;
         }
+
+        Priority_t _find_first_priority_with_writers(){
+            for (Priority_t i = 0; i <  N; i++){
+                if (_priorities[i].writer_waiters_ > 0)
+                    return i;
+            }
+            return _max_priority;
+        }
+
     };
 }

@@ -246,10 +246,6 @@ namespace PrioSync{// the name has yet to be chosen
                 p.thread_queue.notify_all();
         }
 
-        bool _lock_is_owned_by_me(){
-            return std::this_thread::get_id() == _owner;
-        }
-
         bool _lock_is_owned(){
             return std::thread::id() != _owner;
         }
