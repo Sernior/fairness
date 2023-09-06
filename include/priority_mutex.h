@@ -26,7 +26,8 @@ namespace PrioSync{// the name has yet to be chosen
      * 
      * @tparam N : number of 0 indexed priorities the priority_mutex manages, up to _max_priority.
      */
-    template<Priority_t N = 1, typename = std::enable_if_t<(N >= 1 && N <= _max_priority)>>
+    template<Priority_t N = 1>
+    requires (N >= 1 && N <= _max_priority)
     class priority_mutex{
 
         using Thread_cnt_t = uint32_t;

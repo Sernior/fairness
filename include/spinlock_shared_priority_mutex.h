@@ -18,6 +18,7 @@
 #include <chrono>
 #include <thread>
 #include "priority_t.h"
+#include "spinlock_priority_mutex.h"
 #include <mutex>
 
 namespace PrioSync{// the name has yet to be chosen
@@ -29,7 +30,8 @@ namespace PrioSync{// the name has yet to be chosen
      * 
      * @tparam N : number of 0 indexed priorities the priority_mutex manages, up to _max_priority.
      */
-    template<Priority_t N = 1, typename = std::enable_if_t<(N >= 1 && N <= _max_priority)>>
+    template<size_t N = 1>
+    requires (N >= 1 && N <= _max_priority)
     class spinlock_shared_priority_mutex{
 
         using Thread_cnt_t = uint32_t;
@@ -65,6 +67,31 @@ namespace PrioSync{// the name has yet to be chosen
          * \endcode
          */
         void lock(Priority_t const priority = 0){
+            Thr_cnt_t localTotalCurrentReaders = tot_current_readers_.load(std::memory_order_relaxed);;
+            internalMtx_.lock(priority);
+            waiters_waiters_[priority]++;
+            for (;;){
+
+                if (
+                    localTotalCurrentReaders == 0 && tot_current_readers_.compare_exchange_weak(localTotalCurrentReaders, 0, std::memory_order_relaxed, std::memory_order_relaxed) &&
+                    lockOwned_.test_and_set(std::memory_order_relaxed)
+                ){
+                    waiters_waiters_[priority]--;
+                    break;
+                }
+
+                internalMtx_.unlock();
+
+                lockOwned_.wait(true);
+
+                if (localTotalCurrentReaders != 0)
+                    tot_current_readers_.wait(localTotalCurrentReaders);// maybe should be a flag
+
+                internalMtx_.lock(priority);
+
+            }
+            internalMtx_.unlock();
+            /*
             Priority_t localCurrentPriority = currentPriority_.load(std::memory_order_relaxed);
             Thr_cnt_t localTotalCurrentReaders = tot_current_readers_.load(std::memory_order_relaxed);
             waiters_[priority].fetch_add(1, std::memory_order_relaxed);
@@ -81,7 +108,7 @@ namespace PrioSync{// the name has yet to be chosen
                 localTotalCurrentReaders = tot_current_readers_;
             }
             waiters_waiters_[priority].fetch_sub(1, std::memory_order_relaxed);
-            waiters_[priority].fetch_sub(1, std::memory_order_relaxed);
+            waiters_[priority].fetch_sub(1, std::memory_order_relaxed);*/
         }
 
         /**
@@ -110,7 +137,7 @@ namespace PrioSync{// the name has yet to be chosen
          * \endcode
          * @return bool 
          */
-        [[nodiscard]] bool try_lock(Priority_t const priority = 0){
+        [[nodiscard]] bool try_lock(Priority_t const priority = 0){ // friend spinlock_priority
             return (tot_current_readers_.load(std::memory_order_relaxed) == 0 && currentPriority_.load(std::memory_order_relaxed) >= priority && !lockOwned_.test_and_set(std::memory_order_acquire));
         }
 
@@ -125,7 +152,13 @@ namespace PrioSync{// the name has yet to be chosen
          * \endcode
          */
         void lock_shared(Priority_t priority = 0){
-            return ;
+            Priority_t localMinWriterPriority = minWriterPriority_.load(std::memory_order_relaxed);
+            while (
+                (localMinWriterPriority < priority) ||
+                lockOwned_.test(std::memory_order_acquire)
+            ){
+                
+            }
         }
 
         /**
@@ -163,21 +196,13 @@ namespace PrioSync{// the name has yet to be chosen
         }
 
         private:
-        std::array<std::atomic<Thr_cnt_t>, N> waiters_;
-        std::array<std::atomic<Thr_cnt_t>, N> writer_waiters_;
-        std::atomic<Thr_cnt_t> tot_current_readers_;
+        std::array<Thr_cnt_t, N> writer_waiters_;
+        std::atomic<Thr_cnt_t> tot_current_readers_;//
+        std::atomic<Priority_t> minWriterPriority_{_max_priority};//
+        std::atomic_flag lockOwned_;//
 
-        std::atomic<Priority_t> minWriterPriority_{_max_priority};
-        std::atomic<Priority_t> currentPriority_{_max_priority};
-        std::atomic_flag lockOwned_;
+        spinlock_priority_mutex<N> internalMtx_;
 
-        Priority_t find_first_priority_(){
-            for (Priority_t i = 0; i < N; i++){
-                if (waiters_[i] > 0)
-                    return i;
-            }
-            return _max_priority;
-        }
 
         Priority_t _find_first_priority_with_writers(){
             for (Priority_t i = 0; i <  N; i++){
@@ -189,3 +214,27 @@ namespace PrioSync{// the name has yet to be chosen
 
     };
 }
+
+/*
+
+wait_internal(p){
+    while (!lp || !p.ce)
+    wait(lp)
+    lp = p
+}
+
+p1 p2 p3
+
+lp1 = p1
+
+for(;;){
+
+}
+
+while (!lp1 || !p1.ce)
+
+
+
+
+*/
+

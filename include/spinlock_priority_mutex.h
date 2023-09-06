@@ -27,7 +27,8 @@ namespace PrioSync{// the name has yet to be chosen
      * 
      * @tparam N : number of 0 indexed priorities the priority_mutex manages, up to _max_priority.
      */
-    template<Priority_t N = 1, typename = std::enable_if_t<(N >= 1 && N <= _max_priority)>>
+    template<size_t N = 1>
+    requires (N >= 1 && N <= _max_priority)
     class spinlock_priority_mutex{
 
         using Thread_cnt_t = uint32_t;
@@ -85,8 +86,8 @@ namespace PrioSync{// the name has yet to be chosen
          * \endcode
          */
         void unlock(){
-            currentPriority_.store(find_first_priority_(), std::memory_order_relaxed);
             lockOwned_.clear(std::memory_order_release);
+            currentPriority_.store(find_first_priority_(), std::memory_order_relaxed);
             lockOwned_.notify_all();//P2616R3 https://www.open-std.org/jtc1/sc22/wg21/docs/papers/2023/p2616r3.html this shouldnt be a problem with mutex semantics
         }
 

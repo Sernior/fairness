@@ -6,7 +6,7 @@
 #include <algorithm>
 #include <BS_thread_pool.hpp>
 
-static PrioSync::spinlock_priority_mutex<4> ms;
+static PrioSync::spinlock_priority_mutex<8> ms;
 #define NOW std::chrono::steady_clock::now()
 
 void threadFunction(PrioSync::Priority_t prio) {
@@ -43,7 +43,7 @@ int main()
 
     BS::thread_pool pool(8);
 
-    for (int j = 0; j < 2000000; j++){
+    for (int j = 0; j < 200; j++){
         for (int i = 0; i < 8; i++){
             pool.push_task(thread_function_nano, prios[i], preCT[i], CT, postCT[i]);
         }
