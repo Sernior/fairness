@@ -1,12 +1,13 @@
 #include <iostream>
 #include <thread>
 #include <spinlock_priority_mutex.h>
+#include <experimental_priority_mutex.h>
 #include <chrono>
 #include <vector>
 #include <algorithm>
 #include <BS_thread_pool.hpp>
 
-static PrioSync::spinlock_priority_mutex<8> ms;
+static PrioSync::experimental_priority_mutex<8> ms;
 #define NOW std::chrono::steady_clock::now()
 
 void threadFunction(PrioSync::Priority_t prio) {
