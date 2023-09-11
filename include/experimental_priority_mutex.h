@@ -18,14 +18,13 @@
 #include <chrono>
 #include <thread>
 #include <mutex>
-
+#include "priority_t.h"
 namespace PrioSync{// the name has yet to be chosen
 
     //NO DWCAS
-    using priority_t = uint8_t;
-    static constexpr priority_t max_priority_ = 7; // NO DWCAS
+
     struct control_block_t{ // templarize
-        int8_t owned_ = max_priority_;// first bit owned remaining 7 bit is the current priority
+        int8_t owned_ = 7;// first bit owned remaining 7 bit is the current priority
         uint8_t priority_[7];
     };
 
@@ -91,7 +90,7 @@ namespace PrioSync{// the name has yet to be chosen
                 if (!lockOwned_(localCtrl.owned_) && priority <= localCtrl.owned_ && ctrl_.compare_exchange_weak(localCtrl, localCtrlModified)){ //benchmark vs strong
                     break;
                 }
-                waiters_[priority].wait(false); // UB if the cew fails and the first thread with fails randomly we deadlock
+                waiters_[priority].wait(false); // UB if the cew fails randomly we deadlock maybe we should use strong
                 localCtrl = ctrl_.load();
             }
 
@@ -117,13 +116,13 @@ namespace PrioSync{// the name has yet to be chosen
          * \endcode
          */
         void unlock(){
-            priority_t localFirstPriority;
+            Priority_t localFirstPriority;
             control_block_t localCtrl = ctrl_.load();
             control_block_t localCtrlModified;
             for (;;){
                 reset_();
                 localCtrlModified = localCtrl;
-                localFirstPriority = find_first_priority_();
+                localFirstPriority = find_first_priority_(localCtrl);
                 localCtrlModified.owned_ = localFirstPriority;
                 if (localFirstPriority < N){
                     waiters_[localFirstPriority].test_and_set();
@@ -162,16 +161,16 @@ namespace PrioSync{// the name has yet to be chosen
                 waiters_[i].clear();
         }
 
-        Priority_t find_first_priority_(){
+        Priority_t find_first_priority_(control_block_t const& ctrl){// try use a non atomic parameter instead
             for (Priority_t i = 0; i < N; i++){
-                if (ctrl_.load().priority_[i] > 0)
+                if (ctrl.priority_[i] > 0)
                     return i;
             }
             return 7;
         }
 
-        bool lockOwned_(int8_t ctrl1) const{
-            return ctrl1 < 0;
+        bool lockOwned_(int8_t ctrl) const{
+            return ctrl < 0;
         }
 
     };

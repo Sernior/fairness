@@ -1,11 +1,11 @@
-#include <spinlock_priority_mutex.h>
+#include <experimental_priority_mutex.h>
 #include <DeterministicConcurrency>
 #include <vector>
 
 namespace PMscenario1{
     using namespace DeterministicConcurrency;
 
-    PrioSync::spinlock_priority_mutex<5> m;
+    PrioSync::experimental_priority_mutex<5> m;
 
     std::vector<int> ret;
 

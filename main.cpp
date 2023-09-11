@@ -28,7 +28,7 @@ static void busy_wait_nano(uint64_t nanoseconds){
 static void thread_function_nano(int p, int preCriticalTime, int criticalTime, int postCriticalTime){
     busy_wait_nano(preCriticalTime);
     ms.lock(p);
-    std::cout << p;
+    //std::cout << p;
     busy_wait_nano(criticalTime);
     ms.unlock();
     busy_wait_nano(postCriticalTime);
@@ -50,7 +50,9 @@ int main()
             pool.push_task(thread_function_nano, prios[i], preCT[i], CT, postCT[i]);
         }
         pool.wait_for_tasks();
-        std::cout << std::endl;
+        if (j % 500 == 0)
+            std::cout << j << std::endl;
+        //std::cout << std::endl;
     }
 
     return 0;

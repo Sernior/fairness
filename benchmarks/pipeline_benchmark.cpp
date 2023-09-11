@@ -1,4 +1,5 @@
 #include <spinlock_priority_mutex.h>
+#include <experimental_priority_mutex.h>
 #include <vector>
 #include <chrono>
 #include <thread>
@@ -32,6 +33,47 @@ static void busy_wait_nano(uint32_t nanoseconds){
 namespace _PM_pipeline_benchmark{
 
     static PrioSync::spinlock_priority_mutex<4> m;
+
+    static void thread_function(int p, int preCriticalTime, int criticalTime, int postCriticalTime){
+        busy_wait_milli(preCriticalTime);
+        m.lock(p);
+        busy_wait_milli(criticalTime);
+        m.unlock();
+        busy_wait_milli(postCriticalTime);
+    }
+
+    static void thread_function_micro(int p, int preCriticalTime, int criticalTime, int postCriticalTime){
+        busy_wait_micro(preCriticalTime);
+        m.lock(p);
+        busy_wait_micro(criticalTime);
+        m.unlock();
+        busy_wait_micro(postCriticalTime);
+    }
+
+    static void thread_function_nano(int p, int preCriticalTime, int criticalTime, int postCriticalTime){
+        busy_wait_nano(preCriticalTime);
+        m.lock(p);
+        busy_wait_nano(criticalTime);
+        m.unlock();
+        busy_wait_nano(postCriticalTime);
+    }
+
+    static void thread_loop(DeterministicConcurrency::thread_context* c, int iterations, int p, int preCriticalTime, int criticalTime, int postCriticalTime){
+        for (;iterations > 0; iterations--){
+            c->switchContext();
+            busy_wait_nano(preCriticalTime);
+            m.lock(p);
+            busy_wait_nano(criticalTime);
+            m.unlock();
+            busy_wait_nano(postCriticalTime);
+        }
+    }
+
+}
+
+namespace _EXP_PM_pipeline_benchmark{
+
+    static PrioSync::experimental_priority_mutex<4> m;
 
     static void thread_function(int p, int preCriticalTime, int criticalTime, int postCriticalTime){
         busy_wait_milli(preCriticalTime);

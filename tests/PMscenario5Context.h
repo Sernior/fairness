@@ -1,4 +1,4 @@
-#include <spinlock_priority_mutex.h>
+#include <experimental_priority_mutex.h>
 #include <DeterministicConcurrency>
 #include <vector>
 #include <random>
@@ -6,13 +6,13 @@
 namespace PMscenario5{
     using namespace DeterministicConcurrency;
 
-    PrioSync::spinlock_priority_mutex<8> m;
+    PrioSync::experimental_priority_mutex<7> m;
 
     std::vector<int> ret;
 
     std::random_device rd;
     std::mt19937 gen(rd());
-    std::uniform_int_distribution<int> distribution(0, 7);
+    std::uniform_int_distribution<int> distribution(0, 6);
 
     void threadFunction(thread_context* c ,int i) {
         c->lock(&m,i);
