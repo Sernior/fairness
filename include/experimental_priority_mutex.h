@@ -22,13 +22,12 @@
 namespace PrioSync{// the name has yet to be chosen
 
     //NO DWCAS
-    struct control_block_t{ // templarize
-        int8_t owned_;// first bit owned remaining 7 bit is the current priority
-        bool priority_[7];
-    };
     using priority_t = uint8_t;
     static constexpr priority_t max_priority_ = 7; // NO DWCAS
-    
+    struct control_block_t{ // templarize
+        int8_t owned_ = max_priority_;// first bit owned remaining 7 bit is the current priority
+        uint8_t priority_[7];
+    };
 
     /**
      * @brief The priority_mutex is an advanced synchronization mechanism that enhances the traditional mutex by introducing a priority-based approach.
@@ -72,31 +71,40 @@ namespace PrioSync{// the name has yet to be chosen
          * \endcode
          */
         void lock(Priority_t const priority = 0){
+
             control_block_t localCtrl = ctrl_.load();
-            control_block_t localCtrlOwned;
-            waiters_[priority].fetch_add(1, std::memory_order_relaxed);
+            control_block_t localCtrlModified;
+
             for(;;){
-                localCtrlOwned = localCtrl;
-                localCtrlOwned.owned_ |= 0b10000000; 
-                if (!lockOwned_(localCtrl.owned_) && priority <= localCtrl.owned_ && ctrl_.compare_exchange_weak(localCtrl, localCtrlOwned)){
+                localCtrlModified = localCtrl;
+                localCtrlModified.priority_[priority]++;
+                if (ctrl_.compare_exchange_weak(localCtrl, localCtrlModified)){
                     break;
                 }
-                ((std::atomic_flag*)(&(ctrl_.load().priority_[priority])))->wait(false);
+            }
+
+            localCtrl = ctrl_.load();
+
+            for(;;){
+                localCtrlModified = localCtrl;
+                localCtrlModified.owned_ |= 0b10000000; 
+                if (!lockOwned_(localCtrl.owned_) && priority <= localCtrl.owned_ && ctrl_.compare_exchange_weak(localCtrl, localCtrlModified)){ //benchmark vs strong
+                    break;
+                }
+                waiters_[priority].wait(false); // UB if the cew fails and the first thread with fails randomly we deadlock
                 localCtrl = ctrl_.load();
             }
-            waiters_[priority].fetch_sub(1, std::memory_order_relaxed);
-            /*
-            Priority_t localCurrentPriority = currentPriority_.load(std::memory_order_relaxed);
-            waiters_[priority].fetch_add(1, std::memory_order_relaxed);
-            while ( 
-                (localCurrentPriority < priority || !currentPriority_.compare_exchange_weak(localCurrentPriority, priority, std::memory_order_relaxed)) ||
-                (lockOwned_.test_and_set(std::memory_order_acquire))
-            ){
-                lockOwned_.wait(true);
-                localCurrentPriority = currentPriority_;
+
+            localCtrl = ctrl_.load();
+
+            for(;;){
+                localCtrlModified = localCtrl;
+                localCtrlModified.priority_[priority]--;
+                if (ctrl_.compare_exchange_weak(localCtrl, localCtrlModified)){
+                    break;
+                }
             }
-            waiters_[priority].fetch_sub(1, std::memory_order_relaxed);
-            */
+
         }
 
         /**
@@ -109,16 +117,21 @@ namespace PrioSync{// the name has yet to be chosen
          * \endcode
          */
         void unlock(){
-            reset_();
-            priority_t localFirstPriority = find_first_priority_();
-            ((std::atomic<int8_t>*)(&(ctrl_.load().owned_))).store(localFirstPriority);
-            ((std::atomic_flag*)(&(ctrl_.load().priority_[localFirstPriority])))->test_and_set();
-            ((std::atomic_flag*)(&(ctrl_.load().priority_[localFirstPriority])))->notify_one();
-            /*
-            lockOwned_.clear(std::memory_order_relaxed);
-            currentPriority_.store(find_first_priority_(), std::memory_order_release);
-            lockOwned_.notify_all();//P2616R3 https://www.open-std.org/jtc1/sc22/wg21/docs/papers/2023/p2616r3.html this shouldnt be a problem with mutex semantics
-            */
+            priority_t localFirstPriority;
+            control_block_t localCtrl = ctrl_.load();
+            control_block_t localCtrlModified;
+            for (;;){
+                reset_();
+                localCtrlModified = localCtrl;
+                localFirstPriority = find_first_priority_();
+                localCtrlModified.owned_ = localFirstPriority;
+                if (localFirstPriority < N){
+                    waiters_[localFirstPriority].test_and_set();
+                    waiters_[localFirstPriority].notify_one();
+                }
+                if (ctrl_.compare_exchange_weak(localCtrl, localCtrlModified))
+                    break;
+            }
         }
 
         /**
@@ -139,27 +152,26 @@ namespace PrioSync{// the name has yet to be chosen
         }
 
         private:
-        std::array<std::atomic<Thread_cnt_t>, N> waiters_;
+        std::array<std::atomic_flag, N> waiters_;
         std::atomic<control_block_t> ctrl_;
         //std::atomic<Priority_t> currentPriority_{_max_priority};
         //std::atomic_flag lockOwned_;
 
+        void reset_(){
+            for (Priority_t i = 0; i < N; i++)
+                waiters_[i].clear();
+        }
 
         Priority_t find_first_priority_(){
             for (Priority_t i = 0; i < N; i++){
-                if (waiters_[i] > 0)
+                if (ctrl_.load().priority_[i] > 0)
                     return i;
             }
-            return _max_priority;
+            return 7;
         }
 
         bool lockOwned_(int8_t ctrl1) const{
             return ctrl1 < 0;
-        }
-
-        void reset_(){
-            for (Priority_t i = 0; i < N; i++)
-                ((std::atomic_flag*)(&(ctrl_.load().priority_[i])))->clear();
         }
 
     };
