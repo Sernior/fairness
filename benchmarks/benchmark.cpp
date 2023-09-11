@@ -2,6 +2,7 @@
 #include <priority_mutex.h>
 #include <spinlock_priority_mutex.h>
 #include <experimental_priority_mutex.h>
+#include <boost_experimental_priority_mutex.h>
 #include <shared_priority_mutex.h>
 #include <mutex>
 #include <shared_mutex>
@@ -27,6 +28,14 @@ static void SPINPM_LockUnlock(benchmark::State& state) {
 
 static void EXPPM_LockUnlock(benchmark::State& state) {
     PrioSync::experimental_priority_mutex m;
+    for (auto _ : state){
+        m.lock();
+        m.unlock();
+    }
+}
+
+static void BEXPPM_LockUnlock(benchmark::State& state) {
+    PrioSync::boost_experimental_priority_mutex m;
     for (auto _ : state){
         m.lock();
         m.unlock();
@@ -205,6 +214,7 @@ static void EXP_pipeline_benchmark_fast(benchmark::State& state) {
 BENCHMARK(PM_LockUnlock)->Threads(8);
 BENCHMARK(SPINPM_LockUnlock)->Threads(8);
 BENCHMARK(EXPPM_LockUnlock)->Threads(8);
+BENCHMARK(BEXPPM_LockUnlock)->Threads(8);
 BENCHMARK(STD_LockUnlock)->Threads(8);
 
 BENCHMARK(PM_S_LockUnlock);
