@@ -18,7 +18,6 @@
 #include <chrono>
 #include <thread>
 #include "priority_t.h"
-#include "spinlock_priority_mutex.h"
 #include <mutex>
 
 namespace PrioSync{// the name has yet to be chosen

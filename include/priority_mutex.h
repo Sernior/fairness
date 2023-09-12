@@ -13,11 +13,12 @@
  */
 #pragma once
 #include <thread>
-#include <mutex>
-#include <condition_variable>
+#include <atomic>
 #include <array>
-#include <stdexcept>
+#include <chrono>
+#include <thread>
 #include "priority_t.h"
+#include <mutex>
 
 namespace PrioSync{// the name has yet to be chosen
 
@@ -26,15 +27,11 @@ namespace PrioSync{// the name has yet to be chosen
      * 
      * @tparam N : number of 0 indexed priorities the priority_mutex manages, up to _max_priority.
      */
-    template<Priority_t N = 1>
+    template<size_t N = 1>
     requires (N >= 1 && N <= _max_priority)
     class priority_mutex{
 
         using Thread_cnt_t = uint32_t;
-        struct threadPriority{
-            Thread_cnt_t threads_waiting{};
-            std::condition_variable thread_queue;
-        };
 
         public:
 
@@ -66,18 +63,17 @@ namespace PrioSync{// the name has yet to be chosen
          * m.lock(9);
          * \endcode
          */
-        void lock(Priority_t priority = 0){
-
-            std::unique_lock<std::mutex> lock(_internalMtx);
-            auto& myPriority = _priorities[priority];
-
-            while (_lock_is_owned() || _find_first_priority(priority) < priority ){ 
-                myPriority.threads_waiting++;
-                myPriority.thread_queue.wait(lock);
-                myPriority.threads_waiting--;
+        void lock(Priority_t const priority = 0){
+            Priority_t localCurrentPriority = currentPriority_.load(std::memory_order_relaxed);
+            waiters_[priority].fetch_add(1, std::memory_order_relaxed);
+            while ( 
+                (localCurrentPriority < priority || !currentPriority_.compare_exchange_weak(localCurrentPriority, priority, std::memory_order_relaxed)) ||
+                (lockOwned_.test_and_set(std::memory_order_acquire))
+            ){
+                lockOwned_.wait(true);
+                localCurrentPriority = currentPriority_;
             }
-
-            _owner = std::this_thread::get_id();
+            waiters_[priority].fetch_sub(1, std::memory_order_relaxed);
         }
 
         /**
@@ -90,17 +86,9 @@ namespace PrioSync{// the name has yet to be chosen
          * \endcode
          */
         void unlock(){
-            Priority_t p;
-
-            {
-            std::lock_guard<std::mutex> lock(_internalMtx);
-            _owner = std::thread::id();
-            p = _find_first_priority();
-            }
-
-            if (p != _max_priority)
-                _priorities[p].thread_queue.notify_one();
-
+            currentPriority_.store(find_first_priority_(), std::memory_order_relaxed);
+            lockOwned_.clear(std::memory_order_release);
+            lockOwned_.notify_all();//P2616R3 https://www.open-std.org/jtc1/sc22/wg21/docs/papers/2023/p2616r3.html this shouldnt be a problem with mutex semantics
         }
 
         /**
@@ -114,37 +102,21 @@ namespace PrioSync{// the name has yet to be chosen
          * \endcode
          * @return bool 
          */
-        [[nodiscard]] bool try_lock(Priority_t priority = 0){
-
-            std::lock_guard<std::mutex> lock(_internalMtx);
-            auto max_p = _find_first_priority(priority);
-            if (_lock_is_owned() || max_p < priority)
-                return false;
-            _owner = std::this_thread::get_id();
-            return true;
+        [[nodiscard]] bool try_lock(Priority_t const priority = 0){
+            return (currentPriority_.load(std::memory_order_relaxed) >= priority && !lockOwned_.test_and_set(std::memory_order_acquire));
         }
 
-
         private:
-        std::mutex _internalMtx;
-        std::array<threadPriority, N> _priorities;
-        std::thread::id _owner{};
+        std::array<std::atomic<Thread_cnt_t>, N> waiters_;
+        std::atomic<Priority_t> currentPriority_{_max_priority};
+        std::atomic_flag lockOwned_;
 
-        Priority_t _find_first_priority(Priority_t priority = _max_priority){
-            for (Priority_t i = 0; i < ((priority == _max_priority) ? N : priority); i++){
-                if (_priorities[i].threads_waiting > 0)
+        Priority_t find_first_priority_(){
+            for (Priority_t i = 0; i < N; i++){
+                if (waiters_[i] > 0)
                     return i;
             }
             return _max_priority;
         }
-
-        bool _lock_is_owned_by_me(){
-            return std::this_thread::get_id() == _owner;
-        }
-
-        bool _lock_is_owned(){
-            return std::thread::id() != _owner;
-        }
-
     };
 }

@@ -1,5 +1,4 @@
-#include <spinlock_priority_mutex.h>
-#include <experimental_priority_mutex.h>
+#include <priority_mutex.h>
 #include <vector>
 #include <chrono>
 #include <thread>
@@ -7,6 +6,10 @@
 #include <BS_thread_pool.hpp>
 #include <DeterministicConcurrency>
 #define NOW std::chrono::steady_clock::now()
+
+#ifdef EXPERIMENTAL_MUTEXES
+#include <experimental_priority_mutex.h>
+#endif
 
 /*
 std::this_thread::sleep_for is too imprecise, and also I could make a bunch of variables during busy waiting to simulate heated cpu caches.
@@ -32,7 +35,7 @@ static void busy_wait_nano(uint32_t nanoseconds){
 
 namespace _PM_pipeline_benchmark{
 
-    static PrioSync::spinlock_priority_mutex<4> m;
+    static PrioSync::priority_mutex<4> m;
 
     static void thread_function(int p, int preCriticalTime, int criticalTime, int postCriticalTime){
         busy_wait_milli(preCriticalTime);
@@ -70,7 +73,7 @@ namespace _PM_pipeline_benchmark{
     }
 
 }
-
+#ifdef EXPERIMENTAL_MUTEXES
 namespace _EXP_PM_pipeline_benchmark{
 
     static PrioSync::experimental_priority_mutex<4> m;
@@ -111,7 +114,7 @@ namespace _EXP_PM_pipeline_benchmark{
     }
 
 }
-
+#endif
 namespace _STD_pipeline_benchmark{
 
     static std::mutex m;

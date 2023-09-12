@@ -11,6 +11,7 @@
  * Distributed under the Boost Software License, Version 1.0. (See accompanying file LICENSE_1_0.txt or copy at http://www.boost.org/LICENSE_1_0.txt).
  * 
  */
+#ifdef EXPERIMENTAL_MUTEXES
 #pragma once
 #include <thread>
 #include <atomic>
@@ -18,7 +19,7 @@
 #include <chrono>
 #include <thread>
 #include <mutex>
-#include "priority_t.h"
+#include "../priority_t.h"
 namespace PrioSync{// the name has yet to be chosen
 
     //NO DWCAS
@@ -90,7 +91,7 @@ namespace PrioSync{// the name has yet to be chosen
                 if (!lockOwned_(localCtrl.owned_) && priority <= localCtrl.owned_ && ctrl_.compare_exchange_weak(localCtrl, localCtrlModified)){ //benchmark vs strong
                     break;
                 }
-                waiters_[priority].wait(false); // UB if the cew fails randomly we deadlock maybe we should use strong
+                waiters_[priority].wait(false); // we should spin a bit before this one wait as we are not waiting on a lock owned like being
                 localCtrl = ctrl_.load();
             }
 
@@ -175,3 +176,4 @@ namespace PrioSync{// the name has yet to be chosen
 
     };
 }
+#endif

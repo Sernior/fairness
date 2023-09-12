@@ -3,8 +3,14 @@ cmake_minimum_required(VERSION 3.14.0)
 set(PROJ_NAME "Fair_Shared_Mutex")
 project(${PROJ_NAME} VERSION 0.0.0 LANGUAGES CXX)
 
+option(LIBFSM_EXPERIMENTAL "Add experimental mutexes" OFF)
+
 add_library(fsm INTERFACE)
 target_include_directories(fsm INTERFACE include)
+if(LIBFSM_EXPERIMENTAL)
+target_include_directories(fsm INTERFACE include/experimental)
+add_compile_definitions(EXPERIMENTAL_MUTEXES)
+endif()
 target_compile_features(fsm INTERFACE cxx_std_20)
 
 set(CMAKE_CXX_STANDARD 20)
@@ -15,6 +21,8 @@ endif ()
 option(LIBFSM_COMPILE_TESTS "Build the libfsm tests" OFF)
 
 option(LIBFSM_COMPILE_BENCHMARKS "Build the libfsm tests" OFF)
+
+option(LIBFSM_EXPERIMENTAL "add experimental mutexes" OFF)
 
 add_library(tp INTERFACE)# testing
 target_include_directories(tp INTERFACE thread-pool)

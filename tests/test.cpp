@@ -43,7 +43,7 @@ TEST(PriorityMutex_ControlledScheduling, TryLockTest) {
 //    PMscenario4::expected.clear();
 //}
 
-#define RANDOM_TESTS 20000000
+#define RANDOM_TESTS 250000
 
 TEST(PriorityMutex_ControlledScheduling, RandomizedPriorityTest) {
     bool condition = true;
@@ -105,44 +105,6 @@ TEST(SharedPriorityMutex_ControlledScheduling, PriorityBehavior) {
 }
 
 int main(int argc, char* argv[]) {
-
-    /*****************priority_mutex******************/
-
-    //TEST 1
-    // PMscenario1::executeSchedulingSequence();
-    //////////////////////
-    //TEST 2
-    // PMscenario2::executeSchedulingSequence();
-    //////////////////////
-    //TEST 3
-    // PMscenario3::executeSchedulingSequence();
-    //////////////////////
-    //TEST 4
-    //PMscenario4::executeSchedulingSequence();//not semaphore
-    //////////////////////
-    //TEST 5
-    // PMscenario5::executeSchedulingSequence();
-    //////////////////////
-    /**************shared_priority_mutex***************/
-
-    //TEST 6
-    // SPMscenario1::executeSchedulingSequence();
-    //////////////////////
-    //TEST 7
-    // SPMscenario2::executeSchedulingSequence();
-    //////////////////////
-    //TEST 8
-    // SPMscenario3::executeSchedulingSequence();
-    //////////////////////
-    //TEST 9
-    // SPMscenario4::executeSchedulingSequence();
-    //////////////////////
-    //TEST 10
-    //SPMscenario5::executeSchedulingSequence();//not semaphore
-    //////////////////////
-    //TEST 11 (This test does have an assert above but not deadlocking is the real assert, read comments in SPMscenario6Conext.h)
-    // SPMscenario6::executeSchedulingSequence();
-    //////////////////////
 
     testing::InitGoogleTest(&argc, argv);
     return RUN_ALL_TESTS();

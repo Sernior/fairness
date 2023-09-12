@@ -1,4 +1,4 @@
-#include <experimental_priority_mutex.h>
+#include <priority_mutex.h>
 #include <DeterministicConcurrency>
 #include <vector>
 #include <random>
@@ -6,7 +6,7 @@
 namespace PMscenario5{
     using namespace DeterministicConcurrency;
 
-    PrioSync::experimental_priority_mutex<7> m;
+    PrioSync::priority_mutex<7> m;
 
     std::vector<int> ret;
 

@@ -1,13 +1,15 @@
 #include <iostream>
 #include <thread>
-#include <spinlock_priority_mutex.h>
+#ifdef EXPERIMENTAL_MUTEXES
 #include <experimental_priority_mutex.h>
+#endif
+#include <priority_mutex.h>
 #include <chrono>
 #include <vector>
 #include <algorithm>
 #include <BS_thread_pool.hpp>
 
-static PrioSync::experimental_priority_mutex<4> ms;
+static PrioSync::priority_mutex<4> ms;
 #define NOW std::chrono::steady_clock::now()
 
 void threadFunction(PrioSync::Priority_t prio) {
@@ -45,7 +47,7 @@ int main()
 
     BS::thread_pool pool(8);
 
-    for (int j = 0; j < 2000000; j++){
+    for (int j = 0; j < 200000; j++){
         for (int i = 0; i < 8; i++){
             pool.push_task(thread_function_nano, prios[i], preCT[i], CT, postCT[i]);
         }
