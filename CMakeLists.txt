@@ -40,4 +40,4 @@ set(SOURCE_LIST
     main.cpp)
 
 add_executable(test ${SOURCE_LIST})
-target_link_libraries(test PRIVATE fsm tp) 
+target_link_libraries(test PRIVATE fsm tp)

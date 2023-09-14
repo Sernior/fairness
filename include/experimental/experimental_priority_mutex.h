@@ -23,11 +23,32 @@
 namespace PrioSync{// the name has yet to be chosen
 
     //NO DWCAS
-
-    struct control_block_t{ // templarize
+    struct control_block_t{ 
         int8_t owned_ = 7;// first bit owned remaining 7 bit is the current priority
         uint8_t priority_[7];
+        control_block_t setOwned() const {
+            control_block_t new_ctrl = *this;
+            new_ctrl.owned_ |= 0b10000000;
+            return new_ctrl;
+        }
+        control_block_t increasePriority(Priority_t const priority) const {
+            control_block_t new_ctrl = *this;
+            new_ctrl.priority_[priority]++;
+            return new_ctrl;
+        }
+        control_block_t decreasePriority(Priority_t const priority) const {
+            control_block_t new_ctrl = *this;
+            new_ctrl.priority_[priority]--;
+            return new_ctrl;
+        }
+        control_block_t setPriority(Priority_t const priority) const {
+            control_block_t new_ctrl = *this;
+            new_ctrl.owned_ = priority;
+            return new_ctrl;
+        }
     };
+
+    static_assert(std::atomic<control_block_t>::is_always_lock_free, "control_block_t is not lock free");
 
     /**
      * @brief The priority_mutex is an advanced synchronization mechanism that enhances the traditional mutex by introducing a priority-based approach.
@@ -73,34 +94,29 @@ namespace PrioSync{// the name has yet to be chosen
         void lock(Priority_t const priority = 0){
 
             control_block_t localCtrl = ctrl_.load();
-            control_block_t localCtrlModified;
 
             for(;;){
-                localCtrlModified = localCtrl;
-                localCtrlModified.priority_[priority]++;
-                if (ctrl_.compare_exchange_weak(localCtrl, localCtrlModified)){
+                if (localCtrl.priority_[priority] == uint8_t(-1)){
+                    localCtrl = ctrl_.load();
+                    continue;
+                }
+                if (ctrl_.compare_exchange_weak(localCtrl, localCtrl.increasePriority(priority))){
                     break;
                 }
             }
 
-            localCtrl = ctrl_.load();
-
             for(;;){
-                localCtrlModified = localCtrl;
-                localCtrlModified.owned_ |= 0b10000000; 
-                if (!lockOwned_(localCtrl.owned_) && priority <= localCtrl.owned_ && ctrl_.compare_exchange_weak(localCtrl, localCtrlModified)){ //benchmark vs strong
-                    break;
-                }
-                waiters_[priority].wait(false); // we should spin a bit before this one wait as we are not waiting on a lock owned like being
                 localCtrl = ctrl_.load();
+                if (!lockOwned_(localCtrl.owned_) && priority <= localCtrl.owned_ && ctrl_.compare_exchange_strong(localCtrl, localCtrl.setOwned())){
+                    break;
+                }
+                waiters_[priority].wait(false);
             }
 
             localCtrl = ctrl_.load();
 
             for(;;){
-                localCtrlModified = localCtrl;
-                localCtrlModified.priority_[priority]--;
-                if (ctrl_.compare_exchange_weak(localCtrl, localCtrlModified)){
+                if (ctrl_.compare_exchange_weak(localCtrl, localCtrl.decreasePriority(priority))){
                     break;
                 }
             }
@@ -118,18 +134,16 @@ namespace PrioSync{// the name has yet to be chosen
          */
         void unlock(){
             Priority_t localFirstPriority;
-            control_block_t localCtrl = ctrl_.load();
-            control_block_t localCtrlModified;
+            control_block_t localCtrl;
             for (;;){
                 reset_();
-                localCtrlModified = localCtrl;
+                localCtrl = ctrl_.load();
                 localFirstPriority = find_first_priority_(localCtrl);
-                localCtrlModified.owned_ = localFirstPriority;
                 if (localFirstPriority < N){
                     waiters_[localFirstPriority].test_and_set();
                     waiters_[localFirstPriority].notify_one();
                 }
-                if (ctrl_.compare_exchange_weak(localCtrl, localCtrlModified))
+                if (ctrl_.compare_exchange_weak(localCtrl, localCtrl.setPriority(localFirstPriority)))
                     break;
             }
         }
@@ -154,10 +168,8 @@ namespace PrioSync{// the name has yet to be chosen
         private:
         std::array<std::atomic_flag, N> waiters_;
         std::atomic<control_block_t> ctrl_;
-        //std::atomic<Priority_t> currentPriority_{_max_priority};
-        //std::atomic_flag lockOwned_;
 
-        void reset_(){
+        void reset_(){ // there probably is a much better way to do this
             for (Priority_t i = 0; i < N; i++)
                 waiters_[i].clear();
         }
