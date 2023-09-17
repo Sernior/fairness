@@ -4,13 +4,20 @@ set(PROJ_NAME "Fair_Shared_Mutex")
 project(${PROJ_NAME} VERSION 0.0.0 LANGUAGES CXX)
 
 option(LIBFSM_EXPERIMENTAL "Add experimental mutexes" OFF)
+option(Boost_FOUND "Boost found" OFF)
 
 add_library(fsm INTERFACE)
 target_include_directories(fsm INTERFACE include)
-if(LIBFSM_EXPERIMENTAL)
+
+if(LIBFSM_EXPERIMENTAL)#experimental stuff
 target_include_directories(fsm INTERFACE include/experimental)
 add_compile_definitions(EXPERIMENTAL_MUTEXES)
 endif()
+
+if(Boost_FOUND)#if boost is found for boost atomic
+add_compile_definitions(BOOST_FOUND)
+endif()
+
 target_compile_features(fsm INTERFACE cxx_std_20)
 
 set(CMAKE_CXX_STANDARD 20)

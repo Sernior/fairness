@@ -9,17 +9,12 @@
 #include <algorithm>
 #include <BS_thread_pool.hpp>
 
-static PrioSync::priority_mutex<4> ms;
+#include <boost/atomic.hpp>
+#include <slim_priority_mutex.h>
+
+static PrioSync::slim_priority_mutex<13> ms;
 #define NOW std::chrono::steady_clock::now()
 
-void threadFunction(PrioSync::Priority_t prio) {
-
-    ms.lock(prio);
-
-    std::cout << "Thread : " << int(prio) << " is crit." << std::endl;
-    
-    ms.unlock();
-}
 
 static void busy_wait_nano(uint64_t nanoseconds){
     auto begin = NOW;
@@ -35,8 +30,6 @@ static void thread_function_nano(int p, int preCriticalTime, int criticalTime, i
     ms.unlock();
     busy_wait_nano(postCriticalTime);
 }
-
-
 
 int main()
 {
