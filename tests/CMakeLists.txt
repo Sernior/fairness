@@ -8,6 +8,10 @@ PMscenario2Context.h
 PMscenario3Context.h
 PMscenario4Context.h
 PMscenario5Context.h
+PMscenario6Context.h
+PMscenario7Context.h
+PMscenario8Context.h
+PMscenario9Context.h
 SPMscenario1Context.h
 SPMscenario2Context.h
 SPMscenario3Context.h
