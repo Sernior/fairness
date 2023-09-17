@@ -6,13 +6,13 @@
 #include "pipeline_benchmark.cpp"
 #include <BS_thread_pool.hpp>
 #include <DeterministicConcurrency>
-
+#include <slim_priority_mutex.h>
 #ifdef EXPERIMENTAL_MUTEXES
 #include <experimental_priority_mutex.h>
 #endif
 
 static void PM_LockUnlock(benchmark::State& state) {
-    PrioSync::priority_mutex<10> m;
+    PrioSync::priority_mutex m;
     for (auto _ : state){
         m.lock();
         m.unlock();
@@ -27,6 +27,14 @@ static void EXPPM_LockUnlock(benchmark::State& state) {
     }
 }
 #endif
+static void SLMPM_LockUnlock(benchmark::State& state) {
+    PrioSync::slim_priority_mutex m;
+    for (auto _ : state){
+        m.lock();
+        m.unlock();
+    }
+}
+
 static void STD_LockUnlock(benchmark::State& state) {
     std::mutex m;
     for (auto _ : state){
@@ -160,6 +168,17 @@ static void EXP_pipeline_benchmark_audio(benchmark::State& state) {
     }
 }
 #endif
+static void SLM_pipeline_benchmark_audio(benchmark::State& state) {
+    std::array<int, 8> prios {0, 2, 2, 1, 1, 3, 3, 0};
+    std::array<int, 8> preCT {200, 150, 200, 300, 100, 50, 50, 200};
+    int CT = 100;
+    std::array<int, 8> postCT {500, 300, 200, 250, 100, 150, 150, 450};
+
+    for (auto _ : state) {
+      _SLM_PM_pipeline_benchmark::thread_function_micro(prios[state.thread_index()] ,preCT[state.thread_index()], CT, postCT[state.thread_index()]);
+    }
+}
+
 static void STD_pipeline_benchmark_fast(benchmark::State& state) {
     std::array<int, 8> prios {0, 2, 2, 1, 1, 3, 3, 0};
     std::array<int, 8> preCT {2000, 1500, 2000, 3000, 1000, 500, 500, 2000};
@@ -196,11 +215,23 @@ static void EXP_pipeline_benchmark_fast(benchmark::State& state) {
 
 }
 #endif
+static void SLM_pipeline_benchmark_fast(benchmark::State& state) {
+    std::array<int, 8> prios {0, 2, 2, 1, 1, 3, 3, 0};
+    std::array<int, 8> preCT {2000, 1500, 2000, 3000, 1000, 500, 500, 2000};
+    int CT = 1000;
+    std::array<int, 8> postCT {5000, 3000, 2000, 2500, 1000, 1500, 1500, 4500};
+
+    for (auto _ : state) {
+      _SLM_PM_pipeline_benchmark::thread_function_nano(prios[state.thread_index()] ,preCT[state.thread_index()], CT, postCT[state.thread_index()]);
+    }
+
+}
 
 BENCHMARK(PM_LockUnlock)->Threads(8);
 #ifdef EXPERIMENTAL_MUTEXES
 BENCHMARK(EXPPM_LockUnlock)->Threads(8);
 #endif
+BENCHMARK(SLMPM_LockUnlock)->Threads(8);
 BENCHMARK(STD_LockUnlock)->Threads(8);
 
 BENCHMARK(PM_S_LockUnlock);
@@ -220,10 +251,12 @@ BENCHMARK(STD_pipeline_benchmark_audio)->Threads(8);
 #ifdef EXPERIMENTAL_MUTEXES
 BENCHMARK(EXP_pipeline_benchmark_audio)->Threads(8);
 #endif
+BENCHMARK(SLM_pipeline_benchmark_audio)->Threads(8);
 BENCHMARK(PM_pipeline_benchmark_fast)->Threads(8);
 #ifdef EXPERIMENTAL_MUTEXES
 BENCHMARK(EXP_pipeline_benchmark_fast)->Threads(8);
 #endif
+BENCHMARK(SLM_pipeline_benchmark_fast)->Threads(8);
 BENCHMARK(STD_pipeline_benchmark_fast)->Threads(8);
 
 BENCHMARK_MAIN();
