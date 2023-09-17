@@ -3,21 +3,21 @@ include("../cmake/DeterministicConcurrency.cmake")
 
 add_executable(fsm_test
 test.cpp
-PMscenario1Context.h
-PMscenario2Context.h
-PMscenario3Context.h
-PMscenario4Context.h
-PMscenario5Context.h
-PMscenario6Context.h
-PMscenario7Context.h
-PMscenario8Context.h
-PMscenario9Context.h
-SPMscenario1Context.h
-SPMscenario2Context.h
-SPMscenario3Context.h
-SPMscenario4Context.h
-SPMscenario5Context.h
-SPMscenario6Context.h
+PM_scenario1Context.h
+PM_scenario2Context.h
+PM_scenario3Context.h
+PM_scenario4Context.h
+PM_scenario5Context.h
+SLM_scenario1Context.h
+SLM_scenario2Context.h
+SLM_scenario3Context.h
+SLM_scenario4Context.h
+SPM_scenario1Context.h
+SPM_scenario2Context.h
+SPM_scenario3Context.h
+SPM_scenario4Context.h
+SPM_scenario5Context.h
+SPM_scenario6Context.h
 )
 
 target_compile_features(fsm_test PUBLIC cxx_std_20)

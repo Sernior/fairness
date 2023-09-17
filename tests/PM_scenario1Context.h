@@ -1,11 +1,11 @@
-#include <shared_priority_mutex.h>
+#include <priority_mutex.h>
 #include <DeterministicConcurrency>
 #include <vector>
 
-namespace SPMscenario1{
+namespace PM_scenario1{
     using namespace DeterministicConcurrency;
 
-    PrioSync::shared_priority_mutex<5> m;
+    PrioSync::priority_mutex<5> m;
 
     std::vector<int> ret;
 

@@ -3,7 +3,7 @@
 #include <vector>
 #include <random>
 
-namespace PMscenario6{
+namespace SLM_scenario4{
     using namespace DeterministicConcurrency;
 
     PrioSync::slim_priority_mutex<7> m;

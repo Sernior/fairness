@@ -1,11 +1,11 @@
-#include <shared_priority_mutex.h>
 #include <DeterministicConcurrency>
 #include <vector>
+#include <priority_mutex.h>
 
-namespace SPMscenario5{
+namespace PM_scenario4{
     using namespace DeterministicConcurrency;
 
-    PrioSync::shared_priority_mutex<2> m;
+    PrioSync::priority_mutex<2> m;
 
     std::vector<int> ret;
 
@@ -32,8 +32,8 @@ namespace SPMscenario5{
     static size_t THREAD1 = 1;
     
     static constexpr auto executeSchedulingSequence = []{
-        auto thread_0 = std::tuple{&threadFunction, 0};
-        auto thread_1 = std::tuple{&threadFunction2, 1};
+        static auto thread_0 = std::tuple{&threadFunction, 0};
+        static auto thread_1 = std::tuple{&threadFunction2, 1};
 
         auto sch = make_UserControlledScheduler(
             thread_0, thread_1

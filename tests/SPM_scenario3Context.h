@@ -1,11 +1,11 @@
+#include <shared_priority_mutex.h>
 #include <DeterministicConcurrency>
 #include <vector>
-#include <slim_priority_mutex.h>
 
-namespace PMscenario9{
+namespace SPM_scenario3{
     using namespace DeterministicConcurrency;
 
-    PrioSync::slim_priority_mutex<5> m;
+    PrioSync::shared_priority_mutex<5> m;
 
     std::vector<bool> ret;
 
@@ -52,7 +52,7 @@ namespace PMscenario9{
         auto thread_3 = std::tuple{&threadFunction2, 3};
         auto thread_4 = std::tuple{&threadFunction, 4};
         auto ctrlThread = std::tuple{&controlThread};
-        
+
         auto sch = make_UserControlledScheduler(
             thread_0, thread_1, thread_2, thread_3, thread_4, ctrlThread
         );
