@@ -10,9 +10,9 @@
 #include <BS_thread_pool.hpp>
 
 #include <boost/atomic.hpp>
-#include <slim_priority_mutex.h>
+#include <spinlock_priority_mutex.h>
 
-static PrioSync::slim_priority_mutex<13> ms;
+static PrioSync::spinlock_priority_mutex<13> ms;
 #define NOW std::chrono::steady_clock::now()
 
 

@@ -12,6 +12,10 @@ SLM_scenario1Context.h
 SLM_scenario2Context.h
 SLM_scenario3Context.h
 SLM_scenario4Context.h
+SPNLCPM_scenario1Context.h
+SPNLCPM_scenario2Context.h
+SPNLCPM_scenario3Context.h
+SPNLCPM_scenario4Context.h
 SPM_scenario1Context.h
 SPM_scenario2Context.h
 SPM_scenario3Context.h
