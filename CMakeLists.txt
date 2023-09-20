@@ -9,6 +9,8 @@ option(Boost_FOUND "Boost found" OFF)
 add_library(fsm INTERFACE)
 target_include_directories(fsm INTERFACE include)
 
+add_compile_options(-mcx16)
+
 if(LIBFSM_EXPERIMENTAL)#experimental stuff
 target_include_directories(fsm INTERFACE include/experimental)
 add_compile_definitions(EXPERIMENTAL_MUTEXES)
