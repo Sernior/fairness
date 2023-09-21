@@ -10,15 +10,16 @@
  * Distributed under the Boost Software License, Version 1.0. (See accompanying file LICENSE_1_0.txt or copy at http://www.boost.org/LICENSE_1_0.txt).
  * 
  */
-#pragma once
+#ifndef SHARED_PRIORITY_MUTEX_HPP
+#define SHARED_PRIORITY_MUTEX_HPP
 #include <thread>
 #include <mutex>
 #include <condition_variable>
 #include <array>
 #include <stdexcept>
-#include "priority_t.h"
+#include <boost/fairness/priority_t.hpp>
 
-namespace PrioSync{// the name has yet to be chosen
+namespace boost::fairness{
 
     /**
      * @brief The shared_priority_mutex is an advanced synchronization mechanism that enhances the traditional shared_mutex by introducing a priority-based approach.
@@ -246,13 +247,10 @@ namespace PrioSync{// the name has yet to be chosen
                 p.thread_queue.notify_all();
         }
 
-        bool _lock_is_owned_by_me(){
-            return std::this_thread::get_id() == _owner;
-        }
-
         bool _lock_is_owned(){
             return std::thread::id() != _owner;
         }
 
     };
 }
+#endif // SHARED_PRIORITY_MUTEX_HPP

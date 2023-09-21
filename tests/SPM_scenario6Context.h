@@ -1,17 +1,17 @@
-#include <shared_priority_mutex.h>
+#include <boost/fairness.hpp>
 #include <DeterministicConcurrency>
 #include <vector>
-namespace SPMscenario6{
+
+namespace SPM_scenario6{
     using namespace DeterministicConcurrency;
 
-    PrioSync::shared_priority_mutex<4> m;
+    boost::fairness::shared_priority_mutex<4> m;
 
     std::vector<int> ret;
 
     std::vector<int> expected{
         0, 1, 2, 2, 3
     };
-
 
     void threadFunction0(thread_context* c ,int i) {
         c->lock(&m, i);
@@ -48,24 +48,23 @@ namespace SPMscenario6{
         m.unlock();
     }
 
-
-    static auto thread_0 = std::tuple{&threadFunction0, 0};
-    static auto thread_1 = std::tuple{&threadFunction1, 1};
-    static auto thread_2 = std::tuple{&threadFunction2, 2};
-    static auto thread_3 = std::tuple{&threadFunction3, 2};
-    static auto thread_4 = std::tuple{&threadFunction4, 3};
-
     static size_t THREAD0 = 0;
     static size_t THREAD1 = 1;
     static size_t THREAD2 = 2;
     static size_t THREAD3 = 3;
     static size_t THREAD4 = 4;
     
-    static auto sch = make_UserControlledScheduler(
-        thread_0, thread_1, thread_2, thread_3, thread_4
-    );
-    
     static constexpr auto executeSchedulingSequence = []{
+        auto thread_0 = std::tuple{&threadFunction0, 0};
+        auto thread_1 = std::tuple{&threadFunction1, 1};
+        auto thread_2 = std::tuple{&threadFunction2, 2};
+        auto thread_3 = std::tuple{&threadFunction3, 2};
+        auto thread_4 = std::tuple{&threadFunction4, 3};
+
+        auto sch = make_UserControlledScheduler(
+            thread_0, thread_1, thread_2, thread_3, thread_4
+        );
+
         sch.switchContextTo(THREAD0);// lock
         sch.proceed(THREAD1);
         sch.waitUntilAllThreadStatus<thread_status_t::WAITING_EXTERNAL>(THREAD1);

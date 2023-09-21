@@ -1,11 +1,13 @@
-#include <priority_mutex.h>
+#include <boost/fairness.hpp>
 #include <vector>
 #include <chrono>
 #include <thread>
 #include <tuple>
 #include <BS_thread_pool.hpp>
 #include <DeterministicConcurrency>
-#define NOW std::chrono::steady_clock::now()
+
+#define NOW std::chrono::high_resolution_clock::now()
+
 
 /*
 std::this_thread::sleep_for is too imprecise, and also I could make a bunch of variables during busy waiting to simulate heated cpu caches.
@@ -31,7 +33,7 @@ static void busy_wait_nano(uint32_t nanoseconds){
 
 namespace _PM_pipeline_benchmark{
 
-    static PrioSync::priority_mutex<4> m;
+    static boost::fairness::priority_mutex<4> m;
 
     static void thread_function(int p, int preCriticalTime, int criticalTime, int postCriticalTime){
         busy_wait_milli(preCriticalTime);
@@ -57,23 +59,129 @@ namespace _PM_pipeline_benchmark{
         busy_wait_nano(postCriticalTime);
     }
 
-    static void thread_loop(DeterministicConcurrency::thread_context* c, int iterations, int p, int preCriticalTime, int criticalTime, int postCriticalTime){
-        for (;iterations > 0; iterations--){
-            c->switchContext();
-            busy_wait_nano(preCriticalTime);
-            m.lock(p);
-            busy_wait_nano(criticalTime);
-            m.unlock();
-            busy_wait_nano(postCriticalTime);
-        }
+}
+#ifdef EXPERIMENTAL_MUTEXES
+namespace _EXP_PM_pipeline_benchmark{
+
+    static boost::fairness::experimental_priority_mutex<4> m;
+
+    static void thread_function(int p, int preCriticalTime, int criticalTime, int postCriticalTime){
+        busy_wait_milli(preCriticalTime);
+        m.lock(p);
+        busy_wait_milli(criticalTime);
+        m.unlock();
+        busy_wait_milli(postCriticalTime);
+    }
+
+    static void thread_function_micro(int p, int preCriticalTime, int criticalTime, int postCriticalTime){
+        busy_wait_micro(preCriticalTime);
+        m.lock(p);
+        busy_wait_micro(criticalTime);
+        m.unlock();
+        busy_wait_micro(postCriticalTime);
+    }
+
+    static void thread_function_nano(int p, int preCriticalTime, int criticalTime, int postCriticalTime){
+        busy_wait_nano(preCriticalTime);
+        m.lock(p);
+        busy_wait_nano(criticalTime);
+        m.unlock();
+        busy_wait_nano(postCriticalTime);
+    }
+
+}
+#endif
+namespace _SLM_PM_pipeline_benchmark{
+
+    static boost::fairness::slim_priority_mutex<4> m;
+
+    static void thread_function(int p, int preCriticalTime, int criticalTime, int postCriticalTime){
+        busy_wait_milli(preCriticalTime);
+        m.lock(p);
+        busy_wait_milli(criticalTime);
+        m.unlock();
+        busy_wait_milli(postCriticalTime);
+    }
+
+    static void thread_function_micro(int p, int preCriticalTime, int criticalTime, int postCriticalTime){
+        busy_wait_micro(preCriticalTime);
+        m.lock(p);
+        busy_wait_micro(criticalTime);
+        m.unlock();
+        busy_wait_micro(postCriticalTime);
+    }
+
+    static void thread_function_nano(int p, int preCriticalTime, int criticalTime, int postCriticalTime){
+        busy_wait_nano(preCriticalTime);
+        m.lock(p);
+        busy_wait_nano(criticalTime);
+        m.unlock();
+        busy_wait_nano(postCriticalTime);
+    }
+
+}
+#ifdef EXPERIMENTAL_MUTEXES
+namespace _SPNLC_SLM_PM_pipeline_benchmark{
+
+    static boost::fairness::slim_spinlock_priority_mutex<4> m;
+
+    static void thread_function(int p, int preCriticalTime, int criticalTime, int postCriticalTime){
+        busy_wait_milli(preCriticalTime);
+        m.lock(p);
+        busy_wait_milli(criticalTime);
+        m.unlock();
+        busy_wait_milli(postCriticalTime);
+    }
+
+    static void thread_function_micro(int p, int preCriticalTime, int criticalTime, int postCriticalTime){
+        busy_wait_micro(preCriticalTime);
+        m.lock(p);
+        busy_wait_micro(criticalTime);
+        m.unlock();
+        busy_wait_micro(postCriticalTime);
+    }
+
+    static void thread_function_nano(int p, int preCriticalTime, int criticalTime, int postCriticalTime){
+        busy_wait_nano(preCriticalTime);
+        m.lock(p);
+        busy_wait_nano(criticalTime);
+        m.unlock();
+        busy_wait_nano(postCriticalTime);
+    }
+
+}
+#endif
+namespace _SPNLC_PM_pipeline_benchmark{
+
+    static boost::fairness::spinlock_priority_mutex<4> m;
+
+    static void thread_function(int p, int preCriticalTime, int criticalTime, int postCriticalTime){
+        busy_wait_milli(preCriticalTime);
+        m.lock(p);
+        busy_wait_milli(criticalTime);
+        m.unlock();
+        busy_wait_milli(postCriticalTime);
+    }
+
+    static void thread_function_micro(int p, int preCriticalTime, int criticalTime, int postCriticalTime){
+        busy_wait_micro(preCriticalTime);
+        m.lock(p);
+        busy_wait_micro(criticalTime);
+        m.unlock();
+        busy_wait_micro(postCriticalTime);
+    }
+
+    static void thread_function_nano(int p, int preCriticalTime, int criticalTime, int postCriticalTime){
+        busy_wait_nano(preCriticalTime);
+        m.lock(p);
+        busy_wait_nano(criticalTime);
+        m.unlock();
+        busy_wait_nano(postCriticalTime);
     }
 
 }
 
 namespace _STD_pipeline_benchmark{
-
-    static std::counting_semaphore<8> P(0);
-    static std::counting_semaphore<1> V(-7);
 
     static std::mutex m;
 
@@ -99,17 +207,6 @@ namespace _STD_pipeline_benchmark{
         busy_wait_nano(criticalTime);
         m.unlock();
         busy_wait_nano(postCriticalTime);
-    }
-
-    static void thread_loop(DeterministicConcurrency::thread_context* c, int iterations, int preCriticalTime, int criticalTime, int postCriticalTime){
-        for (;iterations > 0; iterations--){
-            c->switchContext();
-            busy_wait_nano(preCriticalTime);
-            m.lock();
-            busy_wait_nano(criticalTime);
-            m.unlock();
-            busy_wait_nano(postCriticalTime);
-        }
     }
 
 }

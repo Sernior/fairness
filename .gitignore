@@ -2,3 +2,6 @@ build
 *.exe
 .vscode
 *.o
+*.pdb
+*.obj
+*.ilk

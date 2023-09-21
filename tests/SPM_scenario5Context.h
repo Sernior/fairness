@@ -1,17 +1,17 @@
-#include <priority_mutex.h>
+#include <boost/fairness.hpp>
 #include <DeterministicConcurrency>
 #include <vector>
-namespace PMscenario4{
+
+namespace SPM_scenario5{
     using namespace DeterministicConcurrency;
 
-    PrioSync::priority_mutex<2> m;
+    boost::fairness::shared_priority_mutex<2> m;
 
     std::vector<int> ret;
 
     std::vector<int> expected{
         0, 1
     };
-
 
     void threadFunction(thread_context* c ,int i) {
         c->lock(&m);
@@ -28,18 +28,17 @@ namespace PMscenario4{
         m.unlock();
     }
 
-
-    static auto thread_0 = std::tuple{&threadFunction, 0};
-    static auto thread_1 = std::tuple{&threadFunction2, 1};
-
     static size_t THREAD0 = 0;
     static size_t THREAD1 = 1;
     
-    static auto sch = make_UserControlledScheduler(
-        thread_0, thread_1
-    );
-    
     static constexpr auto executeSchedulingSequence = []{
+        auto thread_0 = std::tuple{&threadFunction, 0};
+        auto thread_1 = std::tuple{&threadFunction2, 1};
+
+        auto sch = make_UserControlledScheduler(
+            thread_0, thread_1
+        );
+
         sch.switchContextTo(THREAD0);
         sch.switchContextTo(THREAD1);
         sch.proceed(THREAD1, THREAD0);// thread 1 here should be stuck on the lock assuming my mutex is a mutex and not a semaphore

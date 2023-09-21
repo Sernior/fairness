@@ -1,33 +1,51 @@
 #include <iostream>
 #include <thread>
-#include <priority_mutex.h>
-#include <shared_priority_mutex.h>
 #include <chrono>
 #include <vector>
 #include <algorithm>
+#include <BS_thread_pool.hpp>
 
-static PrioSync::priority_mutex<8> m;
+#include <boost/atomic.hpp>
+#include <boost/fairness.hpp>
+
+static boost::fairness::slim_priority_mutex<3> ms;
+
+#define NOW std::chrono::steady_clock::now()
 
 
-void threadFunction(PrioSync::Priority_t prio) {
-    m.lock(prio);
-    std::cout << "Thread with priority : " << int(prio) << " is running." << std::endl;
-    m.unlock();
+static void busy_wait_nano(uint64_t nanoseconds){
+    auto begin = NOW;
+    for(;std::chrono::duration_cast<std::chrono::nanoseconds>(NOW - begin).count() < nanoseconds;)
+        continue;
 }
 
+static void thread_function_nano(int p, int preCriticalTime, int criticalTime, int postCriticalTime){
+    busy_wait_nano(preCriticalTime);
+    ms.lock(p);
+    //std::cout << p;
+    busy_wait_nano(criticalTime);
+    ms.unlock();
+    busy_wait_nano(postCriticalTime);
+}
 
 int main()
 {
-    m.lock();
-    std::vector<std::thread> tp;
-    for (int i = 0; i < 4; i++){
-        tp.push_back(std::thread(&threadFunction, i));
-    }
-    std::this_thread::sleep_for(std::chrono::milliseconds(10));//make sure the threads lock themselves
+    std::array<int, 8> prios {0, 2, 2, 1, 1, 3, 3, 0};
+    std::array<int, 8> preCT {2000, 1500, 2000, 3000, 1000, 500, 500, 2000};
+    int CT = 1000;
+    std::array<int, 8> postCT {5000, 3000, 2000, 2500, 1000, 1500, 1500, 4500};
 
-    m.unlock();
-    for (auto& t : tp)
-        t.join();
+    BS::thread_pool pool(8);
+
+    for (int j = 0; j < 200000; j++){
+        for (int i = 0; i < 8; i++){
+            pool.push_task(thread_function_nano, prios[i], preCT[i], CT, postCT[i]);
+        }
+        pool.wait_for_tasks();
+        if (j % 500 == 0)
+            std::cout << j << std::endl;
+        //std::cout << std::endl;
+    }
 
     return 0;
 }
