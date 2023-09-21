@@ -12,16 +12,17 @@
  * 
  */
 
-#pragma once
+#ifndef SLIM_PRIORITY_MUTEX_HPP
+#define SLIM_PRIORITY_MUTEX_HPP
 #include <thread>
 #include <atomic>
 #include <array>
 #include <chrono>
 #include <thread>
 #include <mutex>
-#include "priority_t.h"
+#include <boost/fairness/priority_t.hpp>
 #include <cstring>
-namespace PrioSync{
+namespace boost::fairness{
 
     template<bool> struct Range;
 
@@ -374,3 +375,4 @@ namespace PrioSync{
 #endif // BOOST_FAIRNESS_HAS_DWCAS
 
 }
+#endif // SLIM_PRIORITY_MUTEX_HPP

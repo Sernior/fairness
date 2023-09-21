@@ -13,20 +13,21 @@
  */
 
 /*
-    ACCEPTED AND RENAMED slim_priority_mutex.h
+    ACCEPTED AND RENAMED slim_priority_mutex.h marked for deletion
 */
 
 #ifdef EXPERIMENTAL_MUTEXES
-#pragma once
+#ifndef EXPERIMENTAL_PRIORITY_MUTEX_HPP
+#define EXPERIMENTAL_PRIORITY_MUTEX_HPP
 #include <thread>
 #include <atomic>
 #include <array>
 #include <chrono>
 #include <thread>
 #include <mutex>
-#include "../priority_t.h"
+#include <boost/fairness/priority_t.hpp>
 #include <cstring>
-namespace PrioSync{// the name has yet to be chosen
+namespace boost::fairness{
 
     /**
      * @brief The priority_mutex is an advanced synchronization mechanism that enhances the traditional mutex by introducing a priority-based approach.
@@ -179,8 +180,6 @@ namespace PrioSync{// the name has yet to be chosen
 
         void reset_(){ // there probably is a much better way to do this
             std::memset(&waiters_, 0b00000000, N); // maybe undefined because lock is reading on the waits? Should be ok
-            //for (Priority_t i = 0; i < N; i++)
-            //    waiters_[i].clear();
         }
 
         Priority_t find_first_priority_(control_block_t const& ctrl){// try use a non atomic parameter instead
@@ -197,4 +196,5 @@ namespace PrioSync{// the name has yet to be chosen
 
     };
 }
-#endif
+#endif // EXPERIMENTAL_PRIORITY_MUTEX_HPP
+#endif // EXPERIMENTAL_MUTEXES

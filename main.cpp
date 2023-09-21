@@ -1,18 +1,15 @@
 #include <iostream>
 #include <thread>
-#ifdef EXPERIMENTAL_MUTEXES
-#include <experimental_priority_mutex.h>
-#endif
-#include <priority_mutex.h>
 #include <chrono>
 #include <vector>
 #include <algorithm>
 #include <BS_thread_pool.hpp>
 
 #include <boost/atomic.hpp>
-#include <slim_spinlock_priority_mutex.h>
+#include <boost/fairness.hpp>
 
-static PrioSync::slim_spinlock_priority_mutex<13> ms;
+static boost::fairness::slim_priority_mutex<3> ms;
+
 #define NOW std::chrono::steady_clock::now()
 
 

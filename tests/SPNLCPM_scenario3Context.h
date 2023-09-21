@@ -1,11 +1,11 @@
 #include <DeterministicConcurrency>
 #include <vector>
-#include <spinlock_priority_mutex.h>
+#include <boost/fairness.hpp>
 
 namespace SPNLCPM_scenario3{
     using namespace DeterministicConcurrency;
 
-    PrioSync::spinlock_priority_mutex<5> m;
+    boost::fairness::spinlock_priority_mutex<5> m;
 
     std::vector<bool> ret;
 

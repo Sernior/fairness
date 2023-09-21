@@ -30,7 +30,7 @@ This repo contains some mutex
 
 that's an ```example``` of what...
 ```cpp
-void my_function(PrioSync::priority_mutex pm, uint8_t priority) {
+void my_function(boost::fairness::priority_mutex pm, uint8_t priority) {
     //...do something
     pm.lock(priority);
     //...do something

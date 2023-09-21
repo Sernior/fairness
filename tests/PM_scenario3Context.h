@@ -1,11 +1,11 @@
 #include <DeterministicConcurrency>
 #include <vector>
-#include <priority_mutex.h>
+#include <boost/fairness.hpp>
 
 namespace PM_scenario3{
     using namespace DeterministicConcurrency;
 
-    PrioSync::priority_mutex<5> m;
+    boost::fairness::priority_mutex<5> m;
 
     std::vector<bool> ret;
 

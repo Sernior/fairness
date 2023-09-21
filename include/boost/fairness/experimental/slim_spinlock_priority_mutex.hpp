@@ -11,7 +11,9 @@
  * Distributed under the Boost Software License, Version 1.0. (See accompanying file LICENSE_1_0.txt or copy at http://www.boost.org/LICENSE_1_0.txt).
  * 
  */
-
+#ifdef EXPERIMENTAL_MUTEXES
+#ifndef SLIM_SPINLOCK_PRIORITY_MUTEX_HPP
+#define SLIM_SPINLOCK_PRIORITY_MUTEX_HPP
 #pragma once
 #include <thread>
 #include <atomic>
@@ -19,9 +21,9 @@
 #include <chrono>
 #include <thread>
 #include <mutex>
-#include "priority_t.h"
+#include <boost/fairness/priority_t.hpp>
 #include <cstring>
-namespace PrioSync{
+namespace boost::fairness{
 
     template<bool> struct Range;
 
@@ -374,3 +376,5 @@ namespace PrioSync{
 #endif // BOOST_FAIRNESS_HAS_DWCAS
 
 }
+#endif // SLIM_SPINLOCK_PRIORITY_MUTEX_HPP
+#endif // EXPERIMENTAL_MUTEXES

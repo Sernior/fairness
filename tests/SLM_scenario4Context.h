@@ -1,4 +1,4 @@
-#include <slim_priority_mutex.h>
+#include <boost/fairness.hpp>
 #include <DeterministicConcurrency>
 #include <vector>
 #include <random>
@@ -6,7 +6,7 @@
 namespace SLM_scenario4{
     using namespace DeterministicConcurrency;
 
-    PrioSync::slim_priority_mutex<7> m;
+    boost::fairness::slim_priority_mutex<7> m;
 
     std::vector<int> ret;
 

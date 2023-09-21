@@ -17,10 +17,16 @@
 #include <array>
 #include <chrono>
 #include <thread>
-#include "priority_t.h"
+#include <boost/fairness/priority_t.hpp>
 #include <mutex>
 
-namespace PrioSync{// the name has yet to be chosen
+/*
+
+THIS WILL BE DELETED AND ITS CODE WILL REPLACE THE shared_priority_mutex once it is completed WIP
+
+*/
+
+namespace boost::fairness{
 
     using Thr_cnt_t = uint32_t;
 
@@ -213,27 +219,4 @@ namespace PrioSync{// the name has yet to be chosen
 
     };
 }
-
-/*
-
-wait_internal(p){
-    while (!lp || !p.ce)
-    wait(lp)
-    lp = p
-}
-
-p1 p2 p3
-
-lp1 = p1
-
-for(;;){
-
-}
-
-while (!lp1 || !p1.ce)
-
-
-
-
-*/
 

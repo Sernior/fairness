@@ -68,9 +68,9 @@ This is a snippet ready-to-use.
 
 #define NUMBER_OF_PRIORITIES 4
 
-static PrioSync::priority_mutex<NUMBER_OF_PRIORITIES> m;
+static boost::fairness::priority_mutex<NUMBER_OF_PRIORITIES> m;
 
-void threadFunction(PrioSync::Priority_t prio) {
+void threadFunction(boost::fairness::Priority_t prio) {
     m.lock(prio);
     std::cout << "Thread with priority : " << int(prio) << " is running." << std::endl;
     m.unlock();

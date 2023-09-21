@@ -1,20 +1,14 @@
 #include <benchmark/benchmark.h>
-#include <priority_mutex.h>
-#include <spinlock_priority_mutex.h>
-#include <shared_priority_mutex.h>
 #include <mutex>
 #include <shared_mutex>
 #include "pipeline_benchmark.cpp"
 #include <BS_thread_pool.hpp>
 #include <DeterministicConcurrency>
-#include <slim_priority_mutex.h>
-#include <slim_spinlock_priority_mutex.h>
-#ifdef EXPERIMENTAL_MUTEXES
-#include <experimental_priority_mutex.h>
-#endif
+#include <boost/fairness.hpp>
+
 
 static void PM_LockUnlock(benchmark::State& state) {
-    PrioSync::priority_mutex m;
+    boost::fairness::priority_mutex m;
     for (auto _ : state){
         m.lock();
         m.unlock();
@@ -22,7 +16,7 @@ static void PM_LockUnlock(benchmark::State& state) {
 }
 
 static void SPNLC_PM_LockUnlock(benchmark::State& state) { /* much better for spinlocking on linux than the slim version */
-    PrioSync::spinlock_priority_mutex m;
+    boost::fairness::spinlock_priority_mutex m;
     for (auto _ : state){
         m.lock();
         m.unlock();
@@ -30,7 +24,7 @@ static void SPNLC_PM_LockUnlock(benchmark::State& state) { /* much better for sp
 }
 #ifdef EXPERIMENTAL_MUTEXES
 static void EXPPM_LockUnlock(benchmark::State& state) {
-    PrioSync::experimental_priority_mutex m;
+    boost::fairness::experimental_priority_mutex m;
     for (auto _ : state){
         m.lock();
         m.unlock();
@@ -38,21 +32,21 @@ static void EXPPM_LockUnlock(benchmark::State& state) {
 }
 #endif
 static void SLMPM_LockUnlock(benchmark::State& state) {
-    PrioSync::slim_priority_mutex<7> m;
+    boost::fairness::slim_priority_mutex<7> m;
     for (auto _ : state){
         m.lock();
         m.unlock();
     }
 }
-
+#ifdef EXPERIMENTAL_MUTEXES
 static void SPNLC_SLM_PM_LockUnlock(benchmark::State& state) { /* the non slim version is better for spinlocking */
-    PrioSync::slim_spinlock_priority_mutex<7> m;
+    boost::fairness::slim_spinlock_priority_mutex<7> m;
     for (auto _ : state){
         m.lock();
         m.unlock();
     }
 }
-
+#endif
 static void STD_LockUnlock(benchmark::State& state) {
     std::mutex m;
     for (auto _ : state){
@@ -62,7 +56,7 @@ static void STD_LockUnlock(benchmark::State& state) {
 }
 
 static void PM_S_LockUnlock(benchmark::State& state) {
-    PrioSync::shared_priority_mutex<10> m;
+    boost::fairness::shared_priority_mutex<10> m;
     for (auto _ : state){
         m.lock();
         m.unlock();
@@ -78,7 +72,7 @@ static void STD_S_LockUnlock(benchmark::State& state) {
 }
 
 static void PM_S_SLockSUnlock(benchmark::State& state) {
-    PrioSync::shared_priority_mutex<10> m;
+    boost::fairness::shared_priority_mutex<10> m;
     for (auto _ : state){
         m.lock_shared();
         m.unlock_shared();
@@ -244,7 +238,7 @@ static void SLM_pipeline_benchmark_fast(benchmark::State& state) {
     }
 
 }
-
+#ifdef EXPERIMENTAL_MUTEXES
 static void SPNLC_SLM_pipeline_benchmark_fast(benchmark::State& state) {
     std::array<int, 8> prios {0, 2, 2, 1, 1, 3, 3, 0};
     std::array<int, 8> preCT {2000, 1500, 2000, 3000, 1000, 500, 500, 2000};
@@ -256,7 +250,7 @@ static void SPNLC_SLM_pipeline_benchmark_fast(benchmark::State& state) {
     }
 
 }
-
+#endif
 static void SPNLC_PM_pipeline_benchmark_fast(benchmark::State& state) {
     std::array<int, 8> prios {0, 2, 2, 1, 1, 3, 3, 0};
     std::array<int, 8> preCT {2000, 1500, 2000, 3000, 1000, 500, 500, 2000};
@@ -276,8 +270,9 @@ BENCHMARK(EXPPM_LockUnlock)->Threads(8);
 BENCHMARK(SLMPM_LockUnlock)->Threads(8);
 BENCHMARK(STD_LockUnlock)->Threads(8);
 BENCHMARK(SPNLC_PM_LockUnlock)->Threads(8);
+#ifdef EXPERIMENTAL_MUTEXES
 BENCHMARK(SPNLC_SLM_PM_LockUnlock)->Threads(8);
-
+#endif
 BENCHMARK(PM_S_LockUnlock);
 BENCHMARK(STD_S_LockUnlock);
 
@@ -301,7 +296,9 @@ BENCHMARK(PM_pipeline_benchmark_fast)->Threads(8);
 BENCHMARK(EXP_pipeline_benchmark_fast)->Threads(8);
 #endif
 BENCHMARK(SLM_pipeline_benchmark_fast)->Threads(8);
+#ifdef EXPERIMENTAL_MUTEXES
 BENCHMARK(SPNLC_SLM_pipeline_benchmark_fast)->Threads(8);
+#endif
 BENCHMARK(SPNLC_PM_pipeline_benchmark_fast)->Threads(8);
 BENCHMARK(STD_pipeline_benchmark_fast)->Threads(8);
 

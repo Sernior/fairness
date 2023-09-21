@@ -11,16 +11,17 @@
  * Distributed under the Boost Software License, Version 1.0. (See accompanying file LICENSE_1_0.txt or copy at http://www.boost.org/LICENSE_1_0.txt).
  * 
  */
-#pragma once
+#ifndef PRIORITY_MUTEX_HPP
+#define PRIORITY_MUTEX_HPP
 #include <thread>
 #include <atomic>
 #include <array>
 #include <chrono>
 #include <thread>
-#include "priority_t.h"
+#include <boost/fairness/priority_t.hpp>
 #include <mutex>
 
-namespace PrioSync{// the name has yet to be chosen
+namespace boost::fairness{
 
     /**
      * @brief The priority_mutex is an advanced synchronization mechanism that enhances the traditional mutex by introducing a priority-based approach.
@@ -120,3 +121,4 @@ namespace PrioSync{// the name has yet to be chosen
         }
     };
 }
+#endif // PRIORITY_MUTEX_HPP

@@ -1,4 +1,4 @@
-#include <spinlock_priority_mutex.h>
+#include <boost/fairness.hpp>
 #include <DeterministicConcurrency>
 #include <vector>
 #include <random>
@@ -6,7 +6,7 @@
 namespace SPNLCPM_scenario4{
     using namespace DeterministicConcurrency;
 
-    PrioSync::spinlock_priority_mutex<7> m;
+    boost::fairness::spinlock_priority_mutex<7> m;
 
     std::vector<int> ret;
 

@@ -1,7 +1,4 @@
-#include <priority_mutex.h>
-#include <slim_priority_mutex.h>
-#include <slim_spinlock_priority_mutex.h>
-#include <spinlock_priority_mutex.h>
+#include <boost/fairness.hpp>
 #include <vector>
 #include <chrono>
 #include <thread>
@@ -11,9 +8,6 @@
 
 #define NOW std::chrono::high_resolution_clock::now()
 
-#ifdef EXPERIMENTAL_MUTEXES
-#include <experimental_priority_mutex.h>
-#endif
 
 /*
 std::this_thread::sleep_for is too imprecise, and also I could make a bunch of variables during busy waiting to simulate heated cpu caches.
@@ -39,7 +33,7 @@ static void busy_wait_nano(uint32_t nanoseconds){
 
 namespace _PM_pipeline_benchmark{
 
-    static PrioSync::priority_mutex<4> m;
+    static boost::fairness::priority_mutex<4> m;
 
     static void thread_function(int p, int preCriticalTime, int criticalTime, int postCriticalTime){
         busy_wait_milli(preCriticalTime);
@@ -69,7 +63,7 @@ namespace _PM_pipeline_benchmark{
 #ifdef EXPERIMENTAL_MUTEXES
 namespace _EXP_PM_pipeline_benchmark{
 
-    static PrioSync::experimental_priority_mutex<4> m;
+    static boost::fairness::experimental_priority_mutex<4> m;
 
     static void thread_function(int p, int preCriticalTime, int criticalTime, int postCriticalTime){
         busy_wait_milli(preCriticalTime);
@@ -99,7 +93,7 @@ namespace _EXP_PM_pipeline_benchmark{
 #endif
 namespace _SLM_PM_pipeline_benchmark{
 
-    static PrioSync::slim_priority_mutex<4> m;
+    static boost::fairness::slim_priority_mutex<4> m;
 
     static void thread_function(int p, int preCriticalTime, int criticalTime, int postCriticalTime){
         busy_wait_milli(preCriticalTime);
@@ -126,10 +120,10 @@ namespace _SLM_PM_pipeline_benchmark{
     }
 
 }
-
+#ifdef EXPERIMENTAL_MUTEXES
 namespace _SPNLC_SLM_PM_pipeline_benchmark{
 
-    static PrioSync::slim_spinlock_priority_mutex<4> m;
+    static boost::fairness::slim_spinlock_priority_mutex<4> m;
 
     static void thread_function(int p, int preCriticalTime, int criticalTime, int postCriticalTime){
         busy_wait_milli(preCriticalTime);
@@ -156,10 +150,10 @@ namespace _SPNLC_SLM_PM_pipeline_benchmark{
     }
 
 }
-
+#endif
 namespace _SPNLC_PM_pipeline_benchmark{
 
-    static PrioSync::spinlock_priority_mutex<4> m;
+    static boost::fairness::spinlock_priority_mutex<4> m;
 
     static void thread_function(int p, int preCriticalTime, int criticalTime, int postCriticalTime){
         busy_wait_milli(preCriticalTime);

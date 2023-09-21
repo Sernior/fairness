@@ -11,16 +11,17 @@
  * Distributed under the Boost Software License, Version 1.0. (See accompanying file LICENSE_1_0.txt or copy at http://www.boost.org/LICENSE_1_0.txt).
  * 
  */
-#pragma once
+#ifndef SPINLOCK_PRIORITY_MUTEX_HPP
+#define SPINLOCK_PRIORITY_MUTEX_HPP
 #include <thread>
 #include <atomic>
 #include <array>
 #include <chrono>
 #include <thread>
-#include "priority_t.h"
+#include <boost/fairness/priority_t.hpp>
 #include <mutex>
 
-namespace PrioSync{// the name has yet to be chosen
+namespace boost::fairness{
 
     /**
      * @brief The spinlock_priority_mutex is an advanced synchronization mechanism that enhances the traditional mutex by introducing a priority-based approach.
@@ -70,7 +71,6 @@ namespace PrioSync{// the name has yet to be chosen
                 (localCurrentPriority < priority || !currentPriority_.compare_exchange_weak(localCurrentPriority, priority, std::memory_order_relaxed)) ||
                 (lockOwned_.test_and_set(std::memory_order_acquire))
             ){
-                // lockOwned_.wait(true);
                 localCurrentPriority = currentPriority_;
             }
             waiters_[priority].fetch_sub(1, std::memory_order_relaxed);
@@ -88,7 +88,6 @@ namespace PrioSync{// the name has yet to be chosen
         void unlock(){
             currentPriority_.store(find_first_priority_(), std::memory_order_relaxed);
             lockOwned_.clear(std::memory_order_release);
-            // lockOwned_.notify_all();//P2616R3 https://www.open-std.org/jtc1/sc22/wg21/docs/papers/2023/p2616r3.html this shouldnt be a problem with mutex semantics
         }
 
         /**
@@ -120,3 +119,4 @@ namespace PrioSync{// the name has yet to be chosen
         }
     };
 }
+#endif // SPINLOCK_PRIORITY_MUTEX_HPP
