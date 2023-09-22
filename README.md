@@ -1,6 +1,7 @@
-# Boost.fairness
+# boost.fairness
 
-<span style="color: red;">This is not currently part of the Boost library collection.<br> However, my intention is to submit it for review once it's fully completed.</span>
+> [!NOTE]  
+> <span style="color: red;">This is not currently part of the Boost library collection.<br> However, my intention is to submit it for review once it's fully completed.</span>
 
 **A collection of advanced syncronization mechanisms which are able to prioritize threads based on their priority, granting higher-priority threads access to protected resources ahead of lower-priority ones.**
 
@@ -27,7 +28,7 @@ The assumptions are:
 
 ### Prerequisites
 
-I build and tested this lib with C++20.
+I build and tested this lib with C++20. <br>
 If for some reason, on some compilers (not MinGW), it doesn`t work on C++20+ please email me or open an issue.
 
 ### Setup boost library
