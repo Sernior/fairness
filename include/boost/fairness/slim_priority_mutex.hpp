@@ -30,14 +30,14 @@ namespace boost::fairness{
     struct slim_priority_mutex{};
 
     /**
-     * @brief The priority_mutex is an advanced synchronization mechanism that enhances the traditional mutex by introducing a priority-based approach.
+     * @brief The slim_priority_mutex is an advanced synchronization mechanism that enhances the traditional mutex by introducing a priority-based approach.
      * 
-     * @tparam N : number of 0 indexed priorities the priority_mutex manages, up to _max_priority.
+     * @tparam N : number of 0 indexed priorities the slim_priority_mutex manages, up to 7.
      */
     template<size_t N>
     class slim_priority_mutex<N, Range<(1 <= N && N <= 7)>>{
 
-            //NO DWCAS
+        //NO DWCAS
         struct control_block_t{ 
             int8_t owned_ = 7;// first bit owned remaining 7 bit is the current priority
             uint8_t priority_[7];
@@ -91,13 +91,18 @@ namespace boost::fairness{
         ~slim_priority_mutex() = default;
 
         /**
-         * @brief Try to acquire the unique ownership of the priority_mutex, blocking the thread if the priority_mutex was already owned or other threads are waiting with higher priority.
+         * @brief Try to acquire the unique ownership of the slim_priority_mutex, blocking the thread if the slim_priority_mutex was already owned or other threads are waiting with higher priority.
          * 
          * @param priority used to set a priority for this thread to aquire the lock.
          * 
          * \code{.cpp}
-         * priority_mutex<10> m;
-         * m.lock(9);
+         * slim_priority_mutex<7> m;
+         * 
+         * void my_function(int prio) {
+         *      //...some code.
+         *      m.lock(prio);
+         *      //...some code.
+         * }
          * \endcode
          */
         void lock(Priority_t const priority = 0){
@@ -135,12 +140,16 @@ namespace boost::fairness{
         }
 
         /**
-         * @brief Release the priority_mutex from unique ownership.
-         * , typename = std::enable_if_t<(N >= 1 && N <= 7)>
+         * @brief Release the slim_priority_mutex from unique ownership.
+         * 
          * \code{.cpp}
-         * priority_mutex<10> m;
-         * m.lock(9);
-         * m.unlock();
+         * slim_priority_mutex<7> m;
+         * 
+         * void my_function() {
+         *      //...some code.
+         *      m.unlock();
+         *      //...some code.
+         * }
          * \endcode
          */
         void unlock(){
@@ -160,13 +169,18 @@ namespace boost::fairness{
         }
 
         /**
-         * @brief Try to acquire the unique ownership of the priority_mutex, if successful will return true, false otherwise.
+         * @brief Try to acquire the unique ownership of the slim_priority_mutex, if successful will return true, false otherwise.
          * 
          * @param priority used to set a priority for this thread to aquire the lock.
          * 
          * \code{.cpp}
-         * priority_mutex<10> m;
-         * m.try_lock(9);
+         * slim_priority_mutex<7> m;
+         * 
+         * void my_function(int prio) {
+         *      //...some code.
+         *      m.try_lock(prio);
+         *      //...some code.
+         * }
          * \endcode
          * @return bool 
          */
@@ -206,9 +220,9 @@ namespace boost::fairness{
 #ifdef BOOST_FAIRNESS_HAS_DWCAS
 
     /**
-     * @brief The priority_mutex is an advanced synchronization mechanism that enhances the traditional mutex by introducing a priority-based approach.
+     * @brief The slim_priority_mutex is an advanced synchronization mechanism that enhances the traditional mutex by introducing a priority-based approach.
      * 
-     * @tparam N : number of 0 indexed priorities the priority_mutex manages, up to _max_priority.
+     * @tparam N : number of 0 indexed priorities the slim_priority_mutex manages, up to _max_priority.
      */
     template<size_t N>
     class slim_priority_mutex<N, Range<(8 <= N && N <= 15)>>{
@@ -266,13 +280,18 @@ namespace boost::fairness{
         ~slim_priority_mutex() = default;
 
         /**
-         * @brief Try to acquire the unique ownership of the priority_mutex, blocking the thread if the priority_mutex was already owned or other threads are waiting with higher priority.
+         * @brief Try to acquire the unique ownership of the slim_priority_mutex, blocking the thread if the slim_priority_mutex was already owned or other threads are waiting with higher priority.
          * 
          * @param priority used to set a priority for this thread to aquire the lock.
          * 
          * \code{.cpp}
-         * priority_mutex<10> m;
-         * m.lock(9);
+         * slim_priority_mutex<15> m;
+         * 
+         * void my_function(int prio) {
+         *      //...some code.
+         *      m.lock(prio);
+         *      //...some code.
+         * }
          * \endcode
          */
         void lock(Priority_t const priority = 0){
@@ -310,12 +329,16 @@ namespace boost::fairness{
         }
 
         /**
-         * @brief Release the priority_mutex from unique ownership.
+         * @brief Release the slim_priority_mutex from unique ownership.
          * 
          * \code{.cpp}
-         * priority_mutex<10> m;
-         * m.lock(9);
-         * m.unlock();
+         * slim_priority_mutex<7> m;
+         * 
+         * void my_function() {
+         *      //...some code.
+         *      m.unlock();
+         *      //...some code.
+         * }
          * \endcode
          */
         void unlock(){
@@ -335,13 +358,18 @@ namespace boost::fairness{
         }
 
         /**
-         * @brief Try to acquire the unique ownership of the priority_mutex, if successful will return true, false otherwise.
+         * @brief Try to acquire the unique ownership of the slim_priority_mutex, if successful will return true, false otherwise.
          * 
          * @param priority used to set a priority for this thread to aquire the lock.
          * 
          * \code{.cpp}
-         * priority_mutex<10> m;
-         * m.try_lock(9);
+         * slim_priority_mutex<15> m;
+         * 
+         * void my_function(int prio) {
+         *      //...some code.
+         *      m.try_lock(prio);
+         *      //...some code.
+         * }
          * \endcode
          * @return bool 
          */
