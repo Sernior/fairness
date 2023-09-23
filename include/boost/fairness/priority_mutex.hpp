@@ -61,7 +61,12 @@ namespace boost::fairness{
          * 
          * \code{.cpp}
          * priority_mutex<10> m;
-         * m.lock(9);
+         * 
+         * void my_function(int prio) {
+         *      //...some code.
+         *      m.lock(prio);
+         *      //...some code.
+         * }
          * \endcode
          */
         void lock(Priority_t const priority = 0){
@@ -82,8 +87,12 @@ namespace boost::fairness{
          * 
          * \code{.cpp}
          * priority_mutex<10> m;
-         * m.lock(9);
-         * m.unlock();
+         * 
+         * void my_function() {
+         *      //...some code.
+         *      m.unlock();
+         *      //...some code.
+         * }
          * \endcode
          */
         void unlock(){
@@ -99,7 +108,12 @@ namespace boost::fairness{
          * 
          * \code{.cpp}
          * priority_mutex<10> m;
-         * m.try_lock(9);
+         * 
+         * void my_function(int prio) {
+         *      //...some code.
+         *      m.try_lock(prio);
+         *      //...some code.
+         * }
          * \endcode
          * @return bool 
          */
