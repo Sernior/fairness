@@ -10,7 +10,6 @@
 #include <boost/fairness/spinlock_priority_mutex.hpp>
 
 #ifdef BOOST_FAIRNESS_EXPERIMENTAL_MUTEXES
-#include <boost/fairness/experimental/experimental_priority_mutex.hpp>
 #include <boost/fairness/experimental/slim_spinlock_priority_mutex.hpp>
 #endif // BOOST_FAIRNESS_EXPERIMENTAL_MUTEXES
 

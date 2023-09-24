@@ -60,37 +60,7 @@ namespace _PM_pipeline_benchmark{
     }
 
 }
-#ifdef BOOST_FAIRNESS_EXPERIMENTAL_MUTEXES
-namespace _EXP_PM_pipeline_benchmark{
 
-    static boost::fairness::experimental_priority_mutex<4> m;
-
-    static void thread_function(int p, int preCriticalTime, int criticalTime, int postCriticalTime){
-        busy_wait_milli(preCriticalTime);
-        m.lock(p);
-        busy_wait_milli(criticalTime);
-        m.unlock();
-        busy_wait_milli(postCriticalTime);
-    }
-
-    static void thread_function_micro(int p, int preCriticalTime, int criticalTime, int postCriticalTime){
-        busy_wait_micro(preCriticalTime);
-        m.lock(p);
-        busy_wait_micro(criticalTime);
-        m.unlock();
-        busy_wait_micro(postCriticalTime);
-    }
-
-    static void thread_function_nano(int p, int preCriticalTime, int criticalTime, int postCriticalTime){
-        busy_wait_nano(preCriticalTime);
-        m.lock(p);
-        busy_wait_nano(criticalTime);
-        m.unlock();
-        busy_wait_nano(postCriticalTime);
-    }
-
-}
-#endif
 namespace _SLM_PM_pipeline_benchmark{
 
     static boost::fairness::slim_priority_mutex<4> m;

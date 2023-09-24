@@ -22,15 +22,7 @@ static void SPNLC_PM_LockUnlock(benchmark::State& state) { /* much better for sp
         m.unlock();
     }
 }
-#ifdef BOOST_FAIRNESS_EXPERIMENTAL_MUTEXES
-static void EXPPM_LockUnlock(benchmark::State& state) {
-    boost::fairness::experimental_priority_mutex m;
-    for (auto _ : state){
-        m.lock();
-        m.unlock();
-    }
-}
-#endif
+
 static void SLMPM_LockUnlock(benchmark::State& state) {
     boost::fairness::slim_priority_mutex<7> m;
     for (auto _ : state){
