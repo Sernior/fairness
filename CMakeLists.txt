@@ -13,7 +13,7 @@ add_compile_options(-mcx16)
 
 if(LIBFSM_EXPERIMENTAL)#experimental stuff
 target_include_directories(fsm INTERFACE include/experimental)
-add_compile_definitions(EXPERIMENTAL_MUTEXES)
+add_compile_definitions(BOOST_FAIRNESS_EXPERIMENTAL_MUTEXES)
 endif()
 
 if(Boost_FOUND)#if boost is found for boost atomic
@@ -33,7 +33,7 @@ option(LIBFSM_COMPILE_BENCHMARKS "Build the libfsm tests" OFF)
 
 option(LIBFSM_EXPERIMENTAL "add experimental mutexes" OFF)
 
-add_library(tp INTERFACE)# testing
+add_library(tp INTERFACE)# testing to remove in the end
 target_include_directories(tp INTERFACE thread-pool)
 target_compile_features(tp INTERFACE cxx_std_20)
 

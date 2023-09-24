@@ -11,7 +11,7 @@
  * Distributed under the Boost Software License, Version 1.0. (See accompanying file LICENSE_1_0.txt or copy at http://www.boost.org/LICENSE_1_0.txt).
  * 
  */
-#ifdef EXPERIMENTAL_MUTEXES
+#ifdef BOOST_FAIRNESS_EXPERIMENTAL_MUTEXES
 #ifndef SLIM_SPINLOCK_PRIORITY_MUTEX_HPP
 #define SLIM_SPINLOCK_PRIORITY_MUTEX_HPP
 #pragma once
@@ -122,7 +122,6 @@ namespace boost::fairness{
                 if (!lockOwned_(localCtrl.owned_) && priority <= localCtrl.owned_ && ctrl_.compare_exchange_strong(localCtrl, localCtrl.setOwned())){
                     break;
                 }
-                // waiting_flags_[priority].wait(false);
             }
 
             localCtrl = ctrl_.load();
@@ -148,13 +147,8 @@ namespace boost::fairness{
             Priority_t localFirstPriority;
             control_block_t localCtrl;
             for (;;){
-                // reset_();
                 localCtrl = ctrl_.load();
                 localFirstPriority = find_first_priority_(localCtrl);
-                if (localFirstPriority < N){
-                    // waiting_flags_[localFirstPriority].test_and_set();
-                    // waiting_flags_[localFirstPriority].notify_one();
-                }
                 if (ctrl_.compare_exchange_weak(localCtrl, localCtrl.setPriority(localFirstPriority)))
                     break;
             }
@@ -177,12 +171,7 @@ namespace boost::fairness{
         }
 
         private:
-        // std::array<std::atomic_flag, N> waiting_flags_;
         std::atomic<control_block_t> ctrl_;
-
-        // void reset_(){ // there probably is a much better way to do this
-        //     std::memset(&waiting_flags_, 0b00000000, N); // maybe undefined because lock is reading on the waits? Should be ok.
-        // }
 
         Priority_t find_first_priority_(control_block_t const& ctrl){
             for (Priority_t i = 0; i < N; i++){
@@ -198,12 +187,6 @@ namespace boost::fairness{
 
     };
 
-#ifdef BOOST_FOUND
-#include <boost/atomic.hpp>
-#endif
-#if defined(BOOST_ATOMIC_INT128_LOCK_FREE) && BOOST_ATOMIC_INT128_LOCK_FREE > 0
-#define BOOST_FAIRNESS_HAS_DWCAS
-#endif
 #ifdef BOOST_FAIRNESS_HAS_DWCAS
 
     /**
@@ -297,7 +280,6 @@ namespace boost::fairness{
                 if (!lockOwned_(localCtrl.owned_) && priority <= localCtrl.owned_ && ctrl_.compare_exchange_strong(localCtrl, localCtrl.setOwned())){
                     break;
                 }
-                // waiting_flags_[priority].wait(false);
             }
 
             localCtrl = ctrl_.load();
@@ -323,13 +305,8 @@ namespace boost::fairness{
             Priority_t localFirstPriority;
             control_block_t localCtrl;
             for (;;){
-                // reset_();
                 localCtrl = ctrl_.load();
                 localFirstPriority = find_first_priority_(localCtrl);
-                if (localFirstPriority < N){
-                    // waiting_flags_[localFirstPriority].test_and_set();
-                    // waiting_flags_[localFirstPriority].notify_one();
-                }
                 if (ctrl_.compare_exchange_weak(localCtrl, localCtrl.setPriority(localFirstPriority)))
                     break;
             }
@@ -352,12 +329,7 @@ namespace boost::fairness{
         }
 
         private:
-        // std::array<boost::atomic_flag, N> waiting_flags_;
         boost::atomic<control_block_t> ctrl_;
-
-        // void reset_(){ // there probably is a much better way to do this
-        //     std::memset(&waiting_flags_, 0b00000000, N); // maybe undefined because lock is reading on the waits? Should be ok.
-        // }
 
         Priority_t find_first_priority_(control_block_t const& ctrl){
             for (Priority_t i = 0; i < N; i++){
@@ -377,4 +349,4 @@ namespace boost::fairness{
 
 }
 #endif // SLIM_SPINLOCK_PRIORITY_MUTEX_HPP
-#endif // EXPERIMENTAL_MUTEXES
+#endif // BOOST_FAIRNESS_EXPERIMENTAL_MUTEXES

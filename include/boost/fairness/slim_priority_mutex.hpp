@@ -12,8 +12,8 @@
  * 
  */
 
-#ifndef SLIM_PRIORITY_MUTEX_HPP
-#define SLIM_PRIORITY_MUTEX_HPP
+#ifndef BOOST_FAIRNESS_SLIM_PRIORITY_MUTEX_HPP
+#define BOOST_FAIRNESS_SLIM_PRIORITY_MUTEX_HPP
 #include <thread>
 #include <atomic>
 #include <array>
@@ -22,6 +22,8 @@
 #include <mutex>
 #include <boost/fairness/priority_t.hpp>
 #include <cstring>
+#include <boost/fairness/config.hpp>
+
 namespace boost::fairness{
 
     template<bool> struct Range;
@@ -97,10 +99,7 @@ namespace boost::fairness{
          * 
          * \code{.cpp}
          * slim_priority_mutex<7> m;
-         * 
-         * void my_function(int prio) {
-         *      //...some code.
-         *      m.lock(prio);
+         * BOOST_FAIRNESS_CONFIG_HPPo);
          *      //...some code.
          * }
          * \endcode
@@ -211,18 +210,12 @@ namespace boost::fairness{
 
     };
 
-#ifdef BOOST_FOUND
-#include <boost/atomic.hpp>
-#endif
-#if defined(BOOST_ATOMIC_INT128_LOCK_FREE) && BOOST_ATOMIC_INT128_LOCK_FREE > 0
-#define BOOST_FAIRNESS_HAS_DWCAS
-#endif
 #ifdef BOOST_FAIRNESS_HAS_DWCAS
 
     /**
      * @brief The slim_priority_mutex is an advanced synchronization mechanism that enhances the traditional mutex by introducing a priority-based approach.
      * 
-     * @tparam N : number of 0 indexed priorities the slim_priority_mutex manages, up to _max_priority.
+     * @tparam N : number of 0 indexed priorities the slim_priority_mutex manages, up to 15.
      */
     template<size_t N>
     class slim_priority_mutex<N, Range<(8 <= N && N <= 15)>>{
@@ -403,4 +396,4 @@ namespace boost::fairness{
 #endif // BOOST_FAIRNESS_HAS_DWCAS
 
 }
-#endif // SLIM_PRIORITY_MUTEX_HPP
+#endif // BOOST_FAIRNESS_SLIM_PRIORITY_MUTEX_HPP

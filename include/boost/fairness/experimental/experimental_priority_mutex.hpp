@@ -16,7 +16,7 @@
     ACCEPTED AND RENAMED slim_priority_mutex.h marked for deletion
 */
 
-#ifdef EXPERIMENTAL_MUTEXES
+#ifdef BOOST_FAIRNESS_EXPERIMENTAL_MUTEXES
 #ifndef EXPERIMENTAL_PRIORITY_MUTEX_HPP
 #define EXPERIMENTAL_PRIORITY_MUTEX_HPP
 #include <thread>
@@ -197,4 +197,4 @@ namespace boost::fairness{
     };
 }
 #endif // EXPERIMENTAL_PRIORITY_MUTEX_HPP
-#endif // EXPERIMENTAL_MUTEXES
+#endif // BOOST_FAIRNESS_EXPERIMENTAL_MUTEXES

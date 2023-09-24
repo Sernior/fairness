@@ -60,7 +60,7 @@ namespace _PM_pipeline_benchmark{
     }
 
 }
-#ifdef EXPERIMENTAL_MUTEXES
+#ifdef BOOST_FAIRNESS_EXPERIMENTAL_MUTEXES
 namespace _EXP_PM_pipeline_benchmark{
 
     static boost::fairness::experimental_priority_mutex<4> m;
@@ -120,7 +120,7 @@ namespace _SLM_PM_pipeline_benchmark{
     }
 
 }
-#ifdef EXPERIMENTAL_MUTEXES
+#ifdef BOOST_FAIRNESS_EXPERIMENTAL_MUTEXES
 namespace _SPNLC_SLM_PM_pipeline_benchmark{
 
     static boost::fairness::slim_spinlock_priority_mutex<4> m;

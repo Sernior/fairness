@@ -11,8 +11,8 @@
  * Distributed under the Boost Software License, Version 1.0. (See accompanying file LICENSE_1_0.txt or copy at http://www.boost.org/LICENSE_1_0.txt).
  * 
  */
-#ifndef SPINLOCK_PRIORITY_MUTEX_HPP
-#define SPINLOCK_PRIORITY_MUTEX_HPP
+#ifndef BOOST_FAIRNESS_SPINLOCK_PRIORITY_MUTEX_HPP
+#define BOOST_FAIRNESS_SPINLOCK_PRIORITY_MUTEX_HPP
 #include <thread>
 #include <atomic>
 #include <array>
@@ -133,4 +133,4 @@ namespace boost::fairness{
         }
     };
 }
-#endif // SPINLOCK_PRIORITY_MUTEX_HPP
+#endif // BOOST_FAIRNESS_SPINLOCK_PRIORITY_MUTEX_HPP

@@ -10,32 +10,33 @@
  * Distributed under the Boost Software License, Version 1.0. (See accompanying file LICENSE_1_0.txt or copy at http://www.boost.org/LICENSE_1_0.txt).
  * 
  */
-#ifndef SHARED_PRIORITY_MUTEX_HPP
-#define SHARED_PRIORITY_MUTEX_HPP
+#ifndef BOOST_FAIRNESS_SHARED_PRIORITY_MUTEX_HPP
+#define BOOST_FAIRNESS_SHARED_PRIORITY_MUTEX_HPP
 #include <thread>
 #include <mutex>
 #include <condition_variable>
 #include <array>
 #include <stdexcept>
+#include <cstring>
 #include <boost/fairness/priority_t.hpp>
+#include <boost/fairness/spinlock_priority_mutex.hpp>
 
 namespace boost::fairness{
 
     /**
-     * @brief The shared_priority_mutex is an advanced synchronization mechanism that enhances the traditional shared_mutex by introducing a priority-based approach.
+     * @brief The shared_priority_mutex is an advanced synchronization mechanism that enhances the traditional mutex by introducing a priority-based approach.
      * 
      * @tparam N : number of 0 indexed priorities the shared_priority_mutex manages, up to _max_priority.
      */
-    template<Priority_t N = 1, typename = std::enable_if_t<(N >= 1 && N <= _max_priority)>>
+    template<size_t N = 1>
+    requires (N >= 1 && N <= _max_priority)
     class shared_priority_mutex{
 
         using Thread_cnt_t = uint32_t;
-        static constexpr Thread_cnt_t _max_threads = Thread_cnt_t(-1);
 
         struct threadPriority{
             Thread_cnt_t writers_waiting{};
-            Thread_cnt_t threads_waiting{};
-            std::condition_variable thread_queue;
+            Thread_cnt_t readers_waiting{};
         };
 
         public:
@@ -65,25 +66,40 @@ namespace boost::fairness{
          * 
          * \code{.cpp}
          * shared_priority_mutex<10> m;
-         * m.lock(9);
+         * 
+         * void my_function(int prio) {
+         *      //...some code.
+         *      m.lock(prio);
+         *      //...some code.
+         * }
          * \endcode
          */
-        void lock(Priority_t priority = 0){
+        void lock(Priority_t const priority = 0){
+            intMtx_.lock(priority);
+            priorities_[priority].writers_waiting++;
+            tot_writers_waiting_++;
+            for (;;){
 
-            std::unique_lock<std::mutex> lock(_internalMtx);
-            auto& myPriority = _priorities[priority];
+                if (
+                    tot_current_readers_ == 0 &&
+                    !lockOwned_ &&
+                    find_first_priority_() >= priority
 
-            while (_lock_is_owned() || _totalCurrentReaders > 0 || _find_first_priority(priority) < priority ){ 
-                myPriority.threads_waiting++;
-                myPriority.writers_waiting++;
-                _totalWritersWaiting++;
-                myPriority.thread_queue.wait(lock);
-                myPriority.threads_waiting--;
-                myPriority.writers_waiting--;
-                _totalWritersWaiting--;
+                ){
+                    priorities_[priority].writers_waiting--;
+                    tot_writers_waiting_--;
+                    lockOwned_ = true;
+                    intMtx_.unlock();
+                    return;
+                }
+
+                intMtx_.unlock();
+
+                writer_waiting_flag[priority].wait(false);
+
+                intMtx_.lock(priority);
+
             }
-
-            _owner = std::this_thread::get_id();
         }
 
         /**
@@ -91,29 +107,41 @@ namespace boost::fairness{
          * 
          * \code{.cpp}
          * shared_priority_mutex<10> m;
-         * m.lock(9);
-         * m.unlock();
+         * 
+         * void my_function() {
+         *      //...some code.
+         *      m.unlock();
+         *      //...some code.
+         * }
          * \endcode
          */
         void unlock(){
+
             Priority_t p;
 
-            {
-            std::lock_guard<std::mutex> lock(_internalMtx);
-            _owner = std::thread::id();
-            p = _find_first_priority();
-            }
+            intMtx_.lock();
 
-            if (p == _max_priority)
-                return;
+            lockOwned_ = false;
 
-            if (_totalWritersWaiting == 0){
-                _notify_all();
+            p = find_first_priority_();
+
+            if (p == _max_priority){
+                intMtx_.unlock();
                 return;
             }
 
-            _priorities[p].thread_queue.notify_all();
+            if (tot_writers_waiting_ == 0){
+                allow_all_readers();
+                intMtx_.unlock();
+                notify_all_readers_();
+                return;
+            }
 
+            reset_(p);
+
+            intMtx_.unlock();
+
+            notify_priority_(p);
 
         }
 
@@ -124,16 +152,32 @@ namespace boost::fairness{
          * 
          * \code{.cpp}
          * shared_priority_mutex<10> m;
-         * m.try_lock(9);
+         * 
+         * void my_function(int prio) {
+         *      //...some code.
+         *      m.try_lock(prio);
+         *      //...some code.
+         * }
          * \endcode
          * @return bool 
          */
-        [[nodiscard]] bool try_lock(Priority_t priority = 0){
+        [[nodiscard]] bool try_lock(Priority_t const priority = 0){
 
-            std::lock_guard<std::mutex> lock(_internalMtx);
-            if (_lock_is_owned() || _totalCurrentReaders > 0 || _find_first_priority(priority) < priority)
+            intMtx_.lock(priority);
+
+            if (lockOwned_ ||
+            tot_current_readers_ > 0 ||
+            find_first_priority_() < priority){
+
+                intMtx_.unlock();
+
                 return false;
-            _owner = std::this_thread::get_id();
+            }
+
+            lockOwned_ = true;
+
+            intMtx_.unlock();
+
             return true;
         }
 
@@ -144,24 +188,81 @@ namespace boost::fairness{
          * 
          * \code{.cpp}
          * shared_priority_mutex<10> m;
-         * m.lock_shared(9);
+         * 
+         * void my_function(int prio) {
+         *      //...some code.
+         *      m.lock_shared(prio);
+         *      //...some code.
+         * }
          * \endcode
          */
         void lock_shared(Priority_t priority = 0){
+            intMtx_.lock(priority);
 
-            std::unique_lock<std::mutex> lock(_internalMtx);
-            auto& myPriority = _priorities[priority];
+            priorities_[priority].readers_waiting++;
 
-            while (_lock_is_owned() ||
-                   _totalCurrentReaders == _max_threads ||
-                   _find_first_priority_with_writers(priority) < priority )
-            {
-                myPriority.threads_waiting++;
-                myPriority.thread_queue.wait(lock);
-                myPriority.threads_waiting--;
+            for(;;){
+
+                if (!lockOwned_ && find_first_priority_with_writers_() >= priority){
+                    tot_current_readers_++;
+                    priorities_[priority].readers_waiting--;
+                    intMtx_.unlock();
+                    return;
+                }
+
+                intMtx_.unlock();
+
+                reader_waiting_flag[priority].wait(false);
+
+                intMtx_.lock(priority);
+
+            }
+        }
+
+        /**
+         * @brief Release the shared_priority_mutex from shared ownership.
+         * 
+         * \code{.cpp}
+         * shared_priority_mutex<10> m;
+         * 
+         * void my_function() {
+         *      //...some code.
+         *      m.unlock_shared();
+         *      //...some code.
+         * }
+         * \endcode
+         */
+        void unlock_shared(){
+
+            Priority_t p;
+
+            intMtx_.lock();
+
+            tot_current_readers_--;
+
+            p = find_first_priority_();
+
+            if (p == _max_priority){
+                intMtx_.unlock();
+                return;
             }
 
-            _totalCurrentReaders++;
+            if (tot_writers_waiting_ == 0){
+                allow_all_readers();
+                intMtx_.unlock();
+                notify_all_readers_();
+                return;
+            }
+
+            if (tot_current_readers_ == 0){
+                reset_(p);
+                intMtx_.unlock();
+                notify_priority_(p);
+                return;
+            }
+
+            intMtx_.unlock();
+
         }
 
         /**
@@ -171,86 +272,81 @@ namespace boost::fairness{
          * 
          * \code{.cpp}
          * shared_priority_mutex<10> m;
-         * m.try_lock_shared(9);
+         * 
+         * void my_function(int prio) {
+         *      //...some code.
+         *      m.try_lock_shared(prio);
+         *      //...some code.
+         * }
          * \endcode
          * @return bool 
          */
         [[nodiscard]] bool try_lock_shared(Priority_t priority = 0){
+            intMtx_.lock(priority);
 
-            std::lock_guard<std::mutex> lock(_internalMtx);
-            if (_lock_is_owned() ||
-                _totalCurrentReaders == _max_threads ||
-                _find_first_priority_with_writers(priority) < priority)
+            if (lockOwned_ || find_first_priority_with_writers_() < priority){
+
+                intMtx_.unlock();
+
                 return false;
-            _totalCurrentReaders++;
+            }
+
+            tot_current_readers_++;
+
+            intMtx_.unlock();
+
             return true;
-        }
-
-        /**
-         * @brief Release the shared_priority_mutex from shared ownership.
-         * 
-         * \code{.cpp}
-         * shared_priority_mutex<10> m;
-         * m.lock_shared(9);
-         * m.unlock_shared();
-         * \endcode
-         */
-        void unlock_shared(){
-            Priority_t p;
-
-            {
-            std::lock_guard<std::mutex> lock(_internalMtx);
-            _totalCurrentReaders--;
-            p = _find_first_priority();
-            }
-
-            if (p == _max_priority)
-                return;
-
-            if (_totalWritersWaiting == 0){
-                _notify_all();
-                return;
-            }
-
-            if (_totalCurrentReaders == 0){
-                _priorities[p].thread_queue.notify_all();
-            }
-
         }
 
         private:
 
-        Thread_cnt_t _totalWritersWaiting{};
-        Thread_cnt_t _totalCurrentReaders{};
-        std::mutex _internalMtx;
-        std::array<threadPriority, N> _priorities;
-        std::thread::id _owner{};
+        spinlock_priority_mutex<N> intMtx_;
+        std::array<threadPriority, N> priorities_;
+        std::array<std::atomic_flag, N> writer_waiting_flag;
+        std::array<std::atomic_flag, N> reader_waiting_flag;
+        Thread_cnt_t tot_current_readers_;
+        Thread_cnt_t tot_writers_waiting_;
+        bool lockOwned_;
 
-        Priority_t _find_first_priority(Priority_t priority = _max_priority){
-            for (Priority_t i = 0; i < ((priority == _max_priority) ? N : priority); i++){
-                if (_priorities[i].threads_waiting > 0)
+        Priority_t find_first_priority_() const {
+            for (Priority_t i = 0; i <  N; i++){
+                if (priorities_[i].writers_waiting+priorities_[i].readers_waiting > 0)
                     return i;
             }
             return _max_priority;
         }
 
-        Priority_t _find_first_priority_with_writers(Priority_t priority = _max_priority){
-            for (Priority_t i = 0; i < ((priority == _max_priority) ? N : priority); i++){
-                if (_priorities[i].writers_waiting > 0)
+        Priority_t find_first_priority_with_writers_() const {
+            for (Priority_t i = 0; i <  N; i++){
+                if (priorities_[i].writers_waiting > 0)
                     return i;
             }
             return _max_priority;
         }
 
-        void _notify_all(){
-            for (auto& p : _priorities)
-                p.thread_queue.notify_all();
+        void notify_all_readers_(){
+            std::memset(&reader_waiting_flag, 0b00000001, N);
+            for (Priority_t i = 0; i < N; i++)
+                reader_waiting_flag[i].notify_all();
         }
 
-        bool _lock_is_owned(){
-            return std::thread::id() != _owner;
+        void notify_priority_(Priority_t const p){
+            writer_waiting_flag[p].notify_one();
+            reader_waiting_flag[p].notify_all();
+        }
+
+        void reset_(Priority_t const p){
+            std::memset(&writer_waiting_flag, 0b00000000, N);
+            std::memset(&reader_waiting_flag, 0b00000000, N);
+            writer_waiting_flag[p].test_and_set();
+            reader_waiting_flag[p].test_and_set();
+        }
+
+        void allow_all_readers(){
+            std::memset(&writer_waiting_flag, 0b00000000, N);
+            std::memset(&reader_waiting_flag, 0b00000001, N);
         }
 
     };
 }
-#endif // SHARED_PRIORITY_MUTEX_HPP
+#endif // BOOST_FAIRNESS_SHARED_PRIORITY_MUTEX_HPP

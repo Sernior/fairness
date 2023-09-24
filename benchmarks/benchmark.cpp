@@ -22,7 +22,7 @@ static void SPNLC_PM_LockUnlock(benchmark::State& state) { /* much better for sp
         m.unlock();
     }
 }
-#ifdef EXPERIMENTAL_MUTEXES
+#ifdef BOOST_FAIRNESS_EXPERIMENTAL_MUTEXES
 static void EXPPM_LockUnlock(benchmark::State& state) {
     boost::fairness::experimental_priority_mutex m;
     for (auto _ : state){
@@ -38,7 +38,7 @@ static void SLMPM_LockUnlock(benchmark::State& state) {
         m.unlock();
     }
 }
-#ifdef EXPERIMENTAL_MUTEXES
+#ifdef BOOST_FAIRNESS_EXPERIMENTAL_MUTEXES
 static void SPNLC_SLM_PM_LockUnlock(benchmark::State& state) { /* the non slim version is better for spinlocking */
     boost::fairness::slim_spinlock_priority_mutex<7> m;
     for (auto _ : state){
@@ -168,7 +168,7 @@ static void STD_pipeline_benchmark_audio(benchmark::State& state) {
         _STD_pipeline_benchmark::thread_function_micro(preCT[state.thread_index()], CT, postCT[state.thread_index()]);
     }
 }
-#ifdef EXPERIMENTAL_MUTEXES
+#ifdef BOOST_FAIRNESS_EXPERIMENTAL_MUTEXES
 static void EXP_pipeline_benchmark_audio(benchmark::State& state) {
     std::array<int, 8> prios {0, 2, 2, 1, 1, 3, 3, 0};
     std::array<int, 8> preCT {200, 150, 200, 300, 100, 50, 50, 200};
@@ -214,7 +214,7 @@ static void PM_pipeline_benchmark_fast(benchmark::State& state) {
     }
 
 }
-#ifdef EXPERIMENTAL_MUTEXES
+#ifdef BOOST_FAIRNESS_EXPERIMENTAL_MUTEXES
 static void EXP_pipeline_benchmark_fast(benchmark::State& state) {
     std::array<int, 8> prios {0, 2, 2, 1, 1, 3, 3, 0};
     std::array<int, 8> preCT {2000, 1500, 2000, 3000, 1000, 500, 500, 2000};
@@ -238,7 +238,7 @@ static void SLM_pipeline_benchmark_fast(benchmark::State& state) {
     }
 
 }
-#ifdef EXPERIMENTAL_MUTEXES
+#ifdef BOOST_FAIRNESS_EXPERIMENTAL_MUTEXES
 static void SPNLC_SLM_pipeline_benchmark_fast(benchmark::State& state) {
     std::array<int, 8> prios {0, 2, 2, 1, 1, 3, 3, 0};
     std::array<int, 8> preCT {2000, 1500, 2000, 3000, 1000, 500, 500, 2000};
@@ -264,13 +264,13 @@ static void SPNLC_PM_pipeline_benchmark_fast(benchmark::State& state) {
 }
 
 BENCHMARK(PM_LockUnlock)->Threads(8);
-#ifdef EXPERIMENTAL_MUTEXES
+#ifdef BOOST_FAIRNESS_EXPERIMENTAL_MUTEXES
 BENCHMARK(EXPPM_LockUnlock)->Threads(8);
 #endif
 BENCHMARK(SLMPM_LockUnlock)->Threads(8);
 BENCHMARK(STD_LockUnlock)->Threads(8);
 BENCHMARK(SPNLC_PM_LockUnlock)->Threads(8);
-#ifdef EXPERIMENTAL_MUTEXES
+#ifdef BOOST_FAIRNESS_EXPERIMENTAL_MUTEXES
 BENCHMARK(SPNLC_SLM_PM_LockUnlock)->Threads(8);
 #endif
 BENCHMARK(PM_S_LockUnlock);
@@ -287,16 +287,16 @@ BENCHMARK(STD_pipeline_benchmark_gaming)->UseRealTime();
 
 BENCHMARK(PM_pipeline_benchmark_audio)->Threads(8);
 BENCHMARK(STD_pipeline_benchmark_audio)->Threads(8);
-#ifdef EXPERIMENTAL_MUTEXES
+#ifdef BOOST_FAIRNESS_EXPERIMENTAL_MUTEXES
 BENCHMARK(EXP_pipeline_benchmark_audio)->Threads(8);
 #endif
 BENCHMARK(SLM_pipeline_benchmark_audio)->Threads(8);
 BENCHMARK(PM_pipeline_benchmark_fast)->Threads(8);
-#ifdef EXPERIMENTAL_MUTEXES
+#ifdef BOOST_FAIRNESS_EXPERIMENTAL_MUTEXES
 BENCHMARK(EXP_pipeline_benchmark_fast)->Threads(8);
 #endif
 BENCHMARK(SLM_pipeline_benchmark_fast)->Threads(8);
-#ifdef EXPERIMENTAL_MUTEXES
+#ifdef BOOST_FAIRNESS_EXPERIMENTAL_MUTEXES
 BENCHMARK(SPNLC_SLM_pipeline_benchmark_fast)->Threads(8);
 #endif
 BENCHMARK(SPNLC_PM_pipeline_benchmark_fast)->Threads(8);

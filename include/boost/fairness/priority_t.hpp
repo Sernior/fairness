@@ -11,11 +11,11 @@
  * Distributed under the Boost Software License, Version 1.0. (See accompanying file LICENSE_1_0.txt or copy at http://www.boost.org/LICENSE_1_0.txt).
  * 
  */
-#ifndef PRIORITY_T_HPP
-#define PRIORITY_T_HPP
+#ifndef BOOST_FAIRNESS_PRIORITY_T_HPP
+#define BOOST_FAIRNESS_PRIORITY_T_HPP
 #include <cstdint>
 namespace boost::fairness{
     using Priority_t = uint8_t;
     static constexpr Priority_t _max_priority = Priority_t(-1);
 }
-#endif // PRIORITY_T_HPP
+#endif // BOOST_FAIRNESS_PRIORITY_T_HPP
