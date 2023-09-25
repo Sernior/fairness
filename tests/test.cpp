@@ -23,6 +23,7 @@
 #include "SPM_scenario5Context.h"
 #include "SPM_scenario6Context.h"
 #include "SPM_scenario7Context.h"
+#include "SPM_scenario8Context.h"
 
 TEST(PriorityMutex_ControlledScheduling, LockUnlockTest) {
     PM_scenario1::executeSchedulingSequence();
@@ -95,6 +96,28 @@ TEST(PriorityMutex_ControlledScheduling, SPNLCPM_RandomizedPriorityTest) {
         }
 
         SPNLCPM_scenario4::ret.clear();
+    }
+    EXPECT_TRUE(condition);
+}
+
+TEST(PriorityMutex_ControlledScheduling, SPM_RandomizedPriorityTest) {
+    bool condition = true;
+    for (int i = 0; i < RANDOM_TESTS; i++) {
+        SPM_scenario8::executeSchedulingSequence();
+        condition &= std::is_sorted(SPM_scenario8::ret.cbegin(), SPM_scenario8::ret.cend());
+
+        if (condition && i % 100 == 0){
+            std::cout << i << std::endl; 
+        }
+
+        if (condition == false){
+            for (int j = 0; j < 8; j++) {
+                std::cout << SPM_scenario8::ret[j] << " ";
+            }
+            std::cout << std::endl;
+        }
+
+        SPM_scenario8::ret.clear();
     }
     EXPECT_TRUE(condition);
 }
