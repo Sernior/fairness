@@ -22,6 +22,7 @@
 #include "SPM_scenario4Context.h"
 #include "SPM_scenario5Context.h"
 #include "SPM_scenario6Context.h"
+#include "SPM_scenario7Context.h"
 
 TEST(PriorityMutex_ControlledScheduling, LockUnlockTest) {
     PM_scenario1::executeSchedulingSequence();
@@ -181,6 +182,13 @@ TEST(SharedPriorityMutex_ControlledScheduling, PriorityBehavior) {
     EXPECT_EQ(SPM_scenario6::ret, SPM_scenario6::expected);
     SPM_scenario6::ret.clear();
     SPM_scenario6::expected.clear();
+}
+
+TEST(SharedPriorityMutex_ControlledScheduling, TryLockSharedTest) {
+    SPM_scenario7::executeSchedulingSequence();
+    EXPECT_EQ(SPM_scenario7::ret, SPM_scenario7::expected);
+    SPM_scenario7::ret.clear();
+    SPM_scenario7::expected.clear();
 }
 
 int main(int argc, char* argv[]) {
