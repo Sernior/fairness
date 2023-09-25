@@ -110,7 +110,7 @@ TEST(PriorityMutex_ControlledScheduling, SPM_RandomizedPriorityTest) {
             std::cout << i << std::endl; 
         }
 
-        if (condition == false){
+        if (!std::is_sorted(SPM_scenario8::ret.cbegin(), SPM_scenario8::ret.cend())){
             for (int j = 0; j < 8; j++) {
                 std::cout << SPM_scenario8::ret[j] << " ";
             }
