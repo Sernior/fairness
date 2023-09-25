@@ -5,7 +5,7 @@
 namespace SPM_scenario7{
     using namespace DeterministicConcurrency;
 
-    boost::fairness::shared_priority_mutex<5> m;
+    boost::fairness::shared_priority_mutex<6> m;
 
     std::vector<int> ret;
 
