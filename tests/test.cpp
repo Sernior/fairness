@@ -3,27 +3,7 @@
 #include <algorithm>
 #include <DeterministicConcurrency>
 
-#include "PM_scenario1Context.h"
-#include "PM_scenario2Context.h"
-#include "PM_scenario3Context.h"
-#include "PM_scenario4Context.h"
-#include "PM_scenario5Context.h"
-#include "SLM_scenario1Context.h"
-#include "SLM_scenario2Context.h"
-#include "SLM_scenario3Context.h"
-#include "SLM_scenario4Context.h"
-#include "SPNLCPM_scenario1Context.h"
-#include "SPNLCPM_scenario2Context.h"
-#include "SPNLCPM_scenario3Context.h"
-#include "SPNLCPM_scenario4Context.h"
-#include "SPM_scenario1Context.h"
-#include "SPM_scenario2Context.h"
-#include "SPM_scenario3Context.h"
-#include "SPM_scenario4Context.h"
-#include "SPM_scenario5Context.h"
-#include "SPM_scenario6Context.h"
-#include "SPM_scenario7Context.h"
-#include "SPM_scenario8Context.h"
+#include "scenarios.hpp"
 
 TEST(PriorityMutex_ControlledScheduling, LockUnlockTest) {
     PM_scenario1::executeSchedulingSequence();
@@ -106,7 +86,7 @@ TEST(PriorityMutex_ControlledScheduling, SPM_RandomizedPriorityTest) {
         SPM_scenario8::executeSchedulingSequence();
         condition &= std::is_sorted(SPM_scenario8::ret.cbegin(), SPM_scenario8::ret.cend());
 
-        if (condition && i % 100 == 0){
+        if (i % 100 == 0){
             std::cout << i << std::endl; 
         }
 
