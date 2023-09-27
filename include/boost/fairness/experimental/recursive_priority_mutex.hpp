@@ -24,10 +24,11 @@
 namespace boost::fairness{
 
     /**
-     * @brief The recursive_putex is an advanced synchronization mechanism that enhances the traditional mutex by introducing a priority-based approach.
+     * @brief The recursive_priority_mutex is an advanced synchronization mechanism that enhances the traditional mutex by introducing a priority-based approach.
      * 
      * @tparam N : number of 0 indexed priorities the recursive_priority_mutex manages, up to _max_priority.
      */
+    thread_local static uint32_t recursiveCounter_;
     template<size_t N = 1>
     requires (N >= 1 && N <= _max_priority)
     class recursive_priority_mutex{
@@ -135,7 +136,6 @@ namespace boost::fairness{
         std::array<std::atomic<Thread_cnt_t>, N> waiters_;
         std::atomic<Priority_t> currentPriority_{_max_priority};
         std::atomic_flag lockOwned_;
-        static thread_local uint32_t recursiveCounter_ = 0;
 
         Priority_t find_first_priority_(){
             for (Priority_t i = 0; i < N; i++){
