@@ -3,26 +3,7 @@
 #include <algorithm>
 #include <DeterministicConcurrency>
 
-#include "PM_scenario1Context.h"
-#include "PM_scenario2Context.h"
-#include "PM_scenario3Context.h"
-#include "PM_scenario4Context.h"
-#include "PM_scenario5Context.h"
-#include "SLM_scenario1Context.h"
-#include "SLM_scenario2Context.h"
-#include "SLM_scenario3Context.h"
-#include "SLM_scenario4Context.h"
-#include "SPNLCPM_scenario1Context.h"
-#include "SPNLCPM_scenario2Context.h"
-#include "SPNLCPM_scenario3Context.h"
-#include "SPNLCPM_scenario4Context.h"
-#include "SPM_scenario1Context.h"
-#include "SPM_scenario2Context.h"
-#include "SPM_scenario3Context.h"
-#include "SPM_scenario4Context.h"
-#include "SPM_scenario5Context.h"
-#include "SPM_scenario6Context.h"
-#include "SPM_scenario7Context.h"
+#include "scenarios.hpp"
 
 TEST(PriorityMutex_ControlledScheduling, LockUnlockTest) {
     PM_scenario1::executeSchedulingSequence();
@@ -95,6 +76,28 @@ TEST(PriorityMutex_ControlledScheduling, SPNLCPM_RandomizedPriorityTest) {
         }
 
         SPNLCPM_scenario4::ret.clear();
+    }
+    EXPECT_TRUE(condition);
+}
+
+TEST(PriorityMutex_ControlledScheduling, SPM_RandomizedPriorityTest) {
+    bool condition = true;
+    for (int i = 0; i < RANDOM_TESTS; i++) {
+        SPM_scenario8::executeSchedulingSequence();
+        condition &= std::is_sorted(SPM_scenario8::ret.cbegin(), SPM_scenario8::ret.cend());
+
+        if (i % 100 == 0){
+            std::cout << i << std::endl; 
+        }
+
+        if (!std::is_sorted(SPM_scenario8::ret.cbegin(), SPM_scenario8::ret.cend())){
+            for (int j = 0; j < 8; j++) {
+                std::cout << SPM_scenario8::ret[j] << " ";
+            }
+            std::cout << std::endl;
+        }
+
+        SPM_scenario8::ret.clear();
     }
     EXPECT_TRUE(condition);
 }
