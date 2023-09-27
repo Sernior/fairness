@@ -161,14 +161,14 @@ static void STD_pipeline_benchmark_audio(benchmark::State& state) {
     }
 }
 #ifdef BOOST_FAIRNESS_EXPERIMENTAL_MUTEXES
-static void EXP_pipeline_benchmark_audio(benchmark::State& state) {
+static void SPNLC_SLM_PM_pipeline_benchmark_audio(benchmark::State& state) {
     std::array<int, 8> prios {0, 2, 2, 1, 1, 3, 3, 0};
     std::array<int, 8> preCT {200, 150, 200, 300, 100, 50, 50, 200};
     int CT = 100;
     std::array<int, 8> postCT {500, 300, 200, 250, 100, 150, 150, 450};
 
     for (auto _ : state) {
-      _EXP_PM_pipeline_benchmark::thread_function_micro(prios[state.thread_index()] ,preCT[state.thread_index()], CT, postCT[state.thread_index()]);
+      _SPNLC_SLM_PM_pipeline_benchmark::thread_function_micro(prios[state.thread_index()] ,preCT[state.thread_index()], CT, postCT[state.thread_index()]);
     }
 }
 #endif
@@ -206,19 +206,7 @@ static void PM_pipeline_benchmark_fast(benchmark::State& state) {
     }
 
 }
-#ifdef BOOST_FAIRNESS_EXPERIMENTAL_MUTEXES
-static void EXP_pipeline_benchmark_fast(benchmark::State& state) {
-    std::array<int, 8> prios {0, 2, 2, 1, 1, 3, 3, 0};
-    std::array<int, 8> preCT {2000, 1500, 2000, 3000, 1000, 500, 500, 2000};
-    int CT = 1000;
-    std::array<int, 8> postCT {5000, 3000, 2000, 2500, 1000, 1500, 1500, 4500};
 
-    for (auto _ : state) {
-      _EXP_PM_pipeline_benchmark::thread_function_nano(prios[state.thread_index()] ,preCT[state.thread_index()], CT, postCT[state.thread_index()]);
-    }
-
-}
-#endif
 static void SLM_pipeline_benchmark_fast(benchmark::State& state) {
     std::array<int, 8> prios {0, 2, 2, 1, 1, 3, 3, 0};
     std::array<int, 8> preCT {2000, 1500, 2000, 3000, 1000, 500, 500, 2000};
@@ -230,6 +218,7 @@ static void SLM_pipeline_benchmark_fast(benchmark::State& state) {
     }
 
 }
+
 #ifdef BOOST_FAIRNESS_EXPERIMENTAL_MUTEXES
 static void SPNLC_SLM_pipeline_benchmark_fast(benchmark::State& state) {
     std::array<int, 8> prios {0, 2, 2, 1, 1, 3, 3, 0};
@@ -243,6 +232,7 @@ static void SPNLC_SLM_pipeline_benchmark_fast(benchmark::State& state) {
 
 }
 #endif
+
 static void SPNLC_PM_pipeline_benchmark_fast(benchmark::State& state) {
     std::array<int, 8> prios {0, 2, 2, 1, 1, 3, 3, 0};
     std::array<int, 8> preCT {2000, 1500, 2000, 3000, 1000, 500, 500, 2000};
@@ -256,9 +246,6 @@ static void SPNLC_PM_pipeline_benchmark_fast(benchmark::State& state) {
 }
 
 BENCHMARK(PM_LockUnlock)->Threads(8);
-#ifdef BOOST_FAIRNESS_EXPERIMENTAL_MUTEXES
-BENCHMARK(EXPPM_LockUnlock)->Threads(8);
-#endif
 BENCHMARK(SLMPM_LockUnlock)->Threads(8);
 BENCHMARK(STD_LockUnlock)->Threads(8);
 BENCHMARK(SPNLC_PM_LockUnlock)->Threads(8);
@@ -280,13 +267,11 @@ BENCHMARK(STD_pipeline_benchmark_gaming)->UseRealTime();
 BENCHMARK(PM_pipeline_benchmark_audio)->Threads(8);
 BENCHMARK(STD_pipeline_benchmark_audio)->Threads(8);
 #ifdef BOOST_FAIRNESS_EXPERIMENTAL_MUTEXES
-BENCHMARK(EXP_pipeline_benchmark_audio)->Threads(8);
+BENCHMARK(SPNLC_SLM_PM_pipeline_benchmark_audio)->Threads(8);
 #endif
 BENCHMARK(SLM_pipeline_benchmark_audio)->Threads(8);
 BENCHMARK(PM_pipeline_benchmark_fast)->Threads(8);
-#ifdef BOOST_FAIRNESS_EXPERIMENTAL_MUTEXES
-BENCHMARK(EXP_pipeline_benchmark_fast)->Threads(8);
-#endif
+
 BENCHMARK(SLM_pipeline_benchmark_fast)->Threads(8);
 #ifdef BOOST_FAIRNESS_EXPERIMENTAL_MUTEXES
 BENCHMARK(SPNLC_SLM_pipeline_benchmark_fast)->Threads(8);

@@ -11,6 +11,7 @@
 
 #ifdef BOOST_FAIRNESS_EXPERIMENTAL_MUTEXES
 #include <boost/fairness/experimental/slim_spinlock_priority_mutex.hpp>
+#include <boost/fairness/experimental/recursive_priority_mutex.hpp>
 #endif // BOOST_FAIRNESS_EXPERIMENTAL_MUTEXES
 
 #endif // BOOST_FAIRNESS_HPP
