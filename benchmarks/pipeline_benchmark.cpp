@@ -93,7 +93,7 @@ namespace _SLM_PM_pipeline_benchmark{
 #ifdef BOOST_FAIRNESS_EXPERIMENTAL_MUTEXES
 namespace _SPNLC_SLM_PM_pipeline_benchmark{
 
-    static boost::fairness::slim_spinlock_priority_mutex<4> m;
+    static boost::fairness::experimental::slim_spinlock_priority_mutex<4> m;
 
     static void thread_function(int p, int preCriticalTime, int criticalTime, int postCriticalTime){
         busy_wait_milli(preCriticalTime);

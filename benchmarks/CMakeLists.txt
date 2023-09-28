@@ -7,3 +7,7 @@ target_link_libraries(pm_benchmark benchmark::benchmark fsm tp deterministic_con
 if ("${CMAKE_SYSTEM_NAME}" MATCHES "Windows")
         target_link_libraries(pm_benchmark Shlwapi)
 endif()
+if(Boost_FOUND)
+target_link_libraries(pm_benchmark LINK_PUBLIC ${Boost_LIBRARIES} )
+endif()
+

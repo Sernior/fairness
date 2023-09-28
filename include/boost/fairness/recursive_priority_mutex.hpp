@@ -10,7 +10,7 @@
  * Distributed under the Boost Software License, Version 1.0. (See accompanying file LICENSE_1_0.txt or copy at http://www.boost.org/LICENSE_1_0.txt).
  * 
  */
-#ifdef BOOST_FAIRNESS_EXPERIMENTAL_MUTEXES
+
 #ifndef BOOST_FAIRNESS_RECURSIVE_PRIORITY_MUTEX_HPP
 #define BOOST_FAIRNESS_RECURSIVE_PRIORITY_MUTEX_HPP
 #include <thread>
@@ -28,7 +28,7 @@ namespace boost::fairness{
      * 
      * @tparam N : number of 0 indexed priorities the recursive_priority_mutex manages, up to _max_priority.
      */
-    thread_local static uint32_t recursiveCounter_;
+
     template<size_t N = 1>
     requires (N >= 1 && N <= _max_priority)
     class recursive_priority_mutex{
@@ -71,19 +71,7 @@ namespace boost::fairness{
          * \endcode
          */
         void lock(Priority_t const priority = 0){
-            Priority_t localCurrentPriority = currentPriority_.load(std::memory_order_relaxed);
-            waiters_[priority].fetch_add(1, std::memory_order_relaxed);
-            while ( 
-                (recursiveCounter_) ||
-                (localCurrentPriority < priority || !currentPriority_.compare_exchange_weak(localCurrentPriority, priority, std::memory_order_relaxed)) ||
-                (lockOwned_.test_and_set(std::memory_order_acquire))
-            ){
-                lockOwned_.wait(true);
-                localCurrentPriority = currentPriority_;
-            }
-            waiters_[priority].fetch_sub(1, std::memory_order_relaxed);
 
-            recursiveCounter_++;
         }
 
         /**
@@ -100,12 +88,6 @@ namespace boost::fairness{
          * \endcode
          */
         void unlock(){
-            recursiveCounter_--;
-            if (recursiveCounter_ == 0){
-                currentPriority_.store(find_first_priority_(), std::memory_order_relaxed);
-                lockOwned_.clear(std::memory_order_release);
-                lockOwned_.notify_all();//P2616R3 https://www.open-std.org/jtc1/sc22/wg21/docs/papers/2023/p2616r3.html this shouldnt be a problem with mutex semantics
-            }
         }
 
         /**
@@ -125,11 +107,7 @@ namespace boost::fairness{
          * @return bool 
          */
         [[nodiscard]] bool try_lock(Priority_t const priority = 0){
-            if (recursiveCounter_ > 0) {
-                return recursiveCounter_++;
-            }
-            else 
-                return (currentPriority_.load(std::memory_order_relaxed) >= priority && !lockOwned_.test_and_set(std::memory_order_acquire));
+            return false;
         }
 
         private:
@@ -147,4 +125,3 @@ namespace boost::fairness{
     };
 }
 #endif // BOOST_FAIRNESS_RECURSIVE_PRIORITY_MUTEX_HPP
-#endif // BOOST_FAIRNESS_EXPERIMENTAL_MUTEXES

@@ -23,6 +23,7 @@
 #include <boost/fairness/priority_t.hpp>
 #include <cstring>
 #include <boost/fairness/config.hpp>
+#include <boost/fairness/control_block_t.hpp>
 
 namespace boost::fairness{
 
@@ -38,37 +39,6 @@ namespace boost::fairness{
      */
     template<size_t N>
     class slim_priority_mutex<N, Range<(1 <= N && N <= 7)>>{
-
-        //NO DWCAS
-        struct control_block_t{ 
-            int8_t owned_ = 7;// first bit owned remaining 7 bit is the current priority
-            uint8_t priority_[7];
-            control_block_t setOwned() const {
-                control_block_t new_ctrl = *this;
-                new_ctrl.owned_ |= 0b10000000;
-                return new_ctrl;
-            }
-            control_block_t increasePriority(Priority_t const priority) const {
-                control_block_t new_ctrl = *this;
-                new_ctrl.priority_[priority]++;
-                return new_ctrl;
-            }
-            control_block_t decreasePriority(Priority_t const priority) const {
-                control_block_t new_ctrl = *this;
-                new_ctrl.priority_[priority]--;
-                return new_ctrl;
-            }
-            control_block_t setPriority(Priority_t const priority) const {
-                control_block_t new_ctrl = *this;
-                new_ctrl.owned_ = priority;
-                return new_ctrl;
-            }
-            Priority_t getPriority() const {
-                return owned_ & 0b01111111;
-            }
-        };
-
-        static_assert(std::atomic<control_block_t>::is_always_lock_free, "control_block_t is not lock free");
 
         using Thread_cnt_t = uint32_t;
 
@@ -106,7 +76,7 @@ namespace boost::fairness{
          */
         void lock(Priority_t const priority = 0){
 
-            control_block_t localCtrl = ctrl_.load();
+            control_block_64b_t localCtrl = ctrl_.load();
 
             // try to increment the waiters counter in this priority
             for(;;){
@@ -153,7 +123,7 @@ namespace boost::fairness{
          */
         void unlock(){
             Priority_t localFirstPriority;
-            control_block_t localCtrl;
+            control_block_64b_t localCtrl;
             for (;;){
                 reset_();
                 localCtrl = ctrl_.load();
@@ -184,24 +154,24 @@ namespace boost::fairness{
          * @return bool 
          */
         [[nodiscard]] bool try_lock(Priority_t const priority = 0){
-            control_block_t localCtrl = ctrl_.load();
+            control_block_64b_t localCtrl = ctrl_.load();
             return !lockOwned_(localCtrl.owned_) && priority <= localCtrl.owned_ && ctrl_.compare_exchange_strong(localCtrl, localCtrl.setOwned());
         }
 
         private:
         std::array<std::atomic_flag, N> waiting_flags_;
-        std::atomic<control_block_t> ctrl_;
+        std::atomic<control_block_64b_t> ctrl_;
 
         void reset_(){ // there probably is a much better way to do this
             std::memset(&waiting_flags_, 0b00000000, N); // maybe undefined because lock is reading on the waits? Should be ok.
         }
 
-        Priority_t find_first_priority_(control_block_t const& ctrl){
+        Priority_t find_first_priority_(control_block_64b_t const& ctrl){
             for (Priority_t i = 0; i < N; i++){
                 if (ctrl.priority_[i] > 0)
                     return i;
             }
-            return 7;
+            return BOOST_FAIRNESS_SPM64B_SUPPORTED_PRIORITIES;
         }
 
         bool lockOwned_(int8_t ctrl) const{
@@ -219,36 +189,6 @@ namespace boost::fairness{
      */
     template<size_t N>
     class slim_priority_mutex<N, Range<(8 <= N && N <= 15)>>{
-
-        struct control_block_t{ 
-            int8_t owned_ = 15;// first bit owned remaining 7 bit is the current priority
-            uint8_t priority_[15];
-            control_block_t setOwned() const {
-                control_block_t new_ctrl = *this;
-                new_ctrl.owned_ |= 0b10000000;
-                return new_ctrl;
-            }
-            control_block_t increasePriority(Priority_t const priority) const {
-                control_block_t new_ctrl = *this;
-                new_ctrl.priority_[priority]++;
-                return new_ctrl;
-            }
-            control_block_t decreasePriority(Priority_t const priority) const {
-                control_block_t new_ctrl = *this;
-                new_ctrl.priority_[priority]--;
-                return new_ctrl;
-            }
-            control_block_t setPriority(Priority_t const priority) const {
-                control_block_t new_ctrl = *this;
-                new_ctrl.owned_ = priority;
-                return new_ctrl;
-            }
-            Priority_t getPriority() const {
-                return owned_ & 0b01111111;
-            }
-        };
-
-        static_assert(boost::atomic<control_block_t>::is_always_lock_free, "control_block_t is not lock free");
 
         using Thread_cnt_t = uint32_t;
 
@@ -289,7 +229,7 @@ namespace boost::fairness{
          */
         void lock(Priority_t const priority = 0){
 
-            control_block_t localCtrl = ctrl_.load();
+            control_block_128b_t localCtrl = ctrl_.load();
 
             // try to increment the waiters counter in this priority
             for(;;){
@@ -336,7 +276,7 @@ namespace boost::fairness{
          */
         void unlock(){
             Priority_t localFirstPriority;
-            control_block_t localCtrl;
+            control_block_128b_t localCtrl;
             for (;;){
                 reset_();
                 localCtrl = ctrl_.load();
@@ -367,24 +307,24 @@ namespace boost::fairness{
          * @return bool 
          */
         [[nodiscard]] bool try_lock(Priority_t const priority = 0){
-            control_block_t localCtrl = ctrl_.load();
+            control_block_128b_t localCtrl = ctrl_.load();
             return !lockOwned_(localCtrl.owned_) && priority <= localCtrl.owned_ && ctrl_.compare_exchange_strong(localCtrl, localCtrl.setOwned());
         }
 
         private:
         std::array<boost::atomic_flag, N> waiting_flags_;
-        boost::atomic<control_block_t> ctrl_;
+        boost::atomic<control_block_128b_t> ctrl_;
 
         void reset_(){ // there probably is a much better way to do this
             std::memset(&waiting_flags_, 0b00000000, N); // maybe undefined because lock is reading on the waits? Should be ok.
         }
 
-        Priority_t find_first_priority_(control_block_t const& ctrl){
+        Priority_t find_first_priority_(control_block_128b_t const& ctrl){
             for (Priority_t i = 0; i < N; i++){
                 if (ctrl.priority_[i] > 0)
                     return i;
             }
-            return 15;
+            return BOOST_FAIRNESS_SPM128B_SUPPORTED_PRIORITIES;
         }
 
         bool lockOwned_(int8_t ctrl) const{

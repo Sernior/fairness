@@ -23,7 +23,7 @@
 #include <mutex>
 #include <boost/fairness/priority_t.hpp>
 #include <cstring>
-namespace boost::fairness{
+namespace boost::fairness::experimental{
 
     template<bool> struct Range;
 

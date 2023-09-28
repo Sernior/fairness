@@ -8,7 +8,7 @@
 #include <boost/atomic.hpp>
 #include <boost/fairness.hpp>
 
-static boost::fairness::recursive_priority_mutex<3> ms;
+static boost::fairness::slim_priority_mutex<3> ms;
 
 #define NOW std::chrono::steady_clock::now()
 

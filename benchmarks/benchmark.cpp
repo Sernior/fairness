@@ -32,7 +32,7 @@ static void SLMPM_LockUnlock(benchmark::State& state) {
 }
 #ifdef BOOST_FAIRNESS_EXPERIMENTAL_MUTEXES
 static void SPNLC_SLM_PM_LockUnlock(benchmark::State& state) { /* the non slim version is better for spinlocking */
-    boost::fairness::slim_spinlock_priority_mutex<7> m;
+    boost::fairness::experimental::slim_spinlock_priority_mutex<7> m;
     for (auto _ : state){
         m.lock();
         m.unlock();
@@ -259,7 +259,7 @@ BENCHMARK(STD_LockUnlock)->Threads(8);
 BENCHMARK(SPNLC_PM_LockUnlock)->Threads(8);
 #ifdef BOOST_FAIRNESS_EXPERIMENTAL_MUTEXES
 BENCHMARK(SPNLC_SLM_PM_LockUnlock)->Threads(8);
-BENCHMARK(R_PM_LockUnlock)->Threads(8);
+//BENCHMARK(R_PM_LockUnlock)->Threads(8);
 #endif
 BENCHMARK(PM_S_LockUnlock);
 BENCHMARK(STD_S_LockUnlock);
