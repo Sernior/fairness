@@ -304,9 +304,9 @@ namespace boost::fairness{
         std::array<threadPriority, N> priorities_;
         std::array<std::atomic_flag, N> writer_waiting_flag;
         std::array<std::atomic_flag, N> reader_waiting_flag;
-        Thread_cnt_t tot_current_readers_;
-        Thread_cnt_t tot_writers_waiting_;
-        bool lockOwned_;
+        Thread_cnt_t tot_current_readers_{};
+        Thread_cnt_t tot_writers_waiting_{};
+        bool lockOwned_{};
 
         Priority_t find_first_priority_() const {
             for (Priority_t i = 0; i <  N; i++){
