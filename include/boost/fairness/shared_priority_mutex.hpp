@@ -76,8 +76,8 @@ namespace boost::fairness{
          */
         void lock(Priority_t const priority = 0){
             intMtx_.lock(priority);
-            priorities_[priority].writers_waiting++;
-            tot_writers_waiting_++;
+            ++priorities_[priority].writers_waiting;
+            ++tot_writers_waiting_;
             for (;;){
 
                 if (
@@ -86,8 +86,8 @@ namespace boost::fairness{
                     find_first_priority_() >= priority
 
                 ){
-                    priorities_[priority].writers_waiting--;
-                    tot_writers_waiting_--;
+                    --priorities_[priority].writers_waiting;
+                    --tot_writers_waiting_;
                     lockOwned_ = true;
                     intMtx_.unlock();
                     return;
@@ -199,13 +199,13 @@ namespace boost::fairness{
         void lock_shared(Priority_t priority = 0){
             intMtx_.lock(priority);
 
-            priorities_[priority].readers_waiting++;
+            ++priorities_[priority].readers_waiting;
 
             for(;;){
 
                 if (!lockOwned_ && find_first_priority_with_writers_() >= priority){
-                    tot_current_readers_++;
-                    priorities_[priority].readers_waiting--;
+                    ++tot_current_readers_;
+                    --priorities_[priority].readers_waiting;
                     intMtx_.unlock();
                     return;
                 }
@@ -238,7 +238,7 @@ namespace boost::fairness{
 
             intMtx_.lock();
 
-            tot_current_readers_--;
+            --tot_current_readers_;
 
             p = find_first_priority_();
 
@@ -309,7 +309,7 @@ namespace boost::fairness{
         bool lockOwned_;
 
         Priority_t find_first_priority_() const {
-            for (Priority_t i = 0; i <  N; i++){
+            for (Priority_t i = 0; i <  N; ++i){
                 if (priorities_[i].writers_waiting+priorities_[i].readers_waiting > 0)
                     return i;
             }
@@ -317,7 +317,7 @@ namespace boost::fairness{
         }
 
         Priority_t find_first_priority_with_writers_() const {
-            for (Priority_t i = 0; i <  N; i++){
+            for (Priority_t i = 0; i <  N; ++i){
                 if (priorities_[i].writers_waiting > 0)
                     return i;
             }
@@ -326,7 +326,7 @@ namespace boost::fairness{
 
         void notify_all_readers_(){
             std::memset(&reader_waiting_flag, 0b00000001, N);
-            for (Priority_t i = 0; i < N; i++)
+            for (Priority_t i = 0; i < N; ++i)
                 reader_waiting_flag[i].notify_all();
         }
 

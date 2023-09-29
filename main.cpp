@@ -37,8 +37,8 @@ int main()
 
     BS::thread_pool pool(8);
 
-    for (int j = 0; j < 200000; j++){
-        for (int i = 0; i < 8; i++){
+    for (int j = 0; j < 200000; ++j){
+        for (int i = 0; i < 8; ++i){
             pool.push_task(thread_function_nano, prios[i], preCT[i], CT, postCT[i]);
         }
         pool.wait_for_tasks();

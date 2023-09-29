@@ -37,7 +37,7 @@ TEST(PriorityMutex_ControlledScheduling, TryLockTest) {
 
 TEST(PriorityMutex_ControlledScheduling, RandomizedPriorityTest) {
     bool condition = true;
-    for (int i = 0; i < RANDOM_TESTS; i++) {
+    for (int i = 0; i < RANDOM_TESTS; ++i) {
         PM_scenario5::executeSchedulingSequence();
         condition &= std::is_sorted(PM_scenario5::ret.cbegin(), PM_scenario5::ret.cend());
 
@@ -52,7 +52,7 @@ TEST(PriorityMutex_ControlledScheduling, RandomizedPriorityTest) {
 
 TEST(PriorityMutex_ControlledScheduling, SLM_RandomizedPriorityTest) {
     bool condition = true;
-    for (int i = 0; i < RANDOM_TESTS; i++) {
+    for (int i = 0; i < RANDOM_TESTS; ++i) {
         SLM_scenario4::executeSchedulingSequence();
         condition &= std::is_sorted(SLM_scenario4::ret.cbegin(), SLM_scenario4::ret.cend());
 
@@ -67,7 +67,7 @@ TEST(PriorityMutex_ControlledScheduling, SLM_RandomizedPriorityTest) {
 
 TEST(PriorityMutex_ControlledScheduling, SPNLCPM_RandomizedPriorityTest) {
     bool condition = true;
-    for (int i = 0; i < RANDOM_TESTS; i++) {
+    for (int i = 0; i < RANDOM_TESTS; ++i) {
         SPNLCPM_scenario4::executeSchedulingSequence();
         condition &= std::is_sorted(SPNLCPM_scenario4::ret.cbegin(), SPNLCPM_scenario4::ret.cend());
 
@@ -82,7 +82,7 @@ TEST(PriorityMutex_ControlledScheduling, SPNLCPM_RandomizedPriorityTest) {
 
 TEST(PriorityMutex_ControlledScheduling, SPM_RandomizedPriorityTest) {
     bool condition = true;
-    for (int i = 0; i < RANDOM_TESTS; i++) {
+    for (int i = 0; i < RANDOM_TESTS; ++i) {
         SPM_scenario8::executeSchedulingSequence();
         condition &= std::is_sorted(SPM_scenario8::ret.cbegin(), SPM_scenario8::ret.cend());
 
@@ -91,7 +91,7 @@ TEST(PriorityMutex_ControlledScheduling, SPM_RandomizedPriorityTest) {
         }
 
         if (!std::is_sorted(SPM_scenario8::ret.cbegin(), SPM_scenario8::ret.cend())){
-            for (int j = 0; j < 8; j++) {
+            for (int j = 0; j < 8; ++j) {
                 std::cout << SPM_scenario8::ret[j] << " ";
             }
             std::cout << std::endl;

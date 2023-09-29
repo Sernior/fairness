@@ -110,7 +110,7 @@ int main()
 
     BS::thread_pool pool(8);
 
-    for (int i = 0; i < 8; i++){
+    for (int i = 0; i < 8; ++i){
         pool.push_task(thread_function_nano, prios[i], preCT[i], postCT[i], criticalTime);
     }
     pool.wait_for_tasks();

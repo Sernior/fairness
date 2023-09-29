@@ -49,12 +49,12 @@ namespace boost::fairness{
             }
             control_block_t increasePriority(Priority_t const priority) const {
                 control_block_t new_ctrl = *this;
-                new_ctrl.priority_[priority]++;
+                ++new_ctrl.priority_[priority];
                 return new_ctrl;
             }
             control_block_t decreasePriority(Priority_t const priority) const {
                 control_block_t new_ctrl = *this;
-                new_ctrl.priority_[priority]--;
+                --new_ctrl.priority_[priority];
                 return new_ctrl;
             }
             control_block_t setPriority(Priority_t const priority) const {
@@ -174,7 +174,7 @@ namespace boost::fairness{
         std::atomic<control_block_t> ctrl_;
 
         Priority_t find_first_priority_(control_block_t const& ctrl){
-            for (Priority_t i = 0; i < N; i++){
+            for (Priority_t i = 0; i < N; ++i){
                 if (ctrl.priority_[i] > 0)
                     return i;
             }
@@ -207,12 +207,12 @@ namespace boost::fairness{
             }
             control_block_t increasePriority(Priority_t const priority) const {
                 control_block_t new_ctrl = *this;
-                new_ctrl.priority_[priority]++;
+                ++new_ctrl.priority_[priority];
                 return new_ctrl;
             }
             control_block_t decreasePriority(Priority_t const priority) const {
                 control_block_t new_ctrl = *this;
-                new_ctrl.priority_[priority]--;
+                --new_ctrl.priority_[priority];
                 return new_ctrl;
             }
             control_block_t setPriority(Priority_t const priority) const {
@@ -332,7 +332,7 @@ namespace boost::fairness{
         boost::atomic<control_block_t> ctrl_;
 
         Priority_t find_first_priority_(control_block_t const& ctrl){
-            for (Priority_t i = 0; i < N; i++){
+            for (Priority_t i = 0; i < N; ++i){
                 if (ctrl.priority_[i] > 0)
                     return i;
             }
