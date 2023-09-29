@@ -16,12 +16,12 @@ namespace boost::fairness{
         }
         control_block_64b_t increasePriority(Priority_t const priority) const {
             control_block_64b_t new_ctrl = *this;
-            new_ctrl.priority_[priority]++;
+            ++new_ctrl.priority_[priority];
             return new_ctrl;
         }
         control_block_64b_t decreasePriority(Priority_t const priority) const {
             control_block_64b_t new_ctrl = *this;
-            new_ctrl.priority_[priority]--;
+            --new_ctrl.priority_[priority];
             return new_ctrl;
         }
         control_block_64b_t setPriority(Priority_t const priority) const {
@@ -49,12 +49,12 @@ namespace boost::fairness{
         }
         control_block_128b_t increasePriority(Priority_t const priority) const {
             control_block_128b_t new_ctrl = *this;
-            new_ctrl.priority_[priority]++;
+            ++new_ctrl.priority_[priority];
             return new_ctrl;
         }
         control_block_128b_t decreasePriority(Priority_t const priority) const {
             control_block_128b_t new_ctrl = *this;
-            new_ctrl.priority_[priority]--;
+            --new_ctrl.priority_[priority];
             return new_ctrl;
         }
         control_block_128b_t setPriority(Priority_t const priority) const {

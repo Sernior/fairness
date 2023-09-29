@@ -116,7 +116,7 @@ namespace boost::fairness{
         std::atomic_flag lockOwned_;
 
         Priority_t find_first_priority_(){
-            for (Priority_t i = 0; i < N; i++){
+            for (Priority_t i = 0; i < N; ++i){
                 if (waiters_[i] > 0)
                     return i;
             }

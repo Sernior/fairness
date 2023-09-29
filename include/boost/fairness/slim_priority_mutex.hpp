@@ -167,7 +167,7 @@ namespace boost::fairness{
         }
 
         Priority_t find_first_priority_(control_block_64b_t const& ctrl){
-            for (Priority_t i = 0; i < N; i++){
+            for (Priority_t i = 0; i < N; ++i){
                 if (ctrl.priority_[i] > 0)
                     return i;
             }
@@ -320,7 +320,7 @@ namespace boost::fairness{
         }
 
         Priority_t find_first_priority_(control_block_128b_t const& ctrl){
-            for (Priority_t i = 0; i < N; i++){
+            for (Priority_t i = 0; i < N; ++i){
                 if (ctrl.priority_[i] > 0)
                     return i;
             }
