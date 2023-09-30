@@ -98,7 +98,7 @@ namespace boost::fairness{
         void unlock(){
             currentPriority_.store(find_first_priority_(), std::memory_order_relaxed);
             lockOwned_.clear(std::memory_order_release);
-            lockOwned_.notify_all();//P2616R3 https://www.open-std.org/jtc1/sc22/wg21/docs/papers/2023/p2616r3.html this shouldnt be a problem with mutex semantics
+            lockOwned_.notify_all();
         }
 
         /**

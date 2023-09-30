@@ -2,13 +2,14 @@
 #include <thread>
 #include <chrono>
 #include <vector>
+#include <mutex>
 #include <algorithm>
 #include <BS_thread_pool.hpp>
 
 #include <boost/atomic.hpp>
 #include <boost/fairness.hpp>
-
-static boost::fairness::slim_priority_mutex<3> ms;
+std::recursive_mutex rm;
+static boost::fairness::slim_priority_mutex<4> ms;
 
 #define NOW std::chrono::steady_clock::now()
 
