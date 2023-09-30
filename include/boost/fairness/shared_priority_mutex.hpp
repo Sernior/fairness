@@ -1,5 +1,5 @@
 /**
- * @file shared_priority_mutex.h
+ * @file shared_priority_mutex.hpp
  * @author F. Abrignani (federignoli@hotmail.it)
  * @author P. Di Giglio
  * @author S. Martorana
@@ -12,11 +12,8 @@
  */
 #ifndef BOOST_FAIRNESS_SHARED_PRIORITY_MUTEX_HPP
 #define BOOST_FAIRNESS_SHARED_PRIORITY_MUTEX_HPP
-#include <thread>
-#include <mutex>
-#include <condition_variable>
 #include <array>
-#include <stdexcept>
+#include <atomic>
 #include <cstring>
 #include <boost/fairness/priority_t.hpp>
 #include <boost/fairness/spinlock_priority_mutex.hpp>

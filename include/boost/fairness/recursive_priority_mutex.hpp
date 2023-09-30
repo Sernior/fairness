@@ -1,7 +1,7 @@
 /**
- * @file recursive_priority_mutex.h
- * @author S. Martorana
+ * @file recursive_priority_mutex.hpp
  * @author F. Abrignani (federignoli@hotmail.it)
+ * @author S. Martorana
  * @brief This file contains the implementation of the recursive_priority_mutex.
  * @version 0.1
  * @date 2023-08-19
@@ -16,10 +16,7 @@
 #include <thread>
 #include <atomic>
 #include <array>
-#include <chrono>
-#include <thread>
 #include <boost/fairness/priority_t.hpp>
-#include <mutex>
 
 namespace boost::fairness{
 

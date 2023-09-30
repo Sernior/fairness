@@ -1,5 +1,5 @@
 /**
- * @file slim_spinlock_priority_mutex.h
+ * @file slim_spinlock_priority_mutex.hpp
  * @author F. Abrignani (federignoli@hotmail.it)
  * @author P. Di Giglio
  * @author S. Martorana
@@ -15,12 +15,8 @@
 #ifndef SLIM_SPINLOCK_PRIORITY_MUTEX_HPP
 #define SLIM_SPINLOCK_PRIORITY_MUTEX_HPP
 #pragma once
-#include <thread>
 #include <atomic>
 #include <array>
-#include <chrono>
-#include <thread>
-#include <mutex>
 #include <boost/fairness/priority_t.hpp>
 #include <cstring>
 namespace boost::fairness::experimental{

@@ -1,5 +1,5 @@
 /**
- * @file priority_mutex.h
+ * @file priority_mutex.hpp
  * @author F. Abrignani (federignoli@hotmail.it)
  * @author P. Di Giglio
  * @author S. Martorana
@@ -17,9 +17,7 @@
 #include <atomic>
 #include <array>
 #include <chrono>
-#include <thread>
 #include <boost/fairness/priority_t.hpp>
-#include <mutex>
 
 namespace boost::fairness{
 

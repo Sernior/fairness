@@ -1,10 +1,10 @@
+#include <boost/fairness.hpp>
 #include <benchmark/benchmark.h>
 #include <mutex>
 #include <shared_mutex>
 #include "pipeline_benchmark.cpp"
 #include <BS_thread_pool.hpp>
 #include <DeterministicConcurrency>
-#include <boost/fairness.hpp>
 
 
 static void PM_LockUnlock(benchmark::State& state) {

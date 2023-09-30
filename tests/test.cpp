@@ -1,3 +1,4 @@
+#include <boost/fairness.hpp>
 #include <gtest/gtest.h>
 #include <thread>
 #include <algorithm>

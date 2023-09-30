@@ -1,5 +1,5 @@
 /**
- * @file priority_t.h
+ * @file priority_t.hpp
  * @author F. Abrignani (federignoli@hotmail.it)
  * @author P. Di Giglio
  * @author S. Martorana

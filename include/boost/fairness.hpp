@@ -1,4 +1,17 @@
 
+/**
+ * @file fairness.hpp
+ * @author F. Abrignani (federignoli@hotmail.it)
+ * @author P. Di Giglio
+ * @author S. Martorana
+ * @brief This file contains the all the includes required by the library.
+ * @version 0.1
+ * @date 2023-09-29
+ * 
+ * @copyright Copyright (c) 2023 Federico Abrignani (federignoli@hotmail.it).
+ * Distributed under the Boost Software License, Version 1.0. (See accompanying file LICENSE_1_0.txt or copy at http://www.boost.org/LICENSE_1_0.txt).
+ * 
+ */
 #ifndef BOOST_FAIRNESS_HPP
 #define BOOST_FAIRNESS_HPP
 

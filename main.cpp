@@ -1,15 +1,19 @@
+#include <boost/fairness.hpp>
 #include <iostream>
 #include <thread>
 #include <chrono>
 #include <vector>
 #include <mutex>
+#include <shared_mutex>
 #include <algorithm>
 #include <BS_thread_pool.hpp>
 
 #include <boost/atomic.hpp>
-#include <boost/fairness.hpp>
 std::recursive_mutex rm;
-static boost::fairness::slim_priority_mutex<4> ms;
+std::recursive_timed_mutex rrm;
+std::shared_mutex sm;
+std::shared_timed_mutex stm;
+static boost::fairness::recursive_priority_mutex<4> ms;
 
 #define NOW std::chrono::steady_clock::now()
 

@@ -1,5 +1,5 @@
 /**
- * @file spinlock_priority_mutex.h
+ * @file spinlock_priority_mutex.hpp
  * @author F. Abrignani (federignoli@hotmail.it)
  * @author P. Di Giglio
  * @author S. Martorana
@@ -13,13 +13,9 @@
  */
 #ifndef BOOST_FAIRNESS_SPINLOCK_PRIORITY_MUTEX_HPP
 #define BOOST_FAIRNESS_SPINLOCK_PRIORITY_MUTEX_HPP
-#include <thread>
 #include <atomic>
 #include <array>
-#include <chrono>
-#include <thread>
 #include <boost/fairness/priority_t.hpp>
-#include <mutex>
 
 namespace boost::fairness{
 
