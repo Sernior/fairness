@@ -17,13 +17,9 @@
 #include <atomic>
 #include <array>
 #include <boost/fairness/priority_t.hpp>
+#include <boost/fairness/spinlock_priority_mutex.hpp>
 
 namespace boost::fairness{
-
-    /*
-    TODO: the idea is that, since we can only have 1 thread owning the lock we need only 1 recursiveness counter instead of a problematic thread_local one
-    currently a spinlock without any wait/notify mechanism... should test if the logic is sound first
-    */
 
     /**
      * @brief The recursive_priority_mutex is an advanced synchronization mechanism that enhances the traditional mutex by introducing a priority-based approach.
@@ -73,17 +69,23 @@ namespace boost::fairness{
          * \endcode
          */
         void lock(Priority_t const priority = 0){
-            Priority_t localCurrentPriority = currentPriority_.load(std::memory_order_relaxed);
-            waiters_[priority].fetch_add(1, std::memory_order_relaxed);
-            while ( 
-                (localCurrentPriority < priority || !currentPriority_.compare_exchange_weak(localCurrentPriority, priority, std::memory_order_relaxed)) ||
-                (!try_take_ownership_weak_())
-            ){
-                // wait here
-                localCurrentPriority = currentPriority_;
+            intMtx_.lock(priority);
+            ++waiters_[priority];
+            for(;;){
+                if ( lock_owned_by_me_() ||
+                    (find_first_priority_() >= priority &&
+                    lock_not_owned_())){
+                        owner_ = std::this_thread::get_id();
+                        lockOwned_.test_and_set();
+                        break;
+                    }
+                intMtx_.unlock();
+                lockOwned_.wait(true);
+                intMtx_.lock(priority);
             }
-            waiters_[priority].fetch_sub(1, std::memory_order_relaxed);
+            --waiters_[priority];
             ++recursionCounter_;
+            intMtx_.unlock();
         }
 
         /**
@@ -100,12 +102,14 @@ namespace boost::fairness{
          * \endcode
          */
         void unlock(){
+            intMtx_.lock();
             --recursionCounter_;
             if (recursionCounter_ == 0){
-                currentPriority_.store(find_first_priority_(), std::memory_order_relaxed);
-                owner_.store(std::thread::id(), std::memory_order_release);
-                // notify here
+                owner_ = std::thread::id();
+                lockOwned_.clear();
+                lockOwned_.notify_all();
             }
+            intMtx_.unlock();
         }
 
         /**
@@ -125,26 +129,29 @@ namespace boost::fairness{
          * @return bool 
          */
         [[nodiscard]] bool try_lock(Priority_t const priority = 0){
-            bool lockTaken = currentPriority_.load(std::memory_order_relaxed) >= priority && try_take_ownership_strong_();
+            intMtx_.lock(priority);
+            bool lockTaken = lock_owned_by_me_() || (find_first_priority_() >= priority && lock_not_owned_());
             if (lockTaken)
+                owner_ = std::this_thread::get_id();
+                lockOwned_.test_and_set();
                 ++recursionCounter_;
+            intMtx_.unlock();
             return lockTaken;
         }
 
         private:
-        std::array<std::atomic<Thread_cnt_t>, N> waiters_;
-        std::atomic<Priority_t> currentPriority_{_max_priority};
-        std::atomic<std::thread::id> owner_{};
-        uint32_t recursionCounter_{}; // does it make sense for you to be an atomic? or you are already protected by the mutex structure itself?
+        spinlock_priority_mutex<N> intMtx_;
+        std::array<Thread_cnt_t, N> waiters_;
+        std::thread::id owner_{};
+        std::atomic_flag lockOwned_;
+        uint32_t recursionCounter_{};
 
-        bool try_take_ownership_weak_(){
-            std::thread::id localOwner = owner_.load(std::memory_order_relaxed); // if there is no owner or you are the owner
-            return (std::thread::id() == localOwner || localOwner == std::this_thread::get_id()) && owner_.compare_exchange_weak(localOwner, std::this_thread::get_id());
+        bool lock_not_owned_(){
+            return std::thread::id() == owner_;
         }
 
-        bool try_take_ownership_strong_(){
-            std::thread::id localOwner = owner_.load(std::memory_order_relaxed); // if there is no owner or you are the owner
-            return (std::thread::id() == localOwner || localOwner == std::this_thread::get_id()) && owner_.compare_exchange_strong(localOwner, std::this_thread::get_id());
+        bool lock_owned_by_me_(){
+            return owner_ == std::this_thread::get_id();
         }
 
         Priority_t find_first_priority_(){

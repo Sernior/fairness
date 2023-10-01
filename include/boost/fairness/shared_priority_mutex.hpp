@@ -128,7 +128,7 @@ namespace boost::fairness{
             }
 
             if (tot_writers_waiting_ == 0){
-                allow_all_readers();
+                allow_all_readers_();
                 intMtx_.unlock();
                 notify_all_readers_();
                 return;
@@ -245,7 +245,7 @@ namespace boost::fairness{
             }
 
             if (tot_writers_waiting_ == 0){
-                allow_all_readers();
+                allow_all_readers_();
                 intMtx_.unlock();
                 notify_all_readers_();
                 return;
@@ -339,7 +339,7 @@ namespace boost::fairness{
             reader_waiting_flag[p].test_and_set();
         }
 
-        void allow_all_readers(){
+        void allow_all_readers_(){
             std::memset(&writer_waiting_flag, 0b00000000, N);
             std::memset(&reader_waiting_flag, 0b00000001, N);
         }
