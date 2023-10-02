@@ -8,7 +8,7 @@
 #include <algorithm>
 #include <BS_thread_pool.hpp>
 
-#include <boost/atomic.hpp>
+// #include <boost/atomic.hpp>
 
 static boost::fairness::recursive_priority_mutex<4> ms;
 

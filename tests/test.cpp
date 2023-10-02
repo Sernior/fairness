@@ -102,6 +102,22 @@ TEST(PriorityMutex_ControlledScheduling, SPM_RandomizedPriorityTest) {
     }
     EXPECT_TRUE(condition);
 }
+
+TEST(PriorityMutex_ControlledScheduling, RPM_RandomizedPriorityTest) {
+    bool condition = true;
+    for (int i = 0; i < RANDOM_TESTS; i++) {
+        RPM_scenario5::executeSchedulingSequence();
+        condition &= std::is_sorted(RPM_scenario5::ret.cbegin(), RPM_scenario5::ret.cend());
+
+        if (condition && i % 100 == 0){
+            std::cout << i << std::endl; 
+        }
+
+        RPM_scenario5::ret.clear();
+    }
+    EXPECT_TRUE(condition);
+}
+
 #undef RANDOM_TESTS
 
 TEST(PriorityMutex_ControlledScheduling, SLM_LockUnlockTest) {
@@ -193,6 +209,34 @@ TEST(SharedPriorityMutex_ControlledScheduling, TryLockSharedTest) {
     EXPECT_EQ(SPM_scenario7::ret, SPM_scenario7::expected);
     SPM_scenario7::ret.clear();
     SPM_scenario7::expected.clear();
+}
+
+TEST(PriorityMutex_ControlledScheduling, RPM_LockUnlockTest) {
+    RPM_scenario1::executeSchedulingSequence();
+    EXPECT_EQ(RPM_scenario1::ret, RPM_scenario1::expected);
+    RPM_scenario1::ret.clear();
+    RPM_scenario1::expected.clear();
+}
+
+TEST(PriorityMutex_ControlledScheduling, RPM_LockUnlockTest2) {
+    RPM_scenario2::executeSchedulingSequence();
+    EXPECT_EQ(RPM_scenario2::ret, RPM_scenario2::expected);
+    RPM_scenario2::ret.clear();
+    RPM_scenario2::expected.clear();
+}
+
+TEST(PriorityMutex_ControlledScheduling, RPM_TryLockTest) {
+    RPM_scenario3::executeSchedulingSequence();
+    EXPECT_EQ(RPM_scenario3::ret, RPM_scenario3::expected);
+    RPM_scenario3::ret.clear();
+    RPM_scenario3::expected.clear();
+}
+
+TEST(PriorityMutex_ControlledScheduling, RPM_RecursiveTest) {
+   RPM_scenario4::executeSchedulingSequence();//not semaphore
+   EXPECT_EQ(RPM_scenario4::ret, RPM_scenario4::expected);
+   RPM_scenario4::ret.clear();
+   RPM_scenario4::expected.clear();
 }
 
 int main(int argc, char* argv[]) {
