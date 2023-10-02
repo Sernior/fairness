@@ -129,14 +129,22 @@ namespace boost::fairness{
          * @return bool 
          */
         [[nodiscard]] bool try_lock(Priority_t const priority = 0){
+
             intMtx_.lock(priority);
-            bool lockTaken = lock_owned_by_me_() || (find_first_priority_() >= priority && lock_not_owned_());
-            if (lockTaken)
+
+            if (lock_owned_by_me_() ||
+             (find_first_priority_() >= priority && lock_not_owned_())){
+
                 owner_ = std::this_thread::get_id();
                 lockOwned_.test_and_set();
                 ++recursionCounter_;
+                intMtx_.unlock();
+                return true;
+                
+             }
+
             intMtx_.unlock();
-            return lockTaken;
+            return false;
         }
 
         private:
