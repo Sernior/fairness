@@ -38,15 +38,15 @@ static void SPNLC_SLM_PM_LockUnlock(benchmark::State& state) { /* the non slim v
         m.unlock();
     }
 }
+#endif
 
-static void R_PM_LockUnlock(benchmark::State& state) { /* the non slim version is better for spinlocking */
+static void R_PM_LockUnlock(benchmark::State& state) {
     boost::fairness::recursive_priority_mutex<7> m;
     for (auto _ : state){
         m.lock();
         m.unlock();
     }
 }
-#endif
 static void STD_LockUnlock(benchmark::State& state) {
     std::mutex m;
     for (auto _ : state){
@@ -259,8 +259,8 @@ BENCHMARK(STD_LockUnlock)->Threads(8);
 BENCHMARK(SPNLC_PM_LockUnlock)->Threads(8);
 #ifdef BOOST_FAIRNESS_EXPERIMENTAL_MUTEXES
 BENCHMARK(SPNLC_SLM_PM_LockUnlock)->Threads(8);
-//BENCHMARK(R_PM_LockUnlock)->Threads(8);
 #endif
+BENCHMARK(R_PM_LockUnlock)->Threads(8);
 BENCHMARK(PM_S_LockUnlock);
 BENCHMARK(STD_S_LockUnlock);
 

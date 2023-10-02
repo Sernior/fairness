@@ -19,3 +19,8 @@
 #include "spm/SPM_scenario6Context.h"
 #include "spm/SPM_scenario7Context.h"
 #include "spm/SPM_scenario8Context.h"
+#include "rpm/RPM_scenario1Context.h"
+#include "rpm/RPM_scenario2Context.h"
+#include "rpm/RPM_scenario3Context.h"
+#include "rpm/RPM_scenario4Context.h"
+#include "rpm/RPM_scenario5Context.h"
