@@ -239,6 +239,33 @@ TEST(RecursivePriorityMutex_ControlledScheduling, RPM_RecursiveTest) {
    RPM_scenario4::expected.clear();
 }
 
+TEST(RecursivePriorityMutex_ControlledScheduling, RPM_RecursiveTryLockTest) {
+   RPM_scenario6::executeSchedulingSequence();
+   EXPECT_EQ(RPM_scenario6::ret, RPM_scenario6::expected);
+   RPM_scenario6::ret.clear();
+   RPM_scenario6::expected.clear();
+}
+
+TEST(RecursivePriorityMutex_ControlledScheduling, RPM_RecursiveTryLockDifferentPriorityTest) {
+   RPM_scenario7::executeSchedulingSequence();
+   EXPECT_EQ(RPM_scenario7::ret, RPM_scenario7::expected);
+   RPM_scenario7::ret.clear();
+   RPM_scenario7::expected.clear();
+}
+
+TEST(RecursivePriorityMutex_ControlledScheduling, RPM_RecursiveDifferentPriorityTest) {
+   RPM_scenario8::executeSchedulingSequence();//not semaphore
+   EXPECT_EQ(RPM_scenario8::ret, RPM_scenario8::expected);
+   RPM_scenario8::ret.clear();
+   RPM_scenario8::expected.clear();
+}
+
+TEST(RecursivePriorityMutex_ControlledScheduling, RPM_RecursiveCustomTest) {
+   RPM_scenario9::executeSchedulingSequence();//not semaphore
+   EXPECT_EQ(RPM_scenario9::ret, RPM_scenario9::expected);
+   RPM_scenario9::ret.clear();
+   RPM_scenario9::expected.clear();
+}
 int main(int argc, char* argv[]) {
 
     testing::InitGoogleTest(&argc, argv);

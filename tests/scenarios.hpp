@@ -24,3 +24,7 @@
 #include "rpm/RPM_scenario3Context.h"
 #include "rpm/RPM_scenario4Context.h"
 #include "rpm/RPM_scenario5Context.h"
+#include "rpm/RPM_scenario6Context.h"
+#include "rpm/RPM_scenario7Context.h"
+#include "rpm/RPM_scenario8Context.h"
+#include "rpm/RPM_scenario9Context.h"
