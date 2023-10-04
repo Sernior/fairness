@@ -45,6 +45,9 @@ namespace boost::fairness{
         Priority_t getPriority() const {
             return owned_ & 0b01111111;
         }
+        bool isOwned_() const{
+            return owned_ < 0;
+        }
     };
 
     #define BOOST_FAIRNESS_SPM64B_SUPPORTED_PRIORITIES sizeof(control_block_64b_t::priority_)
@@ -78,6 +81,9 @@ namespace boost::fairness{
         }
         Priority_t getPriority() const {
             return owned_ & 0b01111111;
+        }
+        bool isOwned_() const{
+            return owned_ < 0;
         }
     };
     #define BOOST_FAIRNESS_SPM128B_SUPPORTED_PRIORITIES sizeof(control_block_128b_t::priority_)

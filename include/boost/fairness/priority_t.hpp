@@ -16,6 +16,6 @@
 #include <cstdint>
 namespace boost::fairness{
     using Priority_t = uint8_t;
-    static constexpr Priority_t _max_priority = Priority_t(-1);
+    #define BOOST_FAIRNESS_MAXIMUM_PRIORITY Priority_t(-1)
 }
 #endif // BOOST_FAIRNESS_PRIORITY_T_HPP
