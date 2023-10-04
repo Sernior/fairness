@@ -1,8 +1,10 @@
+#ifndef BOOST_FAIRNESS_WAITING_UTILS
+#define BOOST_FAIRNESS_WAITING_UTILS
 #include <chrono>
 
 #define NOW std::chrono::high_resolution_clock::now()
 
-namespace _waiting_utils_{
+namespace waiting::utils{
     /*
     std::this_thread::sleep_for is too imprecise, and also I could make a bunch of variables during busy waiting to simulate heated cpu caches.
     */
@@ -27,3 +29,4 @@ namespace _waiting_utils_{
 }
 
 #undef NOW
+#endif // BOOST_FAIRNESS_WAITING_UTILS
