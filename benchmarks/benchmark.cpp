@@ -2,7 +2,7 @@
 #include <benchmark/benchmark.h>
 #include <mutex>
 #include <shared_mutex>
-#include "pipeline_benchmark.cpp"
+#include "pipeline_benchmark.hpp"
 #include <BS_thread_pool.hpp>
 #include <DeterministicConcurrency>
 
