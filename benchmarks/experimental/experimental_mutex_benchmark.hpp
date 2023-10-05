@@ -1,9 +1,10 @@
 #include <boost/fairness.hpp>
 #include "../utils/waiting_utils.hpp"
 
-namespace _SLM_PM_pipeline_benchmark{
+#ifdef BOOST_FAIRNESS_EXPERIMENTAL_MUTEXES
+namespace _SPNLC_SLM_PM_pipeline_benchmark{
 
-    boost::fairness::slim_priority_mutex<4> m;
+    boost::fairness::experimental::slim_spinlock_priority_mutex<4> m;
 
     void thread_function(int p, int preCriticalTime, int criticalTime, int postCriticalTime){
         utils::waiting::busy_wait_milli(preCriticalTime);
@@ -29,14 +30,14 @@ namespace _SLM_PM_pipeline_benchmark{
         utils::waiting::busy_wait_nano(postCriticalTime);
     }
 
-    void SLMPM_LockUnlock(benchmark::State& state) {
+    void SPNLC_SLM_PM_LockUnlock(benchmark::State& state) { /* the non slim version is better for spinlocking */
         for (auto _ : state){
             m.lock();
             m.unlock();
         }
     }
 
-    void SLM_pipeline_benchmark_audio(benchmark::State& state) {
+    void SPNLC_SLM_PM_pipeline_benchmark_audio(benchmark::State& state) {
         std::array<int, 8> prios {0, 2, 2, 1, 1, 3, 3, 0};
         std::array<int, 8> preCT {200, 150, 200, 300, 100, 50, 50, 200};
         int CT = 100;
@@ -47,7 +48,7 @@ namespace _SLM_PM_pipeline_benchmark{
         }
     }
 
-    void SLM_pipeline_benchmark_fast(benchmark::State& state) {
+    void SPNLC_SLM_pipeline_benchmark_fast(benchmark::State& state) {
         std::array<int, 8> prios {0, 2, 2, 1, 1, 3, 3, 0};
         std::array<int, 8> preCT {2000, 1500, 2000, 3000, 1000, 500, 500, 2000};
         int CT = 1000;
@@ -56,5 +57,7 @@ namespace _SLM_PM_pipeline_benchmark{
         for (auto _ : state) {
         thread_function_nano(prios[state.thread_index()] ,preCT[state.thread_index()], CT, postCT[state.thread_index()]);
         }
+
     }
 }
+#endif

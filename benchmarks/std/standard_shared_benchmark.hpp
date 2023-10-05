@@ -1,8 +1,8 @@
 #include "../utils/waiting_utils.hpp"
 
-namespace _STD_pipeline_benchmark{
+namespace _STD_S_pipeline_benchmark{
 
-    std::mutex m;
+    std::shared_mutex m;
 
     void thread_function(int preCriticalTime, int criticalTime, int postCriticalTime){
         utils::waiting::busy_wait_milli(preCriticalTime);
@@ -28,14 +28,21 @@ namespace _STD_pipeline_benchmark{
         utils::waiting::busy_wait_nano(postCriticalTime);
     }
 
-    void STD_LockUnlock(benchmark::State& state) {
+    void STD_S_LockUnlock(benchmark::State& state) {
         for (auto _ : state){
             m.lock();
             m.unlock();
         }
     }
 
-    void STD_pipeline_benchmark_long(benchmark::State& state) {
+    void STD_S_SLockSUnlock(benchmark::State& state) {
+        for (auto _ : state){
+            m.lock_shared();
+            m.unlock_shared();
+        }
+    }
+
+    void STD_S_pipeline_benchmark_long(benchmark::State& state) {
         std::array<int, 8> preCT {20, 15, 20, 30, 10, 5, 5, 20};
         int CT = 10;
         std::array<int, 8> postCT {50, 30, 20, 25, 10, 15, 15, 45};
@@ -45,7 +52,7 @@ namespace _STD_pipeline_benchmark{
         }
     }
 
-    void STD_pipeline_benchmark_gaming(benchmark::State& state) {
+    void STD_S_pipeline_benchmark_gaming(benchmark::State& state) {
         std::array<int, 8> preCT {2000, 1500, 2000, 3000, 1000, 500, 500, 2000};
         int CT = 1000;
         std::array<int, 8> postCT {5000, 3000, 2000, 2500, 1000, 1500, 1500, 4500};
@@ -55,7 +62,7 @@ namespace _STD_pipeline_benchmark{
         }
     }
 
-    void STD_pipeline_benchmark_audio(benchmark::State& state) {
+    void STD_S_pipeline_benchmark_audio(benchmark::State& state) {
         std::array<int, 8> prios {0, 2, 2, 1, 1, 3, 3, 0};
         std::array<int, 8> preCT {200, 150, 200, 300, 100, 50, 50, 200};
         int CT = 100;
@@ -66,7 +73,7 @@ namespace _STD_pipeline_benchmark{
         }
     }
 
-    void STD_pipeline_benchmark_fast(benchmark::State& state) { /*  */
+    void STD_S_pipeline_benchmark_fast(benchmark::State& state) { /*  */
         std::array<int, 8> prios {0, 2, 2, 1, 1, 3, 3, 0};
         std::array<int, 8> preCT {2000, 1500, 2000, 3000, 1000, 500, 500, 2000};
         int CT = 1000;
