@@ -37,7 +37,7 @@ namespace _PM_R_pipeline_benchmark{
         }
     }
 
-    void PM_pipeline_benchmark_long(benchmark::State& state) {// order of 1/10th of a second (PM faster)
+    void R_PM_pipeline_benchmark_long(benchmark::State& state) {// order of 1/10th of a second (PM faster)
         std::array<int, 8> prios {0, 2, 2, 1, 1, 3, 3, 0};
         std::array<int, 8> preCT {20, 15, 20, 30, 10, 5, 5, 20};
         int CT = 10;
@@ -48,7 +48,7 @@ namespace _PM_R_pipeline_benchmark{
         }
     }
 
-    void PM_pipeline_benchmark_gaming(benchmark::State& state) {// order of 10 to 15 milliseconds (PM faster)
+    void R_PM_pipeline_benchmark_gaming(benchmark::State& state) {// order of 10 to 15 milliseconds (PM faster)
         std::array<int, 8> prios {0, 2, 2, 1, 1, 3, 3, 0};
         std::array<int, 8> preCT {2000, 1500, 2000, 3000, 1000, 500, 500, 2000};
         int CT = 1000;
@@ -59,7 +59,7 @@ namespace _PM_R_pipeline_benchmark{
         }
     }
 
-    void PM_pipeline_benchmark_audio(benchmark::State& state) {// order of 1 to 1.5 millisec (PM faster)
+    void R_PM_pipeline_benchmark_audio(benchmark::State& state) {// order of 1 to 1.5 millisec (PM faster)
         std::array<int, 8> prios {0, 2, 2, 1, 1, 3, 3, 0};
         std::array<int, 8> preCT {200, 150, 200, 300, 100, 50, 50, 200};
         int CT = 100;
@@ -70,7 +70,7 @@ namespace _PM_R_pipeline_benchmark{
         }
     }
 
-    void PM_pipeline_benchmark_fast(benchmark::State& state) {
+    void R_PM_pipeline_benchmark_fast(benchmark::State& state) {
         std::array<int, 8> prios {0, 2, 2, 1, 1, 3, 3, 0};
         std::array<int, 8> preCT {2000, 1500, 2000, 3000, 1000, 500, 500, 2000};
         int CT = 1000;
