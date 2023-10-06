@@ -5,99 +5,123 @@
 #define NOW std::chrono::high_resolution_clock::now()
 
 namespace utils::thread{
-    void thread_function_milli(int p, int preCriticalTime, int criticalTime, int postCriticalTime){
+
+    template <typename Lockable>
+    void thread_function_milli(Lockable& lockable, int preCriticalTime, int criticalTime, int postCriticalTime, int p = 0){
         utils::waiting::busy_wait_milli(preCriticalTime);
-        // m.lock(p);
+        if constexpr (std::is_same_v<Lockable, std::mutex> || std::is_same_v<Lockable, std::shared_mutex>) lockable.lock();
+        else lockable.lock(p);
         utils::waiting::busy_wait_milli(criticalTime);
-        // m.unlock();
+        lockable.unlock();
         utils::waiting::busy_wait_milli(postCriticalTime);
     }
-
-    void thread_function_micro(int p, int preCriticalTime, int criticalTime, int postCriticalTime){
+    template <typename Lockable>
+    void thread_function_micro(Lockable& lockable, int preCriticalTime, int criticalTime, int postCriticalTime, int p = 0){
         utils::waiting::busy_wait_micro(preCriticalTime);
-        // m.lock(p);
+        if constexpr (std::is_same_v<Lockable, std::mutex> || std::is_same_v<Lockable, std::shared_mutex>) lockable.lock();
+        else lockable.lock(p);
         utils::waiting::busy_wait_micro(criticalTime);
-        // m.unlock();
+        lockable.unlock();
         utils::waiting::busy_wait_micro(postCriticalTime);
     }
 
-    void thread_function_nano(int p, int preCriticalTime, int criticalTime, int postCriticalTime){
+    template <typename Lockable>
+    void thread_function_nano(Lockable& lockable, int preCriticalTime, int criticalTime, int postCriticalTime, int p = 0){
         utils::waiting::busy_wait_nano(preCriticalTime);
-        // m.lock(p);
+        if constexpr (std::is_same_v<Lockable, std::mutex> || std::is_same_v<Lockable, std::shared_mutex>) lockable.lock();
+        else lockable.lock(p);
         utils::waiting::busy_wait_nano(criticalTime);
-        // m.unlock();
+        lockable.unlock();
         utils::waiting::busy_wait_nano(postCriticalTime);
     }
 
-    void shared_thread_function_milli(int p, int preCriticalTime, int criticalTime, int postCriticalTime){
+    template <typename Lockable>
+    void shared_thread_function_milli(Lockable& lockable, int preCriticalTime, int criticalTime, int postCriticalTime, int p = 0){
         utils::waiting::busy_wait_milli(preCriticalTime);
-        // m.lock_shared(p);
+        if constexpr (std::is_same_v<Lockable, std::mutex> || std::is_same_v<Lockable, std::shared_mutex>) lockable.lock_shared();
+        else lockable.lock_shared(p);
         utils::waiting::busy_wait_milli(criticalTime);
-        // m.unlock_shared();
+        lockable.unlock_shared();
         utils::waiting::busy_wait_milli(postCriticalTime);
     }
 
-    void shared_thread_function_micro(int p, int preCriticalTime, int criticalTime, int postCriticalTime){
+    template <typename Lockable>
+    void shared_thread_function_micro(Lockable& lockable, int preCriticalTime, int criticalTime, int postCriticalTime, int p = 0){
         utils::waiting::busy_wait_micro(preCriticalTime);
-        // m.lock_shared(p);
+        if constexpr (std::is_same_v<Lockable, std::mutex> || std::is_same_v<Lockable, std::shared_mutex>) lockable.lock_shared();
+        else lockable.lock_shared(p);
         utils::waiting::busy_wait_micro(criticalTime);
-        // m.unlock_shared();
+        lockable.unlock_shared();
         utils::waiting::busy_wait_micro(postCriticalTime);
     }
 
-    void shared_thread_function_nano(int p, int preCriticalTime, int criticalTime, int postCriticalTime){
+    template <typename Lockable>
+    void shared_thread_function_nano(Lockable& lockable, int preCriticalTime, int criticalTime, int postCriticalTime, int p = 0){
         utils::waiting::busy_wait_nano(preCriticalTime);
-        // m.lock_shared(p);
+        if constexpr (std::is_same_v<Lockable, std::mutex> || std::is_same_v<Lockable, std::shared_mutex>) lockable.lock_shared();
+        else lockable.lock_shared(p);
         utils::waiting::busy_wait_nano(criticalTime);
-        // m.unlock_shared();
+        lockable.unlock_shared();
         utils::waiting::busy_wait_nano(postCriticalTime);
     }
 
-    void try_thread_function_milli(int p, int preCriticalTime, int criticalTime, int postCriticalTime){
+    template <typename Lockable>
+    void try_thread_function_milli(Lockable& lockable, int preCriticalTime, int criticalTime, int postCriticalTime, int p = 0){
         utils::waiting::busy_wait_milli(preCriticalTime);
-        // m.try_lock(p);
+        if constexpr (std::is_same_v<Lockable, std::mutex> || std::is_same_v<Lockable, std::shared_mutex>) lockable.try_lock();
+        else lockable.try_lock(p);
         utils::waiting::busy_wait_milli(criticalTime);
-        // m.unlock();
+        lockable.unlock();
         utils::waiting::busy_wait_milli(postCriticalTime);
     }
 
-    void try_thread_function_micro(int p, int preCriticalTime, int criticalTime, int postCriticalTime){
+    template <typename Lockable>
+    void try_thread_function_micro(Lockable& lockable, int preCriticalTime, int criticalTime, int postCriticalTime, int p = 0){
         utils::waiting::busy_wait_micro(preCriticalTime);
-        // m.try_lock(p);
+        if constexpr (std::is_same_v<Lockable, std::mutex> || std::is_same_v<Lockable, std::shared_mutex>) lockable.try_lock();
+        else lockable.try_lock(p);
         utils::waiting::busy_wait_micro(criticalTime);
-        // m.unlock();
+        lockable.unlock();
         utils::waiting::busy_wait_micro(postCriticalTime);
     }
 
-    void try_thread_function_nano(int p, int preCriticalTime, int criticalTime, int postCriticalTime){
+    template <typename Lockable>
+    void try_thread_function_nano(Lockable& lockable, int preCriticalTime, int criticalTime, int postCriticalTime, int p = 0){
         utils::waiting::busy_wait_nano(preCriticalTime);
-        // m.try_lock(p);
+        if constexpr (std::is_same_v<Lockable, std::mutex> || std::is_same_v<Lockable, std::shared_mutex>) lockable.try_lock();
+        else lockable.try_lock(p);
         utils::waiting::busy_wait_nano(criticalTime);
-        // m.unlock();
+        lockable.unlock();
         utils::waiting::busy_wait_nano(postCriticalTime);
     }
 
-    void try_shared_thread_function_milli(int p, int preCriticalTime, int criticalTime, int postCriticalTime){
+    template <typename Lockable>
+    void try_shared_thread_function_milli(Lockable& lockable, int preCriticalTime, int criticalTime, int postCriticalTime, int p = 0){
         utils::waiting::busy_wait_milli(preCriticalTime);
-        // m.try_lock_shared(p);
+        if constexpr (std::is_same_v<Lockable, std::mutex> || std::is_same_v<Lockable, std::shared_mutex>) lockable.try_lock_shared();
+        else lockable.try_lock_shared(p);
         utils::waiting::busy_wait_milli(criticalTime);
-        // m.unlock_shared();
+        lockable.unlock_shared();
         utils::waiting::busy_wait_milli(postCriticalTime);
     }
 
-    void try_shared_thread_function_micro(int p, int preCriticalTime, int criticalTime, int postCriticalTime){
+    template <typename Lockable>
+    void try_shared_thread_function_micro(Lockable& lockable, int preCriticalTime, int criticalTime, int postCriticalTime, int p = 0){
         utils::waiting::busy_wait_micro(preCriticalTime);
-        // m.try_lock_shared(p);
+        if constexpr (std::is_same_v<Lockable, std::mutex> || std::is_same_v<Lockable, std::shared_mutex>) lockable.try_lock_shared();
+        else lockable.try_lock_shared(p);
         utils::waiting::busy_wait_micro(criticalTime);
-        // m.unlock_shared();
+        lockable.unlock_shared();
         utils::waiting::busy_wait_micro(postCriticalTime);
     }
 
-    void try_shared_thread_function_nano(int p, int preCriticalTime, int criticalTime, int postCriticalTime){
+    template <typename Lockable>
+    void try_shared_thread_function_nano(Lockable& lockable, int preCriticalTime, int criticalTime, int postCriticalTime, int p = 0){
         utils::waiting::busy_wait_nano(preCriticalTime);
-        // m.try_lock_shared(p);
+        if constexpr (std::is_same_v<Lockable, std::mutex> || std::is_same_v<Lockable, std::shared_mutex>) lockable.try_lock_shared();
+        else lockable.try_lock_shared(p);
         utils::waiting::busy_wait_nano(criticalTime);
-        // m.unlock_shared();
+        lockable.unlock_shared();
         utils::waiting::busy_wait_nano(postCriticalTime);
     }
 }

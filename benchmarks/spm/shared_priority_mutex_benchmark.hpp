@@ -1,58 +1,9 @@
 #include <boost/fairness.hpp>
-#include "../utils/waiting_utils.hpp"
-
+#include "../utils/thread_utils.hpp"
 
 namespace _PM_S_pipeline_benchmark{
 
-    boost::fairness::shared_priority_mutex<10> m;
-
-    void thread_function(int p, int preCriticalTime, int criticalTime, int postCriticalTime){
-        utils::waiting::busy_wait_milli(preCriticalTime);
-        m.lock(p);
-        utils::waiting::busy_wait_milli(criticalTime);
-        m.unlock();
-        utils::waiting::busy_wait_milli(postCriticalTime);
-    }
-
-    void thread_function_micro(int p, int preCriticalTime, int criticalTime, int postCriticalTime){
-        utils::waiting::busy_wait_micro(preCriticalTime);
-        m.lock(p);
-        utils::waiting::busy_wait_micro(criticalTime);
-        m.unlock();
-        utils::waiting::busy_wait_micro(postCriticalTime);
-    }
-
-    void thread_function_nano(int p, int preCriticalTime, int criticalTime, int postCriticalTime){
-        utils::waiting::busy_wait_nano(preCriticalTime);
-        m.lock(p);
-        utils::waiting::busy_wait_nano(criticalTime);
-        m.unlock();
-        utils::waiting::busy_wait_nano(postCriticalTime);
-    }
-
-    void shared_thread_function(int p, int preCriticalTime, int criticalTime, int postCriticalTime){
-        utils::waiting::busy_wait_milli(preCriticalTime);
-        m.lock_shared(p);
-        utils::waiting::busy_wait_milli(criticalTime);
-        m.unlock_shared();
-        utils::waiting::busy_wait_milli(postCriticalTime);
-    }
-
-    void shared_thread_function_micro(int p, int preCriticalTime, int criticalTime, int postCriticalTime){
-        utils::waiting::busy_wait_micro(preCriticalTime);
-        m.lock_shared(p);
-        utils::waiting::busy_wait_micro(criticalTime);
-        m.unlock_shared();
-        utils::waiting::busy_wait_micro(postCriticalTime);
-    }
-
-    void shared_thread_function_nano(int p, int preCriticalTime, int criticalTime, int postCriticalTime){
-        utils::waiting::busy_wait_nano(preCriticalTime);
-        m.lock_shared(p);
-        utils::waiting::busy_wait_nano(criticalTime);
-        m.unlock_shared();
-        utils::waiting::busy_wait_nano(postCriticalTime);
-    }
+    boost::fairness::shared_priority_mutex<5> m;
 
     void PM_S_LockUnlock(benchmark::State& state) {
         for (auto _ : state){
@@ -75,7 +26,7 @@ namespace _PM_S_pipeline_benchmark{
         std::array<int, 8> postCT {50, 30, 20, 25, 10, 15, 15, 45};
 
         for (auto _ : state) {
-            thread_function(prios[state.thread_index()] ,preCT[state.thread_index()], CT, postCT[state.thread_index()]);
+            utils::thread::thread_function_milli(m, preCT[state.thread_index()], CT, postCT[state.thread_index()], prios[state.thread_index()]);
         }
     }
 
@@ -86,7 +37,7 @@ namespace _PM_S_pipeline_benchmark{
         std::array<int, 8> postCT {50, 30, 20, 25, 10, 15, 15, 45};
 
         for (auto _ : state) {
-            shared_thread_function(prios[state.thread_index()] ,preCT[state.thread_index()], CT, postCT[state.thread_index()]);
+            utils::thread::shared_thread_function_milli(m, preCT[state.thread_index()], CT, postCT[state.thread_index()], prios[state.thread_index()]);
         }
     }
 
@@ -97,7 +48,7 @@ namespace _PM_S_pipeline_benchmark{
         std::array<int, 8> postCT {5000, 3000, 2000, 2500, 1000, 1500, 1500, 4500};
 
         for (auto _ : state) {
-            thread_function_micro(prios[state.thread_index()] ,preCT[state.thread_index()], CT, postCT[state.thread_index()]);
+            utils::thread::thread_function_micro(m, preCT[state.thread_index()], CT, postCT[state.thread_index()], prios[state.thread_index()]);
         }
     }
 
@@ -108,7 +59,7 @@ namespace _PM_S_pipeline_benchmark{
         std::array<int, 8> postCT {5000, 3000, 2000, 2500, 1000, 1500, 1500, 4500};
 
         for (auto _ : state) {
-            shared_thread_function_micro(prios[state.thread_index()] ,preCT[state.thread_index()], CT, postCT[state.thread_index()]);
+            utils::thread::shared_thread_function_micro(m, preCT[state.thread_index()], CT, postCT[state.thread_index()], prios[state.thread_index()]);
         }
     }
 
@@ -119,7 +70,7 @@ namespace _PM_S_pipeline_benchmark{
         std::array<int, 8> postCT {500, 300, 200, 250, 100, 150, 150, 450};
 
         for (auto _ : state) {
-            thread_function_micro(prios[state.thread_index()] ,preCT[state.thread_index()], CT, postCT[state.thread_index()]);
+            utils::thread::thread_function_micro(m, preCT[state.thread_index()], CT, postCT[state.thread_index()], prios[state.thread_index()]);
         }
     }
 
@@ -130,7 +81,7 @@ namespace _PM_S_pipeline_benchmark{
         std::array<int, 8> postCT {500, 300, 200, 250, 100, 150, 150, 450};
 
         for (auto _ : state) {
-            shared_thread_function_micro(prios[state.thread_index()] ,preCT[state.thread_index()], CT, postCT[state.thread_index()]);
+            utils::thread::shared_thread_function_micro(m, preCT[state.thread_index()], CT, postCT[state.thread_index()], prios[state.thread_index()]);
         }
     }
 
@@ -141,7 +92,7 @@ namespace _PM_S_pipeline_benchmark{
         std::array<int, 8> postCT {5000, 3000, 2000, 2500, 1000, 1500, 1500, 4500};
 
         for (auto _ : state) {
-            thread_function_nano(prios[state.thread_index()] ,preCT[state.thread_index()], CT, postCT[state.thread_index()]);
+            utils::thread::thread_function_nano(m, preCT[state.thread_index()], CT, postCT[state.thread_index()], prios[state.thread_index()]);
         }
     }
 
@@ -152,7 +103,7 @@ namespace _PM_S_pipeline_benchmark{
         std::array<int, 8> postCT {5000, 3000, 2000, 2500, 1000, 1500, 1500, 4500};
 
         for (auto _ : state) {
-            shared_thread_function_nano(prios[state.thread_index()] ,preCT[state.thread_index()], CT, postCT[state.thread_index()]);
+            utils::thread::shared_thread_function_nano(m, preCT[state.thread_index()], CT, postCT[state.thread_index()], prios[state.thread_index()]);
         }
     }
 }

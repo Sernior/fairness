@@ -1,32 +1,8 @@
-#include "../utils/waiting_utils.hpp"
+#include "../utils/thread_utils.hpp"
 
 namespace _STD_pipeline_benchmark{
 
     std::mutex m;
-
-    void thread_function(int preCriticalTime, int criticalTime, int postCriticalTime){
-        utils::waiting::busy_wait_milli(preCriticalTime);
-        m.lock();
-        utils::waiting::busy_wait_milli(criticalTime);
-        m.unlock();
-        utils::waiting::busy_wait_milli(postCriticalTime);
-    }
-
-    void thread_function_micro(int preCriticalTime, int criticalTime, int postCriticalTime){
-        utils::waiting::busy_wait_micro(preCriticalTime);
-        m.lock();
-        utils::waiting::busy_wait_micro(criticalTime);
-        m.unlock();
-        utils::waiting::busy_wait_micro(postCriticalTime);
-    }
-
-    void thread_function_nano(int preCriticalTime, int criticalTime, int postCriticalTime){
-        utils::waiting::busy_wait_nano(preCriticalTime);
-        m.lock();
-        utils::waiting::busy_wait_nano(criticalTime);
-        m.unlock();
-        utils::waiting::busy_wait_nano(postCriticalTime);
-    }
 
     void STD_LockUnlock(benchmark::State& state) {
         for (auto _ : state){
@@ -41,7 +17,7 @@ namespace _STD_pipeline_benchmark{
         std::array<int, 8> postCT {50, 30, 20, 25, 10, 15, 15, 45};
 
         for (auto _ : state) {
-            thread_function(preCT[state.thread_index()], CT, postCT[state.thread_index()]);
+            utils::thread::thread_function_milli(m, preCT[state.thread_index()], CT, postCT[state.thread_index()]);
         }
     }
 
@@ -51,7 +27,7 @@ namespace _STD_pipeline_benchmark{
         std::array<int, 8> postCT {5000, 3000, 2000, 2500, 1000, 1500, 1500, 4500};
 
         for (auto _ : state) {
-            thread_function_micro(preCT[state.thread_index()], CT, postCT[state.thread_index()]);
+            utils::thread::thread_function_micro(m, preCT[state.thread_index()], CT, postCT[state.thread_index()]);
         }
     }
 
@@ -62,7 +38,7 @@ namespace _STD_pipeline_benchmark{
         std::array<int, 8> postCT {500, 300, 200, 250, 100, 150, 150, 450};
 
         for (auto _ : state) {
-            _STD_pipeline_benchmark::thread_function_micro(preCT[state.thread_index()], CT, postCT[state.thread_index()]);
+            utils::thread::thread_function_micro(m, preCT[state.thread_index()], CT, postCT[state.thread_index()]);
         }
     }
 
@@ -73,7 +49,7 @@ namespace _STD_pipeline_benchmark{
         std::array<int, 8> postCT {5000, 3000, 2000, 2500, 1000, 1500, 1500, 4500};
 
         for (auto _ : state) {
-        _STD_pipeline_benchmark::thread_function_nano(preCT[state.thread_index()], CT, postCT[state.thread_index()]);
+            utils::thread::thread_function_nano(m, preCT[state.thread_index()], CT, postCT[state.thread_index()]);
         }
     }
 }
