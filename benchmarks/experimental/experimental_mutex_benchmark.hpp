@@ -20,7 +20,8 @@ namespace _SPNLC_SLM_PM_pipeline_benchmark{
         std::array<int, 8> postCT {50, 30, 20, 25, 10, 15, 15, 45};
 
         for (auto _ : state) {
-            utils::thread::thread_function_milli(m, preCT[state.thread_index()], CT, postCT[state.thread_index()], prios[state.thread_index()]);
+            // utils::thread::thread_function_milli(m, preCT[state.thread_index()], CT, postCT[state.thread_index()], prios[state.thread_index()]);
+            utils::thread::thread_function<utils::thread::LockLevel::Unique, utils::waiting::WaitingLevel::Milli>(m, preCT[state.thread_index()], CT, postCT[state.thread_index()], prios[state.thread_index()]);
         }
     }
 
@@ -31,7 +32,8 @@ namespace _SPNLC_SLM_PM_pipeline_benchmark{
         std::array<int, 8> postCT {5000, 3000, 2000, 2500, 1000, 1500, 1500, 4500};
 
         for (auto _ : state) {
-            utils::thread::thread_function_micro(m, preCT[state.thread_index()], CT, postCT[state.thread_index()], prios[state.thread_index()]);
+            // utils::thread::thread_function_micro(m, preCT[state.thread_index()], CT, postCT[state.thread_index()], prios[state.thread_index()]);
+            utils::thread::thread_function<utils::thread::LockLevel::Unique, utils::waiting::WaitingLevel::Micro>(m, preCT[state.thread_index()], CT, postCT[state.thread_index()], prios[state.thread_index()]);
         }
     }
 
@@ -42,7 +44,8 @@ namespace _SPNLC_SLM_PM_pipeline_benchmark{
         std::array<int, 8> postCT {500, 300, 200, 250, 100, 150, 150, 450};
 
         for (auto _ : state) {
-            utils::thread::thread_function_micro(m, preCT[state.thread_index()], CT, postCT[state.thread_index()], prios[state.thread_index()]);
+            utils::thread::thread_function<utils::thread::LockLevel::Unique, utils::waiting::WaitingLevel::Micro>(m, preCT[state.thread_index()], CT, postCT[state.thread_index()], prios[state.thread_index()]);
+            // utils::thread::thread_function_micro(m, preCT[state.thread_index()], CT, postCT[state.thread_index()], prios[state.thread_index()]);
         }
     }
 
@@ -53,7 +56,8 @@ namespace _SPNLC_SLM_PM_pipeline_benchmark{
         std::array<int, 8> postCT {5000, 3000, 2000, 2500, 1000, 1500, 1500, 4500};
 
         for (auto _ : state) {
-            utils::thread::thread_function_nano(m, preCT[state.thread_index()], CT, postCT[state.thread_index()], prios[state.thread_index()]);
+            utils::thread::thread_function<utils::thread::LockLevel::Unique, utils::waiting::WaitingLevel::Nano>(m, preCT[state.thread_index()], CT, postCT[state.thread_index()], prios[state.thread_index()]);
+            // utils::thread::thread_function_nano(m, preCT[state.thread_index()], CT, postCT[state.thread_index()], prios[state.thread_index()]);
         }
     }
 }
