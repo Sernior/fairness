@@ -1,9 +1,5 @@
-#include <boost/fairness.hpp>
 #include <benchmark/benchmark.h>
-#include <mutex>
-#include <shared_mutex>
 #include "pipeline_benchmark.hpp"
-#include <DeterministicConcurrency>
 
 BENCHMARK(_PM_pipeline_benchmark::PM_LockUnlock)->Threads(8);
 BENCHMARK(_STD_pipeline_benchmark::STD_LockUnlock)->Threads(8);

@@ -1,3 +1,4 @@
+#include <mutex>
 #include "../utils/thread_utils.hpp"
 
 namespace _STD_pipeline_benchmark{

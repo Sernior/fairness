@@ -1,5 +1,7 @@
 #ifndef BOOST_FAIRNESS_THREAD_UTILS
 #define BOOST_FAIRNESS_THREAD_UTILS
+#include <mutex>
+#include <shared_mutex>
 #include "waiting_utils.hpp"
 
 #define NOW std::chrono::high_resolution_clock::now()
