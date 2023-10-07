@@ -13,21 +13,25 @@
 #include <boost/fairness.hpp>
 #include "../utils/thread_utils.hpp"
 
-namespace _PM_S_pipeline_benchmark{
+namespace shared_priority_mutex_benchmark{
 
     boost::fairness::shared_priority_mutex<5> m;
 
     void PM_S_LockUnlock(benchmark::State& state) {
+        boost::fairness::shared_priority_mutex mf;
+
         for (auto _ : state){
-            m.lock();
-            m.unlock();
+            mf.lock();
+            mf.unlock();
         }
     }
 
     void PM_S_SLockSUnlock(benchmark::State& state) {
+        boost::fairness::shared_priority_mutex mf;
+
         for (auto _ : state){
-            m.lock_shared();
-            m.unlock_shared();
+            mf.lock_shared();
+            mf.unlock_shared();
         }
     }
 

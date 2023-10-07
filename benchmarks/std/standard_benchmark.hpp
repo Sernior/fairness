@@ -13,14 +13,16 @@
 #include <mutex>
 #include "../utils/thread_utils.hpp"
 
-namespace _STD_pipeline_benchmark{
+namespace standard_mutex_benchmark{
 
     std::mutex m;
 
     void STD_LockUnlock(benchmark::State& state) {
+        std::mutex mf;
+
         for (auto _ : state){
-            m.lock();
-            m.unlock();
+            mf.lock();
+            mf.unlock();
         }
     }
 

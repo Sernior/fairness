@@ -1,14 +1,16 @@
 #include <boost/fairness.hpp>
 #include "../utils/thread_utils.hpp"
 
-namespace _PM_pipeline_benchmark{
+namespace priority_mutex_benchmark{
 
     boost::fairness::priority_mutex<5> m;
 
     void PM_LockUnlock(benchmark::State& state) {
+        boost::fairness::priority_mutex mf;
+        
         for (auto _ : state){
-            m.lock();
-            m.unlock();
+            mf.lock();
+            mf.unlock();
         }
     }
 

@@ -13,14 +13,16 @@
 #include <boost/fairness.hpp>
 #include "../utils/thread_utils.hpp"
 
-namespace _PM_R_pipeline_benchmark{
+namespace recursive_priority_mutex_benchmark{
 
     boost::fairness::recursive_priority_mutex<5> m;
 
     void R_PM_LockUnlock(benchmark::State& state) {
+        boost::fairness::recursive_priority_mutex mf;
+
         for (auto _ : state){
-            m.lock();
-            m.unlock();
+            mf.lock();
+            mf.unlock();
         }
     }
 

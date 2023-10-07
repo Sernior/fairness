@@ -13,14 +13,16 @@
 #include <boost/fairness.hpp>
 #include "../utils/thread_utils.hpp"
 
-namespace _SLM_PM_pipeline_benchmark{
+namespace slim_priority_mutex_benchmark{
 
     boost::fairness::slim_priority_mutex<5> m;
 
     void SLM_PM_LockUnlock(benchmark::State& state) {
+        boost::fairness::slim_priority_mutex<1> mf;
+
         for (auto _ : state){
-            m.lock();
-            m.unlock();
+            mf.lock();
+            mf.unlock();
         }
     }
 
