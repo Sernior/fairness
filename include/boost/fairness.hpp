@@ -23,6 +23,7 @@
 #include <boost/fairness/slim_priority_mutex.hpp>
 #include <boost/fairness/spinlock_priority_mutex.hpp>
 #include <boost/fairness/recursive_priority_mutex.hpp>
+#include <boost/fairness/unique_lock.hpp>
 
 #ifdef BOOST_FAIRNESS_EXPERIMENTAL_MUTEXES
 #include <boost/fairness/experimental/slim_spinlock_priority_mutex.hpp>

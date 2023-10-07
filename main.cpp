@@ -10,7 +10,7 @@
 
 // #include <boost/atomic.hpp>
 
-static boost::fairness::recursive_priority_mutex<4> ms;
+static boost::fairness::priority_mutex<4> ms;
 
 #define NOW std::chrono::steady_clock::now()
 
@@ -23,12 +23,10 @@ static void busy_wait_nano(uint64_t nanoseconds){
 
 static void thread_function_nano(int p, int preCriticalTime, int criticalTime, int postCriticalTime){
     busy_wait_nano(preCriticalTime);
-    ms.lock(p);
-    ms.lock(p);
-    //std::cout << p;
-    busy_wait_nano(criticalTime);
-    ms.unlock();
-    ms.unlock();
+    {
+        boost::fairness::unique_lock l1(ms, p);
+        busy_wait_nano(criticalTime);
+    }
     busy_wait_nano(postCriticalTime);
 }
 
