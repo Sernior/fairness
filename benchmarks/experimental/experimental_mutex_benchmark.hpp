@@ -14,14 +14,16 @@
 #include "../utils/thread_utils.hpp"
 
 #ifdef BOOST_FAIRNESS_EXPERIMENTAL_MUTEXES
-namespace _SPNLC_SLM_PM_pipeline_benchmark{
+namespace slim_spinlock_priority_mutex_benchmark{
 
     boost::fairness::experimental::slim_spinlock_priority_mutex<5> m;
 
     void SPNLC_SLM_PM_LockUnlock(benchmark::State& state) { /* the non slim version is better for spinlocking */
+        boost::fairness::experimental::slim_spinlock_priority_mutex<1> mf;
+
         for (auto _ : state){
-            m.lock();
-            m.unlock();
+            mf.lock();
+            mf.unlock();
         }
     }
 

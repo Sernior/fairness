@@ -18,3 +18,11 @@
 #include "spnlcpm/spinlock_priority_mutex_benchmark.hpp"
 #include "std/standard_benchmark.hpp"
 #include "std/standard_shared_benchmark.hpp"
+
+void ____________________________________________________________________________________________(benchmark::State& state) {
+    int i = 0;
+    for (auto _ : state){
+        ++i;
+    }
+}
+                   

@@ -13,14 +13,16 @@
 #include <boost/fairness.hpp>
 #include "../utils/thread_utils.hpp"
 
-namespace _SPNLC_PM_pipeline_benchmark{
+namespace spinlock_priority_mutex_benchmark{
 
     boost::fairness::spinlock_priority_mutex<5> m;
 
     void SPNLC_PM_LockUnlock(benchmark::State& state) { /* much better for spinlocking on linux than the slim version */
+        boost::fairness::spinlock_priority_mutex mf;
+
         for (auto _ : state){
-            m.lock();
-            m.unlock();
+            mf.lock();
+            mf.unlock();
         }
     }
 

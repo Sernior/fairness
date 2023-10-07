@@ -13,21 +13,24 @@
 #include <shared_mutex>
 #include "../utils/thread_utils.hpp"
 
-namespace _STD_S_pipeline_benchmark{
+namespace standard_shared_mutex_benchmark{
 
     std::shared_mutex m;
 
     void STD_S_LockUnlock(benchmark::State& state) {
+        std::shared_mutex mf;
         for (auto _ : state){
-            m.lock();
-            m.unlock();
+            mf.lock();
+            mf.unlock();
         }
     }
 
     void STD_S_SLockSUnlock(benchmark::State& state) {
+        std::shared_mutex mf;
+
         for (auto _ : state){
-            m.lock_shared();
-            m.unlock_shared();
+            mf.lock_shared();
+            mf.unlock_shared();
         }
     }
 
