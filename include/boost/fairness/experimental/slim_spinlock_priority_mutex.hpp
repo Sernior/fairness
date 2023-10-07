@@ -29,7 +29,7 @@ namespace boost::fairness::experimental{
     /**
      * @brief The priority_mutex is an advanced synchronization mechanism that enhances the traditional mutex by introducing a priority-based approach.
      * 
-     * @tparam N : number of 0 indexed priorities the priority_mutex manages, up to _max_priority.
+     * @tparam N : number of 0 indexed priorities the priority_mutex manages, up to BOOST_FAIRNESS_SPM64B_SUPPORTED_PRIORITIES.
      */
     template<size_t N>
     class slim_spinlock_priority_mutex<N, Range<(1 <= N && N <= 7)>>{
@@ -188,7 +188,7 @@ namespace boost::fairness::experimental{
     /**
      * @brief The priority_mutex is an advanced synchronization mechanism that enhances the traditional mutex by introducing a priority-based approach.
      * 
-     * @tparam N : number of 0 indexed priorities the priority_mutex manages, up to _max_priority.
+     * @tparam N : number of 0 indexed priorities the priority_mutex manages, up to BOOST_FAIRNESS_SPM128B_SUPPORTED_PRIORITIES.
      */
     template<size_t N>
     class slim_spinlock_priority_mutex<N, Range<(8 <= N && N <= 15)>>{

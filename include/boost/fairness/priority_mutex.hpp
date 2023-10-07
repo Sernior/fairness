@@ -24,10 +24,10 @@ namespace boost::fairness{
     /**
      * @brief The priority_mutex is an advanced synchronization mechanism that enhances the traditional mutex by introducing a priority-based approach.
      * 
-     * @tparam N : number of 0 indexed priorities the priority_mutex manages, up to _max_priority.
+     * @tparam N : number of 0 indexed priorities the priority_mutex manages, up to BOOST_FAIRNESS_MAXIMUM_PRIORITY.
      */
     template<size_t N = 1>
-    requires (N >= 1 && N <= _max_priority)
+    requires (N >= 1 && N <= BOOST_FAIRNESS_MAXIMUM_PRIORITY)
     class priority_mutex{
 
         using Thread_cnt_t = uint32_t;
@@ -121,7 +121,7 @@ namespace boost::fairness{
 
         private:
         std::array<std::atomic<Thread_cnt_t>, N> waiters_;
-        std::atomic<Priority_t> currentPriority_{_max_priority};
+        std::atomic<Priority_t> currentPriority_{BOOST_FAIRNESS_MAXIMUM_PRIORITY};
         std::atomic_flag lockOwned_;
 
         Priority_t find_first_priority_(){
@@ -129,7 +129,7 @@ namespace boost::fairness{
                 if (waiters_[i] > 0)
                     return i;
             }
-            return _max_priority;
+            return BOOST_FAIRNESS_MAXIMUM_PRIORITY;
         }
     };
 }
