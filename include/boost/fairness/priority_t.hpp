@@ -1,5 +1,5 @@
 /**
- * @file priority_t.h
+ * @file priority_t.hpp
  * @author F. Abrignani (federignoli@hotmail.it)
  * @author P. Di Giglio
  * @author S. Martorana
@@ -16,6 +16,23 @@
 #include <cstdint>
 namespace boost::fairness{
     using Priority_t = uint8_t;
-    static constexpr Priority_t _max_priority = Priority_t(-1);
+
+    /*
+    Priorities are indexes in an array, that means that if I define a priority_mutex<BOOST_FAIRNESS_MAXIMUM_PRIORITY> m;
+    we can call m.lock(p) with a p up to BOOST_FAIRNESS_MAXIMUM_PRIORITY - 1;
+    this means that a priority to be valid has to be in the range [BOOST_FAIRNESS_MINIMUM_PRIORITY, BOOST_FAIRNESS_MAXIMUM_PRIORITY)
+    */
+    #define BOOST_FAIRNESS_MAXIMUM_PRIORITY Priority_t(-1)
+    #define BOOST_FAIRNESS_MINIMUM_PRIORITY 0
+
+    /*
+    structs used to overload unique_lock methods
+    */
+    struct defer_lock_t { explicit defer_lock_t() = default; };
+    struct try_to_lock_t { explicit try_to_lock_t() = default; };
+    struct adopt_lock_t { explicit adopt_lock_t() = default; };
+    static constexpr defer_lock_t defer_lock;
+    static constexpr try_to_lock_t try_to_lock;
+    static constexpr adopt_lock_t adopt_lock;
 }
 #endif // BOOST_FAIRNESS_PRIORITY_T_HPP

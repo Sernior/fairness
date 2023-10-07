@@ -1,5 +1,5 @@
 /**
- * @file priority_mutex.h
+ * @file priority_mutex.hpp
  * @author F. Abrignani (federignoli@hotmail.it)
  * @author P. Di Giglio
  * @author S. Martorana
@@ -17,19 +17,17 @@
 #include <atomic>
 #include <array>
 #include <chrono>
-#include <thread>
 #include <boost/fairness/priority_t.hpp>
-#include <mutex>
 
 namespace boost::fairness{
 
     /**
      * @brief The priority_mutex is an advanced synchronization mechanism that enhances the traditional mutex by introducing a priority-based approach.
      * 
-     * @tparam N : number of 0 indexed priorities the priority_mutex manages, up to _max_priority.
+     * @tparam N : number of 0 indexed priorities the priority_mutex manages, up to BOOST_FAIRNESS_MAXIMUM_PRIORITY.
      */
     template<size_t N = 1>
-    requires (N >= 1 && N <= _max_priority)
+    requires (N >= 1 && N <= BOOST_FAIRNESS_MAXIMUM_PRIORITY)
     class priority_mutex{
 
         using Thread_cnt_t = uint32_t;
@@ -98,7 +96,7 @@ namespace boost::fairness{
         void unlock(){
             currentPriority_.store(find_first_priority_(), std::memory_order_relaxed);
             lockOwned_.clear(std::memory_order_release);
-            lockOwned_.notify_all();//P2616R3 https://www.open-std.org/jtc1/sc22/wg21/docs/papers/2023/p2616r3.html this shouldnt be a problem with mutex semantics
+            lockOwned_.notify_all();
         }
 
         /**
@@ -123,15 +121,15 @@ namespace boost::fairness{
 
         private:
         std::array<std::atomic<Thread_cnt_t>, N> waiters_;
-        std::atomic<Priority_t> currentPriority_{_max_priority};
+        std::atomic<Priority_t> currentPriority_{BOOST_FAIRNESS_MAXIMUM_PRIORITY};
         std::atomic_flag lockOwned_;
 
         Priority_t find_first_priority_(){
-            for (Priority_t i = 0; i < N; i++){
+            for (Priority_t i = 0; i < N; ++i){
                 if (waiters_[i] > 0)
                     return i;
             }
-            return _max_priority;
+            return BOOST_FAIRNESS_MAXIMUM_PRIORITY;
         }
     };
 }

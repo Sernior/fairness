@@ -11,6 +11,8 @@ target_include_directories(fsm INTERFACE include)
 
 add_compile_options(-mcx16)
 
+find_package(Boost 1.74.0)
+
 if(LIBFSM_EXPERIMENTAL)#experimental stuff
 target_include_directories(fsm INTERFACE include/experimental)
 add_compile_definitions(BOOST_FAIRNESS_EXPERIMENTAL_MUTEXES)

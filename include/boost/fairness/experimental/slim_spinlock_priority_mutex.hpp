@@ -1,5 +1,5 @@
 /**
- * @file slim_spinlock_priority_mutex.h
+ * @file slim_spinlock_priority_mutex.hpp
  * @author F. Abrignani (federignoli@hotmail.it)
  * @author P. Di Giglio
  * @author S. Martorana
@@ -15,15 +15,11 @@
 #ifndef SLIM_SPINLOCK_PRIORITY_MUTEX_HPP
 #define SLIM_SPINLOCK_PRIORITY_MUTEX_HPP
 #pragma once
-#include <thread>
 #include <atomic>
 #include <array>
-#include <chrono>
-#include <thread>
-#include <mutex>
 #include <boost/fairness/priority_t.hpp>
 #include <cstring>
-namespace boost::fairness{
+namespace boost::fairness::experimental{
 
     template<bool> struct Range;
 
@@ -33,7 +29,7 @@ namespace boost::fairness{
     /**
      * @brief The priority_mutex is an advanced synchronization mechanism that enhances the traditional mutex by introducing a priority-based approach.
      * 
-     * @tparam N : number of 0 indexed priorities the priority_mutex manages, up to _max_priority.
+     * @tparam N : number of 0 indexed priorities the priority_mutex manages, up to BOOST_FAIRNESS_SPM64B_SUPPORTED_PRIORITIES.
      */
     template<size_t N>
     class slim_spinlock_priority_mutex<N, Range<(1 <= N && N <= 7)>>{
@@ -49,12 +45,12 @@ namespace boost::fairness{
             }
             control_block_t increasePriority(Priority_t const priority) const {
                 control_block_t new_ctrl = *this;
-                new_ctrl.priority_[priority]++;
+                ++new_ctrl.priority_[priority];
                 return new_ctrl;
             }
             control_block_t decreasePriority(Priority_t const priority) const {
                 control_block_t new_ctrl = *this;
-                new_ctrl.priority_[priority]--;
+                --new_ctrl.priority_[priority];
                 return new_ctrl;
             }
             control_block_t setPriority(Priority_t const priority) const {
@@ -192,7 +188,7 @@ namespace boost::fairness{
     /**
      * @brief The priority_mutex is an advanced synchronization mechanism that enhances the traditional mutex by introducing a priority-based approach.
      * 
-     * @tparam N : number of 0 indexed priorities the priority_mutex manages, up to _max_priority.
+     * @tparam N : number of 0 indexed priorities the priority_mutex manages, up to BOOST_FAIRNESS_SPM128B_SUPPORTED_PRIORITIES.
      */
     template<size_t N>
     class slim_spinlock_priority_mutex<N, Range<(8 <= N && N <= 15)>>{
@@ -207,12 +203,12 @@ namespace boost::fairness{
             }
             control_block_t increasePriority(Priority_t const priority) const {
                 control_block_t new_ctrl = *this;
-                new_ctrl.priority_[priority]++;
+                ++new_ctrl.priority_[priority];
                 return new_ctrl;
             }
             control_block_t decreasePriority(Priority_t const priority) const {
                 control_block_t new_ctrl = *this;
-                new_ctrl.priority_[priority]--;
+                --new_ctrl.priority_[priority];
                 return new_ctrl;
             }
             control_block_t setPriority(Priority_t const priority) const {
@@ -332,7 +328,7 @@ namespace boost::fairness{
         boost::atomic<control_block_t> ctrl_;
 
         Priority_t find_first_priority_(control_block_t const& ctrl){
-            for (Priority_t i = 0; i < N; i++){
+            for (Priority_t i = 0; i < N; ++i){
                 if (ctrl.priority_[i] > 0)
                     return i;
             }

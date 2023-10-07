@@ -1,14 +1,16 @@
+#include <boost/fairness.hpp>
 #include <iostream>
 #include <thread>
 #include <chrono>
 #include <vector>
+#include <mutex>
+#include <shared_mutex>
 #include <algorithm>
 #include <BS_thread_pool.hpp>
 
-#include <boost/atomic.hpp>
-#include <boost/fairness.hpp>
+// #include <boost/atomic.hpp>
 
-static boost::fairness::slim_priority_mutex<3> ms;
+static boost::fairness::priority_mutex<4> ms;
 
 #define NOW std::chrono::steady_clock::now()
 
@@ -21,10 +23,10 @@ static void busy_wait_nano(uint64_t nanoseconds){
 
 static void thread_function_nano(int p, int preCriticalTime, int criticalTime, int postCriticalTime){
     busy_wait_nano(preCriticalTime);
-    ms.lock(p);
-    //std::cout << p;
-    busy_wait_nano(criticalTime);
-    ms.unlock();
+    {
+        boost::fairness::unique_lock l1(ms, p);
+        busy_wait_nano(criticalTime);
+    }
     busy_wait_nano(postCriticalTime);
 }
 
@@ -37,8 +39,8 @@ int main()
 
     BS::thread_pool pool(8);
 
-    for (int j = 0; j < 200000; j++){
-        for (int i = 0; i < 8; i++){
+    for (int j = 0; j < 200000; ++j){
+        for (int i = 0; i < 8; ++i){
             pool.push_task(thread_function_nano, prios[i], preCT[i], CT, postCT[i]);
         }
         pool.wait_for_tasks();
