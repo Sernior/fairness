@@ -1,6 +1,6 @@
 # Documentation priority-mutex
 
-<em>F.Abrignani, P. Di Giglio, S. Martorana - federignoli@hotmail.it - Version 0.1, 17.08.2023</em>
+<em>F.Abrignani, S. Martorana - federignoli@hotmail.it - Version 0.1, 17.08.2023</em>
 
 <table style="border:none;border-collapse:collapse;">
     <tr>

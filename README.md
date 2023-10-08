@@ -151,5 +151,4 @@ Federico Abrignani - federignoli@hotmail.it
 
 * Federico Abrignani (Author) - https://github.com/Sernior
 * Salvatore Martorana (Contributor) - https://github.com/SMartorana
-* Paolo Di Giglio (Contributor) - https://github.com/pdigiglio
 
