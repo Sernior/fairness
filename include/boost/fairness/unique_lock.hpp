@@ -93,13 +93,13 @@ namespace boost::fairness{
     }
 
     /*
-    CONSTRUCTOR DOC TODO  !!!!!!!!!!! WHEN WE ADOPT A PRIORITY_MUTEX WE HAVE NO WAY TO FIND OUT ITS PRIORITY YET
-    OR WE REMOVE THIS CONSTRUCTOR OR WE MAKE ALL PRIORITY MUTEXES FRIENDS OF UNIQUE LOCK
+    There isn`t a non intrusive way to automatically find out the priority
     */
+    /*
     unique_lock(Lockable& m, adopt_lock_t) noexcept
-    : lockable_(std::addressof(m)), lockOwned_(true), currentPriority_(BOOST_FAIRNESS_INVALID_PRIORITY)
+    : lockable_(std::addressof(m)), lockOwned_(true), currentPriority_(m.)
     {
-    }
+    }*/
 
     /*
     CONSTRUCTOR DOC TODO
@@ -310,9 +310,9 @@ namespace boost::fairness{
         throw std::system_error(std::make_error_code(std::errc::resource_deadlock_would_occur));
     }
 
-    Priority_t  currentPriority_; // swap name with currentPriority_
+    Priority_t  currentPriority_;
     Lockable*	lockable_;
-    bool		lockOwned_; // swap name with lockOwned_
+    bool		lockOwned_;
   };
 
   /*

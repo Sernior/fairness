@@ -13,10 +13,8 @@
  */
 #ifndef BOOST_FAIRNESS_PRIORITY_MUTEX_HPP
 #define BOOST_FAIRNESS_PRIORITY_MUTEX_HPP
-#include <thread>
 #include <atomic>
 #include <array>
-#include <chrono>
 #include <boost/fairness/priority_t.hpp>
 
 namespace boost::fairness{
