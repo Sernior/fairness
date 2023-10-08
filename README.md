@@ -141,7 +141,7 @@ If you encounter any issues or would like to suggest new features, please don't 
 Distributed under the Boost Software License - Version 1.0. See LICENSE.txt for more information.
 
 ## Documentation
-The documentation is available at the following link: https://sernior.github.io/priority-mutex/
+The documentation is available at the following link: https://sernior.github.io/fairness/
 
 ## Contacts
 

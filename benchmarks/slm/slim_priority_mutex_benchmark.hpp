@@ -18,7 +18,7 @@ namespace slim_priority_mutex_benchmark{
     boost::fairness::slim_priority_mutex<5> m;
 
     void SLM_PM_LockUnlock(benchmark::State& state) {
-        boost::fairness::slim_priority_mutex<1> mf;
+        boost::fairness::slim_priority_mutex mf;
 
         for (auto _ : state){
             mf.lock();

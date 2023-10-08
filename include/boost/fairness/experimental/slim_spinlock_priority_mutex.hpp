@@ -22,7 +22,7 @@ namespace boost::fairness::experimental{
 
     template<bool> struct Range;
 
-    template<size_t N, typename = Range<true> >
+    template<size_t N = 1, typename = Range<true> >
     struct slim_spinlock_priority_mutex{};
 
     /**
