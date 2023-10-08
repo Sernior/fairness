@@ -24,7 +24,7 @@ namespace boost::fairness{
 
     template<bool> struct Range;
 
-    template<size_t N, typename = Range<true> >
+    template<size_t N = 1, typename = Range<true> >
     struct slim_priority_mutex{};
 
     /**

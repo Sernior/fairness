@@ -14,7 +14,6 @@
 #ifdef BOOST_FAIRNESS_EXPERIMENTAL_MUTEXES
 #ifndef SLIM_SPINLOCK_PRIORITY_MUTEX_HPP
 #define SLIM_SPINLOCK_PRIORITY_MUTEX_HPP
-#pragma once
 #include <atomic>
 #include <array>
 #include <boost/fairness/priority_t.hpp>

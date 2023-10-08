@@ -22,6 +22,16 @@
 
 namespace boost::fairness{
 
+  /*
+  structs used to overload unique_lock methods
+  */
+  struct defer_lock_t { explicit defer_lock_t() = default; };
+  struct try_to_lock_t { explicit try_to_lock_t() = default; };
+  struct adopt_lock_t { explicit adopt_lock_t() = default; };
+  static constexpr defer_lock_t defer_lock;
+  static constexpr try_to_lock_t try_to_lock;
+  static constexpr adopt_lock_t adopt_lock;
+
   template<typename Lockable>
   class unique_lock{
 
@@ -31,14 +41,14 @@ namespace boost::fairness{
     CONSTRUCTOR DOC TODO
     */
     unique_lock() noexcept
-    : lockable_(0), lockOwned_(false), currentPriority_(BOOST_FAIRNESS_MAXIMUM_PRIORITY)
+    : lockable_(0), lockOwned_(false), currentPriority_(BOOST_FAIRNESS_INVALID_PRIORITY)
     { }
 
     /*
     CONSTRUCTOR DOC TODO
     */
-    explicit unique_lock(Lockable& m, Priority_t const p)
-    : lockable_(std::addressof(m)), lockOwned_(false), currentPriority_(BOOST_FAIRNESS_MAXIMUM_PRIORITY)
+    explicit unique_lock(Lockable& m, Priority_t const p = BOOST_FAIRNESS_MINIMUM_PRIORITY)
+    : lockable_(std::addressof(m)), lockOwned_(false), currentPriority_(BOOST_FAIRNESS_INVALID_PRIORITY)
     {
     if (!is_valid_priority(p))
       throw_operation_not_permitted_();
@@ -51,14 +61,14 @@ namespace boost::fairness{
     CONSTRUCTOR DOC TODO
     */
     unique_lock(Lockable& m, defer_lock_t) noexcept
-    : lockable_(std::addressof(m)), lockOwned_(false), currentPriority_(BOOST_FAIRNESS_MAXIMUM_PRIORITY)
+    : lockable_(std::addressof(m)), lockOwned_(false), currentPriority_(BOOST_FAIRNESS_INVALID_PRIORITY)
     { }
 
     /*
     CONSTRUCTOR DOC TODO
     */
     unique_lock(Lockable& m, Priority_t const p, try_to_lock_t)
-    : lockable_(std::addressof(m)), lockOwned_(lockable_->try_lock(p)), currentPriority_(BOOST_FAIRNESS_MAXIMUM_PRIORITY)
+    : lockable_(std::addressof(m)), lockOwned_(lockable_->try_lock(p)), currentPriority_(BOOST_FAIRNESS_INVALID_PRIORITY)
     { 
     if (lockOwned_)
         currentPriority_ = p;
@@ -68,7 +78,7 @@ namespace boost::fairness{
     CONSTRUCTOR DOC TODO
     */
     unique_lock(Lockable& m, try_to_lock_t)
-    : lockable_(std::addressof(m)), lockOwned_(lockable_->try_lock(BOOST_FAIRNESS_MINIMUM_PRIORITY)), currentPriority_(BOOST_FAIRNESS_MAXIMUM_PRIORITY)
+    : lockable_(std::addressof(m)), lockOwned_(lockable_->try_lock(BOOST_FAIRNESS_MINIMUM_PRIORITY)), currentPriority_(BOOST_FAIRNESS_INVALID_PRIORITY)
     { 
     if (lockOwned_)
         currentPriority_ = BOOST_FAIRNESS_MINIMUM_PRIORITY;
@@ -83,10 +93,11 @@ namespace boost::fairness{
     }
 
     /*
-    CONSTRUCTOR DOC TODO
+    CONSTRUCTOR DOC TODO  !!!!!!!!!!! WHEN WE ADOPT A PRIORITY_MUTEX WE HAVE NO WAY TO FIND OUT ITS PRIORITY YET
+    OR WE REMOVE THIS CONSTRUCTOR OR WE MAKE ALL PRIORITY MUTEXES FRIENDS OF UNIQUE LOCK
     */
     unique_lock(Lockable& m, adopt_lock_t) noexcept
-    : lockable_(std::addressof(m)), lockOwned_(true), currentPriority_(BOOST_FAIRNESS_MAXIMUM_PRIORITY)
+    : lockable_(std::addressof(m)), lockOwned_(true), currentPriority_(BOOST_FAIRNESS_INVALID_PRIORITY)
     {
     }
 
@@ -97,7 +108,7 @@ namespace boost::fairness{
 	  unique_lock(Lockable& m, const std::chrono::time_point<Clock, Duration>& atime, Priority_t p = BOOST_FAIRNESS_MINIMUM_PRIORITY)
 	  : lockable_(std::addressof(m)),
 	  lockOwned_(lockable_->try_lock_until(atime, p)),
-    currentPriority_(BOOST_FAIRNESS_MAXIMUM_PRIORITY)
+    currentPriority_(BOOST_FAIRNESS_INVALID_PRIORITY)
 	  { 
       if (lockOwned_)
         currentPriority_ = p;
@@ -110,7 +121,7 @@ namespace boost::fairness{
 	  unique_lock(Lockable& m, const std::chrono::duration<Rep, Period>& rtime, Priority_t p = BOOST_FAIRNESS_MINIMUM_PRIORITY)
 	  : lockable_(std::addressof(m)),
 	  lockOwned_(lockable_->try_lock_for(rtime, p)),
-    currentPriority_(BOOST_FAIRNESS_MAXIMUM_PRIORITY)
+    currentPriority_(BOOST_FAIRNESS_INVALID_PRIORITY)
 	  { 
       if (lockOwned_)
         currentPriority_ = p;
@@ -135,7 +146,7 @@ namespace boost::fairness{
     {
       other.lockable_ = 0;
       other.lockOwned_ = false;
-        other.currentPriority_ = BOOST_FAIRNESS_MAXIMUM_PRIORITY;
+        other.currentPriority_ = BOOST_FAIRNESS_INVALID_PRIORITY;
     }
 
     /*
@@ -180,7 +191,7 @@ namespace boost::fairness{
     else if (lockable_)
       {
         lockable_->unlock();
-        currentPriority_ = BOOST_FAIRNESS_MAXIMUM_PRIORITY;
+        currentPriority_ = BOOST_FAIRNESS_INVALID_PRIORITY;
         lockOwned_ = false;
       }
     }
@@ -233,7 +244,7 @@ namespace boost::fairness{
     unique_lock(std::move(other)).swap(*this);
     other.lockable_ = 0;
     other.lockOwned_ = false;
-    other.currentPriority_ = BOOST_FAIRNESS_MAXIMUM_PRIORITY;
+    other.currentPriority_ = BOOST_FAIRNESS_INVALID_PRIORITY;
     return *this;
     }
 
@@ -255,7 +266,7 @@ namespace boost::fairness{
     Lockable* __ret = lockable_;
     lockable_ = 0;
     lockOwned_ = false;
-    currentPriority_ = BOOST_FAIRNESS_MAXIMUM_PRIORITY;
+    currentPriority_ = BOOST_FAIRNESS_INVALID_PRIORITY;
     return __ret;
     }
 
@@ -291,15 +302,11 @@ namespace boost::fairness{
 
     private:
 
-    bool is_valid_priority(Priority_t const p){
-        return p >= BOOST_FAIRNESS_MINIMUM_PRIORITY && p < BOOST_FAIRNESS_MAXIMUM_PRIORITY;
-    }
-
-    void throw_operation_not_permitted_(){
+    static inline void throw_operation_not_permitted_(){
         throw std::system_error(std::make_error_code(std::errc::operation_not_permitted));
     }
     
-    void throw_resource_deadlock_would_occur_(){
+    static inline void throw_resource_deadlock_would_occur_(){
         throw std::system_error(std::make_error_code(std::errc::resource_deadlock_would_occur));
     }
 
