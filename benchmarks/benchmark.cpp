@@ -1,8 +1,8 @@
 /**
- * @file #TODO.hpp
+ * @file benchmark.cpp
  * @author F. Abrignani (federignoli@hotmail.it)
  * @author S. Martorana
- * @brief Alias #TODO.
+ * @brief Alias benchmark.
  * @version 0.1
  * @date 2023-10-06
  * @private

@@ -1,0 +1,18 @@
+<map id="include/boost/fairness/recursive_priority_mutex.hpp" name="include/boost/fairness/recursive_priority_mutex.hpp">
+<area shape="rect" id="Node000001" title="This file contains the implementation of the recursive_priority_mutex." alt="" coords="49,5,266,45"/>
+<area shape="rect" id="Node000002" title=" " alt="" coords="5,101,69,126"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="132,48,66,95,63,90,129,43"/>
+<area shape="rect" id="Node000003" title=" " alt="" coords="112,189,179,214"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="153,46,141,94,140,136,144,174,138,175,135,136,136,93,148,45"/>
+<area shape="rect" id="Node000004" title=" " alt="" coords="223,189,279,214"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="161,45,168,87,185,132,204,157,226,178,222,182,200,161,180,135,163,88,156,46"/>
+<area shape="rect" id="Node000005" href="$priority__t_8hpp.html" title="Alias the type Priority_t. Priority_t is the type of priorities that are used by the priority_mutexes..." alt="" coords="312,181,477,221"/>
+<area shape="poly" id="edge4_Node000001_Node000005" title=" " alt="" coords="267,33,298,41,329,53,357,70,381,92,392,109,398,129,401,167,396,168,393,130,387,111,377,95,353,74,326,58,296,46,266,38"/>
+<area shape="rect" id="Node000007" href="$spinlock__priority__mutex_8hpp.html" title="This file contains the implementation of the spinlock_priority_mutex." alt="" coords="195,93,367,133"/>
+<area shape="poly" id="edge6_Node000001_Node000007" title=" " alt="" coords="186,43,244,83,241,88,183,48"/>
+<area shape="rect" id="Node000006" title=" " alt="" coords="361,269,428,295"/>
+<area shape="poly" id="edge5_Node000005_Node000006" title=" " alt="" coords="397,222,397,255,392,255,392,222"/>
+<area shape="poly" id="edge7_Node000007_Node000003" title=" " alt="" coords="253,136,176,184,174,179,250,131"/>
+<area shape="poly" id="edge8_Node000007_Node000004" title=" " alt="" coords="277,135,262,177,257,175,272,133"/>
+<area shape="poly" id="edge9_Node000007_Node000005" title=" " alt="" coords="308,131,360,171,357,175,305,136"/>
+</map>

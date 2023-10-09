@@ -1,7 +1,6 @@
 /**
  * @file control_block_t.hpp
  * @author F. Abrignani (federignoli@hotmail.it)
- * @author P. Di Giglio
  * @author S. Martorana
  * @brief This file contains the definition of the control_block_t.
  * @version 0.1

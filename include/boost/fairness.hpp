@@ -2,7 +2,6 @@
 /**
  * @file fairness.hpp
  * @author F. Abrignani (federignoli@hotmail.it)
- * @author P. Di Giglio
  * @author S. Martorana
  * @brief This file contains the all the includes required by the library.
  * @version 0.1

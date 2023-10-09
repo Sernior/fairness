@@ -946,9 +946,23 @@ WARN_LOGFILE           =
 # spaces. See also FILE_PATTERNS and EXTENSION_MAPPING
 # Note: If this tag is empty the current directory is searched.
 
-INPUT                  = include \
-                         tests \
-                         benchmarks \
+INPUT                  = include/boost \
+                         include/boost/fairness \
+                         tests/ \
+                         tests/pm \
+                         tests/rpm \
+                         tests/slm \
+                         tests/spm \
+                         tests/spnlcpm \
+                         benchmarks/experimental \
+                         benchmarks/ \
+                         benchmarks/pm \
+                         benchmarks/rpm \
+                         benchmarks/slm \
+                         benchmarks/spm \
+                         benchmarks/spnlcpm \
+                         benchmarks/std \
+                         benchmarks/utils \
                          docs-generator/main-page.md
 
 # This tag can be used to specify the character encoding of the source files

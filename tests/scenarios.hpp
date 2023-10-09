@@ -1,8 +1,8 @@
 /**
- * @file #TODO.hpp
+ * @file scenarios.hpp
  * @author S. Martorana
  * @author F. Abrignani (federignoli@hotmail.it)
- * @brief Alias #TODO.
+ * @brief Alias scenarios.
  * @version 0.1
  * @date 2023-10-06
  * @private
