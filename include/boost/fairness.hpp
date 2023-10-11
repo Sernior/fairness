@@ -17,6 +17,7 @@
 
 #include <boost/fairness/config.hpp>
 #include <boost/fairness/priority_t.hpp>
+#include <boost/fairness/acquisition_modes.hpp>
 #include <boost/fairness/control_block_t.hpp>
 #include <boost/fairness/priority_mutex.hpp>
 #include <boost/fairness/shared_priority_mutex.hpp>
@@ -24,6 +25,7 @@
 #include <boost/fairness/spinlock_priority_mutex.hpp>
 #include <boost/fairness/recursive_priority_mutex.hpp>
 #include <boost/fairness/unique_lock.hpp>
+#include <boost/fairness/shared_lock.hpp>
 
 #ifdef BOOST_FAIRNESS_EXPERIMENTAL_MUTEXES
 #include <boost/fairness/experimental/slim_spinlock_priority_mutex.hpp>
