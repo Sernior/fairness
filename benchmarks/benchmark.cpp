@@ -1,7 +1,7 @@
 /**
  * @file benchmark.cpp
  * @author F. Abrignani (federignoli@hotmail.it)
- * @author S. Martorana
+ * @author S. Martorana (salvatoremartorana@hotmail.com)
  * @brief Alias benchmark.
  * @version 0.1
  * @date 2023-10-06

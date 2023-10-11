@@ -1,7 +1,7 @@
 /**
  * @file priority_t.hpp
  * @author F. Abrignani (federignoli@hotmail.it)
- * @author S. Martorana
+ * @author S. Martorana (salvatoremartorana@hotmail.com)
  * @brief Alias the type Priority_t. Priority_t is the type of priorities that are used by the priority_mutexes.
  * @version 0.1
  * @date 2023-08-19

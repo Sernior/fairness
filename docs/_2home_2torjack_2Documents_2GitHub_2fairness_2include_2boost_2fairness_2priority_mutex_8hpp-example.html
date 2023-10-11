@@ -89,30 +89,41 @@ $(function() {
   <div class="headertitle"><div class="title">/home/torjack/Documents/GitHub/fairness/include/boost/fairness/priority_mutex.hpp</div></div>
 </div><!--header-->
 <div class="contents">
-<p>Try to acquire the unique ownership of the priority_mutex. Returns immediately. On successful lock acquisition returns <code>true</code>, otherwise returns <code>false</code>.</p>
-<p>Try to acquire the unique ownership of the priority_mutex. Returns immediately. On successful lock acquisition returns <code>true</code>, otherwise returns <code>false</code>.This function is allowed to fail spuriously and return <code>false</code> even if the mutex is not currently locked by any other thread.</p>
-<p>If try_lock() is called by a thread that already owns the mutex, the behavior is undefined.</p>
-<p>Prior unlock() operation on the same mutex synchronizes-with (as defined in std::memory_order) this operation if it returns <code>true</code>. Note that prior lock() does not synchronize with this operation if it returns <code>false</code>.</p>
-<dl class="params"><dt>Parameters</dt><dd>
+<p>Try to acquire the unique ownership of the priority_mutex. Returns immediately. On successful lock acquisition returns <code>true</code>, otherwise returns <code>false</code>. The return value must be used, otherwise the compiler is encouraged to issue a warning. <br  />
+This function is allowed to fail spuriously and return <code>false</code> even if the mutex is not currently locked by any other thread. <br  />
+If try_lock() is called by a thread that already owns the mutex, the behavior is undefined. <br  />
+Prior unlock() operation on the same mutex <em>synchronizes-with</em> (as defined in <a href="https://en.cppreference.com/w/cpp/atomic/memory_order">std::memory_order</a>) this operation if it returns <code>true</code>. Note that prior lock() does not synchronize with this operation if it returns <code>false</code>.</p>
+<p>Try to acquire the unique ownership of the priority_mutex. Returns immediately. On successful lock acquisition returns <code>true</code>, otherwise returns <code>false</code>. The return value must be used, otherwise the compiler is encouraged to issue a warning. <br  />
+This function is allowed to fail spuriously and return <code>false</code> even if the mutex is not currently locked by any other thread. <br  />
+If try_lock() is called by a thread that already owns the mutex, the behavior is undefined. <br  />
+Prior unlock() operation on the same mutex <em>synchronizes-with</em> (as defined in <a href="https://en.cppreference.com/w/cpp/atomic/memory_order">std::memory_order</a>) this operation if it returns <code>true</code>. Note that prior lock() does not synchronize with this operation if it returns <code>false</code>.</p><dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">priority</td><td>used to set a priority for this thread to aquire the lock.</td></tr>
+    <tr><td class="paramname">priority</td><td>: used to set a priority for this thread to aquire the lock.</td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd><code>true</code> if the lock was acquired successfully, otherwise <code>false</code>.</dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>[[<a href="https://en.cppreference.com/w/cpp/language/attributes/nodiscard">nodiscard</a>]] bool : <code>true</code> if the lock was acquired successfully, otherwise <code>false</code>.</dd></dl>
 <dl class="exception"><dt>Exceptions</dt><dd>
   <table class="exception">
     <tr><td class="paramname">Throws</td><td>nothing.</td></tr>
   </table>
   </dd>
 </dl>
-<div class="fragment"><div class="line">priority_mutex&lt;10&gt; m;</div>
+<h4><a class="anchor" id="autotoc_md0"></a>
+Example</h4>
+<div class="fragment"><div class="line"><span class="preprocessor">#define NUM_ARBITRARY_PRIORITIES 5</span></div>
+<div class="line"> </div>
+<div class="line">priority_mutex&lt;NUM_ARBITRARY_PRIORITIES&gt; m;</div>
 <div class="line"> </div>
 <div class="line"><span class="keywordtype">void</span> my_function(<span class="keywordtype">int</span> prio) {</div>
 <div class="line">     <span class="comment">//...some code.</span></div>
-<div class="line">     m.<a id="a0" name="a0"></a>try_lock(prio);</div>
+<div class="line">     <span class="keywordflow">if</span> (m.<a id="a0" name="a0"></a>try_lock(prio)) {</div>
+<div class="line">         std::cout &lt;&lt; <span class="stringliteral">&quot;mutex with prio : &quot;</span> &lt;&lt; prio &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
+<div class="line">     }</div>
 <div class="line">     <span class="comment">//...some code.</span></div>
 <div class="line">}</div>
+</div><!-- fragment --><p>Possible output:</p>
+<div class="fragment"><div class="line">none</div>
 </div><!-- fragment --><div class="fragment"><div class="line"> </div>
 <div class="line"><span class="preprocessor">#ifndef BOOST_FAIRNESS_PRIORITY_MUTEX_HPP</span></div>
 <div class="line"><span class="preprocessor">#define BOOST_FAIRNESS_PRIORITY_MUTEX_HPP</span></div>

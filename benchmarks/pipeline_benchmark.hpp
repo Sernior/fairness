@@ -1,7 +1,7 @@
 /**
  * @file pipeline_benchmark.hpp
  * @author F. Abrignani
- * @author S. Martorana
+ * @author S. Martorana (salvatoremartorana@hotmail.com)
  * @brief Alias pipeline_benchmark.
  * @version 0.1
  * @date 2023-10-06

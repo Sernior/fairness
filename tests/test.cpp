@@ -1,6 +1,6 @@
 /**
  * @file test.cpp
- * @author S. Martorana
+ * @author S. Martorana (salvatoremartorana@hotmail.com)
  * @author F. Abrignani (federignoli@hotmail.it)
  * @brief Alias test.
  * @version 0.1

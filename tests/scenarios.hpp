@@ -1,6 +1,6 @@
 /**
  * @file scenarios.hpp
- * @author S. Martorana
+ * @author S. Martorana (salvatoremartorana@hotmail.com)
  * @author F. Abrignani (federignoli@hotmail.it)
  * @brief Alias scenarios.
  * @version 0.1

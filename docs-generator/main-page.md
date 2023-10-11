@@ -2,7 +2,7 @@
   
 > <span style="color: red;">This is not currently part of the Boost library collection.<br> However, my intention is to submit it for review once it's fully completed.</span>
 
-<em>F.Abrignani, S. Martorana - federignoli@hotmail.it - Version 0.1, 17.08.2023</em>
+<em>F.Abrignani, S. Martorana (salvatoremartorana@hotmail.com) - federignoli@hotmail.it - Version 0.1, 17.08.2023</em>
 
 <table style="border:none;border-collapse:collapse;">
     <tr>

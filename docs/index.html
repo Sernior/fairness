@@ -93,13 +93,13 @@ $(function() {
 <p>&zwj;<span style="color: red;">This is not currently part of the Boost library collection.<br  />
  However, my intention is to submit it for review once it's fully completed.</span> </p>
 </blockquote>
-<p><em>F.Abrignani, S. Martorana - <a href="#" onclick="location.href='mai'+'lto:'+'fed'+'er'+'ign'+'ol'+'i@h'+'ot'+'mai'+'l.'+'it'; return false;">feder<span class="obfuscator">.nosp@m.</span>igno<span class="obfuscator">.nosp@m.</span>li@ho<span class="obfuscator">.nosp@m.</span>tmai<span class="obfuscator">.nosp@m.</span>l.it</a> - Version 0.1, 17.08.2023</em></p>
+<p><em>F.Abrignani, S. Martorana (<a href="#" onclick="location.href='mai'+'lto:'+'sal'+'va'+'tor'+'em'+'art'+'or'+'ana'+'@h'+'otm'+'ai'+'l.c'+'om'; return false;">salva<span class="obfuscator">.nosp@m.</span>tore<span class="obfuscator">.nosp@m.</span>marto<span class="obfuscator">.nosp@m.</span>rana<span class="obfuscator">.nosp@m.</span>@hotm<span class="obfuscator">.nosp@m.</span>ail.<span class="obfuscator">.nosp@m.</span>com</a>) - <a href="#" onclick="location.href='mai'+'lto:'+'fed'+'er'+'ign'+'ol'+'i@h'+'ot'+'mai'+'l.'+'it'; return false;">feder<span class="obfuscator">.nosp@m.</span>igno<span class="obfuscator">.nosp@m.</span>li@ho<span class="obfuscator">.nosp@m.</span>tmai<span class="obfuscator">.nosp@m.</span>l.it</a> - Version 0.1, 17.08.2023</em></p>
 <table style="border:none;border-collapse:collapse;">
 <tr>
 <td style="border:none;border-left:none;border-top:none;border-bottom:none;width: 80px;"><img src="warning.png" alt="" style="width:70px; height:70px; object-fit: cover; object-position: 100% 0;" class="inline"/>  </td><td style="border-right:none;border-top: none;border-bottom: none;">A C++ library containing a collection of advanced syncronization mechanisms.<br  />
    </td></tr>
 </table>
-<h1><a class="anchor" id="autotoc_md2"></a>
+<h1><a class="anchor" id="autotoc_md4"></a>
 Overview</h1>
 <p>While the standard library offers various tools for managing concurrency, it lacks effective methods for enforcing fairness policies among threads.<br  />
  Tweaking such behaviors can be challenging, and mistakes might lead to issues like thread starvation. These tools, if misused, have the potential to cause harm rather than benefit. Careful implementation and understanding are crucial to harness their benefits effectively.<br  />
@@ -110,12 +110,12 @@ Overview</h1>
 </ul>
 <p><img src="stdpipeline.png" alt="" style="object-fit: cover; object-position: 100% 0;" class="inline"/></p>
 <p><img src="prioritypipeline.png" alt="" style="object-fit: cover; object-position: 50% 0;" class="inline"/></p>
-<h1><a class="anchor" id="autotoc_md3"></a>
+<h1><a class="anchor" id="autotoc_md5"></a>
 Motivation</h1>
 <p>#TODO</p>
-<h1><a class="anchor" id="autotoc_md4"></a>
+<h1><a class="anchor" id="autotoc_md6"></a>
 priority_mutex</h1>
-<h2><a class="anchor" id="autotoc_md5"></a>
+<h2><a class="anchor" id="autotoc_md7"></a>
 lock()</h2>
 <p>That's an <code>example</code> of lock().</p>
 <div class="fragment"><div class="line"><span class="keywordtype">void</span> my_function(<a class="code hl_class" href="classboost_1_1fairness_1_1priority__mutex.html">boost::fairness::priority_mutex</a> pm, uint8_t priority) {</div>
@@ -123,9 +123,9 @@ lock()</h2>
 <div class="line">    pm.<a class="code hl_function" href="classboost_1_1fairness_1_1priority__mutex.html#a713dffb1b1db42084c2ee6fd088f2772">lock</a>(priority);</div>
 <div class="line">    <span class="comment">//...do something</span></div>
 <div class="line">};</div>
-<div class="ttc" id="aclassboost_1_1fairness_1_1priority__mutex_html"><div class="ttname"><a href="classboost_1_1fairness_1_1priority__mutex.html">boost::fairness::priority_mutex</a></div><div class="ttdoc">The priority_mutex is an advanced synchronization mechanism that enhances the traditional mutex by in...</div><div class="ttdef"><b>Definition</b> priority_mutex.hpp:28</div></div>
-<div class="ttc" id="aclassboost_1_1fairness_1_1priority__mutex_html_a713dffb1b1db42084c2ee6fd088f2772"><div class="ttname"><a href="classboost_1_1fairness_1_1priority__mutex.html#a713dffb1b1db42084c2ee6fd088f2772">boost::fairness::priority_mutex::lock</a></div><div class="ttdeci">void lock(Priority_t const priority=0)</div><div class="ttdoc">Try to acquire the unique ownership of the priority_mutex, blocking the thread if the priority_mutex ...</div><div class="ttdef"><b>Definition</b> priority_mutex.hpp:67</div></div>
-</div><!-- fragment --><h2><a class="anchor" id="autotoc_md6"></a>
+<div class="ttc" id="aclassboost_1_1fairness_1_1priority__mutex_html"><div class="ttname"><a href="classboost_1_1fairness_1_1priority__mutex.html">boost::fairness::priority_mutex</a></div><div class="ttdoc">The priority_mutex is an advanced synchronization mechanism that enhances the traditional mutex by in...</div><div class="ttdef"><b>Definition</b> priority_mutex.hpp:40</div></div>
+<div class="ttc" id="aclassboost_1_1fairness_1_1priority__mutex_html_a713dffb1b1db42084c2ee6fd088f2772"><div class="ttname"><a href="classboost_1_1fairness_1_1priority__mutex.html#a713dffb1b1db42084c2ee6fd088f2772">boost::fairness::priority_mutex::lock</a></div><div class="ttdeci">void lock(Priority_t const priority=0)</div><div class="ttdoc">Lock the priority_mutex. If another thread has already locked the mutex or other threads are waiting ...</div><div class="ttdef"><b>Definition</b> priority_mutex.hpp:99</div></div>
+</div><!-- fragment --><h2><a class="anchor" id="autotoc_md8"></a>
 unlock()</h2>
 <p>That's an <code>example</code> of unlock().</p>
 <div class="fragment"><div class="line"><span class="keywordtype">void</span> my_function(<a class="code hl_class" href="classboost_1_1fairness_1_1priority__mutex.html">boost::fairness::priority_mutex</a> pm, uint8_t priority) {</div>
@@ -133,10 +133,10 @@ unlock()</h2>
 <div class="line">    pm.<a class="code hl_function" href="classboost_1_1fairness_1_1priority__mutex.html#ab2b540cda7a37f78a670d3d20ce13ae4">unlock</a>();</div>
 <div class="line">    <span class="comment">//...do something</span></div>
 <div class="line">};</div>
-<div class="ttc" id="aclassboost_1_1fairness_1_1priority__mutex_html_ab2b540cda7a37f78a670d3d20ce13ae4"><div class="ttname"><a href="classboost_1_1fairness_1_1priority__mutex.html#ab2b540cda7a37f78a670d3d20ce13ae4">boost::fairness::priority_mutex::unlock</a></div><div class="ttdeci">void unlock()</div><div class="ttdoc">Release the priority_mutex from unique ownership.</div><div class="ttdef"><b>Definition</b> priority_mutex.hpp:93</div></div>
-</div><!-- fragment --><h1><a class="anchor" id="autotoc_md7"></a>
+<div class="ttc" id="aclassboost_1_1fairness_1_1priority__mutex_html_ab2b540cda7a37f78a670d3d20ce13ae4"><div class="ttname"><a href="classboost_1_1fairness_1_1priority__mutex.html#ab2b540cda7a37f78a670d3d20ce13ae4">boost::fairness::priority_mutex::unlock</a></div><div class="ttdeci">void unlock()</div><div class="ttdoc">Unlocks the mutex.  The mutex must be locked by the current thread of execution, otherwise,...</div><div class="ttdef"><b>Definition</b> priority_mutex.hpp:147</div></div>
+</div><!-- fragment --><h1><a class="anchor" id="autotoc_md9"></a>
 shared_priority_mutex</h1>
-<h2><a class="anchor" id="autotoc_md8"></a>
+<h2><a class="anchor" id="autotoc_md10"></a>
 lock_shared</h2>
 <p>That's an <code>example</code> of lock_shared().</p>
 <div class="fragment"><div class="line"><span class="keywordtype">void</span> my_function(<a class="code hl_class" href="classboost_1_1fairness_1_1shared__priority__mutex.html">boost::fairness::shared_priority_mutex</a> pm, uint8_t priority) {</div>
