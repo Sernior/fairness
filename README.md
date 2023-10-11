@@ -146,10 +146,10 @@ The documentation is available at the following link: https://sernior.github.io/
 ## Contacts
 
 Federico Abrignani - federignoli@hotmail.it
+Salvatore Martorana - salvatoremartorana@hotmail.com
 
 ## Authors and Contributors
 
 * Federico Abrignani (Author) - https://github.com/Sernior
 * Salvatore Martorana (Contributor) - https://github.com/SMartorana
-* Paolo Di Giglio (Contributor) - https://github.com/pdigiglio
 
