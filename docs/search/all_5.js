@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['fairness_2ehpp_0',['fairness.hpp',['../fairness_8hpp.html',1,'']]]
+  ['example_0',['Example',['../classboost_1_1fairness_1_1priority__mutex.html#autotoc_md0',1,'']]]
 ];

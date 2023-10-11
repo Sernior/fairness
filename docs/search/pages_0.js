@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['boost_2efairness_0',['boost.fairness',['../index.html',1,'']]]
+  ['boost_20fairness_0',['boost.fairness',['../index.html',1,'']]]
 ];

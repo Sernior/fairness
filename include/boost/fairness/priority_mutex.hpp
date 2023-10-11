@@ -97,20 +97,42 @@ namespace boost::fairness{
         }
 
         /**
-         * @brief Try to acquire the unique ownership of the priority_mutex, if successful will return true, false otherwise.
+         * @brief Try to acquire the unique ownership of the priority_mutex.
+         * Returns immediately. On successful lock acquisition returns ```true```, otherwise returns ```false```. The return value must be used, otherwise the compiler is encouraged to issue a warning.
+         * \n
+         * This function is allowed to fail spuriously and return ```false``` even if the mutex is not currently locked by any other thread.
+         * \n
+         * If try_lock() is called by a thread that already owns the mutex, the behavior is undefined.
+         * \n
+         * Prior unlock() operation on the same mutex synchronizes-with (as defined in [std::memory_order](https://en.cppreference.com/w/cpp/atomic/memory_order)) this operation if it returns ```true```. Note that prior lock() does not synchronize with this operation if it returns ```false```.
          * 
-         * @param priority used to set a priority for this thread to aquire the lock.
+         * @param priority : used to set a priority for this thread to aquire the lock.
          * 
+         * @return [[[nodiscard](https://en.cppreference.com/w/cpp/language/attributes/nodiscard)]] bool : ```true``` if the lock was acquired successfully, otherwise ```false```.
+         * 
+         * @exception Throws nothing.
+         * 
+         * #### Example
+         *  
          * \code{.cpp}
-         * priority_mutex<10> m;
+         * #define NUM_ARBITRARY_PRIORITIES 5
+         * 
+         * priority_mutex<NUM_ARBITRARY_PRIORITIES> m;
          * 
          * void my_function(int prio) {
          *      //...some code.
-         *      m.try_lock(prio);
+         *      if (m.try_lock(prio)) {
+         *          //...some code.
+         *      }
          *      //...some code.
          * }
          * \endcode
-         * @return bool 
+         * 
+         * Possible output:
+         * 
+         * \code{.cpp}
+         * none
+         * \endcode
          */
         [[nodiscard]] bool try_lock(Priority_t const priority = 0){
             return (currentPriority_.load(std::memory_order_relaxed) >= priority && !lockOwned_.test_and_set(std::memory_order_acquire));
