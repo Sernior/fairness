@@ -146,6 +146,7 @@ The documentation is available at the following link: https://sernior.github.io/
 ## Contacts
 
 Federico Abrignani - federignoli@hotmail.it
+Salvatore Martorana - salvatoremartorana@hotmail.com
 
 ## Authors and Contributors
 
