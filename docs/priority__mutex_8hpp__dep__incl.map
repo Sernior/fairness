@@ -1,5 +1,5 @@
 <map id="include/boost/fairness/priority_mutex.hpp" name="include/boost/fairness/priority_mutex.hpp">
-<area shape="rect" id="Node000001" title="This file contains the implementation of the priority_mutex." alt="" coords="4949,5,5114,45"/>
+<area shape="rect" id="Node000001" title="This file header contains the implementation of the priority_mutex. TODO." alt="" coords="4949,5,5114,45"/>
 <area shape="rect" id="Node000002" href="$fairness_8hpp.html" title="This file contains the all the includes required by the library." alt="" coords="4935,93,5128,119"/>
 <area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="5034,59,5034,93,5029,93,5029,59"/>
 <area shape="rect" id="Node000003" href="$experimental__mutex__benchmark_8hpp_source.html" title=" " alt="" coords="5,174,276,214"/>

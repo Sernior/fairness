@@ -2,7 +2,7 @@
  * @file priority_mutex.hpp
  * @author F. Abrignani (federignoli@hotmail.it)
  * @author S. Martorana (salvatoremartorana@hotmail.com)
- * @brief This file contains the implementation of the priority_mutex.
+ * @brief This file header contains the implementation of the priority_mutex. TODO
  * @version 0.1
  * @date 2023-08-19
  * 
@@ -205,6 +205,6 @@ namespace boost::fairness{
             }
             return BOOST_FAIRNESS_MAXIMUM_PRIORITY;
         }
-    };
-}
+    }; // class priority_mutex
+} // namespace boost::fairness
 #endif // BOOST_FAIRNESS_PRIORITY_MUTEX_HPP

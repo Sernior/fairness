@@ -169,9 +169,9 @@ $(document).ready(function() { init_codefold(0); });
 <div class="line"><a id="l00205" name="l00205"></a><span class="lineno">  205</span>            }</div>
 <div class="line"><a id="l00206" name="l00206"></a><span class="lineno">  206</span>            <span class="keywordflow">return</span> BOOST_FAIRNESS_MAXIMUM_PRIORITY;</div>
 <div class="line"><a id="l00207" name="l00207"></a><span class="lineno">  207</span>        }</div>
-<div class="line"><a id="l00208" name="l00208"></a><span class="lineno">  208</span>    };</div>
+<div class="line"><a id="l00208" name="l00208"></a><span class="lineno">  208</span>    }; <span class="comment">// class priority_mutex</span></div>
 </div>
-<div class="line"><a id="l00209" name="l00209"></a><span class="lineno">  209</span>}</div>
+<div class="line"><a id="l00209" name="l00209"></a><span class="lineno">  209</span>} <span class="comment">// namespace boost::fairness</span></div>
 <div class="line"><a id="l00210" name="l00210"></a><span class="lineno">  210</span><span class="preprocessor">#endif </span><span class="comment">// BOOST_FAIRNESS_PRIORITY_MUTEX_HPP</span></div>
 <div class="ttc" id="aclassboost_1_1fairness_1_1priority__mutex_html"><div class="ttname"><a href="classboost_1_1fairness_1_1priority__mutex.html">boost::fairness::priority_mutex</a></div><div class="ttdoc">The priority_mutex is an advanced synchronization mechanism that enhances the traditional mutex by in...</div><div class="ttdef"><b>Definition</b> priority_mutex.hpp:40</div></div>
 <div class="ttc" id="aclassboost_1_1fairness_1_1priority__mutex_html_a36b1c6637e3aefca3f7722d40d33a8b5"><div class="ttname"><a href="classboost_1_1fairness_1_1priority__mutex.html#a36b1c6637e3aefca3f7722d40d33a8b5">boost::fairness::priority_mutex::try_lock</a></div><div class="ttdeci">bool try_lock(Priority_t const priority=0)</div><div class="ttdoc">Try to acquire the unique ownership of the priority_mutex. Returns immediately. On successful lock ac...</div><div class="ttdef"><b>Definition</b> priority_mutex.hpp:192</div></div>
