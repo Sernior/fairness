@@ -108,7 +108,7 @@ $(document).ready(function() { init_codefold(0); });
 <div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span><span class="keyword">namespace </span>boost::fairness{</div>
 <div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span> </div>
 <div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span>    <span class="keyword">template</span>&lt;<span class="keywordtype">size_t</span> N = 1&gt;</div>
-<div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span>    <span class="keyword">requires</span> (N &gt;= 1 &amp;&amp; N &lt;= BOOST_FAIRNESS_MAXIMUM_PRIORITY)</div>
+<div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span>    <span class="keyword">requires</span> (N &gt;= 1 &amp;&amp; N &lt;= <a class="code hl_define" href="priority__t_8hpp.html#ab63ed35d4aa8f18cc832fecbf13ba0ae">BOOST_FAIRNESS_MAXIMUM_PRIORITY</a>)</div>
 <div class="foldopen" id="foldopen00028" data-start="{" data-end="};">
 <div class="line"><a id="l00028" name="l00028"></a><span class="lineno"><a class="line" href="classboost_1_1fairness_1_1spinlock__priority__mutex.html">   28</a></span>    <span class="keyword">class</span> <a class="code hl_class" href="classboost_1_1fairness_1_1spinlock__priority__mutex.html">spinlock_priority_mutex</a>{</div>
 <div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span> </div>
@@ -157,7 +157,7 @@ $(document).ready(function() { init_codefold(0); });
 <div class="line"><a id="l00116" name="l00116"></a><span class="lineno">  116</span> </div>
 <div class="line"><a id="l00117" name="l00117"></a><span class="lineno">  117</span>        <span class="keyword">private</span>:</div>
 <div class="line"><a id="l00118" name="l00118"></a><span class="lineno">  118</span>        std::array&lt;std::atomic&lt;Thread_cnt_t&gt;, N&gt; waiters_;</div>
-<div class="line"><a id="l00119" name="l00119"></a><span class="lineno">  119</span>        std::atomic&lt;Priority_t&gt; currentPriority_{BOOST_FAIRNESS_MAXIMUM_PRIORITY};</div>
+<div class="line"><a id="l00119" name="l00119"></a><span class="lineno">  119</span>        std::atomic&lt;Priority_t&gt; currentPriority_{<a class="code hl_define" href="priority__t_8hpp.html#ab63ed35d4aa8f18cc832fecbf13ba0ae">BOOST_FAIRNESS_MAXIMUM_PRIORITY</a>};</div>
 <div class="line"><a id="l00120" name="l00120"></a><span class="lineno">  120</span>        std::atomic_flag lockOwned_;</div>
 <div class="line"><a id="l00121" name="l00121"></a><span class="lineno">  121</span> </div>
 <div class="line"><a id="l00122" name="l00122"></a><span class="lineno">  122</span>        Priority_t find_first_priority_(){</div>
@@ -165,7 +165,7 @@ $(document).ready(function() { init_codefold(0); });
 <div class="line"><a id="l00124" name="l00124"></a><span class="lineno">  124</span>                <span class="keywordflow">if</span> (waiters_[i] &gt; 0)</div>
 <div class="line"><a id="l00125" name="l00125"></a><span class="lineno">  125</span>                    <span class="keywordflow">return</span> i;</div>
 <div class="line"><a id="l00126" name="l00126"></a><span class="lineno">  126</span>            }</div>
-<div class="line"><a id="l00127" name="l00127"></a><span class="lineno">  127</span>            <span class="keywordflow">return</span> BOOST_FAIRNESS_MAXIMUM_PRIORITY;</div>
+<div class="line"><a id="l00127" name="l00127"></a><span class="lineno">  127</span>            <span class="keywordflow">return</span> <a class="code hl_define" href="priority__t_8hpp.html#ab63ed35d4aa8f18cc832fecbf13ba0ae">BOOST_FAIRNESS_MAXIMUM_PRIORITY</a>;</div>
 <div class="line"><a id="l00128" name="l00128"></a><span class="lineno">  128</span>        }</div>
 <div class="line"><a id="l00129" name="l00129"></a><span class="lineno">  129</span>    };</div>
 </div>
@@ -176,6 +176,7 @@ $(document).ready(function() { init_codefold(0); });
 <div class="ttc" id="aclassboost_1_1fairness_1_1spinlock__priority__mutex_html_a4c3380ab950986680a553a64cdb5f1e9"><div class="ttname"><a href="classboost_1_1fairness_1_1spinlock__priority__mutex.html#a4c3380ab950986680a553a64cdb5f1e9">boost::fairness::spinlock_priority_mutex::try_lock</a></div><div class="ttdeci">bool try_lock(Priority_t const priority=0)</div><div class="ttdoc">Try to acquire the unique ownership of the spinlock_priority_mutex, if successful will return true,...</div><div class="ttdef"><b>Definition</b> spinlock_priority_mutex.hpp:113</div></div>
 <div class="ttc" id="aclassboost_1_1fairness_1_1spinlock__priority__mutex_html_a51e4111c7996e9df6d384073dd907c7b"><div class="ttname"><a href="classboost_1_1fairness_1_1spinlock__priority__mutex.html#a51e4111c7996e9df6d384073dd907c7b">boost::fairness::spinlock_priority_mutex::unlock</a></div><div class="ttdeci">void unlock()</div><div class="ttdoc">Release the spinlock_priority_mutex from unique ownership.</div><div class="ttdef"><b>Definition</b> spinlock_priority_mutex.hpp:92</div></div>
 <div class="ttc" id="apriority__t_8hpp_html"><div class="ttname"><a href="priority__t_8hpp.html">priority_t.hpp</a></div><div class="ttdoc">Alias the type Priority_t. Priority_t is the type of priorities that are used by the priority_mutexes...</div></div>
+<div class="ttc" id="apriority__t_8hpp_html_ab63ed35d4aa8f18cc832fecbf13ba0ae"><div class="ttname"><a href="priority__t_8hpp.html#ab63ed35d4aa8f18cc832fecbf13ba0ae">BOOST_FAIRNESS_MAXIMUM_PRIORITY</a></div><div class="ttdeci">#define BOOST_FAIRNESS_MAXIMUM_PRIORITY</div><div class="ttdoc">Priorities are indexes in an array, that means that if I define a priority_mutex&lt;BOOST_FAIRNESS_MAXIM...</div><div class="ttdef"><b>Definition</b> priority_t.hpp:24</div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- HTML footer for doxygen 1.9.3-->
 <!-- start footer part -->

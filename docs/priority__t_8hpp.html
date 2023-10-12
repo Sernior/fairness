@@ -267,12 +267,15 @@ This graph shows which files directly or indirectly include this file:</div>
 Macros</h2></td></tr>
 <tr class="memitem:ad3c09eb3008523fc837752140c94a56f" id="r_ad3c09eb3008523fc837752140c94a56f"><td class="memItemLeft" align="right" valign="top"><a id="ad3c09eb3008523fc837752140c94a56f" name="ad3c09eb3008523fc837752140c94a56f"></a>
 #define&#160;</td><td class="memItemRight" valign="bottom"><b>BOOST_FAIRNESS_INVALID_PRIORITY</b>&#160;&#160;&#160;Priority_t(-1)</td></tr>
+<tr class="memdesc:ad3c09eb3008523fc837752140c94a56f"><td class="mdescLeft">&#160;</td><td class="mdescRight">To assign a priority to an invalid state. TODO. <br /></td></tr>
 <tr class="separator:ad3c09eb3008523fc837752140c94a56f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ab63ed35d4aa8f18cc832fecbf13ba0ae" id="r_ab63ed35d4aa8f18cc832fecbf13ba0ae"><td class="memItemLeft" align="right" valign="top"><a id="ab63ed35d4aa8f18cc832fecbf13ba0ae" name="ab63ed35d4aa8f18cc832fecbf13ba0ae"></a>
 #define&#160;</td><td class="memItemRight" valign="bottom"><b>BOOST_FAIRNESS_MAXIMUM_PRIORITY</b>&#160;&#160;&#160;Priority_t(-1)</td></tr>
+<tr class="memdesc:ab63ed35d4aa8f18cc832fecbf13ba0ae"><td class="mdescLeft">&#160;</td><td class="mdescRight">Priorities are indexes in an array, that means that if I define a priority_mutex&lt;BOOST_FAIRNESS_MAXIMUM_PRIORITY&gt; m; we can call m.lock(p) with a p up to BOOST_FAIRNESS_MAXIMUM_PRIORITY - 1; this means that a priority to be valid has to be in the range [BOOST_FAIRNESS_MINIMUM_PRIORITY, BOOST_FAIRNESS_MAXIMUM_PRIORITY) <br /></td></tr>
 <tr class="separator:ab63ed35d4aa8f18cc832fecbf13ba0ae"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac745d616478cbc2090a9eac1a3f07dcc" id="r_ac745d616478cbc2090a9eac1a3f07dcc"><td class="memItemLeft" align="right" valign="top"><a id="ac745d616478cbc2090a9eac1a3f07dcc" name="ac745d616478cbc2090a9eac1a3f07dcc"></a>
 #define&#160;</td><td class="memItemRight" valign="bottom"><b>BOOST_FAIRNESS_MINIMUM_PRIORITY</b>&#160;&#160;&#160;0</td></tr>
+<tr class="memdesc:ac745d616478cbc2090a9eac1a3f07dcc"><td class="mdescLeft">&#160;</td><td class="mdescRight">Priorities are indexes in an array, that means that if I define a priority_mutex&lt;BOOST_FAIRNESS_MAXIMUM_PRIORITY&gt; m; we can call m.lock(p) with a p up to BOOST_FAIRNESS_MAXIMUM_PRIORITY - 1; this means that a priority to be valid has to be in the range [BOOST_FAIRNESS_MINIMUM_PRIORITY, BOOST_FAIRNESS_MAXIMUM_PRIORITY) <br /></td></tr>
 <tr class="separator:ac745d616478cbc2090a9eac1a3f07dcc"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="typedef-members" name="typedef-members"></a>
@@ -283,8 +286,8 @@ using&#160;</td><td class="memItemRight" valign="bottom"><b>boost::fairness::Pri
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="func-members" name="func-members"></a>
 Functions</h2></td></tr>
-<tr class="memitem:ab48d656326266f9c771e1e115e415c38" id="r_ab48d656326266f9c771e1e115e415c38"><td class="memItemLeft" align="right" valign="top"><a id="ab48d656326266f9c771e1e115e415c38" name="ab48d656326266f9c771e1e115e415c38"></a>
-bool&#160;</td><td class="memItemRight" valign="bottom"><b>boost::fairness::is_valid_priority</b> (Priority_t const p)</td></tr>
+<tr class="memitem:ab48d656326266f9c771e1e115e415c38" id="r_ab48d656326266f9c771e1e115e415c38"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ab48d656326266f9c771e1e115e415c38">boost::fairness::is_valid_priority</a> (Priority_t const p)</td></tr>
+<tr class="memdesc:ab48d656326266f9c771e1e115e415c38"><td class="mdescLeft">&#160;</td><td class="mdescRight">allows you to verify that an input priority is valid. Has to be in the range [BOOST_FAIRNESS_MINIMUM_PRIORITY, BOOST_FAIRNESS_MAXIMUM_PRIORITY).  <br /></td></tr>
 <tr class="separator:ab48d656326266f9c771e1e115e415c38"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
@@ -295,7 +298,45 @@ S. Martorana (<a href="#" onclick="location.href='mai'+'lto:'+'sal'+'va'+'tor'+'
 <dl class="section version"><dt>Version</dt><dd>0.1 </dd></dl>
 <dl class="section date"><dt>Date</dt><dd>2023-08-19</dd></dl>
 <dl class="section copyright"><dt>Copyright</dt><dd>Copyright (c) 2023 Federico Abrignani (<a href="#" onclick="location.href='mai'+'lto:'+'fed'+'er'+'ign'+'ol'+'i@h'+'ot'+'mai'+'l.'+'it'; return false;">feder<span class="obfuscator">.nosp@m.</span>igno<span class="obfuscator">.nosp@m.</span>li@ho<span class="obfuscator">.nosp@m.</span>tmai<span class="obfuscator">.nosp@m.</span>l.it</a>). Distributed under the Boost Software License, Version 1.0. (See accompanying file LICENSE_1_0.txt or copy at <a href="http://www.boost.org/LICENSE_1_0.txt">http://www.boost.org/LICENSE_1_0.txt</a>). </dd></dl>
-</div></div><!-- contents -->
+</div><h2 class="groupheader">Function Documentation</h2>
+<a id="ab48d656326266f9c771e1e115e415c38" name="ab48d656326266f9c771e1e115e415c38"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab48d656326266f9c771e1e115e415c38">&#9670;&#160;</a></span>is_valid_priority()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool boost::fairness::is_valid_priority </td>
+          <td>(</td>
+          <td class="paramtype">Priority_t const&#160;</td>
+          <td class="paramname"><em>p</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>allows you to verify that an input priority is valid. Has to be in the range [BOOST_FAIRNESS_MINIMUM_PRIORITY, BOOST_FAIRNESS_MAXIMUM_PRIORITY). </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">p</td><td>: The priority to verify. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>true : if is valid. </dd>
+<dd>
+false : if isn't valid. </dd></dl>
+
+</div>
+</div>
+</div><!-- contents -->
 <!-- HTML footer for doxygen 1.9.3-->
 <!-- start footer part -->
   <hr class="footer"/><address class="footer"><small>
