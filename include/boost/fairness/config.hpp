@@ -13,10 +13,21 @@
  */
 #ifndef BOOST_FAIRNESS_CONFIG_HPP
 #define BOOST_FAIRNESS_CONFIG_HPP
+
 #ifdef BOOST_FOUND
 #include <boost/atomic.hpp>
-#endif
+#endif // BOOST_FOUND
+
 #if defined(BOOST_ATOMIC_INT128_LOCK_FREE) && BOOST_ATOMIC_INT128_LOCK_FREE > 0
 #define BOOST_FAIRNESS_HAS_DWCAS
-#endif
+#endif // BOOST_FAIRNESS_HAS_DWCAS
+
+#if defined(__linux__)
+#include <boost/fairness/detail/wait_ops_linux.hpp>
+#elif defined(_WIN32)
+#include <boost/fairness/detail/wait_ops_windows.hpp>
+#else
+#include <boost/fairness/detail/wait_ops_generic.hpp>
+#endif //__linux__
+
 #endif // BOOST_FAIRNESS_CONFIG_HPP
