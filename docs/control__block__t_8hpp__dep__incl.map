@@ -1,5 +1,5 @@
 <map id="include/boost/fairness/control_block_t.hpp" name="include/boost/fairness/control_block_t.hpp">
-<area shape="rect" id="Node000001" title="This file contains the definition of the control_block_t." alt="" coords="4949,5,5114,45"/>
+<area shape="rect" id="Node000001" title="This file contains the definition of the control_block_t. TODO." alt="" coords="4949,5,5114,45"/>
 <area shape="rect" id="Node000002" href="$fairness_8hpp.html" title="This file contains the all the includes required by the library." alt="" coords="4935,181,5128,207"/>
 <area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="5011,58,4994,94,4990,113,4994,132,5007,159,5023,179,5018,183,5002,161,4989,134,4985,113,4989,93,5006,56"/>
 <area shape="rect" id="Node000043" href="$slim__priority__mutex_8hpp.html" title="This file contains the implementation of the slim_priority_mutex." alt="" coords="5004,93,5189,133"/>

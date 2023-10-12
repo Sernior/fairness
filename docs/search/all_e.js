@@ -1,7 +1,14 @@
 var searchData=
 [
-  ['unique_5flock_0',['unique_lock',['../classboost_1_1fairness_1_1unique__lock.html',1,'boost::fairness']]],
-  ['unique_5flock_2ehpp_1',['unique_lock.hpp',['../unique__lock_8hpp.html',1,'']]],
-  ['unlock_2',['unlock',['../classboost_1_1fairness_1_1priority__mutex.html#ab2b540cda7a37f78a670d3d20ce13ae4',1,'boost::fairness::priority_mutex::unlock()'],['../classboost_1_1fairness_1_1recursive__priority__mutex.html#ae1f7b1029627a276353f354901724501',1,'boost::fairness::recursive_priority_mutex::unlock()'],['../classboost_1_1fairness_1_1shared__priority__mutex.html#a680aae71007cd265e19c2e6b7288579f',1,'boost::fairness::shared_priority_mutex::unlock()'],['../classboost_1_1fairness_1_1slim__priority__mutex_3_01N_00_01Range_3_071_3_0aN_01_6_6N_3_0aBOOST__914236ecebf121bf7c0e20ff8cdf9470.html#aee733d476b4269530badd3f7eae8c72e',1,'boost::fairness::slim_priority_mutex&lt; N, Range&lt;(1&lt;=N &amp;&amp;N&lt;=BOOST_FAIRNESS_SPM64B_SUPPORTED_PRIORITIES)&gt; &gt;::unlock()'],['../classboost_1_1fairness_1_1spinlock__priority__mutex.html#a51e4111c7996e9df6d384073dd907c7b',1,'boost::fairness::spinlock_priority_mutex::unlock()'],['../index.html#autotoc_md8',1,'unlock()']]],
-  ['unlock_5fshared_3',['unlock_shared',['../classboost_1_1fairness_1_1shared__priority__mutex.html#af64efe5d5709af228afe007066196654',1,'boost::fairness::shared_priority_mutex']]]
+  ['scenarios_2ehpp_0',['scenarios.hpp',['../scenarios_8hpp.html',1,'']]],
+  ['setowned_1',['setOwned',['../structboost_1_1fairness_1_1control__block__64b__t.html#a27f6d732a8a4877b591936eebc708ce5',1,'boost::fairness::control_block_64b_t']]],
+  ['setpriority_2',['setPriority',['../structboost_1_1fairness_1_1control__block__64b__t.html#a67e66089aa2ed4398162edfd450fc180',1,'boost::fairness::control_block_64b_t']]],
+  ['shared_5fpriority_5fmutex_3',['shared_priority_mutex',['../classboost_1_1fairness_1_1shared__priority__mutex.html',1,'boost::fairness::shared_priority_mutex&lt; N &gt;'],['../index.html#autotoc_md9',1,'shared_priority_mutex']]],
+  ['shared_5fpriority_5fmutex_2ehpp_4',['shared_priority_mutex.hpp',['../shared__priority__mutex_8hpp.html',1,'']]],
+  ['slim_5fpriority_5fmutex_5',['slim_priority_mutex',['../structboost_1_1fairness_1_1slim__priority__mutex.html',1,'boost::fairness']]],
+  ['slim_5fpriority_5fmutex_2ehpp_6',['slim_priority_mutex.hpp',['../slim__priority__mutex_8hpp.html',1,'']]],
+  ['slim_5fpriority_5fmutex_3c_20n_2c_20range_3c_281_3c_3dn_20_26_26n_3c_3dboost_5ffairness_5fspm64b_5fsupported_5fpriorities_29_3e_20_3e_7',['slim_priority_mutex&lt; N, Range&lt;(1&lt;=N &amp;&amp;N&lt;=BOOST_FAIRNESS_SPM64B_SUPPORTED_PRIORITIES)&gt; &gt;',['../classboost_1_1fairness_1_1slim__priority__mutex_3_01N_00_01Range_3_071_3_0aN_01_6_6N_3_0aBOOST__914236ecebf121bf7c0e20ff8cdf9470.html',1,'boost::fairness']]],
+  ['spinlock_5fpriority_5fmutex_8',['spinlock_priority_mutex',['../classboost_1_1fairness_1_1spinlock__priority__mutex.html',1,'boost::fairness']]],
+  ['spinlock_5fpriority_5fmutex_2ehpp_9',['spinlock_priority_mutex.hpp',['../spinlock__priority__mutex_8hpp.html',1,'']]],
+  ['spinlock_5fpriority_5fmutex_3c_201_20_3e_10',['spinlock_priority_mutex&lt; 1 &gt;',['../classboost_1_1fairness_1_1spinlock__priority__mutex.html',1,'boost::fairness']]]
 ];

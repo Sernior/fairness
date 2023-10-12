@@ -1,5 +1,4 @@
 var searchData=
 [
-  ['try_5flock_0',['try_lock',['../classboost_1_1fairness_1_1priority__mutex.html#a36b1c6637e3aefca3f7722d40d33a8b5',1,'boost::fairness::priority_mutex::try_lock()'],['../classboost_1_1fairness_1_1recursive__priority__mutex.html#a2001fda01023afa964b233421a1725cd',1,'boost::fairness::recursive_priority_mutex::try_lock()'],['../classboost_1_1fairness_1_1shared__priority__mutex.html#ab230ae362ee3b0f6bd3ef4eb320f9b65',1,'boost::fairness::shared_priority_mutex::try_lock()'],['../classboost_1_1fairness_1_1slim__priority__mutex_3_01N_00_01Range_3_071_3_0aN_01_6_6N_3_0aBOOST__914236ecebf121bf7c0e20ff8cdf9470.html#ad9a6cb89b39a74057dcb1c71c70663ea',1,'boost::fairness::slim_priority_mutex&lt; N, Range&lt;(1&lt;=N &amp;&amp;N&lt;=BOOST_FAIRNESS_SPM64B_SUPPORTED_PRIORITIES)&gt; &gt;::try_lock()'],['../classboost_1_1fairness_1_1spinlock__priority__mutex.html#a4c3380ab950986680a553a64cdb5f1e9',1,'boost::fairness::spinlock_priority_mutex::try_lock()']]],
-  ['try_5flock_5fshared_1',['try_lock_shared',['../classboost_1_1fairness_1_1shared__priority__mutex.html#ae253b03d65922a41dec258b7121104d4',1,'boost::fairness::shared_priority_mutex']]]
+  ['getpriority_0',['getPriority',['../structboost_1_1fairness_1_1control__block__64b__t.html#a4377dcf6a8ac7f988c9a91df9501dfc8',1,'boost::fairness::control_block_64b_t']]]
 ];
