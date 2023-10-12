@@ -24,7 +24,7 @@
 <area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="1406,194,1154,240,1153,235,1405,189"/>
 <area shape="rect" id="Node000024" href="$thread__utils_8hpp_source.html" title=" " alt="" coords="1670,240,1840,265"/>
 <area shape="poly" id="edge44_Node000004_Node000024" title=" " alt="" coords="1566,189,1707,233,1705,238,1565,195"/>
-<area shape="rect" id="Node000006" href="$config_8hpp.html" title="This file contains the implementation of the slim_spinlock_priority_mutex." alt="" coords="1104,497,1289,522"/>
+<area shape="rect" id="Node000006" href="$config_8hpp.html" title="This file contains configurations about boost and 128bit cpu support. TODO." alt="" coords="1104,497,1289,522"/>
 <area shape="poly" id="edge5_Node000005_Node000006" title=" " alt="" coords="1150,255,1303,267,1489,293,1579,312,1659,335,1721,364,1745,381,1761,400,1770,422,1768,433,1761,443,1738,456,1698,466,1578,484,1435,497,1303,506,1303,500,1435,492,1578,479,1697,461,1736,451,1757,439,1763,431,1765,422,1757,403,1741,385,1719,369,1657,340,1578,317,1489,298,1303,273,1150,260"/>
 <area shape="rect" id="Node000007" href="$priority__t_8hpp.html" title="Alias the type Priority_t. Priority_t is the type of priorities that are used by the priority_mutexes..." alt="" coords="851,489,1016,529"/>
 <area shape="poly" id="edge6_Node000005_Node000007" title=" " alt="" coords="1094,263,1128,296,1164,341,1178,366,1186,392,1185,418,1173,443,1151,460,1116,474,1031,496,1029,490,1115,469,1148,455,1169,440,1180,417,1180,393,1173,368,1160,344,1124,299,1090,267"/>
