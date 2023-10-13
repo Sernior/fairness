@@ -9,6 +9,10 @@
     height: 72px;
 }
 
+#projectlogo img {
+    border-radius: 10px;
+}
+
 #projectnumber {
     margin-right: 22px;
 }
