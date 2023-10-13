@@ -28,6 +28,11 @@ The advanced syncronization mechanisms in this library do not autonomously adjus
 The assumptions are:
   - The pipeline operates in a multi-threaded manner;
   - the pipeline is finite.
+
+<img class="readme-img" src="stdpipeline.png" style= "object-fit: cover; object-position: 100% 0;"/>
+
+<img class="readme-img" src="prioritypipeline.png" style= "object-fit: cover; object-position: 50% 0;"/>
+
 ## Getting Started
 
 ### Prerequisites

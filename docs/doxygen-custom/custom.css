@@ -1,25 +1,12 @@
-:root {
-    --side-nav-fixed-width: 300px;
-}
-
-.github-corner svg {
-    fill: var(--primary-light-color);
-    color: var(--page-background-color);
-    width: 72px;
-    height: 72px;
-}
-
 #projectlogo img {
     border-radius: 10px;
 }
 
-#projectnumber {
-    margin-right: 22px;
+html {
+    --side-nav-fixed-width: 435px;
+    /* --side-nav-top-height: 130px; */
 }
 
-@media screen and (max-width: 767px) {
-    .github-corner svg {
-        width: 55px;
-        height: 55px;
-    }
+html.light-mode .readme-img {
+    filter: invert(1);
 }

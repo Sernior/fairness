@@ -1340,7 +1340,7 @@ HTML_FILE_EXTENSION    = .html
 # of the possible markers and block names see the documentation.
 # This tag requires that the tag GENERATE_HTML is set to YES.
 
-HTML_HEADER            = ./docs/doxygen-awesome-css/doxygen-custom/header.html
+HTML_HEADER            = ./docs/doxygen-custom/header.html
 
 # The HTML_FOOTER tag can be used to specify a user-defined HTML footer for each
 # generated HTML page. If the tag is left blank doxygen will generate a standard
@@ -1385,6 +1385,7 @@ HTML_EXTRA_STYLESHEET  = docs/doxygen-awesome-css/doxygen-awesome.css \
                          docs/doxygen-awesome-css/doxygen-awesome-sidebar-only-darkmode-toggle.css \
                          docs/doxygen-awesome-css/doxygen-custom/custom.css \
                          docs/doxygen-awesome-css/doxygen-custom/custom-alternative.css \
+                         docs/doxygen-custom/custom.css 
 
 # The HTML_EXTRA_FILES tag can be used to specify one or more extra images or
 # other source files which should be copied to the HTML output directory. Note
@@ -1399,7 +1400,7 @@ HTML_EXTRA_FILES       = docs/doxygen-awesome-css/doxygen-awesome-darkmode-toggl
                          docs/doxygen-awesome-css/doxygen-awesome-paragraph-link.js \
                          docs/doxygen-awesome-css/doxygen-custom/toggle-alternative-theme.js \
                          docs/doxygen-awesome-css/doxygen-awesome-interactive-toc.js \
-                         docs/doxygen-awesome-css/doxygen-awesome-tabs.js
+                         docs/doxygen-awesome-css/doxygen-awesome-tabs.js \
 
 # The HTML_COLORSTYLE tag can be used to specify if the generated HTML output
 # should be rendered with a dark or light theme.
@@ -1412,7 +1413,7 @@ HTML_EXTRA_FILES       = docs/doxygen-awesome-css/doxygen-awesome-darkmode-toggl
 # The default value is: AUTO_LIGHT.
 # This tag requires that the tag GENERATE_HTML is set to YES.
 
-HTML_COLORSTYLE        = AUTO_DARK
+HTML_COLORSTYLE        = LIGHT
 
 # The HTML_COLORSTYLE_HUE tag controls the color of the HTML output. Doxygen
 # will adjust the colors in the style sheet and background images according to
@@ -2731,7 +2732,8 @@ DIR_GRAPH_MAX_DEPTH    = 1
 # The default value is: png.
 # This tag requires that the tag HAVE_DOT is set to YES.
 
-DOT_IMAGE_FORMAT       = png
+DOT_IMAGE_FORMAT       = png \
+                         svg
 
 # If DOT_IMAGE_FORMAT is set to svg, then this option can be set to YES to
 # enable generation of interactive SVG images that allow zooming and panning.
