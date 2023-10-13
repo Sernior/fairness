@@ -19,20 +19,20 @@
 
 namespace boost::fairness::detail{
 
-    template<typename T>
-    inline void wait(T& mem, T expected){
+    template<typename T, typename K>
+    inline void wait_(T& mem, K expected){
         static_assert(sizeof(T) == 4, "Invalid argument size on boost::fairness::detail::wait");
         syscall(SYS_futex, &mem, FUTEX_WAIT_PRIVATE, expected, nullptr, nullptr, 0);
     }
 
     template<typename T>
-    inline void notify_one(T& mem){
+    inline void notify_one_(T& mem){
         static_assert(sizeof(T) == 4, "Invalid argument size on boost::fairness::detail::notify_one");
         syscall(SYS_futex, &mem, FUTEX_WAKE_PRIVATE, 1, nullptr, nullptr, 0);
     }
 
     template<typename T>
-    inline void notify_all(T& mem){
+    inline void notify_all_(T& mem){
         static_assert(sizeof(T) == 4, "Invalid argument size on boost::fairness::detail::notify_all");
         syscall(SYS_futex, &mem, FUTEX_WAKE_PRIVATE, INT_MAX, nullptr, nullptr, 0);
     }

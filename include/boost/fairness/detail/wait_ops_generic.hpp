@@ -18,8 +18,8 @@
 
 namespace boost::fairness::detail{
 
-    template<typename T>
-    inline void wait(T& mem, T expected){
+    template<typename T, typename K>
+    inline void wait_(T& mem, K expected){
         static_assert(
             std::atomic<T>::is_always_lock_free
             , "Invalid argument size on boost::fairness::detail::wait"
@@ -28,7 +28,7 @@ namespace boost::fairness::detail{
     }
 
     template<typename T>
-    inline void notify_one(T& mem){
+    inline void notify_one_(T& mem){
         static_assert(
             std::atomic<T>::is_always_lock_free
             , "Invalid argument size on boost::fairness::detail::notify_one"
@@ -37,7 +37,7 @@ namespace boost::fairness::detail{
     }
 
     template<typename T>
-    inline void notify_all(T& mem){
+    inline void notify_all_(T& mem){
         static_assert(
             std::atomic<T>::is_always_lock_free
             , "Invalid argument size on boost::fairness::detail::notify_one"

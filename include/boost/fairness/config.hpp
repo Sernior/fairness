@@ -14,6 +14,10 @@
 #ifndef BOOST_FAIRNESS_CONFIG_HPP
 #define BOOST_FAIRNESS_CONFIG_HPP
 
+#ifndef BOOST_FAIRNESS_WAIT_SPINS
+#define BOOST_FAIRNESS_WAIT_SPINS 16
+#endif
+
 #ifdef BOOST_FOUND
 #include <boost/atomic.hpp>
 #endif // BOOST_FOUND
@@ -27,6 +31,7 @@
 #elif defined(_WIN32)
 #include <boost/fairness/detail/wait_ops_windows.hpp>
 #else
+#define BOOST_FAIRNESS_USE_STD_WAIT_NOTIFY
 #include <boost/fairness/detail/wait_ops_generic.hpp>
 #endif //__linux__
 
