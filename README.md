@@ -1,5 +1,9 @@
 # boost.fairness
 
+[![GitHub release (latest by date)](https://img.shields.io/github/v/release/Sernior/fairness)](https://github.com/Sernior/fairness/releases/latest)
+[![GitHub](https://img.shields.io/github/license/Sernior/fairness)](https://github.com/Sernior/fairness/blob/main/LICENSE)
+![GitHub Repo stars](https://img.shields.io/github/stars/Sernior/fairness)
+
 > [!NOTE]  
 > <span style="color: red;">This is not currently part of the Boost library collection.<br> However, my intention is to submit it for review once it's fully completed.</span>
 
