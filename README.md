@@ -154,9 +154,6 @@ Salvatore Martorana - salvatoremartorana@hotmail.com
 
 ## Authors and Contributors
 
-* Federico Abrignani (Author) - https://github.com/Sernior
-* Salvatore Martorana (Contributor) - https://github.com/SMartorana
-  
 <a href="https://github.com/Sernior/fairness/graphs/contributors">
     <img src="https://contrib.rocks/image?repo=Sernior/fairness" />
 </a>
