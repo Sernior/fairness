@@ -26,11 +26,12 @@ namespace boost::fairness{
      * priority_mutex offers exclusive, non-recursive ownership semantics:
      * 
      * * A calling thread _owns_ a priority_mutex from the time that it successfully calls either lock() or try_lock() until it calls unlock().
-     * * When a thread owns a mutex, all other threads will block (for calls to lock()) or receive a ```false``` return value (for try_lock) if they attempt to claim ownership of the mutex.
-     * A calling thread must not own the mutex prior to calling lock() or try_lock().
-     * * The behavior of a program is undefined if a mutex is destroyed while still owned by any threads, or a thread terminates while owning a mutex. The mutex class satisfies all requirements of [Mutex](https://en.cppreference.com/w/cpp/named_req/Mutex) and [StandardLayoutType](https://en.cppreference.com/w/cpp/named_req/StandardLayoutType).
+     * * When a thread owns a priority_mutex, all other threads will block (for calls to lock()) or receive a ```false``` return value (for try_lock()) if they attempt to claim ownership of the priority_mutex.
+     * * A calling thread must not own the mutex prior to calling lock() or try_lock().
      * 
-     * boost::fairness::priority_mutex is neither copyable nor movable.
+     * The behavior of a program is undefined if a priority_mutex is destroyed while still owned by any threads, or a thread terminates while owning a priority_mutex. The priority_mutex class satisfies all requirements of [Mutex](https://en.cppreference.com/w/cpp/named_req/Mutex) and [StandardLayoutType](https://en.cppreference.com/w/cpp/named_req/StandardLayoutType).
+     * \n
+     * priority_mutex is neither copyable nor movable.
      * 
      * @tparam N : number of 0 indexed priorities the priority_mutex manages, up to BOOST_FAIRNESS_MAXIMUM_PRIORITY.
      * @note priority_mutex is usually not accessed directly: unique_lock, lock_guard, or scoped_lock manage locking in a more exception-safe manner. 
