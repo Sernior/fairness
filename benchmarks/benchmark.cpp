@@ -13,12 +13,12 @@
 
 #include <benchmark/benchmark.h>
 #include "pipeline_benchmark.hpp"
-
 BENCHMARK(priority_mutex_benchmark::PM_LockUnlock)->Threads(8);
 BENCHMARK(standard_mutex_benchmark::STD_LockUnlock)->Threads(8);
 BENCHMARK(slim_priority_mutex_benchmark::SLM_PM_LockUnlock)->Threads(8);
 BENCHMARK(spinlock_priority_mutex_benchmark::SPNLC_PM_LockUnlock)->Threads(8);
 #ifdef BOOST_FAIRNESS_EXPERIMENTAL_MUTEXES
+BENCHMARK(experimental_priority_mutex_benchmark::EPM_LockUnlock)->Threads(8);
 BENCHMARK(slim_spinlock_priority_mutex_benchmark::SPNLC_SLM_PM_LockUnlock)->Threads(8);
 #endif
 BENCHMARK(recursive_priority_mutex_benchmark::R_PM_LockUnlock)->Threads(8);

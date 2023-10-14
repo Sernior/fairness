@@ -15,6 +15,7 @@
 #define BOOST_FAIRNESS_WAIT_OPS_LINUX_HPP
 #include <boost/fairness/config.hpp>
 #include <linux/futex.h>
+#include <sys/syscall.h>
 #include <limits.h>
 
 namespace boost::fairness::detail{

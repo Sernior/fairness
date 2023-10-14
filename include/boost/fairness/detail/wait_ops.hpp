@@ -27,7 +27,7 @@ namespace boost::fairness::detail{
         // is 16 a good number before the wait?
         // how does the pause performs?
         K localMem = mem.load(std::memory_order_relaxed);
-        for(int i = 0; i < BOOST_FAIRNESS_WAIT_SPINS; i++){
+        for(int i = 0; i < BOOST_FAIRNESS_WAIT_SPINS_FAST; ++i){
             if (localMem != expected)
                 return;
             // place holder the pause will be here
@@ -47,12 +47,15 @@ namespace boost::fairness::detail{
 
 #if defined(_WIN32)
 
+    /*
+    Only windows waitOnAdress can wait on a single byte, linux futex can`t.
+    */
     inline void wait(std::atomic_flag& mem, bool expected){
         // everything about this being is doubtful
         // is 16 a good number before the wait?
         // how does the pause performs?
         bool localMem = mem.test(std::memory_order_relaxed);
-        for(int i = 0; i < BOOST_FAIRNESS_WAIT_SPINS; i++){
+        for(int i = 0; i < BOOST_FAIRNESS_WAIT_SPINS_FAST; ++i){
             if (localMem != expected)
                 return;
             // place holder the pause will be here
