@@ -67,7 +67,7 @@ PROJECT_LOGO           = ./docs/img/logo1.png
 # when the HTML document is shown. Doxygen will copy the logo to the output
 # directory.
 
-PROJECT_ICON           = ./docs/img/logo1.png
+PROJECT_ICON           = ./docs/img/logo1-favicon.png
 
 # The OUTPUT_DIRECTORY tag is used to specify the (relative or absolute) path
 # into which the generated documentation will be written. If a relative path is
@@ -967,6 +967,7 @@ INPUT                  = include/boost \
                          benchmarks/std \
                          benchmarks/utils \
                          docs \
+                         docs/img \
                          examples \
                          README.md
 
