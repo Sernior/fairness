@@ -1,7 +1,7 @@
 /**
  * @file unique_lock.hpp
  * @author F. Abrignani (federignoli@hotmail.it)
- * @author S. Martorana
+ * @author S. Martorana (salvatoremartorana@hotmail.com)
  * @brief This file contains the implementation of the unique_lock.
  * @version 0.1
  * @date 2023-10-06
@@ -13,7 +13,6 @@
 #ifndef BOOST_FAIRNESS_UNIQUE_LOCK_HPP
 #define BOOST_FAIRNESS_UNIQUE_LOCK_HPP
 #include <boost/fairness/priority_t.hpp>
-#include <boost/fairness/acquisition_modes.hpp>
 #include <stdexcept>
 #include <system_error>
 #include <memory>
@@ -22,6 +21,16 @@
 // maybe also all the constructors should check for the validity of the priority
 
 namespace boost::fairness{
+
+  /*
+  structs used to overload unique_lock methods
+  */
+  struct defer_lock_t { explicit defer_lock_t() = default; };
+  struct try_to_lock_t { explicit try_to_lock_t() = default; };
+  struct adopt_lock_t { explicit adopt_lock_t() = default; };
+  static constexpr defer_lock_t defer_lock;
+  static constexpr try_to_lock_t try_to_lock;
+  static constexpr adopt_lock_t adopt_lock;
 
   template<typename Lockable>
   class unique_lock{
@@ -126,7 +135,6 @@ namespace boost::fairness{
     if (lockOwned_)
         unlock();
     }
-
     unique_lock(const unique_lock&) = delete;
     unique_lock& operator=(const unique_lock&) = delete;
 
@@ -138,7 +146,7 @@ namespace boost::fairness{
     {
       other.lockable_ = 0;
       other.lockOwned_ = false;
-      other.currentPriority_ = BOOST_FAIRNESS_INVALID_PRIORITY;
+        other.currentPriority_ = BOOST_FAIRNESS_INVALID_PRIORITY;
     }
 
     /*
@@ -219,7 +227,7 @@ namespace boost::fairness{
 	    throw_resource_deadlock_would_occur_();
 	  else
       {
-        lockOwned_ = lockable_->try_lock_for(rtime, p);
+        lockOwned_ = lockable_->try_lock_for(rtime);
         if (lockOwned_)
           currentPriority_ = p;
         return lockOwned_;

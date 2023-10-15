@@ -1,0 +1,12 @@
+#projectlogo img {
+    border-radius: 10px;
+}
+
+html {
+    --side-nav-fixed-width: 435px;
+    /* --side-nav-top-height: 130px; */
+}
+
+html.light-mode .readme-img {
+    filter: invert(1);
+}

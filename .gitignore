@@ -5,3 +5,4 @@ build
 *.pdb
 *.obj
 *.ilk
+docs/html
