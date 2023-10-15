@@ -37,8 +37,11 @@ namespace boost::fairness{
 
     public:
     
-    /*
-    CONSTRUCTOR DOC TODO
+    /**
+     * @brief CONSTRUCTOR DOC TODO
+     * 
+     * @return CONSTRUCTOR 
+     */
     */
     unique_lock() noexcept
     : lockable_(0), lockOwned_(false), currentPriority_(BOOST_FAIRNESS_INVALID_PRIORITY)

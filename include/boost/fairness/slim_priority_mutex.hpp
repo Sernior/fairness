@@ -21,8 +21,18 @@
 
 namespace boost::fairness{
 
+    /**
+     * @brief 
+     * @private
+     * @tparam ool 
+     */
     template<bool> struct Range;
-
+    /**
+     * @brief 
+     * @private
+     * @tparam N 
+     * @tparam typename 
+     */
     template<size_t N = 1, typename = Range<true> >
     struct slim_priority_mutex{};
 

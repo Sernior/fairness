@@ -15,14 +15,35 @@
 
 namespace boost::fairness{
 
-  /*
-  structs used to overload unique_lock and shared_lock methods
-  */
+  /**
+   * @brief structs used to overload unique_lock and shared_lock methods
+   * @private
+   */
   struct defer_lock_t { explicit defer_lock_t() = default; };
+  /**
+   * @brief 
+   * @private
+   */
   struct try_to_lock_t { explicit try_to_lock_t() = default; };
+  /**
+   * @brief 
+   * @private
+   */
   struct adopt_lock_t { explicit adopt_lock_t() = default; };
+  /**
+   * @brief 
+   * @private
+   */
   static constexpr defer_lock_t defer_lock;
+  /**
+   * @brief 
+   * @private
+   */
   static constexpr try_to_lock_t try_to_lock;
+  /**
+   * @brief 
+   * @private
+   */
   static constexpr adopt_lock_t adopt_lock;
 
 }
