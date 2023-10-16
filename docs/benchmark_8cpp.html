@@ -1,52 +1,77 @@
-<!-- HTML header for doxygen 1.9.3-->
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
-<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.10.0"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
+<!-- BEGIN opengraph metadata -->
+<meta property="og:title" content="Doxygen Awesome" />
+<meta property="og:image" content="https://repository-images.githubusercontent.com/348492097/4f16df80-88fb-11eb-9d31-4015ff22c452" />
+<meta property="og:description" content="Custom CSS theme for doxygen html-documentation with lots of customization parameters." />
+<meta property="og:url" content="https://jothepro.github.io/doxygen-awesome-css/" />
+<!-- END opengraph metadata -->
+<!-- BEGIN twitter metadata -->
+<meta name="twitter:image:src" content="https://repository-images.githubusercontent.com/348492097/4f16df80-88fb-11eb-9d31-4015ff22c452" />
+<meta name="twitter:title" content="Doxygen Awesome" />
+<meta name="twitter:description" content="Custom CSS theme for doxygen html-documentation with lots of customization parameters." />
+<!-- END twitter metadata -->
 <title>fairness: benchmarks/benchmark.cpp File Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
+<link rel="icon" type="image/png" href="logo1-favicon.png" style="border-radius: 10%;"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
-    <!-- ... doxygen-awesome Fragment copy ... -->
-    <script type="text/javascript" src="doxygen-awesome-fragment-copy-button.js"></script>
-    <script type="text/javascript">
-        DoxygenAwesomeFragmentCopyButton.init()
-    </script>
-    <!-- ... End doxygen-awesome Fragment copy ... -->
+<script type="text/javascript" src="doxygen-awesome-darkmode-toggle.js"></script>
+<script type="text/javascript" src="doxygen-awesome-fragment-copy-button.js"></script>
+<script type="text/javascript" src="doxygen-awesome-paragraph-link.js"></script>
+<script type="text/javascript" src="doxygen-awesome-interactive-toc.js"></script>
+<script type="text/javascript" src="doxygen-awesome-tabs.js"></script>
+<script type="text/javascript" src="toggle-alternative-theme.js"></script>
+<script type="text/javascript">
+    DoxygenAwesomeFragmentCopyButton.init()
+    DoxygenAwesomeDarkModeToggle.init()
+    DoxygenAwesomeParagraphLink.init()
+    DoxygenAwesomeInteractiveToc.init()
+    DoxygenAwesomeTabs.init()
+</script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="resize.js"></script>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
 <link href="search/search.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="search/searchdata.js"></script>
 <script type="text/javascript" src="search/search.js"></script>
 <link href="doxygen.css" rel="stylesheet" type="text/css" />
 <link href="doxygen-awesome.css" rel="stylesheet" type="text/css"/>
+<link href="doxygen-awesome-sidebar-only.css" rel="stylesheet" type="text/css"/>
+<link href="doxygen-awesome-sidebar-only-darkmode-toggle.css" rel="stylesheet" type="text/css"/>
+<link href="custom.css" rel="stylesheet" type="text/css"/>
+<link href="custom-alternative.css" rel="stylesheet" type="text/css"/>
+<link href="custom.css" rel="stylesheet" type="text/css"/>
 </head>
 <body>
-<!-- Make a nice link to github (copied from doxygen-awesome/doxygen-custom/header.html-->
 <!-- https://tholman.com/github-corners/ -->
-<a href="https://github.com/Sernior/fairness" class="github-corner" title="View source on GitHub" target="_blank">
-    <svg viewBox="0 0 250 250" width="80" height="80" style="position: fixed; top: 0; border: 0; right: 0; z-index: 99;" aria-hidden="true">
+<a href="https://github.com/jothepro/doxygen-awesome-css" class="github-corner" title="View source on GitHub" target="_blank">
+    <svg viewBox="0 0 250 250" width="40" height="40" style="position: absolute; top: 0; border: 0; right: 0; z-index: 99;" aria-hidden="true">
     <path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a><style>.github-corner:hover .octo-arm{animation:octocat-wave 560ms ease-in-out}@keyframes octocat-wave{0%,100%{transform:rotate(0)}20%,60%{transform:rotate(-25deg)}40%,80%{transform:rotate(10deg)}}@media (max-width:500px){.github-corner:hover .octo-arm{animation:none}.github-corner .octo-arm{animation:octocat-wave 560ms ease-in-out}}</style>
-<!-- End Make a nice link to github -->
 <div id="top"><!-- do not remove this div, it is closed by doxygen! -->
 <div id="titlearea">
-    <!--My own title area-->
-    <h1>boost.fairness</h1>
-  <!--End My own title area-->
 <table cellspacing="0" cellpadding="0">
  <tbody>
- <tr id="projectrow">
-  <td id="projectalign">
-   <div id="projectname">
+ <tr style="height: 56px;">
+  <td id="projectlogo"><img alt="Logo" src="logo1.png"/></td>
+  <td id="projectalign" style="padding-left: 0.5em;">
+   <div id="projectname">fairness
+   &#160;<span id="projectnumber">v0.1</span>
    </div>
-   <br>
+   <div id="projectbrief">A collection of advanced syncronization mechanisms</div>
   </td>
  </tr>
  </tbody>
 </table>
 </div>
-<!-- end header part --><!-- Generated by Doxygen 1.10.0 -->
+<!-- end header part -->
+<!-- Generated by Doxygen 1.10.0 -->
 <script type="text/javascript">
 /* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
 var searchBox = new SearchBox("searchBox", "search/",'.html');
@@ -63,6 +88,23 @@ $(function() {
 /* @license-end */
 </script>
 <div id="main-nav"></div>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(document).ready(function(){initNavTree('benchmark_8cpp.html',''); initResizable(); });
+/* @license-end */
+</script>
+<div id="doc-content">
 <!-- window showing the filter options -->
 <div id="MSearchSelectWindow"
      onmouseover="return searchBox.OnSearchSelectShow()"
@@ -84,11 +126,6 @@ $(function() {
 </div>
 </div>
 
-<div id="nav-path" class="navpath">
-  <ul>
-<li class="navelem"><a class="el" href="dir_13a41d9ad64fb9ae396cb953294783cf.html">benchmarks</a></li>  </ul>
-</div>
-</div><!-- top -->
 <div class="header">
   <div class="summary">
 <a href="#func-members">Functions</a>  </div>
@@ -110,25 +147,25 @@ Include dependency graph for benchmark.cpp:</div>
 <area shape="poly" title=" " alt="" coords="1277,33,1219,73,1216,68,1274,28"/>
 <area shape="rect" href="pipeline__benchmark_8hpp.html" title="Alias pipeline_benchmark." alt="" coords="1305,79,1488,104"/>
 <area shape="poly" title=" " alt="" coords="1311,28,1369,68,1366,73,1308,33"/>
-<area shape="rect" href="experimental__mutex__benchmark_8hpp_source.html" title=" " alt="" coords="1406,152,1606,192"/>
+<area shape="rect" href="experimental__mutex__benchmark_8hpp.html" title=" " alt="" coords="1406,152,1606,192"/>
 <area shape="poly" title=" " alt="" coords="1414,102,1470,142,1467,146,1411,106"/>
-<area shape="rect" href="priority__mutex__benchmark_8hpp_source.html" title=" " alt="" coords="1630,159,1880,185"/>
+<area shape="rect" href="priority__mutex__benchmark_8hpp.html" title=" " alt="" coords="1630,159,1880,185"/>
 <area shape="poly" title=" " alt="" coords="1449,101,1690,154,1689,159,1448,107"/>
-<area shape="rect" href="recursive__priority__mutex__benchmark_8hpp_source.html" title=" " alt="" coords="582,152,760,192"/>
+<area shape="rect" href="recursive__priority__mutex__benchmark_8hpp.html" title=" " alt="" coords="582,152,760,192"/>
 <area shape="poly" title=" " alt="" coords="1305,105,1293,107,1035,127,921,137,774,155,774,149,920,132,1035,122,1292,101,1304,100"/>
-<area shape="rect" href="slim__priority__mutex__benchmark_8hpp_source.html" title=" " alt="" coords="784,152,966,192"/>
+<area shape="rect" href="slim__priority__mutex__benchmark_8hpp.html" title=" " alt="" coords="784,152,966,192"/>
 <area shape="poly" title=" " alt="" coords="1310,107,980,154,979,149,1309,101"/>
-<area shape="rect" href="shared__priority__mutex__benchmark_8hpp_source.html" title=" " alt="" coords="990,152,1168,192"/>
+<area shape="rect" href="shared__priority__mutex__benchmark_8hpp.html" title=" " alt="" coords="990,152,1168,192"/>
 <area shape="poly" title=" " alt="" coords="1351,107,1169,151,1168,146,1350,101"/>
-<area shape="rect" href="spinlock__priority__mutex__benchmark_8hpp_source.html" title=" " alt="" coords="1192,152,1382,192"/>
+<area shape="rect" href="spinlock__priority__mutex__benchmark_8hpp.html" title=" " alt="" coords="1192,152,1382,192"/>
 <area shape="poly" title=" " alt="" coords="1382,106,1326,146,1323,142,1379,102"/>
-<area shape="rect" href="standard__benchmark_8hpp_source.html" title=" " alt="" coords="1904,159,2115,185"/>
+<area shape="rect" href="standard__benchmark_8hpp.html" title=" " alt="" coords="1904,159,2115,185"/>
 <area shape="poly" title=" " alt="" coords="1488,100,1893,149,1928,155,1927,160,1892,155,1488,105"/>
-<area shape="rect" href="standard__shared__benchmark_8hpp_source.html" title=" " alt="" coords="2139,152,2294,192"/>
+<area shape="rect" href="standard__shared__benchmark_8hpp.html" title=" " alt="" coords="2139,152,2294,192"/>
 <area shape="poly" title=" " alt="" coords="1488,94,1769,111,1945,127,2126,149,2125,155,1945,133,1769,117,1488,99"/>
 <area shape="rect" href="fairness_8hpp.html" title="This file contains the all the includes required by the library." alt="" coords="1006,240,1149,265"/>
 <area shape="poly" title=" " alt="" coords="1406,194,1154,240,1153,235,1405,189"/>
-<area shape="rect" href="thread__utils_8hpp_source.html" title=" " alt="" coords="1670,240,1840,265"/>
+<area shape="rect" href="thread__utils_8hpp.html" title=" " alt="" coords="1670,240,1840,265"/>
 <area shape="poly" title=" " alt="" coords="1566,189,1707,233,1705,238,1565,195"/>
 <area shape="rect" href="config_8hpp.html" title="This file contains configurations about boost and 128bit cpu support. TODO." alt="" coords="1104,497,1289,522"/>
 <area shape="poly" title=" " alt="" coords="1150,255,1303,267,1489,293,1579,312,1659,335,1721,364,1745,381,1761,400,1770,422,1768,433,1761,443,1738,456,1698,466,1578,484,1435,497,1303,506,1303,500,1435,492,1578,479,1697,461,1736,451,1757,439,1763,431,1765,422,1757,403,1741,385,1719,369,1657,340,1578,317,1489,298,1303,273,1150,260"/>
@@ -191,7 +228,7 @@ Include dependency graph for benchmark.cpp:</div>
 <area shape="poly" title=" " alt="" coords="1803,263,1880,284,1967,311,1973,313,1971,318,1965,316,1879,289,1801,268"/>
 <area shape="rect" title=" " alt="" coords="2112,321,2227,346"/>
 <area shape="poly" title=" " alt="" coords="1816,263,2099,316,2098,321,1815,268"/>
-<area shape="rect" href="waiting__utils_8hpp_source.html" title=" " alt="" coords="1820,321,1954,346"/>
+<area shape="rect" href="waiting__utils_8hpp.html" title=" " alt="" coords="1820,321,1954,346"/>
 <area shape="poly" title=" " alt="" coords="1776,263,1857,311,1855,316,1773,268"/>
 <area shape="poly" title=" " alt="" coords="1865,349,1751,405,1748,400,1863,344"/>
 <area shape="poly" title=" " alt="" coords="1675,187,1618,195,1164,245,1163,240,1618,189,1674,182"/>
@@ -213,146 +250,99 @@ Include dependency graph for benchmark.cpp:</div>
 </div><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="func-members" name="func-members"></a>
 Functions</h2></td></tr>
-<tr class="memitem:a2e2a0b19bf5b116489e4e7f91b345e40" id="r_a2e2a0b19bf5b116489e4e7f91b345e40"><td class="memItemLeft" align="right" valign="top"><a id="a2e2a0b19bf5b116489e4e7f91b345e40" name="a2e2a0b19bf5b116489e4e7f91b345e40"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>BENCHMARK</b> (<a class="el" href="pipeline__benchmark_8hpp.html#a00b6071b4891a15ae4566f220cf9dee9">____________________________________________________________________________________________</a>)</td></tr>
+<tr class="memitem:a2e2a0b19bf5b116489e4e7f91b345e40" id="r_a2e2a0b19bf5b116489e4e7f91b345e40"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a2e2a0b19bf5b116489e4e7f91b345e40">BENCHMARK</a> (<a class="el" href="pipeline__benchmark_8hpp.html#a00b6071b4891a15ae4566f220cf9dee9">____________________________________________________________________________________________</a>)</td></tr>
 <tr class="separator:a2e2a0b19bf5b116489e4e7f91b345e40"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a9298f7a726409fdb3666462f6e7c5971" id="r_a9298f7a726409fdb3666462f6e7c5971"><td class="memItemLeft" align="right" valign="top"><a id="a9298f7a726409fdb3666462f6e7c5971" name="a9298f7a726409fdb3666462f6e7c5971"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>BENCHMARK</b> (priority_mutex_benchmark::PM_LockUnlock) -&gt; Threads(8)</td></tr>
+<tr class="memitem:a9298f7a726409fdb3666462f6e7c5971" id="r_a9298f7a726409fdb3666462f6e7c5971"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a9298f7a726409fdb3666462f6e7c5971">BENCHMARK</a> (<a class="el" href="namespacepriority__mutex__benchmark.html#a53ad92860a7f055e37869b2728acfcc5">priority_mutex_benchmark::PM_LockUnlock</a>) -&gt; Threads(8)</td></tr>
 <tr class="separator:a9298f7a726409fdb3666462f6e7c5971"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:abe5d6aeb89bc343d6c602f258ffe568c" id="r_abe5d6aeb89bc343d6c602f258ffe568c"><td class="memItemLeft" align="right" valign="top"><a id="abe5d6aeb89bc343d6c602f258ffe568c" name="abe5d6aeb89bc343d6c602f258ffe568c"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>BENCHMARK</b> (priority_mutex_benchmark::PM_pipeline_benchmark_audio) -&gt; Threads(8)</td></tr>
+<tr class="memitem:abe5d6aeb89bc343d6c602f258ffe568c" id="r_abe5d6aeb89bc343d6c602f258ffe568c"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#abe5d6aeb89bc343d6c602f258ffe568c">BENCHMARK</a> (<a class="el" href="namespacepriority__mutex__benchmark.html#a62d59b36e8216459fd8ec5d88d16d53f">priority_mutex_benchmark::PM_pipeline_benchmark_audio</a>) -&gt; Threads(8)</td></tr>
 <tr class="separator:abe5d6aeb89bc343d6c602f258ffe568c"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a0aeffe5c8a2e44d5aec8790bd6532694" id="r_a0aeffe5c8a2e44d5aec8790bd6532694"><td class="memItemLeft" align="right" valign="top"><a id="a0aeffe5c8a2e44d5aec8790bd6532694" name="a0aeffe5c8a2e44d5aec8790bd6532694"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>BENCHMARK</b> (priority_mutex_benchmark::PM_pipeline_benchmark_fast) -&gt; Threads(8)</td></tr>
+<tr class="memitem:a0aeffe5c8a2e44d5aec8790bd6532694" id="r_a0aeffe5c8a2e44d5aec8790bd6532694"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a0aeffe5c8a2e44d5aec8790bd6532694">BENCHMARK</a> (<a class="el" href="namespacepriority__mutex__benchmark.html#ad35958f01660bd62a66666f64f15bcdc">priority_mutex_benchmark::PM_pipeline_benchmark_fast</a>) -&gt; Threads(8)</td></tr>
 <tr class="separator:a0aeffe5c8a2e44d5aec8790bd6532694"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a5a51e0ac650832452b811dee77e0fdf8" id="r_a5a51e0ac650832452b811dee77e0fdf8"><td class="memItemLeft" align="right" valign="top"><a id="a5a51e0ac650832452b811dee77e0fdf8" name="a5a51e0ac650832452b811dee77e0fdf8"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>BENCHMARK</b> (priority_mutex_benchmark::PM_pipeline_benchmark_gaming) -&gt; Threads(8)</td></tr>
+<tr class="memitem:a5a51e0ac650832452b811dee77e0fdf8" id="r_a5a51e0ac650832452b811dee77e0fdf8"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a5a51e0ac650832452b811dee77e0fdf8">BENCHMARK</a> (<a class="el" href="namespacepriority__mutex__benchmark.html#af8f8ee36697339831f42844f557b28ac">priority_mutex_benchmark::PM_pipeline_benchmark_gaming</a>) -&gt; Threads(8)</td></tr>
 <tr class="separator:a5a51e0ac650832452b811dee77e0fdf8"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:adb7d123558fb76f2d2fc401527204ef7" id="r_adb7d123558fb76f2d2fc401527204ef7"><td class="memItemLeft" align="right" valign="top"><a id="adb7d123558fb76f2d2fc401527204ef7" name="adb7d123558fb76f2d2fc401527204ef7"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>BENCHMARK</b> (priority_mutex_benchmark::PM_pipeline_benchmark_long) -&gt; Threads(8)</td></tr>
+<tr class="memitem:adb7d123558fb76f2d2fc401527204ef7" id="r_adb7d123558fb76f2d2fc401527204ef7"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#adb7d123558fb76f2d2fc401527204ef7">BENCHMARK</a> (<a class="el" href="namespacepriority__mutex__benchmark.html#af44421e582fea55a4a13f32303ff5e9e">priority_mutex_benchmark::PM_pipeline_benchmark_long</a>) -&gt; Threads(8)</td></tr>
 <tr class="separator:adb7d123558fb76f2d2fc401527204ef7"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aea57ffefc3a47d58bf081470510956ae" id="r_aea57ffefc3a47d58bf081470510956ae"><td class="memItemLeft" align="right" valign="top"><a id="aea57ffefc3a47d58bf081470510956ae" name="aea57ffefc3a47d58bf081470510956ae"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>BENCHMARK</b> (recursive_priority_mutex_benchmark::R_PM_LockUnlock) -&gt; Threads(8)</td></tr>
+<tr class="memitem:aea57ffefc3a47d58bf081470510956ae" id="r_aea57ffefc3a47d58bf081470510956ae"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#aea57ffefc3a47d58bf081470510956ae">BENCHMARK</a> (<a class="el" href="namespacerecursive__priority__mutex__benchmark.html#a06bfcad62aed344ecc306bdc15456fcc">recursive_priority_mutex_benchmark::R_PM_LockUnlock</a>) -&gt; Threads(8)</td></tr>
 <tr class="separator:aea57ffefc3a47d58bf081470510956ae"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ac8c95baa5acf10426e73db57c42a1d60" id="r_ac8c95baa5acf10426e73db57c42a1d60"><td class="memItemLeft" align="right" valign="top"><a id="ac8c95baa5acf10426e73db57c42a1d60" name="ac8c95baa5acf10426e73db57c42a1d60"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>BENCHMARK</b> (recursive_priority_mutex_benchmark::R_PM_pipeline_benchmark_audio) -&gt; Threads(8)</td></tr>
+<tr class="memitem:ac8c95baa5acf10426e73db57c42a1d60" id="r_ac8c95baa5acf10426e73db57c42a1d60"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ac8c95baa5acf10426e73db57c42a1d60">BENCHMARK</a> (<a class="el" href="namespacerecursive__priority__mutex__benchmark.html#aa852f06d9183ff440f6001db0cd4d9f0">recursive_priority_mutex_benchmark::R_PM_pipeline_benchmark_audio</a>) -&gt; Threads(8)</td></tr>
 <tr class="separator:ac8c95baa5acf10426e73db57c42a1d60"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a6ac4d9278f1f1b4b58577da6f9c0c7c9" id="r_a6ac4d9278f1f1b4b58577da6f9c0c7c9"><td class="memItemLeft" align="right" valign="top"><a id="a6ac4d9278f1f1b4b58577da6f9c0c7c9" name="a6ac4d9278f1f1b4b58577da6f9c0c7c9"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>BENCHMARK</b> (recursive_priority_mutex_benchmark::R_PM_pipeline_benchmark_fast) -&gt; Threads(8)</td></tr>
+<tr class="memitem:a6ac4d9278f1f1b4b58577da6f9c0c7c9" id="r_a6ac4d9278f1f1b4b58577da6f9c0c7c9"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a6ac4d9278f1f1b4b58577da6f9c0c7c9">BENCHMARK</a> (<a class="el" href="namespacerecursive__priority__mutex__benchmark.html#a2a6ba3b4e9bfb55b7ced2e7b77bea287">recursive_priority_mutex_benchmark::R_PM_pipeline_benchmark_fast</a>) -&gt; Threads(8)</td></tr>
 <tr class="separator:a6ac4d9278f1f1b4b58577da6f9c0c7c9"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aa54f2cf48eb8af6c488a2d39625d1d8d" id="r_aa54f2cf48eb8af6c488a2d39625d1d8d"><td class="memItemLeft" align="right" valign="top"><a id="aa54f2cf48eb8af6c488a2d39625d1d8d" name="aa54f2cf48eb8af6c488a2d39625d1d8d"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>BENCHMARK</b> (recursive_priority_mutex_benchmark::R_PM_pipeline_benchmark_gaming) -&gt; Threads(8)</td></tr>
+<tr class="memitem:aa54f2cf48eb8af6c488a2d39625d1d8d" id="r_aa54f2cf48eb8af6c488a2d39625d1d8d"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#aa54f2cf48eb8af6c488a2d39625d1d8d">BENCHMARK</a> (<a class="el" href="namespacerecursive__priority__mutex__benchmark.html#a19712bcd054670fe30f4a8b11fc59afc">recursive_priority_mutex_benchmark::R_PM_pipeline_benchmark_gaming</a>) -&gt; Threads(8)</td></tr>
 <tr class="separator:aa54f2cf48eb8af6c488a2d39625d1d8d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ad4e736d096e3a5dc72a057680d2e5485" id="r_ad4e736d096e3a5dc72a057680d2e5485"><td class="memItemLeft" align="right" valign="top"><a id="ad4e736d096e3a5dc72a057680d2e5485" name="ad4e736d096e3a5dc72a057680d2e5485"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>BENCHMARK</b> (recursive_priority_mutex_benchmark::R_PM_pipeline_benchmark_long) -&gt; Threads(8)</td></tr>
+<tr class="memitem:ad4e736d096e3a5dc72a057680d2e5485" id="r_ad4e736d096e3a5dc72a057680d2e5485"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ad4e736d096e3a5dc72a057680d2e5485">BENCHMARK</a> (<a class="el" href="namespacerecursive__priority__mutex__benchmark.html#aa96269d1b1ab3e8eb1b7e8ba35d40038">recursive_priority_mutex_benchmark::R_PM_pipeline_benchmark_long</a>) -&gt; Threads(8)</td></tr>
 <tr class="separator:ad4e736d096e3a5dc72a057680d2e5485"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a9322ff9f0ce67c7391e3c6b31aca6baf" id="r_a9322ff9f0ce67c7391e3c6b31aca6baf"><td class="memItemLeft" align="right" valign="top"><a id="a9322ff9f0ce67c7391e3c6b31aca6baf" name="a9322ff9f0ce67c7391e3c6b31aca6baf"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>BENCHMARK</b> (shared_priority_mutex_benchmark::PM_S_LockUnlock) -&gt; Threads(8)</td></tr>
+<tr class="memitem:a9322ff9f0ce67c7391e3c6b31aca6baf" id="r_a9322ff9f0ce67c7391e3c6b31aca6baf"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a9322ff9f0ce67c7391e3c6b31aca6baf">BENCHMARK</a> (<a class="el" href="namespaceshared__priority__mutex__benchmark.html#af24851fda55a54c6a99309dd6e49662b">shared_priority_mutex_benchmark::PM_S_LockUnlock</a>) -&gt; Threads(8)</td></tr>
 <tr class="separator:a9322ff9f0ce67c7391e3c6b31aca6baf"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a26754f4b879fbe2966339935b372d694" id="r_a26754f4b879fbe2966339935b372d694"><td class="memItemLeft" align="right" valign="top"><a id="a26754f4b879fbe2966339935b372d694" name="a26754f4b879fbe2966339935b372d694"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>BENCHMARK</b> (shared_priority_mutex_benchmark::PM_S_pipeline_benchmark_audio) -&gt; Threads(8)</td></tr>
+<tr class="memitem:a26754f4b879fbe2966339935b372d694" id="r_a26754f4b879fbe2966339935b372d694"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a26754f4b879fbe2966339935b372d694">BENCHMARK</a> (<a class="el" href="namespaceshared__priority__mutex__benchmark.html#a369ca2614b4c4644a14df9c8fe550f16">shared_priority_mutex_benchmark::PM_S_pipeline_benchmark_audio</a>) -&gt; Threads(8)</td></tr>
 <tr class="separator:a26754f4b879fbe2966339935b372d694"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a82c3509770e41773e3328547b8435229" id="r_a82c3509770e41773e3328547b8435229"><td class="memItemLeft" align="right" valign="top"><a id="a82c3509770e41773e3328547b8435229" name="a82c3509770e41773e3328547b8435229"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>BENCHMARK</b> (shared_priority_mutex_benchmark::PM_S_pipeline_benchmark_fast) -&gt; Threads(8)</td></tr>
+<tr class="memitem:a82c3509770e41773e3328547b8435229" id="r_a82c3509770e41773e3328547b8435229"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a82c3509770e41773e3328547b8435229">BENCHMARK</a> (<a class="el" href="namespaceshared__priority__mutex__benchmark.html#ad22f4e15e185923d5cb1b1cdf8d2c327">shared_priority_mutex_benchmark::PM_S_pipeline_benchmark_fast</a>) -&gt; Threads(8)</td></tr>
 <tr class="separator:a82c3509770e41773e3328547b8435229"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a2e772fe455e5409a9d5a38f6fee4d41c" id="r_a2e772fe455e5409a9d5a38f6fee4d41c"><td class="memItemLeft" align="right" valign="top"><a id="a2e772fe455e5409a9d5a38f6fee4d41c" name="a2e772fe455e5409a9d5a38f6fee4d41c"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>BENCHMARK</b> (shared_priority_mutex_benchmark::PM_S_pipeline_benchmark_gaming) -&gt; Threads(8)</td></tr>
+<tr class="memitem:a2e772fe455e5409a9d5a38f6fee4d41c" id="r_a2e772fe455e5409a9d5a38f6fee4d41c"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a2e772fe455e5409a9d5a38f6fee4d41c">BENCHMARK</a> (<a class="el" href="namespaceshared__priority__mutex__benchmark.html#ac0545d9e85eadb6551c12d292337c5e5">shared_priority_mutex_benchmark::PM_S_pipeline_benchmark_gaming</a>) -&gt; Threads(8)</td></tr>
 <tr class="separator:a2e772fe455e5409a9d5a38f6fee4d41c"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a7a4e73e2e302c373c174b4282261a693" id="r_a7a4e73e2e302c373c174b4282261a693"><td class="memItemLeft" align="right" valign="top"><a id="a7a4e73e2e302c373c174b4282261a693" name="a7a4e73e2e302c373c174b4282261a693"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>BENCHMARK</b> (shared_priority_mutex_benchmark::PM_S_pipeline_benchmark_long) -&gt; Threads(8)</td></tr>
+<tr class="memitem:a7a4e73e2e302c373c174b4282261a693" id="r_a7a4e73e2e302c373c174b4282261a693"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a7a4e73e2e302c373c174b4282261a693">BENCHMARK</a> (<a class="el" href="namespaceshared__priority__mutex__benchmark.html#a33ab4a0d0db66c12f8d4a3ea522a64bb">shared_priority_mutex_benchmark::PM_S_pipeline_benchmark_long</a>) -&gt; Threads(8)</td></tr>
 <tr class="separator:a7a4e73e2e302c373c174b4282261a693"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a725fdc47787f6b88b0d722269304caeb" id="r_a725fdc47787f6b88b0d722269304caeb"><td class="memItemLeft" align="right" valign="top"><a id="a725fdc47787f6b88b0d722269304caeb" name="a725fdc47787f6b88b0d722269304caeb"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>BENCHMARK</b> (shared_priority_mutex_benchmark::PM_S_SLockSUnlock) -&gt; Threads(8)</td></tr>
+<tr class="memitem:a725fdc47787f6b88b0d722269304caeb" id="r_a725fdc47787f6b88b0d722269304caeb"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a725fdc47787f6b88b0d722269304caeb">BENCHMARK</a> (<a class="el" href="namespaceshared__priority__mutex__benchmark.html#ae21aaec7fa690ada83e392a6c59097ef">shared_priority_mutex_benchmark::PM_S_SLockSUnlock</a>) -&gt; Threads(8)</td></tr>
 <tr class="separator:a725fdc47787f6b88b0d722269304caeb"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:af30ccee2cfd32f3deec24543edf8a1b5" id="r_af30ccee2cfd32f3deec24543edf8a1b5"><td class="memItemLeft" align="right" valign="top"><a id="af30ccee2cfd32f3deec24543edf8a1b5" name="af30ccee2cfd32f3deec24543edf8a1b5"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>BENCHMARK</b> (shared_priority_mutex_benchmark::PM_S_Spipeline_benchmark_audio) -&gt; Threads(8)</td></tr>
+<tr class="memitem:af30ccee2cfd32f3deec24543edf8a1b5" id="r_af30ccee2cfd32f3deec24543edf8a1b5"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#af30ccee2cfd32f3deec24543edf8a1b5">BENCHMARK</a> (<a class="el" href="namespaceshared__priority__mutex__benchmark.html#a0f20fc1a9c1d214b3fc0e4bd11efd289">shared_priority_mutex_benchmark::PM_S_Spipeline_benchmark_audio</a>) -&gt; Threads(8)</td></tr>
 <tr class="separator:af30ccee2cfd32f3deec24543edf8a1b5"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aeb67d405321123b11e6bc9f7b7d11d46" id="r_aeb67d405321123b11e6bc9f7b7d11d46"><td class="memItemLeft" align="right" valign="top"><a id="aeb67d405321123b11e6bc9f7b7d11d46" name="aeb67d405321123b11e6bc9f7b7d11d46"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>BENCHMARK</b> (shared_priority_mutex_benchmark::PM_S_Spipeline_benchmark_fast) -&gt; Threads(8)</td></tr>
+<tr class="memitem:aeb67d405321123b11e6bc9f7b7d11d46" id="r_aeb67d405321123b11e6bc9f7b7d11d46"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#aeb67d405321123b11e6bc9f7b7d11d46">BENCHMARK</a> (<a class="el" href="namespaceshared__priority__mutex__benchmark.html#a435bde39f7c0ce77b0874129259b7a92">shared_priority_mutex_benchmark::PM_S_Spipeline_benchmark_fast</a>) -&gt; Threads(8)</td></tr>
 <tr class="separator:aeb67d405321123b11e6bc9f7b7d11d46"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a751927c08499dfacd63bbc222a880f3a" id="r_a751927c08499dfacd63bbc222a880f3a"><td class="memItemLeft" align="right" valign="top"><a id="a751927c08499dfacd63bbc222a880f3a" name="a751927c08499dfacd63bbc222a880f3a"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>BENCHMARK</b> (shared_priority_mutex_benchmark::PM_S_Spipeline_benchmark_gaming) -&gt; Threads(8)</td></tr>
+<tr class="memitem:a751927c08499dfacd63bbc222a880f3a" id="r_a751927c08499dfacd63bbc222a880f3a"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a751927c08499dfacd63bbc222a880f3a">BENCHMARK</a> (<a class="el" href="namespaceshared__priority__mutex__benchmark.html#a2f1f60e0a9266788039da44719e7a276">shared_priority_mutex_benchmark::PM_S_Spipeline_benchmark_gaming</a>) -&gt; Threads(8)</td></tr>
 <tr class="separator:a751927c08499dfacd63bbc222a880f3a"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aa20ea23e16712dcc2f3c5b0feaa532f7" id="r_aa20ea23e16712dcc2f3c5b0feaa532f7"><td class="memItemLeft" align="right" valign="top"><a id="aa20ea23e16712dcc2f3c5b0feaa532f7" name="aa20ea23e16712dcc2f3c5b0feaa532f7"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>BENCHMARK</b> (shared_priority_mutex_benchmark::PM_S_Spipeline_benchmark_long) -&gt; Threads(8)</td></tr>
+<tr class="memitem:aa20ea23e16712dcc2f3c5b0feaa532f7" id="r_aa20ea23e16712dcc2f3c5b0feaa532f7"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#aa20ea23e16712dcc2f3c5b0feaa532f7">BENCHMARK</a> (<a class="el" href="namespaceshared__priority__mutex__benchmark.html#a56dec7b398d9d97207ac29f0dcf1c2be">shared_priority_mutex_benchmark::PM_S_Spipeline_benchmark_long</a>) -&gt; Threads(8)</td></tr>
 <tr class="separator:aa20ea23e16712dcc2f3c5b0feaa532f7"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:adfe3a6f3f4415b2221df688a3f150d60" id="r_adfe3a6f3f4415b2221df688a3f150d60"><td class="memItemLeft" align="right" valign="top"><a id="adfe3a6f3f4415b2221df688a3f150d60" name="adfe3a6f3f4415b2221df688a3f150d60"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>BENCHMARK</b> (slim_priority_mutex_benchmark::SLM_PM_LockUnlock) -&gt; Threads(8)</td></tr>
+<tr class="memitem:adfe3a6f3f4415b2221df688a3f150d60" id="r_adfe3a6f3f4415b2221df688a3f150d60"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#adfe3a6f3f4415b2221df688a3f150d60">BENCHMARK</a> (<a class="el" href="namespaceslim__priority__mutex__benchmark.html#a7351e5e22d5fe1d1f07fcf3fbe9e4b24">slim_priority_mutex_benchmark::SLM_PM_LockUnlock</a>) -&gt; Threads(8)</td></tr>
 <tr class="separator:adfe3a6f3f4415b2221df688a3f150d60"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a3ab01be8d56f266bb6e5199f243f30ac" id="r_a3ab01be8d56f266bb6e5199f243f30ac"><td class="memItemLeft" align="right" valign="top"><a id="a3ab01be8d56f266bb6e5199f243f30ac" name="a3ab01be8d56f266bb6e5199f243f30ac"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>BENCHMARK</b> (slim_priority_mutex_benchmark::SLM_PM_pipeline_benchmark_audio) -&gt; Threads(8)</td></tr>
+<tr class="memitem:a3ab01be8d56f266bb6e5199f243f30ac" id="r_a3ab01be8d56f266bb6e5199f243f30ac"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a3ab01be8d56f266bb6e5199f243f30ac">BENCHMARK</a> (<a class="el" href="namespaceslim__priority__mutex__benchmark.html#af79751c7e946c01abdcd482a9b213d43">slim_priority_mutex_benchmark::SLM_PM_pipeline_benchmark_audio</a>) -&gt; Threads(8)</td></tr>
 <tr class="separator:a3ab01be8d56f266bb6e5199f243f30ac"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aa7e6f55f3411dac685d1083338475b41" id="r_aa7e6f55f3411dac685d1083338475b41"><td class="memItemLeft" align="right" valign="top"><a id="aa7e6f55f3411dac685d1083338475b41" name="aa7e6f55f3411dac685d1083338475b41"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>BENCHMARK</b> (slim_priority_mutex_benchmark::SLM_PM_pipeline_benchmark_fast) -&gt; Threads(8)</td></tr>
+<tr class="memitem:aa7e6f55f3411dac685d1083338475b41" id="r_aa7e6f55f3411dac685d1083338475b41"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#aa7e6f55f3411dac685d1083338475b41">BENCHMARK</a> (<a class="el" href="namespaceslim__priority__mutex__benchmark.html#a8fa30fab7a83ba4060d85156bf7d4aa7">slim_priority_mutex_benchmark::SLM_PM_pipeline_benchmark_fast</a>) -&gt; Threads(8)</td></tr>
 <tr class="separator:aa7e6f55f3411dac685d1083338475b41"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ab43082fd8e96743a8cffd3350b814137" id="r_ab43082fd8e96743a8cffd3350b814137"><td class="memItemLeft" align="right" valign="top"><a id="ab43082fd8e96743a8cffd3350b814137" name="ab43082fd8e96743a8cffd3350b814137"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>BENCHMARK</b> (slim_priority_mutex_benchmark::SLM_PM_pipeline_benchmark_gaming) -&gt; Threads(8)</td></tr>
+<tr class="memitem:ab43082fd8e96743a8cffd3350b814137" id="r_ab43082fd8e96743a8cffd3350b814137"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ab43082fd8e96743a8cffd3350b814137">BENCHMARK</a> (<a class="el" href="namespaceslim__priority__mutex__benchmark.html#aeb503c3cdf9d2622e4ee54d6f2e74135">slim_priority_mutex_benchmark::SLM_PM_pipeline_benchmark_gaming</a>) -&gt; Threads(8)</td></tr>
 <tr class="separator:ab43082fd8e96743a8cffd3350b814137"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ad897e721f2571cf41ef96492b928afc7" id="r_ad897e721f2571cf41ef96492b928afc7"><td class="memItemLeft" align="right" valign="top"><a id="ad897e721f2571cf41ef96492b928afc7" name="ad897e721f2571cf41ef96492b928afc7"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>BENCHMARK</b> (slim_priority_mutex_benchmark::SLM_PM_pipeline_benchmark_long) -&gt; Threads(8)</td></tr>
+<tr class="memitem:ad897e721f2571cf41ef96492b928afc7" id="r_ad897e721f2571cf41ef96492b928afc7"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ad897e721f2571cf41ef96492b928afc7">BENCHMARK</a> (<a class="el" href="namespaceslim__priority__mutex__benchmark.html#a541dc9e6420351279de391303843547a">slim_priority_mutex_benchmark::SLM_PM_pipeline_benchmark_long</a>) -&gt; Threads(8)</td></tr>
 <tr class="separator:ad897e721f2571cf41ef96492b928afc7"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a3e2442e32192a5be251d48904bb506a9" id="r_a3e2442e32192a5be251d48904bb506a9"><td class="memItemLeft" align="right" valign="top"><a id="a3e2442e32192a5be251d48904bb506a9" name="a3e2442e32192a5be251d48904bb506a9"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>BENCHMARK</b> (spinlock_priority_mutex_benchmark::SPNLC_PM_LockUnlock) -&gt; Threads(8)</td></tr>
+<tr class="memitem:a3e2442e32192a5be251d48904bb506a9" id="r_a3e2442e32192a5be251d48904bb506a9"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a3e2442e32192a5be251d48904bb506a9">BENCHMARK</a> (<a class="el" href="namespacespinlock__priority__mutex__benchmark.html#a3ed02cf45e0965748c077c070efce15e">spinlock_priority_mutex_benchmark::SPNLC_PM_LockUnlock</a>) -&gt; Threads(8)</td></tr>
 <tr class="separator:a3e2442e32192a5be251d48904bb506a9"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ac6b35c23de8029ebae950d0e7dfafef0" id="r_ac6b35c23de8029ebae950d0e7dfafef0"><td class="memItemLeft" align="right" valign="top"><a id="ac6b35c23de8029ebae950d0e7dfafef0" name="ac6b35c23de8029ebae950d0e7dfafef0"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>BENCHMARK</b> (spinlock_priority_mutex_benchmark::SPNLC_PM_pipeline_benchmark_audio) -&gt; Threads(8)</td></tr>
+<tr class="memitem:ac6b35c23de8029ebae950d0e7dfafef0" id="r_ac6b35c23de8029ebae950d0e7dfafef0"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ac6b35c23de8029ebae950d0e7dfafef0">BENCHMARK</a> (<a class="el" href="namespacespinlock__priority__mutex__benchmark.html#a86867793d18b3a895277000073cda6ff">spinlock_priority_mutex_benchmark::SPNLC_PM_pipeline_benchmark_audio</a>) -&gt; Threads(8)</td></tr>
 <tr class="separator:ac6b35c23de8029ebae950d0e7dfafef0"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a696529903de3c1b8ac01d448b4433a4e" id="r_a696529903de3c1b8ac01d448b4433a4e"><td class="memItemLeft" align="right" valign="top"><a id="a696529903de3c1b8ac01d448b4433a4e" name="a696529903de3c1b8ac01d448b4433a4e"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>BENCHMARK</b> (spinlock_priority_mutex_benchmark::SPNLC_PM_pipeline_benchmark_fast) -&gt; Threads(8)</td></tr>
+<tr class="memitem:a696529903de3c1b8ac01d448b4433a4e" id="r_a696529903de3c1b8ac01d448b4433a4e"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a696529903de3c1b8ac01d448b4433a4e">BENCHMARK</a> (<a class="el" href="namespacespinlock__priority__mutex__benchmark.html#af4163c9c3dc6d0d074a8543540ebc6b0">spinlock_priority_mutex_benchmark::SPNLC_PM_pipeline_benchmark_fast</a>) -&gt; Threads(8)</td></tr>
 <tr class="separator:a696529903de3c1b8ac01d448b4433a4e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a484f2bf2db8a74dbcb2d63edb149e01b" id="r_a484f2bf2db8a74dbcb2d63edb149e01b"><td class="memItemLeft" align="right" valign="top"><a id="a484f2bf2db8a74dbcb2d63edb149e01b" name="a484f2bf2db8a74dbcb2d63edb149e01b"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>BENCHMARK</b> (spinlock_priority_mutex_benchmark::SPNLC_PM_pipeline_benchmark_gaming) -&gt; Threads(8)</td></tr>
+<tr class="memitem:a484f2bf2db8a74dbcb2d63edb149e01b" id="r_a484f2bf2db8a74dbcb2d63edb149e01b"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a484f2bf2db8a74dbcb2d63edb149e01b">BENCHMARK</a> (<a class="el" href="namespacespinlock__priority__mutex__benchmark.html#a5c7a4d82130e544ae13ea36656224f21">spinlock_priority_mutex_benchmark::SPNLC_PM_pipeline_benchmark_gaming</a>) -&gt; Threads(8)</td></tr>
 <tr class="separator:a484f2bf2db8a74dbcb2d63edb149e01b"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ad24d3f7f7a846457cd05673b13262dcf" id="r_ad24d3f7f7a846457cd05673b13262dcf"><td class="memItemLeft" align="right" valign="top"><a id="ad24d3f7f7a846457cd05673b13262dcf" name="ad24d3f7f7a846457cd05673b13262dcf"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>BENCHMARK</b> (spinlock_priority_mutex_benchmark::SPNLC_PM_pipeline_benchmark_long) -&gt; Threads(8)</td></tr>
+<tr class="memitem:ad24d3f7f7a846457cd05673b13262dcf" id="r_ad24d3f7f7a846457cd05673b13262dcf"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ad24d3f7f7a846457cd05673b13262dcf">BENCHMARK</a> (<a class="el" href="namespacespinlock__priority__mutex__benchmark.html#afee7603359254b9f75cb1cd445aa18cb">spinlock_priority_mutex_benchmark::SPNLC_PM_pipeline_benchmark_long</a>) -&gt; Threads(8)</td></tr>
 <tr class="separator:ad24d3f7f7a846457cd05673b13262dcf"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a9c46c5481f1501d0dd00ba58b8be89e3" id="r_a9c46c5481f1501d0dd00ba58b8be89e3"><td class="memItemLeft" align="right" valign="top"><a id="a9c46c5481f1501d0dd00ba58b8be89e3" name="a9c46c5481f1501d0dd00ba58b8be89e3"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>BENCHMARK</b> (standard_mutex_benchmark::STD_LockUnlock) -&gt; Threads(8)</td></tr>
+<tr class="memitem:a9c46c5481f1501d0dd00ba58b8be89e3" id="r_a9c46c5481f1501d0dd00ba58b8be89e3"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a9c46c5481f1501d0dd00ba58b8be89e3">BENCHMARK</a> (<a class="el" href="namespacestandard__mutex__benchmark.html#ae894f14badba4c328331b19ee7e21900">standard_mutex_benchmark::STD_LockUnlock</a>) -&gt; Threads(8)</td></tr>
 <tr class="separator:a9c46c5481f1501d0dd00ba58b8be89e3"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ad900748d6e8b6b1fb961ef42f453e8bc" id="r_ad900748d6e8b6b1fb961ef42f453e8bc"><td class="memItemLeft" align="right" valign="top"><a id="ad900748d6e8b6b1fb961ef42f453e8bc" name="ad900748d6e8b6b1fb961ef42f453e8bc"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>BENCHMARK</b> (standard_mutex_benchmark::STD_pipeline_benchmark_audio) -&gt; Threads(8)</td></tr>
+<tr class="memitem:ad900748d6e8b6b1fb961ef42f453e8bc" id="r_ad900748d6e8b6b1fb961ef42f453e8bc"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ad900748d6e8b6b1fb961ef42f453e8bc">BENCHMARK</a> (<a class="el" href="namespacestandard__mutex__benchmark.html#ac9522bc34fd3d979e6b5bed68ff50070">standard_mutex_benchmark::STD_pipeline_benchmark_audio</a>) -&gt; Threads(8)</td></tr>
 <tr class="separator:ad900748d6e8b6b1fb961ef42f453e8bc"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a40fb345e3d2a3e546a5c163c1b84fb4c" id="r_a40fb345e3d2a3e546a5c163c1b84fb4c"><td class="memItemLeft" align="right" valign="top"><a id="a40fb345e3d2a3e546a5c163c1b84fb4c" name="a40fb345e3d2a3e546a5c163c1b84fb4c"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>BENCHMARK</b> (standard_mutex_benchmark::STD_pipeline_benchmark_fast) -&gt; Threads(8)</td></tr>
+<tr class="memitem:a40fb345e3d2a3e546a5c163c1b84fb4c" id="r_a40fb345e3d2a3e546a5c163c1b84fb4c"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a40fb345e3d2a3e546a5c163c1b84fb4c">BENCHMARK</a> (<a class="el" href="namespacestandard__mutex__benchmark.html#a395548be3305849a4c488b5d456ad764">standard_mutex_benchmark::STD_pipeline_benchmark_fast</a>) -&gt; Threads(8)</td></tr>
 <tr class="separator:a40fb345e3d2a3e546a5c163c1b84fb4c"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ae0960702df4d2ec51610bd5b7c7913c3" id="r_ae0960702df4d2ec51610bd5b7c7913c3"><td class="memItemLeft" align="right" valign="top"><a id="ae0960702df4d2ec51610bd5b7c7913c3" name="ae0960702df4d2ec51610bd5b7c7913c3"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>BENCHMARK</b> (standard_mutex_benchmark::STD_pipeline_benchmark_gaming) -&gt; Threads(8)</td></tr>
+<tr class="memitem:ae0960702df4d2ec51610bd5b7c7913c3" id="r_ae0960702df4d2ec51610bd5b7c7913c3"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ae0960702df4d2ec51610bd5b7c7913c3">BENCHMARK</a> (<a class="el" href="namespacestandard__mutex__benchmark.html#a0fca3d29e9eed16d3b0e86d695c65a80">standard_mutex_benchmark::STD_pipeline_benchmark_gaming</a>) -&gt; Threads(8)</td></tr>
 <tr class="separator:ae0960702df4d2ec51610bd5b7c7913c3"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a60b979e48d95a0c76c1e5a5fb2dcf409" id="r_a60b979e48d95a0c76c1e5a5fb2dcf409"><td class="memItemLeft" align="right" valign="top"><a id="a60b979e48d95a0c76c1e5a5fb2dcf409" name="a60b979e48d95a0c76c1e5a5fb2dcf409"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>BENCHMARK</b> (standard_mutex_benchmark::STD_pipeline_benchmark_long) -&gt; Threads(8)</td></tr>
+<tr class="memitem:a60b979e48d95a0c76c1e5a5fb2dcf409" id="r_a60b979e48d95a0c76c1e5a5fb2dcf409"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a60b979e48d95a0c76c1e5a5fb2dcf409">BENCHMARK</a> (<a class="el" href="namespacestandard__mutex__benchmark.html#a1146fa28fc88b13ffeea2ee1a44b32e1">standard_mutex_benchmark::STD_pipeline_benchmark_long</a>) -&gt; Threads(8)</td></tr>
 <tr class="separator:a60b979e48d95a0c76c1e5a5fb2dcf409"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a2cd0bca7d219023c717905006a8499b3" id="r_a2cd0bca7d219023c717905006a8499b3"><td class="memItemLeft" align="right" valign="top"><a id="a2cd0bca7d219023c717905006a8499b3" name="a2cd0bca7d219023c717905006a8499b3"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>BENCHMARK</b> (standard_shared_mutex_benchmark::STD_S_LockUnlock) -&gt; Threads(8)</td></tr>
+<tr class="memitem:a2cd0bca7d219023c717905006a8499b3" id="r_a2cd0bca7d219023c717905006a8499b3"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a2cd0bca7d219023c717905006a8499b3">BENCHMARK</a> (<a class="el" href="namespacestandard__shared__mutex__benchmark.html#acf9796448e722552b21c934f715db611">standard_shared_mutex_benchmark::STD_S_LockUnlock</a>) -&gt; Threads(8)</td></tr>
 <tr class="separator:a2cd0bca7d219023c717905006a8499b3"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ad667d3bef20d035ae06c2776589753bb" id="r_ad667d3bef20d035ae06c2776589753bb"><td class="memItemLeft" align="right" valign="top"><a id="ad667d3bef20d035ae06c2776589753bb" name="ad667d3bef20d035ae06c2776589753bb"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>BENCHMARK</b> (standard_shared_mutex_benchmark::STD_S_pipeline_benchmark_audio) -&gt; Threads(8)</td></tr>
+<tr class="memitem:ad667d3bef20d035ae06c2776589753bb" id="r_ad667d3bef20d035ae06c2776589753bb"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ad667d3bef20d035ae06c2776589753bb">BENCHMARK</a> (<a class="el" href="namespacestandard__shared__mutex__benchmark.html#a96138c6e2a04d3b5f7535a3c06760562">standard_shared_mutex_benchmark::STD_S_pipeline_benchmark_audio</a>) -&gt; Threads(8)</td></tr>
 <tr class="separator:ad667d3bef20d035ae06c2776589753bb"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a2a94e50bf5ba8b441acda9aba58dbea0" id="r_a2a94e50bf5ba8b441acda9aba58dbea0"><td class="memItemLeft" align="right" valign="top"><a id="a2a94e50bf5ba8b441acda9aba58dbea0" name="a2a94e50bf5ba8b441acda9aba58dbea0"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>BENCHMARK</b> (standard_shared_mutex_benchmark::STD_S_pipeline_benchmark_fast) -&gt; Threads(8)</td></tr>
+<tr class="memitem:a2a94e50bf5ba8b441acda9aba58dbea0" id="r_a2a94e50bf5ba8b441acda9aba58dbea0"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a2a94e50bf5ba8b441acda9aba58dbea0">BENCHMARK</a> (<a class="el" href="namespacestandard__shared__mutex__benchmark.html#a40078f0663e78978b27d0451bab7abe6">standard_shared_mutex_benchmark::STD_S_pipeline_benchmark_fast</a>) -&gt; Threads(8)</td></tr>
 <tr class="separator:a2a94e50bf5ba8b441acda9aba58dbea0"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ac45f059198bc9ee822be30996d9582de" id="r_ac45f059198bc9ee822be30996d9582de"><td class="memItemLeft" align="right" valign="top"><a id="ac45f059198bc9ee822be30996d9582de" name="ac45f059198bc9ee822be30996d9582de"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>BENCHMARK</b> (standard_shared_mutex_benchmark::STD_S_pipeline_benchmark_gaming) -&gt; Threads(8)</td></tr>
+<tr class="memitem:ac45f059198bc9ee822be30996d9582de" id="r_ac45f059198bc9ee822be30996d9582de"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ac45f059198bc9ee822be30996d9582de">BENCHMARK</a> (<a class="el" href="namespacestandard__shared__mutex__benchmark.html#ad797748bfa4e4c9cb644ce6041b47336">standard_shared_mutex_benchmark::STD_S_pipeline_benchmark_gaming</a>) -&gt; Threads(8)</td></tr>
 <tr class="separator:ac45f059198bc9ee822be30996d9582de"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a47898ccdc3e69ad1fa2c78d9f786f181" id="r_a47898ccdc3e69ad1fa2c78d9f786f181"><td class="memItemLeft" align="right" valign="top"><a id="a47898ccdc3e69ad1fa2c78d9f786f181" name="a47898ccdc3e69ad1fa2c78d9f786f181"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>BENCHMARK</b> (standard_shared_mutex_benchmark::STD_S_pipeline_benchmark_long) -&gt; Threads(8)</td></tr>
+<tr class="memitem:a47898ccdc3e69ad1fa2c78d9f786f181" id="r_a47898ccdc3e69ad1fa2c78d9f786f181"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a47898ccdc3e69ad1fa2c78d9f786f181">BENCHMARK</a> (<a class="el" href="namespacestandard__shared__mutex__benchmark.html#a25056dfa03f8f5c7e65aa7e442df8262">standard_shared_mutex_benchmark::STD_S_pipeline_benchmark_long</a>) -&gt; Threads(8)</td></tr>
 <tr class="separator:a47898ccdc3e69ad1fa2c78d9f786f181"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a44760aa393fc25708513bd47fde152cc" id="r_a44760aa393fc25708513bd47fde152cc"><td class="memItemLeft" align="right" valign="top"><a id="a44760aa393fc25708513bd47fde152cc" name="a44760aa393fc25708513bd47fde152cc"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>BENCHMARK</b> (standard_shared_mutex_benchmark::STD_S_SLockSUnlock) -&gt; Threads(8)</td></tr>
+<tr class="memitem:a44760aa393fc25708513bd47fde152cc" id="r_a44760aa393fc25708513bd47fde152cc"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a44760aa393fc25708513bd47fde152cc">BENCHMARK</a> (<a class="el" href="namespacestandard__shared__mutex__benchmark.html#af674acd663ed205620c7bdf74e6e2665">standard_shared_mutex_benchmark::STD_S_SLockSUnlock</a>) -&gt; Threads(8)</td></tr>
 <tr class="separator:a44760aa393fc25708513bd47fde152cc"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:abb9a8f0b3039f42cdb3597438346ddf7" id="r_abb9a8f0b3039f42cdb3597438346ddf7"><td class="memItemLeft" align="right" valign="top"><a id="abb9a8f0b3039f42cdb3597438346ddf7" name="abb9a8f0b3039f42cdb3597438346ddf7"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>BENCHMARK</b> (standard_shared_mutex_benchmark::STD_S_Spipeline_benchmark_audio) -&gt; Threads(8)</td></tr>
+<tr class="memitem:abb9a8f0b3039f42cdb3597438346ddf7" id="r_abb9a8f0b3039f42cdb3597438346ddf7"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#abb9a8f0b3039f42cdb3597438346ddf7">BENCHMARK</a> (<a class="el" href="namespacestandard__shared__mutex__benchmark.html#a28da08daeb8a7dd3b5f1029d2f3dc864">standard_shared_mutex_benchmark::STD_S_Spipeline_benchmark_audio</a>) -&gt; Threads(8)</td></tr>
 <tr class="separator:abb9a8f0b3039f42cdb3597438346ddf7"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a166cb9753993652b7ebfcc7ccc823b13" id="r_a166cb9753993652b7ebfcc7ccc823b13"><td class="memItemLeft" align="right" valign="top"><a id="a166cb9753993652b7ebfcc7ccc823b13" name="a166cb9753993652b7ebfcc7ccc823b13"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>BENCHMARK</b> (standard_shared_mutex_benchmark::STD_S_Spipeline_benchmark_fast) -&gt; Threads(8)</td></tr>
+<tr class="memitem:a166cb9753993652b7ebfcc7ccc823b13" id="r_a166cb9753993652b7ebfcc7ccc823b13"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a166cb9753993652b7ebfcc7ccc823b13">BENCHMARK</a> (<a class="el" href="namespacestandard__shared__mutex__benchmark.html#a245ef74246b9fc0c2d8898560a0358d2">standard_shared_mutex_benchmark::STD_S_Spipeline_benchmark_fast</a>) -&gt; Threads(8)</td></tr>
 <tr class="separator:a166cb9753993652b7ebfcc7ccc823b13"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aeb2ca092b2258ebb4174a713510d807c" id="r_aeb2ca092b2258ebb4174a713510d807c"><td class="memItemLeft" align="right" valign="top"><a id="aeb2ca092b2258ebb4174a713510d807c" name="aeb2ca092b2258ebb4174a713510d807c"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>BENCHMARK</b> (standard_shared_mutex_benchmark::STD_S_Spipeline_benchmark_gaming) -&gt; Threads(8)</td></tr>
+<tr class="memitem:aeb2ca092b2258ebb4174a713510d807c" id="r_aeb2ca092b2258ebb4174a713510d807c"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#aeb2ca092b2258ebb4174a713510d807c">BENCHMARK</a> (<a class="el" href="namespacestandard__shared__mutex__benchmark.html#acacccb709f5e494dde1c903164a29912">standard_shared_mutex_benchmark::STD_S_Spipeline_benchmark_gaming</a>) -&gt; Threads(8)</td></tr>
 <tr class="separator:aeb2ca092b2258ebb4174a713510d807c"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a62376f9dcb003f2b084dba3acbbdaaa0" id="r_a62376f9dcb003f2b084dba3acbbdaaa0"><td class="memItemLeft" align="right" valign="top"><a id="a62376f9dcb003f2b084dba3acbbdaaa0" name="a62376f9dcb003f2b084dba3acbbdaaa0"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>BENCHMARK</b> (standard_shared_mutex_benchmark::STD_S_Spipeline_benchmark_long) -&gt; Threads(8)</td></tr>
+<tr class="memitem:a62376f9dcb003f2b084dba3acbbdaaa0" id="r_a62376f9dcb003f2b084dba3acbbdaaa0"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a62376f9dcb003f2b084dba3acbbdaaa0">BENCHMARK</a> (<a class="el" href="namespacestandard__shared__mutex__benchmark.html#a54fb97d061ef1be427cd6c5562aaae3f">standard_shared_mutex_benchmark::STD_S_Spipeline_benchmark_long</a>) -&gt; Threads(8)</td></tr>
 <tr class="separator:a62376f9dcb003f2b084dba3acbbdaaa0"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a5851750faa9cfec10f7cad1f3b89697e" id="r_a5851750faa9cfec10f7cad1f3b89697e"><td class="memItemLeft" align="right" valign="top"><a id="a5851750faa9cfec10f7cad1f3b89697e" name="a5851750faa9cfec10f7cad1f3b89697e"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>BENCHMARK_MAIN</b> ()</td></tr>
+<tr class="memitem:a5851750faa9cfec10f7cad1f3b89697e" id="r_a5851750faa9cfec10f7cad1f3b89697e"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a5851750faa9cfec10f7cad1f3b89697e">BENCHMARK_MAIN</a> ()</td></tr>
 <tr class="separator:a5851750faa9cfec10f7cad1f3b89697e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
@@ -363,11 +353,860 @@ S. Martorana (<a href="#" onclick="location.href='mai'+'lto:'+'sal'+'va'+'tor'+'
 <dl class="section version"><dt>Version</dt><dd>0.1 </dd></dl>
 <dl class="section date"><dt>Date</dt><dd>2023-10-06</dd></dl>
 <dl class="section copyright"><dt>Copyright</dt><dd>Copyright (c) 2023 Federico Abrignani (<a href="#" onclick="location.href='mai'+'lto:'+'fed'+'er'+'ign'+'ol'+'i@h'+'ot'+'mai'+'l.'+'it'; return false;">feder<span class="obfuscator">.nosp@m.</span>igno<span class="obfuscator">.nosp@m.</span>li@ho<span class="obfuscator">.nosp@m.</span>tmai<span class="obfuscator">.nosp@m.</span>l.it</a>). Distributed under the Boost Software License, Version 1.0. (See accompanying file LICENSE_1_0.txt or copy at <a href="http://www.boost.org/LICENSE_1_0.txt">http://www.boost.org/LICENSE_1_0.txt</a>). </dd></dl>
-</div></div><!-- contents -->
-<!-- HTML footer for doxygen 1.9.3-->
+</div><h2 class="groupheader">Function Documentation</h2>
+<a id="a2e2a0b19bf5b116489e4e7f91b345e40" name="a2e2a0b19bf5b116489e4e7f91b345e40"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2e2a0b19bf5b116489e4e7f91b345e40">&#9670;&#160;</a></span>BENCHMARK() <span class="overload">[1/46]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">BENCHMARK </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="pipeline__benchmark_8hpp.html#a00b6071b4891a15ae4566f220cf9dee9">____________________________________________________________________________________________</a>&#160;</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a9298f7a726409fdb3666462f6e7c5971" name="a9298f7a726409fdb3666462f6e7c5971"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9298f7a726409fdb3666462f6e7c5971">&#9670;&#160;</a></span>BENCHMARK() <span class="overload">[2/46]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">BENCHMARK </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="namespacepriority__mutex__benchmark.html#a53ad92860a7f055e37869b2728acfcc5">priority_mutex_benchmark::PM_LockUnlock</a>&#160;</td>
+          <td class="paramname"></td><td>)</td>
+          <td> -&gt;  Threads(8)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="abe5d6aeb89bc343d6c602f258ffe568c" name="abe5d6aeb89bc343d6c602f258ffe568c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#abe5d6aeb89bc343d6c602f258ffe568c">&#9670;&#160;</a></span>BENCHMARK() <span class="overload">[3/46]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">BENCHMARK </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="namespacepriority__mutex__benchmark.html#a62d59b36e8216459fd8ec5d88d16d53f">priority_mutex_benchmark::PM_pipeline_benchmark_audio</a>&#160;</td>
+          <td class="paramname"></td><td>)</td>
+          <td> -&gt;  Threads(8)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a0aeffe5c8a2e44d5aec8790bd6532694" name="a0aeffe5c8a2e44d5aec8790bd6532694"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0aeffe5c8a2e44d5aec8790bd6532694">&#9670;&#160;</a></span>BENCHMARK() <span class="overload">[4/46]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">BENCHMARK </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="namespacepriority__mutex__benchmark.html#ad35958f01660bd62a66666f64f15bcdc">priority_mutex_benchmark::PM_pipeline_benchmark_fast</a>&#160;</td>
+          <td class="paramname"></td><td>)</td>
+          <td> -&gt;  Threads(8)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a5a51e0ac650832452b811dee77e0fdf8" name="a5a51e0ac650832452b811dee77e0fdf8"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5a51e0ac650832452b811dee77e0fdf8">&#9670;&#160;</a></span>BENCHMARK() <span class="overload">[5/46]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">BENCHMARK </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="namespacepriority__mutex__benchmark.html#af8f8ee36697339831f42844f557b28ac">priority_mutex_benchmark::PM_pipeline_benchmark_gaming</a>&#160;</td>
+          <td class="paramname"></td><td>)</td>
+          <td> -&gt;  Threads(8)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="adb7d123558fb76f2d2fc401527204ef7" name="adb7d123558fb76f2d2fc401527204ef7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#adb7d123558fb76f2d2fc401527204ef7">&#9670;&#160;</a></span>BENCHMARK() <span class="overload">[6/46]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">BENCHMARK </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="namespacepriority__mutex__benchmark.html#af44421e582fea55a4a13f32303ff5e9e">priority_mutex_benchmark::PM_pipeline_benchmark_long</a>&#160;</td>
+          <td class="paramname"></td><td>)</td>
+          <td> -&gt;  Threads(8)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="aea57ffefc3a47d58bf081470510956ae" name="aea57ffefc3a47d58bf081470510956ae"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aea57ffefc3a47d58bf081470510956ae">&#9670;&#160;</a></span>BENCHMARK() <span class="overload">[7/46]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">BENCHMARK </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="namespacerecursive__priority__mutex__benchmark.html#a06bfcad62aed344ecc306bdc15456fcc">recursive_priority_mutex_benchmark::R_PM_LockUnlock</a>&#160;</td>
+          <td class="paramname"></td><td>)</td>
+          <td> -&gt;  Threads(8)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ac8c95baa5acf10426e73db57c42a1d60" name="ac8c95baa5acf10426e73db57c42a1d60"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac8c95baa5acf10426e73db57c42a1d60">&#9670;&#160;</a></span>BENCHMARK() <span class="overload">[8/46]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">BENCHMARK </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="namespacerecursive__priority__mutex__benchmark.html#aa852f06d9183ff440f6001db0cd4d9f0">recursive_priority_mutex_benchmark::R_PM_pipeline_benchmark_audio</a>&#160;</td>
+          <td class="paramname"></td><td>)</td>
+          <td> -&gt;  Threads(8)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a6ac4d9278f1f1b4b58577da6f9c0c7c9" name="a6ac4d9278f1f1b4b58577da6f9c0c7c9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6ac4d9278f1f1b4b58577da6f9c0c7c9">&#9670;&#160;</a></span>BENCHMARK() <span class="overload">[9/46]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">BENCHMARK </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="namespacerecursive__priority__mutex__benchmark.html#a2a6ba3b4e9bfb55b7ced2e7b77bea287">recursive_priority_mutex_benchmark::R_PM_pipeline_benchmark_fast</a>&#160;</td>
+          <td class="paramname"></td><td>)</td>
+          <td> -&gt;  Threads(8)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="aa54f2cf48eb8af6c488a2d39625d1d8d" name="aa54f2cf48eb8af6c488a2d39625d1d8d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa54f2cf48eb8af6c488a2d39625d1d8d">&#9670;&#160;</a></span>BENCHMARK() <span class="overload">[10/46]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">BENCHMARK </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="namespacerecursive__priority__mutex__benchmark.html#a19712bcd054670fe30f4a8b11fc59afc">recursive_priority_mutex_benchmark::R_PM_pipeline_benchmark_gaming</a>&#160;</td>
+          <td class="paramname"></td><td>)</td>
+          <td> -&gt;  Threads(8)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ad4e736d096e3a5dc72a057680d2e5485" name="ad4e736d096e3a5dc72a057680d2e5485"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad4e736d096e3a5dc72a057680d2e5485">&#9670;&#160;</a></span>BENCHMARK() <span class="overload">[11/46]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">BENCHMARK </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="namespacerecursive__priority__mutex__benchmark.html#aa96269d1b1ab3e8eb1b7e8ba35d40038">recursive_priority_mutex_benchmark::R_PM_pipeline_benchmark_long</a>&#160;</td>
+          <td class="paramname"></td><td>)</td>
+          <td> -&gt;  Threads(8)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a9322ff9f0ce67c7391e3c6b31aca6baf" name="a9322ff9f0ce67c7391e3c6b31aca6baf"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9322ff9f0ce67c7391e3c6b31aca6baf">&#9670;&#160;</a></span>BENCHMARK() <span class="overload">[12/46]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">BENCHMARK </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="namespaceshared__priority__mutex__benchmark.html#af24851fda55a54c6a99309dd6e49662b">shared_priority_mutex_benchmark::PM_S_LockUnlock</a>&#160;</td>
+          <td class="paramname"></td><td>)</td>
+          <td> -&gt;  Threads(8)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a26754f4b879fbe2966339935b372d694" name="a26754f4b879fbe2966339935b372d694"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a26754f4b879fbe2966339935b372d694">&#9670;&#160;</a></span>BENCHMARK() <span class="overload">[13/46]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">BENCHMARK </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="namespaceshared__priority__mutex__benchmark.html#a369ca2614b4c4644a14df9c8fe550f16">shared_priority_mutex_benchmark::PM_S_pipeline_benchmark_audio</a>&#160;</td>
+          <td class="paramname"></td><td>)</td>
+          <td> -&gt;  Threads(8)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a82c3509770e41773e3328547b8435229" name="a82c3509770e41773e3328547b8435229"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a82c3509770e41773e3328547b8435229">&#9670;&#160;</a></span>BENCHMARK() <span class="overload">[14/46]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">BENCHMARK </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="namespaceshared__priority__mutex__benchmark.html#ad22f4e15e185923d5cb1b1cdf8d2c327">shared_priority_mutex_benchmark::PM_S_pipeline_benchmark_fast</a>&#160;</td>
+          <td class="paramname"></td><td>)</td>
+          <td> -&gt;  Threads(8)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a2e772fe455e5409a9d5a38f6fee4d41c" name="a2e772fe455e5409a9d5a38f6fee4d41c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2e772fe455e5409a9d5a38f6fee4d41c">&#9670;&#160;</a></span>BENCHMARK() <span class="overload">[15/46]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">BENCHMARK </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="namespaceshared__priority__mutex__benchmark.html#ac0545d9e85eadb6551c12d292337c5e5">shared_priority_mutex_benchmark::PM_S_pipeline_benchmark_gaming</a>&#160;</td>
+          <td class="paramname"></td><td>)</td>
+          <td> -&gt;  Threads(8)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a7a4e73e2e302c373c174b4282261a693" name="a7a4e73e2e302c373c174b4282261a693"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7a4e73e2e302c373c174b4282261a693">&#9670;&#160;</a></span>BENCHMARK() <span class="overload">[16/46]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">BENCHMARK </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="namespaceshared__priority__mutex__benchmark.html#a33ab4a0d0db66c12f8d4a3ea522a64bb">shared_priority_mutex_benchmark::PM_S_pipeline_benchmark_long</a>&#160;</td>
+          <td class="paramname"></td><td>)</td>
+          <td> -&gt;  Threads(8)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a725fdc47787f6b88b0d722269304caeb" name="a725fdc47787f6b88b0d722269304caeb"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a725fdc47787f6b88b0d722269304caeb">&#9670;&#160;</a></span>BENCHMARK() <span class="overload">[17/46]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">BENCHMARK </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="namespaceshared__priority__mutex__benchmark.html#ae21aaec7fa690ada83e392a6c59097ef">shared_priority_mutex_benchmark::PM_S_SLockSUnlock</a>&#160;</td>
+          <td class="paramname"></td><td>)</td>
+          <td> -&gt;  Threads(8)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="af30ccee2cfd32f3deec24543edf8a1b5" name="af30ccee2cfd32f3deec24543edf8a1b5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af30ccee2cfd32f3deec24543edf8a1b5">&#9670;&#160;</a></span>BENCHMARK() <span class="overload">[18/46]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">BENCHMARK </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="namespaceshared__priority__mutex__benchmark.html#a0f20fc1a9c1d214b3fc0e4bd11efd289">shared_priority_mutex_benchmark::PM_S_Spipeline_benchmark_audio</a>&#160;</td>
+          <td class="paramname"></td><td>)</td>
+          <td> -&gt;  Threads(8)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="aeb67d405321123b11e6bc9f7b7d11d46" name="aeb67d405321123b11e6bc9f7b7d11d46"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aeb67d405321123b11e6bc9f7b7d11d46">&#9670;&#160;</a></span>BENCHMARK() <span class="overload">[19/46]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">BENCHMARK </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="namespaceshared__priority__mutex__benchmark.html#a435bde39f7c0ce77b0874129259b7a92">shared_priority_mutex_benchmark::PM_S_Spipeline_benchmark_fast</a>&#160;</td>
+          <td class="paramname"></td><td>)</td>
+          <td> -&gt;  Threads(8)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a751927c08499dfacd63bbc222a880f3a" name="a751927c08499dfacd63bbc222a880f3a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a751927c08499dfacd63bbc222a880f3a">&#9670;&#160;</a></span>BENCHMARK() <span class="overload">[20/46]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">BENCHMARK </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="namespaceshared__priority__mutex__benchmark.html#a2f1f60e0a9266788039da44719e7a276">shared_priority_mutex_benchmark::PM_S_Spipeline_benchmark_gaming</a>&#160;</td>
+          <td class="paramname"></td><td>)</td>
+          <td> -&gt;  Threads(8)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="aa20ea23e16712dcc2f3c5b0feaa532f7" name="aa20ea23e16712dcc2f3c5b0feaa532f7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa20ea23e16712dcc2f3c5b0feaa532f7">&#9670;&#160;</a></span>BENCHMARK() <span class="overload">[21/46]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">BENCHMARK </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="namespaceshared__priority__mutex__benchmark.html#a56dec7b398d9d97207ac29f0dcf1c2be">shared_priority_mutex_benchmark::PM_S_Spipeline_benchmark_long</a>&#160;</td>
+          <td class="paramname"></td><td>)</td>
+          <td> -&gt;  Threads(8)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="adfe3a6f3f4415b2221df688a3f150d60" name="adfe3a6f3f4415b2221df688a3f150d60"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#adfe3a6f3f4415b2221df688a3f150d60">&#9670;&#160;</a></span>BENCHMARK() <span class="overload">[22/46]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">BENCHMARK </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="namespaceslim__priority__mutex__benchmark.html#a7351e5e22d5fe1d1f07fcf3fbe9e4b24">slim_priority_mutex_benchmark::SLM_PM_LockUnlock</a>&#160;</td>
+          <td class="paramname"></td><td>)</td>
+          <td> -&gt;  Threads(8)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a3ab01be8d56f266bb6e5199f243f30ac" name="a3ab01be8d56f266bb6e5199f243f30ac"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3ab01be8d56f266bb6e5199f243f30ac">&#9670;&#160;</a></span>BENCHMARK() <span class="overload">[23/46]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">BENCHMARK </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="namespaceslim__priority__mutex__benchmark.html#af79751c7e946c01abdcd482a9b213d43">slim_priority_mutex_benchmark::SLM_PM_pipeline_benchmark_audio</a>&#160;</td>
+          <td class="paramname"></td><td>)</td>
+          <td> -&gt;  Threads(8)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="aa7e6f55f3411dac685d1083338475b41" name="aa7e6f55f3411dac685d1083338475b41"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa7e6f55f3411dac685d1083338475b41">&#9670;&#160;</a></span>BENCHMARK() <span class="overload">[24/46]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">BENCHMARK </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="namespaceslim__priority__mutex__benchmark.html#a8fa30fab7a83ba4060d85156bf7d4aa7">slim_priority_mutex_benchmark::SLM_PM_pipeline_benchmark_fast</a>&#160;</td>
+          <td class="paramname"></td><td>)</td>
+          <td> -&gt;  Threads(8)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ab43082fd8e96743a8cffd3350b814137" name="ab43082fd8e96743a8cffd3350b814137"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab43082fd8e96743a8cffd3350b814137">&#9670;&#160;</a></span>BENCHMARK() <span class="overload">[25/46]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">BENCHMARK </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="namespaceslim__priority__mutex__benchmark.html#aeb503c3cdf9d2622e4ee54d6f2e74135">slim_priority_mutex_benchmark::SLM_PM_pipeline_benchmark_gaming</a>&#160;</td>
+          <td class="paramname"></td><td>)</td>
+          <td> -&gt;  Threads(8)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ad897e721f2571cf41ef96492b928afc7" name="ad897e721f2571cf41ef96492b928afc7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad897e721f2571cf41ef96492b928afc7">&#9670;&#160;</a></span>BENCHMARK() <span class="overload">[26/46]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">BENCHMARK </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="namespaceslim__priority__mutex__benchmark.html#a541dc9e6420351279de391303843547a">slim_priority_mutex_benchmark::SLM_PM_pipeline_benchmark_long</a>&#160;</td>
+          <td class="paramname"></td><td>)</td>
+          <td> -&gt;  Threads(8)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a3e2442e32192a5be251d48904bb506a9" name="a3e2442e32192a5be251d48904bb506a9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3e2442e32192a5be251d48904bb506a9">&#9670;&#160;</a></span>BENCHMARK() <span class="overload">[27/46]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">BENCHMARK </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="namespacespinlock__priority__mutex__benchmark.html#a3ed02cf45e0965748c077c070efce15e">spinlock_priority_mutex_benchmark::SPNLC_PM_LockUnlock</a>&#160;</td>
+          <td class="paramname"></td><td>)</td>
+          <td> -&gt;  Threads(8)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ac6b35c23de8029ebae950d0e7dfafef0" name="ac6b35c23de8029ebae950d0e7dfafef0"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac6b35c23de8029ebae950d0e7dfafef0">&#9670;&#160;</a></span>BENCHMARK() <span class="overload">[28/46]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">BENCHMARK </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="namespacespinlock__priority__mutex__benchmark.html#a86867793d18b3a895277000073cda6ff">spinlock_priority_mutex_benchmark::SPNLC_PM_pipeline_benchmark_audio</a>&#160;</td>
+          <td class="paramname"></td><td>)</td>
+          <td> -&gt;  Threads(8)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a696529903de3c1b8ac01d448b4433a4e" name="a696529903de3c1b8ac01d448b4433a4e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a696529903de3c1b8ac01d448b4433a4e">&#9670;&#160;</a></span>BENCHMARK() <span class="overload">[29/46]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">BENCHMARK </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="namespacespinlock__priority__mutex__benchmark.html#af4163c9c3dc6d0d074a8543540ebc6b0">spinlock_priority_mutex_benchmark::SPNLC_PM_pipeline_benchmark_fast</a>&#160;</td>
+          <td class="paramname"></td><td>)</td>
+          <td> -&gt;  Threads(8)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a484f2bf2db8a74dbcb2d63edb149e01b" name="a484f2bf2db8a74dbcb2d63edb149e01b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a484f2bf2db8a74dbcb2d63edb149e01b">&#9670;&#160;</a></span>BENCHMARK() <span class="overload">[30/46]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">BENCHMARK </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="namespacespinlock__priority__mutex__benchmark.html#a5c7a4d82130e544ae13ea36656224f21">spinlock_priority_mutex_benchmark::SPNLC_PM_pipeline_benchmark_gaming</a>&#160;</td>
+          <td class="paramname"></td><td>)</td>
+          <td> -&gt;  Threads(8)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ad24d3f7f7a846457cd05673b13262dcf" name="ad24d3f7f7a846457cd05673b13262dcf"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad24d3f7f7a846457cd05673b13262dcf">&#9670;&#160;</a></span>BENCHMARK() <span class="overload">[31/46]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">BENCHMARK </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="namespacespinlock__priority__mutex__benchmark.html#afee7603359254b9f75cb1cd445aa18cb">spinlock_priority_mutex_benchmark::SPNLC_PM_pipeline_benchmark_long</a>&#160;</td>
+          <td class="paramname"></td><td>)</td>
+          <td> -&gt;  Threads(8)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a9c46c5481f1501d0dd00ba58b8be89e3" name="a9c46c5481f1501d0dd00ba58b8be89e3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9c46c5481f1501d0dd00ba58b8be89e3">&#9670;&#160;</a></span>BENCHMARK() <span class="overload">[32/46]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">BENCHMARK </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="namespacestandard__mutex__benchmark.html#ae894f14badba4c328331b19ee7e21900">standard_mutex_benchmark::STD_LockUnlock</a>&#160;</td>
+          <td class="paramname"></td><td>)</td>
+          <td> -&gt;  Threads(8)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ad900748d6e8b6b1fb961ef42f453e8bc" name="ad900748d6e8b6b1fb961ef42f453e8bc"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad900748d6e8b6b1fb961ef42f453e8bc">&#9670;&#160;</a></span>BENCHMARK() <span class="overload">[33/46]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">BENCHMARK </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="namespacestandard__mutex__benchmark.html#ac9522bc34fd3d979e6b5bed68ff50070">standard_mutex_benchmark::STD_pipeline_benchmark_audio</a>&#160;</td>
+          <td class="paramname"></td><td>)</td>
+          <td> -&gt;  Threads(8)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a40fb345e3d2a3e546a5c163c1b84fb4c" name="a40fb345e3d2a3e546a5c163c1b84fb4c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a40fb345e3d2a3e546a5c163c1b84fb4c">&#9670;&#160;</a></span>BENCHMARK() <span class="overload">[34/46]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">BENCHMARK </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="namespacestandard__mutex__benchmark.html#a395548be3305849a4c488b5d456ad764">standard_mutex_benchmark::STD_pipeline_benchmark_fast</a>&#160;</td>
+          <td class="paramname"></td><td>)</td>
+          <td> -&gt;  Threads(8)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ae0960702df4d2ec51610bd5b7c7913c3" name="ae0960702df4d2ec51610bd5b7c7913c3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae0960702df4d2ec51610bd5b7c7913c3">&#9670;&#160;</a></span>BENCHMARK() <span class="overload">[35/46]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">BENCHMARK </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="namespacestandard__mutex__benchmark.html#a0fca3d29e9eed16d3b0e86d695c65a80">standard_mutex_benchmark::STD_pipeline_benchmark_gaming</a>&#160;</td>
+          <td class="paramname"></td><td>)</td>
+          <td> -&gt;  Threads(8)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a60b979e48d95a0c76c1e5a5fb2dcf409" name="a60b979e48d95a0c76c1e5a5fb2dcf409"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a60b979e48d95a0c76c1e5a5fb2dcf409">&#9670;&#160;</a></span>BENCHMARK() <span class="overload">[36/46]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">BENCHMARK </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="namespacestandard__mutex__benchmark.html#a1146fa28fc88b13ffeea2ee1a44b32e1">standard_mutex_benchmark::STD_pipeline_benchmark_long</a>&#160;</td>
+          <td class="paramname"></td><td>)</td>
+          <td> -&gt;  Threads(8)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a2cd0bca7d219023c717905006a8499b3" name="a2cd0bca7d219023c717905006a8499b3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2cd0bca7d219023c717905006a8499b3">&#9670;&#160;</a></span>BENCHMARK() <span class="overload">[37/46]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">BENCHMARK </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="namespacestandard__shared__mutex__benchmark.html#acf9796448e722552b21c934f715db611">standard_shared_mutex_benchmark::STD_S_LockUnlock</a>&#160;</td>
+          <td class="paramname"></td><td>)</td>
+          <td> -&gt;  Threads(8)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ad667d3bef20d035ae06c2776589753bb" name="ad667d3bef20d035ae06c2776589753bb"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad667d3bef20d035ae06c2776589753bb">&#9670;&#160;</a></span>BENCHMARK() <span class="overload">[38/46]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">BENCHMARK </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="namespacestandard__shared__mutex__benchmark.html#a96138c6e2a04d3b5f7535a3c06760562">standard_shared_mutex_benchmark::STD_S_pipeline_benchmark_audio</a>&#160;</td>
+          <td class="paramname"></td><td>)</td>
+          <td> -&gt;  Threads(8)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a2a94e50bf5ba8b441acda9aba58dbea0" name="a2a94e50bf5ba8b441acda9aba58dbea0"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2a94e50bf5ba8b441acda9aba58dbea0">&#9670;&#160;</a></span>BENCHMARK() <span class="overload">[39/46]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">BENCHMARK </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="namespacestandard__shared__mutex__benchmark.html#a40078f0663e78978b27d0451bab7abe6">standard_shared_mutex_benchmark::STD_S_pipeline_benchmark_fast</a>&#160;</td>
+          <td class="paramname"></td><td>)</td>
+          <td> -&gt;  Threads(8)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ac45f059198bc9ee822be30996d9582de" name="ac45f059198bc9ee822be30996d9582de"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac45f059198bc9ee822be30996d9582de">&#9670;&#160;</a></span>BENCHMARK() <span class="overload">[40/46]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">BENCHMARK </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="namespacestandard__shared__mutex__benchmark.html#ad797748bfa4e4c9cb644ce6041b47336">standard_shared_mutex_benchmark::STD_S_pipeline_benchmark_gaming</a>&#160;</td>
+          <td class="paramname"></td><td>)</td>
+          <td> -&gt;  Threads(8)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a47898ccdc3e69ad1fa2c78d9f786f181" name="a47898ccdc3e69ad1fa2c78d9f786f181"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a47898ccdc3e69ad1fa2c78d9f786f181">&#9670;&#160;</a></span>BENCHMARK() <span class="overload">[41/46]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">BENCHMARK </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="namespacestandard__shared__mutex__benchmark.html#a25056dfa03f8f5c7e65aa7e442df8262">standard_shared_mutex_benchmark::STD_S_pipeline_benchmark_long</a>&#160;</td>
+          <td class="paramname"></td><td>)</td>
+          <td> -&gt;  Threads(8)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a44760aa393fc25708513bd47fde152cc" name="a44760aa393fc25708513bd47fde152cc"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a44760aa393fc25708513bd47fde152cc">&#9670;&#160;</a></span>BENCHMARK() <span class="overload">[42/46]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">BENCHMARK </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="namespacestandard__shared__mutex__benchmark.html#af674acd663ed205620c7bdf74e6e2665">standard_shared_mutex_benchmark::STD_S_SLockSUnlock</a>&#160;</td>
+          <td class="paramname"></td><td>)</td>
+          <td> -&gt;  Threads(8)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="abb9a8f0b3039f42cdb3597438346ddf7" name="abb9a8f0b3039f42cdb3597438346ddf7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#abb9a8f0b3039f42cdb3597438346ddf7">&#9670;&#160;</a></span>BENCHMARK() <span class="overload">[43/46]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">BENCHMARK </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="namespacestandard__shared__mutex__benchmark.html#a28da08daeb8a7dd3b5f1029d2f3dc864">standard_shared_mutex_benchmark::STD_S_Spipeline_benchmark_audio</a>&#160;</td>
+          <td class="paramname"></td><td>)</td>
+          <td> -&gt;  Threads(8)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a166cb9753993652b7ebfcc7ccc823b13" name="a166cb9753993652b7ebfcc7ccc823b13"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a166cb9753993652b7ebfcc7ccc823b13">&#9670;&#160;</a></span>BENCHMARK() <span class="overload">[44/46]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">BENCHMARK </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="namespacestandard__shared__mutex__benchmark.html#a245ef74246b9fc0c2d8898560a0358d2">standard_shared_mutex_benchmark::STD_S_Spipeline_benchmark_fast</a>&#160;</td>
+          <td class="paramname"></td><td>)</td>
+          <td> -&gt;  Threads(8)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="aeb2ca092b2258ebb4174a713510d807c" name="aeb2ca092b2258ebb4174a713510d807c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aeb2ca092b2258ebb4174a713510d807c">&#9670;&#160;</a></span>BENCHMARK() <span class="overload">[45/46]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">BENCHMARK </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="namespacestandard__shared__mutex__benchmark.html#acacccb709f5e494dde1c903164a29912">standard_shared_mutex_benchmark::STD_S_Spipeline_benchmark_gaming</a>&#160;</td>
+          <td class="paramname"></td><td>)</td>
+          <td> -&gt;  Threads(8)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a62376f9dcb003f2b084dba3acbbdaaa0" name="a62376f9dcb003f2b084dba3acbbdaaa0"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a62376f9dcb003f2b084dba3acbbdaaa0">&#9670;&#160;</a></span>BENCHMARK() <span class="overload">[46/46]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">BENCHMARK </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="namespacestandard__shared__mutex__benchmark.html#a54fb97d061ef1be427cd6c5562aaae3f">standard_shared_mutex_benchmark::STD_S_Spipeline_benchmark_long</a>&#160;</td>
+          <td class="paramname"></td><td>)</td>
+          <td> -&gt;  Threads(8)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a5851750faa9cfec10f7cad1f3b89697e" name="a5851750faa9cfec10f7cad1f3b89697e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5851750faa9cfec10f7cad1f3b89697e">&#9670;&#160;</a></span>BENCHMARK_MAIN()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">BENCHMARK_MAIN </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+</div><!-- contents -->
+</div><!-- doc-content -->
 <!-- start footer part -->
-  <hr class="footer"/><address class="footer"><small>
-  Generated by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.10.0
-  </small></address>
-  </body>
-  </html>
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><a class="el" href="dir_13a41d9ad64fb9ae396cb953294783cf.html">benchmarks</a></li><li class="navelem"><a class="el" href="benchmark_8cpp.html">benchmark.cpp</a></li>
+    <li class="footer">Generated by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.10.0 </li>
+  </ul>
+</div>
+</body>
+</html>

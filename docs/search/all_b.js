@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['overview_0',['Overview',['../index.html#autotoc_md4',1,'']]],
-  ['owned_5f_1',['owned_',['../structboost_1_1fairness_1_1control__block__64b__t.html#a49e468807db56b2693316e3023d012c0',1,'boost::fairness::control_block_64b_t']]]
+  ['nano_0',['Nano',['../namespaceutils_1_1waiting.html#ab79f9b030bcaa61f7f229628f3bb9ba2a79b048d6d742fae8fc4f0524dcb6949c',1,'utils::waiting']]],
+  ['now_1',['now',['../thread__utils_8hpp.html#acc4a9ad83f9350a588d117e0c8916d45',1,'NOW:&#160;thread_utils.hpp'],['../waiting__utils_8hpp.html#acc4a9ad83f9350a588d117e0c8916d45',1,'NOW:&#160;waiting_utils.hpp']]]
 ];

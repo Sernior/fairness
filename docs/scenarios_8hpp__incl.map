@@ -1,64 +1,64 @@
 <map id="tests/scenarios.hpp" name="tests/scenarios.hpp">
 <area shape="rect" id="Node000001" title="Alias scenarios." alt="" coords="3675,5,3823,31"/>
-<area shape="rect" id="Node000002" href="$PM__scenario1Context_8hpp_source.html" title=" " alt="" coords="5291,86,5507,111"/>
+<area shape="rect" id="Node000002" href="$_p_m__scenario1_context_8hpp.html" title=" " alt="" coords="5291,86,5507,111"/>
 <area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="3824,17,4066,18,4425,26,4847,44,5065,58,5279,76,5322,81,5321,87,5278,81,5065,63,4847,49,4425,31,4066,24,3824,22"/>
-<area shape="rect" id="Node000024" href="$PM__scenario2Context_8hpp_source.html" title=" " alt="" coords="5531,86,5747,111"/>
+<area shape="rect" id="Node000024" href="$_p_m__scenario2_context_8hpp.html" title=" " alt="" coords="5531,86,5747,111"/>
 <area shape="poly" id="edge41_Node000001_Node000024" title=" " alt="" coords="3824,16,4099,16,4517,22,5012,40,5268,56,5519,76,5562,81,5561,87,5518,81,5268,61,5012,46,4517,28,4099,21,3824,21"/>
-<area shape="rect" id="Node000025" href="$PM__scenario3Context_8hpp_source.html" title=" " alt="" coords="5771,86,5987,111"/>
+<area shape="rect" id="Node000025" href="$_p_m__scenario3_context_8hpp.html" title=" " alt="" coords="5771,86,5987,111"/>
 <area shape="poly" id="edge45_Node000001_Node000025" title=" " alt="" coords="3824,18,4765,35,5338,52,5578,63,5759,76,5802,81,5802,87,5758,81,5577,69,5338,58,4765,40,3824,23"/>
-<area shape="rect" id="Node000026" href="$PM__scenario4Context_8hpp_source.html" title=" " alt="" coords="6011,86,6227,111"/>
+<area shape="rect" id="Node000026" href="$_p_m__scenario4_context_8hpp.html" title=" " alt="" coords="6011,86,6227,111"/>
 <area shape="poly" id="edge49_Node000001_Node000026" title=" " alt="" coords="3824,17,4875,33,5522,51,5794,62,5999,76,6042,81,6042,87,5998,81,5794,68,5522,56,4875,38,3824,23"/>
-<area shape="rect" id="Node000027" href="$PM__scenario5Context_8hpp_source.html" title=" " alt="" coords="6507,86,6723,111"/>
+<area shape="rect" id="Node000027" href="$_p_m__scenario5_context_8hpp.html" title=" " alt="" coords="6507,86,6723,111"/>
 <area shape="poly" id="edge53_Node000001_Node000027" title=" " alt="" coords="3824,17,4327,20,5100,29,5903,47,6241,60,6495,76,6539,81,6538,87,6494,81,6240,65,5903,52,5100,35,4326,25,3824,22"/>
-<area shape="rect" id="Node000029" href="$SLM__scenario1Context_8hpp_source.html" title=" " alt="" coords="5,86,232,111"/>
+<area shape="rect" id="Node000029" href="$_s_l_m__scenario1_context_8hpp.html" title=" " alt="" coords="5,86,232,111"/>
 <area shape="poly" id="edge58_Node000001_Node000029" title=" " alt="" coords="3675,22,3051,23,2057,30,1521,37,1014,48,575,62,244,81,198,87,197,81,244,76,574,57,1013,42,1521,32,2057,25,3051,18,3675,17"/>
-<area shape="rect" id="Node000030" href="$SLM__scenario2Context_8hpp_source.html" title=" " alt="" coords="256,86,483,111"/>
+<area shape="rect" id="Node000030" href="$_s_l_m__scenario2_context_8hpp.html" title=" " alt="" coords="256,86,483,111"/>
 <area shape="poly" id="edge62_Node000001_Node000030" title=" " alt="" coords="3675,22,3091,24,2169,32,1205,49,800,63,495,81,448,87,448,81,494,76,800,58,1205,44,2169,26,3091,19,3675,17"/>
-<area shape="rect" id="Node000031" href="$SLM__scenario3Context_8hpp_source.html" title=" " alt="" coords="507,86,733,111"/>
+<area shape="rect" id="Node000031" href="$_s_l_m__scenario3_context_8hpp.html" title=" " alt="" coords="507,86,733,111"/>
 <area shape="poly" id="edge66_Node000001_Node000031" title=" " alt="" coords="3675,22,3130,25,2281,33,1397,51,1025,64,746,81,699,87,699,81,745,76,1025,59,1397,46,2281,28,3130,20,3675,17"/>
-<area shape="rect" id="Node000032" href="$SLM__scenario4Context_8hpp_source.html" title=" " alt="" coords="6747,86,6973,111"/>
+<area shape="rect" id="Node000032" href="$_s_l_m__scenario4_context_8hpp.html" title=" " alt="" coords="6747,86,6973,111"/>
 <area shape="poly" id="edge70_Node000001_Node000032" title=" " alt="" coords="3824,17,4365,20,5208,28,6087,46,6457,59,6735,76,6781,81,6781,87,6734,81,6456,65,6087,51,5208,34,4365,25,3824,22"/>
-<area shape="rect" id="Node000033" href="$SPNLCPM__scenario1Context_8hpp_source.html" title=" " alt="" coords="757,79,971,119"/>
+<area shape="rect" id="Node000033" href="$_s_p_n_l_c_p_m__scenario1_context_8hpp.html" title=" " alt="" coords="757,79,971,119"/>
 <area shape="poly" id="edge75_Node000001_Node000033" title=" " alt="" coords="3675,22,3174,25,2401,34,1593,52,1249,65,985,81,985,76,1249,60,1592,46,2401,29,3174,20,3675,17"/>
-<area shape="rect" id="Node000034" href="$SPNLCPM__scenario2Context_8hpp_source.html" title=" " alt="" coords="995,79,1208,119"/>
+<area shape="rect" id="Node000034" href="$_s_p_n_l_c_p_m__scenario2_context_8hpp.html" title=" " alt="" coords="995,79,1208,119"/>
 <area shape="poly" id="edge79_Node000001_Node000034" title=" " alt="" coords="3675,22,3213,26,2508,36,1774,54,1462,66,1222,81,1222,76,1462,61,1774,48,2508,31,3213,21,3675,17"/>
-<area shape="rect" id="Node000035" href="$SPNLCPM__scenario3Context_8hpp_source.html" title=" " alt="" coords="1232,79,1445,119"/>
+<area shape="rect" id="Node000035" href="$_s_p_n_l_c_p_m__scenario3_context_8hpp.html" title=" " alt="" coords="1232,79,1445,119"/>
 <area shape="poly" id="edge83_Node000001_Node000035" title=" " alt="" coords="3675,23,3252,27,2617,38,1956,55,1676,67,1459,81,1459,76,1676,62,1956,50,2616,32,3252,22,3675,17"/>
-<area shape="rect" id="Node000036" href="$SPNLCPM__scenario4Context_8hpp_source.html" title=" " alt="" coords="6997,79,7211,119"/>
+<area shape="rect" id="Node000036" href="$_s_p_n_l_c_p_m__scenario4_context_8hpp.html" title=" " alt="" coords="6997,79,7211,119"/>
 <area shape="poly" id="edge87_Node000001_Node000036" title=" " alt="" coords="3823,17,4400,18,5309,25,5799,32,6266,43,6672,57,6983,76,6983,81,6672,63,6266,48,5799,38,5309,31,4399,23,3823,22"/>
-<area shape="rect" id="Node000037" href="$SPM__scenario1Context_8hpp_source.html" title=" " alt="" coords="1470,86,1701,111"/>
+<area shape="rect" id="Node000037" href="$_s_p_m__scenario1_context_8hpp.html" title=" " alt="" coords="1470,86,1701,111"/>
 <area shape="poly" id="edge92_Node000001_Node000037" title=" " alt="" coords="3675,23,2721,41,2140,58,1896,69,1712,81,1666,87,1665,81,1712,76,1896,64,2139,53,2721,36,3675,18"/>
-<area shape="rect" id="Node000038" href="$SPM__scenario2Context_8hpp_source.html" title=" " alt="" coords="1725,86,1955,111"/>
+<area shape="rect" id="Node000038" href="$_s_p_m__scenario2_context_8hpp.html" title=" " alt="" coords="1725,86,1955,111"/>
 <area shape="poly" id="edge96_Node000001_Node000038" title=" " alt="" coords="3675,21,3398,22,2977,29,2478,47,2220,62,1967,81,1921,87,1921,81,1966,76,2220,56,2478,41,2977,23,3398,17,3675,16"/>
-<area shape="rect" id="Node000039" href="$SPM__scenario3Context_8hpp_source.html" title=" " alt="" coords="1979,86,2210,111"/>
+<area shape="rect" id="Node000039" href="$_s_p_m__scenario3_context_8hpp.html" title=" " alt="" coords="1979,86,2210,111"/>
 <area shape="poly" id="edge100_Node000001_Node000039" title=" " alt="" coords="3675,22,3433,24,3074,33,2653,50,2435,64,2222,81,2177,87,2176,81,2221,76,2434,59,2652,45,3074,27,3433,19,3675,17"/>
-<area shape="rect" id="Node000040" href="$SPM__scenario4Context_8hpp_source.html" title=" " alt="" coords="2234,86,2465,111"/>
+<area shape="rect" id="Node000040" href="$_s_p_m__scenario4_context_8hpp.html" title=" " alt="" coords="2234,86,2465,111"/>
 <area shape="poly" id="edge104_Node000001_Node000040" title=" " alt="" coords="3675,23,3469,27,3173,37,2828,54,2476,81,2432,87,2431,81,2476,76,2827,49,3172,31,3469,22,3675,18"/>
-<area shape="rect" id="Node000041" href="$SPM__scenario5Context_8hpp_source.html" title=" " alt="" coords="2489,86,2719,111"/>
+<area shape="rect" id="Node000041" href="$_s_p_m__scenario5_context_8hpp.html" title=" " alt="" coords="2489,86,2719,111"/>
 <area shape="poly" id="edge108_Node000001_Node000041" title=" " alt="" coords="3675,24,3272,41,3003,58,2731,81,2687,87,2686,81,2730,76,3003,53,3272,36,3675,19"/>
-<area shape="rect" id="Node000042" href="$SPM__scenario6Context_8hpp_source.html" title=" " alt="" coords="2743,86,2974,111"/>
+<area shape="rect" id="Node000042" href="$_s_p_m__scenario6_context_8hpp.html" title=" " alt="" coords="2743,86,2974,111"/>
 <area shape="poly" id="edge112_Node000001_Node000042" title=" " alt="" coords="3675,26,3374,46,3180,62,2986,81,2944,87,2943,81,2985,76,3180,57,3373,41,3675,21"/>
-<area shape="rect" id="Node000043" href="$SPM__scenario7Context_8hpp_source.html" title=" " alt="" coords="2998,86,3229,111"/>
+<area shape="rect" id="Node000043" href="$_s_p_m__scenario7_context_8hpp.html" title=" " alt="" coords="2998,86,3229,111"/>
 <area shape="poly" id="edge116_Node000001_Node000043" title=" " alt="" coords="3675,30,3240,81,3201,87,3201,81,3240,76,3675,25"/>
-<area shape="rect" id="Node000044" href="$SPM__scenario8Context_8hpp_source.html" title=" " alt="" coords="7235,86,7466,111"/>
+<area shape="rect" id="Node000044" href="$_s_p_m__scenario8_context_8hpp.html" title=" " alt="" coords="7235,86,7466,111"/>
 <area shape="poly" id="edge120_Node000001_Node000044" title=" " alt="" coords="3823,17,4442,18,5428,25,5958,33,6461,43,6896,57,7223,76,7270,81,7270,87,7222,81,6895,63,6461,48,5958,38,5428,31,4442,23,3823,22"/>
-<area shape="rect" id="Node000045" href="$RPM__scenario1Context_8hpp_source.html" title=" " alt="" coords="3253,86,3483,111"/>
+<area shape="rect" id="Node000045" href="$_r_p_m__scenario1_context_8hpp.html" title=" " alt="" coords="3253,86,3483,111"/>
 <area shape="poly" id="edge125_Node000001_Node000045" title=" " alt="" coords="3694,33,3437,86,3436,81,3693,28"/>
-<area shape="rect" id="Node000046" href="$RPM__scenario2Context_8hpp_source.html" title=" " alt="" coords="3507,86,3738,111"/>
+<area shape="rect" id="Node000046" href="$_r_p_m__scenario2_context_8hpp.html" title=" " alt="" coords="3507,86,3738,111"/>
 <area shape="poly" id="edge129_Node000001_Node000046" title=" " alt="" coords="3732,33,3655,81,3652,76,3729,29"/>
-<area shape="rect" id="Node000047" href="$RPM__scenario3Context_8hpp_source.html" title=" " alt="" coords="3762,86,3993,111"/>
+<area shape="rect" id="Node000047" href="$_r_p_m__scenario3_context_8hpp.html" title=" " alt="" coords="3762,86,3993,111"/>
 <area shape="poly" id="edge133_Node000001_Node000047" title=" " alt="" coords="3770,29,3848,76,3845,81,3767,33"/>
-<area shape="rect" id="Node000048" href="$RPM__scenario4Context_8hpp_source.html" title=" " alt="" coords="4017,86,4247,111"/>
+<area shape="rect" id="Node000048" href="$_r_p_m__scenario4_context_8hpp.html" title=" " alt="" coords="4017,86,4247,111"/>
 <area shape="poly" id="edge137_Node000001_Node000048" title=" " alt="" coords="3806,28,4064,81,4062,86,3804,33"/>
-<area shape="rect" id="Node000049" href="$RPM__scenario5Context_8hpp_source.html" title=" " alt="" coords="6251,86,6482,111"/>
+<area shape="rect" id="Node000049" href="$_r_p_m__scenario5_context_8hpp.html" title=" " alt="" coords="6251,86,6482,111"/>
 <area shape="poly" id="edge141_Node000001_Node000049" title=" " alt="" coords="3824,17,4285,22,4984,32,5707,50,6010,62,6239,76,6286,81,6285,87,6238,81,6010,67,5707,55,4984,38,4285,27,3824,23"/>
-<area shape="rect" id="Node000050" href="$RPM__scenario6Context_8hpp_source.html" title=" " alt="" coords="4271,86,4502,111"/>
+<area shape="rect" id="Node000050" href="$_r_p_m__scenario6_context_8hpp.html" title=" " alt="" coords="4271,86,4502,111"/>
 <area shape="poly" id="edge146_Node000001_Node000050" title=" " alt="" coords="3824,25,4260,76,4299,81,4299,87,4260,81,3823,30"/>
-<area shape="rect" id="Node000051" href="$RPM__scenario7Context_8hpp_source.html" title=" " alt="" coords="4526,86,4757,111"/>
+<area shape="rect" id="Node000051" href="$_r_p_m__scenario7_context_8hpp.html" title=" " alt="" coords="4526,86,4757,111"/>
 <area shape="poly" id="edge150_Node000001_Node000051" title=" " alt="" coords="3824,21,4126,41,4319,56,4515,76,4557,81,4556,87,4514,81,4319,62,4125,46,3823,26"/>
-<area shape="rect" id="Node000052" href="$RPM__scenario8Context_8hpp_source.html" title=" " alt="" coords="4781,86,5011,111"/>
+<area shape="rect" id="Node000052" href="$_r_p_m__scenario8_context_8hpp.html" title=" " alt="" coords="4781,86,5011,111"/>
 <area shape="poly" id="edge154_Node000001_Node000052" title=" " alt="" coords="3824,19,4228,36,4497,53,4770,76,4814,81,4813,87,4769,81,4496,58,4227,41,3824,24"/>
-<area shape="rect" id="Node000053" href="$RPM__scenario9Context_8hpp_source.html" title=" " alt="" coords="5035,86,5266,111"/>
+<area shape="rect" id="Node000053" href="$_r_p_m__scenario9_context_8hpp.html" title=" " alt="" coords="5035,86,5266,111"/>
 <area shape="poly" id="edge158_Node000001_Node000053" title=" " alt="" coords="3824,18,4030,22,4327,31,4672,49,5024,76,5069,81,5068,87,5024,81,4672,54,4327,37,4030,27,3823,23"/>
 <area shape="rect" id="Node000003" href="$fairness_8hpp.html" title="This file contains the all the includes required by the library." alt="" coords="3646,167,3789,192"/>
 <area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="5335,114,5279,121,5056,139,4866,147,4699,149,4542,148,4218,147,4028,154,3803,169,3802,164,4027,149,4218,142,4542,142,4699,144,4866,142,5055,133,5278,116,5334,109"/>

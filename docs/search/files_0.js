@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['benchmark_2ecpp_0',['benchmark.cpp',['../benchmark_8cpp.html',1,'']]]
+  ['acquisition_5fmodes_2ehpp_0',['acquisition_modes.hpp',['../acquisition__modes_8hpp.html',1,'']]]
 ];

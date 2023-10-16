@@ -1,6 +1,4 @@
 var searchData=
 [
-  ['increasepriority_0',['increasePriority',['../structboost_1_1fairness_1_1control__block__64b__t.html#a2ed08cf7c1907f8c942c4347b48a947a',1,'boost::fairness::control_block_64b_t']]],
-  ['is_5fvalid_5fpriority_1',['is_valid_priority',['../priority__t_8hpp.html#ab48d656326266f9c771e1e115e415c38',1,'boost::fairness']]],
-  ['isowned_5f_2',['isOwned_',['../structboost_1_1fairness_1_1control__block__64b__t.html#a6f9e0fecc27735d750f39076774eb7af',1,'boost::fairness::control_block_64b_t']]]
+  ['distribution_0',['distribution',['../namespace_p_m__scenario5.html#a38380d2c970eab2670ad0b740a6f4a06',1,'PM_scenario5::distribution()'],['../namespace_r_p_m__scenario5.html#af228754a0b4f03d757d793d639366942',1,'RPM_scenario5::distribution()'],['../namespace_s_l_m__scenario4.html#ac173ab8bb1df9fe208398162baa4cf1e',1,'SLM_scenario4::distribution()'],['../namespace_s_p_m__scenario8.html#aa35a964a6ff04b40ed741d4dd0b1d161',1,'SPM_scenario8::distribution()'],['../namespace_s_p_n_l_c_p_m__scenario4.html#a5c062f1666d4ad0349d9a0591c861da4',1,'SPNLCPM_scenario4::distribution()']]]
 ];
