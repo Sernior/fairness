@@ -31,7 +31,7 @@ The assumptions are:
 
 <img class="readme-img" src="./docs/img/stdpipeline.png" style= "object-fit: cover; object-position: 100% 0; width: 100%;"/>
 
-<img class="readme-img" src="./docs/img/rioritypipeline.png" style= "object-fit: cover; object-position: 100% 0; width: 100%;"/>
+<img class="readme-img" src="./docs/img/prioritypipeline.png" style= "object-fit: cover; object-position: 100% 0; width: 100%;"/>
 
 ## Getting Started
 
