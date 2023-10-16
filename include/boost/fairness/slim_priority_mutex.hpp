@@ -1,8 +1,7 @@
 /**
  * @file slim_priority_mutex.hpp
  * @author F. Abrignani (federignoli@hotmail.it)
- * @author P. Di Giglio
- * @author S. Martorana
+ * @author S. Martorana (salvatoremartorana@hotmail.com)
  * @brief This file contains the implementation of the slim_priority_mutex.
  * @version 0.1
  * @date 2023-08-19
@@ -22,8 +21,18 @@
 
 namespace boost::fairness{
 
+    /**
+     * @brief 
+     * @private
+     * @tparam ool 
+     */
     template<bool> struct Range;
-
+    /**
+     * @brief 
+     * @private
+     * @tparam N 
+     * @tparam typename 
+     */
     template<size_t N = 1, typename = Range<true> >
     struct slim_priority_mutex{};
 
