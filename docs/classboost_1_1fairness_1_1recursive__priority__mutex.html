@@ -180,7 +180,7 @@ class boost::fairness::recursive_priority_mutex&lt; N &gt;</div><p>The <a class=
   </table>
   </dd>
 </dl>
-<dl class="section note"><dt>Note</dt><dd><a class="el" href="classboost_1_1fairness_1_1priority__mutex.html" title="The priority_mutex is an advanced synchronization mechanism that enhances the traditional mutex by in...">priority_mutex</a> is usually not accessed directly: <a class="el" href="classboost_1_1fairness_1_1unique__lock.html">unique_lock</a>, lock_guard, or scoped_lock manage locking in a more exception-safe manner. </dd></dl>
+<dl class="section note"><dt>Note</dt><dd><a class="el" href="classboost_1_1fairness_1_1priority__mutex.html" title="The priority_mutex is an advanced synchronization mechanism that enhances the traditional mutex by in...">priority_mutex</a> is usually not accessed directly: <a class="el" href="classboost_1_1fairness_1_1unique__lock.html" title="The class unique_lock is a general-purpose mutex ownership wrapper allowing deferred locking,...">unique_lock</a>, lock_guard, or scoped_lock manage locking in a more exception-safe manner. </dd></dl>
 </div><h2 class="groupheader">Member Function Documentation</h2>
 <a id="ac5ea189330fd7469e9131bf9668f31bf" name="ac5ea189330fd7469e9131bf9668f31bf"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#ac5ea189330fd7469e9131bf9668f31bf">&#9670;&#160;</a></span>lock()</h2>
@@ -346,7 +346,7 @@ This operation <em>synchronizes-with</em> (as defined in <a href="https://en.cpp
   </table>
   </dd>
 </dl>
-<dl class="section note"><dt>Note</dt><dd><a class="el" href="classboost_1_1fairness_1_1recursive__priority__mutex.html" title="The recursive_priority_mutex is an advanced synchronization mechanism that enhances the traditional m...">recursive_priority_mutex</a> is usually not called directly: <a class="el" href="classboost_1_1fairness_1_1unique__lock.html">unique_lock</a>, lock_guard, are used to manage exclusive locking.</dd></dl>
+<dl class="section note"><dt>Note</dt><dd><a class="el" href="classboost_1_1fairness_1_1recursive__priority__mutex.html" title="The recursive_priority_mutex is an advanced synchronization mechanism that enhances the traditional m...">recursive_priority_mutex</a> is usually not called directly: <a class="el" href="classboost_1_1fairness_1_1unique__lock.html" title="The class unique_lock is a general-purpose mutex ownership wrapper allowing deferred locking,...">unique_lock</a>, lock_guard, are used to manage exclusive locking.</dd></dl>
 <h4><a class="anchor" id="autotoc_md4"></a>
 Example</h4>
 <div class="fragment"><div class="line"><span class="preprocessor">#define NUM_ARBITRARY_PRIORITIES 5</span></div>

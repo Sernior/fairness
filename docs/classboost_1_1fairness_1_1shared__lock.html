@@ -289,7 +289,7 @@ template&lt;typename Lockable &gt; </div>
 <p>Locks the associated mutex in shared mode. Effectively calls <code><a class="el" href="#a23e8415358372e1abf2d030ee99ed2dc" title="Returns a pointer to the associated mutex, or a null pointer if there is no associated mutex.">mutex()</a>-&gt;lock_shared()</code>. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">p</td><td>- the priority of the mutex.</td></tr>
+    <tr><td class="paramname">p</td><td>: the priority of the mutex.</td></tr>
   </table>
   </dd>
 </dl>
@@ -300,9 +300,10 @@ template&lt;typename Lockable &gt; </div>
   </table>
   </dd>
 </dl>
-<p>Any exceptions thrown by <code><a class="el" href="#a23e8415358372e1abf2d030ee99ed2dc" title="Returns a pointer to the associated mutex, or a null pointer if there is no associated mutex.">mutex()</a>-&gt;lock_shared()</code>;</p><ul>
+<ul>
+<li>Any exceptions thrown by <code><a class="el" href="#a23e8415358372e1abf2d030ee99ed2dc" title="Returns a pointer to the associated mutex, or a null pointer if there is no associated mutex.">mutex()</a>-&gt;lock_shared()</code>;</li>
 <li>If there is no associated mutex, <a href="https://en.cppreference.com/w/cpp/error/system_error">std::system_error</a> with an error code of <a href="https://en.cppreference.com/w/cpp/error/errc">std::errc::operation_not_permitted</a>;</li>
-<li>If the associated mutex is already locked by this <a class="el" href="classboost_1_1fairness_1_1shared__lock.html" title="The class shared_lock is a general-purpose shared mutex ownership wrapper allowing deferred locking,...">shared_lock</a> (that is, owns_lock returns true), <a href="https://en.cppreference.com/w/cpp/error/system_error">std::system_error</a> with an error code of <a href="https://en.cppreference.com/w/cpp/error/errc">std::errc::resource_deadlock_would_occur</a>. </li>
+<li>If the associated mutex is already locked by this <a class="el" href="classboost_1_1fairness_1_1shared__lock.html" title="The class shared_lock is a general-purpose shared mutex ownership wrapper allowing deferred locking,...">shared_lock</a> (that is, <a class="el" href="#a7c4ef1823eb8cbd09bbab16bf62aabdb" title="Checks whether *this owns a locked mutex or not.">owns_lock()</a> returns true), <a href="https://en.cppreference.com/w/cpp/error/system_error">std::system_error</a> with an error code of <a href="https://en.cppreference.com/w/cpp/error/errc">std::errc::resource_deadlock_would_occur</a>. </li>
 </ul>
 
 </div>
@@ -604,7 +605,8 @@ template&lt;typename Rep , typename Period &gt; </div>
   </table>
   </dd>
 </dl>
-<p>Any exceptions thrown by <code><a class="el" href="#a23e8415358372e1abf2d030ee99ed2dc" title="Returns a pointer to the associated mutex, or a null pointer if there is no associated mutex.">mutex()</a>-&gt;try_lock_shared_for(timeout_duration)</code>.</p><ul>
+<ul>
+<li>Any exceptions thrown by <code><a class="el" href="#a23e8415358372e1abf2d030ee99ed2dc" title="Returns a pointer to the associated mutex, or a null pointer if there is no associated mutex.">mutex()</a>-&gt;try_lock_shared_for(timeout_duration)</code>.</li>
 <li>If there is no associated mutex, <a href="https://en.cppreference.com/w/cpp/error/system_error">std::system_error</a> with an error code of <a href="https://en.cppreference.com/w/cpp/error/errc">std::errc::operation_not_permitted</a>;</li>
 <li>If the mutex is already locked, <a href="https://en.cppreference.com/w/cpp/error/system_error">std::system_error</a> with an error code of <a href="https://en.cppreference.com/w/cpp/error/errc">std::errc::resource_deadlock_would_occur</a>. </li>
 </ul>
@@ -676,7 +678,8 @@ Clock must meet the <a href="https://en.cppreference.com/w/cpp/named_req/Clock">
   </table>
   </dd>
 </dl>
-<p>Any exceptions thrown by <code><a class="el" href="#a23e8415358372e1abf2d030ee99ed2dc" title="Returns a pointer to the associated mutex, or a null pointer if there is no associated mutex.">mutex()</a>-&gt;try_lock_shared_for(atime)</code>;</p><ul>
+<ul>
+<li>Any exceptions thrown by <code><a class="el" href="#a23e8415358372e1abf2d030ee99ed2dc" title="Returns a pointer to the associated mutex, or a null pointer if there is no associated mutex.">mutex()</a>-&gt;try_lock_shared_until(atime)</code>;</li>
 <li>If there is no associated mutex, <a href="https://en.cppreference.com/w/cpp/error/system_error">std::system_error</a> with an error code of <a href="https://en.cppreference.com/w/cpp/error/errc">std::errc::operation_not_permitted</a>;</li>
 <li>If the mutex is already locked, <a href="https://en.cppreference.com/w/cpp/error/system_error">std::system_error</a> with an error code of <a href="https://en.cppreference.com/w/cpp/error/errc">std::errc::resource_deadlock_would_occur</a>. </li>
 </ul>
@@ -723,7 +726,8 @@ template&lt;typename Lockable &gt; </div>
   </table>
   </dd>
 </dl>
-<p>Any exceptions thrown by <code><a class="el" href="#a23e8415358372e1abf2d030ee99ed2dc" title="Returns a pointer to the associated mutex, or a null pointer if there is no associated mutex.">mutex()</a>-&gt;unlock_shared()</code>;</p><ul>
+<ul>
+<li>Any exceptions thrown by <code><a class="el" href="#a23e8415358372e1abf2d030ee99ed2dc" title="Returns a pointer to the associated mutex, or a null pointer if there is no associated mutex.">mutex()</a>-&gt;unlock_shared()</code>;</li>
 <li>If there is no associated mutex, <a href="https://en.cppreference.com/w/cpp/error/system_error">std::system_error</a> with an error code of <a href="https://en.cppreference.com/w/cpp/error/errc">std::errc::operation_not_permitted</a>. </li>
 </ul>
 
