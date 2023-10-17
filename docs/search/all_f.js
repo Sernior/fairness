@@ -4,7 +4,7 @@ var searchData=
   ['setup_1',['Setup',['../index.html#autotoc_md11',1,'']]],
   ['setup_20boost_20library_2',['Setup boost library',['../index.html#autotoc_md10',1,'']]],
   ['shared_3',['Shared',['../namespaceutils_1_1thread.html#ac46de6fb72020509ce756bcb3541d81caa6156ea9d66fef24e87e841fbabf7cca',1,'utils::thread']]],
-  ['shared_5flock_4',['shared_lock',['../classboost_1_1fairness_1_1shared__lock.html',1,'boost::fairness']]],
+  ['shared_5flock_4',['shared_lock',['../classboost_1_1fairness_1_1shared__lock.html',1,'boost::fairness::shared_lock&lt; Lockable &gt;'],['../classboost_1_1fairness_1_1shared__lock.html#a08e6e40541a692f059b382d91ad36e58',1,'boost::fairness::shared_lock::shared_lock()']]],
   ['shared_5flock_2ehpp_5',['shared_lock.hpp',['../shared__lock_8hpp.html',1,'']]],
   ['shared_5fpriority_5fmutex_6',['shared_priority_mutex',['../classboost_1_1fairness_1_1shared__priority__mutex.html',1,'boost::fairness']]],
   ['shared_5fpriority_5fmutex_2ehpp_7',['shared_priority_mutex.hpp',['../shared__priority__mutex_8hpp.html',1,'']]],
@@ -88,5 +88,5 @@ var searchData=
   ['std_5fs_5fspipeline_5fbenchmark_5ffast_85',['STD_S_Spipeline_benchmark_fast',['../namespacestandard__shared__mutex__benchmark.html#a245ef74246b9fc0c2d8898560a0358d2',1,'standard_shared_mutex_benchmark']]],
   ['std_5fs_5fspipeline_5fbenchmark_5fgaming_86',['STD_S_Spipeline_benchmark_gaming',['../namespacestandard__shared__mutex__benchmark.html#acacccb709f5e494dde1c903164a29912',1,'standard_shared_mutex_benchmark']]],
   ['std_5fs_5fspipeline_5fbenchmark_5flong_87',['STD_S_Spipeline_benchmark_long',['../namespacestandard__shared__mutex__benchmark.html#a54fb97d061ef1be427cd6c5562aaae3f',1,'standard_shared_mutex_benchmark']]],
-  ['swap_88',['swap',['../namespaceboost_1_1fairness.html#ad68474622b98392dd10a8b853664dd0e',1,'boost::fairness::swap(shared_lock&lt; Lockable &gt; &amp;lhs, shared_lock&lt; Lockable &gt; &amp;rhs) noexcept'],['../namespaceboost_1_1fairness.html#a72c4c0f2beb7bf6e2eff1d6c84403df0',1,'boost::fairness::swap(unique_lock&lt; Lockable &gt; &amp;lhs, unique_lock&lt; Lockable &gt; &amp;rhs) noexcept'],['../classboost_1_1fairness_1_1unique__lock.html#a97f70c6ce04b4956a6fdc2a72183448b',1,'boost::fairness::unique_lock::swap()']]]
+  ['swap_88',['swap',['../namespaceboost_1_1fairness.html#ad68474622b98392dd10a8b853664dd0e',1,'boost::fairness::swap(shared_lock&lt; Lockable &gt; &amp;lhs, shared_lock&lt; Lockable &gt; &amp;rhs) noexcept'],['../namespaceboost_1_1fairness.html#a72c4c0f2beb7bf6e2eff1d6c84403df0',1,'boost::fairness::swap(unique_lock&lt; Lockable &gt; &amp;lhs, unique_lock&lt; Lockable &gt; &amp;rhs) noexcept'],['../classboost_1_1fairness_1_1unique__lock.html#a97f70c6ce04b4956a6fdc2a72183448b',1,'boost::fairness::unique_lock::swap()'],['../classboost_1_1fairness_1_1shared__lock.html#a82e47667ae87e76c651f0c831fed41ef',1,'boost::fairness::shared_lock::swap()']]]
 ];

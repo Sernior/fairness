@@ -10,5 +10,5 @@ var searchData=
   ['r_5fstd_5fpipeline_5fbenchmark_5ffast_7',['R_STD_pipeline_benchmark_fast',['../namespacestandard__recursive__mutex__benchmark.html#a0dc6a4c7d599a4886a31c8fd4d445b7b',1,'standard_recursive_mutex_benchmark']]],
   ['r_5fstd_5fpipeline_5fbenchmark_5fgaming_8',['R_STD_pipeline_benchmark_gaming',['../namespacestandard__recursive__mutex__benchmark.html#afffcf2ec5d03795cb7e6a7949f40ecb0',1,'standard_recursive_mutex_benchmark']]],
   ['r_5fstd_5fpipeline_5fbenchmark_5flong_9',['R_STD_pipeline_benchmark_long',['../namespacestandard__recursive__mutex__benchmark.html#ac0deb1840fbecdc0c7cc83ab726a1e3d',1,'standard_recursive_mutex_benchmark']]],
-  ['release_10',['release',['../classboost_1_1fairness_1_1unique__lock.html#af0831583dcd192db3f851f0e63d4aeaf',1,'boost::fairness::unique_lock']]]
+  ['release_10',['release',['../classboost_1_1fairness_1_1shared__lock.html#a2f174c6835dc9d102cbbbcd466500777',1,'boost::fairness::shared_lock::release()'],['../classboost_1_1fairness_1_1unique__lock.html#af0831583dcd192db3f851f0e63d4aeaf',1,'boost::fairness::unique_lock::release()']]]
 ];

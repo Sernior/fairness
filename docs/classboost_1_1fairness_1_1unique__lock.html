@@ -6,15 +6,15 @@
 <meta name="generator" content="Doxygen 1.10.0"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
 <!-- BEGIN opengraph metadata -->
-<meta property="og:title" content="Doxygen Awesome" />
-<meta property="og:image" content="https://repository-images.githubusercontent.com/348492097/4f16df80-88fb-11eb-9d31-4015ff22c452" />
-<meta property="og:description" content="Custom CSS theme for doxygen html-documentation with lots of customization parameters." />
-<meta property="og:url" content="https://jothepro.github.io/doxygen-awesome-css/" />
+<meta property="og:title" content="boost.fairness" />
+<meta property="og:image" content="logo1.png" />
+<meta property="og:description" content="A collection of advanced syncronization mechanisms." />
+<meta property="og:url" content="https://github.com/Sernior/fairness" />
 <!-- END opengraph metadata -->
 <!-- BEGIN twitter metadata -->
-<meta name="twitter:image:src" content="https://repository-images.githubusercontent.com/348492097/4f16df80-88fb-11eb-9d31-4015ff22c452" />
-<meta name="twitter:title" content="Doxygen Awesome" />
-<meta name="twitter:description" content="Custom CSS theme for doxygen html-documentation with lots of customization parameters." />
+<meta name="twitter:image:src" content="logo1.png" />
+<meta name="twitter:title" content="boost.fairness" />
+<meta name="twitter:description" content="A collection of advanced syncronization mechanisms." />
 <!-- END twitter metadata -->
 <title>fairness: boost::fairness::unique_lock&lt; Lockable &gt; Class Template Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
@@ -166,37 +166,54 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:ad12920f997681303160714b4f50a2e56" id="r_ad12920f997681303160714b4f50a2e56"><td class="memTemplParams" colspan="2">template&lt;typename Clock , typename Duration &gt; </td></tr>
 <tr class="memitem:ad12920f997681303160714b4f50a2e56"><td class="memTemplItemLeft" align="right" valign="top">bool&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="#ad12920f997681303160714b4f50a2e56">try_lock_until</a> (const std::chrono::time_point&lt; Clock, Duration &gt; &amp;atime, <a class="el" href="namespaceboost_1_1fairness.html#ae7e29511af6c21c2c41f9dc351e2d969">Priority_t</a> const p=<a class="el" href="priority__t_8hpp.html#ac745d616478cbc2090a9eac1a3f07dcc">BOOST_FAIRNESS_MINIMUM_PRIORITY</a>)</td></tr>
 <tr class="separator:ad12920f997681303160714b4f50a2e56"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a324bd1f20b5189608ea70285162147fd" id="r_a324bd1f20b5189608ea70285162147fd"><td class="memItemLeft" align="right" valign="top">*&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a324bd1f20b5189608ea70285162147fd">unique_lock</a> () noexcept</td></tr>
-<tr class="memdesc:a324bd1f20b5189608ea70285162147fd"><td class="mdescLeft">&#160;</td><td class="mdescRight">CONSTRUCTOR DOC TODO.  <br /></td></tr>
-<tr class="separator:a324bd1f20b5189608ea70285162147fd"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac92da59be517368becb0c86fae34c037" id="r_ac92da59be517368becb0c86fae34c037"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ac92da59be517368becb0c86fae34c037">unique_lock</a> () noexcept</td></tr>
+<tr class="memdesc:ac92da59be517368becb0c86fae34c037"><td class="mdescLeft">&#160;</td><td class="mdescRight">Construct a new unique lock object.  <br /></td></tr>
+<tr class="separator:ac92da59be517368becb0c86fae34c037"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a09b1e8483bcdbdd63cbe4d0b93307e2a" id="r_a09b1e8483bcdbdd63cbe4d0b93307e2a"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a09b1e8483bcdbdd63cbe4d0b93307e2a">unique_lock</a> (const <a class="el" href="classboost_1_1fairness_1_1unique__lock.html">unique_lock</a> &amp;)=delete</td></tr>
 <tr class="separator:a09b1e8483bcdbdd63cbe4d0b93307e2a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a1a446f9b4976c0255c6c383db43a8fc4" id="r_a1a446f9b4976c0255c6c383db43a8fc4"><td class="memTemplParams" colspan="2">template&lt;typename Rep , typename Period &gt; </td></tr>
 <tr class="memitem:a1a446f9b4976c0255c6c383db43a8fc4"><td class="memTemplItemLeft" align="right" valign="top">&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="#a1a446f9b4976c0255c6c383db43a8fc4">unique_lock</a> (Lockable &amp;m, const std::chrono::duration&lt; Rep, Period &gt; &amp;rtime, <a class="el" href="namespaceboost_1_1fairness.html#ae7e29511af6c21c2c41f9dc351e2d969">Priority_t</a> p=<a class="el" href="priority__t_8hpp.html#ac745d616478cbc2090a9eac1a3f07dcc">BOOST_FAIRNESS_MINIMUM_PRIORITY</a>)</td></tr>
+<tr class="memdesc:a1a446f9b4976c0255c6c383db43a8fc4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Construct a new unique lock object.  <br /></td></tr>
 <tr class="separator:a1a446f9b4976c0255c6c383db43a8fc4"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a866398b480aa3732d281745a54e3c5cc" id="r_a866398b480aa3732d281745a54e3c5cc"><td class="memTemplParams" colspan="2">template&lt;typename Clock , typename Duration &gt; </td></tr>
 <tr class="memitem:a866398b480aa3732d281745a54e3c5cc"><td class="memTemplItemLeft" align="right" valign="top">&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="#a866398b480aa3732d281745a54e3c5cc">unique_lock</a> (Lockable &amp;m, const std::chrono::time_point&lt; Clock, Duration &gt; &amp;atime, <a class="el" href="namespaceboost_1_1fairness.html#ae7e29511af6c21c2c41f9dc351e2d969">Priority_t</a> p=<a class="el" href="priority__t_8hpp.html#ac745d616478cbc2090a9eac1a3f07dcc">BOOST_FAIRNESS_MINIMUM_PRIORITY</a>)</td></tr>
+<tr class="memdesc:a866398b480aa3732d281745a54e3c5cc"><td class="mdescLeft">&#160;</td><td class="mdescRight">Construct a new unique lock object.  <br /></td></tr>
 <tr class="separator:a866398b480aa3732d281745a54e3c5cc"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:abb9033e9075ddd01f74cf14b8e343eef" id="r_abb9033e9075ddd01f74cf14b8e343eef"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#abb9033e9075ddd01f74cf14b8e343eef">unique_lock</a> (Lockable &amp;m, defer_lock_t) noexcept</td></tr>
+<tr class="memdesc:abb9033e9075ddd01f74cf14b8e343eef"><td class="mdescLeft">&#160;</td><td class="mdescRight">Construct a new unique lock object.  <br /></td></tr>
 <tr class="separator:abb9033e9075ddd01f74cf14b8e343eef"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a78054f144e08cd0282f94bc43a7dd2bf" id="r_a78054f144e08cd0282f94bc43a7dd2bf"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a78054f144e08cd0282f94bc43a7dd2bf">unique_lock</a> (Lockable &amp;m, <a class="el" href="namespaceboost_1_1fairness.html#ae7e29511af6c21c2c41f9dc351e2d969">Priority_t</a> const p, adopt_lock_t) noexcept</td></tr>
+<tr class="memdesc:a78054f144e08cd0282f94bc43a7dd2bf"><td class="mdescLeft">&#160;</td><td class="mdescRight">Construct a new unique lock object.  <br /></td></tr>
 <tr class="separator:a78054f144e08cd0282f94bc43a7dd2bf"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad5b606d67621f8806a76e733c6343552" id="r_ad5b606d67621f8806a76e733c6343552"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ad5b606d67621f8806a76e733c6343552">unique_lock</a> (Lockable &amp;m, <a class="el" href="namespaceboost_1_1fairness.html#ae7e29511af6c21c2c41f9dc351e2d969">Priority_t</a> const p, try_to_lock_t)</td></tr>
+<tr class="memdesc:ad5b606d67621f8806a76e733c6343552"><td class="mdescLeft">&#160;</td><td class="mdescRight">Construct a new unique lock object.  <br /></td></tr>
 <tr class="separator:ad5b606d67621f8806a76e733c6343552"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:abd9e57ac31e35cf026b1bd83d040c100" id="r_abd9e57ac31e35cf026b1bd83d040c100"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#abd9e57ac31e35cf026b1bd83d040c100">unique_lock</a> (Lockable &amp;m, <a class="el" href="namespaceboost_1_1fairness.html#ae7e29511af6c21c2c41f9dc351e2d969">Priority_t</a> const p=<a class="el" href="priority__t_8hpp.html#ac745d616478cbc2090a9eac1a3f07dcc">BOOST_FAIRNESS_MINIMUM_PRIORITY</a>)</td></tr>
+<tr class="memdesc:abd9e57ac31e35cf026b1bd83d040c100"><td class="mdescLeft">&#160;</td><td class="mdescRight">Construct a new unique lock object.  <br /></td></tr>
 <tr class="separator:abd9e57ac31e35cf026b1bd83d040c100"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a913a035d40782217ec47c9af632660f5" id="r_a913a035d40782217ec47c9af632660f5"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a913a035d40782217ec47c9af632660f5">unique_lock</a> (Lockable &amp;m, try_to_lock_t)</td></tr>
+<tr class="memdesc:a913a035d40782217ec47c9af632660f5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Construct a new unique lock object.  <br /></td></tr>
 <tr class="separator:a913a035d40782217ec47c9af632660f5"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a600216e4a8a99b04f3b4e078950b2397" id="r_a600216e4a8a99b04f3b4e078950b2397"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a600216e4a8a99b04f3b4e078950b2397">unique_lock</a> (<a class="el" href="classboost_1_1fairness_1_1unique__lock.html">unique_lock</a> &amp;&amp;other) noexcept</td></tr>
+<tr class="memdesc:a600216e4a8a99b04f3b4e078950b2397"><td class="mdescLeft">&#160;</td><td class="mdescRight">Construct a new unique lock object.  <br /></td></tr>
 <tr class="separator:a600216e4a8a99b04f3b4e078950b2397"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a1ddd2a29f4e4d32a63bda377a6208c52" id="r_a1ddd2a29f4e4d32a63bda377a6208c52"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a1ddd2a29f4e4d32a63bda377a6208c52">unlock</a> ()</td></tr>
 <tr class="separator:a1ddd2a29f4e4d32a63bda377a6208c52"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:add5605609ebe40bfb8b548e2b0ddb18a" id="r_add5605609ebe40bfb8b548e2b0ddb18a"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#add5605609ebe40bfb8b548e2b0ddb18a">~unique_lock</a> ()</td></tr>
+<tr class="memdesc:add5605609ebe40bfb8b548e2b0ddb18a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Destroy the unique lock object.  <br /></td></tr>
 <tr class="separator:add5605609ebe40bfb8b548e2b0ddb18a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
-<h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
-<a id="a324bd1f20b5189608ea70285162147fd" name="a324bd1f20b5189608ea70285162147fd"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a324bd1f20b5189608ea70285162147fd">&#9670;&#160;</a></span>unique_lock() <span class="overload">[1/10]</span></h2>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><div class="compoundTemplParams">template&lt;typename Lockable&gt;<br />
+class boost::fairness::unique_lock&lt; Lockable &gt;</div><dl class="tparams"><dt>Template Parameters</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">Lockable</td><td></td></tr>
+  </table>
+  </dd>
+</dl>
+</div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
+<a id="ac92da59be517368becb0c86fae34c037" name="ac92da59be517368becb0c86fae34c037"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac92da59be517368becb0c86fae34c037">&#9670;&#160;</a></span>unique_lock() <span class="overload">[1/10]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -207,7 +224,7 @@ template&lt;typename Lockable &gt; </div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">* <a class="el" href="classboost_1_1fairness_1_1unique__lock.html">boost::fairness::unique_lock</a>&lt; Lockable &gt;::unique_lock </td>
+          <td class="memname"><a class="el" href="classboost_1_1fairness_1_1unique__lock.html">boost::fairness::unique_lock</a>&lt; Lockable &gt;::unique_lock </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td></td>
@@ -220,8 +237,7 @@ template&lt;typename Lockable &gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p>CONSTRUCTOR DOC TODO. </p>
-<dl class="section return"><dt>Returns</dt><dd>CONSTRUCTOR </dd></dl>
+<p>Construct a new unique lock object. </p>
 
 </div>
 </div>
@@ -261,6 +277,15 @@ template&lt;typename Lockable &gt; </div>
 </table>
 </div><div class="memdoc">
 
+<p>Construct a new unique lock object. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">m</td><td></td></tr>
+    <tr><td class="paramname">p</td><td></td></tr>
+  </table>
+  </dd>
+</dl>
+
 </div>
 </div>
 <a id="abb9033e9075ddd01f74cf14b8e343eef" name="abb9033e9075ddd01f74cf14b8e343eef"></a>
@@ -298,6 +323,14 @@ template&lt;typename Lockable &gt; </div>
   </tr>
 </table>
 </div><div class="memdoc">
+
+<p>Construct a new unique lock object. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">m</td><td></td></tr>
+  </table>
+  </dd>
+</dl>
 
 </div>
 </div>
@@ -343,6 +376,15 @@ template&lt;typename Lockable &gt; </div>
 </table>
 </div><div class="memdoc">
 
+<p>Construct a new unique lock object. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">m</td><td></td></tr>
+    <tr><td class="paramname">p</td><td></td></tr>
+  </table>
+  </dd>
+</dl>
+
 </div>
 </div>
 <a id="a913a035d40782217ec47c9af632660f5" name="a913a035d40782217ec47c9af632660f5"></a>
@@ -380,6 +422,14 @@ template&lt;typename Lockable &gt; </div>
   </tr>
 </table>
 </div><div class="memdoc">
+
+<p>Construct a new unique lock object. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">m</td><td></td></tr>
+  </table>
+  </dd>
+</dl>
 
 </div>
 </div>
@@ -424,6 +474,15 @@ template&lt;typename Lockable &gt; </div>
   </tr>
 </table>
 </div><div class="memdoc">
+
+<p>Construct a new unique lock object. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">m</td><td></td></tr>
+    <tr><td class="paramname">p</td><td></td></tr>
+  </table>
+  </dd>
+</dl>
 
 </div>
 </div>
@@ -471,6 +530,23 @@ template&lt;typename Clock , typename Duration &gt; </div>
 </table>
 </div><div class="memdoc">
 
+<p>Construct a new unique lock object. </p>
+<dl class="tparams"><dt>Template Parameters</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">Clock</td><td></td></tr>
+    <tr><td class="paramname">Duration</td><td></td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">m</td><td></td></tr>
+    <tr><td class="paramname">atime</td><td></td></tr>
+    <tr><td class="paramname">p</td><td></td></tr>
+  </table>
+  </dd>
+</dl>
+
 </div>
 </div>
 <a id="a1a446f9b4976c0255c6c383db43a8fc4" name="a1a446f9b4976c0255c6c383db43a8fc4"></a>
@@ -517,6 +593,23 @@ template&lt;typename Rep , typename Period &gt; </div>
 </table>
 </div><div class="memdoc">
 
+<p>Construct a new unique lock object. </p>
+<dl class="tparams"><dt>Template Parameters</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">Rep</td><td></td></tr>
+    <tr><td class="paramname">Period</td><td></td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">m</td><td></td></tr>
+    <tr><td class="paramname">rtime</td><td></td></tr>
+    <tr><td class="paramname">p</td><td></td></tr>
+  </table>
+  </dd>
+</dl>
+
 </div>
 </div>
 <a id="add5605609ebe40bfb8b548e2b0ddb18a" name="add5605609ebe40bfb8b548e2b0ddb18a"></a>
@@ -543,6 +636,8 @@ template&lt;typename Lockable &gt; </div>
   </tr>
 </table>
 </div><div class="memdoc">
+
+<p>Destroy the unique lock object. </p>
 
 </div>
 </div>
@@ -600,6 +695,14 @@ template&lt;typename Lockable &gt; </div>
 </table>
 </div><div class="memdoc">
 
+<p>Construct a new unique lock object. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">other</td><td></td></tr>
+  </table>
+  </dd>
+</dl>
+
 </div>
 </div>
 <h2 class="groupheader">Member Function Documentation</h2>
@@ -628,6 +731,12 @@ template&lt;typename Lockable &gt; </div>
   </tr>
 </table>
 </div><div class="memdoc">
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">p</td><td></td></tr>
+  </table>
+  </dd>
+</dl>
 
 </div>
 </div>
@@ -655,6 +764,7 @@ template&lt;typename Lockable &gt; </div>
   </tr>
 </table>
 </div><div class="memdoc">
+<dl class="section return"><dt>Returns</dt><dd>Priority_t </dd></dl>
 
 </div>
 </div>
@@ -682,6 +792,7 @@ template&lt;typename Lockable &gt; </div>
   </tr>
 </table>
 </div><div class="memdoc">
+<dl class="section return"><dt>Returns</dt><dd>Lockable* </dd></dl>
 
 </div>
 </div>
@@ -709,6 +820,9 @@ template&lt;typename Lockable &gt; </div>
   </tr>
 </table>
 </div><div class="memdoc">
+<dl class="section return"><dt>Returns</dt><dd>true </dd>
+<dd>
+false </dd></dl>
 
 </div>
 </div>
@@ -736,6 +850,7 @@ template&lt;typename Lockable &gt; </div>
   </tr>
 </table>
 </div><div class="memdoc">
+<dl class="section return"><dt>Returns</dt><dd>Priority_t </dd></dl>
 
 </div>
 </div>
@@ -792,6 +907,13 @@ template&lt;typename Lockable &gt; </div>
   </tr>
 </table>
 </div><div class="memdoc">
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">other</td><td></td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd><a class="el" href="classboost_1_1fairness_1_1unique__lock.html">unique_lock</a>&amp; </dd></dl>
 
 </div>
 </div>
@@ -819,6 +941,9 @@ template&lt;typename Lockable &gt; </div>
   </tr>
 </table>
 </div><div class="memdoc">
+<dl class="section return"><dt>Returns</dt><dd>true </dd>
+<dd>
+false </dd></dl>
 
 </div>
 </div>
@@ -846,6 +971,7 @@ template&lt;typename Lockable &gt; </div>
   </tr>
 </table>
 </div><div class="memdoc">
+<dl class="section return"><dt>Returns</dt><dd>Lockable* </dd></dl>
 
 </div>
 </div>
@@ -874,6 +1000,12 @@ template&lt;typename Lockable &gt; </div>
   </tr>
 </table>
 </div><div class="memdoc">
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">other</td><td></td></tr>
+  </table>
+  </dd>
+</dl>
 
 </div>
 </div>
@@ -902,6 +1034,15 @@ template&lt;typename Lockable &gt; </div>
   </tr>
 </table>
 </div><div class="memdoc">
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">p</td><td></td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>true </dd>
+<dd>
+false </dd></dl>
 
 </div>
 </div>
@@ -942,6 +1083,23 @@ template&lt;typename Rep , typename Period &gt; </div>
   </tr>
 </table>
 </div><div class="memdoc">
+<dl class="tparams"><dt>Template Parameters</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">Rep</td><td></td></tr>
+    <tr><td class="paramname">Period</td><td></td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">rtime</td><td></td></tr>
+    <tr><td class="paramname">p</td><td></td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>true </dd>
+<dd>
+false </dd></dl>
 
 </div>
 </div>
@@ -982,6 +1140,23 @@ template&lt;typename Clock , typename Duration &gt; </div>
   </tr>
 </table>
 </div><div class="memdoc">
+<dl class="tparams"><dt>Template Parameters</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">Clock</td><td></td></tr>
+    <tr><td class="paramname">Duration</td><td></td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">atime</td><td></td></tr>
+    <tr><td class="paramname">p</td><td></td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>true </dd>
+<dd>
+false </dd></dl>
 
 </div>
 </div>

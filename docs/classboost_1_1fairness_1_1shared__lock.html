@@ -6,15 +6,15 @@
 <meta name="generator" content="Doxygen 1.10.0"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
 <!-- BEGIN opengraph metadata -->
-<meta property="og:title" content="Doxygen Awesome" />
-<meta property="og:image" content="https://repository-images.githubusercontent.com/348492097/4f16df80-88fb-11eb-9d31-4015ff22c452" />
-<meta property="og:description" content="Custom CSS theme for doxygen html-documentation with lots of customization parameters." />
-<meta property="og:url" content="https://jothepro.github.io/doxygen-awesome-css/" />
+<meta property="og:title" content="boost.fairness" />
+<meta property="og:image" content="logo1.png" />
+<meta property="og:description" content="A collection of advanced syncronization mechanisms." />
+<meta property="og:url" content="https://github.com/Sernior/fairness" />
 <!-- END opengraph metadata -->
 <!-- BEGIN twitter metadata -->
-<meta name="twitter:image:src" content="https://repository-images.githubusercontent.com/348492097/4f16df80-88fb-11eb-9d31-4015ff22c452" />
-<meta name="twitter:title" content="Doxygen Awesome" />
-<meta name="twitter:description" content="Custom CSS theme for doxygen html-documentation with lots of customization parameters." />
+<meta name="twitter:image:src" content="logo1.png" />
+<meta name="twitter:title" content="boost.fairness" />
+<meta name="twitter:description" content="A collection of advanced syncronization mechanisms." />
 <!-- END twitter metadata -->
 <title>fairness: boost::fairness::shared_lock&lt; Lockable &gt; Class Template Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
@@ -128,12 +128,607 @@ $(document).ready(function(){initNavTree('classboost_1_1fairness_1_1shared__lock
 
 <div class="header">
   <div class="summary">
+<a href="#pub-methods">Public Member Functions</a> &#124;
 <a href="classboost_1_1fairness_1_1shared__lock-members.html">List of all members</a>  </div>
   <div class="headertitle"><div class="title">boost::fairness::shared_lock&lt; Lockable &gt; Class Template Reference</div></div>
 </div><!--header-->
 <div class="contents">
 
+<p>The class <a class="el" href="classboost_1_1fairness_1_1shared__lock.html" title="The class shared_lock is a general-purpose shared mutex ownership wrapper allowing deferred locking,...">shared_lock</a> is a general-purpose shared mutex ownership wrapper allowing deferred locking, timed locking and transfer of lock ownership. Locking a <a class="el" href="classboost_1_1fairness_1_1shared__lock.html" title="The class shared_lock is a general-purpose shared mutex ownership wrapper allowing deferred locking,...">shared_lock</a> locks the associated shared mutex in shared mode (to lock it in exclusive mode, <a href="https://en.cppreference.com/w/cpp/thread/unique_lock">std::unique_lock</a> can be used). <br  />
+ The <a class="el" href="classboost_1_1fairness_1_1shared__lock.html" title="The class shared_lock is a general-purpose shared mutex ownership wrapper allowing deferred locking,...">shared_lock</a> class is movable, but not copyable – it meets the requirements of <a href="https://en.cppreference.com/w/cpp/named_req/MoveConstructible">MoveConstructible</a> and <a href="https://en.cppreference.com/w/cpp/named_req/MoveAssignable">MoveAssignable</a> but not of <a href="https://en.cppreference.com/w/cpp/named_req/CopyConstructible">CopyConstructible</a> or <a href="https://en.cppreference.com/w/cpp/named_req/CopyAssignable">CopyAssignable</a>. <br  />
+ <a class="el" href="classboost_1_1fairness_1_1shared__lock.html" title="The class shared_lock is a general-purpose shared mutex ownership wrapper allowing deferred locking,...">shared_lock</a> meets the <a href="https://en.cppreference.com/w/cpp/named_req/Lockable">Lockable</a> requirements. If Lockable meets the <a href="https://en.cppreference.com/w/cpp/named_req/SharedTimedLockable">SharedTimedLockable</a> requirements, <a class="el" href="classboost_1_1fairness_1_1shared__lock.html" title="The class shared_lock is a general-purpose shared mutex ownership wrapper allowing deferred locking,...">shared_lock</a> also meets <a href="https://en.cppreference.com/w/cpp/named_req/TimedLockable">TimedLockable</a> requirements. <br  />
+ In order to wait in a shared mutex in shared ownership mode, <a href="https://en.cppreference.com/w/cpp/thread/condition_variable_any">std::condition_variable_any</a> can be used (<a href="https://en.cppreference.com/w/cpp/thread/condition_variable">std::condition_variable</a> requires <a href="https://en.cppreference.com/w/cpp/thread/unique_lock">std::unique_lock</a> and so can only wait in unique ownership mode).  
+ <a href="#details">More...</a></p>
+
 <p><code>#include &lt;<a class="el" href="shared__lock_8hpp_source.html">shared_lock.hpp</a>&gt;</code></p>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
+Public Member Functions</h2></td></tr>
+<tr class="memitem:a830b97364e81a5af56164ec9b2446a2b" id="r_a830b97364e81a5af56164ec9b2446a2b"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a830b97364e81a5af56164ec9b2446a2b">lock</a> (<a class="el" href="namespaceboost_1_1fairness.html#ae7e29511af6c21c2c41f9dc351e2d969">Priority_t</a> const p=<a class="el" href="priority__t_8hpp.html#ac745d616478cbc2090a9eac1a3f07dcc">BOOST_FAIRNESS_MINIMUM_PRIORITY</a>)</td></tr>
+<tr class="memdesc:a830b97364e81a5af56164ec9b2446a2b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Locks the associated mutex in shared mode. Effectively calls <code><a class="el" href="#a23e8415358372e1abf2d030ee99ed2dc" title="Returns a pointer to the associated mutex, or a null pointer if there is no associated mutex.">mutex()</a>-&gt;lock_shared()</code>.  <br /></td></tr>
+<tr class="separator:a830b97364e81a5af56164ec9b2446a2b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae163101d40e6fdb0387d29588e6a4007" id="r_ae163101d40e6fdb0387d29588e6a4007"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceboost_1_1fairness.html#ae7e29511af6c21c2c41f9dc351e2d969">Priority_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ae163101d40e6fdb0387d29588e6a4007">lock_priority</a> () const noexcept</td></tr>
+<tr class="memdesc:ae163101d40e6fdb0387d29588e6a4007"><td class="mdescLeft">&#160;</td><td class="mdescRight">Checks the current priority of <code>*this</code>.  <br /></td></tr>
+<tr class="separator:ae163101d40e6fdb0387d29588e6a4007"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a23e8415358372e1abf2d030ee99ed2dc" id="r_a23e8415358372e1abf2d030ee99ed2dc"><td class="memItemLeft" align="right" valign="top">Lockable *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a23e8415358372e1abf2d030ee99ed2dc">mutex</a> () const noexcept</td></tr>
+<tr class="memdesc:a23e8415358372e1abf2d030ee99ed2dc"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns a pointer to the associated mutex, or a null pointer if there is no associated mutex.  <br /></td></tr>
+<tr class="separator:a23e8415358372e1abf2d030ee99ed2dc"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad1ec0d7cb6e384ab0af9be95def9819b" id="r_ad1ec0d7cb6e384ab0af9be95def9819b"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ad1ec0d7cb6e384ab0af9be95def9819b">operator bool</a> () const noexcept</td></tr>
+<tr class="memdesc:ad1ec0d7cb6e384ab0af9be95def9819b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Checks whether <code>*this owns</code> a locked mutex or not. Effectively calls <a class="el" href="#a7c4ef1823eb8cbd09bbab16bf62aabdb" title="Checks whether *this owns a locked mutex or not.">owns_lock()</a>.  <br /></td></tr>
+<tr class="separator:ad1ec0d7cb6e384ab0af9be95def9819b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7c4ef1823eb8cbd09bbab16bf62aabdb" id="r_a7c4ef1823eb8cbd09bbab16bf62aabdb"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a7c4ef1823eb8cbd09bbab16bf62aabdb">owns_lock</a> () const noexcept</td></tr>
+<tr class="memdesc:a7c4ef1823eb8cbd09bbab16bf62aabdb"><td class="mdescLeft">&#160;</td><td class="mdescRight">Checks whether <code>*this</code> owns a locked mutex or not.  <br /></td></tr>
+<tr class="separator:a7c4ef1823eb8cbd09bbab16bf62aabdb"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2f174c6835dc9d102cbbbcd466500777" id="r_a2f174c6835dc9d102cbbbcd466500777"><td class="memItemLeft" align="right" valign="top">Lockable *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a2f174c6835dc9d102cbbbcd466500777">release</a> () noexcept</td></tr>
+<tr class="memdesc:a2f174c6835dc9d102cbbbcd466500777"><td class="mdescLeft">&#160;</td><td class="mdescRight">Breaks the association of the associated mutex, if any, and <code>*this</code>. <br  />
+No locks are unlocked. If the <code>*this</code> held ownership of the associated mutex prior to the call, the caller is now responsible to unlock the mutex.  <br /></td></tr>
+<tr class="separator:a2f174c6835dc9d102cbbbcd466500777"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a08e6e40541a692f059b382d91ad36e58" id="r_a08e6e40541a692f059b382d91ad36e58"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a08e6e40541a692f059b382d91ad36e58">shared_lock</a> (Lockable &amp;m, <a class="el" href="namespaceboost_1_1fairness.html#ae7e29511af6c21c2c41f9dc351e2d969">Priority_t</a> const p, adopt_lock_t) noexcept</td></tr>
+<tr class="memdesc:a08e6e40541a692f059b382d91ad36e58"><td class="mdescLeft">&#160;</td><td class="mdescRight">Construct a new shared lock object.  <br /></td></tr>
+<tr class="separator:a08e6e40541a692f059b382d91ad36e58"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a82e47667ae87e76c651f0c831fed41ef" id="r_a82e47667ae87e76c651f0c831fed41ef"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a82e47667ae87e76c651f0c831fed41ef">swap</a> (<a class="el" href="classboost_1_1fairness_1_1shared__lock.html">shared_lock</a> &amp;other) noexcept</td></tr>
+<tr class="memdesc:a82e47667ae87e76c651f0c831fed41ef"><td class="mdescLeft">&#160;</td><td class="mdescRight">Exchanges the internal states of the lock objects.  <br /></td></tr>
+<tr class="separator:a82e47667ae87e76c651f0c831fed41ef"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5f5ddf268956bb71f584252521f5db06" id="r_a5f5ddf268956bb71f584252521f5db06"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a5f5ddf268956bb71f584252521f5db06">try_lock</a> (<a class="el" href="namespaceboost_1_1fairness.html#ae7e29511af6c21c2c41f9dc351e2d969">Priority_t</a> const p=<a class="el" href="priority__t_8hpp.html#ac745d616478cbc2090a9eac1a3f07dcc">BOOST_FAIRNESS_MINIMUM_PRIORITY</a>)</td></tr>
+<tr class="memdesc:a5f5ddf268956bb71f584252521f5db06"><td class="mdescLeft">&#160;</td><td class="mdescRight">Tries to lock the associated mutex in shared mode without blocking. Effectively calls <code><a class="el" href="#a23e8415358372e1abf2d030ee99ed2dc" title="Returns a pointer to the associated mutex, or a null pointer if there is no associated mutex.">mutex()</a>-&gt;try_lock_shared()</code>. <br  />
+ <a href="https://en.cppreference.com/w/cpp/error/system_error">std::system_error</a> is thrown if there is no associated mutex or if the mutex is already locked.  <br /></td></tr>
+<tr class="separator:a5f5ddf268956bb71f584252521f5db06"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7e0f2004ec2e5986b3626e3c8027ccd7" id="r_a7e0f2004ec2e5986b3626e3c8027ccd7"><td class="memTemplParams" colspan="2">template&lt;typename Rep , typename Period &gt; </td></tr>
+<tr class="memitem:a7e0f2004ec2e5986b3626e3c8027ccd7"><td class="memTemplItemLeft" align="right" valign="top">bool&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="#a7e0f2004ec2e5986b3626e3c8027ccd7">try_lock_for</a> (const std::chrono::duration&lt; Rep, Period &gt; &amp;rtime, <a class="el" href="namespaceboost_1_1fairness.html#ae7e29511af6c21c2c41f9dc351e2d969">Priority_t</a> const p=<a class="el" href="priority__t_8hpp.html#ac745d616478cbc2090a9eac1a3f07dcc">BOOST_FAIRNESS_MINIMUM_PRIORITY</a>)</td></tr>
+<tr class="memdesc:a7e0f2004ec2e5986b3626e3c8027ccd7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Tries to lock the associated mutex in shared mode. Blocks until specified rtime has elapsed or the lock is acquired, whichever comes first. On successful lock acquisition returns <code>true</code>, otherwise returns <code>false</code>. Effectively calls <code><a class="el" href="#a23e8415358372e1abf2d030ee99ed2dc" title="Returns a pointer to the associated mutex, or a null pointer if there is no associated mutex.">mutex()</a>-&gt;try_lock_shared_for(rtime)</code>. <br  />
+ This function may block for longer than rtime due to scheduling or resource contention delays. <br  />
+ The standard recommends that a steady clock is used to measure the duration. If an implementation uses a system clock instead, the wait time may also be sensitive to clock adjustments. <br  />
+ <a href="https://en.cppreference.com/w/cpp/error/system_error">std::system_error</a> is thrown if there is no associated mutex or if the mutex is already locked. <br  />
+ The behavior is undefined if Lockable does not meet the <a href="https://en.cppreference.com/w/cpp/named_req/SharedTimedLockable">SharedTimedLockable</a> requirements.  <br /></td></tr>
+<tr class="separator:a7e0f2004ec2e5986b3626e3c8027ccd7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af6162c5363f646d949b21752ef4c51d1" id="r_af6162c5363f646d949b21752ef4c51d1"><td class="memTemplParams" colspan="2">template&lt;typename Clock , typename Duration &gt; </td></tr>
+<tr class="memitem:af6162c5363f646d949b21752ef4c51d1"><td class="memTemplItemLeft" align="right" valign="top">bool&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="#af6162c5363f646d949b21752ef4c51d1">try_lock_until</a> (const std::chrono::time_point&lt; Clock, Duration &gt; &amp;atime, <a class="el" href="namespaceboost_1_1fairness.html#ae7e29511af6c21c2c41f9dc351e2d969">Priority_t</a> const p=<a class="el" href="priority__t_8hpp.html#ac745d616478cbc2090a9eac1a3f07dcc">BOOST_FAIRNESS_MINIMUM_PRIORITY</a>)</td></tr>
+<tr class="memdesc:af6162c5363f646d949b21752ef4c51d1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Tries to lock the associated mutex in shared mode. Blocks until specified <code>atime</code> has been reached or the lock is acquired, whichever comes first. On successful lock acquisition returns <code>true</code>, otherwise returns <code>false</code>. May block for longer than until <code>atime</code> has been reached. <br  />
+ Effectively calls <code><a class="el" href="#a23e8415358372e1abf2d030ee99ed2dc" title="Returns a pointer to the associated mutex, or a null pointer if there is no associated mutex.">mutex()</a>-&gt;try_lock_shared_until(timeout_time)</code>. <br  />
+ <a href="https://en.cppreference.com/w/cpp/error/system_error">std::system_error</a> is thrown if there is no associated mutex or if the mutex is already locked. <br  />
+Clock must meet the <a href="https://en.cppreference.com/w/cpp/named_req/Clock">Clock</a> requirements. The behavior is undefined if Mutex does not meet the <a href="https://en.cppreference.com/w/cpp/named_req/SharedTimedLockable">SharedTimedLockable</a> requirements. The program is ill-formed if <a href="http://en.cppreference.com/w/cpp/chrono/is_clock">std::chrono::is_clock_v</a>&lt;Clock&gt; is <code>false</code>.  <br /></td></tr>
+<tr class="separator:af6162c5363f646d949b21752ef4c51d1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3e3a73671de8ee0cc25d417017bc882b" id="r_a3e3a73671de8ee0cc25d417017bc882b"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a3e3a73671de8ee0cc25d417017bc882b">unlock</a> ()</td></tr>
+<tr class="memdesc:a3e3a73671de8ee0cc25d417017bc882b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Unlocks the associated mutex from shared mode. Effectively calls <code><a class="el" href="#a23e8415358372e1abf2d030ee99ed2dc" title="Returns a pointer to the associated mutex, or a null pointer if there is no associated mutex.">mutex()</a>-&gt;unlock_shared()</code>. <br  />
+ <a href="https://en.cppreference.com/w/cpp/error/system_error">std::system_error</a> is thrown if there is no associated mutex or if the mutex is not locked.  <br /></td></tr>
+<tr class="separator:a3e3a73671de8ee0cc25d417017bc882b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><div class="compoundTemplParams">template&lt;typename Lockable&gt;<br />
+class boost::fairness::shared_lock&lt; Lockable &gt;</div><p>The class <a class="el" href="classboost_1_1fairness_1_1shared__lock.html" title="The class shared_lock is a general-purpose shared mutex ownership wrapper allowing deferred locking,...">shared_lock</a> is a general-purpose shared mutex ownership wrapper allowing deferred locking, timed locking and transfer of lock ownership. Locking a <a class="el" href="classboost_1_1fairness_1_1shared__lock.html" title="The class shared_lock is a general-purpose shared mutex ownership wrapper allowing deferred locking,...">shared_lock</a> locks the associated shared mutex in shared mode (to lock it in exclusive mode, <a href="https://en.cppreference.com/w/cpp/thread/unique_lock">std::unique_lock</a> can be used). <br  />
+ The <a class="el" href="classboost_1_1fairness_1_1shared__lock.html" title="The class shared_lock is a general-purpose shared mutex ownership wrapper allowing deferred locking,...">shared_lock</a> class is movable, but not copyable – it meets the requirements of <a href="https://en.cppreference.com/w/cpp/named_req/MoveConstructible">MoveConstructible</a> and <a href="https://en.cppreference.com/w/cpp/named_req/MoveAssignable">MoveAssignable</a> but not of <a href="https://en.cppreference.com/w/cpp/named_req/CopyConstructible">CopyConstructible</a> or <a href="https://en.cppreference.com/w/cpp/named_req/CopyAssignable">CopyAssignable</a>. <br  />
+ <a class="el" href="classboost_1_1fairness_1_1shared__lock.html" title="The class shared_lock is a general-purpose shared mutex ownership wrapper allowing deferred locking,...">shared_lock</a> meets the <a href="https://en.cppreference.com/w/cpp/named_req/Lockable">Lockable</a> requirements. If Lockable meets the <a href="https://en.cppreference.com/w/cpp/named_req/SharedTimedLockable">SharedTimedLockable</a> requirements, <a class="el" href="classboost_1_1fairness_1_1shared__lock.html" title="The class shared_lock is a general-purpose shared mutex ownership wrapper allowing deferred locking,...">shared_lock</a> also meets <a href="https://en.cppreference.com/w/cpp/named_req/TimedLockable">TimedLockable</a> requirements. <br  />
+ In order to wait in a shared mutex in shared ownership mode, <a href="https://en.cppreference.com/w/cpp/thread/condition_variable_any">std::condition_variable_any</a> can be used (<a href="https://en.cppreference.com/w/cpp/thread/condition_variable">std::condition_variable</a> requires <a href="https://en.cppreference.com/w/cpp/thread/unique_lock">std::unique_lock</a> and so can only wait in unique ownership mode). </p>
+<dl class="tparams"><dt>Template Parameters</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">Lockable</td><td>: the type of the shared mutex to lock. The type must meet the <a href="https://en.cppreference.com/w/cpp/named_req/SharedLockable">SharedLockable</a> requirements. </td></tr>
+  </table>
+  </dd>
+</dl>
+</div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
+<a id="a08e6e40541a692f059b382d91ad36e58" name="a08e6e40541a692f059b382d91ad36e58"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a08e6e40541a692f059b382d91ad36e58">&#9670;&#160;</a></span>shared_lock()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename Lockable &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classboost_1_1fairness_1_1shared__lock.html">boost::fairness::shared_lock</a>&lt; Lockable &gt;::shared_lock </td>
+          <td>(</td>
+          <td class="paramtype">Lockable &amp;&#160;</td>
+          <td class="paramname"><em>m</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="namespaceboost_1_1fairness.html#ae7e29511af6c21c2c41f9dc351e2d969">Priority_t</a> const&#160;</td>
+          <td class="paramname"><em>p</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">adopt_lock_t&#160;</td>
+          <td class="paramname">&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Construct a new shared lock object. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">m</td><td></td></tr>
+    <tr><td class="paramname">p</td><td></td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<h2 class="groupheader">Member Function Documentation</h2>
+<a id="a830b97364e81a5af56164ec9b2446a2b" name="a830b97364e81a5af56164ec9b2446a2b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a830b97364e81a5af56164ec9b2446a2b">&#9670;&#160;</a></span>lock()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename Lockable &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void <a class="el" href="classboost_1_1fairness_1_1shared__lock.html">boost::fairness::shared_lock</a>&lt; Lockable &gt;::lock </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="namespaceboost_1_1fairness.html#ae7e29511af6c21c2c41f9dc351e2d969">Priority_t</a> const&#160;</td>
+          <td class="paramname"><em>p</em> = <code><a class="el" href="priority__t_8hpp.html#ac745d616478cbc2090a9eac1a3f07dcc">BOOST_FAIRNESS_MINIMUM_PRIORITY</a></code></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Locks the associated mutex in shared mode. Effectively calls <code><a class="el" href="#a23e8415358372e1abf2d030ee99ed2dc" title="Returns a pointer to the associated mutex, or a null pointer if there is no associated mutex.">mutex()</a>-&gt;lock_shared()</code>. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">p</td><td>- the priority of the mutex.</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>none.</dd></dl>
+<dl class="exception"><dt>Exceptions</dt><dd>
+  <table class="exception">
+    <tr><td class="paramname"></td><td></td></tr>
+  </table>
+  </dd>
+</dl>
+<p>Any exceptions thrown by <code><a class="el" href="#a23e8415358372e1abf2d030ee99ed2dc" title="Returns a pointer to the associated mutex, or a null pointer if there is no associated mutex.">mutex()</a>-&gt;lock_shared()</code>;</p><ul>
+<li>If there is no associated mutex, <a href="https://en.cppreference.com/w/cpp/error/system_error">std::system_error</a> with an error code of <a href="https://en.cppreference.com/w/cpp/error/errc">std::errc::operation_not_permitted</a>;</li>
+<li>If the associated mutex is already locked by this <a class="el" href="classboost_1_1fairness_1_1shared__lock.html" title="The class shared_lock is a general-purpose shared mutex ownership wrapper allowing deferred locking,...">shared_lock</a> (that is, owns_lock returns true), <a href="https://en.cppreference.com/w/cpp/error/system_error">std::system_error</a> with an error code of <a href="https://en.cppreference.com/w/cpp/error/errc">std::errc::resource_deadlock_would_occur</a>. </li>
+</ul>
+
+</div>
+</div>
+<a id="ae163101d40e6fdb0387d29588e6a4007" name="ae163101d40e6fdb0387d29588e6a4007"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae163101d40e6fdb0387d29588e6a4007">&#9670;&#160;</a></span>lock_priority()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename Lockable &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="namespaceboost_1_1fairness.html#ae7e29511af6c21c2c41f9dc351e2d969">Priority_t</a> <a class="el" href="classboost_1_1fairness_1_1shared__lock.html">boost::fairness::shared_lock</a>&lt; Lockable &gt;::lock_priority </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Checks the current priority of <code>*this</code>. </p>
+<dl class="section return"><dt>Returns</dt><dd>Priority_t : the current priority. </dd></dl>
+
+</div>
+</div>
+<a id="a23e8415358372e1abf2d030ee99ed2dc" name="a23e8415358372e1abf2d030ee99ed2dc"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a23e8415358372e1abf2d030ee99ed2dc">&#9670;&#160;</a></span>mutex()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename Lockable &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">Lockable * <a class="el" href="classboost_1_1fairness_1_1shared__lock.html">boost::fairness::shared_lock</a>&lt; Lockable &gt;::mutex </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Returns a pointer to the associated mutex, or a null pointer if there is no associated mutex. </p>
+<dl class="section return"><dt>Returns</dt><dd>Lockable* : Pointer to the associated mutex or a null pointer if there is no associated mutex. </dd></dl>
+
+</div>
+</div>
+<a id="ad1ec0d7cb6e384ab0af9be95def9819b" name="ad1ec0d7cb6e384ab0af9be95def9819b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad1ec0d7cb6e384ab0af9be95def9819b">&#9670;&#160;</a></span>operator bool()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename Lockable &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classboost_1_1fairness_1_1shared__lock.html">boost::fairness::shared_lock</a>&lt; Lockable &gt;::operator bool </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">explicit</span><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Checks whether <code>*this owns</code> a locked mutex or not. Effectively calls <a class="el" href="#a7c4ef1823eb8cbd09bbab16bf62aabdb" title="Checks whether *this owns a locked mutex or not.">owns_lock()</a>. </p>
+<dl class="section return"><dt>Returns</dt><dd><code>true</code> if *this has an associated mutex and has acquired shared ownership of it. </dd>
+<dd>
+<code>false</code> otherwise. </dd></dl>
+
+</div>
+</div>
+<a id="a7c4ef1823eb8cbd09bbab16bf62aabdb" name="a7c4ef1823eb8cbd09bbab16bf62aabdb"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7c4ef1823eb8cbd09bbab16bf62aabdb">&#9670;&#160;</a></span>owns_lock()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename Lockable &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool <a class="el" href="classboost_1_1fairness_1_1shared__lock.html">boost::fairness::shared_lock</a>&lt; Lockable &gt;::owns_lock </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Checks whether <code>*this</code> owns a locked mutex or not. </p>
+<dl class="section return"><dt>Returns</dt><dd><code>true</code> if *this has an associated mutex and has acquired shared ownership of it. </dd>
+<dd>
+<code>false</code> otherwise. </dd></dl>
+
+</div>
+</div>
+<a id="a2f174c6835dc9d102cbbbcd466500777" name="a2f174c6835dc9d102cbbbcd466500777"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2f174c6835dc9d102cbbbcd466500777">&#9670;&#160;</a></span>release()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename Lockable &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">Lockable * <a class="el" href="classboost_1_1fairness_1_1shared__lock.html">boost::fairness::shared_lock</a>&lt; Lockable &gt;::release </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Breaks the association of the associated mutex, if any, and <code>*this</code>. <br  />
+No locks are unlocked. If the <code>*this</code> held ownership of the associated mutex prior to the call, the caller is now responsible to unlock the mutex. </p>
+<dl class="section return"><dt>Returns</dt><dd>Lockable* : Pointer to the associated mutex or a null pointer if there was no associated mutex. </dd></dl>
+
+</div>
+</div>
+<a id="a82e47667ae87e76c651f0c831fed41ef" name="a82e47667ae87e76c651f0c831fed41ef"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a82e47667ae87e76c651f0c831fed41ef">&#9670;&#160;</a></span>swap()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename Lockable &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void <a class="el" href="classboost_1_1fairness_1_1shared__lock.html">boost::fairness::shared_lock</a>&lt; Lockable &gt;::swap </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classboost_1_1fairness_1_1shared__lock.html">shared_lock</a>&lt; Lockable &gt; &amp;&#160;</td>
+          <td class="paramname"><em>other</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Exchanges the internal states of the lock objects. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">other</td><td>: the lock to swap the state with. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="a5f5ddf268956bb71f584252521f5db06" name="a5f5ddf268956bb71f584252521f5db06"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5f5ddf268956bb71f584252521f5db06">&#9670;&#160;</a></span>try_lock()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename Lockable &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool <a class="el" href="classboost_1_1fairness_1_1shared__lock.html">boost::fairness::shared_lock</a>&lt; Lockable &gt;::try_lock </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="namespaceboost_1_1fairness.html#ae7e29511af6c21c2c41f9dc351e2d969">Priority_t</a> const&#160;</td>
+          <td class="paramname"><em>p</em> = <code><a class="el" href="priority__t_8hpp.html#ac745d616478cbc2090a9eac1a3f07dcc">BOOST_FAIRNESS_MINIMUM_PRIORITY</a></code></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Tries to lock the associated mutex in shared mode without blocking. Effectively calls <code><a class="el" href="#a23e8415358372e1abf2d030ee99ed2dc" title="Returns a pointer to the associated mutex, or a null pointer if there is no associated mutex.">mutex()</a>-&gt;try_lock_shared()</code>. <br  />
+ <a href="https://en.cppreference.com/w/cpp/error/system_error">std::system_error</a> is thrown if there is no associated mutex or if the mutex is already locked. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">p</td><td>: the current priority. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd><code>true</code> if the ownership of the mutex has been acquired successfully. </dd>
+<dd>
+<code>false</code> otherwise. </dd></dl>
+
+</div>
+</div>
+<a id="a7e0f2004ec2e5986b3626e3c8027ccd7" name="a7e0f2004ec2e5986b3626e3c8027ccd7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7e0f2004ec2e5986b3626e3c8027ccd7">&#9670;&#160;</a></span>try_lock_for()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename Lockable &gt; </div>
+<div class="memtemplate">
+template&lt;typename Rep , typename Period &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool <a class="el" href="classboost_1_1fairness_1_1shared__lock.html">boost::fairness::shared_lock</a>&lt; Lockable &gt;::try_lock_for </td>
+          <td>(</td>
+          <td class="paramtype">const std::chrono::duration&lt; Rep, Period &gt; &amp;&#160;</td>
+          <td class="paramname"><em>rtime</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="namespaceboost_1_1fairness.html#ae7e29511af6c21c2c41f9dc351e2d969">Priority_t</a> const&#160;</td>
+          <td class="paramname"><em>p</em> = <code><a class="el" href="priority__t_8hpp.html#ac745d616478cbc2090a9eac1a3f07dcc">BOOST_FAIRNESS_MINIMUM_PRIORITY</a></code>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Tries to lock the associated mutex in shared mode. Blocks until specified rtime has elapsed or the lock is acquired, whichever comes first. On successful lock acquisition returns <code>true</code>, otherwise returns <code>false</code>. Effectively calls <code><a class="el" href="#a23e8415358372e1abf2d030ee99ed2dc" title="Returns a pointer to the associated mutex, or a null pointer if there is no associated mutex.">mutex()</a>-&gt;try_lock_shared_for(rtime)</code>. <br  />
+ This function may block for longer than rtime due to scheduling or resource contention delays. <br  />
+ The standard recommends that a steady clock is used to measure the duration. If an implementation uses a system clock instead, the wait time may also be sensitive to clock adjustments. <br  />
+ <a href="https://en.cppreference.com/w/cpp/error/system_error">std::system_error</a> is thrown if there is no associated mutex or if the mutex is already locked. <br  />
+ The behavior is undefined if Lockable does not meet the <a href="https://en.cppreference.com/w/cpp/named_req/SharedTimedLockable">SharedTimedLockable</a> requirements. </p>
+<dl class="tparams"><dt>Template Parameters</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">Rep</td><td>TODO </td></tr>
+    <tr><td class="paramname">Period</td><td>TODO </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">rtime</td><td>: maximum duration to block for. </td></tr>
+    <tr><td class="paramname">p</td><td></td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd><code>true</code> : if the ownership of the mutex has been acquired successfully. </dd>
+<dd>
+<code>false</code> : otherwise. </dd></dl>
+<dl class="exception"><dt>Exceptions</dt><dd>
+  <table class="exception">
+    <tr><td class="paramname"></td><td></td></tr>
+  </table>
+  </dd>
+</dl>
+<p>Any exceptions thrown by <code><a class="el" href="#a23e8415358372e1abf2d030ee99ed2dc" title="Returns a pointer to the associated mutex, or a null pointer if there is no associated mutex.">mutex()</a>-&gt;try_lock_shared_for(timeout_duration)</code>.</p><ul>
+<li>If there is no associated mutex, <a href="https://en.cppreference.com/w/cpp/error/system_error">std::system_error</a> with an error code of <a href="https://en.cppreference.com/w/cpp/error/errc">std::errc::operation_not_permitted</a>;</li>
+<li>If the mutex is already locked, <a href="https://en.cppreference.com/w/cpp/error/system_error">std::system_error</a> with an error code of <a href="https://en.cppreference.com/w/cpp/error/errc">std::errc::resource_deadlock_would_occur</a>. </li>
+</ul>
+
+</div>
+</div>
+<a id="af6162c5363f646d949b21752ef4c51d1" name="af6162c5363f646d949b21752ef4c51d1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af6162c5363f646d949b21752ef4c51d1">&#9670;&#160;</a></span>try_lock_until()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename Lockable &gt; </div>
+<div class="memtemplate">
+template&lt;typename Clock , typename Duration &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool <a class="el" href="classboost_1_1fairness_1_1shared__lock.html">boost::fairness::shared_lock</a>&lt; Lockable &gt;::try_lock_until </td>
+          <td>(</td>
+          <td class="paramtype">const std::chrono::time_point&lt; Clock, Duration &gt; &amp;&#160;</td>
+          <td class="paramname"><em>atime</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="namespaceboost_1_1fairness.html#ae7e29511af6c21c2c41f9dc351e2d969">Priority_t</a> const&#160;</td>
+          <td class="paramname"><em>p</em> = <code><a class="el" href="priority__t_8hpp.html#ac745d616478cbc2090a9eac1a3f07dcc">BOOST_FAIRNESS_MINIMUM_PRIORITY</a></code>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Tries to lock the associated mutex in shared mode. Blocks until specified <code>atime</code> has been reached or the lock is acquired, whichever comes first. On successful lock acquisition returns <code>true</code>, otherwise returns <code>false</code>. May block for longer than until <code>atime</code> has been reached. <br  />
+ Effectively calls <code><a class="el" href="#a23e8415358372e1abf2d030ee99ed2dc" title="Returns a pointer to the associated mutex, or a null pointer if there is no associated mutex.">mutex()</a>-&gt;try_lock_shared_until(timeout_time)</code>. <br  />
+ <a href="https://en.cppreference.com/w/cpp/error/system_error">std::system_error</a> is thrown if there is no associated mutex or if the mutex is already locked. <br  />
+Clock must meet the <a href="https://en.cppreference.com/w/cpp/named_req/Clock">Clock</a> requirements. The behavior is undefined if Mutex does not meet the <a href="https://en.cppreference.com/w/cpp/named_req/SharedTimedLockable">SharedTimedLockable</a> requirements. The program is ill-formed if <a href="http://en.cppreference.com/w/cpp/chrono/is_clock">std::chrono::is_clock_v</a>&lt;Clock&gt; is <code>false</code>. </p>
+<dl class="tparams"><dt>Template Parameters</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">Clock</td><td>TODO </td></tr>
+    <tr><td class="paramname">Duration</td><td>TODO </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">atime</td><td>: maximum time point to block until. </td></tr>
+    <tr><td class="paramname">p</td><td>: the current priority. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd><code>true</code> : if the ownership of the mutex has been acquired successfully. </dd>
+<dd>
+<code>false</code> : otherwise. </dd></dl>
+<dl class="exception"><dt>Exceptions</dt><dd>
+  <table class="exception">
+    <tr><td class="paramname"></td><td></td></tr>
+  </table>
+  </dd>
+</dl>
+<p>Any exceptions thrown by <code><a class="el" href="#a23e8415358372e1abf2d030ee99ed2dc" title="Returns a pointer to the associated mutex, or a null pointer if there is no associated mutex.">mutex()</a>-&gt;try_lock_shared_for(atime)</code>;</p><ul>
+<li>If there is no associated mutex, <a href="https://en.cppreference.com/w/cpp/error/system_error">std::system_error</a> with an error code of <a href="https://en.cppreference.com/w/cpp/error/errc">std::errc::operation_not_permitted</a>;</li>
+<li>If the mutex is already locked, <a href="https://en.cppreference.com/w/cpp/error/system_error">std::system_error</a> with an error code of <a href="https://en.cppreference.com/w/cpp/error/errc">std::errc::resource_deadlock_would_occur</a>. </li>
+</ul>
+
+</div>
+</div>
+<a id="a3e3a73671de8ee0cc25d417017bc882b" name="a3e3a73671de8ee0cc25d417017bc882b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3e3a73671de8ee0cc25d417017bc882b">&#9670;&#160;</a></span>unlock()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename Lockable &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void <a class="el" href="classboost_1_1fairness_1_1shared__lock.html">boost::fairness::shared_lock</a>&lt; Lockable &gt;::unlock </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Unlocks the associated mutex from shared mode. Effectively calls <code><a class="el" href="#a23e8415358372e1abf2d030ee99ed2dc" title="Returns a pointer to the associated mutex, or a null pointer if there is no associated mutex.">mutex()</a>-&gt;unlock_shared()</code>. <br  />
+ <a href="https://en.cppreference.com/w/cpp/error/system_error">std::system_error</a> is thrown if there is no associated mutex or if the mutex is not locked. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">none.</td><td></td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>none. </dd></dl>
+<dl class="exception"><dt>Exceptions</dt><dd>
+  <table class="exception">
+    <tr><td class="paramname"></td><td></td></tr>
+  </table>
+  </dd>
+</dl>
+<p>Any exceptions thrown by <code><a class="el" href="#a23e8415358372e1abf2d030ee99ed2dc" title="Returns a pointer to the associated mutex, or a null pointer if there is no associated mutex.">mutex()</a>-&gt;unlock_shared()</code>;</p><ul>
+<li>If there is no associated mutex, <a href="https://en.cppreference.com/w/cpp/error/system_error">std::system_error</a> with an error code of <a href="https://en.cppreference.com/w/cpp/error/errc">std::errc::operation_not_permitted</a>. </li>
+</ul>
+
+</div>
+</div>
 <hr/>The documentation for this class was generated from the following file:<ul>
 <li>include/boost/fairness/<a class="el" href="shared__lock_8hpp_source.html">shared_lock.hpp</a></li>
 </ul>

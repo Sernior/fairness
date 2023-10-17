@@ -6,15 +6,15 @@
 <meta name="generator" content="Doxygen 1.10.0"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
 <!-- BEGIN opengraph metadata -->
-<meta property="og:title" content="Doxygen Awesome" />
-<meta property="og:image" content="https://repository-images.githubusercontent.com/348492097/4f16df80-88fb-11eb-9d31-4015ff22c452" />
-<meta property="og:description" content="Custom CSS theme for doxygen html-documentation with lots of customization parameters." />
-<meta property="og:url" content="https://jothepro.github.io/doxygen-awesome-css/" />
+<meta property="og:title" content="boost.fairness" />
+<meta property="og:image" content="logo1.png" />
+<meta property="og:description" content="A collection of advanced syncronization mechanisms." />
+<meta property="og:url" content="https://github.com/Sernior/fairness" />
 <!-- END opengraph metadata -->
 <!-- BEGIN twitter metadata -->
-<meta name="twitter:image:src" content="https://repository-images.githubusercontent.com/348492097/4f16df80-88fb-11eb-9d31-4015ff22c452" />
-<meta name="twitter:title" content="Doxygen Awesome" />
-<meta name="twitter:description" content="Custom CSS theme for doxygen html-documentation with lots of customization parameters." />
+<meta name="twitter:image:src" content="logo1.png" />
+<meta name="twitter:title" content="boost.fairness" />
+<meta name="twitter:description" content="A collection of advanced syncronization mechanisms." />
 <!-- END twitter metadata -->
 <title>fairness: boost::fairness Namespace Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
@@ -148,6 +148,10 @@ Classes</h2></td></tr>
 <a class="el" href="classboost_1_1fairness_1_1priority__mutex.html" title="The priority_mutex is an advanced synchronization mechanism that enhances the traditional mutex by in...">priority_mutex</a> offers exclusive, non-recursive ownership semantics:  <a href="classboost_1_1fairness_1_1recursive__priority__mutex.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classboost_1_1fairness_1_1shared__lock.html">shared_lock</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">The class <a class="el" href="classboost_1_1fairness_1_1shared__lock.html" title="The class shared_lock is a general-purpose shared mutex ownership wrapper allowing deferred locking,...">shared_lock</a> is a general-purpose shared mutex ownership wrapper allowing deferred locking, timed locking and transfer of lock ownership. Locking a <a class="el" href="classboost_1_1fairness_1_1shared__lock.html" title="The class shared_lock is a general-purpose shared mutex ownership wrapper allowing deferred locking,...">shared_lock</a> locks the associated shared mutex in shared mode (to lock it in exclusive mode, <a href="https://en.cppreference.com/w/cpp/thread/unique_lock">std::unique_lock</a> can be used). <br  />
+ The <a class="el" href="classboost_1_1fairness_1_1shared__lock.html" title="The class shared_lock is a general-purpose shared mutex ownership wrapper allowing deferred locking,...">shared_lock</a> class is movable, but not copyable – it meets the requirements of <a href="https://en.cppreference.com/w/cpp/named_req/MoveConstructible">MoveConstructible</a> and <a href="https://en.cppreference.com/w/cpp/named_req/MoveAssignable">MoveAssignable</a> but not of <a href="https://en.cppreference.com/w/cpp/named_req/CopyConstructible">CopyConstructible</a> or <a href="https://en.cppreference.com/w/cpp/named_req/CopyAssignable">CopyAssignable</a>. <br  />
+ <a class="el" href="classboost_1_1fairness_1_1shared__lock.html" title="The class shared_lock is a general-purpose shared mutex ownership wrapper allowing deferred locking,...">shared_lock</a> meets the <a href="https://en.cppreference.com/w/cpp/named_req/Lockable">Lockable</a> requirements. If Lockable meets the <a href="https://en.cppreference.com/w/cpp/named_req/SharedTimedLockable">SharedTimedLockable</a> requirements, <a class="el" href="classboost_1_1fairness_1_1shared__lock.html" title="The class shared_lock is a general-purpose shared mutex ownership wrapper allowing deferred locking,...">shared_lock</a> also meets <a href="https://en.cppreference.com/w/cpp/named_req/TimedLockable">TimedLockable</a> requirements. <br  />
+ In order to wait in a shared mutex in shared ownership mode, <a href="https://en.cppreference.com/w/cpp/thread/condition_variable_any">std::condition_variable_any</a> can be used (<a href="https://en.cppreference.com/w/cpp/thread/condition_variable">std::condition_variable</a> requires <a href="https://en.cppreference.com/w/cpp/thread/unique_lock">std::unique_lock</a> and so can only wait in unique ownership mode).  <a href="classboost_1_1fairness_1_1shared__lock.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classboost_1_1fairness_1_1shared__priority__mutex.html">shared_priority_mutex</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">The <a class="el" href="classboost_1_1fairness_1_1shared__priority__mutex.html" title="The shared_priority_mutex is an advanced synchronization mechanism that enhances the traditional mute...">shared_priority_mutex</a> is an advanced synchronization mechanism that enhances the traditional mutex by introducing a priority-based approach.  <a href="classboost_1_1fairness_1_1shared__priority__mutex.html#details">More...</a><br /></td></tr>
@@ -304,6 +308,19 @@ template&lt;typename Lockable &gt; </div>
   </tr>
 </table>
 </div><div class="memdoc">
+<dl class="tparams"><dt>Template Parameters</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">Lockable</td><td></td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">lhs</td><td></td></tr>
+    <tr><td class="paramname">rhs</td><td></td></tr>
+  </table>
+  </dd>
+</dl>
 
 </div>
 </div>
