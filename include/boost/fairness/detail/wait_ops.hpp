@@ -14,6 +14,7 @@
 #ifndef BOOST_FAIRNESS_WAIT_OPS_HPP
 #define BOOST_FAIRNESS_WAIT_OPS_HPP
 #include <boost/fairness/config.hpp>
+#include <boost/fairness/detail/pause_ops.hpp>
 #include <atomic>
 
 
@@ -23,14 +24,16 @@ namespace boost::fairness::detail{
 
     template<typename T, typename K>
     inline void wait(T& mem, K expected){
-        // everything about this being is doubtful
-        // is 16 a good number before the wait?
-        // how does the pause performs?
         K localMem = mem.load(std::memory_order_relaxed);
-        for(int i = 0; i < BOOST_FAIRNESS_WAIT_SPINS_FAST; ++i){
+        for(int i = 0; i < BOOST_FAIRNESS_WAIT_SPINS; ++i){
             if (localMem != expected)
                 return;
-            // place holder the pause will be here
+            localMem = mem.load(std::memory_order_relaxed);
+        }
+        for(int i = 0; i < BOOST_FAIRNESS_WAIT_SPINS_RELAXED; ++i){
+            if (localMem != expected)
+                return;
+            pause();
             localMem = mem.load(std::memory_order_relaxed);
         }
         wait_(mem, expected);
@@ -44,27 +47,6 @@ namespace boost::fairness::detail{
     }
 
 #endif // BOOST_FAIRNESS_USE_STD_WAIT_NOTIFY
-
-#if defined(_WIN32)
-
-    /*
-    Only windows waitOnAdress can wait on a single byte, linux futex can`t.
-    */
-    inline void wait(std::atomic_flag& mem, bool expected){
-        // everything about this being is doubtful
-        // is 16 a good number before the wait?
-        // how does the pause performs?
-        bool localMem = mem.test(std::memory_order_relaxed);
-        for(int i = 0; i < BOOST_FAIRNESS_WAIT_SPINS_FAST; ++i){
-            if (localMem != expected)
-                return;
-            // place holder the pause will be here
-            localMem = mem.test(std::memory_order_relaxed);
-        }
-        wait_(mem, expected);
-    }
-
-#endif // _WIN32
 
     template<typename T>
     inline void notify_one(T& mem){

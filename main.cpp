@@ -60,7 +60,7 @@ int main()
                 pool.push_task(thread_function_nano, prios[i], preCT[i], CT, postCT[i]);
             }
             pool.wait_for_tasks();
-            if (j % 500 == 0) {
+            if (j % 50000 == 0) {
                 std::cout << j << std::endl;
             }
         }
@@ -81,7 +81,7 @@ int main()
                 pool.push_task(thread_function_nano_std, preCT[i], CT, postCT[i]);
             }
             pool.wait_for_tasks();
-            if (j % 500 == 0) {
+            if (j % 50000 == 0) {
                 std::cout << j << std::endl;
             }
         }
