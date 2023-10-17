@@ -1,8 +1,7 @@
 /**
  * @file shared_priority_mutex.hpp
  * @author F. Abrignani (federignoli@hotmail.it)
- * @author P. Di Giglio
- * @author S. Martorana
+ * @author S. Martorana (salvatoremartorana@hotmail.com)
  * @brief This file contains the implementation of the shared_priority_mutex.
  * @version 0.1
  * @date 2023-08-19

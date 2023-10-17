@@ -1,6 +1,6 @@
 /**
  * @file #TODO.hpp
- * @author S. Martorana
+ * @author S. Martorana (salvatoremartorana@hotmail.com)
  * @brief Alias #TODO.
  * @version 0.1
  * @date 2023-10-06
@@ -25,7 +25,7 @@ namespace utils::thread{
     void thread_function(Lockable& lockable, int preCriticalTime, int criticalTime, int postCriticalTime, int p = 0) {
         if constexpr (lock_level == LockLevel::Unique) {
             utils::waiting::busy_wait<waiting_level>(preCriticalTime);
-            if constexpr (std::is_same_v<Lockable, std::mutex> || std::is_same_v<Lockable, std::shared_mutex> || std::is_same_v<Lockable, std::recursive_mutex>) lockable.lock();
+            if constexpr (std::is_same_v<Lockable, std::mutex> || std::is_same_v<Lockable, std::shared_mutex>) lockable.lock();
             else lockable.lock(p);
             utils::waiting::busy_wait<waiting_level>(criticalTime);
             lockable.unlock();
@@ -33,7 +33,7 @@ namespace utils::thread{
         }
         if constexpr (lock_level == LockLevel::Shared) {
             utils::waiting::busy_wait<waiting_level>(preCriticalTime);
-            if constexpr (std::is_same_v<Lockable, std::mutex> || std::is_same_v<Lockable, std::shared_mutex> || std::is_same_v<Lockable, std::recursive_mutex>) lockable.lock_shared();
+            if constexpr (std::is_same_v<Lockable, std::mutex> || std::is_same_v<Lockable, std::shared_mutex>) lockable.lock_shared();
             else lockable.lock_shared(p);
             utils::waiting::busy_wait<waiting_level>(criticalTime);
             lockable.unlock_shared();
@@ -41,7 +41,7 @@ namespace utils::thread{
         }
         if constexpr (lock_level == LockLevel::Unique_Try) {
             utils::waiting::busy_wait<waiting_level>(preCriticalTime);
-            if constexpr (std::is_same_v<Lockable, std::mutex> || std::is_same_v<Lockable, std::shared_mutex> || std::is_same_v<Lockable, std::recursive_mutex>) lockable.try_lock();
+            if constexpr (std::is_same_v<Lockable, std::mutex> || std::is_same_v<Lockable, std::shared_mutex>) lockable.try_lock();
             else lockable.try_lock(p);
             utils::waiting::busy_wait<waiting_level>(criticalTime);
             lockable.unlock();
@@ -49,7 +49,7 @@ namespace utils::thread{
         }
         if constexpr (lock_level == LockLevel::Shared_Try) {
             utils::waiting::busy_wait<waiting_level>(preCriticalTime);
-            if constexpr (std::is_same_v<Lockable, std::mutex> || std::is_same_v<Lockable, std::shared_mutex> || std::is_same_v<Lockable, std::recursive_mutex>) lockable.try_lock_shared();
+            if constexpr (std::is_same_v<Lockable, std::mutex> || std::is_same_v<Lockable, std::shared_mutex>) lockable.try_lock_shared();
             else lockable.try_lock_shared(p);
             utils::waiting::busy_wait<waiting_level>(criticalTime);
             lockable.unlock_shared();
