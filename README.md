@@ -1,4 +1,10 @@
-# boost.fairness
+<!DOCTYPE html>
+<html>
+<head>
+    <title> boost.fairness </title>
+	<link rel="stylesheet" type="text/css" href="docs/doxygen-custom/custom.css">
+</head>
+<body>
 
 [![GitHub release (latest by date)](https://img.shields.io/github/v/release/Sernior/fairness)](https://github.com/Sernior/fairness/releases/latest)
 [![GitHub](https://img.shields.io/github/license/Sernior/fairness)](https://github.com/Sernior/fairness/blob/main/LICENSE)
@@ -29,9 +35,9 @@ The assumptions are:
   - The pipeline operates in a multi-threaded manner;
   - the pipeline is finite.
 
-<img class="readme-img" src="docs/img/stdpipeline.png" style= "object-fit: cover; object-position: 100% 0; width: 100%; .light-mode .readme-img {filter: invert(1);}"/>
+<img class="readme-img" src="docs/img/stdpipeline.png" style= "object-fit: cover; object-position: 100% 0; width: 100%;"/>
 
-<img class="readme-img" src="docs/img/prioritypipeline.png" style= "object-fit: cover; object-position: 100% 0; width: 100%; .light-mode .readme-img {filter: invert(1);}"/>
+<img class="readme-img" src="docs/img/prioritypipeline.png" style= "object-fit: cover; object-position: 100% 0; width: 100%;"/>
 
 ## Getting Started
 
@@ -163,3 +169,5 @@ Salvatore Martorana - salvatoremartorana@hotmail.com
     <img src="https://contrib.rocks/image?repo=Sernior/fairness" />
 </a>
 
+</body>
+</html>
