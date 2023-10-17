@@ -29,11 +29,9 @@ The assumptions are:
   - The pipeline operates in a multi-threaded manner;
   - the pipeline is finite.
 
-<link rel="stylesheet" type="text/css" href="docs/doxygen-custom/custom.css">
+<img class="readme-img" src="docs/img/stdpipeline.png" style= "object-fit: cover; object-position: 100% 0; width: 100%; .light-mode .readme-img {filter: invert(1);}"/>
 
-<img class="readme-img" src="https://sernior.github.io/fairness/stdpipeline.png" style= "object-fit: cover; object-position: 100% 0; width: 100%;"/>
-
-<img class="readme-img" src="https://sernior.github.io/fairness/prioritypipeline.png" style= "object-fit: cover; object-position: 100% 0; width: 100%;"/>
+<img class="readme-img" src="docs/img/prioritypipeline.png" style= "object-fit: cover; object-position: 100% 0; width: 100%; .light-mode .readme-img {filter: invert(1);}"/>
 
 ## Getting Started
 
