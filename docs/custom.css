@@ -7,10 +7,6 @@ html {
     /* --side-nav-top-height: 130px; */
 }
 
-html.light-mode .readme-img {
-    filter: invert(1);
-}
-
 .contents img, .contents .center, .contents center, .contents div.image object {
     max-width: none;
     overflow: auto;
