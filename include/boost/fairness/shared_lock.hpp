@@ -272,14 +272,15 @@ namespace boost::fairness{
 		/**
 		 * @brief Locks the associated mutex in shared mode. Effectively calls ```mutex()->lock_shared()```.
 		 * 
-		 * @param p - the priority of the mutex.
+		 * @param p : the priority of the mutex.
 		 * 
 		 * @return none.
 		 * 
 		 * @exception
+		 * 
 		 * * Any exceptions thrown by ```mutex()->lock_shared()```;
 		 * * If there is no associated mutex, [std::system_error](https://en.cppreference.com/w/cpp/error/system_error) with an error code of [std::errc::operation_not_permitted](https://en.cppreference.com/w/cpp/error/errc);
-		 * * If the associated mutex is already locked by this shared_lock (that is, owns_lock returns true), [std::system_error](https://en.cppreference.com/w/cpp/error/system_error) with an error code of [std::errc::resource_deadlock_would_occur](https://en.cppreference.com/w/cpp/error/errc).
+		 * * If the associated mutex is already locked by this shared_lock (that is, owns_lock() returns true), [std::system_error](https://en.cppreference.com/w/cpp/error/system_error) with an error code of [std::errc::resource_deadlock_would_occur](https://en.cppreference.com/w/cpp/error/errc).
 		 */
 		void lock(Priority_t const p = BOOST_FAIRNESS_MINIMUM_PRIORITY){
 			if (!lockable_ || !is_valid_priority(p))
@@ -324,6 +325,7 @@ namespace boost::fairness{
 		 * @param none.
 		 * @return none.
 		 * @exception 
+		 * 
 		 * * Any exceptions thrown by ```mutex()->unlock_shared()```;
 		 * * If there is no associated mutex, [std::system_error](https://en.cppreference.com/w/cpp/error/system_error) with an error code of [std::errc::operation_not_permitted](https://en.cppreference.com/w/cpp/error/errc).
 		 * 
@@ -354,7 +356,8 @@ namespace boost::fairness{
 		 * @return ```true``` : if the ownership of the mutex has been acquired successfully.
 		 * @return ```false``` : otherwise.
 		 * @exception
-		 * * Any exceptions thrown by ```mutex()->try_lock_shared_for(atime)```;
+		 * 
+		 * * Any exceptions thrown by ```mutex()->try_lock_shared_until(atime)```;
 		 * * If there is no associated mutex, [std::system_error](https://en.cppreference.com/w/cpp/error/system_error) with an error code of [std::errc::operation_not_permitted](https://en.cppreference.com/w/cpp/error/errc);
 		 * * If the mutex is already locked, [std::system_error](https://en.cppreference.com/w/cpp/error/system_error) with an error code of [std::errc::resource_deadlock_would_occur](https://en.cppreference.com/w/cpp/error/errc).
 		 * 
@@ -392,6 +395,7 @@ namespace boost::fairness{
 		 * @return ```true``` : if the ownership of the mutex has been acquired successfully.
 		 * @return ```false``` : otherwise.
 		 * @exception
+		 * 
 		 * * Any exceptions thrown by ```mutex()->try_lock_shared_for(timeout_duration)```.
 		 * * If there is no associated mutex, [std::system_error](https://en.cppreference.com/w/cpp/error/system_error) with an error code of [std::errc::operation_not_permitted](https://en.cppreference.com/w/cpp/error/errc);
 		 * * If the mutex is already locked, [std::system_error](https://en.cppreference.com/w/cpp/error/system_error) with an error code of [std::errc::resource_deadlock_would_occur](https://en.cppreference.com/w/cpp/error/errc).

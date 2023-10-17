@@ -22,27 +22,51 @@
 
 namespace boost::fairness
 {
-
-    /*
-    structs used to overload unique_lock methods
-    */
+    /**
+     * @brief structs used to overload unique_lock methods.
+     * 
+     */
     struct defer_lock_t{
         explicit defer_lock_t() = default;
     };
-    struct try_to_lock_t{
-        explicit try_to_lock_t() = default;
-    };
-    struct adopt_lock_t{
-        explicit adopt_lock_t() = default;
-    };
-    static constexpr defer_lock_t defer_lock;
-    static constexpr try_to_lock_t try_to_lock;
-    static constexpr adopt_lock_t adopt_lock;
-
     /**
      * @brief 
      * 
-     * @tparam Lockable 
+     */
+    struct try_to_lock_t{
+        explicit try_to_lock_t() = default;
+    };
+    /**
+     * @brief 
+     * 
+     */
+    struct adopt_lock_t{
+        explicit adopt_lock_t() = default;
+    };
+    /**
+     * @brief 
+     * 
+     */
+    static constexpr defer_lock_t defer_lock;
+    /**
+     * @brief 
+     * 
+     */
+    static constexpr try_to_lock_t try_to_lock;
+    /**
+     * @brief 
+     * 
+     */
+    static constexpr adopt_lock_t adopt_lock;
+
+    /**
+     * @brief The class unique_lock is a general-purpose mutex ownership wrapper allowing deferred locking, time-constrained attempts at locking, recursive locking, transfer of lock ownership, and use with condition variables.
+     * \n 
+     * The class unique_lock is movable, but not copyable -- it meets the requirements of [MoveConstructible](https://en.cppreference.com/w/cpp/named_req/MoveConstructible) and [MoveAssignable](https://en.cppreference.com/w/cpp/named_req/MoveAssignable) but not of [CopyConstructible](https://en.cppreference.com/w/cpp/named_req/CopyConstructible) or [CopyAssignable](https://en.cppreference.com/w/cpp/named_req/CopyAssignable).
+     * \n 
+     * The class unique_lock meets the [BasicLockable](https://en.cppreference.com/w/cpp/named_req/BasicLockable) requirements. If Lockable meets the [Lockable](https://en.cppreference.com/w/cpp/named_req/Lockable) requirements, unique_lock also meets the [Lockable](https://en.cppreference.com/w/cpp/named_req/Lockable) requirements (ex.: can be used in boost::fairness::lock); if Lockable meets the [TimedLockable](https://en.cppreference.com/w/cpp/named_req/TimedLockable) requirements, unique_lock also meets the [TimedLockable](https://en.cppreference.com/w/cpp/named_req/TimedLockable) requirements.
+     * 
+     * @tparam Lockable : the type of the mutex to lock. The type must meet the [BasicLockable](https://en.cppreference.com/w/cpp/named_req/BasicLockable) requirements.
      */
     template <typename Lockable>
     class unique_lock{
@@ -114,7 +138,9 @@ namespace boost::fairness
         { }
 
         /*
-        There isn`t a non intrusive way to automatically find out the priority - change visibility of current priority, from private to friend
+        There isn`t a non intrusive way to automatically find out the priority 
+            - change visibility of current priority, from private to friend
+            - currentPriority_ isn't in every mutex.
         */
         /*
         unique_lock(Lockable& m, adopt_lock_t) noexcept
@@ -182,10 +208,18 @@ namespace boost::fairness
         }
 
         /**
-         * @brief
+         * @brief Locks the associated mutex. Effectively calls ```mutex()->lock()```.
          *
-         * @param p
-         */
+         * @param p : the priority of the mutex.
+		 * 
+		 * @return none.
+		 * 
+		 * @exception
+         * 
+		 * * Any exceptions thrown by ```mutex()->lock()```;
+		 * * If there is no associated mutex, [std::system_error](https://en.cppreference.com/w/cpp/error/system_error) with an error code of [std::errc::operation_not_permitted](https://en.cppreference.com/w/cpp/error/errc);
+		 * * If the associated mutex is already locked by this lock (that is, owns_lock() returns true), [std::system_error](https://en.cppreference.com/w/cpp/error/system_error) with an error code of [std::errc::resource_deadlock_would_occur](https://en.cppreference.com/w/cpp/error/errc).
+		 */
         void lock(Priority_t const p = BOOST_FAIRNESS_MINIMUM_PRIORITY){
             if (!lockable_ || !is_valid_priority(p))
                 throw_operation_not_permitted_();
@@ -200,11 +234,20 @@ namespace boost::fairness
         }
 
         /**
-         * @brief
-         *
-         * @param p
-         * @return true
-         * @return false
+         * @brief Tries to lock (i.e., takes ownership of) the associated mutex without blocking. Effectively calls mutex()->try_lock().
+		 * \n 
+		 * [std::system_error](https://en.cppreference.com/w/cpp/error/system_error) is thrown if there is no associated mutex or if the mutex is already locked.
+		 * 
+         * @param p : the current priority.
+         * 
+		 * @return ```true``` if the ownership of the mutex has been acquired successfully.
+		 * @return ```false``` otherwise.
+         * 
+ 		 * @exception
+         * 
+		 * * Any exceptions thrown by ```mutex()->lock()``` ([Mutex](https://en.cppreference.com/w/cpp/named_req/Mutex) types do not throw in try_lock, but a custom [Lockable](https://en.cppreference.com/w/cpp/named_req/Lockable) might);
+		 * * If there is no associated mutex, [std::system_error](https://en.cppreference.com/w/cpp/error/system_error) with an error code of [std::errc::operation_not_permitted](https://en.cppreference.com/w/cpp/error/errc);
+		 * * If the associated mutex is already locked by this unique_lock, [std::system_error](https://en.cppreference.com/w/cpp/error/system_error) with an error code of [std::errc::resource_deadlock_would_occur](https://en.cppreference.com/w/cpp/error/errc).
          */
         bool try_lock(Priority_t const p = BOOST_FAIRNESS_MINIMUM_PRIORITY){
             if (!lockable_ || !is_valid_priority(p))
@@ -221,9 +264,18 @@ namespace boost::fairness
         }
 
         /**
-         * @brief
+         * @brief Unlocks (i.e., releases ownership of) the associated mutex and releases ownership.
+         * \n 
+         * [std::system_error](https://en.cppreference.com/w/cpp/error/system_error) is thrown if there is no associated mutex or if the mutex is not locked.
          *
-         */
+		 * @param none.
+		 * @return none.
+		 * @exception 
+		 * 
+		 * * Any exceptions thrown by ```mutex()->unlock()```;
+		 * * If there is no associated mutex, [std::system_error](https://en.cppreference.com/w/cpp/error/system_error) with an error code of [std::errc::operation_not_permitted](https://en.cppreference.com/w/cpp/error/errc).
+		 * 
+		 */
         void unlock(){
             if (!lockOwned_)
                 throw_operation_not_permitted_();
@@ -236,15 +288,27 @@ namespace boost::fairness
         }
 
         /**
-         * @brief
-         *
-         * @tparam Clock
-         * @tparam Duration
-         * @param atime
-         * @param p
-         * @return true
-         * @return false
-         */
+         * @brief Tries to lock (i.e., takes ownership of) the associated mutex. Blocks until specified atime has been reached or the lock is acquired, whichever comes first. On successful lock acquisition returns ```true```, otherwise returns ```false```. May block for longer than atime until has been reached.
+         * \n 
+         * Effectively calls ```mutex()->try_lock_until(atime)```.
+         * \n 
+         * [std::system_error](https://en.cppreference.com/w/cpp/error/system_error) is thrown if there is no associated mutex or if the mutex is already locked by the same thread.
+         * \n 
+         * Clock must meet the [Clock](https://en.cppreference.com/w/cpp/named_req/Clock) requirements. The program is ill-formed if [std::chrono::is_clock_v](http://en.cppreference.com/w/cpp/chrono/is_clock)<Clock> is ```false```.
+         * 
+         * @tparam Clock TODO
+         * @tparam Duration TODO
+         * @param atime : maximum time point to block until
+         * @param p : the current priority.
+		 * @return ```true``` : if the ownership of the mutex has been acquired successfully.
+		 * @return ```false``` : otherwise.
+		 * @exception
+		 * 
+		 * * Any exceptions thrown by ```mutex()->try_lock_until(atime)```;
+		 * * If there is no associated mutex, [std::system_error](https://en.cppreference.com/w/cpp/error/system_error) with an error code of [std::errc::operation_not_permitted](https://en.cppreference.com/w/cpp/error/errc);
+		 * * If the mutex is already locked, [std::system_error](https://en.cppreference.com/w/cpp/error/system_error) with an error code of [std::errc::resource_deadlock_would_occur](https://en.cppreference.com/w/cpp/error/errc).
+		 * 
+		 */        
         template <typename Clock, typename Duration>
         bool try_lock_until(const std::chrono::time_point<Clock, Duration> &atime, Priority_t const p = BOOST_FAIRNESS_MINIMUM_PRIORITY){
             if (!lockable_ || !is_valid_priority(p))
@@ -261,15 +325,27 @@ namespace boost::fairness
         }
 
         /**
-         * @brief
-         *
-         * @tparam Rep
-         * @tparam Period
-         * @param rtime
-         * @param p
-         * @return true
-         * @return false
-         */
+         * @brief Tries to lock (i.e., takes ownership of) the associated mutex. Blocks until specified rtime has elapsed or the lock is acquired, whichever comes first. On successful lock acquisition returns ```true```, otherwise returns ```false```.Effectively calls ```mutex()->try_lock_for(rtime)```.
+         * \n 
+         * This function may block for longer than rtime due to scheduling or resource contention delays.
+         * \n 
+         * The standard recommends that a steady clock is used to measure the duration. If an implementation uses a system clock instead, the wait time may also be sensitive to clock adjustments.
+         * \n 
+         * [std::system_error](https://en.cppreference.com/w/cpp/error/system_error) is thrown if there is no associated mutex or if the mutex is already locked by this std::unique_lock.
+         * 
+         * @tparam Clock TODO
+         * @tparam Duration TODO
+         * @param rtime : maximum duration to block for
+         * @param p : the current priority.
+		 * @return ```true``` : if the ownership of the mutex has been acquired successfully.
+		 * @return ```false``` : otherwise.
+		 * @exception
+		 * 
+		 * * Any exceptions thrown by ```mutex()->try_lock_for(rtime)```;
+		 * * If there is no associated mutex, [std::system_error](https://en.cppreference.com/w/cpp/error/system_error) with an error code of [std::errc::operation_not_permitted](https://en.cppreference.com/w/cpp/error/errc);
+		 * * If the mutex is already locked, [std::system_error](https://en.cppreference.com/w/cpp/error/system_error) with an error code of [std::errc::resource_deadlock_would_occur](https://en.cppreference.com/w/cpp/error/errc).
+		 * 
+		 */        
         template <typename Rep, typename Period>
         bool try_lock_for(const std::chrono::duration<Rep, Period> &rtime, Priority_t const p = BOOST_FAIRNESS_MINIMUM_PRIORITY){
             if (!lockable_ || !is_valid_priority(p))
@@ -302,9 +378,10 @@ namespace boost::fairness
         }
 
         /**
-         * @brief
+         * @brief Exchanges the internal states of the lock objects.
          *
-         * @param other
+         * @param other : the lock to swap the state with.
+         * @return none.
          */
         void swap(unique_lock &other) noexcept{
             std::swap(lockable_, other.lockable_);
@@ -313,9 +390,12 @@ namespace boost::fairness
         }
 
         /**
-         * @brief
+         * @brief Breaks the association of the associated mutex, if any, and ```*this```.
+         * \n 
+         * No locks are unlocked. If ```*this``` held ownership of the associated mutex prior to the call, the caller is now responsible to unlock the mutex.
+         * @param none.
          *
-         * @return Lockable*
+         * @return Lockable* : pointer to the associated mutex or a null pointer if there was no associated mutex.
          */
         Lockable *release() noexcept{
             Lockable *__ret = lockable_;
@@ -326,16 +406,16 @@ namespace boost::fairness
         }
 
         /**
-         * @brief
-         *
-         * @return true
-         * @return false
+         * @brief Checks whether ```*this``` owns a locked mutex or not.
+         * @param none.
+         * @return true : if ```*this``` has an associated mutex and has acquired ownership of it.
+         * @return false : otherwise.
          */
         bool owns_lock() const noexcept
         { return lockOwned_; }
 
         /**
-         * @brief
+         * @brief TODO
          *
          * @return Priority_t
          */
@@ -343,16 +423,16 @@ namespace boost::fairness
         { return currentPriority_; }
 
         /**
-         * @brief
-         *
-         * @return true
-         * @return false
+         * @brief Checks whether ```*this``` owns a locked mutex or not. Effectively calls owns_lock().
+         * @param none.
+         * @return true : if ```*this``` has an associated mutex and has acquired ownership of it.
+         * @return false : otherwise.
          */
         explicit operator bool() const noexcept
         { return owns_lock(); }
 
         /**
-         * @brief
+         * @brief TODO
          *
          * @return Priority_t
          */
