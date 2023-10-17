@@ -1,10 +1,4 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title> boost.fairness </title>
-	<link rel="stylesheet" type="text/css" href="docs/doxygen-custom/custom.css">
-</head>
-<body>
+# boost.fairness
 
 [![GitHub release (latest by date)](https://img.shields.io/github/v/release/Sernior/fairness)](https://github.com/Sernior/fairness/releases/latest)
 [![GitHub](https://img.shields.io/github/license/Sernior/fairness)](https://github.com/Sernior/fairness/blob/main/LICENSE)
@@ -169,5 +163,3 @@ Salvatore Martorana - salvatoremartorana@hotmail.com
     <img src="https://contrib.rocks/image?repo=Sernior/fairness" />
 </a>
 
-</body>
-</html>
