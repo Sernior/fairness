@@ -11,13 +11,13 @@
  * Distributed under the Boost Software License, Version 1.0. (See accompanying file LICENSE_1_0.txt or copy at http://www.boost.org/LICENSE_1_0.txt).
  * 
  */
-#ifndef BOOST_FAIRNESS_EXPERIMENTAL_PRIORITY_MUTEX_HPP
-#define BOOST_FAIRNESS_EXPERIMENTAL_PRIORITY_MUTEX_HPP
+#ifndef BOOST_FAIRNESS_PRIORITY_MUTEX_HPP
+#define BOOST_FAIRNESS_PRIORITY_MUTEX_HPP
 #include <atomic>
 #include <array>
 #include <boost/fairness/priority_t.hpp>
 
-namespace boost::fairness::experimental{
+namespace boost::fairness::old{
 
     /**
      * @brief The priority_mutex is an advanced synchronization mechanism that enhances the traditional mutex by introducing a priority-based approach.
@@ -131,4 +131,4 @@ namespace boost::fairness::experimental{
         }
     };
 }
-#endif // BOOST_FAIRNESS_EXPERIMENTAL_PRIORITY_MUTEX_HPP
+#endif // BOOST_FAIRNESS_PRIORITY_MUTEX_HPP

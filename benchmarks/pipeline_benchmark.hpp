@@ -19,7 +19,7 @@
 #include "spnlcpm/spinlock_priority_mutex_benchmark.hpp"
 #include "std/standard_benchmark.hpp"
 #include "std/standard_shared_benchmark.hpp"
-
+#include "std/standard_recursive_mutex_benchmark.hpp"
 /**
  * @brief This function is used to separate benchmark categories.
  * 

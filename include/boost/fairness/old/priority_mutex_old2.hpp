@@ -11,13 +11,17 @@
  * Distributed under the Boost Software License, Version 1.0. (See accompanying file LICENSE_1_0.txt or copy at http://www.boost.org/LICENSE_1_0.txt).
  * 
  */
-#ifndef BOOST_FAIRNESS_EXPERIMENTAL_PRIORITY_MUTEX_HPP
-#define BOOST_FAIRNESS_EXPERIMENTAL_PRIORITY_MUTEX_HPP
+#ifndef BOOST_FAIRNESS_PRIORITY_MUTEX_HPP
+#define BOOST_FAIRNESS_PRIORITY_MUTEX_HPP
 #include <atomic>
 #include <array>
 #include <boost/fairness/priority_t.hpp>
+#include <boost/fairness/detail/wait_ops.hpp>
 
-namespace boost::fairness::experimental{
+namespace boost::fairness::old2{
+
+    #define LOCK_OWNED 1
+    #define LOCK_NOT_OWNED 0
 
     /**
      * @brief The priority_mutex is an advanced synchronization mechanism that enhances the traditional mutex by introducing a priority-based approach.
@@ -66,14 +70,18 @@ namespace boost::fairness::experimental{
          * \endcode
          */
         void lock(Priority_t const priority = 0){
+            uint32_t localOwned = lockOwned_.load(std::memory_order_relaxed);
             Priority_t localCurrentPriority = currentPriority_.load(std::memory_order_relaxed);
             waiters_[priority].fetch_add(1, std::memory_order_relaxed);
             while ( 
-                (localCurrentPriority < priority || !currentPriority_.compare_exchange_weak(localCurrentPriority, priority, std::memory_order_relaxed)) ||
-                (lockOwned_.test_and_set(std::memory_order_acquire))
+                localCurrentPriority < priority ||
+                localOwned == LOCK_OWNED ||
+                !currentPriority_.compare_exchange_weak(localCurrentPriority, priority, std::memory_order_relaxed) ||
+                !lockOwned_.compare_exchange_weak(localOwned, LOCK_OWNED, std::memory_order_acquire)
             ){
-                lockOwned_.wait(true);
+                detail::wait(lockOwned_, LOCK_OWNED);
                 localCurrentPriority = currentPriority_;
+                localOwned = lockOwned_;
             }
             waiters_[priority].fetch_sub(1, std::memory_order_relaxed);
         }
@@ -93,8 +101,9 @@ namespace boost::fairness::experimental{
          */
         void unlock(){
             currentPriority_.store(find_first_priority_(), std::memory_order_relaxed);
-            lockOwned_.clear(std::memory_order_release);
-            lockOwned_.notify_all();
+            lockOwned_.store(LOCK_NOT_OWNED, std::memory_order_release);
+            //lockOwned_.notify_all();
+            detail::notify_all(lockOwned_);
         }
 
         /**
@@ -114,13 +123,17 @@ namespace boost::fairness::experimental{
          * @return bool 
          */
         [[nodiscard]] bool try_lock(Priority_t const priority = 0){
-            return (currentPriority_.load(std::memory_order_relaxed) >= priority && !lockOwned_.test_and_set(std::memory_order_acquire));
+            uint32_t localOwned = lockOwned_.load(std::memory_order_relaxed);
+            return (currentPriority_.load(std::memory_order_relaxed) >= priority &&
+                    localOwned == LOCK_NOT_OWNED &&
+                    lockOwned_.compare_exchange_strong(localOwned, LOCK_OWNED, std::memory_order_acquire)
+                    );
         }
 
         private:
         std::array<std::atomic<Thread_cnt_t>, N> waiters_;
         std::atomic<Priority_t> currentPriority_{BOOST_FAIRNESS_MAXIMUM_PRIORITY};
-        std::atomic_flag lockOwned_;
+        std::atomic<uint32_t> lockOwned_{LOCK_NOT_OWNED};
 
         Priority_t find_first_priority_(){
             for (Priority_t i = 0; i < N; ++i){
@@ -130,5 +143,9 @@ namespace boost::fairness::experimental{
             return BOOST_FAIRNESS_MAXIMUM_PRIORITY;
         }
     };
+
+    #undef LOCK_OWNED
+    #undef LOCK_NOT_OWNED
+
 }
-#endif // BOOST_FAIRNESS_EXPERIMENTAL_PRIORITY_MUTEX_HPP
+#endif // BOOST_FAIRNESS_PRIORITY_MUTEX_HPP

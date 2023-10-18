@@ -23,43 +23,6 @@
 namespace boost::fairness
 {
     /**
-     * @brief structs used to overload unique_lock methods.
-     * 
-     */
-    struct defer_lock_t{
-        explicit defer_lock_t() = default;
-    };
-    /**
-     * @brief 
-     * 
-     */
-    struct try_to_lock_t{
-        explicit try_to_lock_t() = default;
-    };
-    /**
-     * @brief 
-     * 
-     */
-    struct adopt_lock_t{
-        explicit adopt_lock_t() = default;
-    };
-    /**
-     * @brief 
-     * 
-     */
-    static constexpr defer_lock_t defer_lock;
-    /**
-     * @brief 
-     * 
-     */
-    static constexpr try_to_lock_t try_to_lock;
-    /**
-     * @brief 
-     * 
-     */
-    static constexpr adopt_lock_t adopt_lock;
-
-    /**
      * @brief The class unique_lock is a general-purpose mutex ownership wrapper allowing deferred locking, time-constrained attempts at locking, recursive locking, transfer of lock ownership, and use with condition variables.
      * \n 
      * The class unique_lock is movable, but not copyable -- it meets the requirements of [MoveConstructible](https://en.cppreference.com/w/cpp/named_req/MoveConstructible) and [MoveAssignable](https://en.cppreference.com/w/cpp/named_req/MoveAssignable) but not of [CopyConstructible](https://en.cppreference.com/w/cpp/named_req/CopyConstructible) or [CopyAssignable](https://en.cppreference.com/w/cpp/named_req/CopyAssignable).

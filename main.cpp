@@ -13,7 +13,7 @@
 #undef BOOST_FAIRNESS_EXPERIMENTAL_MUTEXES
 
 static boost::fairness::priority_mutex<4> pm;
-static boost::fairness::experimental::experimental_priority_mutex<4> ms;
+static boost::fairness::experimental::priority_mutex<4> ms;
 static boost::fairness::spinlock_priority_mutex<4> sms;
 static std::mutex m;
 
@@ -29,7 +29,7 @@ static void busy_wait_nano(uint64_t nanoseconds){
 static void thread_function_nano(int p, int preCriticalTime, int criticalTime, int postCriticalTime){
     busy_wait_nano(preCriticalTime);
     {
-        boost::fairness::unique_lock l1(ms, p);
+        boost::fairness::unique_lock l1(pm, p);
         busy_wait_nano(criticalTime);
     }
     busy_wait_nano(postCriticalTime);

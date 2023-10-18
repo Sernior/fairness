@@ -47,7 +47,6 @@ namespace standard_mutex_benchmark{
     }
 
     void STD_pipeline_benchmark_audio(benchmark::State& state) {
-        std::array<int, 8> prios {0, 2, 2, 1, 1, 3, 3, 0};
         std::array<int, 8> preCT {200, 150, 200, 300, 100, 50, 50, 200};
         int CT = 100;
         std::array<int, 8> postCT {500, 300, 200, 250, 100, 150, 150, 450};
@@ -57,8 +56,7 @@ namespace standard_mutex_benchmark{
         }
     }
 
-    void STD_pipeline_benchmark_fast(benchmark::State& state) { /*  */
-        std::array<int, 8> prios {0, 2, 2, 1, 1, 3, 3, 0};
+    void STD_pipeline_benchmark_fast(benchmark::State& state) {
         std::array<int, 8> preCT {2000, 1500, 2000, 3000, 1000, 500, 500, 2000};
         int CT = 1000;
         std::array<int, 8> postCT {5000, 3000, 2000, 2500, 1000, 1500, 1500, 4500};

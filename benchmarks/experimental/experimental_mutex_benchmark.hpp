@@ -74,10 +74,10 @@ namespace slim_spinlock_priority_mutex_benchmark{
 
 namespace experimental_priority_mutex_benchmark{
 
-    boost::fairness::experimental::experimental_priority_mutex<5> m;
+    boost::fairness::experimental::priority_mutex<5> m;
 
     void EPM_LockUnlock(benchmark::State& state) { /* the non slim version is better for spinlocking */
-        boost::fairness::experimental::slim_spinlock_priority_mutex mf;
+        boost::fairness::experimental::priority_mutex mf;
 
         for (auto _ : state){
             mf.lock();

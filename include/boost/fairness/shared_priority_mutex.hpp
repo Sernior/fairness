@@ -80,7 +80,6 @@ namespace boost::fairness{
                     totalCurrentReaders_ == 0 &&
                     !lockOwned_ &&
                     find_first_priority_() >= priority
-
                 ){
                     --priorities_[priority].writers_waiting;
                     --totalWritersWaiting_;
