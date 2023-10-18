@@ -17,7 +17,7 @@
 #include <array>
 #include <boost/fairness/priority_t.hpp>
 #include <boost/fairness/config.hpp>
-#include <boost/fairness/control_block_t.hpp>
+#include <boost/fairness/detail/control_block_t.hpp>
 
 namespace boost::fairness{
 

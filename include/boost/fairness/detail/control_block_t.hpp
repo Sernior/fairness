@@ -18,6 +18,42 @@
 
 namespace boost::fairness{
 
+
+        struct control_block_64b_simple_t{ 
+
+        #define LOCK_OWNED 1
+        #define LOCK_NOT_OWNED 0
+
+        uint32_t owned_{LOCK_NOT_OWNED};
+        uint32_t priority_{BOOST_FAIRNESS_MAXIMUM_PRIORITY};
+
+        control_block_64b_simple_t setOwned() const {
+            control_block_64b_simple_t new_ctrl = *this;
+            new_ctrl.owned_ = LOCK_OWNED;
+            return new_ctrl;
+        }
+
+        control_block_64b_simple_t setPriority(Priority_t const priority) const {
+            control_block_64b_simple_t new_ctrl = *this;
+            new_ctrl.priority_ = priority;
+            return new_ctrl;
+        }
+
+        Priority_t getPriority() const {
+            return priority_;
+        }
+
+        bool isOwned() const{
+            return owned_ == LOCK_OWNED;
+        }
+
+        #undef LOCK_OWNED
+        #undef LOCK_NOT_OWNED
+    };
+
+    static_assert(std::atomic<control_block_64b_simple_t>::is_always_lock_free, "control_block_64b_simple_t is not lock free");
+
+
     /**
      * @brief TODO
      * @private
