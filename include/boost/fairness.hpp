@@ -2,8 +2,7 @@
 /**
  * @file fairness.hpp
  * @author F. Abrignani (federignoli@hotmail.it)
- * @author P. Di Giglio
- * @author S. Martorana
+ * @author S. Martorana (salvatoremartorana@hotmail.com)
  * @brief This file contains the all the includes required by the library.
  * @version 0.1
  * @date 2023-09-29
@@ -24,7 +23,6 @@
 #include <boost/fairness/spinlock_priority_mutex.hpp>
 #include <boost/fairness/recursive_priority_mutex.hpp>
 #include <boost/fairness/unique_lock.hpp>
-#include <boost/fairness/shared_lock.hpp>
 
 #ifdef BOOST_FAIRNESS_EXPERIMENTAL_MUTEXES
 #include <boost/fairness/experimental/slim_spinlock_priority_mutex.hpp>

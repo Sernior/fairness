@@ -1,7 +1,8 @@
 /**
- * @file #TODO.hpp
- * @author S. Martorana
- * @brief Alias #TODO.
+ * @file pipeline_benchmark.hpp
+ * @author F. Abrignani
+ * @author S. Martorana (salvatoremartorana@hotmail.com)
+ * @brief Alias pipeline_benchmark.
  * @version 0.1
  * @date 2023-10-06
  * @private
@@ -19,6 +20,11 @@
 #include "std/standard_benchmark.hpp"
 #include "std/standard_shared_benchmark.hpp"
 
+/**
+ * @brief This function is used to separate benchmark categories.
+ * 
+ * @param state : the state of the benchmark.
+ */
 void ____________________________________________________________________________________________(benchmark::State& state) {
     int i = 0;
     for (auto _ : state){

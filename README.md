@@ -1,5 +1,9 @@
 # boost.fairness
 
+[![GitHub release (latest by date)](https://img.shields.io/github/v/release/Sernior/fairness)](https://github.com/Sernior/fairness/releases/latest)
+[![GitHub](https://img.shields.io/github/license/Sernior/fairness)](https://github.com/Sernior/fairness/blob/main/LICENSE)
+![GitHub Repo stars](https://img.shields.io/github/stars/Sernior/fairness)
+
 > [!NOTE]  
 > <span style="color: red;">This is not currently part of the Boost library collection.<br> However, my intention is to submit it for review once it's fully completed.</span>
 
@@ -24,6 +28,11 @@ The advanced syncronization mechanisms in this library do not autonomously adjus
 The assumptions are:
   - The pipeline operates in a multi-threaded manner;
   - the pipeline is finite.
+    
+<img class="readme-img" src="https://sernior.github.io/fairness/stdpipeline.png" style= "object-fit: cover; object-position: 100% 0; width: 100%;"/>
+
+<img class="readme-img" src="https://sernior.github.io/fairness/prioritypipeline.png" style= "object-fit: cover; object-position: 100% 0; width: 100%;"/>
+
 ## Getting Started
 
 ### Prerequisites
@@ -150,6 +159,7 @@ Salvatore Martorana - salvatoremartorana@hotmail.com
 
 ## Authors and Contributors
 
-* Federico Abrignani (Author) - https://github.com/Sernior
-* Salvatore Martorana (Contributor) - https://github.com/SMartorana
+<a href="https://github.com/Sernior/fairness/graphs/contributors">
+    <img src="https://contrib.rocks/image?repo=Sernior/fairness" />
+</a>
 
