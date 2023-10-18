@@ -17,7 +17,6 @@
 #include <array>
 #include <boost/fairness/priority_t.hpp>
 #include <boost/fairness/detail/wait_ops.hpp>
-#include <boost/fairness/spinlock_priority_mutex.hpp>
 
 namespace boost::fairness{
 
@@ -71,28 +70,17 @@ namespace boost::fairness{
          * \endcode
          */
         void lock(Priority_t const priority = 0){
-            internalMutex_.lock(priority);
-            ++waiters_[priority];
-            for (;;){
-
-                if (
-                    !lockOwned_ &&
-                    find_first_priority_() >= priority
-                ){
-                    --waiters_[priority];
-                    lockOwned_ = true;
-                    internalMutex_.unlock();
-                    waitingFlag_.store(LOCK_OWNED);
-                    return;
-                }
-
-                internalMutex_.unlock();
-
+            Priority_t localCurrentPriority = currentPriority_.load(std::memory_order_relaxed);
+            waiters_[priority].fetch_add(1, std::memory_order_relaxed);
+            while ( 
+                (localCurrentPriority < priority || !currentPriority_.compare_exchange_weak(localCurrentPriority, priority, std::memory_order_relaxed)) ||
+                (lockOwned_.test_and_set(std::memory_order_acquire))
+            ){
                 detail::wait(waitingFlag_, LOCK_OWNED);
-
-                internalMutex_.lock(priority);
-
+                localCurrentPriority = currentPriority_;
             }
+            waiters_[priority].fetch_sub(1, std::memory_order_relaxed);
+            waitingFlag_.store(LOCK_OWNED);
         }
 
         /**
@@ -109,26 +97,11 @@ namespace boost::fairness{
          * \endcode
          */
         void unlock(){
-
-            Priority_t p;
-
-            internalMutex_.lock();
-
-            lockOwned_ = false;
-
-            p = find_first_priority_();
-
-            if (p == BOOST_FAIRNESS_MAXIMUM_PRIORITY){
-                internalMutex_.unlock();
-                return;
-            }
-
-            internalMutex_.unlock();
-
+            currentPriority_.store(find_first_priority_(), std::memory_order_relaxed);
+            lockOwned_.clear(std::memory_order_release);
             waitingFlag_.store(LOCK_NOT_OWNED);
-
             detail::notify_all(waitingFlag_);
-            
+            //lockOwned_.notify_all();
         }
 
         /**
@@ -148,27 +121,14 @@ namespace boost::fairness{
          * @return bool 
          */
         [[nodiscard]] bool try_lock(Priority_t const priority = 0){
-            internalMutex_.lock(priority);
-
-            if (lockOwned_ ||
-                find_first_priority_() < priority){
-
-                internalMutex_.unlock();
-
-                return false;
-            }
-
-            lockOwned_ = LOCK_OWNED;
-
-            internalMutex_.unlock();
-
-            return true;
+            return (currentPriority_.load(std::memory_order_relaxed) >= priority && !lockOwned_.test_and_set(std::memory_order_acquire));
         }
 
         private:
-        alignas(128) spinlock_priority_mutex<N> internalMutex_;
-        bool lockOwned_{};
-        std::array<Thread_cnt_t, N> waiters_;
+        alignas(128) std::atomic<Priority_t> currentPriority_{BOOST_FAIRNESS_MAXIMUM_PRIORITY};
+        alignas(128) std::atomic_flag lockOwned_;
+        std::array<std::atomic<Thread_cnt_t>, N> waiters_;
+
         alignas(128) std::atomic<uint32_t> waitingFlag_{LOCK_OWNED};
 
         Priority_t find_first_priority_(){
@@ -182,6 +142,5 @@ namespace boost::fairness{
 
     #undef LOCK_OWNED
     #undef LOCK_NOT_OWNED
-
 }
 #endif // BOOST_FAIRNESS_PRIORITY_MUTEX_HPP

@@ -19,7 +19,7 @@
 #include <boost/fairness/detail/wait_ops.hpp>
 #include <boost/fairness/spinlock_priority_mutex.hpp>
 
-namespace boost::fairness{
+namespace boost::fairness::old6{ // BEST SO FAR
 
     #define LOCK_OWNED 1
     #define LOCK_NOT_OWNED 0
@@ -88,6 +88,7 @@ namespace boost::fairness{
 
                 internalMutex_.unlock();
 
+                //detail::wait(reinterpret_cast<std::atomic<uint32_t>&>(lockOwned_), LOCK_OWNED);
                 detail::wait(waitingFlag_, LOCK_OWNED);
 
                 internalMutex_.lock(priority);
@@ -126,7 +127,7 @@ namespace boost::fairness{
             internalMutex_.unlock();
 
             waitingFlag_.store(LOCK_NOT_OWNED);
-
+            //detail::notify_all(reinterpret_cast<std::atomic<uint32_t>&>(lockOwned_));
             detail::notify_all(waitingFlag_);
             
         }
