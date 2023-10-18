@@ -20,9 +20,26 @@
 namespace boost::fairness{
 
     /**
-     * @brief The shared_priority_mutex is an advanced synchronization mechanism that enhances the traditional mutex by introducing a priority-based approach.
+     * @brief The shared_priority_mutex is an advanced synchronization mechanism that enhances the traditional shared_mutex by introducing a priority-based approach.
+     * \n 
+     * The shared_priority_mutex class is a synchronization primitive that can be used to protect shared data from being simultaneously accessed by multiple threads. In contrast to other mutex types which facilitate exclusive access, a shared_mutex has two levels of access:
      * 
-     * @tparam N : number of 0 indexed priorities the shared_priority_mutex manages, up to BOOST_FAIRNESS_MAXIMUM_PRIORITY.
+     * * _shared_ - several threads can share ownership of the same mutex;
+     * * _exclusive_ - only one thread can own the mutex.
+     * 
+     * If one thread has acquired the _exclusive_ lock (through lock(), try_lock()), no other threads can acquire the lock (including the _shared_).
+     * \n 
+     * If one thread has acquired the _shared_ lock (through lock_shared(), try_lock_shared()), no other thread can acquire the _exclusive_ lock, but can acquire the _shared_ lock.
+     * \n 
+     * Only when the _exclusive_ lock has not been acquired by any thread, the _shared_ lock can be acquired by multiple threads.
+     * \n
+     * Within one thread, only one lock (_shared_ or _exclusive_) can be acquired at the same time.
+     * \n
+     * Shared mutexes are especially useful when shared data can be safely read by any number of threads simultaneously, but a thread may only write the same data when no other thread is reading or writing at the same time.
+     * \n 
+     * The shared_priority_mutex class satisfies all requirements of [SharedMutex](https://en.cppreference.com/w/cpp/named_req/SharedMutex) and [StandardLayoutType](https://en.cppreference.com/w/cpp/named_req/StandardLayoutType).
+     * 
+     * @tparam N : number of 0 indexed priorities the shared_priority_mutex manages, up to [BOOST_FAIRNESS_MAXIMUM_PRIORITY](https://sernior.github.io/fairness/priority__t_8hpp.html#ab63ed35d4aa8f18cc832fecbf13ba0ae).
      */
     template<size_t N = 1>
     requires (N >= 1 && N <= BOOST_FAIRNESS_MAXIMUM_PRIORITY)
@@ -57,9 +74,15 @@ namespace boost::fairness{
 
         /**
          * @brief Try to acquire the unique ownership of the shared_priority_mutex, blocking the thread if the shared_priority_mutex was already owned or other threads are waiting with higher priority.
+         * \n 
+         * If another thread is holding an exclusive lock() or a shared_lock() on the same shared_priority_mutex the a call to lock will block execution until all such locks are released. While shared_priority_mutex is locked in an exclusive mode, no other lock() of any kind can also be held.
+         * \n 
+         * If lock is called by a thread that already owns the shared_mutex in any mode (exclusive or shared), the behavior is undefined. A prior unlock() operation on the same mutex _synchronizes-with_ (as defined in [std::memory_order](https://en.cppreference.com/w/cpp/atomic/memory_order)) this operation.
          * 
          * @param priority used to set a priority for this thread to aquire the lock.
-         * 
+         * @return none.
+         * @exception Throws [std::system_error](https://en.cppreference.com/w/cpp/error/system_error) when errors occur, including errors from the underlying operating system that would prevent lock from meeting its specifications. The mutex is not locked in the case of any exception being thrown.
+         * @note lock() is usually not called directly: boost::fairness::unique_lock, boost::fairness::scoped_lock, and boost::fairness::lock_guard are used to manage exclusive locking.
          * \code{.cpp}
          * shared_priority_mutex<10> m;
          * 

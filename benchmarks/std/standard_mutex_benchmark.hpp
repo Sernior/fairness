@@ -1,6 +1,7 @@
 /**
  * @file #TODO.hpp
- * @author S. Martorana
+ * @author F. Abrignani (federignoli@hotmail.it)
+ * @author S. Martorana (salvatoremartorana@hotmail.com)
  * @brief Alias #TODO.
  * @version 0.1
  * @date 2023-10-06

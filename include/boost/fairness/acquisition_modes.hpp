@@ -1,7 +1,7 @@
 /**
  * @file acquisition_modes.hpp
  * @author F. Abrignani (federignoli@hotmail.it)
- * @author S. Martorana
+ * @author S. Martorana (salvatoremartorana@hotmail.com)
  * @brief Empty types used by unique_lock and shared_lock constructors.
  * @version 0.1
  * @date 2023-08-19
