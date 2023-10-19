@@ -90,9 +90,12 @@ namespace boost::fairness{
          * If lock is called by a thread that already owns the shared_mutex in any mode (exclusive or shared), the behavior is undefined. A prior unlock() operation on the same mutex _synchronizes-with_ (as defined in [std::memory_order](https://en.cppreference.com/w/cpp/atomic/memory_order)) this operation.
          * 
          * @param priority used to set a priority for this thread to aquire the lock.
-         * @return none.
-         * @exception Throws [std::system_error](https://en.cppreference.com/w/cpp/error/system_error) when errors occur, including errors from the underlying operating system that would prevent lock from meeting its specifications. The mutex is not locked in the case of any exception being thrown.
-         * @note lock() is usually not called directly: boost::fairness::unique_lock, boost::fairness::scoped_lock, and boost::fairness::lock_guard are used to manage exclusive locking.
+         * @return      none.
+         * @exception std::system_error : Throws std::system_error when errors occur, including errors from the underlying operating system that would prevent lock from meeting its specifications. The mutex is not locked in the case of any exception being thrown.
+         * @note lock() is usually not called directly: unique_lock, scoped_lock, and lock_guard are used to manage exclusive locking.
+         * 
+         * ### Example
+         * 
          * \code{.cpp}
          * shared_priority_mutex<10> m;
          * 

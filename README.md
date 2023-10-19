@@ -103,10 +103,11 @@ static void busy_wait_nano(uint64_t nanoseconds){
 
 static void thread_function_nano(int p, int preCriticalTime, int postCriticalTime, int criticalTime){
     busy_wait_nano(preCriticalTime);
-    ms.lock(p);
-    std::cout << "Thread with priority : " << p << " is running."<<std::endl;
-    busy_wait_nano(criticalTime);
-    ms.unlock();
+    {
+        boost::fairness::unique_lock l1(ms, p);
+    	std::cout << "Thread with priority : " << p << " is running." << std::endl;
+        busy_wait_nano(criticalTime);
+    }
     busy_wait_nano(postCriticalTime);
 }
 
@@ -128,7 +129,7 @@ int main()
 }
 ```
 
-The output of the above will be:
+The output of the above could be:
 
 ```
 Thread with priority : 0 is running.
@@ -140,6 +141,16 @@ Thread with priority : 2 is running.
 Thread with priority : 3 is running.
 Thread with priority : 3 is running.
 ```
+
+## Configurations
+
+This is a list of configurations (macros, ecc...):
+
+| MACRO      						       | Description |
+| ---------------------------------------- | ----------- |
+| BOOST_FAIRNESS_EXPERIMENTAL_MUTEXES      | TODO        |
+| NOW  								       | TODO        |
+| BOOST_FAIRNESS_THREAD_UTILS              | TODO        |
 
 ## Contributing
 

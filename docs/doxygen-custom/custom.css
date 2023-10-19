@@ -3,11 +3,22 @@
 }
 
 html {
-    --side-nav-fixed-width: 435px;
-    /* --side-nav-top-height: 130px; */
+    --side-nav-fixed-width: 300px;
+    --top-height: 150px;
 }
 
 .contents img, .contents .center, .contents center, .contents div.image object {
     max-width: none;
     overflow: auto;
+}
+
+.github-corner svg {
+    fill: var(--primary-light-color);
+    color: var(--page-background-color);
+    width: 70px;
+    height: 70px;
+}
+
+dl.section dd, dl.bug dd, dl.deprecated dd, dl.todo dd {
+    margin-inline-start: 40px;
 }
