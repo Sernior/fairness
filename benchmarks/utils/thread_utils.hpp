@@ -11,8 +11,8 @@
  * 
  */
 
-#ifndef BOOST_FAIRNESS_THREAD_UTILS
-#define BOOST_FAIRNESS_THREAD_UTILS
+#ifndef BOOST_FAIRNESS_THREAD_UTILS_HPP
+#define BOOST_FAIRNESS_THREAD_UTILS_HPP
 #include <mutex>
 #include <shared_mutex>
 #include "waiting_utils.hpp"
@@ -60,4 +60,4 @@ namespace utils::thread{
 }
 
 #undef NOW
-#endif // BOOST_FAIRNESS_THREAD_UTILS
+#endif // BOOST_FAIRNESS_THREAD_UTILS_HPP

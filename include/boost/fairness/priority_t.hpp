@@ -23,7 +23,7 @@ namespace boost::fairness{
      */
     #define BOOST_FAIRNESS_MAXIMUM_PRIORITY Priority_t(-1)
     /**
-     * @brief A number indicating an invalid priority which is not usable by the mutexes.
+     * @brief Used to describe an invalid current priority.
      * 
      */
     #define BOOST_FAIRNESS_INVALID_PRIORITY Priority_t(-1)

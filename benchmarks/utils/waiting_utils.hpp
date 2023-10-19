@@ -12,8 +12,8 @@
  */
 
 
-#ifndef BOOST_FAIRNESS_WAITING_UTILS
-#define BOOST_FAIRNESS_WAITING_UTILS
+#ifndef BOOST_FAIRNESS_WAITING_UTILS_HPP
+#define BOOST_FAIRNESS_WAITING_UTILS_HPP
 #include <chrono>
 
 #define NOW std::chrono::high_resolution_clock::now()
@@ -64,4 +64,4 @@ namespace utils::waiting{
 }
 
 #undef NOW
-#endif // BOOST_FAIRNESS_WAITING_UTILS
+#endif // BOOST_FAIRNESS_WAITING_UTILS_HPP

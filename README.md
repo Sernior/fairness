@@ -144,17 +144,20 @@ Thread with priority : 3 is running.
 
 ## Configurations
 
-This is a list of configurations (macros, ecc...):
+This is a list of macros that can be defined to configure boost::fairness:
 
-| MACRO      						       | Description |
-| ---------------------------------------- | ----------- |
-| BOOST_FAIRNESS_EXPERIMENTAL_MUTEXES      | TODO        |
-| NOW  								       | TODO        |
-| BOOST_FAIRNESS_THREAD_UTILS              | TODO        |
+| MACRO									| Description 																												  |
+| ------------------------------------- | --------------------------------------------------------------------------------------------------------------------------- |
+| BOOST_FAIRNESS_EXPERIMENTAL_MUTEXES	| Allow the inclusion of the experimental mutexes. 																			  |
+| BOOST_FAIRNESS_WAIT_SPINS    			| The number of unpaused spins before a syscall to the OS to yield the cpu through futex on linux or waitOnAdress on windows. |
+| BOOST_FAIRNESS_WAIT_SPINS_RELAXED		| the number of paused spins before a syscall to the OS to yield the cpu through futex on linux or waitOnAdress on windows.   |
+| BOOST_FAIRNESS_HAS_DWCAS    			| if the hardware supports cmpxch16b and boost::atomic is present then allow boost::fairness to use cmpxch16b. 				  |
+| BOOST_FAIRNESS_USE_STD_WAIT_NOTIFY 	| boost::fairness will use atomic::wait/notify implemented by the standard lib instead of its own implementation.			  |
 
 ## Contributing
 
-If you encounter any issues or would like to suggest new features, please don't hesitate to open an issue or get in touch with me at federignoli@hotmail.it.<br />Contributions are also welcome! Feel free to open pull requests to the main repository and assign me as a reviewer – I'll be sure to review them. Your help is greatly appreciated!
+If you encounter any issues or would like to suggest new features, please don't hesitate to open an issue or get in touch with me at federignoli@hotmail.it.<br/>
+Contributions are also welcome! Feel free to open pull requests to the main repository and assign me as a reviewer – I'll be sure to review them. Your help is greatly appreciated!
 
 ## License
 
@@ -165,7 +168,7 @@ The documentation is available at the following link: https://sernior.github.io/
 
 ## Contacts
 
-Federico Abrignani - federignoli@hotmail.it
+Federico Abrignani - federignoli@hotmail.it<br/>
 Salvatore Martorana - salvatoremartorana@hotmail.com
 
 ## Authors and Contributors
