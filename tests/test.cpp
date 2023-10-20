@@ -224,6 +224,19 @@ TEST(SharedPriorityMutex_ControlledScheduling, TryLockSharedTest) {
     SPM_scenario7::expected.clear();
 }
 
+TEST(SharedPriorityMutex_ControlledScheduling, S_LockSharedTest) {
+    bool condition = true;
+    SPM_scenario9::executeSchedulingSequence();
+    // if (std::size(SPM_scenario9::ret) == 4)
+    //     condition = true;
+    // else
+    //     condition = false;
+    condition &= std::size(SPM_scenario9::ret) == 4;
+    SPM_scenario9::ret.clear();
+
+    EXPECT_TRUE(condition);
+}
+
 TEST(RecursivePriorityMutex_ControlledScheduling, RPM_LockUnlockTest) {
     RPM_scenario1::executeSchedulingSequence();
     EXPECT_EQ(RPM_scenario1::ret, RPM_scenario1::expected);

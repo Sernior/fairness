@@ -19,6 +19,7 @@ namespace SPM_scenario4{
     using namespace DeterministicConcurrency;
 
     boost::fairness::shared_priority_mutex<5> m;
+    std::mutex sm;
 
     std::vector<int> ret;
 
@@ -29,7 +30,10 @@ namespace SPM_scenario4{
     void threadFunction(thread_context* c ,int i) {
         c->lock_shared(&m, i);
         c->switchContext();
-        ret.push_back(i);
+        {
+            std::unique_lock<std::mutex> lock(sm);
+            ret.push_back(i);               
+        }
         m.unlock_shared();
     }
 
