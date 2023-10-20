@@ -1,8 +1,8 @@
 /**
- * @file #TODO.hpp
+ * @file thread_utils.hpp
  * @author F. Abrignani (federignoli@hotmail.it)
  * @author S. Martorana (salvatoremartorana@hotmail.com)
- * @brief Alias #TODO.
+ * @brief Alias thread_utils.
  * @version 0.1
  * @date 2023-10-06
  * @private
