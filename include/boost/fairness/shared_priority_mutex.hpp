@@ -13,7 +13,6 @@
 #define BOOST_FAIRNESS_SHARED_PRIORITY_MUTEX_HPP
 #include <array>
 #include <atomic>
-#include <cstring>
 #include <boost/fairness/priority_t.hpp>
 #include <boost/fairness/spinlock_priority_mutex.hpp>
 
@@ -94,10 +93,15 @@ namespace boost::fairness{
          * \endcode
          */
         void lock(Priority_t const priority = 0){
+
             internalMutex_.lock(priority);
+
             ++priorities_[priority].writers_waiting;
+
             ++totalWritersWaiting_;
-            for (;;){
+
+            for (;;)
+            {
 
                 if (
                     totalCurrentReaders_ == 0 &&
@@ -105,9 +109,13 @@ namespace boost::fairness{
                     find_first_priority_() >= priority
                 ){
                     --priorities_[priority].writers_waiting;
+
                     --totalWritersWaiting_;
+
                     lockOwned_ = true;
+
                     internalMutex_.unlock();
+
                     return;
                 }
 
@@ -143,15 +151,21 @@ namespace boost::fairness{
 
             p = find_first_priority_();
 
-            if (p == BOOST_FAIRNESS_MAXIMUM_PRIORITY){
+            if (p == BOOST_FAIRNESS_MAXIMUM_PRIORITY)
+            {
                 internalMutex_.unlock();
+
                 return;
             }
 
-            if (totalWritersWaiting_ == 0){
+            if (totalWritersWaiting_ == 0)
+            {
                 allow_all_readers_();
+
                 internalMutex_.unlock();
+
                 notify_all_readers_();
+
                 return;
             }
 
@@ -185,7 +199,8 @@ namespace boost::fairness{
 
             if (lockOwned_ ||
             totalCurrentReaders_ > 0 ||
-            find_first_priority_() < priority){
+            find_first_priority_() < priority)
+            {
 
                 internalMutex_.unlock();
 
@@ -221,10 +236,14 @@ namespace boost::fairness{
 
             for(;;){
 
-                if (!lockOwned_ && find_first_priority_with_writers_() >= priority){
+                if (!lockOwned_ && find_first_priority_with_writers_() >= priority)
+                {
                     ++totalCurrentReaders_;
+
                     --priorities_[priority].readers_waiting;
+
                     internalMutex_.unlock();
+
                     return;
                 }
 
@@ -260,22 +279,32 @@ namespace boost::fairness{
 
             p = find_first_priority_();
 
-            if (p == BOOST_FAIRNESS_MAXIMUM_PRIORITY){
+            if (p == BOOST_FAIRNESS_MAXIMUM_PRIORITY)
+            {
                 internalMutex_.unlock();
+
                 return;
             }
 
-            if (totalWritersWaiting_ == 0){
+            if (totalWritersWaiting_ == 0)
+            {
                 allow_all_readers_();
+
                 internalMutex_.unlock();
+
                 notify_all_readers_();
+
                 return;
             }
 
-            if (totalCurrentReaders_ == 0){
+            if (totalCurrentReaders_ == 0)
+            {
                 reset_(p);
+
                 internalMutex_.unlock();
+
                 notify_priority_(p);
+
                 return;
             }
 
@@ -318,11 +347,11 @@ namespace boost::fairness{
 
         private:
 
-        spinlock_priority_mutex<N> internalMutex_;
+        alignas(BOOST_FAIRNESS_HARDWARE_DESTRUCTIVE_SIZE) spinlock_priority_mutex<N> internalMutex_;
         std::array<threadPriority, N> priorities_;
-        std::array<std::atomic_flag, N> writerWaitingFlags_;
-        std::array<std::atomic_flag, N> readerWaitingFlags_;
-        Thread_cnt_t totalCurrentReaders_{};
+        alignas(BOOST_FAIRNESS_HARDWARE_DESTRUCTIVE_SIZE) std::array<std::atomic_flag, N> writerWaitingFlags_; // there should be a struct like threadPriority for the flags so I can align both with 1 alignas
+        std::array<std::atomic_flag, N> readerWaitingFlags_; // I should also change these to be 4 bytes so other systems other than windows can also wait on this memory
+         Thread_cnt_t totalCurrentReaders_{};
         Thread_cnt_t totalWritersWaiting_{};
         bool lockOwned_{};
 
@@ -343,9 +372,10 @@ namespace boost::fairness{
         }
 
         void notify_all_readers_(){
-            std::memset(&readerWaitingFlags_, 0b00000001, N);
-            for (Priority_t i = 0; i < N; ++i)
+            for (Priority_t i = 0; i < N; ++i){
+                readerWaitingFlags_[i].test_and_set();
                 readerWaitingFlags_[i].notify_all();
+            }
         }
 
         void notify_priority_(Priority_t const p){
@@ -354,15 +384,19 @@ namespace boost::fairness{
         }
 
         void reset_(Priority_t const p){
-            std::memset(&writerWaitingFlags_, 0b00000000, N);
-            std::memset(&readerWaitingFlags_, 0b00000000, N);
+            for (Priority_t i = 0; i <  N; ++i){
+                readerWaitingFlags_[i].clear();
+                readerWaitingFlags_[i].clear();
+            }
             writerWaitingFlags_[p].test_and_set();
             readerWaitingFlags_[p].test_and_set();
         }
 
         void allow_all_readers_(){
-            std::memset(&writerWaitingFlags_, 0b00000000, N);
-            std::memset(&readerWaitingFlags_, 0b00000001, N);
+            for (Priority_t i = 0; i < N; ++i){
+                readerWaitingFlags_[i].test_and_set();
+                writerWaitingFlags_[i].clear();
+            }
         }
 
     };

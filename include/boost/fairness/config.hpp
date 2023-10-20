@@ -18,19 +18,37 @@
 #ifndef BOOST_FAIRNESS_WAIT_SPINS
 /**
  * @brief the number of unpaused spins before a syscall to the OS to yield the cpu through futex on linux or waitOnAdress on windows
+ *        it is used only if BOOST_FAIRNESS_USE_EXPERIMENTAL_WAIT_NOTIFY is defined
 */
-#define BOOST_FAIRNESS_WAIT_SPINS 16
+#define BOOST_FAIRNESS_WAIT_SPINS 0
 #endif // BOOST_FAIRNESS_WAIT_SPINS
 
 
 
 #ifndef BOOST_FAIRNESS_WAIT_SPINS_RELAXED
 /**
- * @brief the number of paused spins before a syscall to the OS to yield the cpu through futex on linux or waitOnAdress on windows
+ * @brief the number of paused spins before a syscall to the OS to yield the cpu through futex on linux or waitOnAdress on windows.
+ *        it is used only if BOOST_FAIRNESS_USE_EXPERIMENTAL_WAIT_NOTIFY is defined
 */
-#define BOOST_FAIRNESS_WAIT_SPINS_RELAXED 64
+#define BOOST_FAIRNESS_WAIT_SPINS_RELAXED 12
 #endif // BOOST_FAIRNESS_WAIT_SPINS_RELAXED
 
+
+#ifndef BOOST_FAIRNESS_WAIT_SPINS_YIELD
+/**
+ * @brief the number of yield spins before a syscall to the OS to yield the cpu through futex on linux or waitOnAdress on windows
+ *        it is used only if BOOST_FAIRNESS_USE_EXPERIMENTAL_WAIT_NOTIFY is defined
+*/
+#define BOOST_FAIRNESS_WAIT_SPINS_YIELD 4
+#endif // BOOST_FAIRNESS_WAIT_SPINS_RELAXED
+
+
+#ifndef BOOST_FAIRNESS_HARDWARE_DESTRUCTIVE_SIZE
+/**
+ * @brief size to be aligned to avoid false sharing (https://www.intel.com/content/www/us/en/developer/articles/technical/intel-sdm.html#optimization - 3.7.3)
+*/
+#define BOOST_FAIRNESS_HARDWARE_DESTRUCTIVE_SIZE 128
+#endif // BOOST_FAIRNESS_HARDWARE_DESTRUCTIVE_SIZE
 
 
 /*
@@ -52,6 +70,23 @@
 
 
 
+/**
+ * @brief boost fairness will use atomic::wait/notify implemented by the standard lib instead of its own implementation.
+*/
+#define BOOST_FAIRNESS_USE_STD_WAIT_NOTIFY
+
+
+
+
+/**
+ * @brief if BOOST_FAIRNESS_USE_EXPERIMENTAL_WAIT_NOTIFY is defined we shall the experimental wait notify system
+*/
+#if defined(BOOST_FAIRNESS_USE_EXPERIMENTAL_WAIT_NOTIFY)
+#undef BOOST_FAIRNESS_USE_STD_WAIT_NOTIFY
+#endif
+
+
+
 /*
  Operating systems
 */
@@ -67,10 +102,7 @@
 #else
 
 #ifndef BOOST_FAIRNESS_USE_STD_WAIT_NOTIFY
-/**
- * @brief boost fairness will use atomic::wait/notify implemented by the standard lib instead of its own implementation.
-*/
-#define BOOST_FAIRNESS_USE_STD_WAIT_NOTIFY
+
 #endif // BOOST_FAIRNESS_USE_STD_WAIT_NOTIFY
 
 #include <boost/fairness/detail/wait_ops_generic.hpp>

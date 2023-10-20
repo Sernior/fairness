@@ -14,6 +14,7 @@
 #ifndef BOOST_FAIRNESS_SLIM_PRIORITY_MUTEX_HPP
 #define BOOST_FAIRNESS_SLIM_PRIORITY_MUTEX_HPP
 #include <atomic>
+#include <cstring>
 #include <array>
 #include <boost/fairness/priority_t.hpp>
 #include <boost/fairness/config.hpp>

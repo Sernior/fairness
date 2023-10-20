@@ -16,6 +16,7 @@
 #include <boost/fairness/config.hpp>
 #include <boost/fairness/detail/pause_ops.hpp>
 #include <atomic>
+#include <thread>
 
 
 namespace boost::fairness::detail{
@@ -24,19 +25,23 @@ namespace boost::fairness::detail{
 
     template<typename T, typename K>
     inline void wait(T& mem, K expected){
-        K localMem = mem.load(std::memory_order_relaxed);
-        for(int i = 0; i < BOOST_FAIRNESS_WAIT_SPINS; ++i){
-            if (localMem != expected)
-                return;
-            localMem = mem.load(std::memory_order_relaxed);
+        while (mem.load(std::memory_order_relaxed) == expected){
+            for(int i = 0; i < BOOST_FAIRNESS_WAIT_SPINS; ++i){
+                if (mem.load(std::memory_order_relaxed) != expected)
+                    return;
+            }
+            for(int i = 0; i < BOOST_FAIRNESS_WAIT_SPINS_RELAXED; ++i){
+                if (mem.load(std::memory_order_relaxed) != expected)
+                    return;
+                pause();
+            }
+            for(int i = 0; i < BOOST_FAIRNESS_WAIT_SPINS_YIELD; ++i){
+                if (mem.load(std::memory_order_relaxed) != expected)
+                    return;
+                std::this_thread::yield();
+            }
+            wait_(mem, expected);
         }
-        for(int i = 0; i < BOOST_FAIRNESS_WAIT_SPINS_RELAXED; ++i){
-            if (localMem != expected)
-                return;
-            pause();
-            localMem = mem.load(std::memory_order_relaxed);
-        }
-        wait_(mem, expected);
     }
 
 #else

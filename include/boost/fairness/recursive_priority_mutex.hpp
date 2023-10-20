@@ -17,9 +17,13 @@
 #include <atomic>
 #include <array>
 #include <boost/fairness/priority_t.hpp>
+#include <boost/fairness/detail/wait_ops.hpp>
 #include <boost/fairness/spinlock_priority_mutex.hpp>
 
 namespace boost::fairness{
+
+    #define WAIT 0
+    #define PROCEED 1
 
     /**
      * @brief The recursive_priority_mutex is an advanced synchronization mechanism that enhances the traditional mutex by introducing a priority-based approach.
@@ -105,20 +109,26 @@ namespace boost::fairness{
             internalMutex_.lock(priority);
             ++waiters_[priority];
             for(;;){
-                if ( lock_owned_by_me_() ||
+                if ( 
+                    lock_owned_by_me_() ||
                     (find_first_priority_() >= priority &&
-                    lock_not_owned_())){
+                    lock_not_owned_())
+                    ){
+
                         owner_ = std::this_thread::get_id();
-                        lockOwned_.test_and_set();
-                        break;
+                        --waiters_[priority];
+                        ++recursionCounter_;
+
+                        internalMutex_.unlock();
+                        return;
                     }
+
                 internalMutex_.unlock();
-                lockOwned_.wait(true);
+
+                detail::wait(waitingFlag_[priority], WAIT);
+
                 internalMutex_.lock(priority);
             }
-            --waiters_[priority];
-            ++recursionCounter_;
-            internalMutex_.unlock();
         }
 
         /**
@@ -159,14 +169,33 @@ namespace boost::fairness{
          * \endcode
          */
         void unlock(){
+            
+            Priority_t p;
+
             internalMutex_.lock();
+
+            p = find_first_priority_();
+
             --recursionCounter_;
-            if (recursionCounter_ == 0){
-                owner_ = std::thread::id();
-                lockOwned_.clear();
-                lockOwned_.notify_all();
+
+            if (recursionCounter_ != 0)
+            {
+                internalMutex_.unlock();
+                return;
             }
+
+            owner_ = std::thread::id();
+
+            if (p == BOOST_FAIRNESS_MAXIMUM_PRIORITY){
+                internalMutex_.unlock();
+                return;
+            }
+
+            reset_(p); // maybe better before the unlock
+
             internalMutex_.unlock();
+
+            detail::notify_one(waitingFlag_[p]);
         }
 
         /**
@@ -218,7 +247,6 @@ namespace boost::fairness{
              (find_first_priority_() >= priority && lock_not_owned_())){
 
                 owner_ = std::this_thread::get_id();
-                lockOwned_.test_and_set();
                 ++recursionCounter_;
                 internalMutex_.unlock();
                 return true;
@@ -230,11 +258,11 @@ namespace boost::fairness{
         }
 
         private:
-        spinlock_priority_mutex<N> internalMutex_;
+        alignas(BOOST_FAIRNESS_HARDWARE_DESTRUCTIVE_SIZE) spinlock_priority_mutex<N> internalMutex_;
         std::array<Thread_cnt_t, N> waiters_;
         std::thread::id owner_{};
-        std::atomic_flag lockOwned_;
         uint32_t recursionCounter_{};
+        alignas(BOOST_FAIRNESS_HARDWARE_DESTRUCTIVE_SIZE) std::array<std::atomic<uint32_t>, N> waitingFlag_;
 
         bool lock_not_owned_(){
             return std::thread::id() == owner_;
@@ -242,6 +270,12 @@ namespace boost::fairness{
 
         bool lock_owned_by_me_(){
             return owner_ == std::this_thread::get_id();
+        }
+
+        void reset_(Priority_t p){
+            for (Priority_t i = 0; i < N; ++i)
+                waitingFlag_[i].store(WAIT);
+            waitingFlag_[p].store(PROCEED);
         }
 
         Priority_t find_first_priority_(){
@@ -252,5 +286,8 @@ namespace boost::fairness{
             return BOOST_FAIRNESS_MAXIMUM_PRIORITY;
         }
     };
+
+    #undef WAIT
+    #undef PROCEED
 }
 #endif // BOOST_FAIRNESS_RECURSIVE_PRIORITY_MUTEX_HPP

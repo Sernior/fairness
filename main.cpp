@@ -8,12 +8,10 @@
 #include <BS_thread_pool.hpp>
 
 // #include <boost/atomic.hpp>
-#define BOOST_FAIRNESS_EXPERIMENTAL_MUTEXES
+
 #include <boost/fairness.hpp>
-#undef BOOST_FAIRNESS_EXPERIMENTAL_MUTEXES
 
 static boost::fairness::priority_mutex<4> pm;
-static boost::fairness::experimental::priority_mutex<4> ms;
 static boost::fairness::spinlock_priority_mutex<4> sms;
 static std::mutex m;
 
