@@ -21,8 +21,8 @@
 
 namespace boost::fairness{
 
-    #define LOCK_OWNED 1
-    #define LOCK_NOT_OWNED 0
+    #define WAIT 0
+    #define PROCEED 1
 
     /**
      * @brief The priority_mutex is an advanced synchronization mechanism that enhances the traditional mutex by introducing a priority-based approach.
@@ -82,13 +82,13 @@ namespace boost::fairness{
                     --waiters_[priority];
                     lockOwned_ = true;
                     internalMutex_.unlock();
-                    waitingFlag_.store(LOCK_OWNED);
+                    //reset(priority);
                     return;
                 }
 
                 internalMutex_.unlock();
 
-                detail::wait(waitingFlag_, LOCK_OWNED);
+                detail::wait(waitingFlag_[priority], WAIT);
 
                 internalMutex_.lock(priority);
 
@@ -125,10 +125,9 @@ namespace boost::fairness{
 
             internalMutex_.unlock();
 
-            waitingFlag_.store(LOCK_NOT_OWNED);
+            reset_(p); // maybe better before the unlock
 
-            detail::notify_all(waitingFlag_);
-            
+            detail::notify_one(waitingFlag_[p]);
         }
 
         /**
@@ -158,7 +157,7 @@ namespace boost::fairness{
                 return false;
             }
 
-            lockOwned_ = LOCK_OWNED;
+            lockOwned_ = true;
 
             internalMutex_.unlock();
 
@@ -166,10 +165,10 @@ namespace boost::fairness{
         }
 
         private:
-        alignas(128) spinlock_priority_mutex<N> internalMutex_;
-        bool lockOwned_{};
+        alignas(BOOST_FAIRNESS_HARDWARE_DESTRUCTIVE_SIZE) spinlock_priority_mutex<N> internalMutex_;
         std::array<Thread_cnt_t, N> waiters_;
-        alignas(128) std::atomic<uint32_t> waitingFlag_{LOCK_OWNED};
+        bool lockOwned_{};
+        alignas(BOOST_FAIRNESS_HARDWARE_DESTRUCTIVE_SIZE) std::array<std::atomic<uint32_t>, N> waitingFlag_;
 
         Priority_t find_first_priority_(){
             for (Priority_t i = 0; i < N; ++i){
@@ -178,10 +177,17 @@ namespace boost::fairness{
             }
             return BOOST_FAIRNESS_MAXIMUM_PRIORITY;
         }
+
+        void reset_(Priority_t p){
+            for (Priority_t i = 0; i < N; ++i)
+                waitingFlag_[i].store(WAIT);
+            waitingFlag_[p].store(PROCEED);
+        }
+
     };
 
-    #undef LOCK_OWNED
-    #undef LOCK_NOT_OWNED
+    #undef WAIT
+    #undef PROCEED
 
 }
 #endif // BOOST_FAIRNESS_PRIORITY_MUTEX_HPP

@@ -16,33 +16,33 @@
 #include <boost/fairness/config.hpp>
 #include <atomic>
 
-namespace boost::fairness::detail{
+namespace boost::fairness::detail{// NOTICE: maybe T is already an atomic and should not be casted
 
     template<typename T, typename K>
     inline void wait_(T& mem, K expected){
         static_assert(
-            std::atomic<T>::is_always_lock_free
+            T::is_always_lock_free
             , "Invalid argument size on boost::fairness::detail::wait"
         );
-        std::atomic<T>(mem).wait(expected, std::memory_order_relaxed);
+        mem.wait(expected, std::memory_order_relaxed);
     }
 
     template<typename T>
     inline void notify_one_(T& mem){
         static_assert(
-            std::atomic<T>::is_always_lock_free
+            T::is_always_lock_free
             , "Invalid argument size on boost::fairness::detail::notify_one"
         );
-        std::atomic<T>(mem).notify_one();
+        mem.notify_one();
     }
 
     template<typename T>
     inline void notify_all_(T& mem){
         static_assert(
-            std::atomic<T>::is_always_lock_free
+            T::is_always_lock_free
             , "Invalid argument size on boost::fairness::detail::notify_one"
         );
-        std::atomic<T>(mem).notify_all();
+        mem.notify_all();
     }
 
 }
