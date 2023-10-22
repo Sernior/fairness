@@ -21,7 +21,7 @@ namespace SPM_scenario9{
 
     boost::fairness::shared_priority_mutex<7> m;
     std::mutex sm;
-    std::vector<int> ret;
+    // std::vector<bool> ret;
 
     std::random_device rd;
     std::mt19937 gen(rd());
@@ -30,10 +30,10 @@ namespace SPM_scenario9{
     void threadFunction(thread_context* c ,int i) {
         c->lock_shared(&m, i);
         c->switchContext();
-        {
-            std::unique_lock<std::mutex> lock(sm);
-            ret.push_back(true);               
-        }
+        // {
+        //     std::unique_lock<std::mutex> lock(sm);
+        //     ret.push_back(true);               
+        // }
         m.unlock_shared();
     }
 
