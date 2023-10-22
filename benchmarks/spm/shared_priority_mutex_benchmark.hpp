@@ -1,8 +1,8 @@
 /**
- * @file #TODO.hpp
+ * @file shared_priority_mutex_benchmark.hpp
  * @author F. Abrignani (federignoli@hotmail.it)
  * @author S. Martorana (salvatoremartorana@hotmail.com)
- * @brief Alias #TODO.
+ * @brief Alias shared_priority_mutex_benchmark.
  * @version 0.1
  * @date 2023-10-06
  * @private
@@ -18,7 +18,7 @@ namespace shared_priority_mutex_benchmark{
 
     boost::fairness::shared_priority_mutex<5> m;
 
-    void PM_S_LockUnlock(benchmark::State& state) {
+    void lock_unlock_benchmark(benchmark::State& state) {
         boost::fairness::shared_priority_mutex mf;
 
         for (auto _ : state){
@@ -27,7 +27,7 @@ namespace shared_priority_mutex_benchmark{
         }
     }
 
-    void PM_S_SLockSUnlock(benchmark::State& state) {
+    void shared_lock_unlock_benchmark(benchmark::State& state) {
         boost::fairness::shared_priority_mutex mf;
 
         for (auto _ : state){
@@ -36,7 +36,7 @@ namespace shared_priority_mutex_benchmark{
         }
     }
 
-    void PM_S_pipeline_benchmark_long(benchmark::State& state) {// order of 1/10th of a second (PM faster)
+    void pipeline_benchmark_long(benchmark::State& state) {// order of 1/10th of a second (PM faster)
         std::array<int, 8> prios {0, 2, 2, 1, 1, 3, 3, 0};
         std::array<int, 8> preCT {20, 15, 20, 30, 10, 5, 5, 20};
         int CT = 10;
@@ -47,7 +47,7 @@ namespace shared_priority_mutex_benchmark{
         }
     }
 
-    void PM_S_Spipeline_benchmark_long(benchmark::State& state) {// order of 1/10th of a second (PM faster)
+    void shared_pipeline_benchmark_long(benchmark::State& state) {// order of 1/10th of a second (PM faster)
         std::array<int, 8> prios {0, 2, 2, 1, 1, 3, 3, 0};
         std::array<int, 8> preCT {20, 15, 20, 30, 10, 5, 5, 20};
         int CT = 10;
@@ -58,7 +58,7 @@ namespace shared_priority_mutex_benchmark{
         }
     }
 
-    void PM_S_pipeline_benchmark_gaming(benchmark::State& state) {// order of 10 to 15 milliseconds (PM faster)
+    void pipeline_benchmark_gaming(benchmark::State& state) {// order of 10 to 15 milliseconds (PM faster)
         std::array<int, 8> prios {0, 2, 2, 1, 1, 3, 3, 0};
         std::array<int, 8> preCT {2000, 1500, 2000, 3000, 1000, 500, 500, 2000};
         int CT = 1000;
@@ -69,7 +69,7 @@ namespace shared_priority_mutex_benchmark{
         }
     }
 
-    void PM_S_Spipeline_benchmark_gaming(benchmark::State& state) {// order of 10 to 15 milliseconds (PM faster)
+    void shared_pipeline_benchmark_gaming(benchmark::State& state) {// order of 10 to 15 milliseconds (PM faster)
         std::array<int, 8> prios {0, 2, 2, 1, 1, 3, 3, 0};
         std::array<int, 8> preCT {2000, 1500, 2000, 3000, 1000, 500, 500, 2000};
         int CT = 1000;
@@ -80,7 +80,7 @@ namespace shared_priority_mutex_benchmark{
         }
     }
 
-    void PM_S_pipeline_benchmark_audio(benchmark::State& state) {// order of 1 to 1.5 millisec (PM faster)
+    void pipeline_benchmark_audio(benchmark::State& state) {// order of 1 to 1.5 millisec (PM faster)
         std::array<int, 8> prios {0, 2, 2, 1, 1, 3, 3, 0};
         std::array<int, 8> preCT {200, 150, 200, 300, 100, 50, 50, 200};
         int CT = 100;
@@ -91,7 +91,7 @@ namespace shared_priority_mutex_benchmark{
         }
     }
 
-    void PM_S_Spipeline_benchmark_audio(benchmark::State& state) {// order of 1 to 1.5 millisec (PM faster)
+    void shared_pipeline_benchmark_audio(benchmark::State& state) {// order of 1 to 1.5 millisec (PM faster)
         std::array<int, 8> prios {0, 2, 2, 1, 1, 3, 3, 0};
         std::array<int, 8> preCT {200, 150, 200, 300, 100, 50, 50, 200};
         int CT = 100;
@@ -102,7 +102,7 @@ namespace shared_priority_mutex_benchmark{
         }
     }
 
-    void PM_S_pipeline_benchmark_fast(benchmark::State& state) {
+    void pipeline_benchmark_fast(benchmark::State& state) {
         std::array<int, 8> prios {0, 2, 2, 1, 1, 3, 3, 0};
         std::array<int, 8> preCT {2000, 1500, 2000, 3000, 1000, 500, 500, 2000};
         int CT = 1000;
@@ -113,7 +113,7 @@ namespace shared_priority_mutex_benchmark{
         }
     }
 
-    void PM_S_Spipeline_benchmark_fast(benchmark::State& state) {
+    void shared_pipeline_benchmark_fast(benchmark::State& state) {
         std::array<int, 8> prios {0, 2, 2, 1, 1, 3, 3, 0};
         std::array<int, 8> preCT {2000, 1500, 2000, 3000, 1000, 500, 500, 2000};
         int CT = 1000;
