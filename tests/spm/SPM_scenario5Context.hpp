@@ -1,8 +1,8 @@
 /**
- * @file #TODO.hpp
+ * @file SPM_scenario5Context.hpp
  * @author S. Martorana (salvatoremartorana@hotmail.com)
  * @author F. Abrignani (federignoli@hotmail.it)
- * @brief Alias #TODO.
+ * @brief Alias SPM_scenario5Context.
  * @version 0.1
  * @date 2023-10-06
  * @private

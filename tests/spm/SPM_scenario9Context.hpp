@@ -1,8 +1,8 @@
 /**
- * @file #TODO.hpp
+ * @file SPM_scenario9Context.hpp
  * @author S. Martorana (salvatoremartorana@hotmail.com)
  * @author F. Abrignani (federignoli@hotmail.it)
- * @brief Alias #TODO.
+ * @brief Alias SPM_scenario9Context.
  * @version 0.1
  * @date 2023-10-06
  * @private
@@ -56,12 +56,12 @@ namespace SPM_scenario9{
             thread_0, thread_1, thread_2, thread_3, ctrlThread
         );
 
-        sch.switchContextTo(CTRLTHREAD);// acquire the lock and then the scheduler reaquire control
+        sch.switchContextTo(CTRLTHREAD);// acquire the lock and then the scheduler reaquire control.
         sch.proceed(THREAD0, THREAD1, THREAD2, THREAD3);
-        sch.waitUntilAllThreadStatus<thread_status_t::WAITING_EXTERNAL>(THREAD0, THREAD1, THREAD2, THREAD3);// wait until 0 and 4 are stuck on the lock_shared
-        sch.switchContextTo(CTRLTHREAD);// now you unlock the mutex so 0 since it has higher priority must go first
-        sch.waitUntilAllThreadStatus<thread_status_t::WAITING>(THREAD0, THREAD1, THREAD2, THREAD3);// so now both 0 and 4 can reach their next switch context
-        sch.proceed(THREAD0, THREAD1, THREAD2, THREAD3);// now everyone else decide to start 1 and 2 can get in since they are also shared and 4 is still holding shared but 3 wait on the lock
+        sch.waitUntilAllThreadStatus<thread_status_t::WAITING_EXTERNAL>(THREAD0, THREAD1, THREAD2, THREAD3);// wait until 0, 1, 2 and 3 are stuck on the lock_shared.
+        sch.switchContextTo(CTRLTHREAD);// now you unlock the mutex.
+        sch.waitUntilAllThreadStatus<thread_status_t::WAITING>(THREAD0, THREAD1, THREAD2, THREAD3);// so now 0, 1, 2 and 3 can reach their next switch context.
+        sch.proceed(THREAD0, THREAD1, THREAD2, THREAD3);// now everyone can proceed.
         sch.joinAll();
     };
 }
