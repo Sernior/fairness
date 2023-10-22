@@ -15,6 +15,7 @@
 #include <DeterministicConcurrency>
 #include <vector>
 #include <random>
+#include <mutex>
 
 namespace SPM_scenario9{
     using namespace DeterministicConcurrency;
