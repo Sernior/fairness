@@ -56,12 +56,12 @@ namespace SPM_scenario9{
             thread_0, thread_1, thread_2, thread_3, ctrlThread
         );
 
-        sch.switchContextTo(CTRLTHREAD);// acquire the lock and then the scheduler reaquire control.
+        sch.switchContextTo(CTRLTHREAD);
         sch.proceed(THREAD0, THREAD1, THREAD2, THREAD3);
-        sch.waitUntilAllThreadStatus<thread_status_t::WAITING_EXTERNAL>(THREAD0, THREAD1, THREAD2, THREAD3);// wait until 0, 1, 2 and 3 are stuck on the lock_shared.
-        sch.switchContextTo(CTRLTHREAD);// now you unlock the mutex.
-        sch.waitUntilAllThreadStatus<thread_status_t::WAITING>(THREAD0, THREAD1, THREAD2, THREAD3);// so now 0, 1, 2 and 3 can reach their next switch context.
-        sch.proceed(THREAD0, THREAD1, THREAD2, THREAD3);// now everyone can proceed.
+        sch.waitUntilAllThreadStatus<thread_status_t::WAITING_EXTERNAL>(THREAD0, THREAD1, THREAD2, THREAD3);
+        sch.switchContextTo(CTRLTHREAD);
+        sch.waitUntilAllThreadStatus<thread_status_t::WAITING>(THREAD0, THREAD1, THREAD2, THREAD3); // if the lock_shared wouldn`t be "shared" this instruction would cause deadlock.
+        sch.proceed(THREAD0, THREAD1, THREAD2, THREAD3);
         sch.joinAll();
     };
 }
