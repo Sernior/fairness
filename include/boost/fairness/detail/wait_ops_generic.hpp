@@ -16,7 +16,7 @@
 #include <boost/fairness/config.hpp>
 #include <atomic>
 
-namespace boost::fairness::detail{// NOTICE: maybe T is already an atomic and should not be casted
+namespace boost::fairness::detail{
 
     template<typename T, typename K>
     inline void wait_(T& mem, K expected){

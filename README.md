@@ -112,7 +112,7 @@ static void thread_function_nano(int p, int preCriticalTime, int postCriticalTim
 
 int main()
 {
-    std::array<int, 8> prios {0, 2, 2, 1, 1, 3, 3, 0};
+    std::array<int, 8> prios {0, 1, 2, 1, 3, 2, 2, 0};
     std::array<int, 8> preCT {2000, 1500, 2000, 3000, 1000, 500, 500, 2000};
     std::array<int, 8> postCT {5000, 3000, 2000, 2500, 1000, 1500, 1500, 4500};
     int criticalTime = 1000;

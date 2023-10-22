@@ -8,14 +8,14 @@
 #include <BS_thread_pool.hpp>
 
 // #include <boost/atomic.hpp>
-
 #include <boost/fairness.hpp>
 
+static boost::fairness::shared_priority_mutex<4> spm;
 static boost::fairness::priority_mutex<4> pm;
 static boost::fairness::spinlock_priority_mutex<4> sms;
 static std::mutex m;
 
-#define NOW std::chrono::steady_clock::now()
+#define NOW std::chrono::high_resolution_clock::now()
 
 
 static void busy_wait_nano(uint64_t nanoseconds){
@@ -36,7 +36,7 @@ static void thread_function_nano(int p, int preCriticalTime, int criticalTime, i
 static void thread_function_nano_std(int preCriticalTime, int criticalTime, int postCriticalTime){
     busy_wait_nano(preCriticalTime);
     {
-        std::lock_guard l1(m);
+        std::unique_lock l1(m);
         busy_wait_nano(criticalTime);
     }
     busy_wait_nano(postCriticalTime);
@@ -44,14 +44,14 @@ static void thread_function_nano_std(int preCriticalTime, int criticalTime, int 
 
 int main()
 {
-    std::array<int, 8> prios {0, 2, 2, 1, 1, 3, 3, 0};
+    std::array<int, 8> prios {0, 1, 2, 1, 3, 2, 2, 0};
     std::array<int, 8> preCT {2000, 1500, 2000, 3000, 1000, 500, 500, 2000};
     int CT = 1000;
     std::array<int, 8> postCT {5000, 3000, 2000, 2500, 1000, 1500, 1500, 4500};
     {
         BS::thread_pool pool(8);
 
-        auto start_time = std::chrono::high_resolution_clock::now();
+        auto start_time = NOW;
 
         for (int j = 0; j < 200000; ++j) {
             for (int i = 0; i < 8; ++i) {
@@ -63,8 +63,7 @@ int main()
             }
         }
 
-        auto end_time = std::chrono::high_resolution_clock::now();
-        auto duration = std::chrono::duration_cast<std::chrono::milliseconds>(end_time - start_time);
+        auto duration = std::chrono::duration_cast<std::chrono::milliseconds>(NOW - start_time);
 
         std::cout << "Time taken PRIO: " << duration.count() << " milliseconds" << std::endl;
     }
@@ -72,7 +71,7 @@ int main()
     {
         BS::thread_pool pool(8);
 
-        auto start_time = std::chrono::high_resolution_clock::now();
+        auto start_time = NOW;
 
         for (int j = 0; j < 200000; ++j) {
             for (int i = 0; i < 8; ++i) {
@@ -84,8 +83,7 @@ int main()
             }
         }
 
-        auto end_time = std::chrono::high_resolution_clock::now();
-        auto duration = std::chrono::duration_cast<std::chrono::milliseconds>(end_time - start_time);
+        auto duration = std::chrono::duration_cast<std::chrono::milliseconds>(NOW - start_time);
 
         std::cout << "Time taken STD: " << duration.count() << " milliseconds" << std::endl;
     }
