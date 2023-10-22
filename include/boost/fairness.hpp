@@ -25,8 +25,7 @@
 #include <boost/fairness/unique_lock.hpp>
 
 #ifdef BOOST_FAIRNESS_EXPERIMENTAL_MUTEXES
-#include <boost/fairness/experimental/slim_spinlock_priority_mutex.hpp>
-#include <boost/fairness/experimental/experimental_priority_mutex.hpp>
+// include experimental stuff here.
 #endif // BOOST_FAIRNESS_EXPERIMENTAL_MUTEXES
 
 #endif // BOOST_FAIRNESS_HPP
