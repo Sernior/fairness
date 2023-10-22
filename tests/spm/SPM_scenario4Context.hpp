@@ -1,8 +1,8 @@
 /**
- * @file #TODO.hpp
+ * @file SPM_scenario4Context.hpp
  * @author S. Martorana (salvatoremartorana@hotmail.com)
  * @author F. Abrignani (federignoli@hotmail.it)
- * @brief Alias #TODO.
+ * @brief Alias SPM_scenario4Context.
  * @version 0.1
  * @date 2023-10-06
  * @private
@@ -14,11 +14,13 @@
 #include <boost/fairness.hpp>
 #include <DeterministicConcurrency>
 #include <vector>
+#include <mutex>
 
 namespace SPM_scenario4{
     using namespace DeterministicConcurrency;
 
     boost::fairness::shared_priority_mutex<5> m;
+    std::mutex sm;
 
     std::vector<int> ret;
 
@@ -29,7 +31,10 @@ namespace SPM_scenario4{
     void threadFunction(thread_context* c ,int i) {
         c->lock_shared(&m, i);
         c->switchContext();
-        ret.push_back(i);
+        {
+            std::unique_lock<std::mutex> lock(sm);
+            ret.push_back(i);               
+        }
         m.unlock_shared();
     }
 

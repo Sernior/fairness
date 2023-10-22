@@ -1,8 +1,8 @@
 /**
- * @file #TODO.hpp
+ * @file SPM_scenario8Context.hpp
  * @author S. Martorana (salvatoremartorana@hotmail.com)
  * @author F. Abrignani (federignoli@hotmail.it)
- * @brief Alias #TODO.
+ * @brief Alias SPM_scenario8Context.
  * @version 0.1
  * @date 2023-10-06
  * @private
@@ -15,12 +15,13 @@
 #include <DeterministicConcurrency>
 #include <vector>
 #include <random>
+#include <mutex>
 
 namespace SPM_scenario8{
     using namespace DeterministicConcurrency;
 
     boost::fairness::shared_priority_mutex<7> m;
-
+    std::mutex sm;
     std::vector<int> ret;
 
     std::random_device rd;
@@ -35,7 +36,10 @@ namespace SPM_scenario8{
         }
         else {
             c->lock_shared(&m, i);
-            ret.push_back(7);               // if reader write 7
+            {
+                std::unique_lock<std::mutex> lock(sm);
+                ret.push_back(7);               // if reader write 7
+            }
             m.unlock_shared();
         }
     }

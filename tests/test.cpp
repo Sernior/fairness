@@ -224,6 +224,11 @@ TEST(SharedPriorityMutex_ControlledScheduling, TryLockSharedTest) {
     SPM_scenario7::expected.clear();
 }
 
+TEST(SharedPriorityMutex_ControlledScheduling, S_LockSharedTest) {
+    SPM_scenario9::executeSchedulingSequence();
+    EXPECT_TRUE(true);
+}
+
 TEST(RecursivePriorityMutex_ControlledScheduling, RPM_LockUnlockTest) {
     RPM_scenario1::executeSchedulingSequence();
     EXPECT_EQ(RPM_scenario1::ret, RPM_scenario1::expected);

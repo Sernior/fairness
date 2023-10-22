@@ -1,8 +1,8 @@
 /**
- * @file #TODO.hpp
+ * @file SPM_scenario7Context.hpp
  * @author S. Martorana (salvatoremartorana@hotmail.com)
  * @author F. Abrignani (federignoli@hotmail.it)
- * @brief Alias #TODO.
+ * @brief Alias SPM_scenario7Context.
  * @version 0.1
  * @date 2023-10-06
  * @private
@@ -14,12 +14,13 @@
 #include <boost/fairness.hpp>
 #include <DeterministicConcurrency>
 #include <vector>
+#include <mutex>
 
 namespace SPM_scenario7{
     using namespace DeterministicConcurrency;
 
     boost::fairness::shared_priority_mutex<6> m;
-
+    std::mutex sm;
     std::vector<int> ret;
 
     std::vector<int> expected{
@@ -29,14 +30,20 @@ namespace SPM_scenario7{
     void threadFunction(thread_context* c ,int i) {
         c->lock_shared(&m, i);
         c->switchContext();
-        ret.push_back(i);
+        {
+            std::unique_lock<std::mutex> lock(sm);
+            ret.push_back(i);               
+        }
         m.unlock_shared();
     }
 
     void threadFunctionTryShared(thread_context* c ,int i) {
         if (m.try_lock_shared(i)){
             c->switchContext();
-            ret.push_back(i);
+            {
+                std::unique_lock<std::mutex> lock(sm);
+                ret.push_back(i);               
+            }
             m.unlock_shared();
             // return;
         }
@@ -90,8 +97,6 @@ namespace SPM_scenario7{
         sch.waitUntilAllThreadStatus<thread_status_t::WAITING_EXTERNAL>(THREAD3);
         sch.switchContextTo(THREAD4, THREAD1, THREAD2);// after 4 1 and 2 are done finally 3 can acquire the unique lock
         sch.proceed(THREAD5); // 5 will fail
-        // sch.waitUntilAllThreadStatus<thread_status_t::WAITING>(THREAD5);
-        // sch.switchContextTo(THREAD5);
         sch.waitUntilAllThreadStatus<thread_status_t::WAITING>(THREAD3);
         sch.switchContextTo(THREAD3);
         sch.joinAll();
