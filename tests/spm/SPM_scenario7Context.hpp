@@ -14,6 +14,7 @@
 #include <boost/fairness.hpp>
 #include <DeterministicConcurrency>
 #include <vector>
+#include <mutex>
 
 namespace SPM_scenario7{
     using namespace DeterministicConcurrency;
