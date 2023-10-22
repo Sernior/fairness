@@ -32,6 +32,7 @@
 #include "spm/SPM_scenario6Context.hpp"
 #include "spm/SPM_scenario7Context.hpp"
 #include "spm/SPM_scenario8Context.hpp"
+#include "spm/SPM_scenario9Context.hpp"
 #include "rpm/RPM_scenario1Context.hpp"
 #include "rpm/RPM_scenario2Context.hpp"
 #include "rpm/RPM_scenario3Context.hpp"

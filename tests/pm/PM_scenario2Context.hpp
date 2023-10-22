@@ -1,8 +1,8 @@
 /**
- * @file #TODO.hpp
+ * @file PM_scenario2Context.hpp
  * @author S. Martorana (salvatoremartorana@hotmail.com)
  * @author F. Abrignani (federignoli@hotmail.it)
- * @brief Alias #TODO.
+ * @brief Alias PM_scenario2Context.
  * @version 0.1
  * @date 2023-10-06
  * @private
