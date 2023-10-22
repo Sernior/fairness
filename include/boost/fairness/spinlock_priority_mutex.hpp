@@ -65,15 +65,22 @@ namespace boost::fairness{
          * \endcode
          */
         void lock(Priority_t const priority = 0){
+
             Priority_t localCurrentPriority = currentPriority_.load(std::memory_order_relaxed);
+
             waiters_[priority].fetch_add(1, std::memory_order_relaxed);
+
             while ( 
                 (localCurrentPriority < priority || !currentPriority_.compare_exchange_weak(localCurrentPriority, priority, std::memory_order_relaxed)) ||
                 (lockOwned_.test_and_set(std::memory_order_acquire))
             ){
+
                 localCurrentPriority = currentPriority_;
+
             }
+
             waiters_[priority].fetch_sub(1, std::memory_order_relaxed);
+            
         }
 
         /**

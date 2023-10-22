@@ -106,8 +106,11 @@ namespace boost::fairness{
          * \endcode
          */
         void lock(Priority_t const priority = 0){
+
             internalMutex_.lock(priority);
+
             ++waiters_[priority];
+            
             for(;;){
                 if ( 
                     lock_owned_by_me_() ||
@@ -116,10 +119,13 @@ namespace boost::fairness{
                     ){
 
                         owner_ = std::this_thread::get_id();
+
                         --waiters_[priority];
+
                         ++recursionCounter_;
 
                         internalMutex_.unlock();
+
                         return;
                     }
 
@@ -181,13 +187,16 @@ namespace boost::fairness{
             if (recursionCounter_ != 0)
             {
                 internalMutex_.unlock();
+
                 return;
             }
 
             owner_ = std::thread::id();
 
             if (p == BOOST_FAIRNESS_MAXIMUM_PRIORITY){
+
                 internalMutex_.unlock();
+
                 return;
             }
 
@@ -247,13 +256,16 @@ namespace boost::fairness{
              (find_first_priority_() >= priority && lock_not_owned_())){
 
                 owner_ = std::this_thread::get_id();
+
                 ++recursionCounter_;
+
                 internalMutex_.unlock();
+
                 return true;
-                
              }
 
             internalMutex_.unlock();
+
             return false;
         }
 

@@ -223,6 +223,7 @@ namespace boost::fairness{
             internalMutex_.unlock();
 
             return true;
+
         }
 
         /**
@@ -241,6 +242,7 @@ namespace boost::fairness{
          * \endcode
          */
         void lock_shared(Priority_t priority = 0){
+
             internalMutex_.lock(priority);
 
             ++priorities_[priority].readers_waiting;
@@ -340,6 +342,7 @@ namespace boost::fairness{
          * @return bool 
          */
         [[nodiscard]] bool try_lock_shared(Priority_t priority = 0){
+
             internalMutex_.lock(priority);
 
             if (lockOwned_ || find_first_priority_with_writers_() < priority){
@@ -354,6 +357,7 @@ namespace boost::fairness{
             internalMutex_.unlock();
 
             return true;
+            
         }
 
         private:
@@ -361,7 +365,7 @@ namespace boost::fairness{
         alignas(BOOST_FAIRNESS_HARDWARE_DESTRUCTIVE_SIZE) spinlock_priority_mutex<N> internalMutex_;
         alignas(BOOST_FAIRNESS_HARDWARE_DESTRUCTIVE_SIZE) waitingFlags<N> waitingFlags_;
         std::array<threadPriority, N> priorities_;
-         Thread_cnt_t totalCurrentReaders_{};
+        Thread_cnt_t totalCurrentReaders_{};
         Thread_cnt_t totalWritersWaiting_{};
         bool lockOwned_{};
 
