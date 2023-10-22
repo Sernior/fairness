@@ -71,18 +71,24 @@ namespace boost::fairness{
          * \endcode
          */
         void lock(Priority_t const priority = 0){
+
             internalMutex_.lock(priority);
+
             ++waiters_[priority];
+
             for (;;){
 
                 if (
                     !lockOwned_ &&
                     find_first_priority_() >= priority
                 ){
+
                     --waiters_[priority];
+
                     lockOwned_ = true;
+
                     internalMutex_.unlock();
-                    //reset(priority);
+
                     return;
                 }
 
@@ -123,9 +129,9 @@ namespace boost::fairness{
                 return;
             }
 
-            internalMutex_.unlock();
+            reset_(p);
 
-            reset_(p); // maybe better before the unlock
+            internalMutex_.unlock();
 
             detail::notify_one(waitingFlag_[p]);
         }
@@ -166,9 +172,9 @@ namespace boost::fairness{
 
         private:
         alignas(BOOST_FAIRNESS_HARDWARE_DESTRUCTIVE_SIZE) spinlock_priority_mutex<N> internalMutex_;
+        alignas(BOOST_FAIRNESS_HARDWARE_DESTRUCTIVE_SIZE) std::array<std::atomic<uint32_t>, N> waitingFlag_;
         std::array<Thread_cnt_t, N> waiters_;
         bool lockOwned_{};
-        alignas(BOOST_FAIRNESS_HARDWARE_DESTRUCTIVE_SIZE) std::array<std::atomic<uint32_t>, N> waitingFlag_;
 
         Priority_t find_first_priority_(){
             for (Priority_t i = 0; i < N; ++i){
