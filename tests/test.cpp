@@ -19,14 +19,14 @@
 
 #include "scenarios.hpp"
 
-TEST(PriorityMutex_ControlledScheduling, lock_unlock_benchmarkTest) {
+TEST(PriorityMutex_ControlledScheduling, LockUnlockTest) {
     PM_scenario1::executeSchedulingSequence();
     EXPECT_EQ(PM_scenario1::ret, PM_scenario1::expected);
     PM_scenario1::ret.clear();
     PM_scenario1::expected.clear();
 }
 
-TEST(PriorityMutex_ControlledScheduling, lock_unlock_benchmarkTest2) {
+TEST(PriorityMutex_ControlledScheduling, LockUnlockTest2) {
     PM_scenario2::executeSchedulingSequence();
     EXPECT_EQ(PM_scenario2::ret, PM_scenario2::expected);
     PM_scenario2::ret.clear();
@@ -133,14 +133,14 @@ TEST(RecursivePriorityMutex_ControlledScheduling, RPM_RandomizedPriorityTest) {
 
 #undef RANDOM_TESTS
 
-TEST(SlimPriorityMutex_ControlledScheduling, SLM_lock_unlock_benchmarkTest) {
+TEST(SlimPriorityMutex_ControlledScheduling, SLM_LockUnlockTest) {
     SLM_scenario1::executeSchedulingSequence();
     EXPECT_EQ(SLM_scenario1::ret, SLM_scenario1::expected);
     SLM_scenario1::ret.clear();
     SLM_scenario1::expected.clear();
 }
 
-TEST(SlimPriorityMutex_ControlledScheduling, SLM_lock_unlock_benchmarkTest2) {
+TEST(SlimPriorityMutex_ControlledScheduling, SLM_LockUnlockTest2) {
     SLM_scenario2::executeSchedulingSequence();
     EXPECT_EQ(SLM_scenario2::ret, SLM_scenario2::expected);
     SLM_scenario2::ret.clear();
@@ -154,14 +154,14 @@ TEST(SlimPriorityMutex_ControlledScheduling, SLM_TryLockTest) {
     SLM_scenario3::expected.clear();
 }
 
-TEST(SpinlockPriorityMutex_ControlledScheduling, SPNLCPM_lock_unlock_benchmarkTest) {
+TEST(SpinlockPriorityMutex_ControlledScheduling, SPNLCPM_LockUnlockTest) {
     SPNLCPM_scenario1::executeSchedulingSequence();
     EXPECT_EQ(SPNLCPM_scenario1::ret, SPNLCPM_scenario1::expected);
     SPNLCPM_scenario1::ret.clear();
     SPNLCPM_scenario1::expected.clear();
 }
 
-TEST(SpinlockPriorityMutex_ControlledScheduling, SPNLCPM_lock_unlock_benchmarkTest2) {
+TEST(SpinlockPriorityMutex_ControlledScheduling, SPNLCPM_LockUnlockTest2) {
     SPNLCPM_scenario2::executeSchedulingSequence();
     EXPECT_EQ(SPNLCPM_scenario2::ret, SPNLCPM_scenario2::expected);
     SPNLCPM_scenario2::ret.clear();
@@ -175,14 +175,14 @@ TEST(SpinlockPriorityMutex_ControlledScheduling, SPNLCPM_TryLockTest) {
     SPNLCPM_scenario3::expected.clear();
 }
 
-TEST(SharedPriorityMutex_ControlledScheduling, lock_unlock_benchmarkTest) {
+TEST(SharedPriorityMutex_ControlledScheduling, LockUnlockTest) {
     SPM_scenario1::executeSchedulingSequence();
     EXPECT_EQ(SPM_scenario1::expected, SPM_scenario1::ret);
     SPM_scenario1::ret.clear();
     SPM_scenario1::expected.clear();
 }
 
-TEST(SharedPriorityMutex_ControlledScheduling, lock_unlock_benchmarkTest2) {
+TEST(SharedPriorityMutex_ControlledScheduling, LockUnlockTest2) {
     SPM_scenario2::executeSchedulingSequence();
     EXPECT_EQ(SPM_scenario2::expected, SPM_scenario2::ret);
     SPM_scenario2::ret.clear();
@@ -224,14 +224,14 @@ TEST(SharedPriorityMutex_ControlledScheduling, TryLockSharedTest) {
     SPM_scenario7::expected.clear();
 }
 
-TEST(RecursivePriorityMutex_ControlledScheduling, RPM_lock_unlock_benchmarkTest) {
+TEST(RecursivePriorityMutex_ControlledScheduling, RPM_LockUnlockTest) {
     RPM_scenario1::executeSchedulingSequence();
     EXPECT_EQ(RPM_scenario1::ret, RPM_scenario1::expected);
     RPM_scenario1::ret.clear();
     RPM_scenario1::expected.clear();
 }
 
-TEST(RecursivePriorityMutex_ControlledScheduling, RPM_lock_unlock_benchmarkTest2) {
+TEST(RecursivePriorityMutex_ControlledScheduling, RPM_LockUnlockTest2) {
     RPM_scenario2::executeSchedulingSequence();
     EXPECT_EQ(RPM_scenario2::ret, RPM_scenario2::expected);
     RPM_scenario2::ret.clear();
