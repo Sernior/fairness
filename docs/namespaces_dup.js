@@ -40,19 +40,19 @@ var namespaces_dup =
       [ "ret", "namespace_p_m__scenario5.html#ae94912c04b40600341791c62f5e17d04", null ]
     ] ],
     [ "priority_mutex_benchmark", "namespacepriority__mutex__benchmark.html", [
-      [ "PM_LockUnlock", "namespacepriority__mutex__benchmark.html#a53ad92860a7f055e37869b2728acfcc5", null ],
-      [ "PM_pipeline_benchmark_audio", "namespacepriority__mutex__benchmark.html#a62d59b36e8216459fd8ec5d88d16d53f", null ],
-      [ "PM_pipeline_benchmark_fast", "namespacepriority__mutex__benchmark.html#ad35958f01660bd62a66666f64f15bcdc", null ],
-      [ "PM_pipeline_benchmark_gaming", "namespacepriority__mutex__benchmark.html#af8f8ee36697339831f42844f557b28ac", null ],
-      [ "PM_pipeline_benchmark_long", "namespacepriority__mutex__benchmark.html#af44421e582fea55a4a13f32303ff5e9e", null ],
+      [ "lock_unlock_benchmark", "namespacepriority__mutex__benchmark.html#ab45d9338b4517b2fcb4fc6645ddb586d", null ],
+      [ "pipeline_benchmark_audio", "namespacepriority__mutex__benchmark.html#a33b883bc34fe63a3571c12b5ade8d5e5", null ],
+      [ "pipeline_benchmark_fast", "namespacepriority__mutex__benchmark.html#a1ff2d163e83c55fa21df54ffc45f083a", null ],
+      [ "pipeline_benchmark_gaming", "namespacepriority__mutex__benchmark.html#ab062813a4832e9f9aecaaafd0b8ec13f", null ],
+      [ "pipeline_benchmark_long", "namespacepriority__mutex__benchmark.html#a852e5d5bcd8c72e250abf9fea62413dc", null ],
       [ "m", "namespacepriority__mutex__benchmark.html#a89caf11e8f4e9383e828e6f8115c2ac6", null ]
     ] ],
     [ "recursive_priority_mutex_benchmark", "namespacerecursive__priority__mutex__benchmark.html", [
-      [ "R_PM_LockUnlock", "namespacerecursive__priority__mutex__benchmark.html#a06bfcad62aed344ecc306bdc15456fcc", null ],
-      [ "R_PM_pipeline_benchmark_audio", "namespacerecursive__priority__mutex__benchmark.html#aa852f06d9183ff440f6001db0cd4d9f0", null ],
-      [ "R_PM_pipeline_benchmark_fast", "namespacerecursive__priority__mutex__benchmark.html#a2a6ba3b4e9bfb55b7ced2e7b77bea287", null ],
-      [ "R_PM_pipeline_benchmark_gaming", "namespacerecursive__priority__mutex__benchmark.html#a19712bcd054670fe30f4a8b11fc59afc", null ],
-      [ "R_PM_pipeline_benchmark_long", "namespacerecursive__priority__mutex__benchmark.html#aa96269d1b1ab3e8eb1b7e8ba35d40038", null ],
+      [ "lock_unlock_benchmark", "namespacerecursive__priority__mutex__benchmark.html#aaab464790221b51183f9a4dcfdbfdb64", null ],
+      [ "pipeline_benchmark_audio", "namespacerecursive__priority__mutex__benchmark.html#aff4ed92d6aa22eca50de8c428b48da5f", null ],
+      [ "pipeline_benchmark_fast", "namespacerecursive__priority__mutex__benchmark.html#abf424153a79ba95ab7edf112255e441d", null ],
+      [ "pipeline_benchmark_gaming", "namespacerecursive__priority__mutex__benchmark.html#a1b503ffef97c3d975dc49deab1538bf9", null ],
+      [ "pipeline_benchmark_long", "namespacerecursive__priority__mutex__benchmark.html#aaba70961173bcd75d9aa9c3f1882f45b", null ],
       [ "m", "namespacerecursive__priority__mutex__benchmark.html#aaaf871b7ce6ab7247891fdfe9bd9cd03", null ]
     ] ],
     [ "RPM_scenario1", "namespace_r_p_m__scenario1.html", [
@@ -124,24 +124,24 @@ var namespaces_dup =
       [ "ret", "namespace_r_p_m__scenario9.html#aecc55b9f70e87e2d3c1310e1f10dbf5e", null ]
     ] ],
     [ "shared_priority_mutex_benchmark", "namespaceshared__priority__mutex__benchmark.html", [
-      [ "PM_S_LockUnlock", "namespaceshared__priority__mutex__benchmark.html#af24851fda55a54c6a99309dd6e49662b", null ],
-      [ "PM_S_pipeline_benchmark_audio", "namespaceshared__priority__mutex__benchmark.html#a369ca2614b4c4644a14df9c8fe550f16", null ],
-      [ "PM_S_pipeline_benchmark_fast", "namespaceshared__priority__mutex__benchmark.html#ad22f4e15e185923d5cb1b1cdf8d2c327", null ],
-      [ "PM_S_pipeline_benchmark_gaming", "namespaceshared__priority__mutex__benchmark.html#ac0545d9e85eadb6551c12d292337c5e5", null ],
-      [ "PM_S_pipeline_benchmark_long", "namespaceshared__priority__mutex__benchmark.html#a33ab4a0d0db66c12f8d4a3ea522a64bb", null ],
-      [ "PM_S_SLockSUnlock", "namespaceshared__priority__mutex__benchmark.html#ae21aaec7fa690ada83e392a6c59097ef", null ],
-      [ "PM_S_Spipeline_benchmark_audio", "namespaceshared__priority__mutex__benchmark.html#a0f20fc1a9c1d214b3fc0e4bd11efd289", null ],
-      [ "PM_S_Spipeline_benchmark_fast", "namespaceshared__priority__mutex__benchmark.html#a435bde39f7c0ce77b0874129259b7a92", null ],
-      [ "PM_S_Spipeline_benchmark_gaming", "namespaceshared__priority__mutex__benchmark.html#a2f1f60e0a9266788039da44719e7a276", null ],
-      [ "PM_S_Spipeline_benchmark_long", "namespaceshared__priority__mutex__benchmark.html#a56dec7b398d9d97207ac29f0dcf1c2be", null ],
+      [ "lock_unlock_benchmark", "namespaceshared__priority__mutex__benchmark.html#a4c521643f62dc437d2ee6ca6662c9ddf", null ],
+      [ "pipeline_benchmark_audio", "namespaceshared__priority__mutex__benchmark.html#a581426b186bff8416e3fb9fd7275c2ea", null ],
+      [ "pipeline_benchmark_fast", "namespaceshared__priority__mutex__benchmark.html#a95e178cf32b96e13036a75acd512f04e", null ],
+      [ "pipeline_benchmark_gaming", "namespaceshared__priority__mutex__benchmark.html#a2497f07ce38187f7912bf3ddc42b154b", null ],
+      [ "pipeline_benchmark_long", "namespaceshared__priority__mutex__benchmark.html#a73bac4afe3c901391c4c21d0c4bde973", null ],
+      [ "shared_lock_unlock_benchmark", "namespaceshared__priority__mutex__benchmark.html#a9873b112907e710fecf893afe3ae973a", null ],
+      [ "shared_pipeline_benchmark_audio", "namespaceshared__priority__mutex__benchmark.html#ab79ecfed4df5191f3efb37ff627e7b0b", null ],
+      [ "shared_pipeline_benchmark_fast", "namespaceshared__priority__mutex__benchmark.html#a21c7ad038b38575a006008aff4d1c1c7", null ],
+      [ "shared_pipeline_benchmark_gaming", "namespaceshared__priority__mutex__benchmark.html#a829bc5724c3363c5403593551823b33c", null ],
+      [ "shared_pipeline_benchmark_long", "namespaceshared__priority__mutex__benchmark.html#a7ee9cc57d046fa91739136adb46d6874", null ],
       [ "m", "namespaceshared__priority__mutex__benchmark.html#a716225bf6400b8bc6dee49e98de2b5af", null ]
     ] ],
     [ "slim_priority_mutex_benchmark", "namespaceslim__priority__mutex__benchmark.html", [
-      [ "SLM_PM_LockUnlock", "namespaceslim__priority__mutex__benchmark.html#a7351e5e22d5fe1d1f07fcf3fbe9e4b24", null ],
-      [ "SLM_PM_pipeline_benchmark_audio", "namespaceslim__priority__mutex__benchmark.html#af79751c7e946c01abdcd482a9b213d43", null ],
-      [ "SLM_PM_pipeline_benchmark_fast", "namespaceslim__priority__mutex__benchmark.html#a8fa30fab7a83ba4060d85156bf7d4aa7", null ],
-      [ "SLM_PM_pipeline_benchmark_gaming", "namespaceslim__priority__mutex__benchmark.html#aeb503c3cdf9d2622e4ee54d6f2e74135", null ],
-      [ "SLM_PM_pipeline_benchmark_long", "namespaceslim__priority__mutex__benchmark.html#a541dc9e6420351279de391303843547a", null ],
+      [ "lock_unlock_benchmark", "namespaceslim__priority__mutex__benchmark.html#aa34c2e873dadb32832dad15ad6c0c068", null ],
+      [ "pipeline_benchmark_audio", "namespaceslim__priority__mutex__benchmark.html#ad7b9b33f03fcdedc7909db6cfd8ddf9d", null ],
+      [ "pipeline_benchmark_fast", "namespaceslim__priority__mutex__benchmark.html#afe573a31a8129055970a796f4ac32929", null ],
+      [ "pipeline_benchmark_gaming", "namespaceslim__priority__mutex__benchmark.html#a0561f0b3b4bf159504402cb016a3c7cb", null ],
+      [ "pipeline_benchmark_long", "namespaceslim__priority__mutex__benchmark.html#a7ad7c8778439a597740bb8d6453dc007", null ],
       [ "m", "namespaceslim__priority__mutex__benchmark.html#a25b3c8193bd14c60164d1b25c10e5d5d", null ]
     ] ],
     [ "SLM_scenario1", "namespace_s_l_m__scenario1.html", [
@@ -176,11 +176,11 @@ var namespaces_dup =
       [ "ret", "namespace_s_l_m__scenario4.html#a4aa8900f6c241a7a9684bffcc321670a", null ]
     ] ],
     [ "spinlock_priority_mutex_benchmark", "namespacespinlock__priority__mutex__benchmark.html", [
-      [ "SPNLC_PM_LockUnlock", "namespacespinlock__priority__mutex__benchmark.html#a3ed02cf45e0965748c077c070efce15e", null ],
-      [ "SPNLC_PM_pipeline_benchmark_audio", "namespacespinlock__priority__mutex__benchmark.html#a86867793d18b3a895277000073cda6ff", null ],
-      [ "SPNLC_PM_pipeline_benchmark_fast", "namespacespinlock__priority__mutex__benchmark.html#af4163c9c3dc6d0d074a8543540ebc6b0", null ],
-      [ "SPNLC_PM_pipeline_benchmark_gaming", "namespacespinlock__priority__mutex__benchmark.html#a5c7a4d82130e544ae13ea36656224f21", null ],
-      [ "SPNLC_PM_pipeline_benchmark_long", "namespacespinlock__priority__mutex__benchmark.html#afee7603359254b9f75cb1cd445aa18cb", null ],
+      [ "lock_unlock_benchmark", "namespacespinlock__priority__mutex__benchmark.html#ac6b0f129883f22b3a1726ad6f4baff57", null ],
+      [ "pipeline_benchmark_audio", "namespacespinlock__priority__mutex__benchmark.html#a3af8bd2c1e0ee22adc0a0e4fce472e3d", null ],
+      [ "pipeline_benchmark_fast", "namespacespinlock__priority__mutex__benchmark.html#a333309ba1ab793b1f75896a37d911250", null ],
+      [ "pipeline_benchmark_gaming", "namespacespinlock__priority__mutex__benchmark.html#a83beaa9053573638e754857274e05f03", null ],
+      [ "pipeline_benchmark_long", "namespacespinlock__priority__mutex__benchmark.html#affbbe45b4b000a1aebd6ac2076674c09", null ],
       [ "m", "namespacespinlock__priority__mutex__benchmark.html#a83ba7faa6456840b2c203997a99d578d", null ]
     ] ],
     [ "SPM_scenario1", "namespace_s_p_m__scenario1.html", [
@@ -211,7 +211,8 @@ var namespaces_dup =
       [ "threadFunction2", "namespace_s_p_m__scenario4.html#aa7fb13b8f695d288606dbc50e623f219", null ],
       [ "expected", "namespace_s_p_m__scenario4.html#a2478b408b27e71e526945fb1d7947a11", null ],
       [ "m", "namespace_s_p_m__scenario4.html#ac343962708035002e9b46a712aee67ff", null ],
-      [ "ret", "namespace_s_p_m__scenario4.html#a495e3757a1cefee70fd063ad77fd07c4", null ]
+      [ "ret", "namespace_s_p_m__scenario4.html#a495e3757a1cefee70fd063ad77fd07c4", null ],
+      [ "sm", "namespace_s_p_m__scenario4.html#aafab14074f4340e0516854a967dd8c19", null ]
     ] ],
     [ "SPM_scenario5", "namespace_s_p_m__scenario5.html", [
       [ "threadFunction", "namespace_s_p_m__scenario5.html#a171078ca1e460db284b18eece2a2acc1", null ],
@@ -237,7 +238,8 @@ var namespaces_dup =
       [ "threadFunctionTryShared", "namespace_s_p_m__scenario7.html#ac525c25896acfb05febb5b5e598b95fc", null ],
       [ "expected", "namespace_s_p_m__scenario7.html#ae510e4817cb6dd34040b9a768968b2c9", null ],
       [ "m", "namespace_s_p_m__scenario7.html#a0e5eb935e7b18ba4706f6b0bb3177080", null ],
-      [ "ret", "namespace_s_p_m__scenario7.html#a32fa57d4c70f65df352a3aeeb71d4032", null ]
+      [ "ret", "namespace_s_p_m__scenario7.html#a32fa57d4c70f65df352a3aeeb71d4032", null ],
+      [ "sm", "namespace_s_p_m__scenario7.html#aa6420d35b79bd5370664c10c02d4ac41", null ]
     ] ],
     [ "SPM_scenario8", "namespace_s_p_m__scenario8.html", [
       [ "controlThread", "namespace_s_p_m__scenario8.html#a530c69a5a176837570e79117fe9ff58f", null ],
@@ -246,7 +248,17 @@ var namespaces_dup =
       [ "threadFunction", "namespace_s_p_m__scenario8.html#af93222e0496164d24a6f6b0024024ec4", null ],
       [ "m", "namespace_s_p_m__scenario8.html#a3ff7e057d92240a5ce688ad8a9275630", null ],
       [ "rd", "namespace_s_p_m__scenario8.html#a4f418dc11580a6e4d64b2c59abbe6eb5", null ],
-      [ "ret", "namespace_s_p_m__scenario8.html#a62b1033fc72998e6ec1d64d800eff25e", null ]
+      [ "ret", "namespace_s_p_m__scenario8.html#a62b1033fc72998e6ec1d64d800eff25e", null ],
+      [ "sm", "namespace_s_p_m__scenario8.html#a709e11b09d9a821041f9c4975d592c5f", null ]
+    ] ],
+    [ "SPM_scenario9", "namespace_s_p_m__scenario9.html", [
+      [ "controlThread", "namespace_s_p_m__scenario9.html#a157154dbe711849f24b4b03b78010036", null ],
+      [ "distribution", "namespace_s_p_m__scenario9.html#a6d7c176c6b744cb8392d867b1a039305", null ],
+      [ "gen", "namespace_s_p_m__scenario9.html#a81f8a257052e022e55ce9891e213ba65", null ],
+      [ "threadFunction", "namespace_s_p_m__scenario9.html#a2ee30ab02cd38f79351dff65d0b9352c", null ],
+      [ "m", "namespace_s_p_m__scenario9.html#ae0517a877b5a23d49ca3266739932923", null ],
+      [ "rd", "namespace_s_p_m__scenario9.html#ad8cf427dc23f61f28ecbf487f8d0a09b", null ],
+      [ "sm", "namespace_s_p_m__scenario9.html#a5a68ec097a9f1cdab957def715040989", null ]
     ] ],
     [ "SPNLCPM_scenario1", "namespace_s_p_n_l_c_p_m__scenario1.html", [
       [ "controlThread", "namespace_s_p_n_l_c_p_m__scenario1.html#a1ef13e490185cd7d99234ac2ae5aa779", null ],
@@ -280,32 +292,32 @@ var namespaces_dup =
       [ "ret", "namespace_s_p_n_l_c_p_m__scenario4.html#acb88271c380a0e38bff250d4d50e1442", null ]
     ] ],
     [ "standard_mutex_benchmark", "namespacestandard__mutex__benchmark.html", [
-      [ "STD_LockUnlock", "namespacestandard__mutex__benchmark.html#ae894f14badba4c328331b19ee7e21900", null ],
-      [ "STD_pipeline_benchmark_audio", "namespacestandard__mutex__benchmark.html#ac9522bc34fd3d979e6b5bed68ff50070", null ],
-      [ "STD_pipeline_benchmark_fast", "namespacestandard__mutex__benchmark.html#a395548be3305849a4c488b5d456ad764", null ],
-      [ "STD_pipeline_benchmark_gaming", "namespacestandard__mutex__benchmark.html#a0fca3d29e9eed16d3b0e86d695c65a80", null ],
-      [ "STD_pipeline_benchmark_long", "namespacestandard__mutex__benchmark.html#a1146fa28fc88b13ffeea2ee1a44b32e1", null ],
+      [ "lock_unlock_benchmark", "namespacestandard__mutex__benchmark.html#a274fa0295153b8e54b072189446d8d90", null ],
+      [ "pipeline_benchmark_audio", "namespacestandard__mutex__benchmark.html#ad34de0f2f085a489d0ffd34ab25e1fd0", null ],
+      [ "pipeline_benchmark_fast", "namespacestandard__mutex__benchmark.html#a4cc2dd7d267551bf78db429d31de6674", null ],
+      [ "pipeline_benchmark_gaming", "namespacestandard__mutex__benchmark.html#a5b9b5da40c9f6c390c9c0bccee275dcc", null ],
+      [ "pipeline_benchmark_long", "namespacestandard__mutex__benchmark.html#a97e0e9a68e8e190f416c45c78fb97ed6", null ],
       [ "m", "namespacestandard__mutex__benchmark.html#afcc2f9a8831d01ce6bd55e9e68a8e870", null ]
     ] ],
     [ "standard_recursive_mutex_benchmark", "namespacestandard__recursive__mutex__benchmark.html", [
-      [ "R_STD_LockUnlock", "namespacestandard__recursive__mutex__benchmark.html#a3823d808c05bfe9600d280621da2f7f1", null ],
-      [ "R_STD_pipeline_benchmark_audio", "namespacestandard__recursive__mutex__benchmark.html#ae384252ad960fb6e1151126bc5f55d49", null ],
-      [ "R_STD_pipeline_benchmark_fast", "namespacestandard__recursive__mutex__benchmark.html#a0dc6a4c7d599a4886a31c8fd4d445b7b", null ],
-      [ "R_STD_pipeline_benchmark_gaming", "namespacestandard__recursive__mutex__benchmark.html#afffcf2ec5d03795cb7e6a7949f40ecb0", null ],
-      [ "R_STD_pipeline_benchmark_long", "namespacestandard__recursive__mutex__benchmark.html#ac0deb1840fbecdc0c7cc83ab726a1e3d", null ],
+      [ "lock_unlock_benchmark", "namespacestandard__recursive__mutex__benchmark.html#afe3e3333f0e1620ff50976845b0bd904", null ],
+      [ "pipeline_benchmark_audio", "namespacestandard__recursive__mutex__benchmark.html#ac5aa3d381b13ff8335bee4d87ee76ed9", null ],
+      [ "pipeline_benchmark_fast", "namespacestandard__recursive__mutex__benchmark.html#a9cf9113655ac3f45893572b2b6e1aad5", null ],
+      [ "pipeline_benchmark_gaming", "namespacestandard__recursive__mutex__benchmark.html#aefa76cc884de87612e039efc793d5905", null ],
+      [ "pipeline_benchmark_long", "namespacestandard__recursive__mutex__benchmark.html#a505cba618615322879cecfd00b9a7b2b", null ],
       [ "m", "namespacestandard__recursive__mutex__benchmark.html#a117615d958081bfe2a337632b07d7063", null ]
     ] ],
     [ "standard_shared_mutex_benchmark", "namespacestandard__shared__mutex__benchmark.html", [
-      [ "STD_S_LockUnlock", "namespacestandard__shared__mutex__benchmark.html#acf9796448e722552b21c934f715db611", null ],
-      [ "STD_S_pipeline_benchmark_audio", "namespacestandard__shared__mutex__benchmark.html#a96138c6e2a04d3b5f7535a3c06760562", null ],
-      [ "STD_S_pipeline_benchmark_fast", "namespacestandard__shared__mutex__benchmark.html#a40078f0663e78978b27d0451bab7abe6", null ],
-      [ "STD_S_pipeline_benchmark_gaming", "namespacestandard__shared__mutex__benchmark.html#ad797748bfa4e4c9cb644ce6041b47336", null ],
-      [ "STD_S_pipeline_benchmark_long", "namespacestandard__shared__mutex__benchmark.html#a25056dfa03f8f5c7e65aa7e442df8262", null ],
-      [ "STD_S_SLockSUnlock", "namespacestandard__shared__mutex__benchmark.html#af674acd663ed205620c7bdf74e6e2665", null ],
-      [ "STD_S_Spipeline_benchmark_audio", "namespacestandard__shared__mutex__benchmark.html#a28da08daeb8a7dd3b5f1029d2f3dc864", null ],
-      [ "STD_S_Spipeline_benchmark_fast", "namespacestandard__shared__mutex__benchmark.html#a245ef74246b9fc0c2d8898560a0358d2", null ],
-      [ "STD_S_Spipeline_benchmark_gaming", "namespacestandard__shared__mutex__benchmark.html#acacccb709f5e494dde1c903164a29912", null ],
-      [ "STD_S_Spipeline_benchmark_long", "namespacestandard__shared__mutex__benchmark.html#a54fb97d061ef1be427cd6c5562aaae3f", null ],
+      [ "lock_unlock_benchmark", "namespacestandard__shared__mutex__benchmark.html#ac5076973b5db42e97cb1841403a2b08d", null ],
+      [ "pipeline_benchmark_audio", "namespacestandard__shared__mutex__benchmark.html#a684a8f31c0aa69f7f7a751f4fca47ee5", null ],
+      [ "pipeline_benchmark_fast", "namespacestandard__shared__mutex__benchmark.html#aa015a90cd47d051a16df1bb92893368d", null ],
+      [ "pipeline_benchmark_gaming", "namespacestandard__shared__mutex__benchmark.html#af3021bd9b27eb23b4aabe1c3d7bf1097", null ],
+      [ "pipeline_benchmark_long", "namespacestandard__shared__mutex__benchmark.html#ae69800c8e3ea72ae87353caa3f147d6a", null ],
+      [ "shared_lock_unlock_benchmark", "namespacestandard__shared__mutex__benchmark.html#a414182274a7c216d019d1af5de6794eb", null ],
+      [ "shared_pipeline_benchmark_audio", "namespacestandard__shared__mutex__benchmark.html#a85b5fb18513b34a5134adbf593ddc09c", null ],
+      [ "shared_pipeline_benchmark_fast", "namespacestandard__shared__mutex__benchmark.html#a2d13bc685734bc832f7e8cee5d4e181a", null ],
+      [ "shared_pipeline_benchmark_gaming", "namespacestandard__shared__mutex__benchmark.html#a862ccbb01f1e12c09f4dabcb71367bb9", null ],
+      [ "shared_pipeline_benchmark_long", "namespacestandard__shared__mutex__benchmark.html#a1538aa859ef36b21f4f8df8b4d288d14", null ],
       [ "m", "namespacestandard__shared__mutex__benchmark.html#a58e1fe1e573dbc0af9621791811c3b1f", null ]
     ] ],
     [ "utils", "namespaceutils.html", "namespaceutils" ]

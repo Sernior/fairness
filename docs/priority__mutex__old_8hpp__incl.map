@@ -1,0 +1,11 @@
+<map id="include/boost/fairness/old/priority_mutex_old.hpp" name="include/boost/fairness/old/priority_mutex_old.hpp">
+<area shape="rect" id="Node000001" title=" " alt="" coords="23,5,225,45"/>
+<area shape="rect" id="Node000002" title=" " alt="" coords="5,101,72,126"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="107,47,62,92,58,89,103,44"/>
+<area shape="rect" id="Node000003" title=" " alt="" coords="96,101,152,126"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="127,46,127,87,121,87,121,46"/>
+<area shape="rect" id="Node000004" href="$priority__t_8hpp.html" title="Alias the type Priority_t. Priority_t is the type of priorities that are used by the priority_mutexes..." alt="" coords="176,93,341,133"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="155,43,219,84,216,88,152,48"/>
+<area shape="rect" id="Node000005" title=" " alt="" coords="225,181,292,207"/>
+<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="261,134,261,167,256,167,256,134"/>
+</map>

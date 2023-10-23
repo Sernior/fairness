@@ -16,7 +16,7 @@
 <meta name="twitter:title" content="boost.fairness" />
 <meta name="twitter:description" content="A collection of advanced syncronization mechanisms." />
 <!-- END twitter metadata -->
-<title>fairness: include/boost/fairness/control_block_t.hpp File Reference</title>
+<title>fairness: include/boost/fairness/detail/control_block_t.hpp File Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <link rel="icon" type="image/png" href="logo1-favicon.png" style="border-radius: 10%;"/>
 <script type="text/javascript" src="jquery.js"></script>
@@ -52,7 +52,7 @@
 <body>
 <!-- https://tholman.com/github-corners/ -->
 <a href="https://github.com/Sernior/fairness" class="github-corner" title="View source on GitHub" target="_blank">
-    <svg viewBox="0 0 250 250" width="80" height="80" style="position: absolute; top: 0; border: 0; right: 0; z-index: 99;" aria-hidden="true">
+    <svg viewBox="0 0 250 250" width="70" height="70" style="position: absolute; top: 0; border: 0; right: 0; z-index: 99;" aria-hidden="true">
     <path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a><style>.github-corner:hover .octo-arm{animation:octocat-wave 560ms ease-in-out}@keyframes octocat-wave{0%,100%{transform:rotate(0)}20%,60%{transform:rotate(-25deg)}40%,80%{transform:rotate(10deg)}}@media (max-width:500px){.github-corner:hover .octo-arm{animation:none}.github-corner .octo-arm{animation:octocat-wave 560ms ease-in-out}}</style>
 <div id="top"><!-- do not remove this div, it is closed by doxygen! -->
 <div id="titlearea">
@@ -143,105 +143,119 @@ $(document).ready(function(){initNavTree('control__block__t_8hpp.html',''); init
 </div><div class="textblock"><div class="dynheader">
 Include dependency graph for control_block_t.hpp:</div>
 <div class="dyncontent">
-<div class="center"><img src="control__block__t_8hpp__incl.png" border="0" usemap="#ainclude_2boost_2fairness_2control__block__t_8hpp" alt=""/></div>
-<map name="ainclude_2boost_2fairness_2control__block__t_8hpp" id="ainclude_2boost_2fairness_2control__block__t_8hpp">
-<area shape="rect" title="This file contains the definition of the control_block_t. TODO." alt="" coords="215,5,381,45"/>
-<area shape="rect" href="config_8hpp.html" title="This file contains configurations about boost and 128bit cpu support. TODO." alt="" coords="5,101,191,126"/>
-<area shape="poly" title=" " alt="" coords="255,48,138,98,136,93,253,43"/>
-<area shape="rect" href="priority__t_8hpp.html" title="Alias the type Priority_t. Priority_t is the type of priorities that are used by the priority_mutexes..." alt="" coords="215,93,381,133"/>
-<area shape="poly" title=" " alt="" coords="301,46,301,79,295,79,295,46"/>
-<area shape="rect" title=" " alt="" coords="405,101,471,126"/>
-<area shape="poly" title=" " alt="" coords="330,43,409,91,406,96,327,48"/>
-<area shape="rect" title=" " alt="" coords="265,181,331,207"/>
-<area shape="poly" title=" " alt="" coords="301,134,301,167,295,167,295,134"/>
+<div class="center"><img src="control__block__t_8hpp__incl.png" border="0" usemap="#ainclude_2boost_2fairness_2detail_2control__block__t_8hpp" alt=""/></div>
+<map name="ainclude_2boost_2fairness_2detail_2control__block__t_8hpp" id="ainclude_2boost_2fairness_2detail_2control__block__t_8hpp">
+<area shape="rect" title="This file contains the definition of the control_block_t. TODO." alt="" coords="304,5,499,45"/>
+<area shape="rect" href="config_8hpp.html" title="This file contains configurations about boost and 128bit cpu support. TODO." alt="" coords="178,101,363,126"/>
+<area shape="poly" title=" " alt="" coords="374,48,302,95,299,91,371,43"/>
+<area shape="rect" title=" " alt="" coords="303,269,369,295"/>
+<area shape="poly" title=" " alt="" coords="403,46,396,124,387,173,373,222,354,259,350,257,368,220,382,172,391,123,398,45"/>
+<area shape="rect" href="priority__t_8hpp.html" title="Alias the type Priority_t. Priority_t is the type of priorities that are used by the priority_mutexes..." alt="" coords="439,93,604,133"/>
+<area shape="poly" title=" " alt="" coords="430,43,485,83,482,87,426,48"/>
+<area shape="rect" href="pause__ops__linux_8hpp.html" title="This file contains the implementation of the pause operations used by the mutexes on linux." alt="" coords="5,181,168,221"/>
+<area shape="poly" title=" " alt="" coords="247,129,141,178,139,173,245,124"/>
+<area shape="rect" href="wait__ops__generic_8hpp.html" title="This file contains the implementation of the wait operation for misc os." alt="" coords="193,181,359,221"/>
+<area shape="poly" title=" " alt="" coords="268,126,268,168,263,168,262,126"/>
+<area shape="poly" title=" " alt="" coords="280,181,278,140,283,139,285,181"/>
+<area shape="poly" title=" " alt="" coords="293,220,321,257,317,260,288,223"/>
+<area shape="rect" title=" " alt="" coords="488,189,555,214"/>
+<area shape="poly" title=" " alt="" coords="524,134,524,175,519,175,519,134"/>
 </map>
 </div>
 </div><div class="textblock"><div class="dynheader">
 This graph shows which files directly or indirectly include this file:</div>
 <div class="dyncontent">
-<div class="center"><img src="control__block__t_8hpp__dep__incl.png" border="0" usemap="#ainclude_2boost_2fairness_2control__block__t_8hppdep" alt=""/></div>
-<map name="ainclude_2boost_2fairness_2control__block__t_8hppdep" id="ainclude_2boost_2fairness_2control__block__t_8hppdep">
-<area shape="rect" title="This file contains the definition of the control_block_t. TODO." alt="" coords="5002,5,5167,45"/>
-<area shape="rect" href="fairness_8hpp.html" title="This file contains the all the includes required by the library." alt="" coords="4988,181,5181,207"/>
-<area shape="poly" title=" " alt="" coords="5064,58,5047,94,5044,113,5047,132,5060,159,5076,179,5072,183,5055,161,5042,134,5038,113,5042,93,5059,56"/>
-<area shape="rect" href="slim__priority__mutex_8hpp.html" title="This file contains the implementation of the slim_priority_mutex." alt="" coords="5057,93,5243,133"/>
-<area shape="poly" title=" " alt="" coords="5109,55,5138,91,5133,95,5105,58"/>
-<area shape="rect" href="experimental__mutex__benchmark_8hpp.html" title=" " alt="" coords="5,262,276,302"/>
-<area shape="poly" title=" " alt="" coords="4974,198,4026,202,2559,212,1129,229,600,242,289,257,234,265,233,259,288,252,600,237,1129,224,2559,206,4026,197,4974,193"/>
-<area shape="rect" href="priority__mutex__benchmark_8hpp.html" title=" " alt="" coords="301,262,479,302"/>
-<area shape="poly" title=" " alt="" coords="4974,198,4061,198,2658,205,1937,212,1292,222,788,237,610,247,492,257,454,265,453,259,491,252,609,241,788,232,1292,217,1937,206,2658,199,4061,193,4974,193"/>
-<area shape="rect" href="recursive__priority__mutex__benchmark_8hpp.html" title=" " alt="" coords="504,262,737,302"/>
-<area shape="poly" title=" " alt="" coords="4974,198,4107,202,2786,211,1502,229,1028,242,860,249,749,257,701,265,700,259,748,252,860,244,1028,236,1502,223,2785,206,4107,196,4974,193"/>
-<area shape="rect" href="slim__priority__mutex__benchmark_8hpp.html" title=" " alt="" coords="761,262,995,302"/>
-<area shape="poly" title=" " alt="" coords="4974,198,4153,202,2912,212,1710,230,1267,242,1006,257,959,265,958,259,1006,252,1267,237,1710,225,2912,207,4153,197,4974,193"/>
-<area shape="rect" href="shared__priority__mutex__benchmark_8hpp.html" title=" " alt="" coords="1019,262,1252,302"/>
-<area shape="poly" title=" " alt="" coords="4975,198,4200,203,3040,214,1920,231,1507,243,1264,257,1216,265,1215,259,1263,252,1507,238,1920,226,3040,208,4200,198,4975,193"/>
-<area shape="rect" href="spinlock__priority__mutex__benchmark_8hpp.html" title=" " alt="" coords="1276,255,1459,309"/>
-<area shape="poly" title=" " alt="" coords="4975,198,4237,202,3142,211,2087,228,1699,241,1562,249,1470,257,1459,259,1459,254,1470,252,1561,244,1699,236,2087,223,3142,205,4237,196,4975,193"/>
+<div class="center"><img src="control__block__t_8hpp__dep__incl.png" border="0" usemap="#ainclude_2boost_2fairness_2detail_2control__block__t_8hppdep" alt=""/></div>
+<map name="ainclude_2boost_2fairness_2detail_2control__block__t_8hppdep" id="ainclude_2boost_2fairness_2detail_2control__block__t_8hppdep">
+<area shape="rect" title="This file contains the definition of the control_block_t. TODO." alt="" coords="4794,5,4989,45"/>
+<area shape="rect" href="priority__mutex__old4_8hpp.html" title=" " alt="" coords="4437,93,4647,133"/>
+<area shape="poly" title=" " alt="" coords="4802,51,4619,96,4618,91,4801,46"/>
+<area shape="rect" href="priority__mutex__old5_8hpp.html" title=" " alt="" coords="4671,93,4880,133"/>
+<area shape="poly" title=" " alt="" coords="4856,56,4803,95,4799,91,4853,52"/>
+<area shape="rect" href="priority__mutex__old7_8hpp.html" title=" " alt="" coords="4904,93,5113,133"/>
+<area shape="poly" title=" " alt="" coords="4930,52,4984,91,4981,95,4927,56"/>
+<area shape="rect" href="slim__priority__mutex_8hpp.html" title="This file contains the implementation of the slim_priority_mutex." alt="" coords="5137,93,5323,133"/>
+<area shape="poly" title=" " alt="" coords="4980,46,5157,91,5155,96,4978,51"/>
+<area shape="rect" href="fairness_8hpp.html" title="This file contains the all the includes required by the library." alt="" coords="5133,181,5327,207"/>
+<area shape="poly" title=" " alt="" coords="5233,147,5233,181,5227,181,5227,147"/>
+<area shape="rect" href="experimental__mutex__benchmark_8hpp.html" title="Alias experimental_mutex_benchmark." alt="" coords="5,262,276,302"/>
+<area shape="poly" title=" " alt="" coords="5120,198,4145,202,2633,211,1156,229,610,242,417,249,289,257,234,265,233,259,288,252,417,244,610,236,1156,224,2633,206,4145,196,5120,193"/>
+<area shape="rect" href="priority__mutex__benchmark_8hpp.html" title="Alias priority_mutex_benchmark." alt="" coords="301,262,479,302"/>
+<area shape="poly" title=" " alt="" coords="5120,198,4181,198,2732,204,1987,211,1320,222,798,237,614,246,492,257,454,265,453,259,491,252,614,241,798,231,1320,216,1987,205,2732,198,4181,193,5120,192"/>
+<area shape="rect" href="recursive__priority__mutex__benchmark_8hpp.html" title="Alias recursive_priority_mutex_benchmark." alt="" coords="504,262,737,302"/>
+<area shape="poly" title=" " alt="" coords="5120,198,4227,201,2859,210,1529,228,1038,241,864,249,749,257,701,265,700,259,748,252,864,243,1038,236,1529,223,2859,205,4227,196,5120,193"/>
+<area shape="rect" href="slim__priority__mutex__benchmark_8hpp.html" title="Alias slim_priority_mutex_benchmark." alt="" coords="761,262,995,302"/>
+<area shape="poly" title=" " alt="" coords="5120,198,4272,202,2986,212,1738,229,1278,242,1006,257,959,265,958,259,1006,252,1277,237,1738,224,2986,206,4272,197,5120,193"/>
+<area shape="rect" href="shared__priority__mutex__benchmark_8hpp.html" title="Alias shared_priority_mutex_benchmark." alt="" coords="1019,262,1252,302"/>
+<area shape="poly" title=" " alt="" coords="5120,198,4319,203,3113,213,1947,231,1517,243,1264,257,1216,265,1215,259,1263,252,1517,237,1947,225,3113,208,4319,197,5120,193"/>
+<area shape="rect" href="spinlock__priority__mutex__benchmark_8hpp.html" title="Alias spinlock_priority_mutex_benchmark." alt="" coords="1276,255,1459,309"/>
+<area shape="poly" title=" " alt="" coords="5120,198,4356,201,3215,210,2634,217,2114,228,1709,241,1566,249,1470,257,1459,259,1459,254,1470,252,1565,243,1709,235,2114,222,2634,212,3215,205,4356,196,5120,193"/>
 <area shape="rect" href="example_8cpp.html" title=" " alt="" coords="1483,269,1657,295"/>
-<area shape="poly" title=" " alt="" coords="4974,198,4273,202,3241,211,2249,229,1884,242,1755,249,1669,257,1605,272,1604,267,1668,252,1754,244,1884,236,2248,224,3241,206,4273,197,4974,193"/>
-<area shape="rect" href="_p_m__scenario1_context_8hpp.html" title=" " alt="" coords="1681,269,1933,295"/>
-<area shape="poly" title=" " alt="" coords="4974,198,4382,198,3505,203,3042,211,2606,221,2229,237,1945,257,1857,272,1856,267,1944,252,2229,231,2606,216,3042,205,3505,198,4382,192,4974,192"/>
-<area shape="rect" href="test_8cpp.html" title="Alias test." alt="" coords="7980,445,8091,471"/>
-<area shape="poly" title=" " alt="" coords="5195,193,6235,197,7826,207,8616,215,9290,225,9763,237,9898,244,9951,252,9962,267,9965,282,9962,297,9952,311,9936,324,9912,337,9846,358,9757,378,9648,394,9384,420,9085,438,8777,450,8490,456,8091,459,8091,454,8490,451,8777,444,9085,433,9384,415,9647,389,9756,372,9845,353,9910,332,9933,320,9948,308,9957,295,9960,282,9957,269,9949,257,9897,249,9763,242,9290,230,8616,220,7826,212,6235,202,5195,198"/>
-<area shape="rect" href="_p_m__scenario2_context_8hpp.html" title=" " alt="" coords="1957,269,2209,295"/>
-<area shape="poly" title=" " alt="" coords="4974,198,4429,199,3632,206,3213,213,2818,224,2478,238,2221,257,2133,272,2132,267,2220,252,2478,233,2818,219,3213,208,3632,201,4429,194,4974,192"/>
-<area shape="rect" href="_p_m__scenario3_context_8hpp.html" title=" " alt="" coords="2233,269,2485,295"/>
-<area shape="poly" title=" " alt="" coords="4974,198,4475,200,3759,209,3031,226,2727,240,2497,257,2409,272,2408,267,2496,252,2726,235,3031,221,3759,203,4475,195,4974,193"/>
-<area shape="rect" href="_p_m__scenario4_context_8hpp.html" title=" " alt="" coords="2509,269,2761,295"/>
-<area shape="poly" title=" " alt="" coords="4974,198,4523,202,3886,211,3244,229,2976,242,2773,257,2686,272,2685,267,2772,252,2975,236,3244,224,3886,206,4522,197,4974,193"/>
-<area shape="rect" href="_p_m__scenario5_context_8hpp.html" title=" " alt="" coords="2785,269,3037,295"/>
-<area shape="poly" title=" " alt="" coords="4974,199,4571,204,4016,214,3458,232,3226,243,3050,257,2962,272,2961,267,3050,252,3226,238,3458,226,4016,209,4571,199,4974,194"/>
-<area shape="rect" href="_r_p_m__scenario1_context_8hpp.html" title=" " alt="" coords="3062,269,3329,295"/>
-<area shape="poly" title=" " alt="" coords="4974,200,4153,218,3684,235,3489,245,3341,257,3249,272,3248,267,3340,252,3489,240,3684,230,4152,213,4974,194"/>
-<area shape="rect" href="_r_p_m__scenario2_context_8hpp.html" title=" " alt="" coords="3353,269,3619,295"/>
-<area shape="poly" title=" " alt="" coords="4974,197,4732,199,4399,207,4018,225,3823,239,3632,257,3540,272,3539,267,3631,252,3822,234,4017,220,4399,201,4732,194,4974,192"/>
-<area shape="rect" href="_r_p_m__scenario3_context_8hpp.html" title=" " alt="" coords="3643,269,3910,295"/>
-<area shape="poly" title=" " alt="" coords="4974,199,4776,203,4515,213,4220,230,3922,257,3831,272,3831,267,3922,252,4219,225,4514,207,4776,198,4974,194"/>
-<area shape="rect" href="_r_p_m__scenario4_context_8hpp.html" title=" " alt="" coords="3934,269,4201,295"/>
-<area shape="poly" title=" " alt="" coords="4974,202,4633,219,4423,235,4213,257,4123,272,4122,267,4212,252,4423,230,4633,214,4974,196"/>
-<area shape="rect" href="_r_p_m__scenario5_context_8hpp.html" title=" " alt="" coords="4225,269,4491,295"/>
-<area shape="poly" title=" " alt="" coords="4974,207,4756,227,4504,257,4416,272,4415,267,4503,252,4756,222,4974,201"/>
-<area shape="rect" href="_r_p_m__scenario6_context_8hpp.html" title=" " alt="" coords="4515,269,4782,295"/>
-<area shape="poly" title=" " alt="" coords="5014,212,4707,272,4706,267,5013,207"/>
-<area shape="rect" href="_r_p_m__scenario7_context_8hpp.html" title=" " alt="" coords="4806,269,5073,295"/>
-<area shape="poly" title=" " alt="" coords="5055,216,4960,271,4958,267,5052,211"/>
-<area shape="rect" href="_r_p_m__scenario8_context_8hpp.html" title=" " alt="" coords="5097,269,5363,295"/>
-<area shape="poly" title=" " alt="" coords="5117,211,5212,267,5209,271,5115,216"/>
-<area shape="rect" href="_r_p_m__scenario9_context_8hpp.html" title=" " alt="" coords="5387,269,5654,295"/>
-<area shape="poly" title=" " alt="" coords="5157,207,5463,267,5462,272,5156,212"/>
-<area shape="rect" href="_s_l_m__scenario1_context_8hpp.html" title=" " alt="" coords="5679,269,5941,295"/>
-<area shape="poly" title=" " alt="" coords="5195,201,5414,222,5666,252,5753,267,5752,272,5666,257,5413,227,5195,207"/>
-<area shape="rect" href="_s_l_m__scenario2_context_8hpp.html" title=" " alt="" coords="5965,269,6228,295"/>
-<area shape="poly" title=" " alt="" coords="5195,196,5535,214,5744,230,5954,252,6043,267,6042,272,5954,257,5744,235,5535,219,5195,202"/>
-<area shape="rect" href="_s_l_m__scenario3_context_8hpp.html" title=" " alt="" coords="6252,269,6515,295"/>
-<area shape="poly" title=" " alt="" coords="5196,194,5392,198,5652,207,5945,225,6241,252,6330,267,6330,272,6240,257,5945,230,5652,213,5392,203,5195,199"/>
-<area shape="rect" href="_s_l_m__scenario4_context_8hpp.html" title=" " alt="" coords="6539,269,6801,295"/>
-<area shape="poly" title=" " alt="" coords="5195,192,5436,193,5766,201,6145,219,6338,234,6528,252,6618,267,6617,272,6527,257,6338,239,6144,225,5766,207,5436,199,5195,197"/>
-<area shape="rect" href="_s_p_m__scenario1_context_8hpp.html" title=" " alt="" coords="6826,269,7093,295"/>
-<area shape="poly" title=" " alt="" coords="5195,194,6010,213,6474,230,6668,240,6814,252,6907,267,6906,272,6814,257,6667,245,6474,235,6010,218,5195,200"/>
-<area shape="rect" href="_s_p_m__scenario2_context_8hpp.html" title=" " alt="" coords="7117,269,7383,295"/>
-<area shape="poly" title=" " alt="" coords="5195,194,5595,199,6147,210,6700,227,6930,239,7105,252,7198,267,7197,272,7104,257,6930,244,6700,232,6147,215,5595,204,5195,199"/>
-<area shape="rect" href="_s_p_m__scenario3_context_8hpp.html" title=" " alt="" coords="7407,269,7674,295"/>
-<area shape="poly" title=" " alt="" coords="5195,193,5647,197,6282,207,6925,225,7193,237,7396,252,7489,267,7488,272,7395,257,7192,242,6924,230,6282,212,5646,203,5195,199"/>
-<area shape="rect" href="_s_p_m__scenario4_context_8hpp.html" title=" " alt="" coords="7698,269,7965,295"/>
-<area shape="poly" title=" " alt="" coords="5195,193,5697,196,6417,204,7149,222,7455,235,7686,252,7780,267,7779,272,7686,257,7455,241,7149,227,6417,210,5697,201,5195,198"/>
-<area shape="rect" href="_s_p_m__scenario5_context_8hpp.html" title=" " alt="" coords="7989,269,8255,295"/>
-<area shape="poly" title=" " alt="" coords="5195,193,5746,194,6551,202,6974,209,7373,220,7717,234,7977,252,8070,267,8069,272,7976,257,7717,239,7373,225,6974,214,6551,207,5746,200,5195,198"/>
-<area shape="rect" href="_s_p_m__scenario6_context_8hpp.html" title=" " alt="" coords="8279,269,8546,295"/>
-<area shape="poly" title=" " alt="" coords="5195,192,5795,193,6684,199,7154,206,7597,217,7979,232,8268,252,8361,267,8360,272,8267,257,7979,237,7597,222,7154,212,6684,205,5795,198,5195,198"/>
-<area shape="rect" href="_s_p_m__scenario7_context_8hpp.html" title=" " alt="" coords="8570,269,8837,295"/>
-<area shape="poly" title=" " alt="" coords="5195,192,5843,191,6817,197,7333,204,7820,215,8241,230,8558,252,8652,267,8651,272,8558,257,8241,236,7820,220,7333,209,6817,202,5843,197,5195,198"/>
-<area shape="rect" href="_s_p_m__scenario8_context_8hpp.html" title=" " alt="" coords="8861,269,9127,295"/>
-<area shape="poly" title=" " alt="" coords="5195,193,7101,211,8203,228,8609,239,8849,252,8943,267,8942,272,8848,257,8609,245,8203,234,7101,216,5195,199"/>
-<area shape="rect" href="_s_p_n_l_c_p_m__scenario1_context_8hpp.html" title=" " alt="" coords="9151,262,9330,302"/>
-<area shape="poly" title=" " alt="" coords="5195,193,6012,195,7246,203,7876,210,8440,220,8880,234,9036,243,9140,252,9178,259,9177,265,9139,257,9036,248,8880,239,8440,226,7876,215,7246,208,6012,200,5195,198"/>
-<area shape="rect" href="_s_p_n_l_c_p_m__scenario2_context_8hpp.html" title=" " alt="" coords="9354,262,9533,302"/>
-<area shape="poly" title=" " alt="" coords="5195,193,6048,194,7346,201,8010,209,8605,219,9069,233,9233,242,9342,252,9381,259,9379,265,9342,257,9233,247,9068,239,8604,224,8010,214,7346,207,6048,199,5195,198"/>
-<area shape="rect" href="_s_p_n_l_c_p_m__scenario3_context_8hpp.html" title=" " alt="" coords="9557,262,9735,302"/>
-<area shape="poly" title=" " alt="" coords="5195,193,6084,193,7446,200,8144,207,8769,218,9257,233,9430,242,9545,252,9583,259,9582,265,9544,257,9430,247,9257,238,8769,223,8144,213,7446,205,6084,199,5195,198"/>
-<area shape="rect" href="_s_p_n_l_c_p_m__scenario4_context_8hpp.html" title=" " alt="" coords="9759,262,9938,302"/>
-<area shape="poly" title=" " alt="" coords="5195,192,6121,193,7546,199,8278,206,8934,217,9446,232,9627,241,9748,252,9786,259,9785,265,9747,257,9627,247,9446,237,8934,222,8278,211,7546,204,6121,198,5195,198"/>
+<area shape="poly" title=" " alt="" coords="5119,198,4391,201,3313,210,2275,228,1894,241,1759,249,1669,257,1605,272,1604,267,1668,252,1758,243,1894,236,2275,223,3313,205,4391,196,5119,193"/>
+<area shape="rect" href="_p_m__scenario1_context_8hpp.html" title="Alias PM_scenario1Context." alt="" coords="1681,269,1933,295"/>
+<area shape="poly" title=" " alt="" coords="5120,197,4503,197,3584,202,3097,209,2639,220,2243,236,1945,257,1857,272,1856,267,1944,252,2243,231,2639,215,3097,204,3584,197,4503,191,5120,192"/>
+<area shape="rect" href="test_8cpp.html" title="Alias test." alt="" coords="8268,445,8379,471"/>
+<area shape="poly" title=" " alt="" coords="5341,193,6409,197,8048,206,8864,214,9559,224,10047,237,10187,244,10242,252,10253,267,10256,282,10252,297,10243,311,10226,324,10203,337,10136,358,10047,378,9938,394,9674,420,9374,438,9066,450,8779,456,8379,459,8379,454,8779,451,9066,444,9374,433,9674,415,9937,389,10046,372,10135,353,10201,332,10223,320,10239,308,10248,295,10251,282,10248,269,10239,257,10186,249,10047,242,9559,229,8864,219,8048,212,6409,202,5341,198"/>
+<area shape="rect" href="_p_m__scenario2_context_8hpp.html" title="Alias PM_scenario2Context." alt="" coords="1957,269,2209,295"/>
+<area shape="poly" title=" " alt="" coords="5120,198,4549,198,3710,205,3268,212,2852,223,2492,237,2221,257,2133,272,2132,267,2220,252,2492,232,2851,217,3268,207,3710,199,4549,193,5120,192"/>
+<area shape="rect" href="_p_m__scenario3_context_8hpp.html" title="Alias PM_scenario3Context." alt="" coords="2233,269,2485,295"/>
+<area shape="poly" title=" " alt="" coords="5120,198,4596,200,3837,207,3439,215,3064,225,2741,239,2497,257,2409,272,2408,267,2496,252,2741,234,3064,220,3439,209,3837,202,4596,194,5120,193"/>
+<area shape="rect" href="_p_m__scenario4_context_8hpp.html" title="Alias PM_scenario4Context." alt="" coords="2509,269,2761,295"/>
+<area shape="poly" title=" " alt="" coords="5119,198,4643,201,3964,210,3277,228,2990,241,2773,257,2685,272,2684,267,2772,252,2990,235,3277,222,3964,205,4643,196,5119,193"/>
+<area shape="rect" href="_p_m__scenario5_context_8hpp.html" title="Alias PM_scenario5Context." alt="" coords="2785,269,3037,295"/>
+<area shape="poly" title=" " alt="" coords="5119,199,4691,203,4093,213,3491,230,3240,242,3050,257,2962,272,2961,267,3050,252,3240,237,3491,225,4093,207,4691,198,5119,193"/>
+<area shape="rect" href="_r_p_m__scenario1_context_8hpp.html" title="Alias RPM_scenario1Context." alt="" coords="3062,269,3329,295"/>
+<area shape="poly" title=" " alt="" coords="5119,199,4229,216,3716,234,3503,245,3341,257,3249,272,3248,267,3340,252,3503,239,3716,228,4229,211,5119,194"/>
+<area shape="rect" href="_r_p_m__scenario2_context_8hpp.html" title="Alias RPM_scenario2Context." alt="" coords="3353,269,3619,295"/>
+<area shape="poly" title=" " alt="" coords="5120,200,4367,219,3942,236,3766,246,3632,257,3540,272,3539,267,3631,252,3765,241,3942,231,4367,214,5120,195"/>
+<area shape="rect" href="_r_p_m__scenario3_context_8hpp.html" title="Alias RPM_scenario3Context." alt="" coords="3643,269,3910,295"/>
+<area shape="poly" title=" " alt="" coords="5120,198,4900,201,4602,210,4264,227,3922,257,3831,272,3830,267,3922,252,4264,222,4602,204,4900,196,5120,193"/>
+<area shape="rect" href="_r_p_m__scenario4_context_8hpp.html" title="Alias RPM_scenario4Context." alt="" coords="3934,269,4201,295"/>
+<area shape="poly" title=" " alt="" coords="5120,200,4719,216,4467,233,4213,257,4122,272,4122,267,4212,252,4466,227,4719,211,5119,195"/>
+<area shape="rect" href="_r_p_m__scenario5_context_8hpp.html" title="Alias RPM_scenario5Context." alt="" coords="4225,269,4491,295"/>
+<area shape="poly" title=" " alt="" coords="5120,204,4840,223,4672,238,4504,257,4415,272,4414,267,4503,252,4671,233,4840,218,5120,198"/>
+<area shape="rect" href="_r_p_m__scenario6_context_8hpp.html" title="Alias RPM_scenario6Context." alt="" coords="4515,269,4782,295"/>
+<area shape="poly" title=" " alt="" coords="5125,211,4794,257,4709,272,4709,267,4794,252,5125,206"/>
+<area shape="rect" href="_r_p_m__scenario7_context_8hpp.html" title="Alias RPM_scenario7Context." alt="" coords="4806,269,5073,295"/>
+<area shape="poly" title=" " alt="" coords="5178,213,4979,272,4978,267,5177,208"/>
+<area shape="rect" href="_r_p_m__scenario8_context_8hpp.html" title="Alias RPM_scenario8Context." alt="" coords="5097,269,5363,295"/>
+<area shape="poly" title=" " alt="" coords="5233,221,5233,269,5227,269,5227,221"/>
+<area shape="rect" href="_r_p_m__scenario9_context_8hpp.html" title="Alias RPM_scenario9Context." alt="" coords="5387,269,5654,295"/>
+<area shape="poly" title=" " alt="" coords="5283,208,5482,267,5481,272,5282,213"/>
+<area shape="rect" href="_s_l_m__scenario1_context_8hpp.html" title="Alias SLM_scenario1Context." alt="" coords="5679,269,5941,295"/>
+<area shape="poly" title=" " alt="" coords="5336,206,5666,252,5751,267,5750,272,5666,257,5335,211"/>
+<area shape="rect" href="_s_l_m__scenario2_context_8hpp.html" title="Alias SLM_scenario2Context." alt="" coords="5965,269,6228,295"/>
+<area shape="poly" title=" " alt="" coords="5340,198,5619,218,5786,233,5953,252,6041,267,6040,272,5952,257,5785,238,5618,223,5340,204"/>
+<area shape="rect" href="_s_l_m__scenario3_context_8hpp.html" title="Alias SLM_scenario3Context." alt="" coords="6252,269,6515,295"/>
+<area shape="poly" title=" " alt="" coords="5341,195,5738,210,5989,227,6241,252,6330,267,6329,272,6240,257,5989,233,5738,216,5340,200"/>
+<area shape="rect" href="_s_l_m__scenario4_context_8hpp.html" title="Alias SLM_scenario4Context." alt="" coords="6539,269,6801,295"/>
+<area shape="poly" title=" " alt="" coords="5340,193,5559,196,5854,204,6189,222,6360,235,6528,252,6617,267,6617,272,6527,257,6360,241,6189,227,5854,210,5559,201,5340,198"/>
+<area shape="rect" href="_s_p_m__scenario1_context_8hpp.html" title="Alias SPM_scenario1Context." alt="" coords="6826,269,7093,295"/>
+<area shape="poly" title=" " alt="" coords="5341,195,6086,214,6507,231,6681,241,6814,252,6907,267,6906,272,6814,257,6681,246,6507,236,6086,220,5340,200"/>
+<area shape="rect" href="_s_p_m__scenario2_context_8hpp.html" title="Alias SPM_scenario2Context." alt="" coords="7117,269,7383,295"/>
+<area shape="poly" title=" " alt="" coords="5340,194,6224,211,6732,228,6944,239,7105,252,7198,267,7197,272,7104,257,6944,245,6732,234,6223,217,5340,199"/>
+<area shape="rect" href="_s_p_m__scenario3_context_8hpp.html" title="Alias SPM_scenario3Context." alt="" coords="7407,269,7674,295"/>
+<area shape="poly" title=" " alt="" coords="5341,194,5766,198,6360,208,6958,226,7207,238,7396,252,7489,267,7488,272,7395,257,7206,243,6957,231,6360,214,5766,204,5341,199"/>
+<area shape="rect" href="_s_p_m__scenario4_context_8hpp.html" title="Alias SPM_scenario4Context." alt="" coords="7698,269,7965,295"/>
+<area shape="poly" title=" " alt="" coords="5341,193,5817,197,6495,206,7182,223,7469,236,7686,252,7779,267,7778,272,7686,257,7469,241,7182,229,6495,211,5817,202,5341,198"/>
+<area shape="rect" href="_s_p_m__scenario5_context_8hpp.html" title="Alias SPM_scenario5Context." alt="" coords="7989,269,8255,295"/>
+<area shape="poly" title=" " alt="" coords="5340,193,5867,195,6629,203,7406,221,7731,234,7977,252,8070,267,8069,272,7976,257,7731,240,7406,226,6629,208,5867,200,5340,198"/>
+<area shape="rect" href="_s_p_m__scenario6_context_8hpp.html" title="Alias SPM_scenario6Context." alt="" coords="8279,269,8546,295"/>
+<area shape="poly" title=" " alt="" coords="5340,192,5916,194,6763,200,7209,208,7630,218,7993,233,8268,252,8361,267,8360,272,8267,257,7993,238,7630,224,7209,213,6763,206,5916,199,5340,198"/>
+<area shape="rect" href="_s_p_m__scenario7_context_8hpp.html" title="Alias SPM_scenario7Context." alt="" coords="8570,269,8837,295"/>
+<area shape="poly" title=" " alt="" coords="5341,192,5964,192,6896,198,7389,205,7854,216,8255,231,8558,252,8652,267,8651,272,8558,257,8255,237,7854,221,7389,210,6896,203,5964,197,5341,198"/>
+<area shape="rect" href="_s_p_m__scenario8_context_8hpp.html" title="Alias SPM_scenario8Context." alt="" coords="8861,269,9127,295"/>
+<area shape="poly" title=" " alt="" coords="5340,193,7174,211,8230,229,8619,240,8849,252,8943,267,8942,272,8848,257,8619,245,8230,234,7174,217,5340,199"/>
+<area shape="rect" href="_s_p_m__scenario9_context_8hpp.html" title="Alias SPM_scenario9Context." alt="" coords="9151,269,9418,295"/>
+<area shape="poly" title=" " alt="" coords="5341,193,7319,210,8467,228,8890,239,9140,252,9233,267,9232,272,9139,257,8890,244,8467,233,7319,215,5341,199"/>
+<area shape="rect" href="_s_p_n_l_c_p_m__scenario1_context_8hpp.html" title="Alias SPNLCPM_scenario1Context." alt="" coords="9442,262,9621,302"/>
+<area shape="poly" title=" " alt="" coords="5340,193,6183,194,7463,202,8118,209,8703,219,9161,234,9323,242,9430,252,9469,259,9467,265,9430,257,9322,248,9160,239,8703,225,8117,214,7463,207,6183,200,5340,198"/>
+<area shape="rect" href="_s_p_n_l_c_p_m__scenario2_context_8hpp.html" title="Alias SPNLCPM_scenario2Context." alt="" coords="9645,262,9823,302"/>
+<area shape="poly" title=" " alt="" coords="5340,193,6220,194,7563,200,8252,208,8868,218,9349,233,9520,242,9633,252,9671,259,9670,265,9632,257,9519,247,9349,238,8868,224,8251,213,7563,206,6220,199,5340,198"/>
+<area shape="rect" href="_s_p_n_l_c_p_m__scenario3_context_8hpp.html" title="Alias SPNLCPM_scenario3Context." alt="" coords="9847,262,10026,302"/>
+<area shape="poly" title=" " alt="" coords="5341,193,6256,193,7663,199,8386,206,9033,217,9538,232,9717,241,9836,252,9874,259,9873,265,9835,257,9716,247,9538,237,9032,222,8386,212,7663,205,6256,198,5341,198"/>
+<area shape="rect" href="_s_p_n_l_c_p_m__scenario4_context_8hpp.html" title="Alias SPNLCPM_scenario4Context." alt="" coords="10050,262,10229,302"/>
+<area shape="poly" title=" " alt="" coords="5340,192,6291,192,7762,198,8519,205,9197,216,9726,231,9914,241,10038,252,10077,259,10076,265,10038,257,9914,246,9726,237,9197,221,8519,210,7762,203,6291,198,5340,198"/>
 <area shape="rect" href="pipeline__benchmark_8hpp.html" title="Alias pipeline_benchmark." alt="" coords="671,357,829,397"/>
 <area shape="poly" title=" " alt="" coords="259,302,289,307,671,363,670,368,288,312,258,307"/>
 <area shape="rect" href="benchmark_8cpp.html" title="Alias benchmark." alt="" coords="647,445,853,471"/>
@@ -251,44 +265,49 @@ This graph shows which files directly or indirectly include this file:</div>
 <area shape="poly" title=" " alt="" coords="843,312,777,359,774,355,839,308"/>
 <area shape="poly" title=" " alt="" coords="1045,308,828,360,827,355,1043,303"/>
 <area shape="poly" title=" " alt="" coords="1262,312,1023,349,830,371,829,366,1022,344,1262,307"/>
-<area shape="rect" href="scenarios_8hpp.html" title="Alias scenarios." alt="" coords="6023,365,6171,390"/>
-<area shape="poly" title=" " alt="" coords="1870,295,1945,307,2219,322,2686,335,3945,355,5224,367,6023,373,6023,378,5224,373,3945,360,2686,340,2219,327,1944,312,1869,300"/>
-<area shape="poly" title=" " alt="" coords="6184,380,7980,452,7980,457,6184,385"/>
-<area shape="poly" title=" " alt="" coords="2146,295,2221,307,2476,321,2909,333,4079,353,5271,367,6022,373,6022,378,5271,372,4079,359,2909,339,2476,326,2220,312,2145,300"/>
-<area shape="poly" title=" " alt="" coords="2422,295,2497,307,2650,320,2836,331,3288,349,3810,361,4361,369,5383,374,6022,374,6022,379,5383,380,4361,374,3810,366,3288,354,2836,336,2650,325,2496,312,2421,300"/>
-<area shape="poly" title=" " alt="" coords="2698,295,2773,307,3085,329,3499,346,3979,358,4485,366,5427,373,6023,374,6023,379,5427,378,4485,372,3979,364,3499,352,3084,335,2772,312,2697,300"/>
-<area shape="poly" title=" " alt="" coords="2975,295,3050,307,3334,328,3711,344,4148,355,4609,363,5471,372,6022,373,6022,379,5471,377,4609,369,4148,361,3711,349,3334,333,3050,312,2974,300"/>
-<area shape="poly" title=" " alt="" coords="3262,295,3341,307,3596,325,3935,340,4741,360,5518,370,6023,373,6023,378,5518,375,4741,365,3934,345,3596,330,3340,312,3261,300"/>
-<area shape="poly" title=" " alt="" coords="3552,295,3632,307,3858,324,4158,337,4873,357,5565,368,6022,373,6022,378,5565,374,4873,363,4157,343,3857,329,3631,312,3551,300"/>
-<area shape="poly" title=" " alt="" coords="3843,295,3922,307,4120,322,4381,335,5006,355,5613,367,6022,373,6022,378,5613,372,5005,360,4381,340,4119,327,3922,312,3842,300"/>
-<area shape="poly" title=" " alt="" coords="4134,295,4213,307,4382,320,4605,332,5139,352,6022,372,6022,377,5139,357,4605,338,4381,326,4212,312,4133,300"/>
-<area shape="poly" title=" " alt="" coords="4425,295,4504,307,4727,328,4955,344,5396,364,5771,373,6023,374,6023,379,5771,378,5396,370,4954,350,4726,333,4503,312,4424,300"/>
-<area shape="poly" title=" " alt="" coords="4717,295,4794,307,4972,325,5154,339,5508,359,5812,369,6023,373,6023,378,5812,374,5508,364,5154,345,4972,330,4794,312,4716,300"/>
-<area shape="poly" title=" " alt="" coords="5008,295,5085,307,5355,334,5622,353,6022,371,6022,377,5621,358,5355,339,5084,312,5008,300"/>
-<area shape="poly" title=" " alt="" coords="5301,295,5376,307,5557,329,5738,346,6022,369,6022,374,5738,352,5557,334,5375,312,5300,300"/>
-<area shape="poly" title=" " alt="" coords="5597,294,5668,307,6023,362,6022,368,5667,312,5596,300"/>
-<area shape="poly" title=" " alt="" coords="5859,296,6062,362,6060,367,5857,301"/>
-<area shape="poly" title=" " alt="" coords="6099,308,6099,365,6094,365,6094,308"/>
-<area shape="poly" title=" " alt="" coords="6336,301,6133,367,6131,362,6334,296"/>
-<area shape="poly" title=" " alt="" coords="6597,300,6528,312,6171,368,6170,363,6527,307,6596,295"/>
-<area shape="poly" title=" " alt="" coords="6889,300,6814,312,6633,334,6454,351,6171,374,6171,369,6453,346,6633,328,6814,307,6888,295"/>
-<area shape="poly" title=" " alt="" coords="7182,300,7105,312,6836,339,6570,358,6171,377,6171,371,6570,353,6835,334,7104,307,7181,295"/>
-<area shape="poly" title=" " alt="" coords="7474,300,7396,312,7218,330,7037,344,6684,364,6381,374,6171,378,6171,373,6381,369,6684,359,7036,339,7218,325,7395,307,7473,295"/>
-<area shape="poly" title=" " alt="" coords="7765,300,7686,312,7464,333,7236,350,6796,370,6422,378,6171,379,6171,374,6422,373,6796,364,7236,344,7463,328,7686,307,7764,295"/>
-<area shape="poly" title=" " alt="" coords="8056,300,7977,312,7808,326,7586,338,7053,357,6171,377,6171,372,7052,352,7585,332,7808,320,7976,307,8055,295"/>
-<area shape="poly" title=" " alt="" coords="8347,300,8268,312,8070,327,7809,340,7186,360,6579,372,6171,378,6171,373,6579,367,7186,355,7809,335,8070,322,8267,307,8346,295"/>
-<area shape="poly" title=" " alt="" coords="8638,300,8558,312,8332,329,8033,343,7319,363,6627,374,6171,378,6171,373,6627,368,7319,357,8033,337,8332,324,8558,307,8637,295"/>
-<area shape="poly" title=" " alt="" coords="8929,300,8849,312,8594,330,8256,345,7451,365,6675,375,6171,378,6171,373,6675,370,7451,360,8256,340,8594,325,8848,307,8928,295"/>
-<area shape="poly" title=" " alt="" coords="9164,308,9140,312,8943,327,8610,339,7706,359,6777,372,6171,378,6171,373,6776,367,7706,354,8609,334,8943,321,9139,307,9163,302"/>
-<area shape="poly" title=" " alt="" coords="9366,308,9342,312,9132,327,8774,341,7806,360,6813,373,6171,378,6171,373,6812,367,7805,355,8774,335,9131,322,9342,307,9366,302"/>
-<area shape="poly" title=" " alt="" coords="9569,308,9545,312,9455,320,9320,328,8938,342,7905,362,6848,373,6171,378,6171,373,6848,368,7905,356,8938,336,9320,323,9455,315,9544,307,9568,303"/>
-<area shape="poly" title=" " alt="" coords="9772,308,9748,312,9652,321,9509,329,9103,343,8004,363,6884,374,6171,378,6171,373,6884,369,8004,358,9102,338,9508,324,9652,316,9747,307,9771,303"/>
-<area shape="poly" title=" " alt="" coords="5128,146,5097,183,5092,179,5123,142"/>
+<area shape="rect" href="scenarios_8hpp.html" title="Alias scenarios." alt="" coords="6165,365,6313,390"/>
+<area shape="poly" title=" " alt="" coords="1870,295,1945,307,2229,322,2713,335,4018,355,5342,368,6165,373,6165,378,5342,373,4018,361,2713,341,2229,327,1944,312,1869,300"/>
+<area shape="poly" title=" " alt="" coords="6327,379,8268,452,8268,457,6327,385"/>
+<area shape="poly" title=" " alt="" coords="2146,295,2221,307,2486,321,2936,334,4153,354,5389,367,6165,373,6165,378,5389,372,4153,359,2936,339,2486,327,2220,312,2145,300"/>
+<area shape="poly" title=" " alt="" coords="2422,295,2497,307,2742,320,3160,333,4287,353,6165,373,6165,378,4287,358,3160,338,2742,326,2496,312,2421,300"/>
+<area shape="poly" title=" " alt="" coords="2698,295,2773,307,2920,319,3099,330,3533,347,4034,360,4564,367,5547,374,6165,374,6165,379,5547,379,4564,373,4034,365,3533,353,3099,335,2920,325,2772,312,2697,300"/>
+<area shape="poly" title=" " alt="" coords="2975,295,3050,307,3349,328,3745,345,4204,357,4688,365,5591,372,6165,373,6165,379,5591,378,4688,370,4203,362,3745,350,3348,334,3050,312,2974,300"/>
+<area shape="poly" title=" " alt="" coords="3261,295,3341,307,3610,326,3968,341,4381,353,4819,361,5637,370,6165,373,6165,379,5637,376,4819,366,4381,358,3967,346,3610,331,3340,312,3261,300"/>
+<area shape="poly" title=" " alt="" coords="3552,295,3632,307,3872,324,4191,339,4951,358,5685,369,6165,373,6165,378,5684,374,4951,364,4190,344,3872,330,3631,312,3551,300"/>
+<area shape="poly" title=" " alt="" coords="3843,295,3922,307,4134,323,4414,336,5083,356,5732,368,6165,373,6165,378,5732,373,5083,361,4414,341,4133,328,3922,312,3842,300"/>
+<area shape="poly" title=" " alt="" coords="4134,295,4213,307,4396,321,4638,334,5216,353,6165,372,6165,378,5216,359,4637,339,4395,326,4212,312,4133,300"/>
+<area shape="poly" title=" " alt="" coords="4425,295,4504,307,4749,330,5000,347,5247,359,5484,367,5894,374,6165,374,6165,379,5894,379,5484,372,5247,364,4999,352,4749,335,4503,312,4424,300"/>
+<area shape="poly" title=" " alt="" coords="4716,295,4794,307,4994,326,5199,342,5595,362,5934,371,6165,373,6165,379,5934,376,5595,367,5198,347,4994,332,4794,312,4715,300"/>
+<area shape="poly" title=" " alt="" coords="5008,295,5085,307,5399,337,5708,356,5976,367,6165,372,6165,377,5976,372,5708,361,5399,342,5084,312,5007,300"/>
+<area shape="poly" title=" " alt="" coords="5300,295,5376,307,5601,331,5823,350,6165,370,6165,375,5823,355,5600,337,5375,312,5299,300"/>
+<area shape="poly" title=" " alt="" coords="5593,295,5666,307,5942,342,6165,366,6165,371,5941,348,5666,312,5592,300"/>
+<area shape="poly" title=" " alt="" coords="5876,295,6187,362,6186,367,5875,300"/>
+<area shape="poly" title=" " alt="" coords="6127,300,6223,362,6220,367,6124,304"/>
+<area shape="poly" title=" " alt="" coords="6356,304,6259,367,6256,362,6353,300"/>
+<area shape="poly" title=" " alt="" coords="6605,300,6293,367,6292,362,6603,295"/>
+<area shape="poly" title=" " alt="" coords="6888,300,6814,312,6538,348,6314,372,6313,366,6537,342,6814,307,6887,295"/>
+<area shape="poly" title=" " alt="" coords="7181,300,7105,312,6879,337,6656,355,6314,375,6314,370,6656,350,6879,331,7104,307,7180,295"/>
+<area shape="poly" title=" " alt="" coords="7473,300,7396,312,7081,342,6771,361,6503,372,6314,377,6314,372,6503,367,6771,356,7080,337,7395,307,7472,295"/>
+<area shape="poly" title=" " alt="" coords="7765,300,7686,312,7486,332,7281,347,6884,367,6544,376,6313,379,6313,373,6544,371,6883,362,7281,342,7485,326,7686,307,7764,295"/>
+<area shape="poly" title=" " alt="" coords="8056,300,7977,312,7731,335,7480,352,7232,364,6995,372,6585,379,6314,379,6314,374,6585,374,6995,367,7232,359,7480,347,7731,330,7976,307,8055,295"/>
+<area shape="poly" title=" " alt="" coords="8347,300,8268,312,8085,326,7842,339,7263,359,6313,378,6313,372,7263,353,7842,334,8084,321,8267,307,8346,295"/>
+<area shape="poly" title=" " alt="" coords="8638,300,8558,312,8347,328,8066,341,7397,361,6747,373,6314,378,6314,373,6747,368,7397,356,8066,336,8346,323,8558,307,8637,295"/>
+<area shape="poly" title=" " alt="" coords="8929,300,8849,312,8608,330,8289,344,7529,364,6794,374,6314,378,6314,373,6794,369,7529,358,8289,339,8608,324,8848,307,8928,295"/>
+<area shape="poly" title=" " alt="" coords="9219,300,9140,312,8870,331,8512,346,8098,358,7660,366,6841,376,6313,379,6313,373,6841,370,7660,361,8098,353,8512,341,8870,326,9139,307,9219,295"/>
+<area shape="poly" title=" " alt="" coords="9454,308,9430,312,9223,327,8872,340,7921,360,6945,373,6313,378,6313,373,6945,367,7921,355,8872,335,9223,322,9430,307,9454,302"/>
+<area shape="poly" title=" " alt="" coords="9657,308,9633,312,9545,320,9412,328,9037,341,8021,361,6981,373,6314,378,6314,373,6981,368,8021,356,9037,336,9412,323,9544,315,9632,307,9656,302"/>
+<area shape="poly" title=" " alt="" coords="9860,308,9836,312,9742,321,9601,329,9201,343,8120,363,7017,374,6314,378,6314,373,7017,369,8120,357,9201,337,9600,323,9742,315,9835,307,9859,303"/>
+<area shape="poly" title=" " alt="" coords="10062,308,10038,312,9939,321,9789,330,9365,344,8823,355,8219,364,7051,374,6313,378,6313,373,7051,369,8219,359,8823,350,9365,339,9789,324,9939,316,10038,307,10062,303"/>
 </map>
 </div>
 </div>
 <p><a href="control__block__t_8hpp_source.html">Go to the source code of this file.</a></p>
 <table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="nested-classes" name="nested-classes"></a>
+Classes</h2></td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structboost_1_1fairness_1_1control__block__64b__simple__t.html">boost::fairness::control_block_64b_simple_t</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="namespaces" name="namespaces"></a>
 Namespaces</h2></td></tr>
 <tr class="memitem:namespaceboost" id="r_namespaceboost"><td class="memItemLeft" align="right" valign="top">namespace &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceboost.html">boost</a></td></tr>
@@ -300,6 +319,10 @@ Namespaces</h2></td></tr>
 Macros</h2></td></tr>
 <tr class="memitem:a5f29c1006da12ec0c041fe744b52fe98" id="r_a5f29c1006da12ec0c041fe744b52fe98"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a5f29c1006da12ec0c041fe744b52fe98">BOOST_FAIRNESS_SPM64B_SUPPORTED_PRIORITIES</a>&#160;&#160;&#160;sizeof(control_block_64b_t::priority_)</td></tr>
 <tr class="separator:a5f29c1006da12ec0c041fe744b52fe98"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a071a9295db0d021992643c2fdf6bcc6a" id="r_a071a9295db0d021992643c2fdf6bcc6a"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a071a9295db0d021992643c2fdf6bcc6a">LOCK_NOT_OWNED</a>&#160;&#160;&#160;0</td></tr>
+<tr class="separator:a071a9295db0d021992643c2fdf6bcc6a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a46333aefeefc8428c72d78380317eb3d" id="r_a46333aefeefc8428c72d78380317eb3d"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a46333aefeefc8428c72d78380317eb3d">LOCK_OWNED</a>&#160;&#160;&#160;1</td></tr>
+<tr class="separator:a46333aefeefc8428c72d78380317eb3d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>This file contains the definition of the control_block_t. TODO. </p>
@@ -324,12 +347,40 @@ S. Martorana (<a href="#" onclick="location.href='mai'+'lto:'+'sal'+'va'+'tor'+'
 
 </div>
 </div>
+<a id="a071a9295db0d021992643c2fdf6bcc6a" name="a071a9295db0d021992643c2fdf6bcc6a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a071a9295db0d021992643c2fdf6bcc6a">&#9670;&#160;</a></span>LOCK_NOT_OWNED</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define LOCK_NOT_OWNED&#160;&#160;&#160;0</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a46333aefeefc8428c72d78380317eb3d" name="a46333aefeefc8428c72d78380317eb3d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a46333aefeefc8428c72d78380317eb3d">&#9670;&#160;</a></span>LOCK_OWNED</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define LOCK_OWNED&#160;&#160;&#160;1</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
 </div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="navelem"><a class="el" href="dir_d44c64559bbebec7f509842c48db8b23.html">include</a></li><li class="navelem"><a class="el" href="dir_1878a3f4746a95c6aad317458cc7ef80.html">boost</a></li><li class="navelem"><a class="el" href="dir_ce7963af6704c2fe6f4ea06d8d082268.html">fairness</a></li><li class="navelem"><a class="el" href="control__block__t_8hpp.html">control_block_t.hpp</a></li>
+    <li class="navelem"><a class="el" href="dir_d44c64559bbebec7f509842c48db8b23.html">include</a></li><li class="navelem"><a class="el" href="dir_1878a3f4746a95c6aad317458cc7ef80.html">boost</a></li><li class="navelem"><a class="el" href="dir_ce7963af6704c2fe6f4ea06d8d082268.html">fairness</a></li><li class="navelem"><a class="el" href="dir_c4cf67fe6b34592b64993bd974f64f14.html">detail</a></li><li class="navelem"><a class="el" href="control__block__t_8hpp.html">control_block_t.hpp</a></li>
     <li class="footer">Generated by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.10.0 </li>
   </ul>
 </div>

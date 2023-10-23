@@ -1,9 +1,9 @@
 var dir_ce7963af6704c2fe6f4ea06d8d082268 =
 [
-    [ "experimental", "dir_e6adbc90c6f5f83e9d5dae04cd626a88.html", "dir_e6adbc90c6f5f83e9d5dae04cd626a88" ],
+    [ "detail", "dir_c4cf67fe6b34592b64993bd974f64f14.html", "dir_c4cf67fe6b34592b64993bd974f64f14" ],
+    [ "old", "dir_ad3f35b498387c121c9235c27f228809.html", "dir_ad3f35b498387c121c9235c27f228809" ],
     [ "acquisition_modes.hpp", "acquisition__modes_8hpp.html", null ],
-    [ "config.hpp", "config_8hpp.html", null ],
-    [ "control_block_t.hpp", "control__block__t_8hpp.html", "control__block__t_8hpp" ],
+    [ "config.hpp", "config_8hpp.html", "config_8hpp" ],
     [ "priority_mutex.hpp", "priority__mutex_8hpp.html", "priority__mutex_8hpp" ],
     [ "priority_t.hpp", "priority__t_8hpp.html", "priority__t_8hpp" ],
     [ "recursive_priority_mutex.hpp", "recursive__priority__mutex_8hpp.html", "recursive__priority__mutex_8hpp" ],

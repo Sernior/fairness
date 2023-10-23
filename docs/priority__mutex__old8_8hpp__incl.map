@@ -1,0 +1,27 @@
+<map id="include/boost/fairness/old/priority_mutex_old8.hpp" name="include/boost/fairness/old/priority_mutex_old8.hpp">
+<area shape="rect" id="Node000001" title=" " alt="" coords="33,5,243,45"/>
+<area shape="rect" id="Node000002" title=" " alt="" coords="198,431,265,456"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="94,48,61,68,34,95,18,121,11,144,9,200,9,283,14,313,27,339,47,362,72,381,130,410,186,429,184,434,128,415,69,385,43,365,23,342,9,315,3,284,3,200,5,143,13,119,29,92,58,63,91,43"/>
+<area shape="rect" id="Node000003" title=" " alt="" coords="43,101,99,126"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="125,47,91,91,87,88,121,44"/>
+<area shape="rect" id="Node000004" href="$priority__t_8hpp.html" title="Alias the type Priority_t. Priority_t is the type of priorities that are used by the priority_mutexes..." alt="" coords="123,93,289,133"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="155,44,185,81,180,84,151,47"/>
+<area shape="rect" id="Node000006" href="$wait__ops_8hpp.html" title="This file contains the implementation of the wait operations used by the mutexes." alt="" coords="313,93,467,133"/>
+<area shape="poly" id="edge5_Node000001_Node000006" title=" " alt="" coords="194,43,323,86,321,92,193,48"/>
+<area shape="rect" id="Node000005" title=" " alt="" coords="127,189,194,214"/>
+<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="198,135,176,177,171,175,194,132"/>
+<area shape="poly" id="edge13_Node000006_Node000002" title=" " alt="" coords="375,135,338,183,293,260,259,344,239,417,234,416,254,342,288,258,333,180,370,132"/>
+<area shape="rect" id="Node000007" href="$config_8hpp.html" title="This file contains configurations about boost and 128bit cpu support. TODO." alt="" coords="343,269,528,295"/>
+<area shape="poly" id="edge6_Node000006_Node000007" title=" " alt="" coords="374,135,360,154,349,176,344,198,348,220,368,244,394,261,391,266,365,248,344,223,338,198,344,174,356,151,370,132"/>
+<area shape="rect" id="Node000010" href="$pause__ops_8hpp.html" title="This file contains the implementation of the pause operations used by the mutexes." alt="" coords="358,181,513,221"/>
+<area shape="poly" id="edge11_Node000006_Node000010" title=" " alt="" coords="403,132,421,168,417,170,398,135"/>
+<area shape="rect" id="Node000011" title=" " alt="" coords="537,189,601,214"/>
+<area shape="poly" id="edge14_Node000006_Node000011" title=" " alt="" coords="430,131,534,180,531,185,428,136"/>
+<area shape="rect" id="Node000008" href="$pause__ops__linux_8hpp.html" title="This file contains the implementation of the pause operations used by the mutexes on linux." alt="" coords="269,343,431,383"/>
+<area shape="poly" id="edge7_Node000007_Node000008" title=" " alt="" coords="425,297,383,335,379,331,421,293"/>
+<area shape="rect" id="Node000009" href="$wait__ops__generic_8hpp.html" title="This file contains the implementation of the wait operation for misc os." alt="" coords="456,343,623,383"/>
+<area shape="poly" id="edge8_Node000007_Node000009" title=" " alt="" coords="446,293,497,333,494,337,443,297"/>
+<area shape="poly" id="edge10_Node000009_Node000002" title=" " alt="" coords="466,385,279,433,278,428,465,380"/>
+<area shape="poly" id="edge9_Node000009_Node000007" title=" " alt="" coords="521,345,467,304,470,300,524,340"/>
+<area shape="poly" id="edge12_Node000010_Node000007" title=" " alt="" coords="438,222,438,255,433,255,433,222"/>
+</map>

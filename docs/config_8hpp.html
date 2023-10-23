@@ -52,7 +52,7 @@
 <body>
 <!-- https://tholman.com/github-corners/ -->
 <a href="https://github.com/Sernior/fairness" class="github-corner" title="View source on GitHub" target="_blank">
-    <svg viewBox="0 0 250 250" width="80" height="80" style="position: absolute; top: 0; border: 0; right: 0; z-index: 99;" aria-hidden="true">
+    <svg viewBox="0 0 250 250" width="70" height="70" style="position: absolute; top: 0; border: 0; right: 0; z-index: 99;" aria-hidden="true">
     <path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a><style>.github-corner:hover .octo-arm{animation:octocat-wave 560ms ease-in-out}@keyframes octocat-wave{0%,100%{transform:rotate(0)}20%,60%{transform:rotate(-25deg)}40%,80%{transform:rotate(10deg)}}@media (max-width:500px){.github-corner:hover .octo-arm{animation:none}.github-corner .octo-arm{animation:octocat-wave 560ms ease-in-out}}</style>
 <div id="top"><!-- do not remove this div, it is closed by doxygen! -->
 <div id="titlearea">
@@ -127,148 +127,164 @@ $(document).ready(function(){initNavTree('config_8hpp.html',''); initResizable()
 </div>
 
 <div class="header">
+  <div class="summary">
+<a href="#define-members">Macros</a>  </div>
   <div class="headertitle"><div class="title">config.hpp File Reference</div></div>
 </div><!--header-->
 <div class="contents">
 
 <p>This file contains configurations about boost and 128bit cpu support. TODO.  
 <a href="#details">More...</a></p>
-<div class="textblock"><div class="dynheader">
+<div class="textblock"><code>#include &lt;<a class="el" href="pause__ops__linux_8hpp_source.html">boost/fairness/detail/pause_ops_linux.hpp</a>&gt;</code><br />
+<code>#include &lt;<a class="el" href="wait__ops__generic_8hpp_source.html">boost/fairness/detail/wait_ops_generic.hpp</a>&gt;</code><br />
+</div><div class="textblock"><div class="dynheader">
+Include dependency graph for config.hpp:</div>
+<div class="dyncontent">
+<div class="center"><img src="config_8hpp__incl.png" border="0" usemap="#ainclude_2boost_2fairness_2config_8hpp" alt=""/></div>
+<map name="ainclude_2boost_2fairness_2config_8hpp" id="ainclude_2boost_2fairness_2config_8hpp">
+<area shape="rect" title="This file contains configurations about boost and 128bit cpu support. TODO." alt="" coords="193,5,359,45"/>
+<area shape="rect" href="pause__ops__linux_8hpp.html" title="This file contains the implementation of the pause operations used by the mutexes on linux." alt="" coords="5,93,168,133"/>
+<area shape="poly" title=" " alt="" coords="236,48,142,90,139,85,233,43"/>
+<area shape="rect" href="wait__ops__generic_8hpp.html" title="This file contains the implementation of the wait operation for misc os." alt="" coords="193,93,359,133"/>
+<area shape="poly" title=" " alt="" coords="271,46,270,80,265,80,266,46"/>
+<area shape="poly" title=" " alt="" coords="281,93,282,59,287,59,286,93"/>
+<area shape="rect" title=" " alt="" coords="243,181,309,207"/>
+<area shape="poly" title=" " alt="" coords="279,134,279,167,273,167,273,134"/>
+</map>
+</div>
+</div><div class="textblock"><div class="dynheader">
 This graph shows which files directly or indirectly include this file:</div>
 <div class="dyncontent">
 <div class="center"><img src="config_8hpp__dep__incl.png" border="0" usemap="#ainclude_2boost_2fairness_2config_8hppdep" alt=""/></div>
 <map name="ainclude_2boost_2fairness_2config_8hppdep" id="ainclude_2boost_2fairness_2config_8hppdep">
-<area shape="rect" title="This file contains configurations about boost and 128bit cpu support. TODO." alt="" coords="5042,5,5207,45"/>
-<area shape="rect" href="fairness_8hpp.html" title="This file contains the all the includes required by the library." alt="" coords="4988,269,5181,295"/>
-<area shape="poly" title=" " alt="" coords="5072,55,5049,72,5032,95,5024,118,5023,143,5027,168,5035,192,5057,236,5078,268,5073,271,5052,239,5030,194,5022,169,5018,143,5019,117,5028,92,5045,69,5068,50"/>
-<area shape="rect" href="control__block__t_8hpp.html" title="This file contains the definition of the control_block_t. TODO." alt="" coords="5042,93,5207,133"/>
-<area shape="poly" title=" " alt="" coords="5127,59,5127,93,5122,93,5122,59"/>
-<area shape="rect" href="slim__priority__mutex_8hpp.html" title="This file contains the implementation of the slim_priority_mutex." alt="" coords="5123,181,5308,221"/>
-<area shape="poly" title=" " alt="" coords="5181,50,5204,69,5222,92,5229,115,5231,139,5224,181,5219,181,5225,139,5224,116,5217,95,5200,72,5178,55"/>
-<area shape="rect" href="experimental__mutex__benchmark_8hpp.html" title=" " alt="" coords="5,350,276,390"/>
-<area shape="poly" title=" " alt="" coords="4974,286,4026,290,2559,300,1129,317,600,330,289,345,234,353,233,347,288,340,600,325,1129,312,2559,294,4026,285,4974,281"/>
-<area shape="rect" href="priority__mutex__benchmark_8hpp.html" title=" " alt="" coords="301,350,479,390"/>
-<area shape="poly" title=" " alt="" coords="4974,286,4061,286,2658,293,1937,300,1292,310,788,325,610,335,492,345,454,353,453,347,491,340,609,329,788,320,1292,305,1937,294,2658,287,4061,281,4974,281"/>
-<area shape="rect" href="recursive__priority__mutex__benchmark_8hpp.html" title=" " alt="" coords="504,350,737,390"/>
-<area shape="poly" title=" " alt="" coords="4974,286,4107,290,2786,299,1502,317,1028,330,860,337,749,345,701,353,700,347,748,340,860,332,1028,324,1502,311,2785,294,4107,284,4974,281"/>
-<area shape="rect" href="slim__priority__mutex__benchmark_8hpp.html" title=" " alt="" coords="761,350,995,390"/>
-<area shape="poly" title=" " alt="" coords="4974,286,4153,290,2912,300,1710,318,1267,330,1006,345,959,353,958,347,1006,340,1267,325,1710,313,2912,295,4153,285,4974,281"/>
-<area shape="rect" href="shared__priority__mutex__benchmark_8hpp.html" title=" " alt="" coords="1019,350,1252,390"/>
-<area shape="poly" title=" " alt="" coords="4975,286,4200,291,3040,302,1920,319,1507,331,1264,345,1216,353,1215,347,1263,340,1507,326,1920,314,3040,296,4200,286,4975,281"/>
-<area shape="rect" href="spinlock__priority__mutex__benchmark_8hpp.html" title=" " alt="" coords="1276,343,1459,397"/>
-<area shape="poly" title=" " alt="" coords="4975,286,4237,290,3142,299,2087,316,1699,329,1562,337,1470,345,1459,347,1459,342,1470,340,1561,332,1699,324,2087,311,3142,293,4237,284,4975,281"/>
-<area shape="rect" href="example_8cpp.html" title=" " alt="" coords="1483,357,1657,383"/>
-<area shape="poly" title=" " alt="" coords="4974,286,4273,290,3241,299,2249,317,1884,330,1755,337,1669,345,1605,360,1604,355,1668,340,1754,332,1884,324,2248,312,3241,294,4273,285,4974,281"/>
-<area shape="rect" href="_p_m__scenario1_context_8hpp.html" title=" " alt="" coords="1681,357,1933,383"/>
-<area shape="poly" title=" " alt="" coords="4974,286,4382,286,3505,291,3042,299,2606,309,2229,325,1945,345,1857,360,1856,355,1944,340,2229,319,2606,304,3042,293,3505,286,4382,280,4974,280"/>
-<area shape="rect" href="test_8cpp.html" title="Alias test." alt="" coords="7980,533,8091,559"/>
-<area shape="poly" title=" " alt="" coords="5195,281,6235,285,7826,295,8616,303,9290,313,9763,325,9898,332,9951,340,9962,355,9965,370,9962,385,9952,399,9936,412,9912,425,9846,446,9757,466,9648,482,9384,508,9085,526,8777,538,8490,544,8091,547,8091,542,8490,539,8777,532,9085,521,9384,503,9647,477,9756,460,9845,441,9910,420,9933,408,9948,396,9957,383,9960,370,9957,357,9949,345,9897,337,9763,330,9290,318,8616,308,7826,300,6235,290,5195,286"/>
-<area shape="rect" href="_p_m__scenario2_context_8hpp.html" title=" " alt="" coords="1957,357,2209,383"/>
-<area shape="poly" title=" " alt="" coords="4974,286,4429,287,3632,294,3213,301,2818,312,2478,326,2221,345,2133,360,2132,355,2220,340,2478,321,2818,307,3213,296,3632,289,4429,282,4974,280"/>
-<area shape="rect" href="_p_m__scenario3_context_8hpp.html" title=" " alt="" coords="2233,357,2485,383"/>
-<area shape="poly" title=" " alt="" coords="4974,286,4475,288,3759,297,3031,314,2727,328,2497,345,2409,360,2408,355,2496,340,2726,323,3031,309,3759,291,4475,283,4974,281"/>
-<area shape="rect" href="_p_m__scenario4_context_8hpp.html" title=" " alt="" coords="2509,357,2761,383"/>
-<area shape="poly" title=" " alt="" coords="4974,286,4523,290,3886,299,3244,317,2976,330,2773,345,2686,360,2685,355,2772,340,2975,324,3244,312,3886,294,4522,285,4974,281"/>
-<area shape="rect" href="_p_m__scenario5_context_8hpp.html" title=" " alt="" coords="2785,357,3037,383"/>
-<area shape="poly" title=" " alt="" coords="4974,287,4571,292,4016,302,3458,320,3226,331,3050,345,2962,360,2961,355,3050,340,3226,326,3458,314,4016,297,4571,287,4974,282"/>
-<area shape="rect" href="_r_p_m__scenario1_context_8hpp.html" title=" " alt="" coords="3062,357,3329,383"/>
-<area shape="poly" title=" " alt="" coords="4974,288,4153,306,3684,323,3489,333,3341,345,3249,360,3248,355,3340,340,3489,328,3684,318,4152,301,4974,282"/>
-<area shape="rect" href="_r_p_m__scenario2_context_8hpp.html" title=" " alt="" coords="3353,357,3619,383"/>
-<area shape="poly" title=" " alt="" coords="4974,285,4732,287,4399,295,4018,313,3823,327,3632,345,3540,360,3539,355,3631,340,3822,322,4017,308,4399,289,4732,282,4974,280"/>
-<area shape="rect" href="_r_p_m__scenario3_context_8hpp.html" title=" " alt="" coords="3643,357,3910,383"/>
-<area shape="poly" title=" " alt="" coords="4974,287,4776,291,4515,301,4220,318,3922,345,3831,360,3831,355,3922,340,4219,313,4514,295,4776,286,4974,282"/>
-<area shape="rect" href="_r_p_m__scenario4_context_8hpp.html" title=" " alt="" coords="3934,357,4201,383"/>
-<area shape="poly" title=" " alt="" coords="4974,290,4633,307,4423,323,4213,345,4123,360,4122,355,4212,340,4423,318,4633,302,4974,284"/>
-<area shape="rect" href="_r_p_m__scenario5_context_8hpp.html" title=" " alt="" coords="4225,357,4491,383"/>
-<area shape="poly" title=" " alt="" coords="4974,295,4756,315,4504,345,4416,360,4415,355,4503,340,4756,310,4974,289"/>
-<area shape="rect" href="_r_p_m__scenario6_context_8hpp.html" title=" " alt="" coords="4515,357,4782,383"/>
-<area shape="poly" title=" " alt="" coords="5014,300,4707,360,4706,355,5013,295"/>
-<area shape="rect" href="_r_p_m__scenario7_context_8hpp.html" title=" " alt="" coords="4806,357,5073,383"/>
-<area shape="poly" title=" " alt="" coords="5055,304,4960,359,4958,355,5052,299"/>
-<area shape="rect" href="_r_p_m__scenario8_context_8hpp.html" title=" " alt="" coords="5097,357,5363,383"/>
-<area shape="poly" title=" " alt="" coords="5117,299,5212,355,5209,359,5115,304"/>
-<area shape="rect" href="_r_p_m__scenario9_context_8hpp.html" title=" " alt="" coords="5387,357,5654,383"/>
-<area shape="poly" title=" " alt="" coords="5157,295,5463,355,5462,360,5156,300"/>
-<area shape="rect" href="_s_l_m__scenario1_context_8hpp.html" title=" " alt="" coords="5679,357,5941,383"/>
-<area shape="poly" title=" " alt="" coords="5195,289,5414,310,5666,340,5753,355,5752,360,5666,345,5413,315,5195,295"/>
-<area shape="rect" href="_s_l_m__scenario2_context_8hpp.html" title=" " alt="" coords="5965,357,6228,383"/>
-<area shape="poly" title=" " alt="" coords="5195,284,5535,302,5744,318,5954,340,6043,355,6042,360,5954,345,5744,323,5535,307,5195,290"/>
-<area shape="rect" href="_s_l_m__scenario3_context_8hpp.html" title=" " alt="" coords="6252,357,6515,383"/>
-<area shape="poly" title=" " alt="" coords="5196,282,5392,286,5652,295,5945,313,6241,340,6330,355,6330,360,6240,345,5945,318,5652,301,5392,291,5195,287"/>
-<area shape="rect" href="_s_l_m__scenario4_context_8hpp.html" title=" " alt="" coords="6539,357,6801,383"/>
-<area shape="poly" title=" " alt="" coords="5195,280,5436,281,5766,289,6145,307,6338,322,6528,340,6618,355,6617,360,6527,345,6338,327,6144,313,5766,295,5436,287,5195,285"/>
-<area shape="rect" href="_s_p_m__scenario1_context_8hpp.html" title=" " alt="" coords="6826,357,7093,383"/>
-<area shape="poly" title=" " alt="" coords="5195,282,6010,301,6474,318,6668,328,6814,340,6907,355,6906,360,6814,345,6667,333,6474,323,6010,306,5195,288"/>
-<area shape="rect" href="_s_p_m__scenario2_context_8hpp.html" title=" " alt="" coords="7117,357,7383,383"/>
-<area shape="poly" title=" " alt="" coords="5195,282,5595,287,6147,298,6700,315,6930,327,7105,340,7198,355,7197,360,7104,345,6930,332,6700,320,6147,303,5595,292,5195,287"/>
-<area shape="rect" href="_s_p_m__scenario3_context_8hpp.html" title=" " alt="" coords="7407,357,7674,383"/>
-<area shape="poly" title=" " alt="" coords="5195,281,5647,285,6282,295,6925,313,7193,325,7396,340,7489,355,7488,360,7395,345,7192,330,6924,318,6282,300,5646,291,5195,287"/>
-<area shape="rect" href="_s_p_m__scenario4_context_8hpp.html" title=" " alt="" coords="7698,357,7965,383"/>
-<area shape="poly" title=" " alt="" coords="5195,281,5697,284,6417,292,7149,310,7455,323,7686,340,7780,355,7779,360,7686,345,7455,329,7149,315,6417,298,5697,289,5195,286"/>
-<area shape="rect" href="_s_p_m__scenario5_context_8hpp.html" title=" " alt="" coords="7989,357,8255,383"/>
-<area shape="poly" title=" " alt="" coords="5195,281,5746,282,6551,290,6974,297,7373,308,7717,322,7977,340,8070,355,8069,360,7976,345,7717,327,7373,313,6974,302,6551,295,5746,288,5195,286"/>
-<area shape="rect" href="_s_p_m__scenario6_context_8hpp.html" title=" " alt="" coords="8279,357,8546,383"/>
-<area shape="poly" title=" " alt="" coords="5195,280,5795,281,6684,287,7154,294,7597,305,7979,320,8268,340,8361,355,8360,360,8267,345,7979,325,7597,310,7154,300,6684,293,5795,286,5195,286"/>
-<area shape="rect" href="_s_p_m__scenario7_context_8hpp.html" title=" " alt="" coords="8570,357,8837,383"/>
-<area shape="poly" title=" " alt="" coords="5195,280,5843,279,6817,285,7333,292,7820,303,8241,318,8558,340,8652,355,8651,360,8558,345,8241,324,7820,308,7333,297,6817,290,5843,285,5195,286"/>
-<area shape="rect" href="_s_p_m__scenario8_context_8hpp.html" title=" " alt="" coords="8861,357,9127,383"/>
-<area shape="poly" title=" " alt="" coords="5195,281,7101,299,8203,316,8609,327,8849,340,8943,355,8942,360,8848,345,8609,333,8203,322,7101,304,5195,287"/>
-<area shape="rect" href="_s_p_n_l_c_p_m__scenario1_context_8hpp.html" title=" " alt="" coords="9151,350,9330,390"/>
-<area shape="poly" title=" " alt="" coords="5195,281,6012,283,7246,291,7876,298,8440,308,8880,322,9036,331,9140,340,9178,347,9177,353,9139,345,9036,336,8880,327,8440,314,7876,303,7246,296,6012,288,5195,286"/>
-<area shape="rect" href="_s_p_n_l_c_p_m__scenario2_context_8hpp.html" title=" " alt="" coords="9354,350,9533,390"/>
-<area shape="poly" title=" " alt="" coords="5195,281,6048,282,7346,289,8010,297,8605,307,9069,321,9233,330,9342,340,9381,347,9379,353,9342,345,9233,335,9068,327,8604,312,8010,302,7346,295,6048,287,5195,286"/>
-<area shape="rect" href="_s_p_n_l_c_p_m__scenario3_context_8hpp.html" title=" " alt="" coords="9557,350,9735,390"/>
-<area shape="poly" title=" " alt="" coords="5195,281,6084,281,7446,288,8144,295,8769,306,9257,321,9430,330,9545,340,9583,347,9582,353,9544,345,9430,335,9257,326,8769,311,8144,301,7446,293,6084,287,5195,286"/>
-<area shape="rect" href="_s_p_n_l_c_p_m__scenario4_context_8hpp.html" title=" " alt="" coords="9759,350,9938,390"/>
-<area shape="poly" title=" " alt="" coords="5195,280,6121,281,7546,287,8278,294,8934,305,9446,320,9627,329,9748,340,9786,347,9785,353,9747,345,9627,335,9446,325,8934,310,8278,299,7546,292,6121,286,5195,286"/>
-<area shape="rect" href="pipeline__benchmark_8hpp.html" title="Alias pipeline_benchmark." alt="" coords="671,445,829,485"/>
-<area shape="poly" title=" " alt="" coords="259,390,289,395,671,451,670,456,288,400,258,395"/>
-<area shape="rect" href="benchmark_8cpp.html" title="Alias benchmark." alt="" coords="647,533,853,559"/>
-<area shape="poly" title=" " alt="" coords="753,499,753,533,747,533,747,499"/>
-<area shape="poly" title=" " alt="" coords="477,391,678,443,677,448,475,396"/>
-<area shape="poly" title=" " alt="" coords="660,396,725,443,722,447,656,400"/>
-<area shape="poly" title=" " alt="" coords="843,400,777,447,774,443,839,396"/>
-<area shape="poly" title=" " alt="" coords="1045,396,828,448,827,443,1043,391"/>
-<area shape="poly" title=" " alt="" coords="1262,400,1023,437,830,459,829,454,1022,432,1262,395"/>
-<area shape="rect" href="scenarios_8hpp.html" title="Alias scenarios." alt="" coords="6023,453,6171,478"/>
-<area shape="poly" title=" " alt="" coords="1870,383,1945,395,2219,410,2686,423,3945,443,5224,455,6023,461,6023,466,5224,461,3945,448,2686,428,2219,415,1944,400,1869,388"/>
-<area shape="poly" title=" " alt="" coords="6184,468,7980,540,7980,545,6184,473"/>
-<area shape="poly" title=" " alt="" coords="2146,383,2221,395,2476,409,2909,421,4079,441,5271,455,6022,461,6022,466,5271,460,4079,447,2909,427,2476,414,2220,400,2145,388"/>
-<area shape="poly" title=" " alt="" coords="2422,383,2497,395,2650,408,2836,419,3288,437,3810,449,4361,457,5383,462,6022,462,6022,467,5383,468,4361,462,3810,454,3288,442,2836,424,2650,413,2496,400,2421,388"/>
-<area shape="poly" title=" " alt="" coords="2698,383,2773,395,3085,417,3499,434,3979,446,4485,454,5427,461,6023,462,6023,467,5427,466,4485,460,3979,452,3499,440,3084,423,2772,400,2697,388"/>
-<area shape="poly" title=" " alt="" coords="2975,383,3050,395,3334,416,3711,432,4148,443,4609,451,5471,460,6022,461,6022,467,5471,465,4609,457,4148,449,3711,437,3334,421,3050,400,2974,388"/>
-<area shape="poly" title=" " alt="" coords="3262,383,3341,395,3596,413,3935,428,4741,448,5518,458,6023,461,6023,466,5518,463,4741,453,3934,433,3596,418,3340,400,3261,388"/>
-<area shape="poly" title=" " alt="" coords="3552,383,3632,395,3858,412,4158,425,4873,445,5565,456,6022,461,6022,466,5565,462,4873,451,4157,431,3857,417,3631,400,3551,388"/>
-<area shape="poly" title=" " alt="" coords="3843,383,3922,395,4120,410,4381,423,5006,443,5613,455,6022,461,6022,466,5613,460,5005,448,4381,428,4119,415,3922,400,3842,388"/>
-<area shape="poly" title=" " alt="" coords="4134,383,4213,395,4382,408,4605,420,5139,440,6022,460,6022,465,5139,445,4605,426,4381,414,4212,400,4133,388"/>
-<area shape="poly" title=" " alt="" coords="4425,383,4504,395,4727,416,4955,432,5396,452,5771,461,6023,462,6023,467,5771,466,5396,458,4954,438,4726,421,4503,400,4424,388"/>
-<area shape="poly" title=" " alt="" coords="4717,383,4794,395,4972,413,5154,427,5508,447,5812,457,6023,461,6023,466,5812,462,5508,452,5154,433,4972,418,4794,400,4716,388"/>
-<area shape="poly" title=" " alt="" coords="5008,383,5085,395,5355,422,5622,441,6022,459,6022,465,5621,446,5355,427,5084,400,5008,388"/>
-<area shape="poly" title=" " alt="" coords="5301,383,5376,395,5557,417,5738,434,6022,457,6022,462,5738,440,5557,422,5375,400,5300,388"/>
-<area shape="poly" title=" " alt="" coords="5597,382,5668,395,6023,450,6022,456,5667,400,5596,388"/>
-<area shape="poly" title=" " alt="" coords="5859,384,6062,450,6060,455,5857,389"/>
-<area shape="poly" title=" " alt="" coords="6099,396,6099,453,6094,453,6094,396"/>
-<area shape="poly" title=" " alt="" coords="6336,389,6133,455,6131,450,6334,384"/>
-<area shape="poly" title=" " alt="" coords="6597,388,6528,400,6171,456,6170,451,6527,395,6596,383"/>
-<area shape="poly" title=" " alt="" coords="6889,388,6814,400,6633,422,6454,439,6171,462,6171,457,6453,434,6633,416,6814,395,6888,383"/>
-<area shape="poly" title=" " alt="" coords="7182,388,7105,400,6836,427,6570,446,6171,465,6171,459,6570,441,6835,422,7104,395,7181,383"/>
-<area shape="poly" title=" " alt="" coords="7474,388,7396,400,7218,418,7037,432,6684,452,6381,462,6171,466,6171,461,6381,457,6684,447,7036,427,7218,413,7395,395,7473,383"/>
-<area shape="poly" title=" " alt="" coords="7765,388,7686,400,7464,421,7236,438,6796,458,6422,466,6171,467,6171,462,6422,461,6796,452,7236,432,7463,416,7686,395,7764,383"/>
-<area shape="poly" title=" " alt="" coords="8056,388,7977,400,7808,414,7586,426,7053,445,6171,465,6171,460,7052,440,7585,420,7808,408,7976,395,8055,383"/>
-<area shape="poly" title=" " alt="" coords="8347,388,8268,400,8070,415,7809,428,7186,448,6579,460,6171,466,6171,461,6579,455,7186,443,7809,423,8070,410,8267,395,8346,383"/>
-<area shape="poly" title=" " alt="" coords="8638,388,8558,400,8332,417,8033,431,7319,451,6627,462,6171,466,6171,461,6627,456,7319,445,8033,425,8332,412,8558,395,8637,383"/>
-<area shape="poly" title=" " alt="" coords="8929,388,8849,400,8594,418,8256,433,7451,453,6675,463,6171,466,6171,461,6675,458,7451,448,8256,428,8594,413,8848,395,8928,383"/>
-<area shape="poly" title=" " alt="" coords="9164,396,9140,400,8943,415,8610,427,7706,447,6777,460,6171,466,6171,461,6776,455,7706,442,8609,422,8943,409,9139,395,9163,390"/>
-<area shape="poly" title=" " alt="" coords="9366,396,9342,400,9132,415,8774,429,7806,448,6813,461,6171,466,6171,461,6812,455,7805,443,8774,423,9131,410,9342,395,9366,390"/>
-<area shape="poly" title=" " alt="" coords="9569,396,9545,400,9455,408,9320,416,8938,430,7905,450,6848,461,6171,466,6171,461,6848,456,7905,444,8938,424,9320,411,9455,403,9544,395,9568,391"/>
-<area shape="poly" title=" " alt="" coords="9772,396,9748,400,9652,409,9509,417,9103,431,8004,451,6884,462,6171,466,6171,461,6884,457,8004,446,9102,426,9508,412,9652,404,9747,395,9771,391"/>
-<area shape="poly" title=" " alt="" coords="5120,147,5090,270,5085,269,5114,146"/>
-<area shape="poly" title=" " alt="" coords="5156,141,5197,179,5193,183,5153,145"/>
-<area shape="poly" title=" " alt="" coords="5173,231,5105,271,5102,267,5171,226"/>
+<area shape="rect" title="This file contains configurations about boost and 128bit cpu support. TODO." alt="" coords="5646,5,5811,45"/>
+<area shape="rect" href="fairness_8hpp.html" title="This file contains the all the includes required by the library." alt="" coords="5133,277,5327,302"/>
+<area shape="poly" title=" " alt="" coords="5632,32,5566,38,5491,49,5415,68,5342,96,5307,113,5281,129,5260,150,5240,182,5232,207,5229,233,5231,277,5225,277,5223,233,5227,206,5236,180,5256,147,5277,125,5304,108,5340,91,5413,63,5490,44,5565,33,5632,26"/>
+<area shape="rect" href="control__block__t_8hpp.html" title="This file contains the definition of the control_block_t. TODO." alt="" coords="5377,93,5571,133"/>
+<area shape="poly" title=" " alt="" coords="5661,52,5531,96,5529,91,5659,47"/>
+<area shape="rect" href="slim__priority__mutex_8hpp.html" title="This file contains the implementation of the slim_priority_mutex." alt="" coords="5251,181,5436,221"/>
+<area shape="poly" title=" " alt="" coords="5632,35,5556,43,5477,55,5410,72,5384,83,5367,95,5353,115,5346,137,5344,181,5339,181,5341,137,5349,112,5363,91,5382,78,5408,67,5476,49,5555,37,5632,30"/>
+<area shape="rect" href="pause__ops_8hpp.html" title="This file contains the implementation of the pause operations used by the mutexes." alt="" coords="5646,93,5811,133"/>
+<area shape="poly" title=" " alt="" coords="5731,59,5731,93,5726,93,5726,59"/>
+<area shape="rect" href="wait__ops_8hpp.html" title="This file contains the implementation of the wait operations used by the mutexes." alt="" coords="5594,181,5759,221"/>
+<area shape="poly" title=" " alt="" coords="5676,55,5653,72,5636,94,5632,116,5637,139,5648,161,5661,179,5657,183,5643,164,5632,141,5626,116,5632,92,5649,69,5672,50"/>
+<area shape="rect" href="wait__ops__generic_8hpp.html" title="This file contains the implementation of the wait operation for misc os." alt="" coords="5835,93,6043,133"/>
+<area shape="poly" title=" " alt="" coords="5781,48,5887,91,5885,96,5779,53"/>
+<area shape="rect" href="wait__ops__linux_8hpp.html" title="This file contains the implementation of the wait operation specific for linux." alt="" coords="6067,93,6259,133"/>
+<area shape="poly" title=" " alt="" coords="5825,43,6069,91,6067,96,5824,48"/>
+<area shape="rect" href="wait__ops__windows_8hpp.html" title="This file contains the implementation of the wait operation specific for windows." alt="" coords="6284,93,6501,133"/>
+<area shape="poly" title=" " alt="" coords="5825,35,6272,91,6284,92,6283,98,6271,96,5825,40"/>
+<area shape="rect" href="experimental__mutex__benchmark_8hpp.html" title="Alias experimental_mutex_benchmark." alt="" coords="5,365,276,405"/>
+<area shape="poly" title=" " alt="" coords="5120,294,4145,299,2633,310,1156,330,610,344,417,352,289,360,234,367,234,362,288,355,417,346,610,339,1156,325,2633,305,4145,293,5120,288"/>
+<area shape="rect" href="priority__mutex__benchmark_8hpp.html" title="Alias priority_mutex_benchmark." alt="" coords="301,365,479,405"/>
+<area shape="poly" title=" " alt="" coords="5120,293,4181,295,2732,303,1987,311,1320,323,798,339,614,349,492,360,454,367,453,362,491,355,614,344,798,334,1320,318,1987,306,2732,298,4181,290,5120,288"/>
+<area shape="rect" href="recursive__priority__mutex__benchmark_8hpp.html" title="Alias recursive_priority_mutex_benchmark." alt="" coords="504,365,737,405"/>
+<area shape="poly" title=" " alt="" coords="5120,294,4227,298,2859,310,1529,330,1038,343,864,351,749,360,702,367,701,362,748,355,864,346,1038,338,1529,324,2859,304,4227,293,5120,288"/>
+<area shape="rect" href="slim__priority__mutex__benchmark_8hpp.html" title="Alias slim_priority_mutex_benchmark." alt="" coords="761,365,995,405"/>
+<area shape="poly" title=" " alt="" coords="5120,294,4272,299,2986,311,1738,331,1278,344,1006,360,959,367,958,362,1006,355,1277,339,1738,326,2986,306,4272,294,5120,289"/>
+<area shape="rect" href="shared__priority__mutex__benchmark_8hpp.html" title="Alias shared_priority_mutex_benchmark." alt="" coords="1019,365,1252,405"/>
+<area shape="poly" title=" " alt="" coords="5120,294,4319,300,3113,312,1947,332,1517,345,1264,360,1216,367,1215,362,1263,355,1517,340,1947,327,3113,307,4319,295,5120,289"/>
+<area shape="rect" href="spinlock__priority__mutex__benchmark_8hpp.html" title="Alias spinlock_priority_mutex_benchmark." alt="" coords="1276,357,1459,412"/>
+<area shape="poly" title=" " alt="" coords="5120,294,4356,298,3215,309,2114,329,1709,343,1566,351,1470,360,1459,362,1459,356,1470,355,1565,346,1709,338,2114,324,3215,304,4356,293,5120,288"/>
+<area shape="rect" href="example_8cpp.html" title=" " alt="" coords="1483,372,1657,397"/>
+<area shape="poly" title=" " alt="" coords="5119,294,4391,299,3313,310,2275,330,1894,343,1759,351,1669,360,1606,374,1605,369,1668,355,1758,346,1894,338,2275,324,3313,304,4391,293,5119,288"/>
+<area shape="rect" href="_p_m__scenario1_context_8hpp.html" title="Alias PM_scenario1Context." alt="" coords="1681,372,1933,397"/>
+<area shape="poly" title=" " alt="" coords="5120,293,4503,294,3584,301,3097,310,2639,322,2243,338,1945,360,1857,375,1856,369,1944,355,2243,333,2639,316,3097,304,3584,296,4503,289,5120,288"/>
+<area shape="rect" href="_p_m__scenario2_context_8hpp.html" title="Alias PM_scenario2Context." alt="" coords="1957,372,2209,397"/>
+<area shape="poly" title=" " alt="" coords="5120,293,4549,295,3710,304,3268,312,2852,324,2492,340,2221,360,2133,375,2132,369,2220,355,2492,334,2851,319,3268,307,3710,299,4549,290,5120,288"/>
+<area shape="rect" href="_p_m__scenario3_context_8hpp.html" title="Alias PM_scenario3Context." alt="" coords="2233,372,2485,397"/>
+<area shape="poly" title=" " alt="" coords="5120,294,4596,297,3837,307,3064,326,2741,341,2497,360,2409,375,2408,369,2496,355,2741,336,3064,321,3837,301,4596,292,5120,288"/>
+<area shape="rect" href="_p_m__scenario4_context_8hpp.html" title="Alias PM_scenario4Context." alt="" coords="2509,372,2761,397"/>
+<area shape="poly" title=" " alt="" coords="5119,294,4643,298,3964,309,3277,329,2990,343,2773,360,2686,375,2685,369,2772,355,2990,338,3277,324,3964,304,4643,293,5119,289"/>
+<area shape="rect" href="_p_m__scenario5_context_8hpp.html" title="Alias PM_scenario5Context." alt="" coords="2785,372,3037,397"/>
+<area shape="poly" title=" " alt="" coords="5119,294,4691,300,4093,312,3491,332,3240,345,3050,360,2962,375,2961,369,3050,355,3240,339,3491,326,4093,307,4691,295,5119,289"/>
+<area shape="rect" href="_r_p_m__scenario1_context_8hpp.html" title="Alias RPM_scenario1Context." alt="" coords="3062,372,3329,397"/>
+<area shape="poly" title=" " alt="" coords="5119,295,4229,316,3716,335,3503,347,3341,360,3249,375,3248,369,3340,355,3503,341,3716,330,4229,311,5119,290"/>
+<area shape="rect" href="_r_p_m__scenario2_context_8hpp.html" title="Alias RPM_scenario2Context." alt="" coords="3353,372,3619,397"/>
+<area shape="poly" title=" " alt="" coords="5120,293,4856,295,4487,303,4062,324,3845,340,3632,360,3540,375,3539,369,3631,355,3844,334,4062,318,4487,298,4856,289,5120,287"/>
+<area shape="rect" href="_r_p_m__scenario3_context_8hpp.html" title="Alias RPM_scenario3Context." alt="" coords="3643,372,3910,397"/>
+<area shape="poly" title=" " alt="" coords="5120,294,4900,299,4602,309,4264,329,3922,360,3831,375,3831,369,3922,355,4264,323,4602,304,4900,293,5120,289"/>
+<area shape="rect" href="_r_p_m__scenario4_context_8hpp.html" title="Alias RPM_scenario4Context." alt="" coords="3934,372,4201,397"/>
+<area shape="poly" title=" " alt="" coords="5120,297,4719,316,4467,334,4213,360,4123,375,4122,369,4212,355,4466,329,4719,310,5119,291"/>
+<area shape="rect" href="_r_p_m__scenario5_context_8hpp.html" title="Alias RPM_scenario5Context." alt="" coords="4225,372,4491,397"/>
+<area shape="poly" title=" " alt="" coords="5120,300,4840,323,4672,340,4504,360,4416,375,4415,369,4503,355,4671,334,4840,318,5120,295"/>
+<area shape="rect" href="_r_p_m__scenario6_context_8hpp.html" title="Alias RPM_scenario6Context." alt="" coords="4515,372,4782,397"/>
+<area shape="poly" title=" " alt="" coords="5139,307,4794,360,4711,375,4710,369,4794,355,5138,301"/>
+<area shape="rect" href="_r_p_m__scenario7_context_8hpp.html" title="Alias RPM_scenario7Context." alt="" coords="4806,372,5073,397"/>
+<area shape="poly" title=" " alt="" coords="5182,309,4976,374,4974,369,5181,304"/>
+<area shape="rect" href="_r_p_m__scenario8_context_8hpp.html" title="Alias RPM_scenario8Context." alt="" coords="5097,372,5363,397"/>
+<area shape="poly" title=" " alt="" coords="5233,316,5233,372,5227,372,5227,316"/>
+<area shape="rect" href="_r_p_m__scenario9_context_8hpp.html" title="Alias RPM_scenario9Context." alt="" coords="5387,372,5654,397"/>
+<area shape="poly" title=" " alt="" coords="5279,304,5486,369,5484,374,5278,309"/>
+<area shape="rect" href="_s_l_m__scenario1_context_8hpp.html" title="Alias SLM_scenario1Context." alt="" coords="5679,372,5941,397"/>
+<area shape="poly" title=" " alt="" coords="5315,302,5348,307,5666,355,5750,369,5749,375,5666,360,5347,312,5314,307"/>
+<area shape="rect" href="_s_l_m__scenario2_context_8hpp.html" title="Alias SLM_scenario2Context." alt="" coords="5965,372,6228,397"/>
+<area shape="poly" title=" " alt="" coords="5309,301,5348,307,5518,323,5651,330,5784,337,5954,355,6042,369,6041,375,5954,360,5784,342,5651,335,5518,328,5347,312,5309,307"/>
+<area shape="rect" href="_s_l_m__scenario3_context_8hpp.html" title="Alias SLM_scenario3Context." alt="" coords="6252,372,6515,397"/>
+<area shape="poly" title=" " alt="" coords="5307,301,5348,307,5483,319,5598,325,5794,329,5990,333,6105,341,6241,355,6330,369,6330,375,6240,360,6105,346,5990,339,5794,334,5598,331,5483,324,5347,312,5307,307"/>
+<area shape="rect" href="_s_l_m__scenario4_context_8hpp.html" title="Alias SLM_scenario4Context." alt="" coords="6539,372,6801,397"/>
+<area shape="poly" title=" " alt="" coords="5306,301,5348,307,5527,321,5679,328,5938,328,6196,330,6348,338,6528,355,6618,369,6617,375,6527,360,6348,343,6196,335,5938,334,5679,333,5526,327,5347,312,5306,307"/>
+<area shape="rect" href="_s_p_m__scenario1_context_8hpp.html" title="Alias SPM_scenario1Context." alt="" coords="6826,372,7093,397"/>
+<area shape="poly" title=" " alt="" coords="5305,301,5348,307,5570,324,5759,331,5926,331,6081,328,6236,326,6403,327,6592,336,6814,355,6907,369,6906,375,6814,360,6591,341,6402,332,6236,331,6081,334,5926,336,5759,336,5570,329,5347,312,5305,307"/>
+<area shape="rect" href="_s_p_m__scenario2_context_8hpp.html" title="Alias SPM_scenario2Context." alt="" coords="7117,372,7383,397"/>
+<area shape="poly" title=" " alt="" coords="5305,301,5348,307,5614,326,5841,333,6040,333,6226,328,6412,323,6612,324,6838,333,7105,355,7198,369,7197,375,7104,360,6838,338,6612,329,6412,329,6226,333,6040,338,5841,339,5614,332,5347,312,5305,307"/>
+<area shape="rect" href="_s_p_m__scenario3_context_8hpp.html" title="Alias SPM_scenario3Context." alt="" coords="7407,372,7674,397"/>
+<area shape="poly" title=" " alt="" coords="5305,301,5348,307,5659,329,5922,336,6155,334,6372,327,6588,321,6821,320,7085,330,7396,355,7489,369,7488,375,7395,360,7084,335,6821,326,6588,326,6372,333,6155,339,5922,341,5658,334,5347,312,5304,307"/>
+<area shape="rect" href="_s_p_m__scenario4_context_8hpp.html" title="Alias SPM_scenario4Context." alt="" coords="7698,372,7965,397"/>
+<area shape="poly" title=" " alt="" coords="5305,301,5348,307,5703,331,6004,339,6270,335,6517,327,6764,319,7030,317,7331,327,7501,338,7686,355,7780,369,7779,375,7686,360,7500,344,7331,332,7030,322,6764,324,6517,332,6270,341,6004,344,5703,336,5347,312,5304,307"/>
+<area shape="rect" href="_s_p_m__scenario5_context_8hpp.html" title="Alias SPM_scenario5Context." alt="" coords="7989,372,8255,397"/>
+<area shape="poly" title=" " alt="" coords="5305,301,5348,307,5556,323,5747,334,6086,341,6384,337,6662,326,6940,316,7239,314,7402,317,7578,324,7768,336,7977,355,8071,369,8070,375,7976,360,7768,342,7577,329,7402,322,7239,319,6941,322,6662,332,6384,342,6086,347,5747,339,5556,328,5347,312,5304,307"/>
+<area shape="rect" href="_s_p_m__scenario6_context_8hpp.html" title="Alias SPM_scenario6Context." alt="" coords="8279,372,8546,397"/>
+<area shape="poly" title=" " alt="" coords="5305,302,5348,307,5579,324,5791,336,5986,342,6167,344,6499,338,6808,326,7117,314,7448,310,7629,313,7824,321,8036,335,8268,355,8361,369,8360,375,8267,360,8036,340,7824,327,7629,319,7448,315,7117,319,6808,331,6499,344,6167,350,5986,348,5791,341,5579,330,5347,312,5304,307"/>
+<area shape="rect" href="_s_p_m__scenario7_context_8hpp.html" title="Alias SPM_scenario7Context." alt="" coords="8570,372,8837,397"/>
+<area shape="poly" title=" " alt="" coords="5304,301,5348,307,5493,317,5660,324,6049,331,6488,331,6953,328,7417,326,7857,327,8245,335,8413,344,8558,355,8652,369,8651,375,8558,360,8413,349,8245,341,7857,332,7417,331,6953,333,6488,336,6049,336,5660,329,5493,322,5347,312,5304,307"/>
+<area shape="rect" href="_s_p_m__scenario8_context_8hpp.html" title="Alias SPM_scenario8Context." alt="" coords="8861,372,9127,397"/>
+<area shape="poly" title=" " alt="" coords="5304,301,5348,307,5506,317,5689,325,6113,332,6592,332,7098,328,7605,324,8084,325,8508,334,8690,343,8849,355,8943,369,8942,375,8848,360,8690,348,8508,339,8084,331,7605,330,7098,333,6592,337,6113,337,5689,330,5506,323,5347,312,5304,307"/>
+<area shape="rect" href="_s_p_m__scenario9_context_8hpp.html" title="Alias SPM_scenario9Context." alt="" coords="9151,372,9418,397"/>
+<area shape="poly" title=" " alt="" coords="5304,301,5348,307,5519,318,5717,326,6176,333,6695,332,7244,328,7792,323,8311,324,8770,333,8968,342,9140,355,9234,369,9233,375,9139,360,8968,347,8770,338,8311,329,7792,329,7244,333,6695,338,6176,339,5717,331,5519,323,5347,312,5304,307"/>
+<area shape="rect" href="_s_p_n_l_c_p_m__scenario1_context_8hpp.html" title="Alias SPNLCPM_scenario1Context." alt="" coords="9442,365,9621,405"/>
+<area shape="poly" title=" " alt="" coords="5304,301,5348,307,5463,313,5634,317,6113,322,7390,323,8060,323,8666,327,9144,337,9315,345,9430,355,9469,362,9468,367,9430,360,9315,350,9144,342,8666,333,8060,329,7390,328,6113,327,5634,323,5463,318,5347,312,5304,307"/>
+<area shape="rect" href="_s_p_n_l_c_p_m__scenario2_context_8hpp.html" title="Alias SPNLCPM_scenario2Context." alt="" coords="9645,365,9823,405"/>
+<area shape="poly" title=" " alt="" coords="5304,302,5348,307,5469,313,5648,318,6151,322,7491,322,8194,323,8831,327,9333,336,9512,344,9633,355,9671,362,9670,367,9632,360,9512,350,9332,342,8831,332,8194,328,7491,328,6151,328,5648,323,5468,318,5347,312,5304,307"/>
+<area shape="rect" href="_s_p_n_l_c_p_m__scenario3_context_8hpp.html" title="Alias SPNLCPM_scenario3Context." alt="" coords="9847,365,10026,405"/>
+<area shape="poly" title=" " alt="" coords="5304,302,5348,307,5474,313,5663,318,6189,323,7592,322,8329,322,8995,326,9521,336,9709,344,9836,355,9874,362,9873,367,9835,360,9709,349,9521,341,8995,331,8329,327,7592,327,6189,328,5663,323,5474,319,5347,312,5304,307"/>
+<area shape="rect" href="_s_p_n_l_c_p_m__scenario4_context_8hpp.html" title="Alias SPNLCPM_scenario4Context." alt="" coords="10050,365,10229,405"/>
+<area shape="poly" title=" " alt="" coords="5304,302,5348,307,5480,314,5677,318,6227,323,7694,322,8464,321,9160,325,9709,335,9906,343,10038,355,10077,362,10076,367,10038,360,9906,349,9709,340,9160,330,8464,326,7694,327,6227,328,5677,324,5480,319,5347,312,5304,307"/>
+<area shape="rect" href="test_8cpp.html" title="Alias test." alt="" coords="10253,372,10364,397"/>
+<area shape="poly" title=" " alt="" coords="5304,302,5348,307,5486,314,5691,318,6265,319,7797,310,8600,307,9327,311,9637,317,9899,325,10104,338,10241,355,10286,369,10284,374,10240,360,10103,343,9899,331,9637,322,9327,316,8600,312,7797,315,6265,324,5691,323,5486,319,5347,312,5304,307"/>
+<area shape="rect" href="priority__mutex__old4_8hpp.html" title=" " alt="" coords="5593,269,5803,309"/>
+<area shape="poly" title=" " alt="" coords="5502,142,5539,180,5584,219,5623,245,5661,267,5659,272,5620,250,5580,223,5535,184,5498,146"/>
+<area shape="rect" href="priority__mutex__old5_8hpp.html" title=" " alt="" coords="5360,269,5569,309"/>
+<area shape="poly" title=" " alt="" coords="5475,147,5468,269,5463,269,5470,147"/>
+<area shape="poly" title=" " alt="" coords="5435,143,5374,183,5371,179,5432,139"/>
+<area shape="poly" title=" " alt="" coords="5309,232,5247,278,5244,274,5306,228"/>
+<area shape="poly" title=" " alt="" coords="5712,146,5690,183,5686,180,5708,144"/>
+<area shape="poly" title=" " alt="" coords="5687,234,5696,268,5691,270,5682,236"/>
+<area shape="poly" title=" " alt="" coords="5619,229,5512,272,5510,267,5617,224"/>
+<area shape="poly" title=" " alt="" coords="5887,90,5782,48,5783,43,5889,85"/>
 </map>
 </div>
 </div>
 <p><a href="config_8hpp_source.html">Go to the source code of this file.</a></p>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="define-members" name="define-members"></a>
+Macros</h2></td></tr>
+<tr class="memitem:a2873fbc3f86d433f7ec02fe48ccd3cfa" id="r_a2873fbc3f86d433f7ec02fe48ccd3cfa"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a2873fbc3f86d433f7ec02fe48ccd3cfa">BOOST_FAIRNESS_HARDWARE_DESTRUCTIVE_SIZE</a>&#160;&#160;&#160;128</td></tr>
+<tr class="memdesc:a2873fbc3f86d433f7ec02fe48ccd3cfa"><td class="mdescLeft">&#160;</td><td class="mdescRight">size to be aligned to avoid false sharing (<a href="https://www.intel.com/content/www/us/en/developer/articles/technical/intel-sdm.html#optimization">https://www.intel.com/content/www/us/en/developer/articles/technical/intel-sdm.html#optimization</a> - 3.7.3)  <br /></td></tr>
+<tr class="separator:a2873fbc3f86d433f7ec02fe48ccd3cfa"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af36f3bf589e005a51ea421fc62d52086" id="r_af36f3bf589e005a51ea421fc62d52086"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#af36f3bf589e005a51ea421fc62d52086">BOOST_FAIRNESS_USE_STD_WAIT_NOTIFY</a></td></tr>
+<tr class="memdesc:af36f3bf589e005a51ea421fc62d52086"><td class="mdescLeft">&#160;</td><td class="mdescRight">boost fairness will use atomic::wait/notify implemented by the standard lib instead of its own implementation.  <br /></td></tr>
+<tr class="separator:af36f3bf589e005a51ea421fc62d52086"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9ad7457de04fbbf85165354779e61505" id="r_a9ad7457de04fbbf85165354779e61505"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a9ad7457de04fbbf85165354779e61505">BOOST_FAIRNESS_WAIT_SPINS</a>&#160;&#160;&#160;0</td></tr>
+<tr class="memdesc:a9ad7457de04fbbf85165354779e61505"><td class="mdescLeft">&#160;</td><td class="mdescRight">the number of unpaused spins before a syscall to the OS to yield the cpu through futex on linux or waitOnAdress on windows it is used only if BOOST_FAIRNESS_USE_EXPERIMENTAL_WAIT_NOTIFY is defined  <br /></td></tr>
+<tr class="separator:a9ad7457de04fbbf85165354779e61505"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2e744f49cb92eb5d0cb6aff8dea90862" id="r_a2e744f49cb92eb5d0cb6aff8dea90862"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a2e744f49cb92eb5d0cb6aff8dea90862">BOOST_FAIRNESS_WAIT_SPINS_RELAXED</a>&#160;&#160;&#160;12</td></tr>
+<tr class="memdesc:a2e744f49cb92eb5d0cb6aff8dea90862"><td class="mdescLeft">&#160;</td><td class="mdescRight">the number of paused spins before a syscall to the OS to yield the cpu through futex on linux or waitOnAdress on windows. it is used only if BOOST_FAIRNESS_USE_EXPERIMENTAL_WAIT_NOTIFY is defined  <br /></td></tr>
+<tr class="separator:a2e744f49cb92eb5d0cb6aff8dea90862"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a12bf085d35f48feb3d2731d2c5d7679f" id="r_a12bf085d35f48feb3d2731d2c5d7679f"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a12bf085d35f48feb3d2731d2c5d7679f">BOOST_FAIRNESS_WAIT_SPINS_YIELD</a>&#160;&#160;&#160;4</td></tr>
+<tr class="memdesc:a12bf085d35f48feb3d2731d2c5d7679f"><td class="mdescLeft">&#160;</td><td class="mdescRight">the number of yield spins before a syscall to the OS to yield the cpu through futex on linux or waitOnAdress on windows it is used only if BOOST_FAIRNESS_USE_EXPERIMENTAL_WAIT_NOTIFY is defined  <br /></td></tr>
+<tr class="separator:a12bf085d35f48feb3d2731d2c5d7679f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>This file contains configurations about boost and 128bit cpu support. TODO. </p>
 <dl class="section author"><dt>Author</dt><dd>F. Abrignani (<a href="#" onclick="location.href='mai'+'lto:'+'fed'+'er'+'ign'+'ol'+'i@h'+'ot'+'mai'+'l.'+'it'; return false;">feder<span class="obfuscator">.nosp@m.</span>igno<span class="obfuscator">.nosp@m.</span>li@ho<span class="obfuscator">.nosp@m.</span>tmai<span class="obfuscator">.nosp@m.</span>l.it</a>) </dd>
@@ -277,7 +293,88 @@ S. Martorana (<a href="#" onclick="location.href='mai'+'lto:'+'sal'+'va'+'tor'+'
 <dl class="section version"><dt>Version</dt><dd>0.1 </dd></dl>
 <dl class="section date"><dt>Date</dt><dd>2023-08-19</dd></dl>
 <dl class="section copyright"><dt>Copyright</dt><dd>Copyright (c) 2023 Federico Abrignani (<a href="#" onclick="location.href='mai'+'lto:'+'fed'+'er'+'ign'+'ol'+'i@h'+'ot'+'mai'+'l.'+'it'; return false;">feder<span class="obfuscator">.nosp@m.</span>igno<span class="obfuscator">.nosp@m.</span>li@ho<span class="obfuscator">.nosp@m.</span>tmai<span class="obfuscator">.nosp@m.</span>l.it</a>). Distributed under the Boost Software License, Version 1.0. (See accompanying file LICENSE_1_0.txt or copy at <a href="http://www.boost.org/LICENSE_1_0.txt">http://www.boost.org/LICENSE_1_0.txt</a>). </dd></dl>
-</div></div><!-- contents -->
+</div><h2 class="groupheader">Macro Definition Documentation</h2>
+<a id="a2873fbc3f86d433f7ec02fe48ccd3cfa" name="a2873fbc3f86d433f7ec02fe48ccd3cfa"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2873fbc3f86d433f7ec02fe48ccd3cfa">&#9670;&#160;</a></span>BOOST_FAIRNESS_HARDWARE_DESTRUCTIVE_SIZE</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define BOOST_FAIRNESS_HARDWARE_DESTRUCTIVE_SIZE&#160;&#160;&#160;128</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>size to be aligned to avoid false sharing (<a href="https://www.intel.com/content/www/us/en/developer/articles/technical/intel-sdm.html#optimization">https://www.intel.com/content/www/us/en/developer/articles/technical/intel-sdm.html#optimization</a> - 3.7.3) </p>
+
+</div>
+</div>
+<a id="af36f3bf589e005a51ea421fc62d52086" name="af36f3bf589e005a51ea421fc62d52086"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af36f3bf589e005a51ea421fc62d52086">&#9670;&#160;</a></span>BOOST_FAIRNESS_USE_STD_WAIT_NOTIFY</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define BOOST_FAIRNESS_USE_STD_WAIT_NOTIFY</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>boost fairness will use atomic::wait/notify implemented by the standard lib instead of its own implementation. </p>
+
+</div>
+</div>
+<a id="a9ad7457de04fbbf85165354779e61505" name="a9ad7457de04fbbf85165354779e61505"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9ad7457de04fbbf85165354779e61505">&#9670;&#160;</a></span>BOOST_FAIRNESS_WAIT_SPINS</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define BOOST_FAIRNESS_WAIT_SPINS&#160;&#160;&#160;0</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>the number of unpaused spins before a syscall to the OS to yield the cpu through futex on linux or waitOnAdress on windows it is used only if BOOST_FAIRNESS_USE_EXPERIMENTAL_WAIT_NOTIFY is defined </p>
+
+</div>
+</div>
+<a id="a2e744f49cb92eb5d0cb6aff8dea90862" name="a2e744f49cb92eb5d0cb6aff8dea90862"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2e744f49cb92eb5d0cb6aff8dea90862">&#9670;&#160;</a></span>BOOST_FAIRNESS_WAIT_SPINS_RELAXED</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define BOOST_FAIRNESS_WAIT_SPINS_RELAXED&#160;&#160;&#160;12</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>the number of paused spins before a syscall to the OS to yield the cpu through futex on linux or waitOnAdress on windows. it is used only if BOOST_FAIRNESS_USE_EXPERIMENTAL_WAIT_NOTIFY is defined </p>
+
+</div>
+</div>
+<a id="a12bf085d35f48feb3d2731d2c5d7679f" name="a12bf085d35f48feb3d2731d2c5d7679f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a12bf085d35f48feb3d2731d2c5d7679f">&#9670;&#160;</a></span>BOOST_FAIRNESS_WAIT_SPINS_YIELD</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define BOOST_FAIRNESS_WAIT_SPINS_YIELD&#160;&#160;&#160;4</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>the number of yield spins before a syscall to the OS to yield the cpu through futex on linux or waitOnAdress on windows it is used only if BOOST_FAIRNESS_USE_EXPERIMENTAL_WAIT_NOTIFY is defined </p>
+
+</div>
+</div>
+</div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->

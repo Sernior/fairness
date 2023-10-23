@@ -1,8 +1,9 @@
 var standard__mutex__benchmark_8hpp =
 [
-    [ "STD_LockUnlock", "standard__mutex__benchmark_8hpp.html#ae894f14badba4c328331b19ee7e21900", null ],
-    [ "STD_pipeline_benchmark_audio", "standard__mutex__benchmark_8hpp.html#ac9522bc34fd3d979e6b5bed68ff50070", null ],
-    [ "STD_pipeline_benchmark_fast", "standard__mutex__benchmark_8hpp.html#a395548be3305849a4c488b5d456ad764", null ],
-    [ "STD_pipeline_benchmark_gaming", "standard__mutex__benchmark_8hpp.html#a0fca3d29e9eed16d3b0e86d695c65a80", null ],
-    [ "STD_pipeline_benchmark_long", "standard__mutex__benchmark_8hpp.html#a1146fa28fc88b13ffeea2ee1a44b32e1", null ]
+    [ "lock_unlock_benchmark", "standard__mutex__benchmark_8hpp.html#a274fa0295153b8e54b072189446d8d90", null ],
+    [ "pipeline_benchmark_audio", "standard__mutex__benchmark_8hpp.html#ad34de0f2f085a489d0ffd34ab25e1fd0", null ],
+    [ "pipeline_benchmark_fast", "standard__mutex__benchmark_8hpp.html#a4cc2dd7d267551bf78db429d31de6674", null ],
+    [ "pipeline_benchmark_gaming", "standard__mutex__benchmark_8hpp.html#a5b9b5da40c9f6c390c9c0bccee275dcc", null ],
+    [ "pipeline_benchmark_long", "standard__mutex__benchmark_8hpp.html#a97e0e9a68e8e190f416c45c78fb97ed6", null ],
+    [ "m", "standard__mutex__benchmark_8hpp.html#afcc2f9a8831d01ce6bd55e9e68a8e870", null ]
 ];

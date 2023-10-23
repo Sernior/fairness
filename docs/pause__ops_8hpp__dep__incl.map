@@ -1,0 +1,102 @@
+<map id="include/boost/fairness/detail/pause_ops.hpp" name="include/boost/fairness/detail/pause_ops.hpp">
+<area shape="rect" id="Node000001" title="This file contains the implementation of the pause operations used by the mutexes." alt="" coords="4215,5,4381,45"/>
+<area shape="rect" id="Node000002" href="$wait__ops_8hpp.html" title="This file contains the implementation of the wait operations used by the mutexes." alt="" coords="4215,93,4381,133"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="4301,59,4301,93,4295,93,4295,59"/>
+<area shape="rect" id="Node000003" href="$priority__mutex__old2_8hpp.html" title=" " alt="" coords="3260,181,3469,221"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="4202,123,3882,145,3683,163,3482,184,3470,186,3469,180,3482,179,3682,157,3881,140,4201,117"/>
+<area shape="rect" id="Node000004" href="$priority__mutex__old3_8hpp.html" title=" " alt="" coords="3493,181,3703,221"/>
+<area shape="poly" id="edge3_Node000002_Node000004" title=" " alt="" coords="4202,127,3979,151,3716,184,3703,186,3703,180,3715,179,3979,146,4201,122"/>
+<area shape="rect" id="Node000005" href="$priority__mutex__old4_8hpp.html" title=" " alt="" coords="3727,181,3936,221"/>
+<area shape="poly" id="edge4_Node000002_Node000005" title=" " alt="" coords="4202,135,3934,184,3933,179,4201,130"/>
+<area shape="rect" id="Node000006" href="$priority__mutex__old5_8hpp.html" title=" " alt="" coords="3960,181,4169,221"/>
+<area shape="poly" id="edge5_Node000002_Node000006" title=" " alt="" coords="4235,141,4117,184,4115,179,4233,136"/>
+<area shape="rect" id="Node000007" href="$priority__mutex__old6_8hpp.html" title=" " alt="" coords="4193,181,4403,221"/>
+<area shape="poly" id="edge6_Node000002_Node000007" title=" " alt="" coords="4301,147,4301,181,4295,181,4295,147"/>
+<area shape="rect" id="Node000008" href="$priority__mutex__old7_8hpp.html" title=" " alt="" coords="4427,181,4636,221"/>
+<area shape="poly" id="edge7_Node000002_Node000008" title=" " alt="" coords="4363,136,4481,179,4479,184,4361,141"/>
+<area shape="rect" id="Node000009" href="$priority__mutex__old8_8hpp.html" title=" " alt="" coords="4660,181,4869,221"/>
+<area shape="poly" id="edge8_Node000002_Node000009" title=" " alt="" coords="4395,130,4663,179,4662,184,4394,135"/>
+<area shape="rect" id="Node000010" href="$priority__mutex_8hpp.html" title="This file contains the implementation of the priority_mutex." alt="" coords="4894,181,5059,221"/>
+<area shape="poly" id="edge9_Node000002_Node000010" title=" " alt="" coords="4395,121,4618,144,4882,179,4894,181,4893,186,4882,184,4617,149,4394,126"/>
+<area shape="rect" id="Node000054" href="$recursive__priority__mutex_8hpp.html" title="This file contains the implementation of the recursive_priority_mutex." alt="" coords="5084,181,5301,221"/>
+<area shape="poly" id="edge49_Node000002_Node000054" title=" " alt="" coords="4395,118,4697,141,5072,179,5084,180,5083,186,5071,184,4697,147,4394,124"/>
+<area shape="rect" id="Node000011" href="$fairness_8hpp.html" title="This file contains the all the includes required by the library." alt="" coords="4988,269,5181,295"/>
+<area shape="poly" id="edge10_Node000010_Node000011" title=" " alt="" coords="5015,227,5070,267,5067,271,5012,232"/>
+<area shape="rect" id="Node000012" href="$experimental__mutex__benchmark_8hpp.html" title="Alias experimental_mutex_benchmark." alt="" coords="5,350,276,390"/>
+<area shape="poly" id="edge11_Node000011_Node000012" title=" " alt="" coords="4974,286,4026,290,2559,300,1129,317,600,330,289,345,234,353,233,347,288,340,600,325,1129,312,2559,294,4026,285,4974,281"/>
+<area shape="rect" id="Node000015" href="$priority__mutex__benchmark_8hpp.html" title="Alias priority_mutex_benchmark." alt="" coords="301,350,479,390"/>
+<area shape="poly" id="edge12_Node000011_Node000015" title=" " alt="" coords="4974,286,4061,286,2658,293,1937,300,1292,310,788,325,610,335,492,345,454,353,453,347,491,340,609,329,788,320,1292,305,1937,294,2658,287,4061,281,4974,281"/>
+<area shape="rect" id="Node000016" href="$recursive__priority__mutex__benchmark_8hpp.html" title="Alias recursive_priority_mutex_benchmark." alt="" coords="504,350,737,390"/>
+<area shape="poly" id="edge13_Node000011_Node000016" title=" " alt="" coords="4974,286,4107,290,2786,299,1502,317,1028,330,860,337,749,345,701,353,700,347,748,340,860,332,1028,324,1502,311,2785,294,4107,284,4974,281"/>
+<area shape="rect" id="Node000017" href="$slim__priority__mutex__benchmark_8hpp.html" title="Alias slim_priority_mutex_benchmark." alt="" coords="761,350,995,390"/>
+<area shape="poly" id="edge14_Node000011_Node000017" title=" " alt="" coords="4974,286,4153,290,2912,300,1710,318,1267,330,1006,345,959,353,958,347,1006,340,1267,325,1710,313,2912,295,4153,285,4974,281"/>
+<area shape="rect" id="Node000018" href="$shared__priority__mutex__benchmark_8hpp.html" title="Alias shared_priority_mutex_benchmark." alt="" coords="1019,350,1252,390"/>
+<area shape="poly" id="edge15_Node000011_Node000018" title=" " alt="" coords="4975,286,4200,291,3040,302,1920,319,1507,331,1264,345,1216,353,1215,347,1263,340,1507,326,1920,314,3040,296,4200,286,4975,281"/>
+<area shape="rect" id="Node000019" href="$spinlock__priority__mutex__benchmark_8hpp.html" title="Alias spinlock_priority_mutex_benchmark." alt="" coords="1276,343,1459,397"/>
+<area shape="poly" id="edge16_Node000011_Node000019" title=" " alt="" coords="4975,286,4237,290,3142,299,2087,316,1699,329,1562,337,1470,345,1459,347,1459,342,1470,340,1561,332,1699,324,2087,311,3142,293,4237,284,4975,281"/>
+<area shape="rect" id="Node000020" href="$example_8cpp.html" title=" " alt="" coords="1483,357,1657,383"/>
+<area shape="poly" id="edge17_Node000011_Node000020" title=" " alt="" coords="4974,286,4273,290,3241,299,2249,317,1884,330,1755,337,1669,345,1605,360,1604,355,1668,340,1754,332,1884,324,2248,312,3241,294,4273,285,4974,281"/>
+<area shape="rect" id="Node000021" href="$_p_m__scenario1_context_8hpp.html" title="Alias PM_scenario1Context." alt="" coords="1681,357,1933,383"/>
+<area shape="poly" id="edge18_Node000011_Node000021" title=" " alt="" coords="4974,286,4382,286,3505,291,3042,299,2606,309,2229,325,1945,345,1857,360,1856,355,1944,340,2229,319,2606,304,3042,293,3505,286,4382,280,4974,280"/>
+<area shape="rect" id="Node000024" href="$_p_m__scenario2_context_8hpp.html" title="Alias PM_scenario2Context." alt="" coords="1957,357,2209,383"/>
+<area shape="poly" id="edge19_Node000011_Node000024" title=" " alt="" coords="4974,286,4429,287,3632,294,3213,301,2818,312,2478,326,2221,345,2133,360,2132,355,2220,340,2478,321,2818,307,3213,296,3632,289,4429,282,4974,280"/>
+<area shape="rect" id="Node000025" href="$_p_m__scenario3_context_8hpp.html" title="Alias PM_scenario3Context." alt="" coords="2233,357,2485,383"/>
+<area shape="poly" id="edge20_Node000011_Node000025" title=" " alt="" coords="4974,286,4475,288,3759,297,3031,314,2727,328,2497,345,2409,360,2408,355,2496,340,2726,323,3031,309,3759,291,4475,283,4974,281"/>
+<area shape="rect" id="Node000026" href="$_p_m__scenario4_context_8hpp.html" title="Alias PM_scenario4Context." alt="" coords="2509,357,2761,383"/>
+<area shape="poly" id="edge21_Node000011_Node000026" title=" " alt="" coords="4974,286,4523,290,3886,299,3244,317,2976,330,2773,345,2686,360,2685,355,2772,340,2975,324,3244,312,3886,294,4522,285,4974,281"/>
+<area shape="rect" id="Node000027" href="$_p_m__scenario5_context_8hpp.html" title="Alias PM_scenario5Context." alt="" coords="2785,357,3037,383"/>
+<area shape="poly" id="edge22_Node000011_Node000027" title=" " alt="" coords="4974,287,4571,292,4016,302,3458,320,3226,331,3050,345,2962,360,2961,355,3050,340,3226,326,3458,314,4016,297,4571,287,4974,282"/>
+<area shape="rect" id="Node000028" href="$_r_p_m__scenario1_context_8hpp.html" title="Alias RPM_scenario1Context." alt="" coords="3062,357,3329,383"/>
+<area shape="poly" id="edge23_Node000011_Node000028" title=" " alt="" coords="4974,288,4153,306,3684,323,3489,333,3341,345,3249,360,3248,355,3340,340,3489,328,3684,318,4152,301,4974,282"/>
+<area shape="rect" id="Node000029" href="$_r_p_m__scenario2_context_8hpp.html" title="Alias RPM_scenario2Context." alt="" coords="3353,357,3619,383"/>
+<area shape="poly" id="edge24_Node000011_Node000029" title=" " alt="" coords="4974,285,4732,287,4399,295,4018,313,3823,327,3632,345,3540,360,3539,355,3631,340,3822,322,4017,308,4399,289,4732,282,4974,280"/>
+<area shape="rect" id="Node000030" href="$_r_p_m__scenario3_context_8hpp.html" title="Alias RPM_scenario3Context." alt="" coords="3643,357,3910,383"/>
+<area shape="poly" id="edge25_Node000011_Node000030" title=" " alt="" coords="4974,287,4776,291,4515,301,4220,318,3922,345,3831,360,3831,355,3922,340,4219,313,4514,295,4776,286,4974,282"/>
+<area shape="rect" id="Node000031" href="$_r_p_m__scenario4_context_8hpp.html" title="Alias RPM_scenario4Context." alt="" coords="3934,357,4201,383"/>
+<area shape="poly" id="edge26_Node000011_Node000031" title=" " alt="" coords="4974,290,4633,307,4423,323,4213,345,4123,360,4122,355,4212,340,4423,318,4633,302,4974,284"/>
+<area shape="rect" id="Node000032" href="$_r_p_m__scenario5_context_8hpp.html" title="Alias RPM_scenario5Context." alt="" coords="4225,357,4491,383"/>
+<area shape="poly" id="edge27_Node000011_Node000032" title=" " alt="" coords="4974,295,4756,315,4504,345,4416,360,4415,355,4503,340,4756,310,4974,289"/>
+<area shape="rect" id="Node000033" href="$_r_p_m__scenario6_context_8hpp.html" title="Alias RPM_scenario6Context." alt="" coords="4515,357,4782,383"/>
+<area shape="poly" id="edge28_Node000011_Node000033" title=" " alt="" coords="5014,300,4707,360,4706,355,5013,295"/>
+<area shape="rect" id="Node000034" href="$_r_p_m__scenario7_context_8hpp.html" title="Alias RPM_scenario7Context." alt="" coords="4806,357,5073,383"/>
+<area shape="poly" id="edge29_Node000011_Node000034" title=" " alt="" coords="5055,304,4960,359,4958,355,5052,299"/>
+<area shape="rect" id="Node000035" href="$_r_p_m__scenario8_context_8hpp.html" title="Alias RPM_scenario8Context." alt="" coords="5097,357,5363,383"/>
+<area shape="poly" id="edge30_Node000011_Node000035" title=" " alt="" coords="5117,299,5212,355,5209,359,5115,304"/>
+<area shape="rect" id="Node000036" href="$_r_p_m__scenario9_context_8hpp.html" title="Alias RPM_scenario9Context." alt="" coords="5387,357,5654,383"/>
+<area shape="poly" id="edge31_Node000011_Node000036" title=" " alt="" coords="5157,295,5463,355,5462,360,5156,300"/>
+<area shape="rect" id="Node000037" href="$_s_l_m__scenario1_context_8hpp.html" title="Alias SLM_scenario1Context." alt="" coords="5679,357,5941,383"/>
+<area shape="poly" id="edge32_Node000011_Node000037" title=" " alt="" coords="5195,289,5414,310,5666,340,5753,355,5752,360,5666,345,5413,315,5195,295"/>
+<area shape="rect" id="Node000038" href="$_s_l_m__scenario2_context_8hpp.html" title="Alias SLM_scenario2Context." alt="" coords="5965,357,6228,383"/>
+<area shape="poly" id="edge33_Node000011_Node000038" title=" " alt="" coords="5195,284,5535,302,5744,318,5954,340,6043,355,6042,360,5954,345,5744,323,5535,307,5195,290"/>
+<area shape="rect" id="Node000039" href="$_s_l_m__scenario3_context_8hpp.html" title="Alias SLM_scenario3Context." alt="" coords="6252,357,6515,383"/>
+<area shape="poly" id="edge34_Node000011_Node000039" title=" " alt="" coords="5196,282,5392,286,5652,295,5945,313,6241,340,6330,355,6330,360,6240,345,5945,318,5652,301,5392,291,5195,287"/>
+<area shape="rect" id="Node000040" href="$_s_l_m__scenario4_context_8hpp.html" title="Alias SLM_scenario4Context." alt="" coords="6539,357,6801,383"/>
+<area shape="poly" id="edge35_Node000011_Node000040" title=" " alt="" coords="5195,280,5436,281,5766,289,6145,307,6338,322,6528,340,6618,355,6617,360,6527,345,6338,327,6144,313,5766,295,5436,287,5195,285"/>
+<area shape="rect" id="Node000041" href="$_s_p_m__scenario1_context_8hpp.html" title="Alias SPM_scenario1Context." alt="" coords="6826,357,7093,383"/>
+<area shape="poly" id="edge36_Node000011_Node000041" title=" " alt="" coords="5195,282,6010,301,6474,318,6668,328,6814,340,6907,355,6906,360,6814,345,6667,333,6474,323,6010,306,5195,288"/>
+<area shape="rect" id="Node000042" href="$_s_p_m__scenario2_context_8hpp.html" title="Alias SPM_scenario2Context." alt="" coords="7117,357,7383,383"/>
+<area shape="poly" id="edge37_Node000011_Node000042" title=" " alt="" coords="5195,282,5595,287,6147,298,6700,315,6930,327,7105,340,7198,355,7197,360,7104,345,6930,332,6700,320,6147,303,5595,292,5195,287"/>
+<area shape="rect" id="Node000043" href="$_s_p_m__scenario3_context_8hpp.html" title="Alias SPM_scenario3Context." alt="" coords="7407,357,7674,383"/>
+<area shape="poly" id="edge38_Node000011_Node000043" title=" " alt="" coords="5195,281,5647,285,6282,295,6925,313,7193,325,7396,340,7489,355,7488,360,7395,345,7192,330,6924,318,6282,300,5646,291,5195,287"/>
+<area shape="rect" id="Node000044" href="$_s_p_m__scenario4_context_8hpp.html" title="Alias SPM_scenario4Context." alt="" coords="7698,357,7965,383"/>
+<area shape="poly" id="edge39_Node000011_Node000044" title=" " alt="" coords="5195,281,5697,284,6417,292,7149,310,7455,323,7686,340,7780,355,7779,360,7686,345,7455,329,7149,315,6417,298,5697,289,5195,286"/>
+<area shape="rect" id="Node000045" href="$_s_p_m__scenario5_context_8hpp.html" title="Alias SPM_scenario5Context." alt="" coords="7989,357,8255,383"/>
+<area shape="poly" id="edge40_Node000011_Node000045" title=" " alt="" coords="5195,281,5746,282,6551,290,6974,297,7373,308,7717,322,7977,340,8070,355,8069,360,7976,345,7717,327,7373,313,6974,302,6551,295,5746,288,5195,286"/>
+<area shape="rect" id="Node000046" href="$_s_p_m__scenario6_context_8hpp.html" title="Alias SPM_scenario6Context." alt="" coords="8279,357,8546,383"/>
+<area shape="poly" id="edge41_Node000011_Node000046" title=" " alt="" coords="5195,280,5795,281,6684,287,7154,294,7597,305,7979,320,8268,340,8361,355,8360,360,8267,345,7979,325,7597,310,7154,300,6684,293,5795,286,5195,286"/>
+<area shape="rect" id="Node000047" href="$_s_p_m__scenario7_context_8hpp.html" title="Alias SPM_scenario7Context." alt="" coords="8570,357,8837,383"/>
+<area shape="poly" id="edge42_Node000011_Node000047" title=" " alt="" coords="5195,280,5843,279,6817,285,7333,292,7820,303,8241,318,8558,340,8652,355,8651,360,8558,345,8241,324,7820,308,7333,297,6817,290,5843,285,5195,286"/>
+<area shape="rect" id="Node000048" href="$_s_p_m__scenario8_context_8hpp.html" title="Alias SPM_scenario8Context." alt="" coords="8861,357,9127,383"/>
+<area shape="poly" id="edge43_Node000011_Node000048" title=" " alt="" coords="5195,281,7101,299,8203,316,8609,327,8849,340,8943,355,8942,360,8848,345,8609,333,8203,322,7101,304,5195,287"/>
+<area shape="rect" id="Node000049" href="$_s_p_m__scenario9_context_8hpp.html" title="Alias SPM_scenario9Context." alt="" coords="9151,357,9418,383"/>
+<area shape="poly" id="edge44_Node000011_Node000049" title=" " alt="" coords="5195,281,6012,286,7245,297,8439,315,8880,327,9140,340,9233,355,9232,360,9139,345,8879,332,8439,320,7245,303,6012,292,5195,287"/>
+<area shape="rect" id="Node000050" href="$_s_p_n_l_c_p_m__scenario1_context_8hpp.html" title="Alias SPNLCPM_scenario1Context." alt="" coords="9442,350,9621,390"/>
+<area shape="poly" id="edge45_Node000011_Node000050" title=" " alt="" coords="5195,281,6064,282,7389,289,8068,296,8676,307,9151,321,9319,330,9430,340,9469,347,9467,353,9430,345,9318,335,9150,326,8676,312,8068,301,7389,294,6064,287,5195,286"/>
+<area shape="rect" id="Node000051" href="$_s_p_n_l_c_p_m__scenario2_context_8hpp.html" title="Alias SPNLCPM_scenario2Context." alt="" coords="9645,350,9823,390"/>
+<area shape="poly" id="edge46_Node000011_Node000051" title=" " alt="" coords="5195,281,6100,281,7489,288,8202,295,8841,305,9339,320,9516,329,9633,340,9671,347,9670,353,9632,345,9515,335,9339,326,8840,311,8202,300,7489,293,6100,286,5195,286"/>
+<area shape="rect" id="Node000052" href="$_s_p_n_l_c_p_m__scenario3_context_8hpp.html" title="Alias SPNLCPM_scenario3Context." alt="" coords="9847,350,10026,390"/>
+<area shape="poly" id="edge47_Node000011_Node000052" title=" " alt="" coords="5195,280,6136,281,7589,286,8336,293,9005,304,9528,319,9713,329,9836,340,9874,347,9873,353,9835,345,9712,334,9528,325,9005,309,8336,299,7589,292,6136,286,5195,286"/>
+<area shape="rect" id="Node000053" href="$_s_p_n_l_c_p_m__scenario4_context_8hpp.html" title="Alias SPNLCPM_scenario4Context." alt="" coords="10050,350,10229,390"/>
+<area shape="poly" id="edge48_Node000011_Node000053" title=" " alt="" coords="5195,280,6172,280,7689,285,8470,292,9170,303,9716,319,9910,329,10038,340,10077,347,10076,353,10038,345,9910,334,9716,324,9169,308,8470,297,7689,290,6172,285,5195,286"/>
+<area shape="poly" id="edge50_Node000054_Node000011" title=" " alt="" coords="5157,232,5102,271,5099,267,5154,227"/>
+</map>

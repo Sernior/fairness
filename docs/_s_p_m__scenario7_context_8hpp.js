@@ -6,5 +6,6 @@ var _s_p_m__scenario7_context_8hpp =
     [ "threadFunctionTryShared", "_s_p_m__scenario7_context_8hpp.html#ac525c25896acfb05febb5b5e598b95fc", null ],
     [ "expected", "_s_p_m__scenario7_context_8hpp.html#ae510e4817cb6dd34040b9a768968b2c9", null ],
     [ "m", "_s_p_m__scenario7_context_8hpp.html#a0e5eb935e7b18ba4706f6b0bb3177080", null ],
-    [ "ret", "_s_p_m__scenario7_context_8hpp.html#a32fa57d4c70f65df352a3aeeb71d4032", null ]
+    [ "ret", "_s_p_m__scenario7_context_8hpp.html#a32fa57d4c70f65df352a3aeeb71d4032", null ],
+    [ "sm", "_s_p_m__scenario7_context_8hpp.html#aa6420d35b79bd5370664c10c02d4ac41", null ]
 ];
