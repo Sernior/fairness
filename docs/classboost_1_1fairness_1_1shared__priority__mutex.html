@@ -243,7 +243,7 @@ template&lt;size_t N = 1&gt; </div>
   </dd>
 </dl>
 <dl class="section note"><dt>Note</dt><dd><a class="el" href="#a0fd7fd33d4c3ecaaeebdcb815f5b855c" title="Try to acquire the unique ownership of the shared_priority_mutex, blocking the thread if the shared_p...">lock()</a> is usually not called directly: <a class="el" href="classboost_1_1fairness_1_1unique__lock.html" title="The class unique_lock is a general-purpose mutex ownership wrapper allowing deferred locking,...">unique_lock</a>, scoped_lock, and lock_guard are used to manage exclusive locking.</dd></dl>
-<h3><a class="anchor" id="autotoc_md3"></a>
+<h3><a class="anchor" id="autotoc_md6"></a>
 Example</h3>
 <div class="fragment"><div class="line"><a class="code hl_class" href="classboost_1_1fairness_1_1shared__priority__mutex.html">shared_priority_mutex&lt;10&gt;</a> m;</div>
 <div class="line"> </div>
@@ -301,7 +301,7 @@ If <a class="el" href="#a68d900b0a0718756f737d7ed7a66567b" title="Try to acquire
   </dd>
 </dl>
 <dl class="section note"><dt>Note</dt><dd><a class="el" href="#a68d900b0a0718756f737d7ed7a66567b" title="Try to acquire the shared ownership of the shared_priority_mutex, blocking the thread if the shared_p...">lock_shared()</a> is usually not called directly: <a class="el" href="classboost_1_1fairness_1_1shared__lock.html" title="The class shared_lock is a general-purpose shared mutex ownership wrapper allowing deferred locking,...">shared_lock</a> is used to manage shared locking.</dd></dl>
-<h3><a class="anchor" id="autotoc_md6"></a>
+<h3><a class="anchor" id="autotoc_md9"></a>
 Example</h3>
 <div class="fragment"><div class="line"><a class="code hl_class" href="classboost_1_1fairness_1_1shared__priority__mutex.html">shared_priority_mutex&lt;10&gt;</a> m;</div>
 <div class="line"> </div>
@@ -358,7 +358,7 @@ template&lt;size_t N = 1&gt; </div>
   </table>
   </dd>
 </dl>
-<h3><a class="anchor" id="autotoc_md5"></a>
+<h3><a class="anchor" id="autotoc_md8"></a>
 Example</h3>
 <div class="fragment"><div class="line"><a class="code hl_class" href="classboost_1_1fairness_1_1shared__priority__mutex.html">shared_priority_mutex&lt;10&gt;</a> m;</div>
 <div class="line"> </div>
@@ -415,7 +415,7 @@ template&lt;size_t N = 1&gt; </div>
   </table>
   </dd>
 </dl>
-<h3><a class="anchor" id="autotoc_md8"></a>
+<h3><a class="anchor" id="autotoc_md11"></a>
 Example</h3>
 <div class="fragment"><div class="line"><a class="code hl_class" href="classboost_1_1fairness_1_1shared__priority__mutex.html">shared_priority_mutex&lt;10&gt;</a> m;</div>
 <div class="line"> </div>
@@ -470,7 +470,7 @@ template&lt;size_t N = 1&gt; </div>
   </dd>
 </dl>
 <dl class="section note"><dt>Note</dt><dd><a class="el" href="#a680aae71007cd265e19c2e6b7288579f" title="Release the shared_priority_mutex from unique ownership.   The mutex must be locked by the current th...">unlock()</a> is usually not called directly: <a class="el" href="classboost_1_1fairness_1_1unique__lock.html" title="The class unique_lock is a general-purpose mutex ownership wrapper allowing deferred locking,...">unique_lock</a> and lock_guard are used to manage exclusive locking.</dd></dl>
-<h3><a class="anchor" id="autotoc_md4"></a>
+<h3><a class="anchor" id="autotoc_md7"></a>
 Example</h3>
 <div class="fragment"><div class="line"><a class="code hl_class" href="classboost_1_1fairness_1_1shared__priority__mutex.html">shared_priority_mutex&lt;10&gt;</a> m;</div>
 <div class="line"> </div>
@@ -524,7 +524,7 @@ The mutex <a class="el" href="classboost_1_1fairness_1_1shared__priority__mutex.
   </dd>
 </dl>
 <dl class="section note"><dt>Note</dt><dd><a class="el" href="#af64efe5d5709af228afe007066196654" title="Release the shared_priority_mutex from shared ownership by the calling thread.  The mutex shared_prio...">unlock_shared()</a> is usually not called directly: <a class="el" href="classboost_1_1fairness_1_1shared__lock.html" title="The class shared_lock is a general-purpose shared mutex ownership wrapper allowing deferred locking,...">shared_lock</a> is used to manage shared locking.</dd></dl>
-<h3><a class="anchor" id="autotoc_md7"></a>
+<h3><a class="anchor" id="autotoc_md10"></a>
 Example</h3>
 <div class="fragment"><div class="line"><a class="code hl_class" href="classboost_1_1fairness_1_1shared__priority__mutex.html">shared_priority_mutex&lt;10&gt;</a> m;</div>
 <div class="line"> </div>

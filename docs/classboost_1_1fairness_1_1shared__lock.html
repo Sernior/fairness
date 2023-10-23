@@ -148,7 +148,7 @@ Public Member Functions</h2></td></tr>
 <tr class="memdesc:a830b97364e81a5af56164ec9b2446a2b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Locks the associated mutex in shared mode. Effectively calls <code><a class="el" href="#a23e8415358372e1abf2d030ee99ed2dc" title="Returns a pointer to the associated mutex, or a null pointer if there is no associated mutex.">mutex()</a>-&gt;lock_shared()</code>.  <br /></td></tr>
 <tr class="separator:a830b97364e81a5af56164ec9b2446a2b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae163101d40e6fdb0387d29588e6a4007" id="r_ae163101d40e6fdb0387d29588e6a4007"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceboost_1_1fairness.html#ae7e29511af6c21c2c41f9dc351e2d969">Priority_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ae163101d40e6fdb0387d29588e6a4007">lock_priority</a> () const noexcept</td></tr>
-<tr class="memdesc:ae163101d40e6fdb0387d29588e6a4007"><td class="mdescLeft">&#160;</td><td class="mdescRight">Checks the current priority of <code>*this</code>.  <br /></td></tr>
+<tr class="memdesc:ae163101d40e6fdb0387d29588e6a4007"><td class="mdescLeft">&#160;</td><td class="mdescRight">Checks the current priority of <code>*this</code>. TODO.  <br /></td></tr>
 <tr class="separator:ae163101d40e6fdb0387d29588e6a4007"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a23e8415358372e1abf2d030ee99ed2dc" id="r_a23e8415358372e1abf2d030ee99ed2dc"><td class="memItemLeft" align="right" valign="top">Lockable *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a23e8415358372e1abf2d030ee99ed2dc">mutex</a> () const noexcept</td></tr>
 <tr class="memdesc:a23e8415358372e1abf2d030ee99ed2dc"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns a pointer to the associated mutex, or a null pointer if there is no associated mutex.  <br /></td></tr>
@@ -163,9 +163,6 @@ Public Member Functions</h2></td></tr>
 <tr class="memdesc:a2f174c6835dc9d102cbbbcd466500777"><td class="mdescLeft">&#160;</td><td class="mdescRight">Breaks the association of the associated mutex, if any, and <code>*this</code>. <br  />
 No locks are unlocked. If the <code>*this</code> held ownership of the associated mutex prior to the call, the caller is now responsible to unlock the mutex.  <br /></td></tr>
 <tr class="separator:a2f174c6835dc9d102cbbbcd466500777"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a08e6e40541a692f059b382d91ad36e58" id="r_a08e6e40541a692f059b382d91ad36e58"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a08e6e40541a692f059b382d91ad36e58">shared_lock</a> (Lockable &amp;m, <a class="el" href="namespaceboost_1_1fairness.html#ae7e29511af6c21c2c41f9dc351e2d969">Priority_t</a> const p, adopt_lock_t) noexcept</td></tr>
-<tr class="memdesc:a08e6e40541a692f059b382d91ad36e58"><td class="mdescLeft">&#160;</td><td class="mdescRight">Construct a new shared lock object.  <br /></td></tr>
-<tr class="separator:a08e6e40541a692f059b382d91ad36e58"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a82e47667ae87e76c651f0c831fed41ef" id="r_a82e47667ae87e76c651f0c831fed41ef"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a82e47667ae87e76c651f0c831fed41ef">swap</a> (<a class="el" href="classboost_1_1fairness_1_1shared__lock.html">shared_lock</a> &amp;other) noexcept</td></tr>
 <tr class="memdesc:a82e47667ae87e76c651f0c831fed41ef"><td class="mdescLeft">&#160;</td><td class="mdescRight">Exchanges the internal states of the lock objects.  <br /></td></tr>
 <tr class="separator:a82e47667ae87e76c651f0c831fed41ef"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -205,61 +202,7 @@ class boost::fairness::shared_lock&lt; Lockable &gt;</div><p>The class <a class=
   </table>
   </dd>
 </dl>
-</div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
-<a id="a08e6e40541a692f059b382d91ad36e58" name="a08e6e40541a692f059b382d91ad36e58"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a08e6e40541a692f059b382d91ad36e58">&#9670;&#160;</a></span>shared_lock()</h2>
-
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;typename Lockable &gt; </div>
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="classboost_1_1fairness_1_1shared__lock.html">boost::fairness::shared_lock</a>&lt; Lockable &gt;::shared_lock </td>
-          <td>(</td>
-          <td class="paramtype">Lockable &amp;&#160;</td>
-          <td class="paramname"><em>m</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype"><a class="el" href="namespaceboost_1_1fairness.html#ae7e29511af6c21c2c41f9dc351e2d969">Priority_t</a> const&#160;</td>
-          <td class="paramname"><em>p</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">adopt_lock_t&#160;</td>
-          <td class="paramname">&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">noexcept</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>Construct a new shared lock object. </p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">m</td><td></td></tr>
-    <tr><td class="paramname">p</td><td></td></tr>
-  </table>
-  </dd>
-</dl>
-
-</div>
-</div>
-<h2 class="groupheader">Member Function Documentation</h2>
+</div><h2 class="groupheader">Member Function Documentation</h2>
 <a id="a830b97364e81a5af56164ec9b2446a2b" name="a830b97364e81a5af56164ec9b2446a2b"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a830b97364e81a5af56164ec9b2446a2b">&#9670;&#160;</a></span>lock()</h2>
 
@@ -333,7 +276,7 @@ template&lt;typename Lockable &gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p>Checks the current priority of <code>*this</code>. </p>
+<p>Checks the current priority of <code>*this</code>. TODO. </p>
 <dl class="section return"><dt>Returns</dt><dd>Priority_t : the current priority. </dd></dl>
 
 </div>

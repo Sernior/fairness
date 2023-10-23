@@ -1,7 +1,5 @@
 var NAVTREEINDEX4 =
 {
-"standard__mutex__benchmark_8hpp.html#a4cc2dd7d267551bf78db429d31de6674":[3,0,0,6,0,2],
-"standard__mutex__benchmark_8hpp.html#a5b9b5da40c9f6c390c9c0bccee275dcc":[3,0,0,6,0,3],
 "standard__mutex__benchmark_8hpp.html#a97e0e9a68e8e190f416c45c78fb97ed6":[3,0,0,6,0,4],
 "standard__mutex__benchmark_8hpp.html#ad34de0f2f085a489d0ffd34ab25e1fd0":[3,0,0,6,0,1],
 "standard__mutex__benchmark_8hpp.html#afcc2f9a8831d01ce6bd55e9e68a8e870":[3,0,0,6,0,5],

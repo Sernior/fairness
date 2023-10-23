@@ -1,7 +1,5 @@
 var NAVTREEINDEX3 =
 {
-"namespace_s_p_n_l_c_p_m__scenario3.html#aceed1bf261c24c6d3a20588a10c88279":[1,0,35,4],
-"namespace_s_p_n_l_c_p_m__scenario3.html#ad644f41537fb9ad99650fdf92f276450":[1,0,35,5],
 "namespace_s_p_n_l_c_p_m__scenario3.html#ad91cd613693600862a3ad519fd83469b":[1,0,35,2],
 "namespace_s_p_n_l_c_p_m__scenario3.html#ada9274faf4873564ecda01c1e48410a3":[1,0,35,3],
 "namespace_s_p_n_l_c_p_m__scenario4.html":[1,0,36],
@@ -249,5 +247,7 @@ var NAVTREEINDEX3 =
 "spinlock__priority__mutex__benchmark_8hpp.html#affbbe45b4b000a1aebd6ac2076674c09":[3,0,0,5,0,4],
 "spinlock__priority__mutex__benchmark_8hpp_source.html":[3,0,0,5,0],
 "standard__mutex__benchmark_8hpp.html":[3,0,0,6,0],
-"standard__mutex__benchmark_8hpp.html#a274fa0295153b8e54b072189446d8d90":[3,0,0,6,0,0]
+"standard__mutex__benchmark_8hpp.html#a274fa0295153b8e54b072189446d8d90":[3,0,0,6,0,0],
+"standard__mutex__benchmark_8hpp.html#a4cc2dd7d267551bf78db429d31de6674":[3,0,0,6,0,2],
+"standard__mutex__benchmark_8hpp.html#a5b9b5da40c9f6c390c9c0bccee275dcc":[3,0,0,6,0,3]
 };

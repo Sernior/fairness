@@ -1,6 +1,5 @@
 var classboost_1_1fairness_1_1shared__lock =
 [
-    [ "shared_lock", "classboost_1_1fairness_1_1shared__lock.html#a08e6e40541a692f059b382d91ad36e58", null ],
     [ "lock", "classboost_1_1fairness_1_1shared__lock.html#a830b97364e81a5af56164ec9b2446a2b", null ],
     [ "lock_priority", "classboost_1_1fairness_1_1shared__lock.html#ae163101d40e6fdb0387d29588e6a4007", null ],
     [ "mutex", "classboost_1_1fairness_1_1shared__lock.html#a23e8415358372e1abf2d030ee99ed2dc", null ],

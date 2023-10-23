@@ -139,7 +139,7 @@ $(document).ready(function(){initNavTree('index.html',''); initResizable(); });
 <p><b>A collection of advanced syncronization mechanisms which are able to prioritize threads based on their priority, granting higher-priority threads access to protected resources ahead of lower-priority ones.</b></p>
 <p><b>Designed to enhance throughput in pipelines by prioritizing slower threads.</b></p>
 <p><a class="anchor" id="readme-top"></a></p>
-<div align="center"> </div><div align="center"> <em>A C++ library containing a collection of advanced syncronization mechanisms.</em> </div><div align="center"> </div><h1><a class="anchor" id="autotoc_md10"></a>
+<div align="center"> </div><div align="center"> <em>A C++ library containing a collection of advanced syncronization mechanisms.</em> </div><div align="center"> </div><h1><a class="anchor" id="autotoc_md19"></a>
 About The Project</h1>
 <p>While the standard library offers various tools for managing concurrency, it lacks effective methods for enforcing fairness policies among threads.<br  />
  Tweaking such behaviors can be challenging, and mistakes might lead to issues like thread starvation. These tools, if misused, have the potential to cause harm rather than benefit. Careful implementation and understanding are crucial to harness their benefits effectively.<br  />
@@ -150,13 +150,13 @@ About The Project</h1>
 </ul>
 <p><img src="https://sernior.github.io/fairness/stdpipeline.png" alt="" class="readme-img" style="object-fit: cover; object-position: 100% 0; width: 100%;" class="inline"/></p>
 <p><img src="https://sernior.github.io/fairness/prioritypipeline.png" alt="" class="readme-img" style="object-fit: cover; object-position: 100% 0; width: 100%;" class="inline"/></p>
-<h1><a class="anchor" id="autotoc_md11"></a>
+<h1><a class="anchor" id="autotoc_md20"></a>
 Getting Started</h1>
-<h2><a class="anchor" id="autotoc_md12"></a>
+<h2><a class="anchor" id="autotoc_md21"></a>
 Prerequisites</h2>
 <p>I build and tested this lib with C++20. <br  />
  If for some reason, on some compilers (not MinGW), it doesn`t work on C++20+ please email me or open an issue.</p>
-<h2><a class="anchor" id="autotoc_md13"></a>
+<h2><a class="anchor" id="autotoc_md22"></a>
 Setup boost library</h2>
 <p>Download <a href="https://www.boost.org/users/history/version_1_82_0.html">https://www.boost.org/users/history/version_1_82_0.html</a></p>
 <p>In the directory where you want to put the Boost installation, execute: </p><pre class="fragment">```sh
@@ -164,13 +164,13 @@ $ tar --bzip2 -xf /path/to/boost_1_82_0.tar.bz2
 $ ./bootstrap.sh --prefix=/usr/local
 $ ./b2 install
 ```
-</pre> <h2><a class="anchor" id="autotoc_md14"></a>
+</pre> <h2><a class="anchor" id="autotoc_md23"></a>
 Setup</h2>
 <p>This is an header only library but you can build the tests using:</p>
 <p>Generate ninja build files and build:</p>
 <div class="fragment"><div class="line">$ cmake . -B build -G Ninja -DLIBFSM_COMPILE_TESTS=ON -DLIBFSM_COMPILE_BENCHMARKS=ON</div>
 <div class="line">$ cmake --build build</div>
-</div><!-- fragment --><h2><a class="anchor" id="autotoc_md15"></a>
+</div><!-- fragment --><h2><a class="anchor" id="autotoc_md24"></a>
 Installation</h2>
 <p>Using cmake you can include this library using:</p>
 <div class="fragment"><div class="line">include(FetchContent)</div>
@@ -183,7 +183,7 @@ Installation</h2>
 <div class="line"> </div>
 <div class="line">FetchContent_MakeAvailable(fsm)</div>
 </div><!-- fragment --><p> At this point you should be able to link the library simply using: </p><div class="fragment"><div class="line">target_link_libraries(your_stuff.cpp fsm)</div>
-</div><!-- fragment --><h1><a class="anchor" id="autotoc_md16"></a>
+</div><!-- fragment --><h1><a class="anchor" id="autotoc_md25"></a>
 Snippet</h1>
 <p>This is a snippet ready-to-use. </p><div class="fragment"><div class="line"><span class="preprocessor">#include &lt;iostream&gt;</span></div>
 <div class="line"><span class="preprocessor">#include &lt;thread&gt;</span></div>
@@ -239,7 +239,7 @@ Snippet</h1>
 <div class="line">Thread with priority : 2 is running.</div>
 <div class="line">Thread with priority : 3 is running.</div>
 <div class="line">Thread with priority : 3 is running.</div>
-</div><!-- fragment --><h1><a class="anchor" id="autotoc_md17"></a>
+</div><!-- fragment --><h1><a class="anchor" id="autotoc_md26"></a>
 Configurations</h1>
 <p>This is a list of macros that can be defined to configure <a class="el" href="namespaceboost_1_1fairness.html">boost::fairness</a>:</p>
 <table class="markdownTable">
@@ -256,21 +256,21 @@ Configurations</h1>
 <tr class="markdownTableRowOdd">
 <td class="markdownTableBodyNone">BOOST_FAIRNESS_USE_STD_WAIT_NOTIFY   </td><td class="markdownTableBodyNone"><a class="el" href="namespaceboost_1_1fairness.html">boost::fairness</a> will use atomic::wait/notify implemented by the standard lib instead of its own implementation.   </td></tr>
 </table>
-<h1><a class="anchor" id="autotoc_md18"></a>
+<h1><a class="anchor" id="autotoc_md27"></a>
 Contributing</h1>
 <p>If you encounter any issues or would like to suggest new features, please don't hesitate to open an issue or get in touch with me at <a href="#" onclick="location.href='mai'+'lto:'+'fed'+'er'+'ign'+'ol'+'i@h'+'ot'+'mai'+'l.'+'it'; return false;">feder<span class="obfuscator">.nosp@m.</span>igno<span class="obfuscator">.nosp@m.</span>li@ho<span class="obfuscator">.nosp@m.</span>tmai<span class="obfuscator">.nosp@m.</span>l.it</a>.<br  />
  Contributions are also welcome! Feel free to open pull requests to the main repository and assign me as a reviewer – I'll be sure to review them. Your help is greatly appreciated!</p>
-<h1><a class="anchor" id="autotoc_md19"></a>
+<h1><a class="anchor" id="autotoc_md28"></a>
 License</h1>
 <p>Distributed under the Boost Software License - Version 1.0. See LICENSE.txt for more information.</p>
-<h1><a class="anchor" id="autotoc_md20"></a>
+<h1><a class="anchor" id="autotoc_md29"></a>
 Documentation</h1>
 <p>The documentation is available at the following link: <a href="https://sernior.github.io/fairness/">https://sernior.github.io/fairness/</a></p>
-<h1><a class="anchor" id="autotoc_md21"></a>
+<h1><a class="anchor" id="autotoc_md30"></a>
 Contacts</h1>
 <p>Federico Abrignani - <a href="#" onclick="location.href='mai'+'lto:'+'fed'+'er'+'ign'+'ol'+'i@h'+'ot'+'mai'+'l.'+'it'; return false;">feder<span class="obfuscator">.nosp@m.</span>igno<span class="obfuscator">.nosp@m.</span>li@ho<span class="obfuscator">.nosp@m.</span>tmai<span class="obfuscator">.nosp@m.</span>l.it</a><br  />
  Salvatore Martorana - <a href="#" onclick="location.href='mai'+'lto:'+'sal'+'va'+'tor'+'em'+'art'+'or'+'ana'+'@h'+'otm'+'ai'+'l.c'+'om'; return false;">salva<span class="obfuscator">.nosp@m.</span>tore<span class="obfuscator">.nosp@m.</span>marto<span class="obfuscator">.nosp@m.</span>rana<span class="obfuscator">.nosp@m.</span>@hotm<span class="obfuscator">.nosp@m.</span>ail.<span class="obfuscator">.nosp@m.</span>com</a></p>
-<h1><a class="anchor" id="autotoc_md22"></a>
+<h1><a class="anchor" id="autotoc_md31"></a>
 Authors and Contributors</h1>
 <p><a href="https://github.com/Sernior/fairness/graphs/contributors"><img src="https://contrib.rocks/image?repo=Sernior/fairness" alt="" class="inline"/> </a> </p>
 </div></div><!-- PageDoc -->
