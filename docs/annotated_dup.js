@@ -20,6 +20,12 @@ var annotated_dup =
         [ "old6", "namespaceboost_1_1fairness_1_1old6.html", [
           [ "priority_mutex", "classboost_1_1fairness_1_1old6_1_1priority__mutex.html", "classboost_1_1fairness_1_1old6_1_1priority__mutex" ]
         ] ],
+        [ "old7", "namespaceboost_1_1fairness_1_1old7.html", [
+          [ "priority_mutex", "classboost_1_1fairness_1_1old7_1_1priority__mutex.html", "classboost_1_1fairness_1_1old7_1_1priority__mutex" ]
+        ] ],
+        [ "old8", "namespaceboost_1_1fairness_1_1old8.html", [
+          [ "priority_mutex", "classboost_1_1fairness_1_1old8_1_1priority__mutex.html", "classboost_1_1fairness_1_1old8_1_1priority__mutex" ]
+        ] ],
         [ "control_block_64b_simple_t", "structboost_1_1fairness_1_1control__block__64b__simple__t.html", "structboost_1_1fairness_1_1control__block__64b__simple__t" ],
         [ "priority_mutex", "classboost_1_1fairness_1_1priority__mutex.html", "classboost_1_1fairness_1_1priority__mutex" ],
         [ "recursive_priority_mutex", "classboost_1_1fairness_1_1recursive__priority__mutex.html", "classboost_1_1fairness_1_1recursive__priority__mutex" ],

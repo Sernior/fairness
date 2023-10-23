@@ -16,6 +16,8 @@ var namespaceboost_1_1fairness =
     [ "old4", "namespaceboost_1_1fairness_1_1old4.html", "namespaceboost_1_1fairness_1_1old4" ],
     [ "old5", "namespaceboost_1_1fairness_1_1old5.html", "namespaceboost_1_1fairness_1_1old5" ],
     [ "old6", "namespaceboost_1_1fairness_1_1old6.html", "namespaceboost_1_1fairness_1_1old6" ],
+    [ "old7", "namespaceboost_1_1fairness_1_1old7.html", "namespaceboost_1_1fairness_1_1old7" ],
+    [ "old8", "namespaceboost_1_1fairness_1_1old8.html", "namespaceboost_1_1fairness_1_1old8" ],
     [ "control_block_64b_simple_t", "structboost_1_1fairness_1_1control__block__64b__simple__t.html", "structboost_1_1fairness_1_1control__block__64b__simple__t" ],
     [ "priority_mutex", "classboost_1_1fairness_1_1priority__mutex.html", "classboost_1_1fairness_1_1priority__mutex" ],
     [ "recursive_priority_mutex", "classboost_1_1fairness_1_1recursive__priority__mutex.html", "classboost_1_1fairness_1_1recursive__priority__mutex" ],
