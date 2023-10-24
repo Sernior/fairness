@@ -27,17 +27,40 @@ namespace utils::waiting{
 
     template <WaitingLevel level>
     void busy_wait(uint32_t utime) {
+        int i = 0;
         auto begin = NOW;
         if constexpr (level == WaitingLevel::Milli)
-            for(;std::chrono::duration_cast<std::chrono::milliseconds>(NOW - begin).count() < utime;)
-                continue;
+            for(;std::chrono::duration_cast<std::chrono::milliseconds>(NOW - begin).count() < utime;){
+                benchmark::DoNotOptimize(i += 1);
+            }
         if constexpr (level == WaitingLevel::Micro)
-            for(;std::chrono::duration_cast<std::chrono::microseconds>(NOW - begin).count() < utime;)
-                continue;
+            for(;std::chrono::duration_cast<std::chrono::microseconds>(NOW - begin).count() < utime;){
+                benchmark::DoNotOptimize(i += 1);
+            }
         if constexpr (level == WaitingLevel::Nano)
-            for(;std::chrono::duration_cast<std::chrono::nanoseconds>(NOW - begin).count() < utime;)
-                continue;
+            for(;std::chrono::duration_cast<std::chrono::nanoseconds>(NOW - begin).count() < utime;){
+                benchmark::DoNotOptimize(i += 1);
+            }
     }
+
+    void busy_wait_50milli_benchmark(benchmark::State& state) {
+        for (auto _ : state){
+            busy_wait<WaitingLevel::Milli>(50);
+        }
+    }
+
+    void busy_wait_50micro_benchmark(benchmark::State& state) {
+        for (auto _ : state){
+            busy_wait<WaitingLevel::Micro>(50);
+        }
+    }
+
+    void busy_wait_50nano_benchmark(benchmark::State& state) {
+        for (auto _ : state){
+            busy_wait<WaitingLevel::Nano>(50);
+        }
+    }
+
 }
 
 #undef NOW

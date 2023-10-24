@@ -271,10 +271,10 @@ namespace boost::fairness{
 
         private:
         alignas(BOOST_FAIRNESS_HARDWARE_DESTRUCTIVE_SIZE) spinlock_priority_mutex<N> internalMutex_;
+        alignas(BOOST_FAIRNESS_HARDWARE_DESTRUCTIVE_SIZE) std::array<std::atomic<uint32_t>, N> waitingFlag_;
         std::array<Thread_cnt_t, N> waiters_;
         std::thread::id owner_{};
         uint32_t recursionCounter_{};
-        alignas(BOOST_FAIRNESS_HARDWARE_DESTRUCTIVE_SIZE) std::array<std::atomic<uint32_t>, N> waitingFlag_;
 
         bool lock_not_owned_(){
             return std::thread::id() == owner_;
