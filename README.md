@@ -71,7 +71,7 @@ include(FetchContent)
 
 FetchContent_Declare(
   fsm
-  GIT_REPOSITORY https://github.com/Sernior/priority-mutex.git
+  GIT_REPOSITORY https://github.com/Sernior/fairness.git
   GIT_TAG [TAG] #change with the tag you want to use
 )
 

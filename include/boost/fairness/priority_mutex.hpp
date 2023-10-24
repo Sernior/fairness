@@ -85,6 +85,8 @@ namespace boost::fairness
          * #### Example
          *
          * @code
+         * #include <boost/fairness.hpp>
+         * #include <iostream>
          * #define NUM_ARBITRARY_PRIORITIES 5
          *
          * priority_mutex<NUM_ARBITRARY_PRIORITIES> m;
@@ -149,6 +151,8 @@ namespace boost::fairness
          * #### Example
          *
          * @code
+         * #include <boost/fairness.hpp>
+         * #include <iostream>
          * #define NUM_ARBITRARY_PRIORITIES 5
          *
          * priority_mutex<NUM_ARBITRARY_PRIORITIES> m;
@@ -212,6 +216,8 @@ namespace boost::fairness
          * #### Example
          *
          * @code
+         * #include <boost/fairness.hpp>
+         * #include <iostream>
          * #define NUM_ARBITRARY_PRIORITIES 5
          *
          * priority_mutex<NUM_ARBITRARY_PRIORITIES> m;
