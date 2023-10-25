@@ -17,31 +17,55 @@
 #include <boost/fairness/detail/pause_ops.hpp>
 #include <atomic>
 #include <thread>
+#include <functional>
 
 
 namespace boost::fairness::detail{
 
+    static std::function<void()> relaxOrYield[] = {pause, std::this_thread::yield};
+
+    template<typename K>
+    inline void spin_wait(std::atomic_flag& mem, K expected) { // rarely this being is causing 467X the number of branch misspredictions than what it should be
+
+        auto memEqualsExpected = [&mem, expected]{
+            return mem.test() == expected;
+        };
+
+        for(int i = 0; i < BOOST_FAIRNESS_SPINWAIT_SPINS; ++i){
+
+            if (!memEqualsExpected())
+                return;
+
+            relaxOrYield[i >= BOOST_FAIRNESS_SPINWAIT_SPINS_RELAXED]();
+
+        }
+
+    }
+
 #if !defined(BOOST_FAIRNESS_USE_STD_WAIT_NOTIFY)
 
     template<typename T, typename K>
-    inline void wait(T& mem, K expected){
-        while (mem.load(std::memory_order_relaxed) == expected){
+    inline void wait(T& mem, K expected) { // rarely this being is causing 467X the number of branch misspredictions than what it should be
+
+        auto memEqualsExpected = [&mem, expected]{
+            return mem.load(std::memory_order_relaxed) == expected;
+
+        };
+        do {
+
             for(int i = 0; i < BOOST_FAIRNESS_WAIT_SPINS; ++i){
-                if (mem.load(std::memory_order_relaxed) != expected)
+
+                if (!memEqualsExpected())
                     return;
+
+                relaxOrYield[i >= BOOST_FAIRNESS_WAIT_SPINS_RELAXED]();
+
             }
-            for(int i = 0; i < BOOST_FAIRNESS_WAIT_SPINS_RELAXED; ++i){
-                if (mem.load(std::memory_order_relaxed) != expected)
-                    return;
-                pause();
-            }
-            for(int i = 0; i < BOOST_FAIRNESS_WAIT_SPINS_YIELD; ++i){
-                if (mem.load(std::memory_order_relaxed) != expected)
-                    return;
-                std::this_thread::yield();
-            }
+            
             wait_(mem, expected);
-        }
+
+        } while (memEqualsExpected());
+
     }
 
 #else

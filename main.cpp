@@ -6,7 +6,7 @@
 #include <shared_mutex>
 #include <algorithm>
 #include <BS_thread_pool.hpp>
-//#define BOOST_FAIRNESS_USE_EXPERIMENTAL_WAIT_NOTIFY
+#define BOOST_FAIRNESS_USE_EXPERIMENTAL_WAIT_NOTIFY
 // #include <boost/atomic.hpp>
 #include <boost/fairness.hpp>
 
@@ -27,7 +27,7 @@ static void busy_wait_nano(uint64_t nanoseconds){
 static void thread_function_nano(int p, int preCriticalTime, int criticalTime, int postCriticalTime){
     busy_wait_nano(preCriticalTime);
     {
-        boost::fairness::unique_lock l1(pm, p);
+        boost::fairness::unique_lock l1(sms, p);
         busy_wait_nano(criticalTime);
     }
     busy_wait_nano(postCriticalTime);

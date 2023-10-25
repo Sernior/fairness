@@ -15,32 +15,40 @@
 
 
 
+#ifndef BOOST_FAIRNESS_SPINWAIT_SPINS
+/**
+ * @brief the total number of spins during a spin_wait operation
+*/
+#define BOOST_FAIRNESS_SPINWAIT_SPINS 16
+#endif // BOOST_FAIRNESS_SPINWAIT_SPINS
+
+
+
+#ifndef BOOST_FAIRNESS_SPINWAIT_SPINS_RELAXED
+/**
+ * @brief the number of relaxed spins during a spin_wait operation
+*/
+#define BOOST_FAIRNESS_SPINWAIT_SPINS_RELAXED 12
+#endif // BOOST_FAIRNESS_SPINWAIT_SPINS_RELAXED
+
+
+
 #ifndef BOOST_FAIRNESS_WAIT_SPINS
 /**
- * @brief the number of unpaused spins before a syscall to the OS to yield the cpu through futex on linux or waitOnAdress on windows
- *        it is used only if BOOST_FAIRNESS_USE_EXPERIMENTAL_WAIT_NOTIFY is defined
+ * @brief the total number of spins during a wait operation before a syscall to the OS to yield the cpu through futex on linux or waitOnAdress on windows
 */
-#define BOOST_FAIRNESS_WAIT_SPINS 0
+#define BOOST_FAIRNESS_WAIT_SPINS 16
 #endif // BOOST_FAIRNESS_WAIT_SPINS
 
 
 
 #ifndef BOOST_FAIRNESS_WAIT_SPINS_RELAXED
 /**
- * @brief the number of paused spins before a syscall to the OS to yield the cpu through futex on linux or waitOnAdress on windows.
- *        it is used only if BOOST_FAIRNESS_USE_EXPERIMENTAL_WAIT_NOTIFY is defined
+ * @brief the total number of spins during a wait operation before a syscall to the OS to yield the cpu through futex on linux or waitOnAdress on windows.
 */
 #define BOOST_FAIRNESS_WAIT_SPINS_RELAXED 12
 #endif // BOOST_FAIRNESS_WAIT_SPINS_RELAXED
 
-
-#ifndef BOOST_FAIRNESS_WAIT_SPINS_YIELD
-/**
- * @brief the number of yield spins before a syscall to the OS to yield the cpu through futex on linux or waitOnAdress on windows
- *        it is used only if BOOST_FAIRNESS_USE_EXPERIMENTAL_WAIT_NOTIFY is defined
-*/
-#define BOOST_FAIRNESS_WAIT_SPINS_YIELD 4
-#endif // BOOST_FAIRNESS_WAIT_SPINS_RELAXED
 
 
 #ifndef BOOST_FAIRNESS_HARDWARE_DESTRUCTIVE_SIZE

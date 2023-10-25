@@ -15,6 +15,7 @@
 #include <atomic>
 #include <array>
 #include <boost/fairness/priority_t.hpp>
+#include <boost/fairness/detail/wait_ops.hpp>
 
 namespace boost::fairness{
 
@@ -66,16 +67,21 @@ namespace boost::fairness{
          */
         void lock(Priority_t const priority = 0){
 
+            bool localLockOwned = lockOwned_.test(std::memory_order_relaxed);
+
             Priority_t localCurrentPriority = currentPriority_.load(std::memory_order_relaxed);
 
             waiters_[priority].fetch_add(1, std::memory_order_relaxed);
 
-            while ( 
-                (localCurrentPriority < priority || !currentPriority_.compare_exchange_weak(localCurrentPriority, priority, std::memory_order_relaxed)) ||
-                (lockOwned_.test_and_set(std::memory_order_acquire))
-            ){
+            for (;;){
 
-                localCurrentPriority = currentPriority_;
+                if (!localLockOwned * (localCurrentPriority >= priority)){
+                    if (!lockOwned_.test_and_set(std::memory_order_acquire))
+                        break;
+                }
+                detail::spin_wait(lockOwned_, true);
+                localLockOwned = lockOwned_.test(std::memory_order_relaxed);
+                localCurrentPriority = currentPriority_.load(std::memory_order_relaxed);
 
             }
 
