@@ -27,20 +27,22 @@ namespace boost::fairness
 
     /**
      * @brief The priority_mutex is an advanced synchronization mechanism that enhances the traditional mutex by introducing a priority-based approach.
-     * \n
-     * The priority_mutex can be used to protect shared data from being simultaneously accessed by multiple threads.
-     * \n
-     * priority_mutex offers exclusive, non-recursive ownership semantics:
+     * \n 
+     * It serves to protect shared data from simultaneous access by multiple threads and provides exclusive, non-recursive ownership semantics:
      *
-     * * A calling thread _owns_ a priority_mutex from the time that it successfully calls either lock() or try_lock() until it calls unlock().
-     * * When a thread owns a priority_mutex, all other threads will block (for calls to lock()) or receive a ```false``` return value (for try_lock()) if they attempt to claim ownership of the priority_mutex.
-     * * A calling thread must not own the mutex prior to calling lock() or try_lock().
+     * * A thread _holds_ a priority_mutex from the moment it successfully calls either lock() or try_lock() until it calls unlock().
+     * * While a thread owns a priority_mutex, all other threads attempting to acquire ownership will either block (in the case of lock()) or receive a false return value (with try_lock()).
+     * * It's important to note that a thread should not possess the mutex prior to calling lock() or try_lock().
      *
-     * The behavior of a program is undefined if a priority_mutex is destroyed while still owned by any threads, or a thread terminates while owning a priority_mutex. The priority_mutex class satisfies all requirements of [Mutex](https://en.cppreference.com/w/cpp/named_req/Mutex) and [StandardLayoutType](https://en.cppreference.com/w/cpp/named_req/StandardLayoutType).
+     * The program's behavior becomes unpredictable when a priority_mutex is destroyed while it's still under the ownership of any threads or when a thread terminates while in possession of a priority_mutex.
      * \n
-     * priority_mutex is neither copyable nor movable.
+     * Additionally, undefined behavior can occur when you specify a number of priorities (N) that falls outside the valid range, which should be between 1 and [BOOST_FAIRNESS_MAXIMUM_PRIORITY](https://sernior.github.io/fairness/priority__t_8hpp.html#ab63ed35d4aa8f18cc832fecbf13ba0ae).
+     * \n
+     * The priority_mutex class complies with all [Mutex](https://en.cppreference.com/w/cpp/named_req/Mutex) and [StandardLayoutType](https://en.cppreference.com/w/cpp/named_req/StandardLayoutType) requirements.
+     * \n
+     * Importantly, priority_mutex is neither copyable nor movable.
      *
-     * @tparam N : number of 0 indexed priorities the priority_mutex manages, up to BOOST_FAIRNESS_MAXIMUM_PRIORITY.
+     * @tparam N : represents the number of indexed priorities managed by the priority_mutex, ranging from 1 up to [BOOST_FAIRNESS_MAXIMUM_PRIORITY](https://sernior.github.io/fairness/priority__t_8hpp.html#ab63ed35d4aa8f18cc832fecbf13ba0ae).
      * @note priority_mutex is usually not accessed directly: unique_lock, lock_guard, or scoped_lock manage locking in a more exception-safe manner.
      */
     template <size_t N = 1>
@@ -70,13 +72,15 @@ namespace boost::fairness
         ~priority_mutex() = default;
 
         /**
-         * @brief Lock the priority_mutex. If another thread has already locked the mutex or other threads are waiting with higher priority, a call to lock will block execution until the lock is acquired.
+         * @brief Acquire the priority_mutex with a designated priority. If another thread has already obtained the lock, or if there are other threads waiting with higher priority, the lock() function will halt the current thread's execution until the lock is successfully obtained.
          * \n
-         * If lock() is called by a thread that already owns the mutex, the behavior is undefined: for example, the program _may_ deadlock. An implementation that can detect the invalid usage is encouraged to throw a [std::system_error](https://en.cppreference.com/w/cpp/error/system_error) with error condition ```resource_deadlock_would_occur``` instead of deadlocking.
+         * However, if lock() is invoked by a thread that already possesses the mutex, this results in undefined behavior, potentially causing a program deadlock. An implementation capable of identifying this invalid usage is encouraged to raise a [std::system_error](https://en.cppreference.com/w/cpp/error/system_error) exception with the error condition ```resource_deadlock_would_occur``` instead of risking a deadlock.
          * \n
-         * Prior unlock() operations on the same mutex _synchronize-with_ (as defined in [std::memory_order](https://en.cppreference.com/w/cpp/atomic/memory_order)) this operation.
+         * Moreover, any previous unlock() operations on the same mutex are _synchronize-with_ this operation, following the semantics defined in [std::memory_order](https://en.cppreference.com/w/cpp/atomic/memory_order).
          *
          * @param priority used to set a priority for this thread to aquire the lock.
+         *
+         * @warning Undefined behavior occurs if the priority falls outside the range from 0 to N-1.
          *
          * @return (none)
          *
@@ -136,11 +140,11 @@ namespace boost::fairness
         }
 
         /**
-         * @brief Unlocks the mutex.
+         * @brief Unlocks the priority-mutex.
          * \n
-         * The mutex must be locked by the current thread of execution, otherwise, the behavior is undefined.
+         * It is essential for the priority-mutex to be held by the current thread of execution; otherwise, the outcome is undefined.
          * \n
-         * This operation _synchronizes-with_ (as defined in [std::memory_order](https://en.cppreference.com/w/cpp/atomic/memory_order)) any subsequent lock operation that obtains ownership of the same mutex.
+         * This operation _synchronizes-with_ (as defined in [std::memory_order](https://en.cppreference.com/w/cpp/atomic/memory_order)) any subsequent lock operation that obtains ownership of the same priority-mutex.
          *
          * @param (none)
          *
@@ -198,17 +202,23 @@ namespace boost::fairness
         }
 
         /**
-         * @brief Try to acquire the unique ownership of the priority_mutex.
-         * Returns immediately. On successful lock acquisition returns ```true```, otherwise returns ```false```. The return value must be used, otherwise the compiler is encouraged to issue a warning.
+         * @brief Try to acquire the unique ownership of the priority_mutex with a designated priority.
+         * Returns immediately.
          * \n
-         * This function is allowed to fail spuriously and return ```false``` even if the mutex is not currently locked by any other thread.
+         * On successful lock acquisition returns ```true```, otherwise returns ```false```. The return value must be used, otherwise the compiler is encouraged to issue a warning.
          * \n
-         * If try_lock() is called by a thread that already owns the mutex, the behavior is undefined.
+         * This function is designed to potentially fail without a specific reason, even if the mutex is not presently locked by any other thread.
          * \n
-         * Prior unlock() operation on the same mutex _synchronizes-with_ (as defined in [std::memory_order](https://en.cppreference.com/w/cpp/atomic/memory_order)) this operation if it returns ```true```. Note that prior lock() does not synchronize with this operation if it returns ```false```.
+         * However, invoking try_lock() when a thread already holds the mutex results in undefined behavior.
+         * \n
+         * If try_lock() returns ```true```, any preceding unlock() operation on the same mutex is _synchronized-with_ the current operation, as defined in [std::memory_order](https://en.cppreference.com/w/cpp/atomic/memory_order).
+         * \n
+         * It's important to note that if try_lock() returns ```false```, prior lock() calls do not establish a synchronization relationship with this operation.
          *
          * @param priority : used to set a priority for this thread to aquire the lock.
          *
+         * @warning Undefined behavior occurs if the priority falls outside the range from 0 to N-1.
+         * 
          * @return [[[nodiscard](https://en.cppreference.com/w/cpp/language/attributes/nodiscard)]] bool : ```true``` if the lock was acquired successfully, otherwise ```false```.
          *
          * @exception Throws nothing.
