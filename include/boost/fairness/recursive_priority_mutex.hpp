@@ -28,18 +28,21 @@ namespace boost::fairness{
     /**
      * @brief The recursive_priority_mutex is an advanced synchronization mechanism that enhances the traditional mutex by introducing a priority-based approach.
      * \n 
-     * The priority_mutex can be used to protect shared data from being simultaneously accessed by multiple threads.
+     * The recursive_priority_mutex can be used to protect shared data from being simultaneously accessed by multiple threads.
      * \n
-     * priority_mutex offers exclusive, non-recursive ownership semantics:
+     * recursive_priority_mutex offers exclusive, recursive ownership semantics: 
      * 
      * * A calling thread _owns_ a recursive_priority_mutex for a period of time that starts when it successfully calls either lock() or try_lock() until it calls unlock(). During this period, the thread may make additional calls to lock() or try_lock(). The period of ownership ends when the thread makes a matching number of calls to unlock().
      * * When a thread owns a recursive_priority_mutex, all other threads will block (for calls to lock()) or receive a ```false``` return value (for try_lock()) if they attempt to claim ownership of the recursive_priority_mutex.
      * * The maximum number of times that a recursive_priority_mutex may be locked is unspecified, but after that number is reached, calls to lock will throw [std::system_error](https://en.cppreference.com/w/cpp/error/system_error) and calls to try_lock() will return ```false```.
      * 
-     * The behavior of a program is undefined if a recursive_priority_mutex is destroyed while still owned by some thread. The recursive_priority_mutex class satisfies all requirements of [Mutex](https://en.cppreference.com/w/cpp/named_req/Mutex) and [StandardLayoutType](https://en.cppreference.com/w/cpp/named_req/StandardLayoutType).
+     * The behavior of a program is undefined if a recursive_priority_mutex is destroyed while still owned by some thread.
      * \n
+     * Additionally, undefined behavior can occur when you specify a number of priorities (N) that falls outside the valid range, which should be between 1 and [BOOST_FAIRNESS_MAXIMUM_PRIORITY](https://sernior.github.io/fairness/priority__t_8hpp.html#ab63ed35d4aa8f18cc832fecbf13ba0ae).
+     * \n 
+     * The recursive_priority_mutex class satisfies all requirements of [Mutex](https://en.cppreference.com/w/cpp/named_req/Mutex) and [StandardLayoutType](https://en.cppreference.com/w/cpp/named_req/StandardLayoutType).
      * 
-     * @tparam N : number of 0 indexed priorities the recursive_priority_mutex manages, up to BOOST_FAIRNESS_MAXIMUM_PRIORITY.
+     * @tparam N : represents the number of indexed priorities managed by the priority_mutex, ranging from 1 up to [BOOST_FAIRNESS_MAXIMUM_PRIORITY](https://sernior.github.io/fairness/priority__t_8hpp.html#ab63ed35d4aa8f18cc832fecbf13ba0ae).
      * @note priority_mutex is usually not accessed directly: unique_lock, lock_guard, or scoped_lock manage locking in a more exception-safe manner. 
      */
     template<size_t N = 1>
@@ -69,7 +72,7 @@ namespace boost::fairness{
         ~recursive_priority_mutex() = default;
 
         /**
-         * @brief Lock the recursive_priority_mutex. If another thread has already locked the recursive_priority_mutex or other threads are waiting with higher priority, a call to lock will block execution until the lock is acquired.
+         * @brief Acquire the recursive_priority_mutex with a designated priority. If another thread has already obtained the lock, or if there are other threads waiting with higher priority, the lock() function will halt the current thread's execution until the lock is successfully obtained.
          * \n
          * A thread may call lock on a recursive_priority_mutex repeatedly. Ownership will only be released after the thread makes a matching number of calls to unlock.
          * \n
@@ -78,6 +81,8 @@ namespace boost::fairness{
          * Prior unlock() operations on the same mutex _synchronize-with_ (as defined in [std::memory_order](https://en.cppreference.com/w/cpp/atomic/memory_order)) this operation.
          * 
          * @param priority used to set a priority for this thread to aquire the lock.
+         * 
+         * @warning Undefined behavior occurs if the priority falls outside the range from 0 to N-1.
          * 
          * @return (none)
          * 
@@ -140,9 +145,9 @@ namespace boost::fairness{
         }
 
         /**
-         * @brief Unlocks the recursive_priority_mutex if its level of ownership is ```1``` (there was exactly one more call to lock() than there were calls to unlock() made by this thread), reduces the level of ownership by 1 otherwise.
+         * @brief Unlock the recursive_priority_mutex when its ownership level is ```1```, signifying that there was precisely one more call to lock() than there were calls to unlock() made by the current thread. In all other cases, it reduces the ownership level by 1.
          * \n
-         * The mutex must be locked by the current thread of execution, otherwise, the behavior is undefined.
+         * For proper functioning, the mutex must be currently held by the executing thread. Any other scenario results in undefined behavior.
          * \n
          * This operation _synchronizes-with_ (as defined in [std::memory_order](https://en.cppreference.com/w/cpp/atomic/memory_order)) any subsequent lock operation that obtains ownership of the same mutex.
          * 
@@ -151,8 +156,6 @@ namespace boost::fairness{
          * @return (none)
          * 
          * @exception Throws nothing.
-         * 
-         * @note recursive_priority_mutex is usually not called directly: unique_lock, lock_guard, are used to manage exclusive locking.
          * 
          * #### Example
          *  
@@ -212,18 +215,22 @@ namespace boost::fairness{
         }
 
         /**
-         * @brief Try to acquire the unique ownership of the recursive_priority_mutex.
-         * Returns immediately. On successful lock acquisition returns ```true```, otherwise returns ```false```. The return value must be used, otherwise the compiler is encouraged to issue a warning.
+         * @brief Try to acquire the unique ownership of the recursive_priority_mutex with a designated priority.
+         * Returns immediately.
+         * \n
+         * On successful lock acquisition returns ```true```, otherwise returns ```false```. The return value must be used, otherwise the compiler is encouraged to issue a warning.
          * \n
          * This function is allowed to fail spuriously and return ```false``` even if the mutex is not currently locked by any other thread.
          * \n
-         * A thread may call try_lock() on a recursive_priority_mutex repeatedly. Successful calls to try_lock() increment the ownership count: the recursive_priority_mutex will only be released after the thread makes a matching number of calls to unlock().
+         * A thread can make multiple consecutive calls to try_lock() on a recursive_priority_mutex. Each successful try_lock() call increments the ownership count, and the recursive_priority_mutex will only be released when the thread matches this count with an equivalent number of calls to unlock().
          * \n
-         * The maximum number of levels of ownership is unspecified. A call to try_lock() will return ```false``` if this number is exceeded.
+         * The maximum number of ownership levels remains unspecified. If this number is exceeded, a call to try_lock() will return ```false```.
          * \n
-         * Prior unlock() operation on the same mutex _synchronizes-with_ (as defined in [std::memory_order](https://en.cppreference.com/w/cpp/atomic/memory_order)) this operation if it returns ```true```. Note that prior lock() does not synchronize with this operation if it returns ```false```.
+         * If try_lock() returns ```true```, any preceding unlock() operation on the same mutex is _synchronized-with_ the current operation, as defined in [std::memory_order](https://en.cppreference.com/w/cpp/atomic/memory_order).
          * 
          * @param priority : used to set a priority for this thread to aquire the lock.
+         * 
+         * @warning Undefined behavior occurs if the priority falls outside the range from 0 to N-1.
          * 
          * @return [[[nodiscard](https://en.cppreference.com/w/cpp/language/attributes/nodiscard)]] bool : ```true``` if the lock was acquired successfully, otherwise ```false```.
          * 

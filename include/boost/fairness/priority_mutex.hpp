@@ -84,7 +84,7 @@ namespace boost::fairness
          *
          * @return (none)
          *
-         * @exception std::system_error Throws std::system_error when errors occur, including errors from the underlying operating system that would prevent lock from meeting its specifications. The mutex is not locked in the case of any exception being thrown.
+         * @exception std::system_error Throws std::system_error in the event of errors, including those originating from the underlying operating system that would impede the lock() operation from meeting its specifications. It's important to note that no locking occurs if an exception is thrown.
          *
          * #### Example
          *
