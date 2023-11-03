@@ -18,7 +18,7 @@
 #include <boost/fairness/priority_t.hpp>
 #include <boost/fairness/detail/wait_ops.hpp>
 
-namespace boost::fairness{
+namespace boost::fairness::old8{
 
     #define LOCK_OWNED 1
     #define LOCK_NOT_OWNED 0

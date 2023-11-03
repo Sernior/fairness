@@ -14,9 +14,10 @@ static boost::fairness::shared_priority_mutex<4> spm;
 static boost::fairness::priority_mutex<4> pm;
 static boost::fairness::spinlock_priority_mutex<4> sms;
 static std::mutex m;
+static boost::fairness::detail::mcs_spinlock mcs;
 
 #define NOW std::chrono::high_resolution_clock::now()
-
+/*
 
 static void busy_wait_nano(uint64_t nanoseconds){
     auto begin = NOW;
@@ -40,10 +41,17 @@ static void thread_function_nano_std(int preCriticalTime, int criticalTime, int 
         busy_wait_nano(criticalTime);
     }
     busy_wait_nano(postCriticalTime);
+}*/
+
+static void mcs_test(){
+    boost::fairness::detail::QNode p;
+    mcs.acquire(&p);
+
+    mcs.release(&p);
 }
 
 int main()
-{
+{/*
     std::array<int, 8> prios {0, 1, 2, 1, 3, 2, 2, 0};
     std::array<int, 8> preCT {2000, 1500, 2000, 3000, 1000, 500, 500, 2000};
     int CT = 1000;
@@ -87,7 +95,14 @@ int main()
 
         std::cout << "Time taken STD: " << duration.count() << " milliseconds" << std::endl;
     }
+*/
 
+    BS::thread_pool pool(8);
+
+    for (int i = 0; i < 8; ++i) {
+        pool.push_task(mcs_test);
+    }
+    pool.wait_for_tasks();
 
     return 0;
 }

@@ -16,7 +16,6 @@
 #include <array>
 #include <boost/fairness/priority_t.hpp>
 #include <boost/fairness/detail/wait_ops.hpp>
-#include <boost/fairness/detail/mcs_lock.hpp>
 
 /*
 
@@ -28,7 +27,7 @@ https://stackoverflow.com/questions/61944469/problems-with-mcs-lock-implementati
 
 */
 
-namespace boost::fairness{
+namespace boost::fairness::old{
 
     /**
      * @brief The spinlock_priority_mutex is an advanced synchronization mechanism that enhances the traditional mutex by introducing a priority-based approach.
@@ -78,6 +77,26 @@ namespace boost::fairness{
          */
         void lock(Priority_t const priority = 0){
 
+            bool localLockOwned = lockOwned_.test(std::memory_order_relaxed);
+
+            Priority_t localCurrentPriority = currentPriority_.load(std::memory_order_relaxed);
+
+            waiters_[priority].fetch_add(1, std::memory_order_relaxed);
+
+            for (;;){
+
+                if (!localLockOwned & (localCurrentPriority >= priority)){
+                    if (!lockOwned_.test_and_set(std::memory_order_acquire))
+                        break;
+                }
+                detail::spin_wait(lockOwned_, true);
+                localLockOwned = lockOwned_.test(std::memory_order_relaxed);
+                localCurrentPriority = currentPriority_.load(std::memory_order_relaxed);
+
+            }
+
+            waiters_[priority].fetch_sub(1, std::memory_order_relaxed);
+            
         }
 
         /**
@@ -94,7 +113,8 @@ namespace boost::fairness{
          * \endcode
          */
         void unlock(){
-            
+            currentPriority_.store(find_first_priority_(), std::memory_order_relaxed);
+            lockOwned_.clear(std::memory_order_release);
         }
 
         /**
@@ -114,11 +134,21 @@ namespace boost::fairness{
          * @return bool 
          */
         [[nodiscard]] bool try_lock(Priority_t const priority = 0){
-            return false;
+            return (currentPriority_.load(std::memory_order_relaxed) >= priority && !lockOwned_.test_and_set(std::memory_order_acquire));
         }
 
         private:
+        std::array<std::atomic<Thread_cnt_t>, N> waiters_;
+        std::atomic<Priority_t> currentPriority_{BOOST_FAIRNESS_MAXIMUM_PRIORITY};
+        std::atomic_flag lockOwned_;
 
+        Priority_t find_first_priority_(){
+            for (Priority_t i = 0; i < N; ++i){
+                if (waiters_[i] > 0)
+                    return i;
+            }
+            return BOOST_FAIRNESS_MAXIMUM_PRIORITY;
+        }
     };
 }
 #endif // BOOST_FAIRNESS_SPINLOCK_PRIORITY_MUTEX_HPP

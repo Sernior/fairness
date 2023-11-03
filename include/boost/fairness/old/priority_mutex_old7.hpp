@@ -20,7 +20,7 @@
 #include <boost/fairness/detail/control_block_t.hpp>
 #include <boost/fairness/detail/wait_ops.hpp>
 
-namespace boost::fairness{
+namespace boost::fairness::old7{
 
     #define LOCK_OWNED 1
     #define LOCK_NOT_OWNED 0
