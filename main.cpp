@@ -17,6 +17,8 @@ static std::mutex m;
 static boost::fairness::detail::mcs_spinlock mcs;
 
 #define NOW std::chrono::high_resolution_clock::now()
+
+static std::vector<int> ret;
 /*
 
 static void busy_wait_nano(uint64_t nanoseconds){
@@ -43,10 +45,10 @@ static void thread_function_nano_std(int preCriticalTime, int criticalTime, int 
     busy_wait_nano(postCriticalTime);
 }*/
 
-static void mcs_test(){
+static void mcs_test(int i){
     boost::fairness::detail::QNode p;
     mcs.acquire(&p);
-
+    ret.push_back(i);
     mcs.release(&p);
 }
 
@@ -100,9 +102,12 @@ int main()
     BS::thread_pool pool(8);
 
     for (int i = 0; i < 8; ++i) {
-        pool.push_task(mcs_test);
+        pool.push_task(mcs_test, i);
     }
     pool.wait_for_tasks();
+
+    for(auto i : ret)
+        std::cout << i << " ";
 
     return 0;
 }

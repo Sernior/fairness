@@ -39,11 +39,11 @@ namespace boost::fairness::detail{
 
         void acquire(QNode* node){
 
-            QNode* predecessor = tail.exchange(node);
+            QNode* predecessor = tail.exchange(node, std::memory_order_relaxed);
 
             if (predecessor != nullptr){
 
-                predecessor->next_.store(node);
+                predecessor->next_.store(node, std::memory_order_release);
 
                 while (node->locked_.load(std::memory_order_acquire) == LOCKED)
                     pause(); // TODO Change with spinwait
@@ -59,11 +59,11 @@ namespace boost::fairness::detail{
 
                 QNode* expected = node;
 
-                if (tail.compare_exchange_strong(expected, nullptr)) // no one else is waiting
+                if (tail.compare_exchange_strong(expected, nullptr, std::memory_order_release, std::memory_order_relaxed)) // no one else is waiting
                     return;
 
                 do {
-                    successor = node->next_.load();
+                    successor = node->next_.load(std::memory_order_relaxed);
                 } while (successor == nullptr);
             }
 
