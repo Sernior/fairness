@@ -41,7 +41,7 @@ The advanced syncronization mechanisms in this library do not autonomously adjus
 
 ## Use Cases
 
-While the primary cause of priority based locks are often associated with the concept of starvation and a way to avoid it, they can provide a valuable tool for scenarios where traditional, non-priority-based synchronization mechanisms may not be sufficient. Here are some use-cases where a priority-based synchronization mechanism could be preferred:
+Although priority-based locks are primarily designed to mitigate the issue of starvation and prevent it, they can also serve as a valuable tool in scenarios where traditional, non-priority-based synchronization mechanisms fall short. Here are some scenarios where a priority-based synchronization mechanism may be the preferred choice:
 
 **Real-time Systems**:
 	In real-time systems, tasks have strict timing requirements. Priority-based synchronization could be used that high-priority tasks are executed without delay, allowing critical functions like safety-critical control systems or healthcare devices to meet their deadlines.
@@ -65,7 +65,7 @@ While the primary cause of priority based locks are often associated with the co
 	In multi-threaded gaming engines, priority-based synchronization can prioritize slower threads in order to increase throughput of the graphical pipeline so to increase FPS.
 
 **Scientific Simulations**:
-	Scientific Simulations often have a pipeline and the highest throughput the better. Scientific simulations often have multiple tasks or calculations running concurrently and are also often pipelines that could benefit from developers tweaking fairness policies in order to increase throughput.
+	Scientific simulations typically involve intricate pipelines, and maximizing throughput is paramount. These simulations frequently entail the concurrent execution of multiple tasks and calculations, making them ideal candidates for developers to fine-tune fairness policies in order to optimize throughput.
 
 In these use-cases, priority-based synchronization mechanisms allow for better resource management, responsiveness, and prioritization of critical tasks over less critical ones, enhancing system efficiency and performance in scenarios where fairness and timing are of utmost importance.
 
