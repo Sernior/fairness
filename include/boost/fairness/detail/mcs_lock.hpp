@@ -31,7 +31,9 @@ namespace boost::fairness::detail{
     // when we want to acquire instead of looking for the predecessor of node the lock
     // will instead check the tails[p] and continue with the aquire from there.
     // the release instead before selecting as successor the next of node should instead
-    // check the previous tails if any of them has a node we select that one.
+    // check the previous tails if any of them has a node we select that one... 
+    // we might need a head pointer also to respect the fifoness without having to 
+    // linearly search the from tail to the first node to respect the FIFONESS.
 
     class mcs_spinlock{ // TODO add priorities
 
@@ -41,6 +43,10 @@ namespace boost::fairness::detail{
 
             QNode* predecessor = tail.exchange(node, std::memory_order_relaxed);
 
+            //QNode* expected = nullptr;
+
+            //head.compare_exchange_strong(expected, node);
+
             if (predecessor != nullptr){
 
                 predecessor->next_.store(node, std::memory_order_release);
@@ -49,6 +55,9 @@ namespace boost::fairness::detail{
                     pause(); // TODO Change with spinwait
 
             }
+
+            //head.exchange(node->next_);
+
         }
 
         void release(QNode *node) {
@@ -59,19 +68,20 @@ namespace boost::fairness::detail{
 
                 QNode* expected = node;
 
-                if (tail.compare_exchange_strong(expected, nullptr, std::memory_order_release, std::memory_order_relaxed)) // no one else is waiting
+                // no one else is waiting, you are the last
+                if (tail.compare_exchange_strong(expected, nullptr, std::memory_order_release, std::memory_order_relaxed)){
                     return;
+                }
 
                 do {
                     successor = node->next_.load(std::memory_order_relaxed);
                 } while (successor == nullptr);
             }
-
             successor->locked_.store(NOT_LOCKED, std::memory_order_release);
         }
 
         private:
-
+        //std::atomic<QNode*> head{nullptr};
         std::atomic<QNode*> tail{nullptr};
 
     };
