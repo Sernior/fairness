@@ -36,8 +36,11 @@ namespace boost::fairness::detail{
         public:
 
         // this is still wrong there is a chance for 2 threads to both acquire as find_first_priority_ can return BOOST_FAIRNESS_INVALID_PRIORITY for 2 threads
-        // the definition of predecessor and priorityPredecessor has to be merged
+        // the definition of predecessor and priorityPredecessor has to be merged //
+        // seems to be working now but the question now is: would the implementation with a single tail be better?
         void acquire(PNode* node){
+
+            repeat:
 
             Priority_t firstPriority = find_first_priority_();
 
@@ -52,47 +55,62 @@ namespace boost::fairness::detail{
             if (firstPriority != BOOST_FAIRNESS_INVALID_PRIORITY)
                 priorityPredecessor = tails[firstPriority].load();
 
+            if (priorityPredecessor == node)
+                goto exit;
+
             if ((predecessor != nullptr) | (priorityPredecessor != nullptr)){
 
-                // predecessor can be null now
                 if (predecessor != nullptr)
                     predecessor->next_.store(node, std::memory_order_release);//
 
                 while (node->locked_.load(std::memory_order_acquire) == LOCKED)
                     pause(); // TODO Change with spinwait
 
+                //
+                goto exit;
+
             }
+
+            if (firstPriority == BOOST_FAIRNESS_INVALID_PRIORITY && firstPriority != find_first_priority_())
+                goto repeat;
+
+            exit:
 
             heads[node->priority_.load(std::memory_order_relaxed)].exchange(node->next_);
         }
 
         void release(PNode *node) {
 
-            PNode* successor = get_successor();
+            PNode* localNode = nullptr;
+
+            PNode* successor = get_successor_();
 
             if (successor == nullptr) {
                 do 
                 {
-                    auto expected = node;
+                    localNode = node;
 
-                    if (tails[node->priority_.load()].compare_exchange_strong(expected, nullptr, std::memory_order_release, std::memory_order_relaxed) &&
+                    if (tails[node->priority_.load()].compare_exchange_strong(localNode, nullptr, std::memory_order_release, std::memory_order_relaxed) &&
                         find_first_priority_waiters_() == BOOST_FAIRNESS_INVALID_PRIORITY)
                         return;
 
-                    successor = get_successor();
+                    successor = get_successor_();
                 } 
                 while (successor == nullptr);
             }
 
             // now we must update all the tails not just the case we are the last one as an exit condition
-            tails[node->priority_.load()].compare_exchange_strong(node, nullptr, std::memory_order_release, std::memory_order_relaxed);
+            // also I do not want to risk to change node so maybe use expected also here
+            localNode = node;
+
+            tails[node->priority_.load()].compare_exchange_strong(localNode, nullptr, std::memory_order_release, std::memory_order_relaxed);
 
             successor->locked_.store(NOT_LOCKED, std::memory_order_release);
         }
 
         private:
 
-        PNode* get_successor(){
+        PNode* get_successor_(){
             Priority_t firstPriority = find_first_priority_waiters_();
             return heads[firstPriority].load();
         }

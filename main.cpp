@@ -112,7 +112,7 @@ int main()
     BS::thread_pool pool(8);
 
     for (int i = 0; i < 8; ++i) {
-        pool.push_task(pmcs_test, i);
+        pool.push_task(pmcs_test, int(i/2));
     }
     pool.wait_for_tasks();
 
