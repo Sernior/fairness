@@ -9,14 +9,14 @@
 #define BOOST_FAIRNESS_USE_EXPERIMENTAL_WAIT_NOTIFY
 // #include <boost/atomic.hpp>
 #include <boost/fairness.hpp>
-#include <boost/fairness/detail/mcs_priority_lock.hpp>
+#include <boost/fairness/detail/coherent_priority_lock.hpp>
 
 static boost::fairness::shared_priority_mutex<4> spm;
 static boost::fairness::priority_mutex<4> pm;
 static boost::fairness::spinlock_priority_mutex<4> sms;
 static std::mutex m;
 static boost::fairness::detail::mcs_spinlock mcs;
-static boost::fairness::detail::mcs_priority_spinlock<8> pmcs;
+static boost::fairness::detail::coherent_priority_lock pmcs;
 
 #define NOW std::chrono::high_resolution_clock::now()
 
@@ -55,11 +55,11 @@ static void mcs_test(int i){
 }
 
 static void pmcs_test(int i){
-    boost::fairness::detail::PNode p;
-    p.priority_ = i;
-    pmcs.acquire(&p);
+    boost::fairness::detail::Thread t;
+    t.priority_ = i;
+    pmcs.request_lock(&t);
     ret.push_back(i);
-    pmcs.release(&p);
+    pmcs.grant_lock(&t);
 }
 
 int main()

@@ -51,8 +51,10 @@ namespace boost::fairness::detail{
 
                 predecessor->next_.store(node, std::memory_order_release);
 
-                while (node->locked_.load(std::memory_order_acquire) == LOCKED)
+                while (node->locked_.load(std::memory_order_acquire) == LOCKED){
+                    // if I have higher priority then head or head is nullptr I become head
                     pause(); // TODO Change with spinwait
+                }
 
             }
 
@@ -62,7 +64,7 @@ namespace boost::fairness::detail{
 
         void release(QNode *node) {
 
-            QNode* successor = node->next_.load(std::memory_order_relaxed);
+            QNode* successor = node->next_.load(std::memory_order_relaxed);// head
 
             if (successor == nullptr) {
 
@@ -74,7 +76,7 @@ namespace boost::fairness::detail{
                 }
 
                 do {
-                    successor = node->next_.load(std::memory_order_relaxed);
+                    successor = node->next_.load(std::memory_order_relaxed);// head
                 } while (successor == nullptr);
             }
             successor->locked_.store(NOT_LOCKED, std::memory_order_release);
@@ -90,12 +92,3 @@ namespace boost::fairness::detail{
     #undef NOT_LOCKED
 }
 #endif // BOOST_FAIRNESS_MCS_LOCK_HPP
-
-/*
-lock(){
-    QNode n;
-    lock.acquire(&n);
-
-}
-
-*/
