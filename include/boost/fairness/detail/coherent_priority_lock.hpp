@@ -3,6 +3,7 @@
  * @author F. Abrignani (federignoli@hotmail.it)
  * @author S. Martorana
  * @brief This file contains the implementation of a coherent priority lock.
+ * @brief Based on the work of Travis S. Craig "Building FIFO and Priority-Queuing Spin Locks from Atomic Swap"
  * @version 0.1
  * @date 2023-10-06
  * 
@@ -24,20 +25,22 @@ namespace boost::fairness::detail{
 
     struct Thread;
 
-    struct alignas(BOOST_FAIRNESS_HARDWARE_DESTRUCTIVE_SIZE) Request{
+    struct alignas(BOOST_FAIRNESS_HARDWARE_DESTRUCTIVE_SIZE) Request{ // this also requires an inUse bool to determine if it is being used by the pool or not
         std::atomic<uint32_t> state_{PENDING};
         std::atomic<Thread*> watcher_{nullptr};
         std::atomic<Thread*> thread_{nullptr};
-        // TODO maybe add padding? ??
+        
+        char padding[BOOST_FAIRNESS_HARDWARE_DESTRUCTIVE_SIZE-sizeof(state_)-sizeof(watcher_)-sizeof(thread_)]; // test without padding... I am not sure it is necessary
+
     };
 
-    struct Thread{ // most likely not atomic
-        Thread(){
-            request_ = new Request; // TODO find a better way !!! this is a memory leak
+    struct Thread{ // would this be better aligned aswell?
+        Thread(){ // this constructor should take a Request taken by a static array of requests used as a Pool.
+            request_ = new Request; // TODO find a better way !!! this is a memory leak READ ABOVE
             request_.load()->thread_.store(this);
         }
         Priority_t priority_;
-        std::atomic<Request*> watch_{nullptr}; // TODO try not to make these atomic
+        std::atomic<Request*> watch_{nullptr};
         std::atomic<Request*> request_;
     };
 
@@ -45,11 +48,17 @@ namespace boost::fairness::detail{
 
         public:
 
-        coherent_priority_lock(){
-            static Request firstTail; // TODO find a better way this can go once the first req is resolved
+        coherent_priority_lock(){ // should be deleted later
+            static Request firstTail; // TODO find a better way this can go once the first req is resolved READ ABOVE
             firstTail.state_ = GRANTED;
             tail_.store(&firstTail);
             head_.store(&firstTail);
+        }
+
+        coherent_priority_lock(Request* firstTail){
+            firstTail->state_ = GRANTED;
+            tail_.store(firstTail);
+            head_.store(firstTail);
         }
 
         void request_lock(Thread* requester){
@@ -58,6 +67,7 @@ namespace boost::fairness::detail{
             for(;;){
                 if (requester->watch_.load()->state_.load() == GRANTED)
                     return;
+                pause(); // change with spinwait later
             }
         }
 

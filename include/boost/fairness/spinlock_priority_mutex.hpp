@@ -16,17 +16,8 @@
 #include <array>
 #include <boost/fairness/priority_t.hpp>
 #include <boost/fairness/detail/wait_ops.hpp>
-#include <boost/fairness/detail/mcs_lock.hpp>
+#include <boost/fairness/detail/coherent_priority_lock.hpp>
 
-/*
-
-The idea is to use https://www.cs.rochester.edu/u/scott/papers/1991_TOCS_synch.pdf
-and use multiple tails* one for each priority.
-
-this is a good example of how it should look like even if it is missing the alignments.
-https://stackoverflow.com/questions/61944469/problems-with-mcs-lock-implementation
-
-*/
 
 namespace boost::fairness{
 

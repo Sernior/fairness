@@ -59,6 +59,16 @@
 #endif // BOOST_FAIRNESS_HARDWARE_DESTRUCTIVE_SIZE
 
 
+
+#ifndef BOOST_FAIRNESS_MAX_PQNODES
+/**
+ * @brief The maximum amount of PQNODES that can be used at the same time.
+*/
+#define BOOST_FAIRNESS_MAX_PQNODES 4
+#endif // BOOST_FAIRNESS_HARDWARE_DESTRUCTIVE_SIZE
+#define BOOST_FAIRNESS_INVALID_PQNODE_INDEX BOOST_FAIRNESS_MAX_PQNODES
+
+
 /*
  If we have boost lib include boost atomic
 */
