@@ -16,35 +16,15 @@
 #include <boost/fairness/config.hpp>
 #include <boost/fairness/priority_t.hpp>
 #include <boost/fairness/detail/coherent_priority_lock.hpp>
-#include <array>
-#include <atomic>
+
+#include <array>///
+#include <atomic>///
 
 namespace boost::fairness::detail{
 
-    struct PQNode{
-        Request r;
-        Thread t;
-        std::atomic_flag inUse{};
-    };
-
-    static std::array<PQNode, BOOST_FAIRNESS_MAX_PQNODES> pqnodes;
-
-    void inline find_first_free_pqnode(){
-        for (int i = 0; i < BOOST_FAIRNESS_MAX_PQNODES; ++i){
-            if (!pqnodes[i].inUse.test()){
-                return i;
-            }
-        }
-        return BOOST_FAIRNESS_INVALID_PQNODE_INDEX;
-    }
-
-    class pqspinlock{// should I be using 4 pqnodes per mutex? Or the entry PQNode should be separate probably.
+    class pqspinlock{
 
         public:
-
-        pqspinlock()
-        : firstTail_()
-        , cpl_(firstTail_) {}
 
         /// @private
         spinlock_priority_mutex(const spinlock_priority_mutex&) = delete;
@@ -62,12 +42,15 @@ namespace boost::fairness::detail{
         ~spinlock_priority_mutex() = default;
 
         void lock(Priority_t const priority = 0){
-            
+            boost::fairness::detail::Thread t(priority); // knowing that we have a limited amount of Threads and Requests could allow me to use an array to map these
+            cpl_.request_lock(&t);
+        }
+
+        void unlock(){
+            cpl_.grant_lock(&t);
         }
 
         private:
-
-        Request firstTail_;
 
         coherent_priority_lock cpl_;
 

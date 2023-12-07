@@ -21,6 +21,7 @@ static boost::fairness::detail::coherent_priority_lock pmcs;
 #define NOW std::chrono::high_resolution_clock::now()
 
 static std::vector<int> ret;
+static std::vector<int> ret2;
 /*
 
 static void busy_wait_nano(uint64_t nanoseconds){
@@ -55,11 +56,19 @@ static void mcs_test(int i){
 }*/
 
 static void pmcs_test(int i){
-    boost::fairness::detail::Thread t;
-    t.priority_ = i;
+    boost::fairness::detail::Thread t(i);
     pmcs.request_lock(&t);
     ret.push_back(i);
     pmcs.grant_lock(&t);
+
+}
+
+static void pmcs_test2(int i){
+    boost::fairness::detail::Thread t(i);
+    pmcs.request_lock(&t);
+    ret2.push_back(i);
+    pmcs.grant_lock(&t);
+
 }
 
 int main()
@@ -116,7 +125,17 @@ int main()
     }
     pool.wait_for_tasks();
 
+    for (int i = 0; i < 8; ++i) {
+        pool.push_task(pmcs_test2, int(i));
+    }
+    pool.wait_for_tasks();
+
     for(auto i : ret)
+        std::cout << i << " ";
+
+    std::cout << '\n';
+
+    for(auto i : ret2)
         std::cout << i << " ";
 
     return 0;

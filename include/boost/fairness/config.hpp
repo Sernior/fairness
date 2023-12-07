@@ -15,6 +15,15 @@
 
 
 
+#ifdef BOOST_FAIRNESS_USE_TATAS
+/**
+ * @brief base the mutex implementation on simple non scalable but very fast TATAS. Only use on machines with less than 4 physical cores.
+*/
+#define BOOST_FAIRNESS_USE_TATAS_SPINLOCK
+#endif // BOOST_FAIRNESS_USE_TATAS
+
+
+
 #ifndef BOOST_FAIRNESS_SPINWAIT_SPINS
 /**
  * @brief the total number of spins during a spin_wait operation
