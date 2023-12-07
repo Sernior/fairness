@@ -34,28 +34,33 @@ namespace boost::fairness::detail{
 
     };
 
-    struct Thread{ // would this be better aligned aswell?
+   struct Thread{ // would this be better aligned aswell?
         Thread(){ // this constructor should take a Request taken by a static array of requests used as a Pool.
-            request_ = new Request; // TODO find a better way !!! this is a memory leak READ ABOVE
+
+
+            request_.store(new Request); // TODO find a better way !!! this is a memory leak READ ABOVE
+            // I need a pool of Requests to manage this allocation efficiently
+
             request_.load()->thread_.store(this);
         }
+
         Priority_t priority_;
         std::atomic<Request*> watch_{nullptr};
         std::atomic<Request*> request_;
-    };
+    }; 
 
     class coherent_priority_lock{
 
         public:
 
-        coherent_priority_lock(){ // should be deleted later
-            static Request firstTail; // TODO find a better way this can go once the first req is resolved READ ABOVE
-            firstTail.state_ = GRANTED;
-            tail_.store(&firstTail);
-            head_.store(&firstTail);
+        coherent_priority_lock(){
+            auto firstTail = new Request; // this new is wrong it should be taken by a pool of preallocated requests
+            firstTail->state_ = GRANTED;
+            tail_.store(firstTail);
+            head_.store(firstTail);
         }
 
-        coherent_priority_lock(Request* firstTail){
+        coherent_priority_lock(Request* firstTail){ // let`s keep this for now but I think I ll just have the lock itself allocate its own firstTail
             firstTail->state_ = GRANTED;
             tail_.store(firstTail);
             head_.store(firstTail);
@@ -65,10 +70,13 @@ namespace boost::fairness::detail{
             requester->watch_.store(tail_.exchange(requester->request_.load()));
             requester->watch_.load()->watcher_.store(requester);
             for(;;){
-                if (requester->watch_.load()->state_.load() == GRANTED)
+                if (requester->watch_.load()->state_.load() == GRANTED){
+                    delete requester->watch_.load(); // this deleted is wrong we should return the requests to a pool
                     return;
+                }
                 pause(); // change with spinwait later
             }
+
         }
 
         void grant_lock(Thread* requester) {

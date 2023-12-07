@@ -62,7 +62,7 @@ namespace boost::fairness::detail{
         ~spinlock_priority_mutex() = default;
 
         void lock(Priority_t const priority = 0){
-
+            
         }
 
         private:

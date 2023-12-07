@@ -15,7 +15,7 @@ static boost::fairness::shared_priority_mutex<4> spm;
 static boost::fairness::priority_mutex<4> pm;
 static boost::fairness::spinlock_priority_mutex<4> sms;
 static std::mutex m;
-static boost::fairness::detail::mcs_spinlock mcs;
+//static boost::fairness::detail::mcs_spinlock mcs;
 static boost::fairness::detail::coherent_priority_lock pmcs;
 
 #define NOW std::chrono::high_resolution_clock::now()
@@ -46,13 +46,13 @@ static void thread_function_nano_std(int preCriticalTime, int criticalTime, int 
     }
     busy_wait_nano(postCriticalTime);
 }*/
-
+/*
 static void mcs_test(int i){
     boost::fairness::detail::QNode p;
     mcs.acquire(&p);
     ret.push_back(i);
     mcs.release(&p);
-}
+}*/
 
 static void pmcs_test(int i){
     boost::fairness::detail::Thread t;
