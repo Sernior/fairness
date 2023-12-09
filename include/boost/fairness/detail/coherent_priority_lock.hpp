@@ -34,19 +34,43 @@ namespace boost::fairness::detail{
 
     };
 
-   struct Thread{ // would this be better aligned aswell?
-        Thread(Priority_t p)
-        : priority_{p} { // this constructor should take a Request taken by a static array of requests used as a Pool.
+   struct Thread{
+        Thread(){
 
-            request_.store(new Request); // TODO find a better way !!! this is a memory leak READ ABOVE
-            // I need a pool of Requests to manage this allocation efficiently
+            //request_.store(new Request); // TODO find a better way
+
+            //request_.load()->thread_.store(this);
+        }
+
+        void prepare(Priority_t p){
+
+            request_.store(new Request); // TODO find a better way
+
+            request_.load()->thread_.store(this);
+
+            priority_ = p;
+        }
+
+        void prepare(){
+
+            request_.store(new Request); // TODO find a better way
 
             request_.load()->thread_.store(this);
         }
 
-        const Priority_t priority_;
+        void free(){
+            watch_.store(nullptr);
+            request_.store(nullptr);
+            priority_ = BOOST_FAIRNESS_INVALID_PRIORITY;
+        }
+
+        bool isFree(){
+            return priority_ == BOOST_FAIRNESS_INVALID_PRIORITY;
+        }
+
+        Priority_t priority_{BOOST_FAIRNESS_INVALID_PRIORITY};
         std::atomic<Request*> watch_{nullptr};
-        std::atomic<Request*> request_;
+        std::atomic<Request*> request_{nullptr};
     }; 
 
     class coherent_priority_lock{

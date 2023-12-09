@@ -10,6 +10,7 @@
 // #include <boost/atomic.hpp>
 #include <boost/fairness.hpp>
 #include <boost/fairness/detail/coherent_priority_lock.hpp>
+#include <boost/fairness/detail/pqspinlock.hpp>
 
 static boost::fairness::shared_priority_mutex<4> spm;
 static boost::fairness::priority_mutex<4> pm;
@@ -17,6 +18,7 @@ static boost::fairness::spinlock_priority_mutex<4> sms;
 static std::mutex m;
 //static boost::fairness::detail::mcs_spinlock mcs;
 static boost::fairness::detail::coherent_priority_lock pmcs;
+static boost::fairness::detail::pqspinlock pqspin;
 
 #define NOW std::chrono::high_resolution_clock::now()
 
@@ -53,21 +55,42 @@ static void mcs_test(int i){
     mcs.acquire(&p);
     ret.push_back(i);
     mcs.release(&p);
+}
+
+static void mcs_test2(int i){
+    boost::fairness::detail::QNode p;
+    mcs.acquire(&p);
+    ret.push_back(i);
+    mcs.release(&p);
 }*/
 
-static void pmcs_test(int i){
-    boost::fairness::detail::Thread t(i);
+static void cpl_test(int i){
+    boost::fairness::detail::Thread t;
+    t.prepare(i);
     pmcs.request_lock(&t);
     ret.push_back(i);
     pmcs.grant_lock(&t);
+}
+
+static void cpl_test2(int i){
+    boost::fairness::detail::Thread t;
+    t.prepare(i);
+    pmcs.request_lock(&t);
+    ret2.push_back(i);
+    pmcs.grant_lock(&t);
+}
+
+static void pmcs_test(int i){
+    pqspin.lock(i);
+    ret.push_back(i);
+    pqspin.unlock();
 
 }
 
 static void pmcs_test2(int i){
-    boost::fairness::detail::Thread t(i);
-    pmcs.request_lock(&t);
+    pqspin.lock(i);
     ret2.push_back(i);
-    pmcs.grant_lock(&t);
+    pqspin.unlock();
 
 }
 
@@ -120,23 +143,33 @@ int main()
 
     BS::thread_pool pool(8);
 
-    for (int i = 0; i < 8; ++i) {
-        pool.push_task(pmcs_test, int(i/2));
+    for (int i = 0; i != 200; ++i){
+
+        for (int i = 0; i < 8; ++i) {
+            pool.push_task(pmcs_test, int(i/2));
+        }
+        pool.wait_for_tasks();
+
+        for (int i = 0; i < 8; ++i) {
+            pool.push_task(pmcs_test2, int(i));
+        }
+        pool.wait_for_tasks();
+
+        for(auto i : ret)
+            std::cout << i << " ";
+
+        std::cout << '\n';
+
+        for(auto i : ret2)
+            std::cout << i << " ";
+
+        ret.clear();
+        ret2.clear();
+
+        std::cout << '\n';
+        std::cout << std::endl;
+
     }
-    pool.wait_for_tasks();
-
-    for (int i = 0; i < 8; ++i) {
-        pool.push_task(pmcs_test2, int(i));
-    }
-    pool.wait_for_tasks();
-
-    for(auto i : ret)
-        std::cout << i << " ";
-
-    std::cout << '\n';
-
-    for(auto i : ret2)
-        std::cout << i << " ";
 
     return 0;
 }

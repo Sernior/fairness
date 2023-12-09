@@ -17,37 +17,50 @@
 #include <boost/fairness/priority_t.hpp>
 #include <boost/fairness/detail/coherent_priority_lock.hpp>
 
-#include <array>///
-#include <atomic>///
-
 namespace boost::fairness::detail{
+
+    /*
+    A few notes on this:
+    This is partially correct but not quite yet as having a static thread_local Thread means that if we create multiple pqspinlock
+    then the same thread could use the same Thread object to do multiple aquires or releases which would obviously break
+    the coherent_priority_lock.
+    The right way of doing this would be to know how many of these are needed at compile time and thus instantiating
+    an array of N threads 1 per pqspinlock required.
+    Or maybe all the mutexes instances could use only 1 pqspinlock and since I must use a limited number of preallocated Requests I dont think
+    this would even be the bottle neck of the lib.
+    */
+    static thread_local Thread t_;
 
     class pqspinlock{
 
         public:
 
         /// @private
-        spinlock_priority_mutex(const spinlock_priority_mutex&) = delete;
+        pqspinlock() = default;
 
         /// @private
-        spinlock_priority_mutex& operator=(const spinlock_priority_mutex&) = delete;
+        pqspinlock(const pqspinlock&) = delete;
 
         /// @private
-        spinlock_priority_mutex(spinlock_priority_mutex&&) = delete;
+        pqspinlock& operator=(const pqspinlock&) = delete;
 
         /// @private
-        spinlock_priority_mutex& operator=(spinlock_priority_mutex&&) = delete;
+        pqspinlock(pqspinlock&&) = delete;
 
         /// @private
-        ~spinlock_priority_mutex() = default;
+        pqspinlock& operator=(pqspinlock&&) = delete;
+
+        /// @private
+        ~pqspinlock() = default;
 
         void lock(Priority_t const priority = 0){
-            boost::fairness::detail::Thread t(priority); // knowing that we have a limited amount of Threads and Requests could allow me to use an array to map these
-            cpl_.request_lock(&t);
+            t_.prepare(priority);
+            cpl_.request_lock(&t_);
         }
 
         void unlock(){
-            cpl_.grant_lock(&t);
+            cpl_.grant_lock(&t_);
+            t_.free();
         }
 
         private:

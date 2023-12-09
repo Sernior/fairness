@@ -23,7 +23,7 @@ namespace boost::fairness{
      */
     #define BOOST_FAIRNESS_MAXIMUM_PRIORITY Priority_t(-1)
     /**
-     * @brief To assign a priority to an invalid state. TODO
+     * @brief A number indicating an invalid priority which is not usable by the mutexes.
      * 
      */
     #define BOOST_FAIRNESS_INVALID_PRIORITY Priority_t(-1)
