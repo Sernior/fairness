@@ -15,7 +15,7 @@
 #define BOOST_FAIRNESS_COHERENT_PRIORITY_LOCK_HPP
 
 #include <atomic>
-#include <boost/fairness/detail/pause_ops.hpp>
+#include <boost/fairness/detail/wait_ops.hpp>
 #include <boost/fairness/priority_t.hpp>
 
 
@@ -25,37 +25,26 @@ namespace boost::fairness::detail{
 
     struct Thread;
 
-    struct alignas(BOOST_FAIRNESS_HARDWARE_DESTRUCTIVE_SIZE) Request{ // this also requires an inUse bool to determine if it is being used by the pool or not
+    struct alignas(BOOST_FAIRNESS_HARDWARE_DESTRUCTIVE_SIZE) Request{
         std::atomic<uint32_t> state_{PENDING};
         std::atomic<Thread*> watcher_{nullptr};
         std::atomic<Thread*> thread_{nullptr};
         
-        char padding[BOOST_FAIRNESS_HARDWARE_DESTRUCTIVE_SIZE-sizeof(state_)-sizeof(watcher_)-sizeof(thread_)]; // test without padding... I am not sure it is necessary
+        char padding[BOOST_FAIRNESS_HARDWARE_DESTRUCTIVE_SIZE-sizeof(state_)-sizeof(watcher_)-sizeof(thread_)]; // TODO padding surely makes this lowest latency as possible (to test)
 
     };
 
    struct Thread{
-        Thread(){
 
-            //request_.store(new Request); // TODO find a better way
-
-            //request_.load()->thread_.store(this);
-        }
+        Thread() = default;
 
         void prepare(Priority_t p){
 
-            request_.store(new Request); // TODO find a better way
+            request_.store(new Request); // TODO this new is wrong it should be taken by a pool of preallocated requests
 
             request_.load()->thread_.store(this);
 
             priority_ = p;
-        }
-
-        void prepare(){
-
-            request_.store(new Request); // TODO find a better way
-
-            request_.load()->thread_.store(this);
         }
 
         void free(){
@@ -78,7 +67,7 @@ namespace boost::fairness::detail{
         public:
 
         coherent_priority_lock(){
-            auto firstTail = new Request; // this new is wrong it should be taken by a pool of preallocated requests
+            auto firstTail = new Request; // TODO this new is wrong it should be taken by a pool of preallocated requests
             firstTail->state_ = GRANTED;
             tail_.store(firstTail);
             head_.store(firstTail);
@@ -89,10 +78,10 @@ namespace boost::fairness::detail{
             requester->watch_.load()->watcher_.store(requester);
             for(;;){
                 if (requester->watch_.load()->state_.load() == GRANTED){
-                    delete requester->watch_.load(); // this deleted is wrong we should return the requests to a pool
+                    delete requester->watch_.load(); // TODO this deleted is wrong we should return the requests to a pool
                     return;
                 }
-                pause(); // change with spinwait later
+                spin_wait(requester->watch_.load()->state_, GRANTED);
             }
 
         }

@@ -24,11 +24,30 @@ namespace boost::fairness::detail{
 
     static std::function<void()> relaxOrYield[] = {pause, std::this_thread::yield};
 
+
+    template<typename T ,typename K>
+    inline void spin_wait(T& mem, K expected) { // rarely this being is causing 467X the number of branch misspredictions than what it should be
+
+        auto memEqualsExpected = [&mem, expected]{
+            return mem.load(std::memory_order_relaxed) == expected;
+        };
+
+        for(int i = 0; i < BOOST_FAIRNESS_SPINWAIT_SPINS; ++i){
+
+            if (!memEqualsExpected())
+                return;
+
+            relaxOrYield[i >= BOOST_FAIRNESS_SPINWAIT_SPINS_RELAXED]();
+
+        }
+
+    }
+
     template<typename K>
     inline void spin_wait(std::atomic_flag& mem, K expected) { // rarely this being is causing 467X the number of branch misspredictions than what it should be
 
         auto memEqualsExpected = [&mem, expected]{
-            return mem.test() == expected;
+            return mem.test(std::memory_order_relaxed) == expected;
         };
 
         for(int i = 0; i < BOOST_FAIRNESS_SPINWAIT_SPINS; ++i){

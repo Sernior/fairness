@@ -19,7 +19,7 @@
 
 namespace boost::fairness::detail{
 
-    /*
+    /* TODO
     A few notes on this:
     This is partially correct but not quite yet as having a static thread_local Thread means that if we create multiple pqspinlock
     then the same thread could use the same Thread object to do multiple aquires or releases which would obviously break

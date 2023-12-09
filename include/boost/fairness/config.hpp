@@ -106,7 +106,7 @@
 
 
 /**
- * @brief if BOOST_FAIRNESS_USE_EXPERIMENTAL_WAIT_NOTIFY is defined we shall the experimental wait notify system
+ * @brief if BOOST_FAIRNESS_USE_EXPERIMENTAL_WAIT_NOTIFY is defined we shall use the experimental wait notify system
 */
 #if defined(BOOST_FAIRNESS_USE_EXPERIMENTAL_WAIT_NOTIFY)
 #undef BOOST_FAIRNESS_USE_STD_WAIT_NOTIFY

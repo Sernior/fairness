@@ -19,8 +19,8 @@
 //BENCHMARK(utils::waiting::busy_wait_50nano_benchmark);
 //BENCHMARK(____________________________________________________________________________________________);
 BENCHMARK(priority_mutex_benchmark::lock_unlock_benchmark)->Threads(8);
-BENCHMARK(spinlock_priority_mutex_benchmark::lock_unlock_benchmark)->Threads(8);
-/*BENCHMARK(standard_mutex_benchmark::lock_unlock_benchmark)->Threads(8);
+//BENCHMARK(spinlock_priority_mutex_benchmark::lock_unlock_benchmark)->Threads(8);
+BENCHMARK(standard_mutex_benchmark::lock_unlock_benchmark)->Threads(8);
 BENCHMARK(slim_priority_mutex_benchmark::lock_unlock_benchmark)->Threads(8);
 #ifdef BOOST_FAIRNESEXPERIMENTAL_MUTEXES
 #endif
@@ -34,7 +34,7 @@ BENCHMARK(______________________________________________________________________
 BENCHMARK(priority_mutex_benchmark::pipeline_benchmark_long)->Threads(8);
 BENCHMARK(standard_mutex_benchmark::pipeline_benchmark_long)->Threads(8);
 BENCHMARK(slim_priority_mutex_benchmark::pipeline_benchmark_long)->Threads(8);
-BENCHMARK(spinlock_priority_mutex_benchmark::pipeline_benchmark_long)->Threads(8);
+//BENCHMARK(spinlock_priority_mutex_benchmark::pipeline_benchmark_long)->Threads(8);
 #ifdef BOOST_FAIRNESEXPERIMENTAL_MUTEXES
 #endif
 BENCHMARK(recursive_priority_mutex_benchmark::pipeline_benchmark_long)->Threads(8);
@@ -47,7 +47,7 @@ BENCHMARK(______________________________________________________________________
 BENCHMARK(priority_mutex_benchmark::pipeline_benchmark_gaming)->Threads(8);
 BENCHMARK(standard_mutex_benchmark::pipeline_benchmark_gaming)->Threads(8);
 BENCHMARK(slim_priority_mutex_benchmark::pipeline_benchmark_gaming)->Threads(8);
-BENCHMARK(spinlock_priority_mutex_benchmark::pipeline_benchmark_gaming)->Threads(8);
+//BENCHMARK(spinlock_priority_mutex_benchmark::pipeline_benchmark_gaming)->Threads(8);
 #ifdef BOOST_FAIRNESEXPERIMENTAL_MUTEXES
 #endif
 BENCHMARK(recursive_priority_mutex_benchmark::pipeline_benchmark_gaming)->Threads(8);
@@ -60,7 +60,7 @@ BENCHMARK(______________________________________________________________________
 BENCHMARK(priority_mutex_benchmark::pipeline_benchmark_audio)->Threads(8);
 BENCHMARK(standard_mutex_benchmark::pipeline_benchmark_audio)->Threads(8);
 BENCHMARK(slim_priority_mutex_benchmark::pipeline_benchmark_audio)->Threads(8);
-BENCHMARK(spinlock_priority_mutex_benchmark::pipeline_benchmark_audio)->Threads(8);
+//BENCHMARK(spinlock_priority_mutex_benchmark::pipeline_benchmark_audio)->Threads(8);
 #ifdef BOOST_FAIRNESEXPERIMENTAL_MUTEXES
 #endif
 BENCHMARK(recursive_priority_mutex_benchmark::pipeline_benchmark_audio)->Threads(8);
@@ -73,7 +73,7 @@ BENCHMARK(______________________________________________________________________
 BENCHMARK(priority_mutex_benchmark::pipeline_benchmark_fast)->Threads(8);
 BENCHMARK(standard_mutex_benchmark::pipeline_benchmark_fast)->Threads(8);
 BENCHMARK(slim_priority_mutex_benchmark::pipeline_benchmark_fast)->Threads(8);
-BENCHMARK(spinlock_priority_mutex_benchmark::pipeline_benchmark_fast)->Threads(8);
+//BENCHMARK(spinlock_priority_mutex_benchmark::pipeline_benchmark_fast)->Threads(8);
 #ifdef BOOST_FAIRNESEXPERIMENTAL_MUTEXES
 #endif
 BENCHMARK(recursive_priority_mutex_benchmark::pipeline_benchmark_fast)->Threads(8);
@@ -81,6 +81,6 @@ BENCHMARK(standard_recursive_mutex_benchmark::pipeline_benchmark_fast)->Threads(
 BENCHMARK(shared_priority_mutex_benchmark::pipeline_benchmark_fast)->Threads(8);
 BENCHMARK(standard_shared_mutex_benchmark::pipeline_benchmark_fast)->Threads(8);
 BENCHMARK(shared_priority_mutex_benchmark::shared_pipeline_benchmark_fast)->Threads(8);
-BENCHMARK(standard_shared_mutex_benchmark::shared_pipeline_benchmark_fast)->Threads(8);*/
+BENCHMARK(standard_shared_mutex_benchmark::shared_pipeline_benchmark_fast)->Threads(8);
 
 BENCHMARK_MAIN();

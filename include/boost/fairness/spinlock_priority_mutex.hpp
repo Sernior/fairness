@@ -17,7 +17,7 @@
 #include <array>
 #include <boost/fairness/priority_t.hpp>
 #include <boost/fairness/detail/wait_ops.hpp>
-#include <boost/fairness/detail/coherent_priority_lock.hpp>
+#include <boost/fairness/detail/pqspinlock.hpp>
 
 
 namespace boost::fairness{
@@ -69,7 +69,7 @@ namespace boost::fairness{
          * \endcode
          */
         void lock(Priority_t const priority = 0){
-
+            lll_.lock(priority);
         }
 
         /**
@@ -86,7 +86,7 @@ namespace boost::fairness{
          * \endcode
          */
         void unlock(){
-            
+            lll_.unlock();
         }
 
         /**
@@ -105,11 +105,13 @@ namespace boost::fairness{
          * \endcode
          * @return bool 
          */
-        [[nodiscard]] bool try_lock(Priority_t const priority = 0){
+        [[nodiscard]] bool try_lock(Priority_t const priority = 0){ // TODO try_lock from spinlocks should be unnecessary
             return false;
         }
 
         private:
+
+        detail::pqspinlock lll_;
 
     };
 }
