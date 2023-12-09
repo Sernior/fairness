@@ -21,7 +21,7 @@ namespace boost::fairness::detail{
 
     /* TODO
     A few notes on this:
-    This is partially correct but not quite yet as having a static thread_local Thread means that if we create multiple pqspinlock
+    This is partially correct but not quite yet as having a static thread_local Thread means that if we create multiple pqspinlocks
     then the same thread could use the same Thread object to do multiple aquires or releases which would obviously break
     the coherent_priority_lock.
     The right way of doing this would be to know how many of these are needed at compile time and thus instantiating
@@ -60,7 +60,7 @@ namespace boost::fairness::detail{
 
         void unlock(){
             cpl_.grant_lock(&t_);
-            t_.free();
+            //t_.free();
         }
 
         private:

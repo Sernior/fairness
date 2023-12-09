@@ -143,7 +143,7 @@ int main()
 
     BS::thread_pool pool(8);
 
-    for (int i = 0; i != 200; ++i){
+    for (int i = 0; i != 2000000; ++i){
 
         for (int i = 0; i < 8; ++i) {
             pool.push_task(pmcs_test, int(i/2));

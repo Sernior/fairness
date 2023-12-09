@@ -29,32 +29,32 @@ namespace boost::fairness::detail{
         std::atomic<uint32_t> state_{PENDING};
         std::atomic<Thread*> watcher_{nullptr};
         std::atomic<Thread*> thread_{nullptr};
-        
-        char padding[BOOST_FAIRNESS_HARDWARE_DESTRUCTIVE_SIZE-sizeof(state_)-sizeof(watcher_)-sizeof(thread_)]; // TODO padding surely makes this lowest latency as possible (to test)
-
+        //char padding[BOOST_FAIRNESS_HARDWARE_DESTRUCTIVE_SIZE-sizeof(state_)-sizeof(watcher_)-sizeof(thread_)]; // would cause problems with 32bit vs 64bit?
     };
 
-   struct Thread{
+    static_assert(sizeof(Request) == BOOST_FAIRNESS_HARDWARE_DESTRUCTIVE_SIZE, "Request size is not BOOST_FAIRNESS_HARDWARE_DESTRUCTIVE_SIZE");
+
+    struct Thread{
 
         Thread() = default;
 
         void prepare(Priority_t p){
 
-            request_.store(new Request); // TODO this new is wrong it should be taken by a pool of preallocated requests
+            auto localPtr = new Request; // to del
+
+            request_.store(localPtr); // TODO this new is wrong it should be taken by a pool of preallocated requests
 
             request_.load()->thread_.store(this);
 
             priority_ = p;
+
+            watch_.store(nullptr);
         }
 
-        void free(){
+        void free(){ // probably not useful
             watch_.store(nullptr);
             request_.store(nullptr);
             priority_ = BOOST_FAIRNESS_INVALID_PRIORITY;
-        }
-
-        bool isFree(){
-            return priority_ == BOOST_FAIRNESS_INVALID_PRIORITY;
         }
 
         Priority_t priority_{BOOST_FAIRNESS_INVALID_PRIORITY};
@@ -78,12 +78,12 @@ namespace boost::fairness::detail{
             requester->watch_.load()->watcher_.store(requester);
             for(;;){
                 if (requester->watch_.load()->state_.load() == GRANTED){
-                    delete requester->watch_.load(); // TODO this deleted is wrong we should return the requests to a pool
+                    //delete requester->watch_.load(); // TODO this delete is wrong we should return the requests to a pool
+                    //requester->watch_.store(nullptr);
                     return;
                 }
                 spin_wait(requester->watch_.load()->state_, GRANTED);
             }
-
         }
 
         void grant_lock(Thread* requester) {
@@ -98,7 +98,7 @@ namespace boost::fairness::detail{
             else
                 head_.store(requester->request_.load());
 
-            localHighestPriorityReq = head_.load(); 
+            localHighestPriorityReq = head_.load();
             currentThread = head_.load()->watcher_.load();
 
             while (currentThread != nullptr){
@@ -113,6 +113,7 @@ namespace boost::fairness::detail{
 
             requester->request_.store(requester->watch_.load());
             requester->request_.load()->thread_.store(requester);
+            delete requester->watch_.load();
         }
 
         private:
