@@ -1,8 +1,8 @@
 /**
- * @file spinlock_priority_mutex.hpp
+ * @file spinlock_priority_mutex_cpl.hpp
  * @author F. Abrignani (federignoli@hotmail.it)
  * @author S. Martorana (salvatoremartorana@hotmail.com)
- * @brief This file contains the implementation of the spinlock_priority_mutex based on tatas.
+ * @brief This file contains the implementation of the spinlock_priority_mutex based on a scalable list base algorithm.
  * @version 0.1
  * @date 2023-08-19
  * 
@@ -10,22 +10,14 @@
  * Distributed under the Boost Software License, Version 1.0. (See accompanying file LICENSE_1_0.txt or copy at http://www.boost.org/LICENSE_1_0.txt).
  * 
  */
-#ifndef BOOST_FAIRNESS_SPINLOCK_PRIORITY_MUTEX_TATAS_HPP
-#define BOOST_FAIRNESS_SPINLOCK_PRIORITY_MUTEX_TATAS_HPP
+#ifndef BOOST_FAIRNESS_SPINLOCK_PRIORITY_MUTEX_CPL_HPP
+#define BOOST_FAIRNESS_SPINLOCK_PRIORITY_MUTEX_CPL_HPP
 #include <atomic>
 #include <array>
 #include <boost/fairness/priority_t.hpp>
 #include <boost/fairness/detail/wait_ops.hpp>
+#include <boost/fairness/detail/pqspinlock.hpp>
 
-/*
-
-The idea is to use https://www.cs.rochester.edu/u/scott/papers/1991_TOCS_synch.pdf
-and use multiple tails* one for each priority.
-
-this is a good example of how it should look like even if it is missing the alignments.
-https://stackoverflow.com/questions/61944469/problems-with-mcs-lock-implementation
-
-*/
 
 namespace boost::fairness{
 
@@ -76,27 +68,7 @@ namespace boost::fairness{
          * \endcode
          */
         void lock(Priority_t const priority = 0){
-
-            bool localLockOwned = lockOwned_.test(std::memory_order_relaxed);
-
-            Priority_t localCurrentPriority = currentPriority_.load(std::memory_order_relaxed);
-
-            waiters_[priority].fetch_add(1, std::memory_order_relaxed);
-
-            for (;;){
-
-                if (!localLockOwned & (localCurrentPriority >= priority)){
-                    if (!lockOwned_.test_and_set(std::memory_order_acquire))
-                        break;
-                }
-                detail::spin_wait(lockOwned_, true);
-                localLockOwned = lockOwned_.test(std::memory_order_relaxed);
-                localCurrentPriority = currentPriority_.load(std::memory_order_relaxed);
-
-            }
-
-            waiters_[priority].fetch_sub(1, std::memory_order_relaxed);
-            
+            lll_.lock(priority);
         }
 
         /**
@@ -113,8 +85,7 @@ namespace boost::fairness{
          * \endcode
          */
         void unlock(){
-            currentPriority_.store(find_first_priority_(), std::memory_order_relaxed);
-            lockOwned_.clear(std::memory_order_release);
+            lll_.unlock();
         }
 
         /**
@@ -133,22 +104,14 @@ namespace boost::fairness{
          * \endcode
          * @return bool 
          */
-        [[nodiscard]] bool try_lock(Priority_t const priority = 0){
-            return (currentPriority_.load(std::memory_order_relaxed) >= priority && !lockOwned_.test_and_set(std::memory_order_acquire));
+        [[nodiscard]] bool try_lock(Priority_t const priority = 0){ // TODO try_lock from spinlocks should be unnecessary
+            return false;
         }
 
         private:
-        std::array<std::atomic<Thread_cnt_t>, N> waiters_;
-        std::atomic<Priority_t> currentPriority_{BOOST_FAIRNESS_MAXIMUM_PRIORITY};
-        std::atomic_flag lockOwned_;
 
-        Priority_t find_first_priority_(){
-            for (Priority_t i = 0; i < N; ++i){
-                if (waiters_[i] > 0)
-                    return i;
-            }
-            return BOOST_FAIRNESS_MAXIMUM_PRIORITY;
-        }
+        detail::pqspinlock lll_;
+
     };
 }
-#endif // BOOST_FAIRNESS_SPINLOCK_PRIORITY_MUTEX_TATAS_HPP
+#endif // BOOST_FAIRNESS_SPINLOCK_PRIORITY_MUTEX_CPL_HPP
