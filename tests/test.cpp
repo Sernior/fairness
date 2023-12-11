@@ -168,12 +168,16 @@ TEST(SpinlockPriorityMutex_ControlledScheduling, SPNLCPM_LockUnlockTest2) {
     SPNLCPM_scenario2::expected.clear();
 }
 
+// This test utilizes the try_lock feature of the boost::fairness::spinlock_priority_mutex.
+// As of today, the try_lock function is not supported without TATAS.
+#ifdef BOOST_FAIRNESS_USE_TATAS_SPINLOCK
 TEST(SpinlockPriorityMutex_ControlledScheduling, SPNLCPM_TryLockTest) {
     SPNLCPM_scenario3::executeSchedulingSequence();
     EXPECT_EQ(SPNLCPM_scenario3::ret, SPNLCPM_scenario3::expected);
     SPNLCPM_scenario3::ret.clear();
     SPNLCPM_scenario3::expected.clear();
 }
+#endif
 
 TEST(SharedPriorityMutex_ControlledScheduling, LockUnlockTest) {
     SPM_scenario1::executeSchedulingSequence();
@@ -285,7 +289,6 @@ TEST(RecursivePriorityMutex_ControlledScheduling, RPM_RecursiveCustomTest) {
    RPM_scenario9::expected.clear();
 }
 int main(int argc, char* argv[]) {
-
     testing::InitGoogleTest(&argc, argv);
     return RUN_ALL_TESTS();
 }
