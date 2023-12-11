@@ -27,9 +27,9 @@ namespace boost::fairness::detail{
         std::atomic<uint32_t> state_{PENDING};
         std::atomic<Thread*> watcher_{nullptr};
         std::atomic<Thread*> thread_{nullptr};
-        const bool isTail_;
+        const bool isFirstTail_;
 
-        Request(bool isTail = false) : isTail_{isTail} {};
+        Request(bool isFirstTail = false) : isFirstTail_{isFirstTail} {};
 
         void reset(){
             state_ = PENDING;

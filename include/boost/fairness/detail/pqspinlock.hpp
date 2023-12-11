@@ -67,7 +67,8 @@ namespace boost::fairness::detail{
 
         void unlock(){
             cpl_.grant_lock(&t_);
-            reqs_.returnRequest(t_.watch_.load());
+            if (!t_.watch_.load()->isFirstTail_)
+                reqs_.returnRequest(t_.watch_.load());
         }
 
         private:
