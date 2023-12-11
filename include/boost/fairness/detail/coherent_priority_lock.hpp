@@ -1,5 +1,5 @@
 /**
- * @file mcs_priority_lock.hpp
+ * @file coherent_priority_lock.hpp
  * @author F. Abrignani (federignoli@hotmail.it)
  * @author S. Martorana
  * @brief This file contains the implementation of a coherent priority lock.
@@ -15,34 +15,21 @@
 #define BOOST_FAIRNESS_COHERENT_PRIORITY_LOCK_HPP
 
 #include <atomic>
+#include <boost/fairness/config.hpp>
 #include <boost/fairness/detail/wait_ops.hpp>
 #include <boost/fairness/priority_t.hpp>
+#include <boost/fairness/detail/request_pool.hpp>
 
 
 namespace boost::fairness::detail{
-    #define PENDING 1
-    #define GRANTED 0
-
-    struct Thread;
-
-    struct alignas(BOOST_FAIRNESS_HARDWARE_DESTRUCTIVE_SIZE) Request{
-        std::atomic<uint32_t> state_{PENDING};
-        std::atomic<Thread*> watcher_{nullptr};
-        std::atomic<Thread*> thread_{nullptr};
-        //char padding[BOOST_FAIRNESS_HARDWARE_DESTRUCTIVE_SIZE-sizeof(state_)-sizeof(watcher_)-sizeof(thread_)]; // would cause problems with 32bit vs 64bit?
-    };
-
-    static_assert(sizeof(Request) == BOOST_FAIRNESS_HARDWARE_DESTRUCTIVE_SIZE, "Request size is not BOOST_FAIRNESS_HARDWARE_DESTRUCTIVE_SIZE");
 
     struct Thread{
 
         Thread() = default;
 
-        void prepare(Priority_t p){
+        void prepare(Priority_t p, Request* req){
 
-            auto localPtr = new Request; // to del
-
-            request_.store(localPtr); // TODO this new is wrong it should be taken by a pool of preallocated requests
+            request_.store(req); // TODO this new is wrong it should be taken by a pool of preallocated requests
 
             request_.load()->thread_.store(this);
 
@@ -51,7 +38,7 @@ namespace boost::fairness::detail{
             watch_.store(nullptr);
         }
 
-        void free(){ // probably not useful
+        void free(){ // TODO probably not useful
             watch_.store(nullptr);
             request_.store(nullptr);
             priority_ = BOOST_FAIRNESS_INVALID_PRIORITY;
@@ -67,10 +54,15 @@ namespace boost::fairness::detail{
         public:
 
         coherent_priority_lock(){
-            auto firstTail = new Request; // TODO this new is wrong it should be taken by a pool of preallocated requests
+
+            Request* firstTail = &firstTail_;
+
             firstTail->state_ = GRANTED;
+
             tail_.store(firstTail);
+
             head_.store(firstTail);
+
         }
 
         void request_lock(Thread* requester){
@@ -78,8 +70,6 @@ namespace boost::fairness::detail{
             requester->watch_.load()->watcher_.store(requester);
             for(;;){
                 if (requester->watch_.load()->state_.load() == GRANTED){
-                    //delete requester->watch_.load(); // TODO this delete is wrong we should return the requests to a pool
-                    //requester->watch_.store(nullptr);
                     return;
                 }
                 spin_wait(requester->watch_.load()->state_, GRANTED);
@@ -113,12 +103,15 @@ namespace boost::fairness::detail{
 
             requester->request_.store(requester->watch_.load());
             requester->request_.load()->thread_.store(requester);
-            delete requester->watch_.load();
+            
+            //reqs_.returnRequest(requester->watch_.load());
+            //delete requester->watch_.load(); // TODO this delete is wrong should return to the pool instead
         }
 
         private:
         std::atomic<Request*> tail_{nullptr};
         std::atomic<Request*> head_{nullptr};
+        Request firstTail_{true};
 
     };
 

@@ -16,6 +16,7 @@
 #include <boost/fairness/config.hpp>
 #include <boost/fairness/priority_t.hpp>
 #include <boost/fairness/detail/coherent_priority_lock.hpp>
+#include <boost/fairness/detail/request_pool.hpp>
 
 namespace boost::fairness::detail{
 
@@ -54,18 +55,25 @@ namespace boost::fairness::detail{
         ~pqspinlock() = default;
 
         void lock(Priority_t const priority = 0){
-            t_.prepare(priority);
+            Request* req{nullptr};
+
+            while (req == nullptr){
+                req = reqs_.getRequest();
+                pause();
+            }
+            t_.prepare(priority, req);
             cpl_.request_lock(&t_);
         }
 
         void unlock(){
             cpl_.grant_lock(&t_);
-            //t_.free();
+            reqs_.returnRequest(t_.watch_.load());
         }
 
         private:
 
         coherent_priority_lock cpl_;
+        RequestPool<BOOST_FAIRNESS_MAX_PQNODES> reqs_;
 
     };
 

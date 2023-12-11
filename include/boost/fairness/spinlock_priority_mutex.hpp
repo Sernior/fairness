@@ -105,7 +105,7 @@ namespace boost::fairness{
          * \endcode
          * @return bool 
          */
-        [[nodiscard]] bool try_lock(Priority_t const priority = 0){ // TODO try_lock from spinlocks should be unnecessary
+        [[nodiscard]] bool try_lock(Priority_t const priority = 0){ // TODO check later if try_lock can be implemented within the coherent priority lock
             return false;
         }
 
