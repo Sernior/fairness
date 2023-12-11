@@ -29,19 +29,13 @@ namespace boost::fairness::detail{
 
         void prepare(Priority_t p, Request* req){
 
-            request_.store(req); // TODO this new is wrong it should be taken by a pool of preallocated requests
+            request_.store(req);
 
             request_.load()->thread_.store(this);
 
             priority_ = p;
 
             watch_.store(nullptr);
-        }
-
-        void free(){ // TODO probably not useful
-            watch_.store(nullptr);
-            request_.store(nullptr);
-            priority_ = BOOST_FAIRNESS_INVALID_PRIORITY;
         }
 
         Priority_t priority_{BOOST_FAIRNESS_INVALID_PRIORITY};
@@ -104,8 +98,6 @@ namespace boost::fairness::detail{
             requester->request_.store(requester->watch_.load());
             requester->request_.load()->thread_.store(requester);
             
-            //reqs_.returnRequest(requester->watch_.load());
-            //delete requester->watch_.load(); // TODO this delete is wrong should return to the pool instead
         }
 
         private:
