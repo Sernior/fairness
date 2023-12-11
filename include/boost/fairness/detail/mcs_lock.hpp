@@ -12,7 +12,7 @@
  */
 #ifndef BOOST_FAIRNESS_MCS_LOCK_HPP
 #define BOOST_FAIRNESS_MCS_LOCK_HPP
-
+// TODO move to old this is unneeded
 #include <atomic>
 #include <boost/fairness/detail/pause_ops.hpp>
 #include <boost/fairness/priority_t.hpp>
@@ -27,25 +27,13 @@ namespace boost::fairness::detail{
         char padding[BOOST_FAIRNESS_HARDWARE_DESTRUCTIVE_SIZE-sizeof(next_)-sizeof(locked_)];
     };
 
-    // the idea to add priorities is that by having N tails we can exchange with the nth tail.
-    // when we want to acquire instead of looking for the predecessor of node the lock
-    // will instead check the tails[p] and continue with the aquire from there.
-    // the release instead before selecting as successor the next of node should instead
-    // check the previous tails if any of them has a node we select that one... 
-    // we might need a head pointer also to respect the fifoness without having to 
-    // linearly search the from tail to the first node to respect the FIFONESS.
-
-    class mcs_spinlock{ // TODO add priorities
+    class mcs_spinlock{
 
         public:
 
         void acquire(QNode* node){
 
             QNode* predecessor = tail.exchange(node, std::memory_order_relaxed);
-
-            //QNode* expected = nullptr;
-
-            //head.compare_exchange_strong(expected, node);
 
             if (predecessor != nullptr){
 
@@ -57,8 +45,6 @@ namespace boost::fairness::detail{
                 }
 
             }
-
-            //head.exchange(node->next_);
 
         }
 
@@ -83,7 +69,6 @@ namespace boost::fairness::detail{
         }
 
         private:
-        //std::atomic<QNode*> head{nullptr};
         std::atomic<QNode*> tail{nullptr};
 
     };
