@@ -26,7 +26,7 @@ namespace boost::fairness::detail{
     then the same thread could use the same Thread object to do multiple aquires or releases which would obviously break
     the coherent_priority_lock.
     The right way of doing this would be to know how many of these are needed at compile time and thus instantiating
-    an array of N threads 1 per pqspinlock required.
+    a thread_local array of threads 1 per pqspinlock required.
     Or maybe all the mutexes instances could use only 1 pqspinlock and since I must use a limited number of preallocated Requests I dont think
     this would even be the bottle neck of the lib.
     */
@@ -55,10 +55,12 @@ namespace boost::fairness::detail{
         ~pqspinlock() = default;
 
         void lock(Priority_t const priority = 0){
-            Request* req{nullptr};
+            Request* req;// = reqs_.getRequest();
 
-            while (req == nullptr){
+            for(;;){
                 req = reqs_.getRequest();
+                if (req != nullptr)
+                    break;
                 pause();
             }
             t_.prepare(priority, req);
