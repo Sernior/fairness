@@ -7,7 +7,8 @@
 #include <algorithm>
 #include <BS_thread_pool.hpp>
 #define BOOST_FAIRNESS_USE_EXPERIMENTAL_WAIT_NOTIFY
-// #include <boost/atomic.hpp>
+//#include <boost/atomic.hpp>
+//#include <boost/lockfree/queue.hpp>
 #include <boost/fairness.hpp>
 #include <boost/fairness/detail/coherent_priority_lock.hpp>
 #include <boost/fairness/detail/pqspinlock.hpp>
@@ -35,7 +36,7 @@ static void busy_wait_nano(uint64_t nanoseconds){
 static void thread_function_nano(int p, int preCriticalTime, int criticalTime, int postCriticalTime){
     busy_wait_nano(preCriticalTime);
     {
-        boost::fairness::unique_lock l1(sms, p);
+        boost::fairness::unique_lock l1(sms, p);c
         busy_wait_nano(criticalTime);
     }
     busy_wait_nano(postCriticalTime);
@@ -63,7 +64,7 @@ static void mcs_test2(int i){
     ret.push_back(i);
     mcs.release(&p);
 }*/
-
+/*
 static void cpl_test(int i){
     boost::fairness::detail::Thread t;
     t.prepare(i);
@@ -78,7 +79,7 @@ static void cpl_test2(int i){
     pmcs.request_lock(&t);
     ret2.push_back(i);
     pmcs.grant_lock(&t);
-}
+}*/
 
 static void pmcs_test(int i){
     pqspin.lock(i);
@@ -140,6 +141,7 @@ int main()
         std::cout << "Time taken STD: " << duration.count() << " milliseconds" << std::endl;
     }
 */
+
 
     BS::thread_pool pool(8);
 
