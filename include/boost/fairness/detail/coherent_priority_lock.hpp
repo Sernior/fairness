@@ -59,7 +59,7 @@ namespace boost::fairness::detail{
 
         }
 
-        void request_lock(Thread* requester){ // TODO change naming of the methods to be coherent with the rest of the lib
+        void requestLock(Thread* requester){
             requester->watch_ = (tail_.exchange(requester->request_));
             requester->watch_->watcher_ = requester;
             for(;;){
@@ -70,7 +70,7 @@ namespace boost::fairness::detail{
             }
         }
 
-        void grant_lock(Thread* requester) { // TODO change naming of the methods to be coherent with the rest of the lib
+        void grantLock(Thread* requester) {
             Priority_t localHighestPriority{BOOST_FAIRNESS_MAXIMUM_PRIORITY};
             Thread* currentThread;
             Request* localHighestPriorityReq;

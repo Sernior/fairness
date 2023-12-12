@@ -177,8 +177,17 @@ namespace boost::fairness{
         these waitingFlags all being close in memory is probably the reason why the EXPERIMENTAL_WAIT_NOTIFY
         does not scale well.
         TODO test this!
+        As suspected this is the case.
+        We can use the hash to aligned static memory trick from the std lib as I suspect users wouldn`t want
+        these beings to be over 1KB...
         */
+        //struct FollyAlignedAtomicFlag {
+        //    alignas(BOOST_FAIRNESS_HARDWARE_DESTRUCTIVE_SIZE) std::atomic<uint32_t> flag;
+        //};
+        //alignas(BOOST_FAIRNESS_HARDWARE_DESTRUCTIVE_SIZE) std::array<FollyAlignedAtomicFlag, N> waitingFlag_;
         alignas(BOOST_FAIRNESS_HARDWARE_DESTRUCTIVE_SIZE) std::array<std::atomic<uint32_t>, N> waitingFlag_;
+
+
         std::array<Thread_cnt_t, N> waiters_;
         bool lockOwned_{};
 

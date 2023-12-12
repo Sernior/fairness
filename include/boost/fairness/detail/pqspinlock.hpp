@@ -64,11 +64,11 @@ namespace boost::fairness::detail{
                 pause();
             }
             t_.prepare(priority, req);
-            cpl_.request_lock(&t_);
+            cpl_.requestLock(&t_);
         }
 
         void unlock(){
-            cpl_.grant_lock(&t_);
+            cpl_.grantLock(&t_);
             if (!t_.watch_->isFirstTail_)
                 reqs_.returnRequest(t_.watch_);
         }
