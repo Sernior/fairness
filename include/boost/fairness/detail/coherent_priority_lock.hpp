@@ -29,18 +29,18 @@ namespace boost::fairness::detail{
 
         void prepare(Priority_t p, Request* req){
 
-            request_.store(req);
+            request_ = req;
 
-            request_.load()->thread_.store(this);
+            req->thread_ = this;
 
             priority_ = p;
 
-            watch_.store(nullptr);
+            watch_ = nullptr;
         }
 
         Priority_t priority_{BOOST_FAIRNESS_INVALID_PRIORITY};
-        std::atomic<Request*> watch_{nullptr};
-        std::atomic<Request*> request_{nullptr};
+        Request* watch_{nullptr};
+        Request* request_{nullptr};
     }; 
 
     class coherent_priority_lock{
@@ -60,13 +60,13 @@ namespace boost::fairness::detail{
         }
 
         void request_lock(Thread* requester){ // TODO change naming of the methods to be coherent with the rest of the lib
-            requester->watch_.store(tail_.exchange(requester->request_.load()));
-            requester->watch_.load()->watcher_.store(requester);
+            requester->watch_ = (tail_.exchange(requester->request_));
+            requester->watch_->watcher_ = requester;
             for(;;){
-                if (requester->watch_.load()->state_.load() == GRANTED){
+                if (requester->watch_->state_ == GRANTED){
                     return;
                 }
-                spin_wait(requester->watch_.load()->state_, GRANTED);
+                spin_wait(requester->watch_->state_, GRANTED);
             }
         }
 
@@ -75,28 +75,28 @@ namespace boost::fairness::detail{
             Thread* currentThread;
             Request* localHighestPriorityReq;
 
-            requester->request_.load()->thread_.store(requester->watch_.load()->thread_.load());
+            requester->request_->thread_ = (requester->watch_->thread_);
 
-            if (requester->request_.load()->thread_.load() != nullptr)
-                requester->request_.load()->thread_.load()->request_.store(requester->request_.load());
+            if (requester->request_->thread_ != nullptr)
+                requester->request_->thread_->request_ = (requester->request_);
             else
-                head_.store(requester->request_.load());
+                head_.store(requester->request_);
 
             localHighestPriorityReq = head_.load();
-            currentThread = head_.load()->watcher_.load();
+            currentThread = head_.load()->watcher_;
 
             while (currentThread != nullptr){
                 if (currentThread->priority_ < localHighestPriority){
                     localHighestPriority = currentThread->priority_;
-                    localHighestPriorityReq = currentThread->watch_.load();
+                    localHighestPriorityReq = currentThread->watch_;
                 }
-                currentThread = currentThread->request_.load()->watcher_.load();
+                currentThread = currentThread->request_->watcher_;
             }
 
             localHighestPriorityReq->state_.store(GRANTED);
 
-            requester->request_.store(requester->watch_.load());
-            requester->request_.load()->thread_.store(requester);
+            requester->request_ = requester->watch_;
+            requester->request_->thread_ = requester;
             
         }
 

@@ -24,8 +24,8 @@ namespace boost::fairness::detail{
 
     struct alignas(BOOST_FAIRNESS_HARDWARE_DESTRUCTIVE_SIZE) Request{
         std::atomic<uint32_t> state_{PENDING};
-        std::atomic<Thread*> watcher_{nullptr};// TODO these 2 pointers do not need to be atomic probably test
-        std::atomic<Thread*> thread_{nullptr};
+        Thread* watcher_{nullptr};// TODO these 2 pointers do not need to be atomic probably test
+        Thread* thread_{nullptr};
         const bool isFirstTail_;
         std::atomic_flag inUse{};
 
@@ -33,8 +33,8 @@ namespace boost::fairness::detail{
 
         void reset(){
             state_.store(PENDING);
-            watcher_.store(nullptr);
-            thread_.store(nullptr);
+            watcher_ = nullptr;
+            thread_ = nullptr;
         }
     };
 
@@ -70,7 +70,7 @@ namespace boost::fairness::detail{
     template<size_t N>
     class RequestPool{
     public:
-        RequestPool2() = default;
+        RequestPool() = default;
 
         Request* getRequest(){
             for (uint32_t i = 0; i < N; ++i){
