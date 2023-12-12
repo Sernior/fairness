@@ -15,7 +15,6 @@
 
 #include <atomic>
 #include <boost/fairness/config.hpp>
-#include <boost/lockfree/queue.hpp>
 
 namespace boost::fairness::detail{
     #define PENDING 1
@@ -25,21 +24,23 @@ namespace boost::fairness::detail{
 
     struct alignas(BOOST_FAIRNESS_HARDWARE_DESTRUCTIVE_SIZE) Request{
         std::atomic<uint32_t> state_{PENDING};
-        std::atomic<Thread*> watcher_{nullptr};
+        std::atomic<Thread*> watcher_{nullptr};// TODO these 2 pointers do not need to be atomic probably test
         std::atomic<Thread*> thread_{nullptr};
         const bool isFirstTail_;
+        std::atomic_flag inUse{};
 
         Request(bool isFirstTail = false) : isFirstTail_{isFirstTail} {};
 
         void reset(){
-            state_ = PENDING;
-            watcher_ = nullptr;
-            thread_ = nullptr;
+            state_.store(PENDING);
+            watcher_.store(nullptr);
+            thread_.store(nullptr);
         }
     };
 
     static_assert(sizeof(Request) == BOOST_FAIRNESS_HARDWARE_DESTRUCTIVE_SIZE, "Request size is not BOOST_FAIRNESS_HARDWARE_DESTRUCTIVE_SIZE");
 
+/*
     template<size_t N>
     class RequestPool{
     public:
@@ -55,16 +56,38 @@ namespace boost::fairness::detail{
             return nullptr;
         }
 
-        bool returnRequest(Request* req){
+        void returnRequest(Request* req){
             req->reset();
-            bool ret = requestQueue_.bounded_push(req);
-            return ret;
+            requestQueue_.bounded_push(req);
         }
 
     private:
 
         std::array<Request, N> reqs_;
-        boost::lockfree::queue<Request*, boost::lockfree::capacity<N>> requestQueue_;
+        boost::lockfree::stack<Request*, boost::lockfree::capacity<N>> requestQueue_;
+    };
+*/
+    template<size_t N>
+    class RequestPool{
+    public:
+        RequestPool2() = default;
+
+        Request* getRequest(){
+            for (uint32_t i = 0; i < N; ++i){
+                if (!reqs_[i].inUse.test_and_set())
+                    return &reqs_[i];
+            }
+            return nullptr;
+        }
+
+        void returnRequest(Request* req){
+            req->reset();
+            req->inUse.clear();
+        }
+
+    private:
+
+        std::array<Request, N> reqs_;
     };
 
 }

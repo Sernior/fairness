@@ -73,7 +73,7 @@
 /**
  * @brief The maximum amount of PQNODES that can be used at the same time.
 */
-#define BOOST_FAIRNESS_MAX_PQNODES 10
+#define BOOST_FAIRNESS_MAX_PQNODES 4
 #endif // BOOST_FAIRNESS_HARDWARE_DESTRUCTIVE_SIZE
 #define BOOST_FAIRNESS_INVALID_PQNODE_INDEX BOOST_FAIRNESS_MAX_PQNODES
 
@@ -127,11 +127,6 @@
 #elif defined(_WIN32) && !defined(BOOST_FAIRNESS_USE_STD_WAIT_NOTIFY)
 #include <boost/fairness/detail/wait_ops_windows.hpp>
 #else
-
-#ifndef BOOST_FAIRNESS_USE_STD_WAIT_NOTIFY
-
-#endif // BOOST_FAIRNESS_USE_STD_WAIT_NOTIFY
-
 #include <boost/fairness/detail/wait_ops_generic.hpp>
 #endif // Operating systems
 

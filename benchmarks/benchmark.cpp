@@ -20,6 +20,7 @@
 //BENCHMARK(____________________________________________________________________________________________);
 BENCHMARK(priority_mutex_benchmark::lock_unlock_benchmark)->Threads(8);
 //BENCHMARK(spinlock_priority_mutex_benchmark::lock_unlock_benchmark)->Threads(8);
+/*
 BENCHMARK(standard_mutex_benchmark::lock_unlock_benchmark)->Threads(8);
 BENCHMARK(slim_priority_mutex_benchmark::lock_unlock_benchmark)->Threads(8);
 #ifdef BOOST_FAIRNESEXPERIMENTAL_MUTEXES
@@ -82,5 +83,5 @@ BENCHMARK(shared_priority_mutex_benchmark::pipeline_benchmark_fast)->Threads(8);
 BENCHMARK(standard_shared_mutex_benchmark::pipeline_benchmark_fast)->Threads(8);
 BENCHMARK(shared_priority_mutex_benchmark::shared_pipeline_benchmark_fast)->Threads(8);
 BENCHMARK(standard_shared_mutex_benchmark::shared_pipeline_benchmark_fast)->Threads(8);
-
+*/
 BENCHMARK_MAIN();
