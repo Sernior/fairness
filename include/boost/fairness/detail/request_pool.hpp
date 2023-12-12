@@ -24,9 +24,14 @@ namespace boost::fairness::detail{
 
     struct alignas(BOOST_FAIRNESS_HARDWARE_DESTRUCTIVE_SIZE) Request{
         std::atomic<uint32_t> state_{PENDING};
-        Thread* watcher_{nullptr};// TODO these 2 pointers do not need to be atomic probably test
+        Thread* watcher_{nullptr};
         Thread* thread_{nullptr};
         const bool isFirstTail_;
+
+        /*
+        maybe it would be better to have a separate atomic flag array somewhere else instead to even better respect
+        cache coherency. TODO
+        */
         std::atomic_flag inUse{};
 
         Request(bool isFirstTail = false) : isFirstTail_{isFirstTail} {};
@@ -74,7 +79,7 @@ namespace boost::fairness::detail{
 
         Request* getRequest(){
             for (uint32_t i = 0; i < N; ++i){
-                if (!reqs_[i].inUse.test_and_set())
+                if (!reqs_[i].inUse.test_and_set()) // instead of directly calling test_and_set I should TATAS this one TODO!
                     return &reqs_[i];
             }
             return nullptr;

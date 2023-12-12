@@ -172,6 +172,12 @@ namespace boost::fairness{
 
         private:
         alignas(BOOST_FAIRNESS_HARDWARE_DESTRUCTIVE_SIZE) spinlock_priority_mutex<N> internalMutex_;
+
+        /*
+        these waitingFlags all being close in memory is probably the reason why the EXPERIMENTAL_WAIT_NOTIFY
+        does not scale well.
+        TODO test this!
+        */
         alignas(BOOST_FAIRNESS_HARDWARE_DESTRUCTIVE_SIZE) std::array<std::atomic<uint32_t>, N> waitingFlag_;
         std::array<Thread_cnt_t, N> waiters_;
         bool lockOwned_{};
