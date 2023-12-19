@@ -122,26 +122,7 @@ namespace boost::fairness::detail{
                     break;
                 pause();
             }
-            /*
-            Just decrement is good... the last one only should do the cpl_.reset_()
-            */
-           /*
-            for (;;){
-                if (localStatus.lockers_ == 0 && status_.compare_exchange_weak(localStatus, localStatus.enterCriticalReset()))
-                    break;
-                pause();
-                localStatus = status_.load();
-            }
 
-            if (cpl_.head_.load() == cpl_.tail_.load())
-                cpl_.reset_(); // insane race condition here!!!
-
-            for (;;){
-                if (status_.compare_exchange_weak(localStatus, localStatus.exitCriticalReset()))
-                    break;
-                pause();
-            }
-            */
             if (localStatus.lockers_ == 0 && status_.compare_exchange_strong(localStatus, localStatus.enterCriticalReset())){
                 if (cpl_.head_.load() == cpl_.tail_.load())
                     cpl_.reset_();

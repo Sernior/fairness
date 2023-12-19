@@ -43,7 +43,7 @@ namespace boost::fairness::detail{
         maybe it would be better to have a separate atomic flag array for "inUse" somewhere else instead to even better respect
         cache coherency... or maybe not... keep an eye here!
         */
-        std::atomic_flag inUse{};
+        //std::atomic_flag inUse{};
     }; 
 /*  probably useless delete in case
     template<size_t N>
