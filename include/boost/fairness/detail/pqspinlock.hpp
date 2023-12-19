@@ -37,7 +37,9 @@ namespace boost::fairness::detail{
         public:
 
         /// @private
-        pqspinlock() = default;
+        pqspinlock() {
+            cpl_.initialize(reqs_.getRequest());
+        };
 
         /// @private
         pqspinlock(const pqspinlock&) = delete;
@@ -69,8 +71,7 @@ namespace boost::fairness::detail{
 
         void unlock(){
             cpl_.grantLock(&t_);
-            if (!t_.watch_->isFirstTail_)
-                reqs_.returnRequest(t_.watch_);
+            reqs_.returnRequest(t_.watch_);
         }
 
         private:

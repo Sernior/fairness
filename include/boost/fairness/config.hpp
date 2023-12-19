@@ -73,7 +73,7 @@
 /**
  * @brief The maximum amount of PQNODES that can be used at the same time.
 */
-#define BOOST_FAIRNESS_MAX_PQNODES 10
+#define BOOST_FAIRNESS_MAX_PQNODES 4 // setting this too low may make the mutex less fair (some tests might even fail)... ideally you have 1 PQNODE per thread.
 #endif // BOOST_FAIRNESS_HARDWARE_DESTRUCTIVE_SIZE
 #define BOOST_FAIRNESS_INVALID_PQNODE_INDEX BOOST_FAIRNESS_MAX_PQNODES
 

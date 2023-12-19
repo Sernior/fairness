@@ -47,9 +47,9 @@ namespace boost::fairness::detail{
 
         public:
 
-        coherent_priority_lock(){
+        coherent_priority_lock() = default;
 
-            Request* firstTail = &firstTail_;
+        void initialize(Request* firstTail){
 
             firstTail->state_ = GRANTED;
 
@@ -103,7 +103,6 @@ namespace boost::fairness::detail{
         private:
         std::atomic<Request*> tail_{nullptr};
         std::atomic<Request*> head_{nullptr};
-        Request firstTail_{true};
 
     };
 

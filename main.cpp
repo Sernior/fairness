@@ -13,12 +13,8 @@
 #include <boost/fairness/detail/coherent_priority_lock.hpp>
 #include <boost/fairness/detail/pqspinlock.hpp>
 
-static boost::fairness::shared_priority_mutex<4> spm;
-static boost::fairness::priority_mutex<4> pm;
-static boost::fairness::spinlock_priority_mutex<4> sms;
 static std::mutex m;
 //static boost::fairness::detail::mcs_spinlock mcs;
-static boost::fairness::detail::coherent_priority_lock pmcs;
 static boost::fairness::detail::pqspinlock pqspin;
 
 #define NOW std::chrono::high_resolution_clock::now()

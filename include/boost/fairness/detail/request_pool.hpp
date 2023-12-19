@@ -26,7 +26,6 @@ namespace boost::fairness::detail{
         std::atomic<uint32_t> state_{PENDING};
         Thread* watcher_{nullptr};
         Thread* thread_{nullptr};
-        const bool isFirstTail_;
 
         /*
         maybe it would be better to have a separate atomic flag array for "inUse" somewhere else instead to even better respect
@@ -34,7 +33,7 @@ namespace boost::fairness::detail{
         */
         std::atomic_flag inUse{};
 
-        Request(bool isFirstTail = false) : isFirstTail_{isFirstTail} {};
+        Request() {};
 
         void reset(){
             state_.store(PENDING);
