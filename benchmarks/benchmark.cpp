@@ -11,7 +11,7 @@
  * 
  */
 //#define BOOST_FAIRNESS_USE_TATAS
-#define BOOST_FAIRNESS_USE_EXPERIMENTAL_WAIT_NOTIFY
+//#define BOOST_FAIRNESS_USE_EXPERIMENTAL_WAIT_NOTIFY
 #include <benchmark/benchmark.h>
 #include "pipeline_benchmark.hpp"
 

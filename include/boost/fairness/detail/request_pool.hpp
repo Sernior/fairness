@@ -26,14 +26,9 @@ namespace boost::fairness::detail{
         std::atomic<uint32_t> state_{PENDING};
         Thread* watcher_{nullptr};
         Thread* thread_{nullptr};
+        const size_t index_;
 
-        /*
-        maybe it would be better to have a separate atomic flag array for "inUse" somewhere else instead to even better respect
-        cache coherency... or maybe not... keep an eye here!
-        */
-        std::atomic_flag inUse{};
-
-        Request() {};
+        Request(size_t idx) : index_(idx) {};
 
         void reset(){
             state_.store(PENDING);
@@ -44,42 +39,20 @@ namespace boost::fairness::detail{
 
     static_assert(sizeof(Request) == BOOST_FAIRNESS_HARDWARE_DESTRUCTIVE_SIZE, "Request size is not BOOST_FAIRNESS_HARDWARE_DESTRUCTIVE_SIZE");
 
-/*
+    template <size_t... Is>
+    auto make_requests(std::index_sequence<Is...>) {
+        return std::array<Request, sizeof...(Is)>{Request(Is)...};
+    }
+
     template<size_t N>
     class RequestPool{
     public:
-        RequestPool(){
-            for (auto& req : reqs_)
-                requestQueue_.bounded_push(&req);
-        }
 
-        Request* getRequest(){
-            Request* ret;
-            if (requestQueue_.pop(ret))
-                return ret;
-            return nullptr;
-        }
-
-        void returnRequest(Request* req){
-            req->reset();
-            requestQueue_.bounded_push(req);
-        }
-
-    private:
-
-        std::array<Request, N> reqs_;
-        // lockfree stack is too slow for me I need something simpler and faster
-        boost::lockfree::stack<Request*, boost::lockfree::capacity<N>> requestQueue_;
-    };
-*/
-    template<size_t N>
-    class RequestPool{
-    public:
-        RequestPool() = default;
+        RequestPool() : reqs_(make_requests(std::make_index_sequence<N>())) {}
 
         Request* getRequest(){
             for (uint32_t i = 0; i < N; ++i){
-                if (!reqs_[i].inUse.test() && !reqs_[i].inUse.test_and_set())
+                if (!statuses_[i].test() && !statuses_[i].test_and_set())
                     return &reqs_[i];
             }
             return nullptr;
@@ -87,11 +60,15 @@ namespace boost::fairness::detail{
 
         void returnRequest(Request* req){
             req->reset();
-            req->inUse.clear();
+            statuses_[req->index_].clear();
         }
 
     private:
-
+    /*
+    I know what you are thinking... you are thinking why did I put index_ to use for statuses_ as a member of Request instead of an atomic_flag directly?
+    To avoid false sharing an atomic flag with state_.
+    */
+        std::array<std::atomic_flag, N> statuses_;
         std::array<Request, N> reqs_;
     };
 

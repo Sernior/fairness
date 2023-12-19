@@ -60,7 +60,7 @@ namespace boost::fairness::detail{
         }
 
         void requestLock(Thread* requester){
-            requester->watch_ = (tail_.exchange(requester->request_));
+            requester->watch_ = tail_.exchange(requester->request_);
             requester->watch_->watcher_ = requester;
             for(;;){
                 if (requester->watch_->state_ == GRANTED){
@@ -75,7 +75,7 @@ namespace boost::fairness::detail{
             Thread* currentThread;
             Request* localHighestPriorityReq;
 
-            requester->request_->thread_ = (requester->watch_->thread_);
+            requester->request_->thread_ = requester->watch_->thread_;
 
             if (requester->request_->thread_ != nullptr)
                 requester->request_->thread_->request_ = (requester->request_);
