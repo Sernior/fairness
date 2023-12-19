@@ -20,20 +20,56 @@
 
 namespace boost::fairness::detail{
 
+    struct Thread{
+
+        Thread() = default;
+
+        void prepare(Priority_t p, Request* req){
+
+            request_ = req;
+
+            req->thread_ = this;
+
+            priority_ = p;
+
+            watch_ = nullptr;
+        }
+
+        Priority_t priority_{BOOST_FAIRNESS_INVALID_PRIORITY};
+        Request* watch_{nullptr};
+        Request* request_{nullptr};
+
+        /*
+        maybe it would be better to have a separate atomic flag array for "inUse" somewhere else instead to even better respect
+        cache coherency... or maybe not... keep an eye here!
+        */
+        std::atomic_flag inUse{};
+    }; 
+/*  probably useless delete in case
     template<size_t N>
     class ThreadPool{
     public:
 
         ThreadPool() = default;
 
+        Thread* getThread(){
+            for (uint32_t i = 0; i < N; ++i){
+                if (!threads_[i].inUse.test() && !threads_[i].inUse.test_and_set())
+                    return &threads_[i];
+            }
+            return nullptr;
+        }
 
+        void returnThread(Thread* t){
+            t->inUse.clear();
+        }
 
     private:
 
-        std::array<Thread, N> waitMems_;
+        std::array<Thread, N> threads_;
     };
 
-    static ThreadPool<16> waitPool_;
-
+    static ThreadPool<BOOST_FAIRNESS_MAX_PQNODES> threadPool_;
+*/
 }
 #endif // BOOST_FAIRNESS_THREAD_POOL_HPP

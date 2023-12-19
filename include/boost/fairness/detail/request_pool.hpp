@@ -96,5 +96,7 @@ namespace boost::fairness::detail{
         std::array<Request, N> reqs_;
     };
 
+    static RequestPool<BOOST_FAIRNESS_MAX_PQNODES> reqPool_;
+
 }
 #endif // BOOST_FAIRNESS_REQUEST_POOL_HPP

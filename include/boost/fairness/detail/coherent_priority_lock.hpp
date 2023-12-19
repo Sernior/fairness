@@ -19,43 +19,24 @@
 #include <boost/fairness/detail/wait_ops.hpp>
 #include <boost/fairness/priority_t.hpp>
 #include <boost/fairness/detail/request_pool.hpp>
+#include <boost/fairness/detail/thread_pool.hpp>
 
 
 namespace boost::fairness::detail{
 
-    struct Thread{
-
-        Thread() = default;
-
-        void prepare(Priority_t p, Request* req){
-
-            request_ = req;
-
-            req->thread_ = this;
-
-            priority_ = p;
-
-            watch_ = nullptr;
-        }
-
-        Priority_t priority_{BOOST_FAIRNESS_INVALID_PRIORITY};
-        Request* watch_{nullptr};
-        Request* request_{nullptr};
-    }; 
-
     class coherent_priority_lock{
+
+        friend class pqspinlock;
 
         public:
 
         coherent_priority_lock(){
 
-            Request* firstTail = &firstTail_;
+            firstTail_.state_ = GRANTED;
 
-            firstTail->state_ = GRANTED;
+            tail_.store(&firstTail_);
 
-            tail_.store(firstTail);
-
-            head_.store(firstTail);
+            head_.store(&firstTail_);
 
         }
 
@@ -104,6 +85,18 @@ namespace boost::fairness::detail{
         std::atomic<Request*> tail_{nullptr};
         std::atomic<Request*> head_{nullptr};
         Request firstTail_{true};
+
+        void reset_(){
+            reqPool_.returnRequest(tail_.exchange(&firstTail_));
+
+            firstTail_.thread_ = nullptr;
+
+            firstTail_.watcher_ = nullptr;
+
+            firstTail_.state_ = GRANTED;
+
+            head_.store(&firstTail_);
+        }
 
     };
 

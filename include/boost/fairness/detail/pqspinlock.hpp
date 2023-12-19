@@ -34,6 +34,35 @@ namespace boost::fairness::detail{
 
     class pqspinlock{
 
+        struct pqspinlockStatus{
+            uint16_t lockers_{};
+            bool isCriticallyResetting{};
+
+            pqspinlockStatus increment(){
+                pqspinlockStatus new_status = *this;
+                ++new_status.lockers_;
+                return new_status;
+            }
+
+            pqspinlockStatus decrement(){
+                pqspinlockStatus new_status = *this;
+                --new_status.lockers_;
+                return new_status;
+            }
+
+            pqspinlockStatus enterCriticalReset(){
+                pqspinlockStatus new_status = *this;
+                new_status.isCriticallyResetting = true;
+                return new_status;
+            }
+
+            pqspinlockStatus exitCriticalReset(){
+                pqspinlockStatus new_status = *this;
+                new_status.isCriticallyResetting = false;
+                return new_status;
+            }
+        };
+
         public:
 
         /// @private
@@ -55,28 +84,77 @@ namespace boost::fairness::detail{
         ~pqspinlock() = default;
 
         void lock(Priority_t const priority = 0){
-            Request* req;// = reqs_.getRequest();
+            Request* req;
+
+            pqspinlockStatus localStatus = status_.load();
+
+            for (;;){
+                if (!localStatus.isCriticallyResetting && status_.compare_exchange_weak(localStatus, localStatus.increment()))
+                    break;
+                pause();
+                localStatus = status_.load();
+            }
 
             for(;;){
-                req = reqs_.getRequest();
+                req = reqPool_.getRequest();
                 if (req != nullptr)
                     break;
                 pause();
             }
             t_.prepare(priority, req);
+
             cpl_.requestLock(&t_);
+
+
         }
 
         void unlock(){
+            pqspinlockStatus localStatus = status_.load();
+
             cpl_.grantLock(&t_);
+
             if (!t_.watch_->isFirstTail_)
-                reqs_.returnRequest(t_.watch_);
+                reqPool_.returnRequest(t_.watch_);
+
+
+            for (;;){
+                if (status_.compare_exchange_weak(localStatus, localStatus.decrement()))
+                    break;
+                pause();
+            }
+            /*
+            Just decrement is good... the last one only should do the cpl_.reset_()
+            */
+           /*
+            for (;;){
+                if (localStatus.lockers_ == 0 && status_.compare_exchange_weak(localStatus, localStatus.enterCriticalReset()))
+                    break;
+                pause();
+                localStatus = status_.load();
+            }
+
+            if (cpl_.head_.load() == cpl_.tail_.load())
+                cpl_.reset_(); // insane race condition here!!!
+
+            for (;;){
+                if (status_.compare_exchange_weak(localStatus, localStatus.exitCriticalReset()))
+                    break;
+                pause();
+            }
+            */
+            if (localStatus.lockers_ == 0 && status_.compare_exchange_strong(localStatus, localStatus.enterCriticalReset())){
+                if (cpl_.head_.load() == cpl_.tail_.load())
+                    cpl_.reset_();
+                for (;;){
+                    if (status_.compare_exchange_weak(localStatus, localStatus.exitCriticalReset()))
+                        break;
+                    pause();
+                }
+            }
         }
-
         private:
-
+        std::atomic<pqspinlockStatus> status_{};
         coherent_priority_lock cpl_;
-        RequestPool<BOOST_FAIRNESS_MAX_PQNODES> reqs_;
 
     };
 
