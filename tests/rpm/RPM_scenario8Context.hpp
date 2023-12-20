@@ -18,15 +18,13 @@
 namespace RPM_scenario8{
     using namespace DeterministicConcurrency;
 
-    boost::fairness::recursive_priority_mutex<10> m;
-
     std::vector<int> ret;
 
     std::vector<int> expected{
         0, 1, 2, 3, 4
     };
 
-    void threadFunction(thread_context* c ,int i) {
+    void threadFunction(thread_context* c, int i, boost::fairness::recursive_priority_mutex<10>& m) {
         c->lock(&m,i);
         c->lock(&m,i+2);
         ret.push_back(i);
@@ -34,7 +32,7 @@ namespace RPM_scenario8{
         m.unlock();
     }
 
-    void controlThread(thread_context* c) {
+    void controlThread(thread_context* c, boost::fairness::recursive_priority_mutex<10>& m) {
         c->lock(&m);
         c->switchContext();
         m.unlock();
@@ -48,12 +46,14 @@ namespace RPM_scenario8{
     static size_t CTRLTHREAD = 5;
     
     static constexpr auto executeSchedulingSequence = []{
-        auto thread_0 = std::tuple{&threadFunction, 0};
-        auto thread_1 = std::tuple{&threadFunction, 1};
-        auto thread_2 = std::tuple{&threadFunction, 2};
-        auto thread_3 = std::tuple{&threadFunction, 3};
-        auto thread_4 = std::tuple{&threadFunction, 4};
-        auto ctrlThread = std::tuple{&controlThread};
+        boost::fairness::recursive_priority_mutex<10> m;
+    
+        auto thread_0 = std::tuple{&threadFunction, 0, std::ref(m)};
+        auto thread_1 = std::tuple{&threadFunction, 1, std::ref(m)};
+        auto thread_2 = std::tuple{&threadFunction, 2, std::ref(m)};
+        auto thread_3 = std::tuple{&threadFunction, 3, std::ref(m)};
+        auto thread_4 = std::tuple{&threadFunction, 4, std::ref(m)};
+        auto ctrlThread = std::tuple{&controlThread, std::ref(m)};
 
         auto sch = make_UserControlledScheduler(
             thread_0, thread_1, thread_2, thread_3, thread_4, ctrlThread

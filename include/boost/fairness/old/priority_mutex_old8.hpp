@@ -127,7 +127,7 @@ namespace boost::fairness::old8{
         private:
         alignas(128) std::atomic<Priority_t> currentPriority_{BOOST_FAIRNESS_MAXIMUM_PRIORITY};
         alignas(128) std::atomic_flag lockOwned_;
-        std::array<std::atomic<Thread_cnt_t>, N> waiters_;
+        std::array<std::atomic<Thread_cnt_t>, N> waiters_{};
 
         alignas(128) std::atomic<uint32_t> waitingFlag_{LOCK_OWNED};
 

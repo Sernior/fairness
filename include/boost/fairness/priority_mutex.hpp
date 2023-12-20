@@ -184,8 +184,8 @@ namespace boost::fairness{
         //struct FollyAlignedAtomicFlag {
         //    alignas(BOOST_FAIRNESS_HARDWARE_DESTRUCTIVE_SIZE) std::atomic<uint32_t> flag;
         //};
-        //alignas(BOOST_FAIRNESS_HARDWARE_DESTRUCTIVE_SIZE) std::array<FollyAlignedAtomicFlag, N> waitingFlag_;
-        alignas(BOOST_FAIRNESS_HARDWARE_DESTRUCTIVE_SIZE) std::array<std::atomic<uint32_t>, N> waitingFlag_;
+        //alignas(BOOST_FAIRNESS_HARDWARE_DESTRUCTIVE_SIZE) std::array<FollyAlignedAtomicFlag, N> waitingFlag_{};
+        alignas(BOOST_FAIRNESS_HARDWARE_DESTRUCTIVE_SIZE) std::array<std::atomic<uint32_t>, N> waitingFlag_{};
 
 
         std::array<Thread_cnt_t, N> waiters_{};

@@ -164,7 +164,7 @@ namespace boost::fairness::old3{
 
         private:
         spinlock_priority_mutex<N> internalMutex_;
-        std::array<Thread_cnt_t, N> waiters_;
+        std::array<Thread_cnt_t, N> waiters_{};
         uint32_t lockOwned_{LOCK_NOT_OWNED};
 
         Priority_t find_first_priority_(){

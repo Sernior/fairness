@@ -73,8 +73,8 @@ namespace boost::fairness::detail{
 
     private:
 
-        //std::array<bool, N> statuses_;
-        std::array<Thread, N> threads_;
+        //std::array<bool, N> statuses_{};
+        std::array<Thread, N> threads_{};
     };
 
     static thread_local ThreadPool<BOOST_FAIRNESS_MAX_THREADS> t_;

@@ -128,7 +128,7 @@ namespace boost::fairness::old{
         }
 
         private:
-        std::array<std::atomic<Thread_cnt_t>, N> waiters_;
+        std::array<std::atomic<Thread_cnt_t>, N> waiters_{};
         std::atomic<Priority_t> currentPriority_{BOOST_FAIRNESS_MAXIMUM_PRIORITY};
         std::atomic_flag lockOwned_;
 
