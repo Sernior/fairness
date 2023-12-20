@@ -188,7 +188,7 @@ namespace boost::fairness{
         alignas(BOOST_FAIRNESS_HARDWARE_DESTRUCTIVE_SIZE) std::array<std::atomic<uint32_t>, N> waitingFlag_;
 
 
-        std::array<Thread_cnt_t, N> waiters_;
+        std::array<Thread_cnt_t, N> waiters_{};
         bool lockOwned_{};
 
         Priority_t find_first_priority_(){
