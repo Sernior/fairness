@@ -60,7 +60,7 @@ namespace boost::fairness::detail{
         void lock(Priority_t const priority = 0){
             Request* req;
 
-            Thread* t = detail::t_.getThread();
+            Thread* t = detail::t_.getThread(this);
 
             for(;;){
                 req = reqs_.getRequest();
@@ -73,7 +73,7 @@ namespace boost::fairness::detail{
         }
 
         void unlock(){
-            Thread* t = detail::t_.reGetThread();
+            Thread* t = detail::t_.reGetThread(this);
             cpl_.grantLock(t);
             reqs_.returnRequest(t->watch_);
             detail::t_.returnThread(t);
