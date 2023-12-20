@@ -53,7 +53,7 @@ namespace boost::fairness::detail{
             return nullptr;
         }
 
-        void returnRequest(Request* req){
+        void returnRequest(Request* const req){
             req->reset();
             req->inUse_.clear(std::memory_order_release);
         }

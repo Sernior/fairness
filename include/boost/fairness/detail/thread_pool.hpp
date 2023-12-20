@@ -49,7 +49,7 @@ namespace boost::fairness::detail{
 
         ThreadPool() = default;
 
-        Thread* getThread(pqspinlock* owner){
+        Thread* getThread(pqspinlock* const owner){
             for (uint32_t i = 0; i < N; ++i){
                 if (!threads_[i].inUse_){
                     threads_[i].owner_ = owner;
@@ -59,7 +59,7 @@ namespace boost::fairness::detail{
             return nullptr;
         }
 
-        Thread* reGetThread(pqspinlock* owner){
+        Thread* reGetThread(pqspinlock* const owner){
             for (uint32_t i = 0; i < N; ++i){
                 if (threads_[i].owner_ == owner){
                     return &threads_[i];
@@ -68,7 +68,7 @@ namespace boost::fairness::detail{
             return nullptr;
         }
 
-        void returnThread(Thread* t){
+        void returnThread(Thread* const t){
             // setting owner_ to nullptr should be unnecessary
             t->inUse_ = false;
         }

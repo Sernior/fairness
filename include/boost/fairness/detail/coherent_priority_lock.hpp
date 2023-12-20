@@ -30,7 +30,7 @@ namespace boost::fairness::detail{
 
         coherent_priority_lock() = default;
 
-        void initialize(Request* firstTail){
+        void initialize(Request* const firstTail){
 
             firstTail->state_ = GRANTED;
 
@@ -40,18 +40,18 @@ namespace boost::fairness::detail{
 
         }
 
-        void requestLock(Thread* requester){
-            requester->watch_ = tail_.exchange(requester->request_);
+        void requestLock(Thread* const requester){
+            requester->watch_ = tail_.exchange(requester->request_, std::memory_order_acquire);
             requester->watch_->watcher_ = requester;
             for(;;){
-                if (requester->watch_->state_ == GRANTED){
+                if (requester->watch_->state_.load(std::memory_order_relaxed) == GRANTED){
                     return;
                 }
                 spin_wait(requester->watch_->state_, GRANTED);
             }
         }
 
-        void grantLock(Thread* requester) {
+        void grantLock(Thread* const requester) {
             Priority_t localHighestPriority{BOOST_FAIRNESS_MAXIMUM_PRIORITY};
             Thread* currentThread;
             Request* localHighestPriorityReq;
