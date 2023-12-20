@@ -22,7 +22,7 @@ namespace boost::fairness::detail{
 
     struct Thread{
 
-        Thread(size_t idx) : index_(idx) {};
+        Thread() = default;
 
         void prepare(Priority_t p, Request* req){
 
@@ -35,27 +35,22 @@ namespace boost::fairness::detail{
             watch_ = nullptr;
         }
 
-        Priority_t priority_{BOOST_FAIRNESS_INVALID_PRIORITY};
         Request* watch_{nullptr};
         Request* request_{nullptr};
-        const size_t index_;
         std::thread::id owner_{};
+        Priority_t priority_{BOOST_FAIRNESS_INVALID_PRIORITY};
+        bool inUse_{};
     }; 
-
-    template <size_t... Is>
-    auto make_threads(std::index_sequence<Is...>) {
-        return std::array<Thread, sizeof...(Is)>{Thread(Is)...};
-    }
 
     template<size_t N>
     class ThreadPool{
     public:
 
-        ThreadPool() : threads_(make_threads(std::make_index_sequence<N>())) {}
+        ThreadPool() = default;
 
         Thread* getThread(){
             for (uint32_t i = 0; i < N; ++i){
-                if (!statuses_[i]){
+                if (!threads_[i].inUse_){
                     threads_[i].owner_ = std::this_thread::get_id();
                     return &threads_[i];
                 }
@@ -73,12 +68,12 @@ namespace boost::fairness::detail{
         }
 
         void returnThread(Thread* t){
-            statuses_[t->index_] = false;
+            t->inUse_ = false;
         }
 
     private:
 
-        std::array<bool, N> statuses_;
+        //std::array<bool, N> statuses_;
         std::array<Thread, N> threads_;
     };
 

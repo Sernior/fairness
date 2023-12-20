@@ -23,13 +23,12 @@ namespace boost::fairness::detail{
     struct Thread;
 
     struct alignas(BOOST_FAIRNESS_HARDWARE_DESTRUCTIVE_SIZE) Request{
-        std::atomic<uint32_t> state_{PENDING};
         Thread* watcher_{nullptr};
         Thread* thread_{nullptr};
-        const size_t index_;
+        std::atomic<uint32_t> state_{PENDING};
         std::atomic_flag inUse_{};
 
-        Request(size_t idx) : index_(idx) {};
+        Request() = default;
 
         void reset(){
             state_.store(PENDING, std::memory_order_relaxed);
@@ -40,20 +39,15 @@ namespace boost::fairness::detail{
 
     static_assert(sizeof(Request) == BOOST_FAIRNESS_HARDWARE_DESTRUCTIVE_SIZE, "Request size is not BOOST_FAIRNESS_HARDWARE_DESTRUCTIVE_SIZE");
 
-    template <size_t... Is>
-    auto make_requests(std::index_sequence<Is...>) {
-        return std::array<Request, sizeof...(Is)>{Request(Is)...};
-    }
-
     template<size_t N>
     class RequestPool{
     public:
 
-        RequestPool() : reqs_(make_requests(std::make_index_sequence<N>())) {}
+        RequestPool() = default;
 
         Request* getRequest(){
             for (uint32_t i = 0; i < N; ++i){
-                if (!reqs_[i].inUse_.test(std::memory_order_relaxed) && !reqs_[i].inUse_.test_and_set(std::memory_order_acquire))
+                if (!reqs_[i].inUse_.test(std::memory_order_relaxed) && !reqs_[i].inUse_.test_and_set(std::memory_order_acquire)) // check this! TODO
                     return &reqs_[i];
             }
             return nullptr;
