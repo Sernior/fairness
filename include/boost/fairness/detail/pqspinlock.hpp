@@ -17,6 +17,7 @@
 #include <boost/fairness/priority_t.hpp>
 #include <boost/fairness/detail/coherent_priority_lock.hpp>
 #include <boost/fairness/detail/request_pool.hpp>
+#include <boost/fairness/detail/thread_pool.hpp>
 
 namespace boost::fairness::detail{
 
@@ -30,7 +31,7 @@ namespace boost::fairness::detail{
     Or maybe all the mutexes instances could use only 1 pqspinlock and since I must use a limited number of preallocated Requests I dont think
     this would even be the bottle neck of the lib.
     */
-    static thread_local Thread t_;
+    //static thread_local Thread t_;
 
     class pqspinlock{
 
@@ -57,7 +58,9 @@ namespace boost::fairness::detail{
         ~pqspinlock() = default;
 
         void lock(Priority_t const priority = 0){
-            Request* req;// = reqs_.getRequest();
+            Request* req;
+
+            Thread* t = detail::t_.getThread();
 
             for(;;){
                 req = reqs_.getRequest();
@@ -65,13 +68,15 @@ namespace boost::fairness::detail{
                     break;
                 pause();
             }
-            t_.prepare(priority, req);
-            cpl_.requestLock(&t_);
+            t->prepare(priority, req);
+            cpl_.requestLock(t);
         }
 
         void unlock(){
-            cpl_.grantLock(&t_);
-            reqs_.returnRequest(t_.watch_);
+            Thread* t = detail::t_.reGetThread();
+            cpl_.grantLock(t);
+            reqs_.returnRequest(t->watch_);
+            detail::t_.returnThread(t);
         }
 
         private:

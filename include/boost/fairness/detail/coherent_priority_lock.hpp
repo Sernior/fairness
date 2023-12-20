@@ -19,29 +19,10 @@
 #include <boost/fairness/detail/wait_ops.hpp>
 #include <boost/fairness/priority_t.hpp>
 #include <boost/fairness/detail/request_pool.hpp>
+#include <boost/fairness/detail/thread_pool.hpp>
 
 
 namespace boost::fairness::detail{
-
-    struct Thread{
-
-        Thread() = default;
-
-        void prepare(Priority_t p, Request* req){
-
-            request_ = req;
-
-            req->thread_ = this;
-
-            priority_ = p;
-
-            watch_ = nullptr;
-        }
-
-        Priority_t priority_{BOOST_FAIRNESS_INVALID_PRIORITY};
-        Request* watch_{nullptr};
-        Request* request_{nullptr};
-    }; 
 
     class coherent_priority_lock{
 
@@ -93,7 +74,7 @@ namespace boost::fairness::detail{
                 currentThread = currentThread->request_->watcher_;
             }
 
-            localHighestPriorityReq->state_.store(GRANTED);
+            localHighestPriorityReq->state_.store(GRANTED, std::memory_order_release);
 
             requester->request_ = requester->watch_;
             requester->request_->thread_ = requester;

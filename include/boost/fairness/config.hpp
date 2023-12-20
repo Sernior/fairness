@@ -71,11 +71,26 @@
 
 #ifndef BOOST_FAIRNESS_MAX_PQNODES
 /**
- * @brief The maximum amount of PQNODES that can be used at the same time.
+ * @brief The maximum amount of PQNODES that can be used at the same time per pqspinlock.
+ * @brief setting this too low may make the mutex less fair (some tests might even fail). Ideally you have 1 PQNODE per thread.
 */
-#define BOOST_FAIRNESS_MAX_PQNODES 4 // setting this too low may make the mutex less fair (some tests might even fail)... ideally you have 1 PQNODE per thread.
+#define BOOST_FAIRNESS_MAX_PQNODES 4
 #endif // BOOST_FAIRNESS_HARDWARE_DESTRUCTIVE_SIZE
 #define BOOST_FAIRNESS_INVALID_PQNODE_INDEX BOOST_FAIRNESS_MAX_PQNODES
+
+
+
+#ifndef BOOST_FAIRNESS_MAX_THREADS
+/**
+ * @brief Unlike what it may seems this macro does not set the maximum number of supported threads.
+ * @brief Instead this macro tells the library how many thread struct there are per thread to be used.
+ * @brief A good way of seeing it is how many re entrant calls will you make on priority mutexes.
+ * @brief If you plan on using N priority mutexes and locking all of them with the same thread set this number to N.
+*/
+#define BOOST_FAIRNESS_MAX_THREADS 4
+#endif // BOOST_FAIRNESS_HARDWARE_DESTRUCTIVE_SIZE
+#define BOOST_FAIRNESS_INVALID_THREAD_INDEX BOOST_FAIRNESS_MAX_THREADS
+
 
 
 /*

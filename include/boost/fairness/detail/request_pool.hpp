@@ -27,11 +27,12 @@ namespace boost::fairness::detail{
         Thread* watcher_{nullptr};
         Thread* thread_{nullptr};
         const size_t index_;
+        std::atomic_flag inUse_{};
 
         Request(size_t idx) : index_(idx) {};
 
         void reset(){
-            state_.store(PENDING);
+            state_.store(PENDING, std::memory_order_relaxed);
             watcher_ = nullptr;
             thread_ = nullptr;
         }
@@ -52,7 +53,7 @@ namespace boost::fairness::detail{
 
         Request* getRequest(){
             for (uint32_t i = 0; i < N; ++i){
-                if (!statuses_[i].test() && !statuses_[i].test_and_set())
+                if (!reqs_[i].inUse_.test(std::memory_order_relaxed) && !reqs_[i].inUse_.test_and_set(std::memory_order_acquire))
                     return &reqs_[i];
             }
             return nullptr;
@@ -60,15 +61,10 @@ namespace boost::fairness::detail{
 
         void returnRequest(Request* req){
             req->reset();
-            statuses_[req->index_].clear();
+            req->inUse_.clear(std::memory_order_release);
         }
 
     private:
-    /*
-    I know what you are thinking... you are thinking why did I put index_ to use for statuses_ as a member of Request instead of an atomic_flag directly?
-    To avoid false sharing an atomic flag with state_.
-    */
-        std::array<std::atomic_flag, N> statuses_;
         std::array<Request, N> reqs_;
     };
 
