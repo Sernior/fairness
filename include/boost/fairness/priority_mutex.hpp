@@ -18,6 +18,7 @@
 #include <boost/fairness/priority_t.hpp>
 #include <boost/fairness/detail/wait_ops.hpp>
 #include <boost/fairness/spinlock_priority_mutex.hpp>
+#include <boost/fairness/detail/wait_pool.hpp>
 
 namespace boost::fairness{
 
@@ -94,7 +95,7 @@ namespace boost::fairness{
 
                 internalMutex_.unlock();
 
-                detail::wait(waitingFlag_[priority], WAIT);
+                detail::wait(waitingFlag_[priority], detail::wait_flag);
 
                 internalMutex_.lock(priority);
 
@@ -129,7 +130,8 @@ namespace boost::fairness{
                 return;
             }
 
-            reset_(p);
+            //reset_(p);
+            waitingFlag_.reset_(p);
 
             internalMutex_.unlock();
 
@@ -171,24 +173,14 @@ namespace boost::fairness{
         }
 
         private:
+
         alignas(BOOST_FAIRNESS_HARDWARE_DESTRUCTIVE_SIZE) spinlock_priority_mutex<N> internalMutex_;
 
-        /*
-        these waitingFlags all being close in memory is probably the reason why the EXPERIMENTAL_WAIT_NOTIFY
-        does not scale well.
-        TODO test this!
-        As suspected this is the case.
-        We can use the hash to aligned static memory trick from the std lib as I suspect users wouldn`t want
-        these beings to be over 1KB...
-        */
-        //struct FollyAlignedAtomicFlag {
-        //    alignas(BOOST_FAIRNESS_HARDWARE_DESTRUCTIVE_SIZE) std::atomic<uint32_t> flag;
-        //};
-        //alignas(BOOST_FAIRNESS_HARDWARE_DESTRUCTIVE_SIZE) std::array<FollyAlignedAtomicFlag, N> waitingFlag_{};
-        alignas(BOOST_FAIRNESS_HARDWARE_DESTRUCTIVE_SIZE) std::array<std::atomic<uint32_t>, N> waitingFlag_{};
 
+        detail::WaitPool<N> waitingFlag_{};
 
         std::array<Thread_cnt_t, N> waiters_{};
+        
         bool lockOwned_{};
 
         Priority_t find_first_priority_(){
@@ -197,12 +189,6 @@ namespace boost::fairness{
                     return i;
             }
             return BOOST_FAIRNESS_MAXIMUM_PRIORITY;
-        }
-
-        void reset_(Priority_t p){
-            for (Priority_t i = 0; i < N; ++i)
-                waitingFlag_[i].store(WAIT);
-            waitingFlag_[p].store(PROCEED);
         }
 
     };
