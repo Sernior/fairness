@@ -14,11 +14,12 @@
 #ifndef BOOST_FAIRNESS_THREAD_POOL_HPP
 #define BOOST_FAIRNESS_THREAD_POOL_HPP
 
-#include <thread>
 #include <array>
 #include <boost/fairness/config.hpp>
 
 namespace boost::fairness::detail{
+
+    class pqspinlock;
 
     struct Thread{
 
@@ -37,7 +38,7 @@ namespace boost::fairness::detail{
 
         Request* watch_{nullptr};
         Request* request_{nullptr};
-        std::thread::id owner_{};
+        pqspinlock* owner_{nullptr};
         Priority_t priority_{BOOST_FAIRNESS_INVALID_PRIORITY};
         bool inUse_{};
     }; 
@@ -48,33 +49,34 @@ namespace boost::fairness::detail{
 
         ThreadPool() = default;
 
-        Thread* getThread(){
+        Thread* getThread(pqspinlock* const owner){
             for (uint32_t i = 0; i < N; ++i){
                 if (!threads_[i].inUse_){
-                    threads_[i].owner_ = std::this_thread::get_id();
+                    threads_[i].owner_ = owner;
                     return &threads_[i];
                 }
             }
             return nullptr;
         }
 
-        Thread* reGetThread(){
+        Thread* reGetThread(pqspinlock* const owner){
             for (uint32_t i = 0; i < N; ++i){
-                if (threads_[i].owner_ == std::this_thread::get_id()){
+                if (threads_[i].owner_ == owner){
                     return &threads_[i];
                 }
             }
             return nullptr;
         }
 
-        void returnThread(Thread* t){
+        void returnThread(Thread* const t){
+            // setting owner_ to nullptr should be unnecessary
             t->inUse_ = false;
         }
 
     private:
 
-        //std::array<bool, N> statuses_{};
-        std::array<Thread, N> threads_{};
+        std::array<Thread, N> threads_;
+
     };
 
     static thread_local ThreadPool<BOOST_FAIRNESS_MAX_THREADS> t_;

@@ -21,18 +21,6 @@
 
 namespace boost::fairness::detail{
 
-    /* TODO
-    A few notes on this:
-    This is partially correct but not quite yet as having a static thread_local Thread means that if we create multiple pqspinlocks
-    then the same thread could use the same Thread object to do multiple aquires or releases which would obviously break
-    the coherent_priority_lock.
-    The right way of doing this would be to know how many of these are needed at compile time and thus instantiating
-    a thread_local array of threads 1 per pqspinlock required.
-    Or maybe all the mutexes instances could use only 1 pqspinlock and since I must use a limited number of preallocated Requests I dont think
-    this would even be the bottle neck of the lib.
-    */
-    //static thread_local Thread t_;
-
     class pqspinlock{
 
         public:
@@ -60,7 +48,7 @@ namespace boost::fairness::detail{
         void lock(Priority_t const priority = 0){
             Request* req;
 
-            Thread* t = detail::t_.getThread();
+            Thread* t = detail::t_.getThread(this);
 
             for(;;){
                 req = reqs_.getRequest();
@@ -73,7 +61,7 @@ namespace boost::fairness::detail{
         }
 
         void unlock(){
-            Thread* t = detail::t_.reGetThread();
+            Thread* t = detail::t_.reGetThread(this);
             cpl_.grantLock(t);
             reqs_.returnRequest(t->watch_);
             detail::t_.returnThread(t);
