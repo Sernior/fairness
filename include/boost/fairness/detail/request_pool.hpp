@@ -59,7 +59,7 @@ namespace boost::fairness::detail{
         }
 
     private:
-        std::array<Request, N> reqs_;
+        std::array<Request, N> reqs_{};
     };
 
 }

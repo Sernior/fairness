@@ -58,8 +58,8 @@ namespace boost::fairness{
         template<size_t S = 1>
         requires (S >= 1 && S <= BOOST_FAIRNESS_MAXIMUM_PRIORITY)
         struct waitingFlags{
-            std::array<std::atomic<uint32_t>, S> writers;
-            std::array<std::atomic<uint32_t>, S> readers;
+            std::array<std::atomic<uint32_t>, S> writers{};
+            std::array<std::atomic<uint32_t>, S> readers{};
         };
 
         public:
@@ -364,7 +364,7 @@ namespace boost::fairness{
 
         alignas(BOOST_FAIRNESS_HARDWARE_DESTRUCTIVE_SIZE) spinlock_priority_mutex<N> internalMutex_;
         alignas(BOOST_FAIRNESS_HARDWARE_DESTRUCTIVE_SIZE) waitingFlags<N> waitingFlags_;
-        std::array<threadPriority, N> priorities_;
+        std::array<threadPriority, N> priorities_{};
         Thread_cnt_t totalCurrentReaders_{};
         Thread_cnt_t totalWritersWaiting_{};
         bool lockOwned_{};

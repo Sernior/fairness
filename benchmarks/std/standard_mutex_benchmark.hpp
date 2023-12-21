@@ -16,8 +16,6 @@
 
 namespace standard_mutex_benchmark{
 
-    std::mutex m;
-
     void lock_unlock_benchmark(benchmark::State& state) {
         std::mutex mf;
 
@@ -28,6 +26,8 @@ namespace standard_mutex_benchmark{
     }
 
     void pipeline_benchmark_long(benchmark::State& state) {
+        std::mutex m;
+
         std::array<int, 8> preCT {20, 15, 20, 30, 10, 5, 5, 20};
         int CT = 10;
         std::array<int, 8> postCT {50, 30, 20, 25, 10, 15, 15, 45};
@@ -38,6 +38,8 @@ namespace standard_mutex_benchmark{
     }
 
     void pipeline_benchmark_gaming(benchmark::State& state) {
+        std::mutex m;
+
         std::array<int, 8> preCT {2000, 1500, 2000, 3000, 1000, 500, 500, 2000};
         int CT = 1000;
         std::array<int, 8> postCT {5000, 3000, 2000, 2500, 1000, 1500, 1500, 4500};
@@ -48,6 +50,8 @@ namespace standard_mutex_benchmark{
     }
 
     void pipeline_benchmark_audio(benchmark::State& state) {
+        std::mutex m;
+
         std::array<int, 8> prios {0, 1, 2, 1, 3, 2, 2, 0};
         std::array<int, 8> preCT {200, 150, 200, 300, 100, 50, 50, 200};
         int CT = 100;
@@ -59,6 +63,8 @@ namespace standard_mutex_benchmark{
     }
 
     void pipeline_benchmark_fast(benchmark::State& state) { /*  */
+        std::mutex m;
+
         std::array<int, 8> prios {0, 1, 2, 1, 3, 2, 2, 0};
         std::array<int, 8> preCT {2000, 1500, 2000, 3000, 1000, 500, 500, 2000};
         int CT = 1000;

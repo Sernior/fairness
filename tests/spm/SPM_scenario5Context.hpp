@@ -18,22 +18,20 @@
 namespace SPM_scenario5{
     using namespace DeterministicConcurrency;
 
-    boost::fairness::shared_priority_mutex<2> m;
-
     std::vector<int> ret;
 
     std::vector<int> expected{
         0, 1
     };
 
-    void threadFunction(thread_context* c ,int i) {
+    void threadFunction(thread_context* c , int i, boost::fairness::shared_priority_mutex<2>& m) {
         c->lock(&m);
         c->switchContext();
         ret.push_back(i);
         m.unlock();
     }
 
-    void threadFunction2(thread_context* c ,int i) {
+    void threadFunction2(thread_context* c , int i, boost::fairness::shared_priority_mutex<2>& m) {
         m.unlock();// this unlock should do nothing if m is a mutex and not a semaphore
         c->switchContext();
         c->lock(&m);
@@ -45,8 +43,10 @@ namespace SPM_scenario5{
     static size_t THREAD1 = 1;
     
     static constexpr auto executeSchedulingSequence = []{
-        auto thread_0 = std::tuple{&threadFunction, 0};
-        auto thread_1 = std::tuple{&threadFunction2, 1};
+        boost::fairness::shared_priority_mutex<2> m;
+    
+        auto thread_0 = std::tuple{&threadFunction, 0, std::ref(m)};
+        auto thread_1 = std::tuple{&threadFunction2, 1, std::ref(m)};
 
         auto sch = make_UserControlledScheduler(
             thread_0, thread_1

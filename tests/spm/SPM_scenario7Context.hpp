@@ -19,15 +19,13 @@
 namespace SPM_scenario7{
     using namespace DeterministicConcurrency;
 
-    boost::fairness::shared_priority_mutex<6> m;
-    std::mutex sm;
     std::vector<int> ret;
 
     std::vector<int> expected{
         0, 4, 1, 2, -5, 3
     };
 
-    void threadFunction(thread_context* c ,int i) {
+    void threadFunction(thread_context* c , int i, boost::fairness::shared_priority_mutex<6>& m, std::mutex& sm) {
         c->lock_shared(&m, i);
         c->switchContext();
         {
@@ -37,7 +35,7 @@ namespace SPM_scenario7{
         m.unlock_shared();
     }
 
-    void threadFunctionTryShared(thread_context* c ,int i) {
+    void threadFunctionTryShared(thread_context* c , int i, boost::fairness::shared_priority_mutex<6>& m, std::mutex& sm) {
         if (m.try_lock_shared(i)){
             c->switchContext();
             {
@@ -51,14 +49,14 @@ namespace SPM_scenario7{
             ret.push_back(-i);
     }
 
-    void threadFunction2(thread_context* c ,int i) {
+    void threadFunction2(thread_context* c , int i, boost::fairness::shared_priority_mutex<6>& m) {
         c->lock(&m, i);
         c->switchContext();
         ret.push_back(i);
         m.unlock();
     }
 
-    void controlThread(thread_context* c) {
+    void controlThread(thread_context* c, boost::fairness::shared_priority_mutex<6>& m) {
         c->lock(&m);
         c->switchContext();
         m.unlock();
@@ -74,13 +72,16 @@ namespace SPM_scenario7{
     
     // 0 4 1 2 3
     static constexpr auto executeSchedulingSequence = []{
-        auto thread_0 = std::tuple{&threadFunction, 0};
-        auto thread_1 = std::tuple{&threadFunction, 1};
-        auto thread_2 = std::tuple{&threadFunctionTryShared, 2};
-        auto thread_3 = std::tuple{&threadFunction2, 3};
-        auto thread_4 = std::tuple{&threadFunction, 4};
-        auto thread_5 = std::tuple{&threadFunctionTryShared, 5};
-        auto ctrlThread = std::tuple{&controlThread};
+        boost::fairness::shared_priority_mutex<6> m;
+        std::mutex sm;
+    
+        auto thread_0 = std::tuple{&threadFunction, 0, std::ref(m), std::ref(sm)};
+        auto thread_1 = std::tuple{&threadFunction, 1, std::ref(m), std::ref(sm)};
+        auto thread_2 = std::tuple{&threadFunctionTryShared, 2, std::ref(m), std::ref(sm)};
+        auto thread_3 = std::tuple{&threadFunction2, 3, std::ref(m)};
+        auto thread_4 = std::tuple{&threadFunction, 4, std::ref(m), std::ref(sm)};
+        auto thread_5 = std::tuple{&threadFunctionTryShared, 5, std::ref(m), std::ref(sm)};
+        auto ctrlThread = std::tuple{&controlThread, std::ref(m)};
 
         auto sch = make_UserControlledScheduler(
             thread_0, thread_1, thread_2, thread_3, thread_4, thread_5, ctrlThread

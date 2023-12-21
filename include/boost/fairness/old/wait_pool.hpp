@@ -36,7 +36,7 @@ namespace boost::fairness::detail{
 
     private:
 
-        std::array<waitingFlag, N> waitMems_;
+        std::array<waitingFlag, N> waitMems_{};
     };
 
     static WaitPool<16> waitPool_;

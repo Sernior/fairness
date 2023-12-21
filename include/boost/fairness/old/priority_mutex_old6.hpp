@@ -169,7 +169,7 @@ namespace boost::fairness::old6{ // BEST SO FAR
         private:
         alignas(128) spinlock_priority_mutex<N> internalMutex_;
         bool lockOwned_{};
-        std::array<Thread_cnt_t, N> waiters_;
+        std::array<Thread_cnt_t, N> waiters_{};
         alignas(128) std::atomic<uint32_t> waitingFlag_{LOCK_OWNED};
 
         Priority_t find_first_priority_(){

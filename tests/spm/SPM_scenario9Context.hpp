@@ -20,20 +20,17 @@
 namespace SPM_scenario9{
     using namespace DeterministicConcurrency;
 
-    boost::fairness::shared_priority_mutex<7> m;
-    std::mutex sm;
-
     std::random_device rd;
     std::mt19937 gen(rd());
     std::uniform_int_distribution<int> distribution(0, 6);
 
-    void threadFunction(thread_context* c ,int i) {
+    void threadFunction(thread_context* c, int i, boost::fairness::shared_priority_mutex<7>& m) {
         c->lock_shared(&m, i);
         c->switchContext();
         m.unlock_shared();
     }
 
-    void controlThread(thread_context* c) {
+    void controlThread(thread_context* c, boost::fairness::shared_priority_mutex<7>& m) {
         c->lock(&m);
         c->switchContext();
         m.unlock();
@@ -46,11 +43,13 @@ namespace SPM_scenario9{
     static size_t CTRLTHREAD = 4;
         
     static constexpr auto executeSchedulingSequence = []{
-        auto thread_0 = std::tuple{&threadFunction, distribution(gen)};
-        auto thread_1 = std::tuple{&threadFunction, distribution(gen)};
-        auto thread_2 = std::tuple{&threadFunction, distribution(gen)};
-        auto thread_3 = std::tuple{&threadFunction, distribution(gen)};
-        auto ctrlThread = std::tuple{&controlThread};
+        boost::fairness::shared_priority_mutex<7> m;
+        
+        auto thread_0 = std::tuple{&threadFunction, distribution(gen), std::ref(m)};
+        auto thread_1 = std::tuple{&threadFunction, distribution(gen), std::ref(m)};
+        auto thread_2 = std::tuple{&threadFunction, distribution(gen), std::ref(m)};
+        auto thread_3 = std::tuple{&threadFunction, distribution(gen), std::ref(m)};
+        auto ctrlThread = std::tuple{&controlThread, std::ref(m)};
         
         auto sch = make_UserControlledScheduler(
             thread_0, thread_1, thread_2, thread_3, ctrlThread
