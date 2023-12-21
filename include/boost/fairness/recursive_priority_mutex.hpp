@@ -200,7 +200,7 @@ namespace boost::fairness{
                 return;
             }
 
-            reset_(p); // maybe better before the unlock
+            waitingFlag_.reset_(p);
 
             internalMutex_.unlock();
 
@@ -270,10 +270,15 @@ namespace boost::fairness{
         }
 
         private:
+
         alignas(BOOST_FAIRNESS_HARDWARE_DESTRUCTIVE_SIZE) spinlock_priority_mutex<N> internalMutex_;
-        alignas(BOOST_FAIRNESS_HARDWARE_DESTRUCTIVE_SIZE) std::array<std::atomic<uint32_t>, N> waitingFlag_{};
+
+        detail::WaitPool<N> waitingFlag_{};
+
         std::array<Thread_cnt_t, N> waiters_{};
+
         std::thread::id owner_{};
+
         uint32_t recursionCounter_{};
 
         bool lock_not_owned_(){
@@ -282,12 +287,6 @@ namespace boost::fairness{
 
         bool lock_owned_by_me_(){
             return owner_ == std::this_thread::get_id();
-        }
-
-        void reset_(Priority_t p){
-            for (Priority_t i = 0; i < N; ++i)
-                waitingFlag_[i].store(WAIT);
-            waitingFlag_[p].store(PROCEED);
         }
 
         Priority_t find_first_priority_(){

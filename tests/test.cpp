@@ -10,7 +10,7 @@
  * Distributed under the Boost Software License, Version 1.0. (See accompanying file LICENSE_1_0.txt or copy at http://www.boost.org/LICENSE_1_0.txt).
  * 
  */
-
+#define BOOST_FAIRNESS_MAX_PQNODES 32 // some tests use a lot of threads and we want perfect fairness here
 #include <boost/fairness.hpp>
 #include <gtest/gtest.h>
 #include <thread>
