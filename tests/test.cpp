@@ -11,6 +11,7 @@
  * 
  */
 #define BOOST_FAIRNESS_MAX_PQNODES 32 // some tests use a lot of threads and we want perfect fairness here
+//#define BOOST_FAIRNESS_USE_EXPERIMENTAL_WAIT_NOTIFY
 #include <boost/fairness.hpp>
 #include <gtest/gtest.h>
 #include <thread>

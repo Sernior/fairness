@@ -114,7 +114,7 @@ static_assert(BOOST_FAIRNESS_MAX_PQNODES > 2, "BOOST_FAIRNESS_MAX_PQNODES less t
 
 
 /**
- * @brief boost fairness will use atomic::wait/notify implemented by the standard lib instead of its own implementation.
+ * @brief boost fairness will use atomic::wait/notify implemented by the standard lib instead of its own implementation by default.
 */
 #define BOOST_FAIRNESS_USE_STD_WAIT_NOTIFY
 

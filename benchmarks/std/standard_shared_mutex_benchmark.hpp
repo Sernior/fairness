@@ -26,8 +26,8 @@ namespace standard_shared_mutex_benchmark{
 
     void shared_lock_unlock_benchmark(benchmark::State& state) {
         for (auto _ : state){
-            mf.lock_shared();
-            mf.unlock_shared();
+            m.lock_shared();
+            m.unlock_shared();
         }
     }
 

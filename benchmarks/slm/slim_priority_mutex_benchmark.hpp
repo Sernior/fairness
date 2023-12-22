@@ -15,7 +15,7 @@
 #include "../utils/thread_utils.hpp"
 
 namespace slim_priority_mutex_benchmark{
-    boost::fairness::slim_priority_mutex m;
+    boost::fairness::slim_priority_mutex<4> m;
 
     void lock_unlock_benchmark(benchmark::State& state) {
         for (auto _ : state){

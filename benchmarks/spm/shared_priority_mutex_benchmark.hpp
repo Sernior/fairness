@@ -15,7 +15,7 @@
 #include "../utils/thread_utils.hpp"
 
 namespace shared_priority_mutex_benchmark{
-    boost::fairness::shared_priority_mutex m;
+    boost::fairness::shared_priority_mutex<4> m;
 
     void lock_unlock_benchmark(benchmark::State& state) {
         for (auto _ : state){
@@ -26,8 +26,8 @@ namespace shared_priority_mutex_benchmark{
 
     void shared_lock_unlock_benchmark(benchmark::State& state) {
         for (auto _ : state){
-            mf.lock_shared();
-            mf.unlock_shared();
+            m.lock_shared();
+            m.unlock_shared();
         }
     }
 
