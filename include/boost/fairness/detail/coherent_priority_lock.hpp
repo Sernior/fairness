@@ -44,10 +44,12 @@ namespace boost::fairness::detail{
             requester->watch_ = tail_.exchange(requester->request_, std::memory_order_acquire);
             requester->watch_->watcher_ = requester;
             for(;;){
-                if (requester->watch_->state_.load(std::memory_order_relaxed) == GRANTED){
+                if (requester->watch_->state_.load(std::memory_order_acquire) == GRANTED){
                     return;
                 }
-                spin_wait(requester->watch_->state_, GRANTED);
+                pause();
+                //spin_wait();
+                //spin_wait(requester->watch_->state_, GRANTED);
             }
         }
 

@@ -54,7 +54,8 @@ namespace boost::fairness::detail{
                 req = reqs_.getRequest();
                 if (req != nullptr)
                     break;
-                pause();
+                //spin_wait(); // maybe just yield here
+                std::this_thread::yield();
             }
             t->prepare(priority, req);
             cpl_.requestLock(t);

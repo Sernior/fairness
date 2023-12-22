@@ -79,7 +79,10 @@ namespace boost::fairness{
                     if (!lockOwned_.test_and_set(std::memory_order_acquire))
                         break;
                 }
-                detail::spin_wait(lockOwned_, true);
+                //detail::spin_wait(lockOwned_, true);
+                detail::spin_wait();
+                //std::this_thread::yield();
+                //detail::pause();
                 localLockOwned = lockOwned_.test(std::memory_order_relaxed);
                 localCurrentPriority = currentPriority_.load(std::memory_order_relaxed);
 
@@ -128,9 +131,9 @@ namespace boost::fairness{
         }
 
         private:
-        std::array<std::atomic<Thread_cnt_t>, N> waiters_{};
-        std::atomic<Priority_t> currentPriority_{BOOST_FAIRNESS_MAXIMUM_PRIORITY};
-        std::atomic_flag lockOwned_;
+        alignas(BOOST_FAIRNESS_HARDWARE_DESTRUCTIVE_SIZE) std::array<std::atomic<Thread_cnt_t>, N> waiters_{};
+        alignas(BOOST_FAIRNESS_HARDWARE_DESTRUCTIVE_SIZE) std::atomic<Priority_t> currentPriority_{BOOST_FAIRNESS_MAXIMUM_PRIORITY};
+        alignas(BOOST_FAIRNESS_HARDWARE_DESTRUCTIVE_SIZE) std::atomic_flag lockOwned_{};
 
         Priority_t find_first_priority_(){
             for (Priority_t i = 0; i < N; ++i){

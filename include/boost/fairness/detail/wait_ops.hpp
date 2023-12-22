@@ -61,6 +61,16 @@ namespace boost::fairness::detail{
 
     }
 
+    inline void spin_wait() {
+
+        for(int i = 0; i < BOOST_FAIRNESS_SPINWAIT_SPINS; ++i){
+
+            relaxOrYield[i >= BOOST_FAIRNESS_SPINWAIT_SPINS_RELAXED]();
+
+        }
+
+    }
+
 #if !defined(BOOST_FAIRNESS_USE_STD_WAIT_NOTIFY)
 
 // we need to include a wait pool here and instead of waiting on the actual memory we wait on some wait flags which are aligned to destructive size
