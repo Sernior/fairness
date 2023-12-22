@@ -1,9 +1,8 @@
 /**
- * @file priority_mutex.hpp
+ * @file spinlock_priority_mutex.hpp
  * @author F. Abrignani (federignoli@hotmail.it)
- * @author P. Di Giglio
- * @author S. Martorana
- * @brief This file contains the implementation of the priority_mutex.
+ * @author S. Martorana (salvatoremartorana@hotmail.com)
+ * @brief This file contains the implementation of the spinlock_priority_mutex.
  * @version 0.1
  * @date 2023-08-19
  * 
@@ -11,56 +10,53 @@
  * Distributed under the Boost Software License, Version 1.0. (See accompanying file LICENSE_1_0.txt or copy at http://www.boost.org/LICENSE_1_0.txt).
  * 
  */
-#ifndef BOOST_FAIRNESS_PRIORITY_MUTEX_HPP
-#define BOOST_FAIRNESS_PRIORITY_MUTEX_HPP
+#ifndef BOOST_FAIRNESS_SPINLOCK_PRIORITY_MUTEX_HPP
+#define BOOST_FAIRNESS_SPINLOCK_PRIORITY_MUTEX_HPP
 #include <atomic>
 #include <array>
 #include <boost/fairness/priority_t.hpp>
 #include <boost/fairness/detail/wait_ops.hpp>
 
-namespace boost::fairness::old8{
-
-    #define LOCK_OWNED 1
-    #define LOCK_NOT_OWNED 0
+namespace boost::fairness::old{
 
     /**
-     * @brief The priority_mutex is an advanced synchronization mechanism that enhances the traditional mutex by introducing a priority-based approach.
+     * @brief The spinlock_priority_mutex is an advanced synchronization mechanism that enhances the traditional mutex by introducing a priority-based approach.
      * 
-     * @tparam N : number of 0 indexed priorities the priority_mutex manages, up to BOOST_FAIRNESS_MAXIMUM_PRIORITY.
+     * @tparam N : number of 0 indexed priorities the spinlock_priority_mutex manages, up to BOOST_FAIRNESS_MAXIMUM_PRIORITY.
      */
     template<size_t N = 1>
     requires (N >= 1 && N <= BOOST_FAIRNESS_MAXIMUM_PRIORITY)
-    class priority_mutex{
+    class spinlock_priority_mutex{
 
         using Thread_cnt_t = uint32_t;
 
         public:
 
         /// @private
-        priority_mutex() = default;
+        spinlock_priority_mutex() = default;
 
         /// @private
-        priority_mutex(const priority_mutex&) = delete;
+        spinlock_priority_mutex(const spinlock_priority_mutex&) = delete;
 
         /// @private
-        priority_mutex& operator=(const priority_mutex&) = delete;
+        spinlock_priority_mutex& operator=(const spinlock_priority_mutex&) = delete;
 
         /// @private
-        priority_mutex(priority_mutex&&) = delete;
+        spinlock_priority_mutex(spinlock_priority_mutex&&) = delete;
 
         /// @private
-        priority_mutex& operator=(priority_mutex&&) = delete;
+        spinlock_priority_mutex& operator=(spinlock_priority_mutex&&) = delete;
 
         /// @private
-        ~priority_mutex() = default;
+        ~spinlock_priority_mutex() = default;
 
         /**
-         * @brief Try to acquire the unique ownership of the priority_mutex, blocking the thread if the priority_mutex was already owned or other threads are waiting with higher priority.
+         * @brief Try to acquire the unique ownership of the spinlock_priority_mutex, blocking the thread if the spinlock_priority_mutex was already owned or other threads are waiting with higher priority.
          * 
          * @param priority used to set a priority for this thread to aquire the lock.
          * 
          * \code{.cpp}
-         * priority_mutex<10> m;
+         * spinlock_priority_mutex<4> m;
          * 
          * void my_function(int prio) {
          *      //...some code.
@@ -70,24 +66,34 @@ namespace boost::fairness::old8{
          * \endcode
          */
         void lock(Priority_t const priority = 0){
+
+            bool localLockOwned = lockOwned_.test(std::memory_order_relaxed);
+
             Priority_t localCurrentPriority = currentPriority_.load(std::memory_order_relaxed);
+
             waiters_[priority].fetch_add(1, std::memory_order_relaxed);
-            while ( 
-                (localCurrentPriority < priority || !currentPriority_.compare_exchange_weak(localCurrentPriority, priority, std::memory_order_relaxed)) ||
-                (lockOwned_.test_and_set(std::memory_order_acquire))
-            ){
-                detail::wait(waitingFlag_, LOCK_OWNED);
-                localCurrentPriority = currentPriority_;
+
+            for (;;){
+
+                if (!localLockOwned & (localCurrentPriority >= priority)){
+                    if (!lockOwned_.test_and_set(std::memory_order_acquire))
+                        break;
+                }
+                detail::spin_wait(lockOwned_, true);
+                localLockOwned = lockOwned_.test(std::memory_order_relaxed);
+                localCurrentPriority = currentPriority_.load(std::memory_order_relaxed);
+
             }
+
             waiters_[priority].fetch_sub(1, std::memory_order_relaxed);
-            waitingFlag_.store(LOCK_OWNED);
+            
         }
 
         /**
-         * @brief Release the priority_mutex from unique ownership.
+         * @brief Release the spinlock_priority_mutex from unique ownership.
          * 
          * \code{.cpp}
-         * priority_mutex<10> m;
+         * spinlock_priority_mutex<4> m;
          * 
          * void my_function() {
          *      //...some code.
@@ -99,18 +105,15 @@ namespace boost::fairness::old8{
         void unlock(){
             currentPriority_.store(find_first_priority_(), std::memory_order_relaxed);
             lockOwned_.clear(std::memory_order_release);
-            waitingFlag_.store(LOCK_NOT_OWNED);
-            detail::notify_all(waitingFlag_);
-            //lockOwned_.notify_all();
         }
 
         /**
-         * @brief Try to acquire the unique ownership of the priority_mutex, if successful will return true, false otherwise.
+         * @brief Try to acquire the unique ownership of the spinlock_priority_mutex, if successful will return true, false otherwise.
          * 
          * @param priority used to set a priority for this thread to aquire the lock.
          * 
          * \code{.cpp}
-         * priority_mutex<10> m;
+         * spinlock_priority_mutex<4> m;
          * 
          * void my_function(int prio) {
          *      //...some code.
@@ -125,11 +128,9 @@ namespace boost::fairness::old8{
         }
 
         private:
-        alignas(128) std::atomic<Priority_t> currentPriority_{BOOST_FAIRNESS_MAXIMUM_PRIORITY};
-        alignas(128) std::atomic_flag lockOwned_;
         std::array<std::atomic<Thread_cnt_t>, N> waiters_{};
-
-        alignas(128) std::atomic<uint32_t> waitingFlag_{LOCK_OWNED};
+        std::atomic<Priority_t> currentPriority_{BOOST_FAIRNESS_MAXIMUM_PRIORITY};
+        std::atomic_flag lockOwned_;
 
         Priority_t find_first_priority_(){
             for (Priority_t i = 0; i < N; ++i){
@@ -139,8 +140,5 @@ namespace boost::fairness::old8{
             return BOOST_FAIRNESS_MAXIMUM_PRIORITY;
         }
     };
-
-    #undef LOCK_OWNED
-    #undef LOCK_NOT_OWNED
 }
-#endif // BOOST_FAIRNESS_PRIORITY_MUTEX_HPP
+#endif // BOOST_FAIRNESS_SPINLOCK_PRIORITY_MUTEX_HPP

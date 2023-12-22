@@ -15,23 +15,19 @@
 #include "../utils/thread_utils.hpp"
 
 namespace standard_shared_mutex_benchmark{
-
     std::shared_mutex m;
 
     void lock_unlock_benchmark(benchmark::State& state) {
-        std::shared_mutex mf;
         for (auto _ : state){
-            mf.lock();
-            mf.unlock();
+            m.lock();
+            m.unlock();
         }
     }
 
     void shared_lock_unlock_benchmark(benchmark::State& state) {
-        std::shared_mutex mf;
-
         for (auto _ : state){
-            mf.lock_shared();
-            mf.unlock_shared();
+            m.lock_shared();
+            m.unlock_shared();
         }
     }
 
@@ -76,7 +72,7 @@ namespace standard_shared_mutex_benchmark{
     }
 
     void pipeline_benchmark_audio(benchmark::State& state) {
-        std::array<int, 8> prios {0, 2, 2, 1, 1, 3, 3, 0};
+        std::array<int, 8> prios {0, 1, 2, 1, 3, 2, 2, 0};
         std::array<int, 8> preCT {200, 150, 200, 300, 100, 50, 50, 200};
         int CT = 100;
         std::array<int, 8> postCT {500, 300, 200, 250, 100, 150, 150, 450};
@@ -87,7 +83,7 @@ namespace standard_shared_mutex_benchmark{
     }
 
     void shared_pipeline_benchmark_audio(benchmark::State& state) {
-        std::array<int, 8> prios {0, 2, 2, 1, 1, 3, 3, 0};
+        std::array<int, 8> prios {0, 1, 2, 1, 3, 2, 2, 0};
         std::array<int, 8> preCT {200, 150, 200, 300, 100, 50, 50, 200};
         int CT = 100;
         std::array<int, 8> postCT {500, 300, 200, 250, 100, 150, 150, 450};
@@ -98,7 +94,7 @@ namespace standard_shared_mutex_benchmark{
     }
 
     void pipeline_benchmark_fast(benchmark::State& state) { /*  */
-        std::array<int, 8> prios {0, 2, 2, 1, 1, 3, 3, 0};
+        std::array<int, 8> prios {0, 1, 2, 1, 3, 2, 2, 0};
         std::array<int, 8> preCT {2000, 1500, 2000, 3000, 1000, 500, 500, 2000};
         int CT = 1000;
         std::array<int, 8> postCT {5000, 3000, 2000, 2500, 1000, 1500, 1500, 4500};
@@ -109,7 +105,7 @@ namespace standard_shared_mutex_benchmark{
     }
 
     void shared_pipeline_benchmark_fast(benchmark::State& state) { /*  */
-        std::array<int, 8> prios {0, 2, 2, 1, 1, 3, 3, 0};
+        std::array<int, 8> prios {0, 1, 2, 1, 3, 2, 2, 0};
         std::array<int, 8> preCT {2000, 1500, 2000, 3000, 1000, 500, 500, 2000};
         int CT = 1000;
         std::array<int, 8> postCT {5000, 3000, 2000, 2500, 1000, 1500, 1500, 4500};

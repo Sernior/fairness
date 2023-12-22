@@ -15,32 +15,49 @@
 
 
 
+#ifdef BOOST_FAIRNESS_USE_TATAS
+/**
+ * @brief base the mutex implementation on simple non scalable but very fast TATAS. Only use on machines with less than 4 physical cores.
+*/
+#define BOOST_FAIRNESS_USE_TATAS_SPINLOCK
+#endif // BOOST_FAIRNESS_USE_TATAS
+
+
+
+#ifndef BOOST_FAIRNESS_SPINWAIT_SPINS
+/**
+ * @brief the total number of spins during a spin_wait operation
+*/
+#define BOOST_FAIRNESS_SPINWAIT_SPINS 16
+#endif // BOOST_FAIRNESS_SPINWAIT_SPINS
+
+
+
+#ifndef BOOST_FAIRNESS_SPINWAIT_SPINS_RELAXED
+/**
+ * @brief the number of relaxed spins during a spin_wait operation
+*/
+#define BOOST_FAIRNESS_SPINWAIT_SPINS_RELAXED 12
+#endif // BOOST_FAIRNESS_SPINWAIT_SPINS_RELAXED
+
+
+
 #ifndef BOOST_FAIRNESS_WAIT_SPINS
 /**
- * @brief the number of unpaused spins before a syscall to the OS to yield the cpu through futex on linux or waitOnAdress on windows
- *        it is used only if BOOST_FAIRNESS_USE_EXPERIMENTAL_WAIT_NOTIFY is defined
+ * @brief the total number of spins during a wait operation before a syscall to the OS to yield the cpu through futex on linux or waitOnAdress on windows
 */
-#define BOOST_FAIRNESS_WAIT_SPINS 0
+#define BOOST_FAIRNESS_WAIT_SPINS 16
 #endif // BOOST_FAIRNESS_WAIT_SPINS
 
 
 
 #ifndef BOOST_FAIRNESS_WAIT_SPINS_RELAXED
 /**
- * @brief the number of paused spins before a syscall to the OS to yield the cpu through futex on linux or waitOnAdress on windows.
- *        it is used only if BOOST_FAIRNESS_USE_EXPERIMENTAL_WAIT_NOTIFY is defined
+ * @brief the total number of spins during a wait operation before a syscall to the OS to yield the cpu through futex on linux or waitOnAdress on windows.
 */
 #define BOOST_FAIRNESS_WAIT_SPINS_RELAXED 12
 #endif // BOOST_FAIRNESS_WAIT_SPINS_RELAXED
 
-
-#ifndef BOOST_FAIRNESS_WAIT_SPINS_YIELD
-/**
- * @brief the number of yield spins before a syscall to the OS to yield the cpu through futex on linux or waitOnAdress on windows
- *        it is used only if BOOST_FAIRNESS_USE_EXPERIMENTAL_WAIT_NOTIFY is defined
-*/
-#define BOOST_FAIRNESS_WAIT_SPINS_YIELD 4
-#endif // BOOST_FAIRNESS_WAIT_SPINS_RELAXED
 
 
 #ifndef BOOST_FAIRNESS_HARDWARE_DESTRUCTIVE_SIZE
@@ -49,6 +66,32 @@
 */
 #define BOOST_FAIRNESS_HARDWARE_DESTRUCTIVE_SIZE 128
 #endif // BOOST_FAIRNESS_HARDWARE_DESTRUCTIVE_SIZE
+
+
+
+#ifndef BOOST_FAIRNESS_MAX_PQNODES
+/**
+ * @brief The maximum amount of PQNODES that can be used at the same time per pqspinlock.
+ * @brief setting this too low may make the mutex less fair (some tests might even fail). Ideally you have 1 PQNODE per thread.
+*/
+#define BOOST_FAIRNESS_MAX_PQNODES 4
+#endif // BOOST_FAIRNESS_HARDWARE_DESTRUCTIVE_SIZE
+#define BOOST_FAIRNESS_INVALID_PQNODE_INDEX BOOST_FAIRNESS_MAX_PQNODES
+static_assert(BOOST_FAIRNESS_MAX_PQNODES > 2, "BOOST_FAIRNESS_MAX_PQNODES less than 3.");
+
+
+
+#ifndef BOOST_FAIRNESS_MAX_THREADS
+/**
+ * @brief Unlike what it may seems this macro does not set the maximum number of supported threads.
+ * @brief Instead this macro tells the library how many thread struct there are per thread/pqspinlock pair to be used.
+ * @brief A good way of seeing it is how many re entrant calls will you make on priority mutexes.
+ * @brief If you plan on using N priority mutexes and locking all of them with the same thread set this number to N.
+*/
+#define BOOST_FAIRNESS_MAX_THREADS 4
+#endif // BOOST_FAIRNESS_HARDWARE_DESTRUCTIVE_SIZE
+#define BOOST_FAIRNESS_INVALID_THREAD_INDEX BOOST_FAIRNESS_MAX_THREADS
+
 
 
 /*
@@ -71,7 +114,7 @@
 
 
 /**
- * @brief boost fairness will use atomic::wait/notify implemented by the standard lib instead of its own implementation.
+ * @brief boost fairness will use atomic::wait/notify implemented by the standard lib instead of its own implementation by default.
 */
 #define BOOST_FAIRNESS_USE_STD_WAIT_NOTIFY
 
@@ -79,7 +122,7 @@
 
 
 /**
- * @brief if BOOST_FAIRNESS_USE_EXPERIMENTAL_WAIT_NOTIFY is defined we shall the experimental wait notify system
+ * @brief if BOOST_FAIRNESS_USE_EXPERIMENTAL_WAIT_NOTIFY is defined we shall use the experimental wait notify system
 */
 #if defined(BOOST_FAIRNESS_USE_EXPERIMENTAL_WAIT_NOTIFY)
 #undef BOOST_FAIRNESS_USE_STD_WAIT_NOTIFY
@@ -100,11 +143,6 @@
 #elif defined(_WIN32) && !defined(BOOST_FAIRNESS_USE_STD_WAIT_NOTIFY)
 #include <boost/fairness/detail/wait_ops_windows.hpp>
 #else
-
-#ifndef BOOST_FAIRNESS_USE_STD_WAIT_NOTIFY
-
-#endif // BOOST_FAIRNESS_USE_STD_WAIT_NOTIFY
-
 #include <boost/fairness/detail/wait_ops_generic.hpp>
 #endif // Operating systems
 

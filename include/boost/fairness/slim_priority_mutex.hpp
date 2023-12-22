@@ -167,7 +167,7 @@ namespace boost::fairness{
         }
 
         private:
-        std::array<std::atomic_flag, N> waitingFlags_;
+        std::array<std::atomic_flag, N> waitingFlags_{};
         std::atomic<control_block_64b_t> ctrl_;
 
         void reset_(){ // there probably is a much better way to do this
@@ -316,7 +316,7 @@ namespace boost::fairness{
         }
 
         private:
-        std::array<boost::atomic_flag, N> waitingFlags_;
+        std::array<boost::atomic_flag, N> waitingFlags_{};
         boost::atomic<control_block_128b_t> ctrl_;
 
         void reset_(){ // there probably is a much better way to do this

@@ -15,8 +15,12 @@
 #include <atomic>
 #include <boost/fairness/priority_t.hpp>
 #include <boost/fairness/spinlock_priority_mutex.hpp>
+#include <boost/fairness/detail/wait_ops.hpp>
 
 namespace boost::fairness{
+
+    #define WAIT 0
+    #define PROCEED 1
 
     /**
      * @brief The shared_priority_mutex is an advanced synchronization mechanism that enhances the traditional shared_mutex by introducing a priority-based approach.
@@ -49,6 +53,13 @@ namespace boost::fairness{
         struct threadPriority{
             Thread_cnt_t writers_waiting{};
             Thread_cnt_t readers_waiting{};
+        };
+
+        template<size_t S = 1>
+        requires (S >= 1 && S <= BOOST_FAIRNESS_MAXIMUM_PRIORITY)
+        struct waitingFlags{
+            std::array<std::atomic<uint32_t>, S> writers{};
+            std::array<std::atomic<uint32_t>, S> readers{};
         };
 
         public:
@@ -121,7 +132,7 @@ namespace boost::fairness{
 
                 internalMutex_.unlock();
 
-                writerWaitingFlags_[priority].wait(false);
+                detail::wait(waitingFlags_.writers[priority], WAIT);
 
                 internalMutex_.lock(priority);
 
@@ -212,6 +223,7 @@ namespace boost::fairness{
             internalMutex_.unlock();
 
             return true;
+
         }
 
         /**
@@ -230,6 +242,7 @@ namespace boost::fairness{
          * \endcode
          */
         void lock_shared(Priority_t priority = 0){
+
             internalMutex_.lock(priority);
 
             ++priorities_[priority].readers_waiting;
@@ -249,7 +262,7 @@ namespace boost::fairness{
 
                 internalMutex_.unlock();
 
-                readerWaitingFlags_[priority].wait(false);
+                detail::wait(waitingFlags_.readers[priority], WAIT);
 
                 internalMutex_.lock(priority);
 
@@ -329,6 +342,7 @@ namespace boost::fairness{
          * @return bool 
          */
         [[nodiscard]] bool try_lock_shared(Priority_t priority = 0){
+
             internalMutex_.lock(priority);
 
             if (lockOwned_ || find_first_priority_with_writers_() < priority){
@@ -343,15 +357,15 @@ namespace boost::fairness{
             internalMutex_.unlock();
 
             return true;
+            
         }
 
         private:
 
         alignas(BOOST_FAIRNESS_HARDWARE_DESTRUCTIVE_SIZE) spinlock_priority_mutex<N> internalMutex_;
-        std::array<threadPriority, N> priorities_;
-        alignas(BOOST_FAIRNESS_HARDWARE_DESTRUCTIVE_SIZE) std::array<std::atomic_flag, N> writerWaitingFlags_; // there should be a struct like threadPriority for the flags so I can align both with 1 alignas
-        std::array<std::atomic_flag, N> readerWaitingFlags_; // I should also change these to be 4 bytes so other systems other than windows can also wait on this memory
-         Thread_cnt_t totalCurrentReaders_{};
+        alignas(BOOST_FAIRNESS_HARDWARE_DESTRUCTIVE_SIZE) waitingFlags<N> waitingFlags_;
+        std::array<threadPriority, N> priorities_{};
+        Thread_cnt_t totalCurrentReaders_{};
         Thread_cnt_t totalWritersWaiting_{};
         bool lockOwned_{};
 
@@ -373,32 +387,35 @@ namespace boost::fairness{
 
         void notify_all_readers_(){
             for (Priority_t i = 0; i < N; ++i){
-                readerWaitingFlags_[i].test_and_set();
-                readerWaitingFlags_[i].notify_all();
+                waitingFlags_.readers[i].store(PROCEED);
+                detail::notify_all(waitingFlags_.readers[i]);
             }
         }
 
         void notify_priority_(Priority_t const p){
-            writerWaitingFlags_[p].notify_one();
-            readerWaitingFlags_[p].notify_all();
+            detail::notify_one(waitingFlags_.writers[p]);
+            detail::notify_all(waitingFlags_.readers[p]);
         }
 
         void reset_(Priority_t const p){
             for (Priority_t i = 0; i <  N; ++i){
-                readerWaitingFlags_[i].clear();
-                readerWaitingFlags_[i].clear();
+                waitingFlags_.writers[i].store(WAIT);
+                waitingFlags_.readers[i].store(WAIT);
             }
-            writerWaitingFlags_[p].test_and_set();
-            readerWaitingFlags_[p].test_and_set();
+            waitingFlags_.writers[p].store(PROCEED);
+            waitingFlags_.readers[p].store(PROCEED);
         }
 
         void allow_all_readers_(){
             for (Priority_t i = 0; i < N; ++i){
-                readerWaitingFlags_[i].test_and_set();
-                writerWaitingFlags_[i].clear();
+                waitingFlags_.readers[i].store(PROCEED);
+                waitingFlags_.writers[i].store(WAIT);
             }
         }
-
     };
+
+    #undef WAIT
+    #undef PROCEED
+
 }
 #endif // BOOST_FAIRNESS_SHARED_PRIORITY_MUTEX_HPP

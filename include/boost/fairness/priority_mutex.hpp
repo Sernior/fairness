@@ -18,6 +18,7 @@
 #include <boost/fairness/priority_t.hpp>
 #include <boost/fairness/detail/wait_ops.hpp>
 #include <boost/fairness/spinlock_priority_mutex.hpp>
+#include <boost/fairness/detail/wait_pool.hpp>
 
 namespace boost::fairness{
 
@@ -71,24 +72,30 @@ namespace boost::fairness{
          * \endcode
          */
         void lock(Priority_t const priority = 0){
+
             internalMutex_.lock(priority);
+
             ++waiters_[priority];
+
             for (;;){
 
                 if (
                     !lockOwned_ &&
                     find_first_priority_() >= priority
                 ){
+
                     --waiters_[priority];
+
                     lockOwned_ = true;
+
                     internalMutex_.unlock();
-                    //reset(priority);
+
                     return;
                 }
 
                 internalMutex_.unlock();
 
-                detail::wait(waitingFlag_[priority], WAIT);
+                detail::wait(waitingFlag_[priority], detail::wait_flag);
 
                 internalMutex_.lock(priority);
 
@@ -123,9 +130,10 @@ namespace boost::fairness{
                 return;
             }
 
-            internalMutex_.unlock();
+            //reset_(p);
+            waitingFlag_.reset_(p);
 
-            reset_(p); // maybe better before the unlock
+            internalMutex_.unlock();
 
             detail::notify_one(waitingFlag_[p]);
         }
@@ -165,10 +173,15 @@ namespace boost::fairness{
         }
 
         private:
+
         alignas(BOOST_FAIRNESS_HARDWARE_DESTRUCTIVE_SIZE) spinlock_priority_mutex<N> internalMutex_;
-        std::array<Thread_cnt_t, N> waiters_;
+
+
+        detail::WaitPool<N> waitingFlag_{};
+
+        std::array<Thread_cnt_t, N> waiters_{};
+        
         bool lockOwned_{};
-        alignas(BOOST_FAIRNESS_HARDWARE_DESTRUCTIVE_SIZE) std::array<std::atomic<uint32_t>, N> waitingFlag_;
 
         Priority_t find_first_priority_(){
             for (Priority_t i = 0; i < N; ++i){
@@ -176,12 +189,6 @@ namespace boost::fairness{
                     return i;
             }
             return BOOST_FAIRNESS_MAXIMUM_PRIORITY;
-        }
-
-        void reset_(Priority_t p){
-            for (Priority_t i = 0; i < N; ++i)
-                waitingFlag_[i].store(WAIT);
-            waitingFlag_[p].store(PROCEED);
         }
 
     };

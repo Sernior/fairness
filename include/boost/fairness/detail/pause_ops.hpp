@@ -18,7 +18,7 @@
 
 namespace boost::fairness::detail{
 
-    inline void pause(){
+    inline void pause() noexcept {
         pause_();
     }
 

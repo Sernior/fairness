@@ -20,7 +20,7 @@
 #include <boost/fairness/detail/control_block_t.hpp>
 #include <boost/fairness/detail/wait_ops.hpp>
 
-namespace boost::fairness{
+namespace boost::fairness::old7{
 
     #define LOCK_OWNED 1
     #define LOCK_NOT_OWNED 0
@@ -136,7 +136,7 @@ namespace boost::fairness{
         //only for linux, windows can use an atomic flag
         alignas(128) std::atomic<control_block_64b_simple_t> owned_;
 
-        std::array<std::atomic<Thread_cnt_t>, N> waiters_;
+        std::array<std::atomic<Thread_cnt_t>, N> waiters_{};
 
         alignas(128) std::atomic<uint32_t> waitingFlag_{LOCK_OWNED};
 

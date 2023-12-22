@@ -106,8 +106,11 @@ namespace boost::fairness{
          * \endcode
          */
         void lock(Priority_t const priority = 0){
+
             internalMutex_.lock(priority);
+
             ++waiters_[priority];
+            
             for(;;){
                 if ( 
                     lock_owned_by_me_() ||
@@ -116,10 +119,13 @@ namespace boost::fairness{
                     ){
 
                         owner_ = std::this_thread::get_id();
+
                         --waiters_[priority];
+
                         ++recursionCounter_;
 
                         internalMutex_.unlock();
+
                         return;
                     }
 
@@ -181,17 +187,20 @@ namespace boost::fairness{
             if (recursionCounter_ != 0)
             {
                 internalMutex_.unlock();
+
                 return;
             }
 
             owner_ = std::thread::id();
 
             if (p == BOOST_FAIRNESS_MAXIMUM_PRIORITY){
+
                 internalMutex_.unlock();
+
                 return;
             }
 
-            reset_(p); // maybe better before the unlock
+            waitingFlag_.reset_(p);
 
             internalMutex_.unlock();
 
@@ -247,22 +256,30 @@ namespace boost::fairness{
              (find_first_priority_() >= priority && lock_not_owned_())){
 
                 owner_ = std::this_thread::get_id();
+
                 ++recursionCounter_;
+
                 internalMutex_.unlock();
+
                 return true;
-                
              }
 
             internalMutex_.unlock();
+
             return false;
         }
 
         private:
+
         alignas(BOOST_FAIRNESS_HARDWARE_DESTRUCTIVE_SIZE) spinlock_priority_mutex<N> internalMutex_;
-        std::array<Thread_cnt_t, N> waiters_;
+
+        detail::WaitPool<N> waitingFlag_{};
+
+        std::array<Thread_cnt_t, N> waiters_{};
+
         std::thread::id owner_{};
+
         uint32_t recursionCounter_{};
-        alignas(BOOST_FAIRNESS_HARDWARE_DESTRUCTIVE_SIZE) std::array<std::atomic<uint32_t>, N> waitingFlag_;
 
         bool lock_not_owned_(){
             return std::thread::id() == owner_;
@@ -270,12 +287,6 @@ namespace boost::fairness{
 
         bool lock_owned_by_me_(){
             return owner_ == std::this_thread::get_id();
-        }
-
-        void reset_(Priority_t p){
-            for (Priority_t i = 0; i < N; ++i)
-                waitingFlag_[i].store(WAIT);
-            waitingFlag_[p].store(PROCEED);
         }
 
         Priority_t find_first_priority_(){

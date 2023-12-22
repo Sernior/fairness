@@ -128,7 +128,7 @@ namespace boost::fairness::old4{
         }
 
         private:
-        std::array<std::atomic<Thread_cnt_t>, N> waiters_;
+        std::array<std::atomic<Thread_cnt_t>, N> waiters_{};
 
         //only for linux, windows can use an atomic flag
         std::atomic<control_block_64b_simple_t> owned_;

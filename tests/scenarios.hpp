@@ -22,7 +22,9 @@
 #include "slm/SLM_scenario4Context.hpp"
 #include "spnlcpm/SPNLCPM_scenario1Context.hpp"
 #include "spnlcpm/SPNLCPM_scenario2Context.hpp"
+#ifdef BOOST_FAIRNESS_USE_TATAS_SPINLOCK
 #include "spnlcpm/SPNLCPM_scenario3Context.hpp"
+#endif // BOOST_FAIRNESS_USE_TATAS_SPINLOCK
 #include "spnlcpm/SPNLCPM_scenario4Context.hpp"
 #include "spm/SPM_scenario1Context.hpp"
 #include "spm/SPM_scenario2Context.hpp"

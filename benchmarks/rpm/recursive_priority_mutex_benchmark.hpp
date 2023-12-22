@@ -15,20 +15,17 @@
 #include "../utils/thread_utils.hpp"
 
 namespace recursive_priority_mutex_benchmark{
-
-    boost::fairness::recursive_priority_mutex<5> m;
+    boost::fairness::recursive_priority_mutex<4> m;
 
     void lock_unlock_benchmark(benchmark::State& state) {
-        boost::fairness::recursive_priority_mutex mf;
-
         for (auto _ : state){
-            mf.lock();
-            mf.unlock();
+            m.lock();
+            m.unlock();
         }
     }
 
     void pipeline_benchmark_long(benchmark::State& state) {// order of 1/10th of a second (PM faster)
-        std::array<int, 8> prios {0, 2, 2, 1, 1, 3, 3, 0};
+        std::array<int, 8> prios {0, 1, 2, 1, 3, 2, 2, 0};
         std::array<int, 8> preCT {20, 15, 20, 30, 10, 5, 5, 20};
         int CT = 10;
         std::array<int, 8> postCT {50, 30, 20, 25, 10, 15, 15, 45};
@@ -39,7 +36,7 @@ namespace recursive_priority_mutex_benchmark{
     }
 
     void pipeline_benchmark_gaming(benchmark::State& state) {// order of 10 to 15 milliseconds (PM faster)
-        std::array<int, 8> prios {0, 2, 2, 1, 1, 3, 3, 0};
+        std::array<int, 8> prios {0, 1, 2, 1, 3, 2, 2, 0};
         std::array<int, 8> preCT {2000, 1500, 2000, 3000, 1000, 500, 500, 2000};
         int CT = 1000;
         std::array<int, 8> postCT {5000, 3000, 2000, 2500, 1000, 1500, 1500, 4500};
@@ -50,7 +47,7 @@ namespace recursive_priority_mutex_benchmark{
     }
 
     void pipeline_benchmark_audio(benchmark::State& state) {// order of 1 to 1.5 millisec (PM faster)
-        std::array<int, 8> prios {0, 2, 2, 1, 1, 3, 3, 0};
+        std::array<int, 8> prios {0, 1, 2, 1, 3, 2, 2, 0};
         std::array<int, 8> preCT {200, 150, 200, 300, 100, 50, 50, 200};
         int CT = 100;
         std::array<int, 8> postCT {500, 300, 200, 250, 100, 150, 150, 450};
@@ -61,7 +58,7 @@ namespace recursive_priority_mutex_benchmark{
     }
 
     void pipeline_benchmark_fast(benchmark::State& state) {
-        std::array<int, 8> prios {0, 2, 2, 1, 1, 3, 3, 0};
+        std::array<int, 8> prios {0, 1, 2, 1, 3, 2, 2, 0};
         std::array<int, 8> preCT {2000, 1500, 2000, 3000, 1000, 500, 500, 2000};
         int CT = 1000;
         std::array<int, 8> postCT {5000, 3000, 2000, 2500, 1000, 1500, 1500, 4500};

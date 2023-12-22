@@ -20,15 +20,13 @@
 namespace SPM_scenario8{
     using namespace DeterministicConcurrency;
 
-    boost::fairness::shared_priority_mutex<7> m;
-    std::mutex sm;
     std::vector<int> ret;
 
     std::random_device rd;
     std::mt19937 gen(rd());
     std::uniform_int_distribution<int> distribution(0, 6);
 
-    void threadFunction(thread_context* c ,int i) {
+    void threadFunction(thread_context* c, int i, boost::fairness::shared_priority_mutex<7>& m, std::mutex& sm) {
         if (i<3) {
             c->lock(&m, i);
             ret.push_back(i);
@@ -44,7 +42,7 @@ namespace SPM_scenario8{
         }
     }
 
-    void controlThread(thread_context* c) {
+    void controlThread(thread_context* c, boost::fairness::shared_priority_mutex<7>& m) {
         c->lock(&m);
         c->switchContext();
         m.unlock();
@@ -61,15 +59,18 @@ namespace SPM_scenario8{
     static size_t CTRLTHREAD = 8;
         
     static constexpr auto executeSchedulingSequence = []{
-        auto thread_0 = std::tuple{&threadFunction, distribution(gen)};
-        auto thread_1 = std::tuple{&threadFunction, distribution(gen)};
-        auto thread_2 = std::tuple{&threadFunction, distribution(gen)};
-        auto thread_3 = std::tuple{&threadFunction, distribution(gen)};
-        auto thread_4 = std::tuple{&threadFunction, distribution(gen)};
-        auto thread_5 = std::tuple{&threadFunction, distribution(gen)};
-        auto thread_6 = std::tuple{&threadFunction, distribution(gen)};
-        auto thread_7 = std::tuple{&threadFunction, distribution(gen)};
-        auto ctrlThread = std::tuple{&controlThread};
+        boost::fairness::shared_priority_mutex<7> m;
+        std::mutex sm;
+        
+        auto thread_0 = std::tuple{&threadFunction, distribution(gen), std::ref(m), std::ref(sm)};
+        auto thread_1 = std::tuple{&threadFunction, distribution(gen), std::ref(m), std::ref(sm)};
+        auto thread_2 = std::tuple{&threadFunction, distribution(gen), std::ref(m), std::ref(sm)};
+        auto thread_3 = std::tuple{&threadFunction, distribution(gen), std::ref(m), std::ref(sm)};
+        auto thread_4 = std::tuple{&threadFunction, distribution(gen), std::ref(m), std::ref(sm)};
+        auto thread_5 = std::tuple{&threadFunction, distribution(gen), std::ref(m), std::ref(sm)};
+        auto thread_6 = std::tuple{&threadFunction, distribution(gen), std::ref(m), std::ref(sm)};
+        auto thread_7 = std::tuple{&threadFunction, distribution(gen), std::ref(m), std::ref(sm)};
+        auto ctrlThread = std::tuple{&controlThread, std::ref(m)};
         
         auto sch = make_UserControlledScheduler(
             thread_0, thread_1, thread_2, thread_3, thread_4, thread_5, thread_6, thread_7, ctrlThread
