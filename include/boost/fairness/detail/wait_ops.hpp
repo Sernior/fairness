@@ -22,7 +22,7 @@
 
 namespace boost::fairness::detail{
 
-    static std::function<void()> relaxOrYield[] = {pause, std::this_thread::yield};
+    static const std::function<void()> relaxOrYield[] = {pause ,std::this_thread::yield};
 
 
     template<typename T ,typename K>

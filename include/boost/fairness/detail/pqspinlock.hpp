@@ -48,24 +48,24 @@ namespace boost::fairness::detail{
         void lock(Priority_t const priority = 0){
             Request* req;
 
-            Thread* t = detail::t_.getThread(this);
+            Thread* t = t_.getThread(this);
 
             for(;;){
                 req = reqs_.getRequest();
                 if (req != nullptr)
                     break;
                 //spin_wait(); // maybe just yield here
-                std::this_thread::yield();
+                //std::this_thread::yield();
             }
             t->prepare(priority, req);
             cpl_.requestLock(t);
         }
 
         void unlock(){
-            Thread* t = detail::t_.reGetThread(this);
+            Thread* t = t_.reGetThread(this);
             cpl_.grantLock(t);
             reqs_.returnRequest(t->watch_);
-            detail::t_.returnThread(t);
+            t_.returnThread(t);
         }
 
         private:
