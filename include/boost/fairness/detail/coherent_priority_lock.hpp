@@ -47,8 +47,9 @@ namespace boost::fairness::detail{
                 if (requester->watch_->state_.load(std::memory_order_acquire) == GRANTED){
                     return;
                 }
-                pause();
-                //spin_wait();
+                //std::this_thread::yield();
+                //pause();
+                spin_wait();
                 //spin_wait(requester->watch_->state_, GRANTED);
             }
         }

@@ -11,8 +11,8 @@
  * 
  */
 //#define BOOST_FAIRNESS_USE_TATAS
-#define BOOST_FAIRNESS_SPINWAIT_SPINS 4
-#define BOOST_FAIRNESS_SPINWAIT_SPINS_RELAXED 4 // it seems tatas does not like relaxed  spins
+#define BOOST_FAIRNESS_SPINWAIT_SPINS 6
+#define BOOST_FAIRNESS_SPINWAIT_SPINS_RELAXED 6 // it seems tatas does not like relaxed  spins
 //#define BOOST_FAIRNESS_USE_EXPERIMENTAL_WAIT_NOTIFY
 #define BOOST_FAIRNESS_MAX_PQNODES 4
 #include <benchmark/benchmark.h>
@@ -23,7 +23,7 @@
 //BENCHMARK(utils::waiting::busy_wait_50nano_benchmark);
 //BENCHMARK(____________________________________________________________________________________________);
 BENCHMARK(priority_mutex_benchmark::lock_unlock_benchmark)->Threads(8);
-//BENCHMARK(standard_mutex_benchmark::lock_unlock_benchmark)->Threads(8);
+BENCHMARK(standard_mutex_benchmark::lock_unlock_benchmark)->Threads(8);
 //BENCHMARK(spinlock_priority_mutex_benchmark::lock_unlock_benchmark)->Threads(8);
 /*
 BENCHMARK(slim_priority_mutex_benchmark::lock_unlock_benchmark)->Threads(8);

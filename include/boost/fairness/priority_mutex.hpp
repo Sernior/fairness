@@ -176,7 +176,6 @@ namespace boost::fairness{
 
         alignas(BOOST_FAIRNESS_HARDWARE_DESTRUCTIVE_SIZE) spinlock_priority_mutex<N> internalMutex_;
 
-
         detail::WaitPool<N> waitingFlag_{};
 
         std::array<Thread_cnt_t, N> waiters_{};

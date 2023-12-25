@@ -13,6 +13,7 @@
 #ifndef BOOST_FAIRNESS_PQSPINLOCK_HPP
 #define BOOST_FAIRNESS_PQSPINLOCK_HPP
 
+#include <exception>
 #include <boost/fairness/config.hpp>
 #include <boost/fairness/priority_t.hpp>
 #include <boost/fairness/detail/coherent_priority_lock.hpp>
@@ -50,12 +51,15 @@ namespace boost::fairness::detail{
 
             Thread* t = t_.getThread(this);
 
+            if (t == nullptr)
+                throw std::logic_error("Thread Pool returned a nullptr: Increase BOOST_FAIRNESS_MAX_THREADS");
+
             for(;;){
                 req = reqs_.getRequest();
                 if (req != nullptr)
                     break;
                 //spin_wait(); // maybe just yield here
-                //std::this_thread::yield();
+                std::this_thread::yield();
             }
             t->prepare(priority, req);
             cpl_.requestLock(t);

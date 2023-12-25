@@ -54,7 +54,7 @@ namespace boost::fairness::detail{
 
         //RequestPool() : reqs_(make_requests(std::make_index_sequence<N>())) {}
 
-        Request* getRequest(){
+        Request* getRequest(){ // this is probably very bad as it touches cachelines that the coherent priority lock is spinning on...
             for (uint32_t i = 0; i < N; ++i){
                 if (!reqs_[i].inUse_.test(std::memory_order_relaxed) && !reqs_[i].inUse_.test_and_set(std::memory_order_acquire)) // check this! TODO
                     return &reqs_[i];
@@ -70,12 +70,12 @@ namespace boost::fairness::detail{
         void returnRequest(Request* const req){
             req->reset();
             req->inUse_.clear(std::memory_order_release);
-            //statuses_[req->index_].clear();
+            //statuses_[req->index_].clear(std::memory_order_release);
         }
 
     private:
         std::array<Request, N> reqs_{};
-        alignas(BOOST_FAIRNESS_HARDWARE_DESTRUCTIVE_SIZE) std::array<std::atomic_flag, N> statuses_;
+        //alignas(BOOST_FAIRNESS_HARDWARE_DESTRUCTIVE_SIZE) std::array<std::atomic_flag, N> statuses_;
     };
 
 }
