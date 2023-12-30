@@ -93,20 +93,20 @@ Download https://www.boost.org/users/history/version_1_82_0.html
 
 In the directory where you want to put the Boost installation, execute:
 
-    ```sh
-    $ tar --bzip2 -xf /path/to/boost_1_82_0.tar.bz2
-    $ ./bootstrap.sh --prefix=/usr/local
-    $ ./b2 install
-    ```
+```sh
+$ tar --bzip2 -xf /path/to/boost_1_82_0.tar.bz2
+$ ./bootstrap.sh --prefix=/usr/local
+$ ./b2 install
+```
 
 ### Setup
 
 Generate ninja build files and build:
 
-   ```sh
-   $ cmake . -B build -G Ninja -DLIBFSM_COMPILE_TESTS=ON -DLIBFSM_COMPILE_BENCHMARKS=ON
-   $ cmake --build build
-   ```
+```sh
+$ cmake . -B build -G Ninja -DLIBFSM_COMPILE_TESTS=ON -DLIBFSM_COMPILE_BENCHMARKS=ON
+$ cmake --build build
+```
 
 ### Installation
 Using cmake you can include this library as follows:
