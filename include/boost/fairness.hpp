@@ -14,6 +14,8 @@
 #ifndef BOOST_FAIRNESS_HPP
 #define BOOST_FAIRNESS_HPP
 
+#if __cplusplus >= 202002L // boost fairness requires std::atomic::wait/notify
+
 #include <boost/fairness/config.hpp>
 #include <boost/fairness/priority_t.hpp>
 #include <boost/fairness/acquisition_modes.hpp>
@@ -23,6 +25,8 @@
 #include <boost/fairness/spinlock_priority_mutex.hpp>
 #include <boost/fairness/recursive_priority_mutex.hpp>
 #include <boost/fairness/unique_lock.hpp>
+
+#endif // __cplusplus >= 202002L
 
 #ifdef BOOST_FAIRNESS_EXPERIMENTAL_MUTEXES
 // include experimental stuff here.
