@@ -208,13 +208,17 @@ Thread with priority : 3 is running.
 
 This is a list of macros that can be defined to configure boost::fairness:
 
-| MACRO                               | Description                                                                                                                 |
-| ----------------------------------- | --------------------------------------------------------------------------------------------------------------------------- |
-| BOOST_FAIRNESS_EXPERIMENTAL_MUTEXES | Allow the inclusion of the experimental mutexes.                                                                            |
-| BOOST_FAIRNESS_WAIT_SPINS           | The number of unpaused spins before a syscall to the OS to yield the cpu through futex on linux or waitOnAdress on windows. |
-| BOOST_FAIRNESS_WAIT_SPINS_RELAXED   | the number of paused spins before a syscall to the OS to yield the cpu through futex on linux or waitOnAdress on windows.   |
-| BOOST_FAIRNESS_HAS_DWCAS            | if the hardware supports cmpxch16b and boost::atomic is present then allow boost::fairness to use cmpxch16b.                |
-| BOOST_FAIRNESS_USE_STD_WAIT_NOTIFY  | boost::fairness will use atomic::wait/notify implemented by the standard lib instead of its own implementation.             |
+| MACRO                                         | Description                                                                                                                                                                                             |
+| --------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| BOOST_FAIRNESS_WAIT_SPINS                     | The total number of spins before a syscall to the OS to yield the cpu through futex on linux or waitOnAdress on windows (this is used only if BOOST_FAIRNESS_USE_EXPERIMENTAL_WAIT_NOTIFY is defined).  |
+| BOOST_FAIRNESS_WAIT_SPINS_RELAXED             | The number of paused spins before a syscall to the OS to yield the cpu through futex on linux or waitOnAdress on windows (this is used only if BOOST_FAIRNESS_USE_EXPERIMENTAL_WAIT_NOTIFY is defined). |
+| BOOST_FAIRNESS_USE_TATAS                      | If defined contention will be solved with a simple tatas-based algorithm witch is faster but doesn't scale.                                                                                             |
+| BOOST_FAIRNESS_SPINWAIT_SPINS                 | The total number of spins performed while spin waiting.                                                                                                                                                 |
+| BOOST_FAIRNESS_SPINWAIT_SPINS_RELAXED         | The number of paused spins performed while spin waiting.                                                                                                                                                |
+| BOOST_FAIRNESS_HARDWARE_DESTRUCTIVE_SIZE      | Hardware destructive size used by this library.                                                                                                                                                         |
+| BOOST_FAIRNESS_MAX_PQNODES                    | The number of requests each priority mutex has available (this is used only if BOOST_FAIRNESS_USE_TATAS is not defined).                                                                                |
+| BOOST_FAIRNESS_MAX_THREADS                    | The total number of thread structs each thread has available (this is used only if BOOST_FAIRNESS_USE_TATAS is not defined).                                                                            |
+| BOOST_FAIRNESS_USE_EXPERIMENTAL_WAIT_NOTIFY   | Use a custom implementation to perform atomic::wait and atomic::notify instead of the standard ones.                                                                                                    |
 
 ## Contributing
 

@@ -11,7 +11,6 @@
  * 
  */
 
-
 #ifndef BOOST_FAIRNESS_WAITING_UTILS_HPP
 #define BOOST_FAIRNESS_WAITING_UTILS_HPP
 #include <chrono>

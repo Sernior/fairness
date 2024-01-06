@@ -236,7 +236,7 @@ namespace boost::fairness{
 		{ return lockOwned_; }
 		
 		/**
-		 * @brief Checks the current priority of ```*this```. TODO
+		 * @brief Checks the current priority of ```*this```. #TODO
 		 * 
 		 * @return Priority_t : the current priority.
 		 */

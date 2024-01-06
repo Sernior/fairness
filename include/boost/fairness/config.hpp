@@ -105,7 +105,7 @@ static_assert(BOOST_FAIRNESS_MAX_PQNODES > 2, "BOOST_FAIRNESS_MAX_PQNODES less t
 
 #if defined(BOOST_ATOMIC_INT128_LOCK_FREE) && BOOST_ATOMIC_INT128_LOCK_FREE > 0
 /**
- * @brief if the hardware supports cmpxch16b and boost::atomic is present then allow boost::fairness to use cmpxch16b.
+ * @brief if the hardware supports it and boost::atomic is present then boost::fairness is allowed to use cmpxch16b
 */
 #define BOOST_FAIRNESS_HAS_DWCAS
 
