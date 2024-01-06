@@ -13,7 +13,9 @@
 
 #include "pm/PM_scenario1Context.hpp"
 #include "pm/PM_scenario2Context.hpp"
+#ifdef BOOST_FAIRNESS_USE_TATAS_SPINLOCK
 #include "pm/PM_scenario3Context.hpp"
+#endif // BOOST_FAIRNESS_USE_TATAS_SPINLOCK
 #include "pm/PM_scenario4Context.hpp"
 #include "pm/PM_scenario5Context.hpp"
 #include "slm/SLM_scenario1Context.hpp"

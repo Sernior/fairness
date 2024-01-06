@@ -34,12 +34,14 @@ TEST(PriorityMutex_ControlledScheduling, LockUnlockTest2) {
     PM_scenario2::expected.clear();
 }
 
+#ifdef BOOST_FAIRNESS_USE_TATAS_SPINLOCK
 TEST(PriorityMutex_ControlledScheduling, TryLockTest) {
     PM_scenario3::executeSchedulingSequence();
     EXPECT_EQ(PM_scenario3::ret, PM_scenario3::expected);
     PM_scenario3::ret.clear();
     PM_scenario3::expected.clear();
 }
+#endif // BOOST_FAIRNESS_USE_TATAS_SPINLOCK
 
 //TEST(PriorityMutex_ControlledScheduling, MutexOrSemaphore) {
 //    PM_scenario4::executeSchedulingSequence();//not semaphore

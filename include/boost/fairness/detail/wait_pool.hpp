@@ -33,8 +33,9 @@ namespace boost::fairness::detail{
 
     struct waitingFlag{
         alignas(BOOST_FAIRNESS_HARDWARE_DESTRUCTIVE_SIZE) std::atomic<uint32_t> waitMem{};
+        //char padding_[BOOST_FAIRNESS_HARDWARE_DESTRUCTIVE_SIZE - sizeof(waitMem)];
 
-        inline void store(uint32_t waitStatus){
+        inline void store(uint32_t const waitStatus){
             waitMem.store(waitStatus);
         }
 

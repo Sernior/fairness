@@ -2,7 +2,7 @@
  * @file pqspinlock.hpp
  * @author F. Abrignani (federignoli@hotmail.it)
  * @author S. Martorana
- * @brief This file contains the implementation of a priority qspinlock.
+ * @brief This file contains the implementation of a priority qlock.
  * @version 0.1
  * @date 2023-11-19
  * 
@@ -10,8 +10,8 @@
  * Distributed under the Boost Software License, Version 1.0. (See accompanying file LICENSE_1_0.txt or copy at http://www.boost.org/LICENSE_1_0.txt).
  * 
  */
-#ifndef BOOST_FAIRNESS_PQSPINLOCK_HPP
-#define BOOST_FAIRNESS_PQSPINLOCK_HPP
+#ifndef BOOST_FAIRNESS_PQLOCK_HPP
+#define BOOST_FAIRNESS_PQLOCK_HPP
 
 #include <exception>
 #include <boost/fairness/config.hpp>
@@ -22,29 +22,29 @@
 
 namespace boost::fairness::detail{
 
-    class pqspinlock{
+    class pqlock{
 
         public:
 
         /// @private
-        pqspinlock() {
+        pqlock() {
             cpl_.initialize(reqs_.getRequest());
         };
 
         /// @private
-        pqspinlock(const pqspinlock&) = delete;
+        pqlock(const pqlock&) = delete;
 
         /// @private
-        pqspinlock& operator=(const pqspinlock&) = delete;
+        pqlock& operator=(const pqlock&) = delete;
 
         /// @private
-        pqspinlock(pqspinlock&&) = delete;
+        pqlock(pqlock&&) = delete;
 
         /// @private
-        pqspinlock& operator=(pqspinlock&&) = delete;
+        pqlock& operator=(pqlock&&) = delete;
 
         /// @private
-        ~pqspinlock() = default;
+        ~pqlock() = default;
 
         void lock(Priority_t const priority = 0){
             Request* req;
@@ -74,10 +74,10 @@ namespace boost::fairness::detail{
 
         private:
 
-        coherent_priority_lock<WaitMechanism::Spin> cpl_;
+        coherent_priority_lock<WaitMechanism::Wait> cpl_;
         RequestPool<BOOST_FAIRNESS_MAX_PQNODES> reqs_;
 
     };
 
 }
-#endif // BOOST_FAIRNESS_PQSPINLOCK_HPP
+#endif // BOOST_FAIRNESS_PQLOCK_HPP
