@@ -4,7 +4,6 @@
 [![GitHub](https://img.shields.io/github/license/Sernior/fairness)](https://github.com/Sernior/fairness/blob/main/LICENSE)
 ![GitHub Repo stars](https://img.shields.io/github/stars/Sernior/fairness)
 
-> [!NOTE]  
 > <span style="color: red;">This is not currently part of the Boost library collection.<br> However, my intention is to submit it for review once it's fully completed.</span>
 
 **A collection of advanced syncronization mechanisms which are able to prioritize threads based on their priority, granting higher-priority threads access to protected resources ahead of lower-priority ones.**
@@ -23,21 +22,30 @@
 
 ### Crafting Fairness in Synchronization: A C++ Library Journey
 
-In the realm of concurrent programming, where multiple threads traverse intricate pathways of data and computation, ensuring a level playing field becomes paramount. The art of synchronization, through mechanisms like mutexes, has long been our trusty companion in this multifaceted arena. But as the complexity of software systems continues to grow, so does the need for synchronization that offers more than just correctness. It demands fairness.
+<!-- la ragione per cui e' stata fatta la libreria principalmente perche' il so non ha info che un programmatore possa avere, quindi politiche di fairness, user space...  -->
 
-In this landscape of shared resources and high concurrency, arises the motivation to embark on a journey to craft a C++ library that centers on fairness. We aspire to level the playing field and ensure that every thread, regardless of its origin or intent, is given a fair chance to progress.
+<!-- The reason why I started this library is that the operating system operates decisions regarding scheduling policies without knowledge of the application layer. Sometimes, a programmer who is optimizing an application may want to give priority to certain threads for various reasons. -->
+The reason I started this library is that the operating system makes decisions regarding scheduling policies without knowledge of the application layer. Sometimes, a programmer optimizing an application may want to prioritize certain threads for various reasons.
 
-### Our Vision
+<!-- quando ho iniziato questa lib credevo che sarebbe stato relativamente veloce e' semplice ma non lo e;' -->
 
-Our vision is to develop a C++ library that provides synchronization mechanisms with fairness at its core allowing users to express their own fairness policies.
-Fair synchronization can be complex, and striking the right balance between fairness and performance is an art in itself.
-We must navigate through the intricate design of data structures, algorithms, and software patterns that underpin synchronization mechanisms. Users of this library should be aware that there is no silver bullet in concurrency. These tools are supposed to be used in contextes where the target software has been profiled and bottlenecks already identified.
+When I started this library, I believed it would be relatively easy, but it turned out not to be. Throughout my study and development of this library, I realized that in this field, there are no "silver bullets" and each solution has its own set of pros and cons.
+Unable to find a universal solution for every architecture, I opted to allow users to customize certain critical aspects of the library. I recommend users of this library to read [this page](file:///home/torjack/Documents/GitHub/fairness/docs/html/md_docs_2implementation-details.html).
+
+<!-- ci sono tanti trade off e scelte, nessun silver bullet in questo campo.
+Lo scopo di questa lib, per info riguardo all'implementazione della lib, possibilita' di customizzazione per migliorare le performance in base al (...) del programmatore (il problema che deve andare a risolvere, velocita', spazio di memoria, n core, n processori, n pqnode, ecc...) link -> (...) -->
+
+
 
 ## About The Project
 
-While the standard library offers various tools for managing concurrency, it lacks effective methods for enforcing fairness policies among threads.<br>
+<!-- While the standard library offers various tools for managing concurrency, it lacks effective methods for enforcing fairness policies among threads.<br>
 Tweaking such behaviors can be challenging, and mistakes might lead to issues like thread starvation. These tools, if misused, have the potential to cause harm rather than benefit. Careful implementation and understanding are crucial to harness their benefits effectively.<br>
-The advanced syncronization mechanisms in this library do not autonomously adjust priorities, which means there is a risk of thread starvation if new threads are continually created and given high-priority locks.
+The advanced syncronization mechanisms in this library do not autonomously adjust priorities, which means there is a risk of thread starvation if new threads are continually created and given high-priority locks. -->
+
+The standard library provides tools for handling concurrency but lacks effective ways to allow programmers to choose fairness policies.<br>
+Modifying these behaviors can be tricky, and mistakes may lead to issues such as thread starvation. If not used carefully, these tools can do more harm than good, emphasizing the importance of cautious usage.<br>
+Furthermore, the advanced synchronization mechanisms in this library do not automatically adjust priorities. This poses a risk of thread starvation when new threads are consistently created with high-priority locks.
 
 ## Use Cases
 
@@ -49,25 +57,14 @@ Although priority-based locks are primarily designed to mitigate the issue of st
 **Resource Allocation**:
 	In resource allocation scenarios where different processes or threads compete for resources (e.g., memory, CPU time), a priority-based mechanism can allocate resources to high-priority tasks, could be used to ensure that get the resources they need promptly.
 
-**Energy Management**:
-	In battery-powered devices like smartphones, laptops, or IoT devices, priority-based synchronization can help in efficiently managing power by giving priority to background tasks when resources are scarce, and conserving energy during low-priority tasks.
-
-**Quality of Service (QoS)**:
-	In networking and communication systems, ensuring Quality of Service is essential. Priority-based synchronization mechanisms can prioritize network traffic, giving preference to critical data like VoIP calls or video conferencing, guaranteeing a smooth user experience.
-
-**Emergency Handling**:
-	Emergency handling systems (e.g., fire alarm systems, emergency response software) require immediate action. Priority-based synchronization ensures that emergency signals or events are given the highest priority, allowing rapid response.
-
-**Fault Tolerance**:
-	In systems where fault tolerance is crucial (e.g., aviation systems), priority-based synchronization can be used to ensure that redundant components or processes are always up and running, even during critical failures.
-
 **Multi-Threaded Gaming**:
 	In multi-threaded gaming engines, priority-based synchronization can prioritize slower threads in order to increase throughput of the graphical pipeline so to increase FPS.
 
 **Scientific Simulations**:
-	Scientific simulations typically involve intricate pipelines, and maximizing throughput is paramount. These simulations frequently entail the concurrent execution of multiple tasks and calculations, making them ideal candidates for developers to fine-tune fairness policies in order to optimize throughput.
+	Scientific simulations involve complex pipelines where maximizing throughput is crucial. Concurrent execution of multiple tasks in simulations makes priority-based synchronization effective for fine-tuning fairness policies and optimizing throughput.
 
-In these use-cases, priority-based synchronization mechanisms allow for better resource management, responsiveness, and prioritization of critical tasks over less critical ones, enhancing system efficiency and performance in scenarios where fairness and timing are of utmost importance.
+In these use-cases, priority-based synchronization mechanisms enhance resource management, responsiveness, and prioritization of critical tasks, thereby improving system efficiency and performance in situations where fairness and timing are critical.<br>
+Additionally, managing fairness policies helps optimize around issues like priority inversion.
 
 ## Pipelines
 The primary intention behind creating these syncronization mechanisms is for their utilization within completed pipelines. In this context, the risk of thread starvation is non-existent due to the established pipeline structure.
@@ -79,6 +76,8 @@ The assumptions are:
 <img class="readme-img" src="https://sernior.github.io/fairness/stdpipeline.png" style= "object-fit: cover; object-position: 100% 0; width: 100%;"/>
 
 <img class="readme-img" src="https://sernior.github.io/fairness/prioritypipeline.png" style= "object-fit: cover; object-position: 100% 0; width: 100%;"/>
+
+**These two images depict the same pipeline. The first image illustrates the execution of the pipeline with a mostly FIFO lock, while the second image demonstrates an improved execution using a priority lock. The priority lock could be employed to reduce the overall execution time of the pipeline.**
 
 ## Getting Started
 
@@ -227,7 +226,7 @@ Contributions are also welcome! Feel free to open pull requests to the main repo
 
 ## License
 
-Distributed under the Boost Software License - Version 1.0. See LICENSE.txt for more information.
+Distributed under the Boost Software License - Version 1.0. See [LICENSE](https://github.com/Sernior/fairness/blob/main/LICENSE) for more information.
 
 ## Documentation
 The documentation is available at the following link: https://sernior.github.io/fairness/
