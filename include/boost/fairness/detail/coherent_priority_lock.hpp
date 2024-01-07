@@ -24,6 +24,12 @@
 
 namespace boost::fairness::detail{
 
+    enum class WaitMechanism{
+        Spin,
+        Wait
+    };
+
+    template<WaitMechanism W = WaitMechanism::Spin>
     class coherent_priority_lock{
 
         public:
@@ -47,9 +53,10 @@ namespace boost::fairness::detail{
                 if (requester->watch_->state_.load(std::memory_order_acquire) == GRANTED){
                     return;
                 }
-                pause();
-                //spin_wait();
-                //spin_wait(requester->watch_->state_, GRANTED);
+                if constexpr (W == WaitMechanism::Wait)
+                    wait(requester->watch_->state_, PENDING);
+                else
+                    spin_wait(requester->watch_->state_, PENDING);
             }
         }
 
@@ -77,6 +84,9 @@ namespace boost::fairness::detail{
             }
 
             localHighestPriorityReq->state_.store(GRANTED, std::memory_order_release);
+
+            if constexpr (W == WaitMechanism::Wait)
+                notify_one(localHighestPriorityReq->state_);
 
             requester->request_ = requester->watch_;
             requester->request_->thread_ = requester;

@@ -91,8 +91,11 @@ namespace boost::fairness{
          * 
          * @param priority used to set a priority for this thread to aquire the lock.
          * @return none.
-         * @exception Throws [std::system_error](https://en.cppreference.com/w/cpp/error/system_error) when errors occur, including errors from the underlying operating system that would prevent lock from meeting its specifications. The mutex is not locked in the case of any exception being thrown.
-         * @note lock() is usually not called directly: boost::fairness::unique_lock, boost::fairness::scoped_lock, and boost::fairness::lock_guard are used to manage exclusive locking.
+         * @exception std::system_error : Throws std::system_error when errors occur, including errors from the underlying operating system that would prevent lock from meeting its specifications. The mutex is not locked in the case of any exception being thrown.
+         * @note lock() is usually not called directly: unique_lock, scoped_lock, and lock_guard are used to manage exclusive locking.
+         * 
+         * ### Example
+         * 
          * \code{.cpp}
          * shared_priority_mutex<10> m;
          * 
@@ -141,6 +144,17 @@ namespace boost::fairness{
 
         /**
          * @brief Release the shared_priority_mutex from unique ownership.
+         * \n 
+         * The mutex must be locked by the current thread of execution, otherwise, the behavior is undefined.
+         * \n 
+         * This operation _synchronizes-with_ (as defined in [std::memory_order](https://en.cppreference.com/w/cpp/atomic/memory_order)) any subsequent lock operation that obtains ownership of the same mutex.
+         * 
+         * @param none.
+         * @return none.
+         * @exception none.
+         * @note unlock() is usually not called directly: unique_lock and lock_guard are used to manage exclusive locking.
+         * 
+         * ### Example
          * 
          * \code{.cpp}
          * shared_priority_mutex<10> m;
@@ -189,9 +203,20 @@ namespace boost::fairness{
         }
 
         /**
-         * @brief Try to acquire the unique ownership of the shared_priority_mutex, if successful will return true, false otherwise.
+         * @brief Try to acquire the unique ownership of the shared_priority_mutex, if successful will return ```true```, ```false``` otherwise.
+         * \n 
+         * This function is allowed to fail spuriously and return ```false``` even if the mutex is not currently locked by any other thread.
+         * \n 
+         * If try_lock() is called by a thread that already owns the shared_priority_mutex in any mode (shared or exclusive), the behavior is undefined.
+         * \n 
+         * Prior unlock() operation on the same mutex _synchronizes-with_ (as defined in [std::memory_order](https://en.cppreference.com/w/cpp/atomic/memory_order)) this operation if it returns ```true```. Note that prior lock() does not synchronize with this operation if it returns ```false```.
          * 
          * @param priority used to set a priority for this thread to aquire the lock.
+         * @return ```true``` : if the lock was acquired successfully.
+         * @return ```false``` : otherwise.
+         * @exception Throws nothing.
+         * 
+         * ### Example
          * 
          * \code{.cpp}
          * shared_priority_mutex<10> m;
@@ -202,7 +227,6 @@ namespace boost::fairness{
          *      //...some code.
          * }
          * \endcode
-         * @return bool 
          */
         [[nodiscard]] bool try_lock(Priority_t const priority = 0){
 
@@ -228,8 +252,21 @@ namespace boost::fairness{
 
         /**
          * @brief Try to acquire the shared ownership of the shared_priority_mutex, blocking the thread if the shared_priority_mutex was already uniquely owned or if another thread is waiting for unique ownership with higher priority.
+         * \n 
+         * If another thread is holding the mutex in exclusive ownership, a call to lock_shared will block execution until shared ownership can be acquired.
+         * \n
+         * If lock_shared() is called by a thread that already owns the mutex in any mode (exclusive or shared), the behavior is undefined.
+         * \n 
+         * If more than the implementation-defined maximum number of shared owners already locked the mutex in shared mode, lock_shared blocks execution until the number of shared owners is reduced. The maximum number of owners is guaranteed to be at least 10000.
+         * \n 
+         * A prior unlock() operation on the same mutex _synchronizes-with_ (as defined in [std::memory_order](https://en.cppreference.com/w/cpp/atomic/memory_order)) this operation.
          * 
          * @param priority used to set a priority for this thread to aquire the lock_shared.
+         * @return none.
+         * @exception std::system_error : Throws [std::system_error](https://en.cppreference.com/w/cpp/error/system_error) when errors occur, including errors from the underlying operating system that would prevent lock from meeting its specifications. The mutex is not locked in the case of any exception being thrown.
+         * @note lock_shared() is usually not called directly: shared_lock is used to manage shared locking.
+         * 
+         * ### Example
          * 
          * \code{.cpp}
          * shared_priority_mutex<10> m;
@@ -270,7 +307,18 @@ namespace boost::fairness{
         }
 
         /**
-         * @brief Release the shared_priority_mutex from shared ownership.
+         * @brief Release the shared_priority_mutex from shared ownership by the calling thread.
+         * \n
+         * The mutex shared_priority_mutex be locked by the current thread of execution in shared mode, otherwise, the behavior is undefined.
+         * \n 
+         * This operation _synchronizes-with_ (as defined in [std::memory_order](https://en.cppreference.com/w/cpp/atomic/memory_order)) any subsequent lock() operation that obtains ownership of the same shared_priority_mutex.
+         * 
+         * @param none.
+         * @return none.
+         * @exception Throws nothing.
+         * @note unlock_shared() is usually not called directly: shared_lock is used to manage shared locking.
+         * 
+         * ### Example
          * 
          * \code{.cpp}
          * shared_priority_mutex<10> m;
@@ -326,9 +374,20 @@ namespace boost::fairness{
         }
 
         /**
-         * @brief Try to acquire the shared ownership of the shared_priority_mutex, if successful will return true, false otherwise.
+         * @brief Try to acquire the shared ownership of the shared_priority_mutex, if successful will return ```true```, ```false``` otherwise.
+         * \n 
+         * This function is allowed to fail spuriously and return ```false``` even if the mutex is not currenly exclusively locked by any other thread.
+         * \n 
+         * A prior unlock() operation on the same mutex _synchronizes-with_ (as defined in [std::memory_order](https://en.cppreference.com/w/cpp/atomic/memory_order)) this operation if it returns ```true```.
+         * \n 
+         * The behavior is undefined if the calling thread already owns the mutex in any mode.
          * 
          * @param priority used to set a priority for this thread to aquire the lock_shared.
+         * @return ```true``` : if the lock was acquired successfully.
+         * @return ```false``` : otherwise.
+         * @exception Throws nothing.
+         * 
+         * ### Example
          * 
          * \code{.cpp}
          * shared_priority_mutex<10> m;

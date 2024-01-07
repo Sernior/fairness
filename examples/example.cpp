@@ -1,15 +1,13 @@
 #include <boost/fairness.hpp>
+#include <iostream>
 
 static boost::fairness::priority_mutex<4> ms;
 
-void threadFunction(int i) {
-    if (ms.try_lock(i)){
-        ms.unlock();
-        std::cout << i << std::endl;
-        return;
+void threadFunction(int p) {
+    {
+        boost::fairness::unique_lock ul(ms, p);
+        std::cout << p << std::endl;
     }
-    std::cout << -1 << std::endl;
-
 }
 int main()
 {

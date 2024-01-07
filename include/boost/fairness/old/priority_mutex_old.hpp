@@ -1,7 +1,6 @@
 /**
  * @file priority_mutex.hpp
  * @author F. Abrignani (federignoli@hotmail.it)
- * @author P. Di Giglio
  * @author S. Martorana
  * @brief This file contains the implementation of the priority_mutex.
  * @version 0.1

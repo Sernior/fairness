@@ -38,7 +38,7 @@ namespace boost::fairness::detail{
 
         Request* watch_{nullptr};
         Request* request_{nullptr};
-        pqspinlock* owner_{nullptr};
+        void* owner_{nullptr};
         Priority_t priority_{BOOST_FAIRNESS_INVALID_PRIORITY};
         bool inUse_{};
     }; 
@@ -49,7 +49,7 @@ namespace boost::fairness::detail{
 
         ThreadPool() = default;
 
-        Thread* getThread(pqspinlock* const owner){
+        Thread* getThread(void* const owner){
             for (uint32_t i = 0; i < N; ++i){
                 if (!threads_[i].inUse_){
                     threads_[i].owner_ = owner;
@@ -59,7 +59,7 @@ namespace boost::fairness::detail{
             return nullptr;
         }
 
-        Thread* reGetThread(pqspinlock* const owner){
+        Thread* reGetThread(void* const owner){
             for (uint32_t i = 0; i < N; ++i){
                 if (threads_[i].owner_ == owner){
                     return &threads_[i];

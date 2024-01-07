@@ -3,19 +3,20 @@
 #include <chrono>
 #include <vector>
 #include <mutex>
+#include <latch>
 #include <shared_mutex>
 #include <algorithm>
 #include <BS_thread_pool.hpp>
-#define BOOST_FAIRNESS_USE_EXPERIMENTAL_WAIT_NOTIFY
+//#define BOOST_FAIRNESS_USE_EXPERIMENTAL_WAIT_NOTIFY
 //#include <boost/atomic.hpp>
 //#include <boost/lockfree/queue.hpp>
+//#define BOOST_FAIRNESS_USE_TATAS
 #include <boost/fairness.hpp>
-#include <boost/fairness/detail/coherent_priority_lock.hpp>
-#include <boost/fairness/detail/pqspinlock.hpp>
 
 static std::mutex m;
 //static boost::fairness::detail::mcs_spinlock mcs;
 static boost::fairness::detail::pqspinlock pqspin;
+static boost::fairness::priority_mutex pm;
 
 #define NOW std::chrono::high_resolution_clock::now()
 
@@ -32,7 +33,7 @@ static void busy_wait_nano(uint64_t nanoseconds){
 static void thread_function_nano(int p, int preCriticalTime, int criticalTime, int postCriticalTime){
     busy_wait_nano(preCriticalTime);
     {
-        boost::fairness::unique_lock l1(sms, p);c
+        boost::fairness::unique_lock l1(sms, p);
         busy_wait_nano(criticalTime);
     }
     busy_wait_nano(postCriticalTime);
@@ -77,17 +78,19 @@ static void cpl_test2(int i){
     pmcs.grant_lock(&t);
 }*/
 
-static void pmcs_test(int i){
-    pqspin.lock(i);
+static void pmcs_test(int i, std::latch& l){
+    l.arrive_and_wait();
+    pm.lock(i);
     ret.push_back(i);
-    pqspin.unlock();
+    pm.unlock();
 
 }
 
-static void pmcs_test2(int i){
-    pqspin.lock(i);
+static void pmcs_test2(int i, std::latch& l){
+    l.arrive_and_wait();
+    pm.lock(i);
     ret2.push_back(i);
-    pqspin.unlock();
+    pm.unlock();
 
 }
 
@@ -143,13 +146,17 @@ int main()
 
     for (int i = 0; i != 2000000; ++i){
 
-        for (int i = 0; i < 8; ++i) {
-            pool.push_task(pmcs_test, int(i/2));
+        auto l = std::latch{8};
+
+        for (int i = 7; i >= 0; --i) {
+            pool.push_task(pmcs_test, int(i/2), std::ref(l));
         }
         pool.wait_for_tasks();
 
-        for (int i = 0; i < 8; ++i) {
-            pool.push_task(pmcs_test2, int(i));
+        auto l2 = std::latch{8};
+
+        for (int i = 7; i >= 0; --i) {
+            pool.push_task(pmcs_test2, int(i), std::ref(l2));
         }
         pool.wait_for_tasks();
 

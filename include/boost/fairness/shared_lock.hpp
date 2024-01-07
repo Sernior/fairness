@@ -102,6 +102,7 @@ namespace boost::fairness{
 		 * 
 		 * @param m 
 		 * @param p 
+		 * @private
 		 */
 		shared_lock(Lockable& m, Priority_t const p, adopt_lock_t) noexcept
 		: lockable_(std::addressof(m)), lockOwned_(true), currentPriority_(p)
@@ -235,7 +236,7 @@ namespace boost::fairness{
 		{ return lockOwned_; }
 		
 		/**
-		 * @brief Checks the current priority of ```*this```.
+		 * @brief Checks the current priority of ```*this```. #TODO
 		 * 
 		 * @return Priority_t : the current priority.
 		 */
