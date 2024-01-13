@@ -1,14 +1,14 @@
 /**
  * @file priority_mutex.hpp
  * @author F. Abrignani (federignoli@hotmail.it)
- * @author S. Martorana
+ * @author S. Martorana (salvatoremartorana@hotmail.com)
  * @brief This file contains the implementation of the priority_mutex.
  * @version 0.1
  * @date 2023-08-19
- * 
+ *
  * @copyright Copyright (c) 2023 Federico Abrignani (federignoli@hotmail.it).
  * Distributed under the Boost Software License, Version 1.0. (See accompanying file LICENSE_1_0.txt or copy at http://www.boost.org/LICENSE_1_0.txt).
- * 
+ *
  */
 #ifndef BOOST_FAIRNESS_PRIORITY_MUTEX_HPP
 #define BOOST_FAIRNESS_PRIORITY_MUTEX_HPP

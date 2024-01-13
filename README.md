@@ -4,7 +4,6 @@
 [![GitHub](https://img.shields.io/github/license/Sernior/fairness)](https://github.com/Sernior/fairness/blob/main/LICENSE)
 ![GitHub Repo stars](https://img.shields.io/github/stars/Sernior/fairness)
 
-> [!NOTE]  
 > <span style="color: red;">This is not currently part of the Boost library collection.<br> However, my intention is to submit it for review once it's fully completed.</span>
 
 **A collection of advanced syncronization mechanisms which are able to prioritize threads based on their priority, granting higher-priority threads access to protected resources ahead of lower-priority ones.**
@@ -19,11 +18,56 @@
   </p>
 </div>
 
+## Motivation
+
+### Crafting Fairness in Synchronization: A C++ Library Journey
+
+<!-- la ragione per cui e' stata fatta la libreria principalmente perche' il so non ha info che un programmatore possa avere, quindi politiche di fairness, user space...  -->
+
+<!-- The reason why I started this library is that the operating system operates decisions regarding scheduling policies without knowledge of the application layer. Sometimes, a programmer who is optimizing an application may want to give priority to certain threads for various reasons. -->
+The reason I started this library is that the operating system makes decisions regarding scheduling policies without knowledge of the application layer. Sometimes, a programmer optimizing an application may want to prioritize certain threads for various reasons.
+
+<!-- quando ho iniziato questa lib credevo che sarebbe stato relativamente veloce e' semplice ma non lo e;' -->
+
+When I started this library, I believed it would be relatively easy, but it turned out not to be. Throughout my study and development of this library, I realized that in this field, there are no "silver bullets" and each solution has its own set of pros and cons.
+Unable to find a universal solution for every architecture, I opted to allow users to customize certain critical aspects of the library. I recommend users of this library to read [this page](file:///home/torjack/Documents/GitHub/fairness/docs/html/md_docs_2implementation-details.html).
+
+<!-- ci sono tanti trade off e scelte, nessun silver bullet in questo campo.
+Lo scopo di questa lib, per info riguardo all'implementazione della lib, possibilita' di customizzazione per migliorare le performance in base al (...) del programmatore (il problema che deve andare a risolvere, velocita', spazio di memoria, n core, n processori, n pqnode, ecc...) link -> (...) -->
+
+
+
 ## About The Project
 
-While the standard library offers various tools for managing concurrency, it lacks effective methods for enforcing fairness policies among threads.<br>
+<!-- While the standard library offers various tools for managing concurrency, it lacks effective methods for enforcing fairness policies among threads.<br>
 Tweaking such behaviors can be challenging, and mistakes might lead to issues like thread starvation. These tools, if misused, have the potential to cause harm rather than benefit. Careful implementation and understanding are crucial to harness their benefits effectively.<br>
-The advanced syncronization mechanisms in this library do not autonomously adjust priorities, which means there is a risk of thread starvation if new threads are continually created and given high-priority locks; the primary intention behind creating these syncronization mechanisms is for their utilization within completed pipelines. In this context, the risk of thread starvation is non-existent due to the established pipeline structure.
+The advanced syncronization mechanisms in this library do not autonomously adjust priorities, which means there is a risk of thread starvation if new threads are continually created and given high-priority locks. -->
+
+The standard library provides tools for handling concurrency but lacks effective ways to allow programmers to choose fairness policies.<br>
+Modifying these behaviors can be tricky, and mistakes may lead to issues such as thread starvation. If not used carefully, these tools can do more harm than good, emphasizing the importance of cautious usage.<br>
+Furthermore, the advanced synchronization mechanisms in this library do not automatically adjust priorities. This poses a risk of thread starvation when new threads are consistently created with high-priority locks.
+
+## Use Cases
+
+Although priority-based locks are primarily designed to mitigate the issue of starvation and prevent it, they can also serve as a valuable tool in scenarios where traditional, non-priority-based synchronization mechanisms fall short. Here are some scenarios where a priority-based synchronization mechanism may be the preferred choice:
+
+**Real-time Systems**:
+	In real-time systems, tasks have strict timing requirements. Priority-based synchronization could be used that high-priority tasks are executed without delay, allowing critical functions like safety-critical control systems or healthcare devices to meet their deadlines.
+
+**Resource Allocation**:
+	In resource allocation scenarios where different processes or threads compete for resources (e.g., memory, CPU time), a priority-based mechanism can allocate resources to high-priority tasks, could be used to ensure that get the resources they need promptly.
+
+**Multi-Threaded Gaming**:
+	In multi-threaded gaming engines, priority-based synchronization can prioritize slower threads in order to increase throughput of the graphical pipeline so to increase FPS.
+
+**Scientific Simulations**:
+	Scientific simulations involve complex pipelines where maximizing throughput is crucial. Concurrent execution of multiple tasks in simulations makes priority-based synchronization effective for fine-tuning fairness policies and optimizing throughput.
+
+In these use-cases, priority-based synchronization mechanisms enhance resource management, responsiveness, and prioritization of critical tasks, thereby improving system efficiency and performance in situations where fairness and timing are critical.<br>
+Additionally, managing fairness policies helps optimize around issues like priority inversion.
+
+## Pipelines
+The primary intention behind creating these syncronization mechanisms is for their utilization within completed pipelines. In this context, the risk of thread starvation is non-existent due to the established pipeline structure.
 
 The assumptions are:
   - The pipeline operates in a multi-threaded manner;
@@ -32,6 +76,8 @@ The assumptions are:
 <img class="readme-img" src="https://sernior.github.io/fairness/stdpipeline.png" style= "object-fit: cover; object-position: 100% 0; width: 100%;"/>
 
 <img class="readme-img" src="https://sernior.github.io/fairness/prioritypipeline.png" style= "object-fit: cover; object-position: 100% 0; width: 100%;"/>
+
+**These two images depict the same pipeline. The first image illustrates the execution of the pipeline with a mostly FIFO lock, while the second image demonstrates an improved execution using a priority lock. The priority lock could be employed to reduce the overall execution time of the pipeline.**
 
 ## Getting Started
 
@@ -46,33 +92,31 @@ Download https://www.boost.org/users/history/version_1_82_0.html
 
 In the directory where you want to put the Boost installation, execute:
 
-    ```sh
-    $ tar --bzip2 -xf /path/to/boost_1_82_0.tar.bz2
-    $ ./bootstrap.sh --prefix=/usr/local
-    $ ./b2 install
-    ```
+```sh
+$ tar --bzip2 -xf /path/to/boost_1_82_0.tar.bz2
+$ ./bootstrap.sh --prefix=/usr/local
+$ ./b2 install
+```
 
 ### Setup
 
-This is an header only library but you can build the tests using:
-
 Generate ninja build files and build:
 
-   ```sh
-   $ cmake . -B build -G Ninja -DLIBFSM_COMPILE_TESTS=ON -DLIBFSM_COMPILE_BENCHMARKS=ON
-   $ cmake --build build
-   ```
+```sh
+$ cmake . -B build -G Ninja -DLIBFSM_COMPILE_TESTS=ON -DLIBFSM_COMPILE_BENCHMARKS=ON
+$ cmake --build build
+```
 
 ### Installation
-Using cmake you can include this library using:
+Using cmake you can include this library as follows:
 
 ```cmake
 include(FetchContent)
 
 FetchContent_Declare(
-  fsm
-  GIT_REPOSITORY https://github.com/Sernior/priority-mutex.git
-  GIT_TAG [TAG] #change with the tag you want to use
+	fsm
+  	GIT_REPOSITORY https://github.com/Sernior/fairness.git
+  	GIT_TAG [TAG] #change with the tag you want to use
 )
 
 FetchContent_MakeAvailable(fsm)
@@ -83,7 +127,24 @@ target_link_libraries(your_stuff.cpp fsm)
 ```
 
 ## Snippet
-This is a snippet ready-to-use.
+To run this code snippet, you should integrate the 'BS_thread_pool' library into your CMakeLists.txt by including it as follows:
+
+```cmake
+add_library(tp INTERFACE)# testing to remove in the end
+target_include_directories(tp INTERFACE thread-pool)
+target_compile_features(tp INTERFACE cxx_std_20)
+```
+
+Organize your directory structure as follows:
+
+```
+├── snippet.cpp
+└── thread-pool
+    └── BS_thread_pool.hpp
+```
+
+Now this snippet is ready-to-use.
+
 ```cpp
 #include <iostream>
 #include <thread>
@@ -103,10 +164,11 @@ static void busy_wait_nano(uint64_t nanoseconds){
 
 static void thread_function_nano(int p, int preCriticalTime, int postCriticalTime, int criticalTime){
     busy_wait_nano(preCriticalTime);
-    ms.lock(p);
-    std::cout << "Thread with priority : " << p << " is running."<<std::endl;
-    busy_wait_nano(criticalTime);
-    ms.unlock();
+    {
+        boost::fairness::unique_lock l1(ms, p);
+    	std::cout << "Thread with priority : " << p << " is running." << std::endl;
+        busy_wait_nano(criticalTime);
+    }
     busy_wait_nano(postCriticalTime);
 }
 
@@ -128,7 +190,7 @@ int main()
 }
 ```
 
-The output of the above will be:
+The output of the above could be:
 
 ```
 Thread with priority : 0 is running.
@@ -140,21 +202,38 @@ Thread with priority : 2 is running.
 Thread with priority : 3 is running.
 Thread with priority : 3 is running.
 ```
+
+## Configurations
+
+This is a list of macros that can be defined to configure boost::fairness:
+
+| MACRO                                         | Description                                                                                                                                                                                             |
+| --------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| BOOST_FAIRNESS_WAIT_SPINS                     | The total number of spins before a syscall to the OS to yield the cpu through futex on linux or waitOnAdress on windows (this is used only if BOOST_FAIRNESS_USE_EXPERIMENTAL_WAIT_NOTIFY is defined).  |
+| BOOST_FAIRNESS_WAIT_SPINS_RELAXED             | The number of paused spins before a syscall to the OS to yield the cpu through futex on linux or waitOnAdress on windows (this is used only if BOOST_FAIRNESS_USE_EXPERIMENTAL_WAIT_NOTIFY is defined). |
+| BOOST_FAIRNESS_USE_TATAS                      | If defined contention will be solved with a simple tatas-based algorithm witch is faster but doesn't scale.                                                                                             |
+| BOOST_FAIRNESS_SPINWAIT_SPINS                 | The total number of spins performed while spin waiting.                                                                                                                                                 |
+| BOOST_FAIRNESS_SPINWAIT_SPINS_RELAXED         | The number of paused spins performed while spin waiting.                                                                                                                                                |
+| BOOST_FAIRNESS_HARDWARE_DESTRUCTIVE_SIZE      | Hardware destructive size used by this library.                                                                                                                                                         |
+| BOOST_FAIRNESS_MAX_PQNODES                    | The number of requests each priority mutex has available (this is used only if BOOST_FAIRNESS_USE_TATAS is not defined).                                                                                |
+| BOOST_FAIRNESS_MAX_THREADS                    | The total number of thread structs each thread has available (this is used only if BOOST_FAIRNESS_USE_TATAS is not defined).                                                                            |
+| BOOST_FAIRNESS_USE_EXPERIMENTAL_WAIT_NOTIFY   | Use a custom implementation to perform atomic::wait and atomic::notify instead of the standard ones.                                                                                                    |
 
 ## Contributing
 
-If you encounter any issues or would like to suggest new features, please don't hesitate to open an issue or get in touch with me at federignoli@hotmail.it.<br />Contributions are also welcome! Feel free to open pull requests to the main repository and assign me as a reviewer – I'll be sure to review them. Your help is greatly appreciated!
+If you encounter any issues or would like to suggest new features, please don't hesitate to open an issue or get in touch with me at federignoli@hotmail.it.<br/>
+Contributions are also welcome! Feel free to open pull requests to the main repository and assign me as a reviewer – I'll be sure to review them. Your help is greatly appreciated!
 
 ## License
 
-Distributed under the Boost Software License - Version 1.0. See LICENSE.txt for more information.
+Distributed under the Boost Software License - Version 1.0. See [LICENSE](https://github.com/Sernior/fairness/blob/main/LICENSE) for more information.
 
 ## Documentation
 The documentation is available at the following link: https://sernior.github.io/fairness/
 
 ## Contacts
 
-Federico Abrignani - federignoli@hotmail.it
+Federico Abrignani - federignoli@hotmail.it<br/>
 Salvatore Martorana - salvatoremartorana@hotmail.com
 
 ## Authors and Contributors

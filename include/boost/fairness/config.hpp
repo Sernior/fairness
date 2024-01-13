@@ -143,6 +143,14 @@ static_assert(BOOST_FAIRNESS_MAX_PQNODES > 2, "BOOST_FAIRNESS_MAX_PQNODES less t
 #elif defined(_WIN32) && !defined(BOOST_FAIRNESS_USE_STD_WAIT_NOTIFY)
 #include <boost/fairness/detail/wait_ops_windows.hpp>
 #else
+
+#ifndef BOOST_FAIRNESS_USE_STD_WAIT_NOTIFY
+/**
+ * @brief boost::fairness will use atomic::wait/notify implemented by the standard lib instead of its own implementation.
+*/
+#define BOOST_FAIRNESS_USE_STD_WAIT_NOTIFY
+#endif // BOOST_FAIRNESS_USE_STD_WAIT_NOTIFY
+
 #include <boost/fairness/detail/wait_ops_generic.hpp>
 #endif // Operating systems
 

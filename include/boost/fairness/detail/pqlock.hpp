@@ -72,6 +72,13 @@ namespace boost::fairness::detail{
             t_.returnThread(t);
         }
 
+        /* The try_lock for the Craig algorithm will be implemented in a future update.
+        
+        [[nodiscard]] bool try_lock(Priority_t const priority = 0){
+            #TODO
+        }
+        */
+
         private:
 
         coherent_priority_lock<WaitMechanism::Wait> cpl_;
