@@ -103,7 +103,7 @@ $ ./b2 install
 Generate ninja build files and build:
 
 ```sh
-$ cmake . -B build -G Ninja -DLIBFSM_COMPILE_TESTS=ON -DLIBFSM_COMPILE_BENCHMARKS=ON
+$ cmake . -B build -G Ninja -DLIB_FAIRNESS_COMPILE_TESTS=ON -DLIB_FAIRNESS_COMPILE_BENCHMARKS=ON
 $ cmake --build build
 ```
 
@@ -114,16 +114,16 @@ Using cmake you can include this library as follows:
 include(FetchContent)
 
 FetchContent_Declare(
-	fsm
+	fairness
   	GIT_REPOSITORY https://github.com/Sernior/fairness.git
   	GIT_TAG [TAG] #change with the tag you want to use
 )
 
-FetchContent_MakeAvailable(fsm)
+FetchContent_MakeAvailable(fairness)
 ```
 At this point you should be able to link the library simply using:
 ```cmake
-target_link_libraries(your_stuff.cpp fsm)
+target_link_libraries(your_stuff.cpp fairness)
 ```
 
 ## Snippet
