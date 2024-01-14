@@ -58,11 +58,7 @@ namespace boost::fairness::detail{
             for (uint32_t i = 0; i < N; ++i){
                 if (!reqs_[i].inUse_.test(std::memory_order_relaxed) && !reqs_[i].inUse_.test_and_set(std::memory_order_acquire)) // check this! TODO
                     return &reqs_[i];
-                //if (!statuses_[i].test() && !statuses_[i].test_and_set())
-                //    return &reqs_[i];
-                //spin_wait();
-                std::this_thread::yield();
-                //pause();
+                spin_wait();
             }
             return nullptr;
         }

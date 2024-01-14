@@ -55,9 +55,9 @@ namespace boost::fairness::detail{
 
     inline void spin_wait() noexcept {
 
-        for(int i = 0; i < BOOST_FAIRNESS_SPINWAIT_SPINS; ++i){
+        for(int i = 0; i < BOOST_FAIRNESS_GETREQUEST_SPINS; ++i){
 
-            relaxOrYield[i >= BOOST_FAIRNESS_SPINWAIT_SPINS_RELAXED]();
+            relaxOrYield[i >= BOOST_FAIRNESS_GETREQUEST_SPINS_RELAXED]();
 
         }
 
@@ -86,7 +86,7 @@ namespace boost::fairness::detail{
             
             wait_(mem, expected);
 
-        } while (memEqualsExpected()); // could block again and suffer from ABA
+        } while (memEqualsExpected());
 
     }
 

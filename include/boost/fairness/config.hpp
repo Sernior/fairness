@@ -24,6 +24,24 @@
 
 
 
+#ifndef BOOST_FAIRNESS_GETREQUEST_SPINS
+/**
+ * @brief the total number of spins during a spin_wait operation
+*/
+#define BOOST_FAIRNESS_GETREQUEST_SPINS 1
+#endif // BOOST_FAIRNESS_SPINWAIT_SPINS
+
+
+
+#ifndef BOOST_FAIRNESS_GETREQUEST_SPINS_RELAXED
+/**
+ * @brief the number of relaxed spins during a spin_wait operation
+*/
+#define BOOST_FAIRNESS_GETREQUEST_SPINS_RELAXED 1
+#endif // BOOST_FAIRNESS_SPINWAIT_SPINS_RELAXED
+
+
+
 #ifndef BOOST_FAIRNESS_SPINWAIT_SPINS
 /**
  * @brief the total number of spins during a spin_wait operation
