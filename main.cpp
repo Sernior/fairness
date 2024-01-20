@@ -14,7 +14,6 @@
 #include <boost/fairness.hpp>
 
 static std::mutex m;
-//static boost::fairness::detail::mcs_spinlock mcs;
 static boost::fairness::detail::pqspinlock pqspin;
 static boost::fairness::priority_mutex pm;
 
