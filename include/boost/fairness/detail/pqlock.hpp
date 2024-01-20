@@ -58,7 +58,6 @@ namespace boost::fairness::detail{
                 req = reqs_.getRequest();
                 if (req != nullptr)
                     break;
-                //spin_wait(); // maybe just yield here
                 std::this_thread::yield(); // there are no free Requests now just yield
             }
             t->prepare(priority, req);
