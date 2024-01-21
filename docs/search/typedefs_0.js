@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['priority_5ft_0',['Priority_t',['../namespaceboost_1_1fairness.html#ae7e29511af6c21c2c41f9dc351e2d969',1,'boost::fairness']]]
+  ['priority_5ft_0',['Priority_t',['../namespaceboost_1_1fairness.html#a0b60e9ca2b824c36816a15cd7a5c9c8d',1,'boost::fairness']]]
 ];

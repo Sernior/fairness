@@ -1,5 +1,10 @@
 var benchmark_8cpp =
 [
+    [ "BOOST_FAIRNESS_GETREQUEST_SPINS", "benchmark_8cpp.html#a75871f1ee4f73c858731a81b1e86ce10", null ],
+    [ "BOOST_FAIRNESS_GETREQUEST_SPINS_RELAXED", "benchmark_8cpp.html#a3a4431e7c7d1c51c5a69efc2e6daf31d", null ],
+    [ "BOOST_FAIRNESS_MAX_PQNODES", "benchmark_8cpp.html#ade5efba65f23256f5914f9c24b6e1c52", null ],
+    [ "BOOST_FAIRNESS_SPINWAIT_SPINS", "benchmark_8cpp.html#a96f170569709c4091e18ea1eb61f292b", null ],
+    [ "BOOST_FAIRNESS_SPINWAIT_SPINS_RELAXED", "benchmark_8cpp.html#a77adda31959a3584dc6a50e62d03835e", null ],
     [ "BENCHMARK", "benchmark_8cpp.html#a2e2a0b19bf5b116489e4e7f91b345e40", null ],
     [ "BENCHMARK", "benchmark_8cpp.html#a283694676806bc3b2e5dadef89d88c31", null ],
     [ "BENCHMARK", "benchmark_8cpp.html#a02b98943a4f2b13074bdfe499c87a440", null ],
@@ -26,12 +31,10 @@ var benchmark_8cpp =
     [ "BENCHMARK", "benchmark_8cpp.html#a7e733426a1be99c9b88d15a9e06760ab", null ],
     [ "BENCHMARK", "benchmark_8cpp.html#a446b76be7302a7ac8887d852152b1471", null ],
     [ "BENCHMARK", "benchmark_8cpp.html#ad22bc2d8f0147c0f9df00381782b79f5", null ],
-    [ "BENCHMARK", "benchmark_8cpp.html#adc0bece11c5207c958cd96e1229adf91", null ],
     [ "BENCHMARK", "benchmark_8cpp.html#a88143e5b360897d80cb14124edb8326c", null ],
     [ "BENCHMARK", "benchmark_8cpp.html#a4213895afefa4e5e4203684efce2ea33", null ],
     [ "BENCHMARK", "benchmark_8cpp.html#a48c5a4f15d5295f6b63964c2432b1b4d", null ],
     [ "BENCHMARK", "benchmark_8cpp.html#a945edebe055ceae2c65d1a11c0ee3065", null ],
-    [ "BENCHMARK", "benchmark_8cpp.html#ac6d00eaa2f95183a79244bd510d25d06", null ],
     [ "BENCHMARK", "benchmark_8cpp.html#a21f9c51de50e82ebd7f32a73dc34f7ab", null ],
     [ "BENCHMARK", "benchmark_8cpp.html#a431a1ef5a276187f46f834fc41764238", null ],
     [ "BENCHMARK", "benchmark_8cpp.html#af0adfbc0c5d35ec596772a980d17c5a9", null ],

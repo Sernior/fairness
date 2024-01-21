@@ -5,5 +5,5 @@ var slim__priority__mutex__benchmark_8hpp =
     [ "pipeline_benchmark_fast", "slim__priority__mutex__benchmark_8hpp.html#afe573a31a8129055970a796f4ac32929", null ],
     [ "pipeline_benchmark_gaming", "slim__priority__mutex__benchmark_8hpp.html#a0561f0b3b4bf159504402cb016a3c7cb", null ],
     [ "pipeline_benchmark_long", "slim__priority__mutex__benchmark_8hpp.html#a7ad7c8778439a597740bb8d6453dc007", null ],
-    [ "m", "slim__priority__mutex__benchmark_8hpp.html#a25b3c8193bd14c60164d1b25c10e5d5d", null ]
+    [ "m", "slim__priority__mutex__benchmark_8hpp.html#ac6aac8b7ed8924f24792be86a7323627", null ]
 ];

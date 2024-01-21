@@ -1,9 +1,10 @@
 var searchData=
 [
-  ['nano_0',['Nano',['../namespaceutils_1_1waiting.html#ab79f9b030bcaa61f7f229628f3bb9ba2a79b048d6d742fae8fc4f0524dcb6949c',1,'utils::waiting']]],
-  ['notify_5fall_1',['notify_all',['../namespaceboost_1_1fairness_1_1detail.html#af2a7b25c140561f9fb2d89f36512fa55',1,'boost::fairness::detail']]],
-  ['notify_5fall_5f_2',['notify_all_',['../namespaceboost_1_1fairness_1_1detail.html#abd0b11d7777b066de7440293ea728ec3',1,'boost::fairness::detail']]],
-  ['notify_5fone_3',['notify_one',['../namespaceboost_1_1fairness_1_1detail.html#a7bc3de1780104d6aac1048081e407515',1,'boost::fairness::detail']]],
-  ['notify_5fone_5f_4',['notify_one_',['../namespaceboost_1_1fairness_1_1detail.html#a17d86c4ae0b54baceff73eeaf80eafc2',1,'boost::fairness::detail']]],
-  ['now_5',['now',['../thread__utils_8hpp.html#acc4a9ad83f9350a588d117e0c8916d45',1,'NOW:&#160;thread_utils.hpp'],['../waiting__utils_8hpp.html#acc4a9ad83f9350a588d117e0c8916d45',1,'NOW:&#160;waiting_utils.hpp']]]
+  ['m_0',['m',['../namespacepriority__mutex__benchmark.html#abca0d9ddf77052f7b5dcfc8ba1b60f93',1,'priority_mutex_benchmark::m'],['../namespacerecursive__priority__mutex__benchmark.html#a727eefb438fb121ab5b4f374bad8009d',1,'recursive_priority_mutex_benchmark::m'],['../namespaceslim__priority__mutex__benchmark.html#ac6aac8b7ed8924f24792be86a7323627',1,'slim_priority_mutex_benchmark::m'],['../namespaceshared__priority__mutex__benchmark.html#abeffa5a27917bd203eee11e0a449bbf6',1,'shared_priority_mutex_benchmark::m'],['../namespacespinlock__priority__mutex__benchmark.html#a3a7c73cd0cfabd8187647c9958e11dbb',1,'spinlock_priority_mutex_benchmark::m'],['../namespacestandard__mutex__benchmark.html#afcc2f9a8831d01ce6bd55e9e68a8e870',1,'standard_mutex_benchmark::m'],['../namespacestandard__recursive__mutex__benchmark.html#a117615d958081bfe2a337632b07d7063',1,'standard_recursive_mutex_benchmark::m'],['../namespacestandard__shared__mutex__benchmark.html#a58e1fe1e573dbc0af9621791811c3b1f',1,'standard_shared_mutex_benchmark::m']]],
+  ['main_1',['main',['../test_8cpp.html#a0ddf1224851353fc92bfbff6f499fa97',1,'test.cpp']]],
+  ['mcs_20lock_20and_20craig_20algorithm_2',['MCS Lock and Craig Algorithm',['../md_docs_2implementation-details.html#autotoc_md23',1,'']]],
+  ['micro_3',['Micro',['../namespaceutils_1_1waiting.html#ab79f9b030bcaa61f7f229628f3bb9ba2adb1ce45d604c6b1d54c31dbc69bcdb56',1,'utils::waiting']]],
+  ['milli_4',['Milli',['../namespaceutils_1_1waiting.html#ab79f9b030bcaa61f7f229628f3bb9ba2a12465672495917bbec5d04198923d373',1,'utils::waiting']]],
+  ['motivation_5',['Motivation',['../index.html#autotoc_md27',1,'']]],
+  ['mutex_6',['mutex',['../md_docs_2implementation-details.html#autotoc_md20',1,'mutex'],['../classboost_1_1fairness_1_1unique__lock.html#a2d9954fcffb6139527f4c5bf20c4b3e8',1,'boost::fairness::unique_lock::mutex()'],['../classboost_1_1fairness_1_1shared__lock.html#a23e8415358372e1abf2d030ee99ed2dc',1,'boost::fairness::shared_lock::mutex()'],['../md_docs_2implementation-details.html#autotoc_md24',1,'Shared and Recursive Mutex']]]
 ];

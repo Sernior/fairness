@@ -1,4 +1,6 @@
 var searchData=
 [
-  ['priority_5fmutex_0',['priority_mutex',['../classboost_1_1fairness_1_1old2_1_1priority__mutex.html',1,'boost::fairness::old2::priority_mutex&lt; N &gt;'],['../classboost_1_1fairness_1_1old3_1_1priority__mutex.html',1,'boost::fairness::old3::priority_mutex&lt; N &gt;'],['../classboost_1_1fairness_1_1old4_1_1priority__mutex.html',1,'boost::fairness::old4::priority_mutex&lt; N &gt;'],['../classboost_1_1fairness_1_1old5_1_1priority__mutex.html',1,'boost::fairness::old5::priority_mutex&lt; N &gt;'],['../classboost_1_1fairness_1_1old6_1_1priority__mutex.html',1,'boost::fairness::old6::priority_mutex&lt; N &gt;'],['../classboost_1_1fairness_1_1old7_1_1priority__mutex.html',1,'boost::fairness::old7::priority_mutex&lt; N &gt;'],['../classboost_1_1fairness_1_1old8_1_1priority__mutex.html',1,'boost::fairness::old8::priority_mutex&lt; N &gt;'],['../classboost_1_1fairness_1_1old_1_1priority__mutex.html',1,'boost::fairness::old::priority_mutex&lt; N &gt;'],['../classboost_1_1fairness_1_1priority__mutex.html',1,'boost::fairness::priority_mutex&lt; N &gt;']]]
+  ['pqlock_0',['pqlock',['../classboost_1_1fairness_1_1detail_1_1pqlock.html',1,'boost::fairness::detail']]],
+  ['pqspinlock_1',['pqspinlock',['../classboost_1_1fairness_1_1detail_1_1pqspinlock.html',1,'boost::fairness::detail']]],
+  ['priority_5fmutex_2',['priority_mutex',['../classboost_1_1fairness_1_1priority__mutex.html',1,'boost::fairness']]]
 ];

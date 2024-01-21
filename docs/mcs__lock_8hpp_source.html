@@ -1,0 +1,237 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=9"/>
+<meta name="generator" content="Doxygen 1.9.8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<!-- BEGIN opengraph metadata -->
+<meta property="og:title" content="boost.fairness" />
+<meta property="og:image" content="https://sernior.github.io/fairness/logo1.png" />
+<meta property="og:description" content="A collection of advanced syncronization mechanisms." />
+<meta property="og:url" content="https://github.com/Sernior/fairness" />
+<!-- END opengraph metadata -->
+<!-- BEGIN twitter metadata -->
+<meta name="twitter:image:src" content="https://sernior.github.io/fairness/logo1.png" />
+<meta name="twitter:title" content="boost.fairness" />
+<meta name="twitter:description" content="A collection of advanced syncronization mechanisms." />
+<!-- END twitter metadata -->
+<title>fairness: include/boost/fairness/detail/mcs_lock.hpp Source File</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<link rel="icon" type="image/png" href="logo1-favicon.png" style="border-radius: 10%;"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<script type="text/javascript" src="doxygen-awesome-darkmode-toggle.js"></script>
+<script type="text/javascript" src="doxygen-awesome-fragment-copy-button.js"></script>
+<script type="text/javascript" src="doxygen-awesome-paragraph-link.js"></script>
+<script type="text/javascript" src="doxygen-awesome-interactive-toc.js"></script>
+<script type="text/javascript" src="doxygen-awesome-tabs.js"></script>
+<script type="text/javascript" src="toggle-alternative-theme.js"></script>
+<script type="text/javascript">
+    DoxygenAwesomeFragmentCopyButton.init()
+    DoxygenAwesomeDarkModeToggle.init()
+    DoxygenAwesomeParagraphLink.init()
+    DoxygenAwesomeInteractiveToc.init()
+    DoxygenAwesomeTabs.init()
+</script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="resize.js"></script>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+<link href="doxygen-awesome.css" rel="stylesheet" type="text/css"/>
+<link href="doxygen-awesome-sidebar-only.css" rel="stylesheet" type="text/css"/>
+<link href="doxygen-awesome-sidebar-only-darkmode-toggle.css" rel="stylesheet" type="text/css"/>
+<link href="custom.css" rel="stylesheet" type="text/css"/>
+<link href="custom-alternative.css" rel="stylesheet" type="text/css"/>
+<link href="custom.css" rel="stylesheet" type="text/css"/>
+</head>
+<body>
+<!-- https://tholman.com/github-corners/ -->
+<a href="https://github.com/Sernior/fairness" class="github-corner" title="View source on GitHub" target="_blank">
+    <svg viewBox="0 0 250 250" width="70" height="70" style="position: absolute; top: 0; border: 0; right: 0; z-index: 99;" aria-hidden="true">
+    <path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a><style>.github-corner:hover .octo-arm{animation:octocat-wave 560ms ease-in-out}@keyframes octocat-wave{0%,100%{transform:rotate(0)}20%,60%{transform:rotate(-25deg)}40%,80%{transform:rotate(10deg)}}@media (max-width:500px){.github-corner:hover .octo-arm{animation:none}.github-corner .octo-arm{animation:octocat-wave 560ms ease-in-out}}</style>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr style="height: 56px;">
+  <td id="projectlogo"><img alt="Logo" src="logo1.png"/></td>
+  <td id="projectalign" style="padding-left: 0.5em;">
+   <div id="projectname">fairness
+   &#160;<span id="projectnumber">v0.1</span>
+   </div>
+   <div id="projectbrief">A collection of advanced syncronization mechanisms.</div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Generated by Doxygen 1.9.8 -->
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+var searchBox = new SearchBox("searchBox", "search/",'.html');
+/* @license-end */
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(function() {
+  initMenu('',true,false,'search.php','Search');
+  $(document).ready(function() { init_search(); });
+});
+/* @license-end */
+</script>
+<div id="main-nav"></div>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(document).ready(function() { init_codefold(0); });
+/* @license-end */
+</script>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(document).ready(function(){initNavTree('mcs__lock_8hpp_source.html',''); initResizable(); });
+/* @license-end */
+</script>
+<div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">Loading...</div>
+<div class="SRStatus" id="Searching">Searching...</div>
+<div class="SRStatus" id="NoMatches">No Matches</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="header">
+  <div class="headertitle"><div class="title">mcs_lock.hpp</div></div>
+</div><!--header-->
+<div class="contents">
+<a href="mcs__lock_8hpp.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno">    1</span> </div>
+<div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span><span class="preprocessor">#ifndef BOOST_FAIRNESS_MCS_LOCK_HPP</span></div>
+<div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span><span class="preprocessor">#define BOOST_FAIRNESS_MCS_LOCK_HPP</span></div>
+<div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span><span class="comment">// TODO move to old this is unneeded</span></div>
+<div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span><span class="preprocessor">#include &lt;atomic&gt;</span></div>
+<div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span><span class="preprocessor">#include &lt;<a class="code" href="pause__ops_8hpp.html">boost/fairness/detail/pause_ops.hpp</a>&gt;</span></div>
+<div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span><span class="preprocessor">#include &lt;<a class="code" href="priority__t_8hpp.html">boost/fairness/priority_t.hpp</a>&gt;</span></div>
+<div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span> </div>
+<div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span><span class="keyword">namespace </span><a class="code hl_namespace" href="namespaceboost_1_1fairness_1_1detail.html">boost::fairness::detail</a>{</div>
+<div class="line"><a id="l00021" name="l00021"></a><span class="lineno"><a class="line" href="mcs__lock_8hpp.html#a00de8f7e0b615f88335573ba3909583d">   21</a></span><span class="preprocessor">    #define LOCKED 1</span></div>
+<div class="line"><a id="l00022" name="l00022"></a><span class="lineno"><a class="line" href="mcs__lock_8hpp.html#a2446c6fcfae710853129157c1f417d8e">   22</a></span><span class="preprocessor">    #define NOT_LOCKED 0</span></div>
+<div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span> </div>
+<div class="foldopen" id="foldopen00024" data-start="{" data-end="};">
+<div class="line"><a id="l00024" name="l00024"></a><span class="lineno"><a class="line" href="structboost_1_1fairness_1_1detail_1_1_q_node.html">   24</a></span>    <span class="keyword">struct </span>alignas(BOOST_FAIRNESS_HARDWARE_DESTRUCTIVE_SIZE) <a class="code hl_struct" href="structboost_1_1fairness_1_1detail_1_1_q_node.html">QNode</a>{</div>
+<div class="line"><a id="l00025" name="l00025"></a><span class="lineno"><a class="line" href="structboost_1_1fairness_1_1detail_1_1_q_node.html#a26db8d229a83ee484dc6687f3325320f">   25</a></span>        std::atomic&lt;QNode*&gt; next_{<span class="keyword">nullptr</span>};</div>
+<div class="line"><a id="l00026" name="l00026"></a><span class="lineno"><a class="line" href="structboost_1_1fairness_1_1detail_1_1_q_node.html#a37423b13df5f7669088ff67e67db7c3b">   26</a></span>        std::atomic&lt;uint32_t&gt; locked_{<a class="code hl_define" href="mcs__lock_8hpp.html#a00de8f7e0b615f88335573ba3909583d">LOCKED</a>};</div>
+<div class="line"><a id="l00027" name="l00027"></a><span class="lineno"><a class="line" href="structboost_1_1fairness_1_1detail_1_1_q_node.html#aaea4dbcbca100d60d4714d4d8dd1c839">   27</a></span>        <span class="keywordtype">char</span> padding[<a class="code hl_define" href="config_8hpp.html#a2873fbc3f86d433f7ec02fe48ccd3cfa">BOOST_FAIRNESS_HARDWARE_DESTRUCTIVE_SIZE</a>-<span class="keyword">sizeof</span>(next_)-<span class="keyword">sizeof</span>(locked_)];</div>
+<div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span>    };</div>
+</div>
+<div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span> </div>
+<div class="foldopen" id="foldopen00030" data-start="{" data-end="};">
+<div class="line"><a id="l00030" name="l00030"></a><span class="lineno"><a class="line" href="classboost_1_1fairness_1_1detail_1_1mcs__spinlock.html">   30</a></span>    <span class="keyword">class </span><a class="code hl_class" href="classboost_1_1fairness_1_1detail_1_1mcs__spinlock.html">mcs_spinlock</a>{</div>
+<div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span> </div>
+<div class="line"><a id="l00032" name="l00032"></a><span class="lineno">   32</span>        <span class="keyword">public</span>:</div>
+<div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span> </div>
+<div class="foldopen" id="foldopen00034" data-start="{" data-end="}">
+<div class="line"><a id="l00034" name="l00034"></a><span class="lineno"><a class="line" href="classboost_1_1fairness_1_1detail_1_1mcs__spinlock.html#a6cbb726b1df314094f91564ea4e86e4e">   34</a></span>        <span class="keywordtype">void</span> <a class="code hl_function" href="classboost_1_1fairness_1_1detail_1_1mcs__spinlock.html#a6cbb726b1df314094f91564ea4e86e4e">acquire</a>(<a class="code hl_struct" href="structboost_1_1fairness_1_1detail_1_1_q_node.html">QNode</a>* node){</div>
+<div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span> </div>
+<div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span>            <a class="code hl_struct" href="structboost_1_1fairness_1_1detail_1_1_q_node.html">QNode</a>* predecessor = tail.exchange(node, std::memory_order_relaxed);</div>
+<div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span> </div>
+<div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span>            <span class="keywordflow">if</span> (predecessor != <span class="keyword">nullptr</span>){</div>
+<div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span> </div>
+<div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span>                predecessor-&gt;<a class="code hl_variable" href="structboost_1_1fairness_1_1detail_1_1_q_node.html#a26db8d229a83ee484dc6687f3325320f">next_</a>.store(node, std::memory_order_release);</div>
+<div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span> </div>
+<div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span>                <span class="keywordflow">while</span> (node-&gt;<a class="code hl_variable" href="structboost_1_1fairness_1_1detail_1_1_q_node.html#a37423b13df5f7669088ff67e67db7c3b">locked_</a>.load(std::memory_order_acquire) == <a class="code hl_define" href="mcs__lock_8hpp.html#a00de8f7e0b615f88335573ba3909583d">LOCKED</a>){</div>
+<div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span>                    <span class="comment">// if I have higher priority then head or head is nullptr I become head</span></div>
+<div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span>                    <a class="code hl_function" href="namespaceboost_1_1fairness_1_1detail.html#afa0462f6897ac8ab6f4c4b52cd3169d8">pause</a>(); <span class="comment">// TODO Change with spinwait</span></div>
+<div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span>                }</div>
+<div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span> </div>
+<div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span>            }</div>
+<div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span> </div>
+<div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span>        }</div>
+</div>
+<div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span> </div>
+<div class="foldopen" id="foldopen00051" data-start="{" data-end="}">
+<div class="line"><a id="l00051" name="l00051"></a><span class="lineno"><a class="line" href="classboost_1_1fairness_1_1detail_1_1mcs__spinlock.html#a8f332a72ea6b10a76f36c452e5e5aac3">   51</a></span>        <span class="keywordtype">void</span> <a class="code hl_function" href="classboost_1_1fairness_1_1detail_1_1mcs__spinlock.html#a8f332a72ea6b10a76f36c452e5e5aac3">release</a>(<a class="code hl_struct" href="structboost_1_1fairness_1_1detail_1_1_q_node.html">QNode</a> *node) {</div>
+<div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span> </div>
+<div class="line"><a id="l00053" name="l00053"></a><span class="lineno">   53</span>            <a class="code hl_struct" href="structboost_1_1fairness_1_1detail_1_1_q_node.html">QNode</a>* successor = node-&gt;<a class="code hl_variable" href="structboost_1_1fairness_1_1detail_1_1_q_node.html#a26db8d229a83ee484dc6687f3325320f">next_</a>.load(std::memory_order_relaxed);<span class="comment">// head</span></div>
+<div class="line"><a id="l00054" name="l00054"></a><span class="lineno">   54</span> </div>
+<div class="line"><a id="l00055" name="l00055"></a><span class="lineno">   55</span>            <span class="keywordflow">if</span> (successor == <span class="keyword">nullptr</span>) {</div>
+<div class="line"><a id="l00056" name="l00056"></a><span class="lineno">   56</span> </div>
+<div class="line"><a id="l00057" name="l00057"></a><span class="lineno">   57</span>                <a class="code hl_struct" href="structboost_1_1fairness_1_1detail_1_1_q_node.html">QNode</a>* expected = node;</div>
+<div class="line"><a id="l00058" name="l00058"></a><span class="lineno">   58</span> </div>
+<div class="line"><a id="l00059" name="l00059"></a><span class="lineno">   59</span>                <span class="comment">// no one else is waiting, you are the last</span></div>
+<div class="line"><a id="l00060" name="l00060"></a><span class="lineno">   60</span>                <span class="keywordflow">if</span> (tail.compare_exchange_strong(expected, <span class="keyword">nullptr</span>, std::memory_order_release, std::memory_order_relaxed)){</div>
+<div class="line"><a id="l00061" name="l00061"></a><span class="lineno">   61</span>                    <span class="keywordflow">return</span>;</div>
+<div class="line"><a id="l00062" name="l00062"></a><span class="lineno">   62</span>                }</div>
+<div class="line"><a id="l00063" name="l00063"></a><span class="lineno">   63</span> </div>
+<div class="line"><a id="l00064" name="l00064"></a><span class="lineno">   64</span>                <span class="keywordflow">do</span> {</div>
+<div class="line"><a id="l00065" name="l00065"></a><span class="lineno">   65</span>                    successor = node-&gt;<a class="code hl_variable" href="structboost_1_1fairness_1_1detail_1_1_q_node.html#a26db8d229a83ee484dc6687f3325320f">next_</a>.load(std::memory_order_relaxed);<span class="comment">// head</span></div>
+<div class="line"><a id="l00066" name="l00066"></a><span class="lineno">   66</span>                } <span class="keywordflow">while</span> (successor == <span class="keyword">nullptr</span>);</div>
+<div class="line"><a id="l00067" name="l00067"></a><span class="lineno">   67</span>            }</div>
+<div class="line"><a id="l00068" name="l00068"></a><span class="lineno">   68</span>            successor-&gt;<a class="code hl_variable" href="structboost_1_1fairness_1_1detail_1_1_q_node.html#a37423b13df5f7669088ff67e67db7c3b">locked_</a>.store(<a class="code hl_define" href="mcs__lock_8hpp.html#a2446c6fcfae710853129157c1f417d8e">NOT_LOCKED</a>, std::memory_order_release);</div>
+<div class="line"><a id="l00069" name="l00069"></a><span class="lineno">   69</span>        }</div>
+</div>
+<div class="line"><a id="l00070" name="l00070"></a><span class="lineno">   70</span> </div>
+<div class="line"><a id="l00071" name="l00071"></a><span class="lineno">   71</span>        <span class="keyword">private</span>:</div>
+<div class="line"><a id="l00072" name="l00072"></a><span class="lineno">   72</span>        std::atomic&lt;QNode*&gt; tail{<span class="keyword">nullptr</span>};</div>
+<div class="line"><a id="l00073" name="l00073"></a><span class="lineno">   73</span> </div>
+<div class="line"><a id="l00074" name="l00074"></a><span class="lineno">   74</span>    };</div>
+</div>
+<div class="line"><a id="l00075" name="l00075"></a><span class="lineno">   75</span> </div>
+<div class="line"><a id="l00076" name="l00076"></a><span class="lineno">   76</span><span class="preprocessor">    #undef LOCKED</span></div>
+<div class="line"><a id="l00077" name="l00077"></a><span class="lineno">   77</span><span class="preprocessor">    #undef NOT_LOCKED</span></div>
+<div class="line"><a id="l00078" name="l00078"></a><span class="lineno">   78</span>}</div>
+<div class="line"><a id="l00079" name="l00079"></a><span class="lineno">   79</span><span class="preprocessor">#endif </span><span class="comment">// BOOST_FAIRNESS_MCS_LOCK_HPP</span></div>
+<div class="ttc" id="aclassboost_1_1fairness_1_1detail_1_1mcs__spinlock_html"><div class="ttname"><a href="classboost_1_1fairness_1_1detail_1_1mcs__spinlock.html">boost::fairness::detail::mcs_spinlock</a></div><div class="ttdef"><b>Definition</b> mcs_lock.hpp:30</div></div>
+<div class="ttc" id="aclassboost_1_1fairness_1_1detail_1_1mcs__spinlock_html_a6cbb726b1df314094f91564ea4e86e4e"><div class="ttname"><a href="classboost_1_1fairness_1_1detail_1_1mcs__spinlock.html#a6cbb726b1df314094f91564ea4e86e4e">boost::fairness::detail::mcs_spinlock::acquire</a></div><div class="ttdeci">void acquire(QNode *node)</div><div class="ttdef"><b>Definition</b> mcs_lock.hpp:34</div></div>
+<div class="ttc" id="aclassboost_1_1fairness_1_1detail_1_1mcs__spinlock_html_a8f332a72ea6b10a76f36c452e5e5aac3"><div class="ttname"><a href="classboost_1_1fairness_1_1detail_1_1mcs__spinlock.html#a8f332a72ea6b10a76f36c452e5e5aac3">boost::fairness::detail::mcs_spinlock::release</a></div><div class="ttdeci">void release(QNode *node)</div><div class="ttdef"><b>Definition</b> mcs_lock.hpp:51</div></div>
+<div class="ttc" id="aconfig_8hpp_html_a2873fbc3f86d433f7ec02fe48ccd3cfa"><div class="ttname"><a href="config_8hpp.html#a2873fbc3f86d433f7ec02fe48ccd3cfa">BOOST_FAIRNESS_HARDWARE_DESTRUCTIVE_SIZE</a></div><div class="ttdeci">#define BOOST_FAIRNESS_HARDWARE_DESTRUCTIVE_SIZE</div><div class="ttdoc">size to be aligned to avoid false sharing (https://www.intel.com/content/www/us/en/developer/articles...</div><div class="ttdef"><b>Definition</b> config.hpp:67</div></div>
+<div class="ttc" id="amcs__lock_8hpp_html_a00de8f7e0b615f88335573ba3909583d"><div class="ttname"><a href="mcs__lock_8hpp.html#a00de8f7e0b615f88335573ba3909583d">LOCKED</a></div><div class="ttdeci">#define LOCKED</div><div class="ttdef"><b>Definition</b> mcs_lock.hpp:21</div></div>
+<div class="ttc" id="amcs__lock_8hpp_html_a2446c6fcfae710853129157c1f417d8e"><div class="ttname"><a href="mcs__lock_8hpp.html#a2446c6fcfae710853129157c1f417d8e">NOT_LOCKED</a></div><div class="ttdeci">#define NOT_LOCKED</div><div class="ttdef"><b>Definition</b> mcs_lock.hpp:22</div></div>
+<div class="ttc" id="anamespaceboost_1_1fairness_1_1detail_html"><div class="ttname"><a href="namespaceboost_1_1fairness_1_1detail.html">boost::fairness::detail</a></div><div class="ttdef"><b>Definition</b> coherent_priority_lock.hpp:25</div></div>
+<div class="ttc" id="anamespaceboost_1_1fairness_1_1detail_html_afa0462f6897ac8ab6f4c4b52cd3169d8"><div class="ttname"><a href="namespaceboost_1_1fairness_1_1detail.html#afa0462f6897ac8ab6f4c4b52cd3169d8">boost::fairness::detail::pause</a></div><div class="ttdeci">void pause() noexcept</div><div class="ttdef"><b>Definition</b> pause_ops.hpp:21</div></div>
+<div class="ttc" id="apause__ops_8hpp_html"><div class="ttname"><a href="pause__ops_8hpp.html">pause_ops.hpp</a></div><div class="ttdoc">This file contains the implementation of the pause operations used by the mutexes.</div></div>
+<div class="ttc" id="apriority__t_8hpp_html"><div class="ttname"><a href="priority__t_8hpp.html">priority_t.hpp</a></div><div class="ttdoc">Alias the type Priority_t. Priority_t is the type of priorities that are used by the priority_mutexes...</div></div>
+<div class="ttc" id="astructboost_1_1fairness_1_1detail_1_1_q_node_html"><div class="ttname"><a href="structboost_1_1fairness_1_1detail_1_1_q_node.html">boost::fairness::detail::QNode</a></div><div class="ttdef"><b>Definition</b> mcs_lock.hpp:24</div></div>
+<div class="ttc" id="astructboost_1_1fairness_1_1detail_1_1_q_node_html_a26db8d229a83ee484dc6687f3325320f"><div class="ttname"><a href="structboost_1_1fairness_1_1detail_1_1_q_node.html#a26db8d229a83ee484dc6687f3325320f">boost::fairness::detail::QNode::next_</a></div><div class="ttdeci">std::atomic&lt; QNode * &gt; next_</div><div class="ttdef"><b>Definition</b> mcs_lock.hpp:25</div></div>
+<div class="ttc" id="astructboost_1_1fairness_1_1detail_1_1_q_node_html_a37423b13df5f7669088ff67e67db7c3b"><div class="ttname"><a href="structboost_1_1fairness_1_1detail_1_1_q_node.html#a37423b13df5f7669088ff67e67db7c3b">boost::fairness::detail::QNode::locked_</a></div><div class="ttdeci">std::atomic&lt; uint32_t &gt; locked_</div><div class="ttdef"><b>Definition</b> mcs_lock.hpp:26</div></div>
+</div><!-- fragment --></div><!-- contents -->
+</div><!-- doc-content -->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><a class="el" href="dir_d44c64559bbebec7f509842c48db8b23.html">include</a></li><li class="navelem"><a class="el" href="dir_1878a3f4746a95c6aad317458cc7ef80.html">boost</a></li><li class="navelem"><a class="el" href="dir_ce7963af6704c2fe6f4ea06d8d082268.html">fairness</a></li><li class="navelem"><a class="el" href="dir_c4cf67fe6b34592b64993bd974f64f14.html">detail</a></li><li class="navelem"><a class="el" href="mcs__lock_8hpp.html">mcs_lock.hpp</a></li>
+    <li class="footer">Generated by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8 </li>
+  </ul>
+</div>
+</body>
+</html>

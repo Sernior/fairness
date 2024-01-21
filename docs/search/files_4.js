@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['fairness_2ehpp_0',['fairness.hpp',['../fairness_8hpp.html',1,'']]]
+  ['implementation_2ddetails_2emd_0',['implementation-details.md',['../implementation-details_8md.html',1,'']]]
 ];

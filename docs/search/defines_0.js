@@ -1,12 +1,19 @@
 var searchData=
 [
-  ['boost_5ffairness_5fhardware_5fdestructive_5fsize_0',['BOOST_FAIRNESS_HARDWARE_DESTRUCTIVE_SIZE',['../config_8hpp.html#a2873fbc3f86d433f7ec02fe48ccd3cfa',1,'config.hpp']]],
-  ['boost_5ffairness_5finvalid_5fpriority_1',['BOOST_FAIRNESS_INVALID_PRIORITY',['../priority__t_8hpp.html#ad3c09eb3008523fc837752140c94a56f',1,'priority_t.hpp']]],
-  ['boost_5ffairness_5fmaximum_5fpriority_2',['BOOST_FAIRNESS_MAXIMUM_PRIORITY',['../priority__t_8hpp.html#ab63ed35d4aa8f18cc832fecbf13ba0ae',1,'priority_t.hpp']]],
-  ['boost_5ffairness_5fminimum_5fpriority_3',['BOOST_FAIRNESS_MINIMUM_PRIORITY',['../priority__t_8hpp.html#ac745d616478cbc2090a9eac1a3f07dcc',1,'priority_t.hpp']]],
-  ['boost_5ffairness_5fspm64b_5fsupported_5fpriorities_4',['BOOST_FAIRNESS_SPM64B_SUPPORTED_PRIORITIES',['../control__block__t_8hpp.html#a5f29c1006da12ec0c041fe744b52fe98',1,'control_block_t.hpp']]],
-  ['boost_5ffairness_5fuse_5fstd_5fwait_5fnotify_5',['BOOST_FAIRNESS_USE_STD_WAIT_NOTIFY',['../config_8hpp.html#af36f3bf589e005a51ea421fc62d52086',1,'config.hpp']]],
-  ['boost_5ffairness_5fwait_5fspins_6',['BOOST_FAIRNESS_WAIT_SPINS',['../config_8hpp.html#a9ad7457de04fbbf85165354779e61505',1,'config.hpp']]],
-  ['boost_5ffairness_5fwait_5fspins_5frelaxed_7',['BOOST_FAIRNESS_WAIT_SPINS_RELAXED',['../config_8hpp.html#a2e744f49cb92eb5d0cb6aff8dea90862',1,'config.hpp']]],
-  ['boost_5ffairness_5fwait_5fspins_5fyield_8',['BOOST_FAIRNESS_WAIT_SPINS_YIELD',['../config_8hpp.html#a12bf085d35f48feb3d2731d2c5d7679f',1,'config.hpp']]]
+  ['boost_5ffairness_5fgetrequest_5fspins_0',['boost_fairness_getrequest_spins',['../benchmark_8cpp.html#a75871f1ee4f73c858731a81b1e86ce10',1,'BOOST_FAIRNESS_GETREQUEST_SPINS:&#160;benchmark.cpp'],['../config_8hpp.html#a75871f1ee4f73c858731a81b1e86ce10',1,'BOOST_FAIRNESS_GETREQUEST_SPINS:&#160;config.hpp']]],
+  ['boost_5ffairness_5fgetrequest_5fspins_5frelaxed_1',['boost_fairness_getrequest_spins_relaxed',['../config_8hpp.html#a3a4431e7c7d1c51c5a69efc2e6daf31d',1,'BOOST_FAIRNESS_GETREQUEST_SPINS_RELAXED:&#160;config.hpp'],['../benchmark_8cpp.html#a3a4431e7c7d1c51c5a69efc2e6daf31d',1,'BOOST_FAIRNESS_GETREQUEST_SPINS_RELAXED:&#160;benchmark.cpp']]],
+  ['boost_5ffairness_5fhardware_5fdestructive_5fsize_2',['BOOST_FAIRNESS_HARDWARE_DESTRUCTIVE_SIZE',['../config_8hpp.html#a2873fbc3f86d433f7ec02fe48ccd3cfa',1,'config.hpp']]],
+  ['boost_5ffairness_5finvalid_5fpqnode_5findex_3',['BOOST_FAIRNESS_INVALID_PQNODE_INDEX',['../config_8hpp.html#af76c80f067833e8857c7f620dff5bab0',1,'config.hpp']]],
+  ['boost_5ffairness_5finvalid_5fpriority_4',['BOOST_FAIRNESS_INVALID_PRIORITY',['../priority__t_8hpp.html#ad3c09eb3008523fc837752140c94a56f',1,'priority_t.hpp']]],
+  ['boost_5ffairness_5finvalid_5fthread_5findex_5',['BOOST_FAIRNESS_INVALID_THREAD_INDEX',['../config_8hpp.html#ade9e31138bd7dec3be9b9f88fe247102',1,'config.hpp']]],
+  ['boost_5ffairness_5fmax_5fpqnodes_6',['boost_fairness_max_pqnodes',['../config_8hpp.html#ade5efba65f23256f5914f9c24b6e1c52',1,'BOOST_FAIRNESS_MAX_PQNODES:&#160;config.hpp'],['../test_8cpp.html#ade5efba65f23256f5914f9c24b6e1c52',1,'BOOST_FAIRNESS_MAX_PQNODES:&#160;test.cpp'],['../benchmark_8cpp.html#ade5efba65f23256f5914f9c24b6e1c52',1,'BOOST_FAIRNESS_MAX_PQNODES:&#160;benchmark.cpp']]],
+  ['boost_5ffairness_5fmax_5fthreads_7',['BOOST_FAIRNESS_MAX_THREADS',['../config_8hpp.html#ad5db4875668707ed06ad0c00fb42a6cd',1,'config.hpp']]],
+  ['boost_5ffairness_5fmaximum_5fpriority_8',['BOOST_FAIRNESS_MAXIMUM_PRIORITY',['../priority__t_8hpp.html#ab63ed35d4aa8f18cc832fecbf13ba0ae',1,'priority_t.hpp']]],
+  ['boost_5ffairness_5fminimum_5fpriority_9',['BOOST_FAIRNESS_MINIMUM_PRIORITY',['../priority__t_8hpp.html#ac745d616478cbc2090a9eac1a3f07dcc',1,'priority_t.hpp']]],
+  ['boost_5ffairness_5fspinwait_5fspins_10',['boost_fairness_spinwait_spins',['../config_8hpp.html#a96f170569709c4091e18ea1eb61f292b',1,'BOOST_FAIRNESS_SPINWAIT_SPINS:&#160;config.hpp'],['../benchmark_8cpp.html#a96f170569709c4091e18ea1eb61f292b',1,'BOOST_FAIRNESS_SPINWAIT_SPINS:&#160;benchmark.cpp']]],
+  ['boost_5ffairness_5fspinwait_5fspins_5frelaxed_11',['boost_fairness_spinwait_spins_relaxed',['../config_8hpp.html#a77adda31959a3584dc6a50e62d03835e',1,'BOOST_FAIRNESS_SPINWAIT_SPINS_RELAXED:&#160;config.hpp'],['../benchmark_8cpp.html#a77adda31959a3584dc6a50e62d03835e',1,'BOOST_FAIRNESS_SPINWAIT_SPINS_RELAXED:&#160;benchmark.cpp']]],
+  ['boost_5ffairness_5fspm64b_5fsupported_5fpriorities_12',['BOOST_FAIRNESS_SPM64B_SUPPORTED_PRIORITIES',['../control__block__t_8hpp.html#a5f29c1006da12ec0c041fe744b52fe98',1,'control_block_t.hpp']]],
+  ['boost_5ffairness_5fuse_5fstd_5fwait_5fnotify_13',['BOOST_FAIRNESS_USE_STD_WAIT_NOTIFY',['../config_8hpp.html#af36f3bf589e005a51ea421fc62d52086',1,'config.hpp']]],
+  ['boost_5ffairness_5fwait_5fspins_14',['BOOST_FAIRNESS_WAIT_SPINS',['../config_8hpp.html#a9ad7457de04fbbf85165354779e61505',1,'config.hpp']]],
+  ['boost_5ffairness_5fwait_5fspins_5frelaxed_15',['BOOST_FAIRNESS_WAIT_SPINS_RELAXED',['../config_8hpp.html#a2e744f49cb92eb5d0cb6aff8dea90862',1,'config.hpp']]]
 ];

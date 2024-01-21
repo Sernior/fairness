@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['proceed_0',['proceed',['../priority__mutex_8hpp.html#a933db57bcb6f9415e7bf41fad62fde8c',1,'PROCEED:&#160;priority_mutex.hpp'],['../recursive__priority__mutex_8hpp.html#a933db57bcb6f9415e7bf41fad62fde8c',1,'PROCEED:&#160;recursive_priority_mutex.hpp']]]
+  ['now_0',['now',['../thread__utils_8hpp.html#acc4a9ad83f9350a588d117e0c8916d45',1,'NOW:&#160;thread_utils.hpp'],['../waiting__utils_8hpp.html#acc4a9ad83f9350a588d117e0c8916d45',1,'NOW:&#160;waiting_utils.hpp']]]
 ];
