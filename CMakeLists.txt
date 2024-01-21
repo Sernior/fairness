@@ -1,7 +1,7 @@
 cmake_minimum_required(VERSION 3.14.0)
 
 set(PROJ_NAME "Fairness")
-project(${PROJ_NAME} VERSION 0.0.0 LANGUAGES CXX)
+project(${PROJ_NAME} VERSION 1.0.0 LANGUAGES CXX)
 
 option(LIB_FAIRNESS_EXPERIMENTAL "Add experimental mutexes" OFF)
 option(Boost_FOUND "Boost found" OFF)
