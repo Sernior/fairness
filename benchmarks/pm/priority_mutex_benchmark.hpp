@@ -19,13 +19,6 @@ namespace priority_mutex_benchmark{
     boost::fairness::priority_mutex<4> m;
     boost::fairness::detail::pqspinlock pqspinlock;
 
-    void pq_lock_unlock_benchmark(benchmark::State& state) {
-        for (auto _ : state){
-            pqspinlock.lock();
-            pqspinlock.unlock();
-        }
-    }
-
     void lock_unlock_benchmark(benchmark::State& state) {
         for (auto _ : state){
             m.lock();
