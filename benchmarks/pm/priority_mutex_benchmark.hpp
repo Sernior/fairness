@@ -12,10 +12,12 @@
  */
 
 #include <boost/fairness.hpp>
+#include <boost/fairness/detail/pqspinlock.hpp>
 #include "../utils/thread_utils.hpp"
 
 namespace priority_mutex_benchmark{
     boost::fairness::priority_mutex<4> m;
+    boost::fairness::detail::pqspinlock pqspinlock;
 
     void lock_unlock_benchmark(benchmark::State& state) {
         for (auto _ : state){

@@ -79,10 +79,7 @@ namespace boost::fairness{
                     if (!lockOwned_.test_and_set(std::memory_order_acquire))
                         break;
                 }
-                //detail::spin_wait(lockOwned_, true);
-                detail::spin_wait();
-                //std::this_thread::yield();
-                //detail::pause();
+                detail::spin_wait(lockOwned_, true);
                 localLockOwned = lockOwned_.test(std::memory_order_relaxed);
                 localCurrentPriority = currentPriority_.load(std::memory_order_relaxed);
 

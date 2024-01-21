@@ -22,19 +22,15 @@
 
 namespace boost::fairness::detail{
 
-    static std::function<void()> relaxOrYield[] = {pause, std::this_thread::yield};
+    static const std::function<void()> relaxOrYield[] = {pause ,std::this_thread::yield};
 
 
     template<typename T ,typename K>
-    inline void spin_wait(T& mem, K expected) {
-
-        auto memEqualsExpected = [&mem, expected]{
-            return mem.load(std::memory_order_relaxed) == expected;
-        };
+    inline void spin_wait(T& mem, K const expected) noexcept {
 
         for(int i = 0; i < BOOST_FAIRNESS_SPINWAIT_SPINS; ++i){
 
-            if (!memEqualsExpected())
+            if (mem.load(std::memory_order_relaxed) != expected)
                 return;
 
             relaxOrYield[i >= BOOST_FAIRNESS_SPINWAIT_SPINS_RELAXED]();
@@ -44,15 +40,11 @@ namespace boost::fairness::detail{
     }
 
     template<typename K>
-    inline void spin_wait(std::atomic_flag& mem, K expected) {
-
-        auto memEqualsExpected = [&mem, expected]{
-            return mem.test(std::memory_order_relaxed) == expected;
-        };
+    inline void spin_wait(std::atomic_flag& mem, K const expected) noexcept {
 
         for(int i = 0; i < BOOST_FAIRNESS_SPINWAIT_SPINS; ++i){
 
-            if (!memEqualsExpected())
+            if (mem.test(std::memory_order_relaxed) != expected)
                 return;
 
             relaxOrYield[i >= BOOST_FAIRNESS_SPINWAIT_SPINS_RELAXED]();
@@ -61,11 +53,11 @@ namespace boost::fairness::detail{
 
     }
 
-    inline void spin_wait() {
+    inline void spin_wait() noexcept {
 
-        for(int i = 0; i < BOOST_FAIRNESS_SPINWAIT_SPINS; ++i){
+        for(int i = 0; i < BOOST_FAIRNESS_GETREQUEST_SPINS; ++i){
 
-            relaxOrYield[i >= BOOST_FAIRNESS_SPINWAIT_SPINS_RELAXED]();
+            relaxOrYield[i >= BOOST_FAIRNESS_GETREQUEST_SPINS_RELAXED]();
 
         }
 
@@ -73,16 +65,14 @@ namespace boost::fairness::detail{
 
 #if !defined(BOOST_FAIRNESS_USE_STD_WAIT_NOTIFY)
 
-// we need to include a wait pool here and instead of waiting on the actual memory we wait on some wait flags which are aligned to destructive size
-// notify should be also performed on this other memory instead
-
     template<typename T, typename K>
-    inline void wait(T& mem, K expected) {
+    inline void wait(T& mem, K const expected) noexcept {
 
         auto memEqualsExpected = [&mem, expected]{
             return mem.load(std::memory_order_relaxed) == expected;
 
         };
+
         do {
 
             for(int i = 0; i < BOOST_FAIRNESS_WAIT_SPINS; ++i){
@@ -103,19 +93,19 @@ namespace boost::fairness::detail{
 #else // defined(BOOST_FAIRNESS_USE_STD_WAIT_NOTIFY)
 
     template<typename T, typename K>
-    inline void wait(T& mem, K expected){
+    inline void wait(T& mem, K expected) noexcept {
         wait_(mem, expected);
     }
 
 #endif // BOOST_FAIRNESS_USE_STD_WAIT_NOTIFY
 
     template<typename T>
-    inline void notify_one(T& mem){
+    inline void notify_one(T& mem) noexcept {
         notify_one_(mem);
     }
 
     template<typename T>
-    inline void notify_all(T& mem){
+    inline void notify_all(T& mem) noexcept {
         notify_all_(mem);
     }
 
