@@ -138,18 +138,18 @@ $(document).ready(function(){initNavTree('index.html',''); initResizable(); });
 <p><b>A collection of advanced syncronization mechanisms which are able to prioritize threads based on their priority, granting higher-priority threads access to protected resources ahead of lower-priority ones.</b></p>
 <p><b>Designed to enhance throughput in pipelines by prioritizing slower threads.</b></p>
 <p><a class="anchor" id="readme-top"></a></p>
-<div align="center"> </div><div align="center"> <em>A C++ library containing a collection of advanced syncronization mechanisms.</em> </div><div align="center"> </div><h1><a class="anchor" id="autotoc_md27"></a>
+<div align="center"> </div><div align="center"> <em>A C++ library containing a collection of advanced syncronization mechanisms.</em> </div><div align="center"> </div><h1><a class="anchor" id="autotoc_md19"></a>
 Motivation</h1>
-<h2><a class="anchor" id="autotoc_md28"></a>
+<h2><a class="anchor" id="autotoc_md20"></a>
 Crafting Fairness in Synchronization: A C++ Library Journey</h2>
 <p>The reason I started this library is that the operating system makes decisions regarding scheduling policies without knowledge of the application layer. Sometimes, a programmer optimizing an application may want to prioritize certain threads for various reasons.</p>
-<p>When I started this library, I believed it would be relatively easy, but it turned out not to be. Throughout my study and development of this library, I realized that in this field, there are no "silver bullets" and each solution has its own set of pros and cons. Unable to find a universal solution for every architecture, I opted to allow users to customize certain critical aspects of the library. I recommend users of this library to read <a href="file:///home/torjack/Documents/GitHub/fairness/docs/html/md_docs_2implementation-details.html">this page</a>.</p>
-<h1><a class="anchor" id="autotoc_md29"></a>
+<p>When I started this library, I believed it would be relatively easy, but it turned out not to be. Throughout my study and development of this library, I realized that in this field, there are no "silver bullets" and each solution has its own set of pros and cons. Unable to find a universal solution for every architecture, I opted to allow users to customize certain critical aspects of the library. I recommend users of this library to read <a href="https://sernior.github.io/fairness/md_docs_2implementation-details.html">this page</a>.</p>
+<h1><a class="anchor" id="autotoc_md21"></a>
 About The Project</h1>
 <p>The standard library provides tools for handling concurrency but lacks effective ways to allow programmers to choose fairness policies.<br  />
  Modifying these behaviors can be tricky, and mistakes may lead to issues such as thread starvation. If not used carefully, these tools can do more harm than good, emphasizing the importance of cautious usage.<br  />
  Furthermore, the advanced synchronization mechanisms in this library do not automatically adjust priorities. This poses a risk of thread starvation when new threads are consistently created with high-priority locks.</p>
-<h1><a class="anchor" id="autotoc_md30"></a>
+<h1><a class="anchor" id="autotoc_md22"></a>
 Use Cases</h1>
 <p>Although priority-based locks are primarily designed to mitigate the issue of starvation and prevent it, they can also serve as a valuable tool in scenarios where traditional, non-priority-based synchronization mechanisms fall short. Here are some scenarios where a priority-based synchronization mechanism may be the preferred choice:</p>
 <p><b>Real-time Systems</b>: In real-time systems, tasks have strict timing requirements. Priority-based synchronization could be used that high-priority tasks are executed without delay, allowing critical functions like safety-critical control systems or healthcare devices to meet their deadlines.</p>
@@ -158,7 +158,7 @@ Use Cases</h1>
 <p><b>Scientific Simulations</b>: Scientific simulations involve complex pipelines where maximizing throughput is crucial. Concurrent execution of multiple tasks in simulations makes priority-based synchronization effective for fine-tuning fairness policies and optimizing throughput.</p>
 <p>In these use-cases, priority-based synchronization mechanisms enhance resource management, responsiveness, and prioritization of critical tasks, thereby improving system efficiency and performance in situations where fairness and timing are critical.<br  />
  Additionally, managing fairness policies helps optimize around issues like priority inversion.</p>
-<h1><a class="anchor" id="autotoc_md31"></a>
+<h1><a class="anchor" id="autotoc_md23"></a>
 Pipelines</h1>
 <p>The primary intention behind creating these syncronization mechanisms is for their utilization within completed pipelines. In this context, the risk of thread starvation is non-existent due to the established pipeline structure.</p>
 <p>The assumptions are:</p><ul>
@@ -168,25 +168,25 @@ Pipelines</h1>
 <p><img src="https://sernior.github.io/fairness/stdpipeline.png" alt="" class="readme-img" style="object-fit: cover; object-position: 100% 0; width: 100%;" class="inline"/></p>
 <p><img src="https://sernior.github.io/fairness/prioritypipeline.png" alt="" class="readme-img" style="object-fit: cover; object-position: 100% 0; width: 100%;" class="inline"/></p>
 <p><b>These two images depict the same pipeline. The first image illustrates the execution of the pipeline with a mostly FIFO lock, while the second image demonstrates an improved execution using a priority lock. The priority lock could be employed to reduce the overall execution time of the pipeline.</b></p>
-<h1><a class="anchor" id="autotoc_md32"></a>
+<h1><a class="anchor" id="autotoc_md24"></a>
 Getting Started</h1>
-<h2><a class="anchor" id="autotoc_md33"></a>
+<h2><a class="anchor" id="autotoc_md25"></a>
 Prerequisites</h2>
 <p>I build and tested this lib with C++20. <br  />
  If for some reason, on some compilers (not MinGW), it doesn`t work on C++20+ please email me or open an issue.</p>
-<h2><a class="anchor" id="autotoc_md34"></a>
+<h2><a class="anchor" id="autotoc_md26"></a>
 Setup boost library</h2>
 <p>Download <a href="https://www.boost.org/users/history/version_1_82_0.html">https://www.boost.org/users/history/version_1_82_0.html</a></p>
 <p>In the directory where you want to put the Boost installation, execute:</p>
 <div class="fragment"><div class="line">$ tar --bzip2 -xf /path/to/boost_1_82_0.tar.bz2</div>
 <div class="line">$ ./bootstrap.sh --prefix=/usr/local</div>
 <div class="line">$ ./b2 install</div>
-</div><!-- fragment --><h2><a class="anchor" id="autotoc_md35"></a>
+</div><!-- fragment --><h2><a class="anchor" id="autotoc_md27"></a>
 Setup</h2>
 <p>Generate ninja build files and build:</p>
 <div class="fragment"><div class="line">$ cmake . -B build -G Ninja -DLIB_FAIRNESS_COMPILE_TESTS=ON -DLIB_FAIRNESS_COMPILE_BENCHMARKS=ON</div>
 <div class="line">$ cmake --build build</div>
-</div><!-- fragment --><h2><a class="anchor" id="autotoc_md36"></a>
+</div><!-- fragment --><h2><a class="anchor" id="autotoc_md28"></a>
 Installation</h2>
 <p>Using cmake you can include this library as follows:</p>
 <div class="fragment"><div class="line">include(FetchContent)</div>
@@ -199,7 +199,7 @@ Installation</h2>
 <div class="line"> </div>
 <div class="line">FetchContent_MakeAvailable(fairness)</div>
 </div><!-- fragment --><p> At this point you should be able to link the library simply using: </p><div class="fragment"><div class="line">target_link_libraries(your_stuff.cpp fairness)</div>
-</div><!-- fragment --><h1><a class="anchor" id="autotoc_md37"></a>
+</div><!-- fragment --><h1><a class="anchor" id="autotoc_md29"></a>
 Snippet</h1>
 <p>To run this code snippet, you should integrate the 'BS_thread_pool' library into your CMakeLists.txt by including it as follows:</p>
 <div class="fragment"><div class="line">add_library(tp INTERFACE)# testing to remove in the end</div>
@@ -264,7 +264,7 @@ Snippet</h1>
 <div class="line">Thread with priority : 2 is running.</div>
 <div class="line">Thread with priority : 3 is running.</div>
 <div class="line">Thread with priority : 3 is running.</div>
-</div><!-- fragment --><h1><a class="anchor" id="autotoc_md38"></a>
+</div><!-- fragment --><h1><a class="anchor" id="autotoc_md30"></a>
 Configurations</h1>
 <p>This is a list of macros that can be defined to configure <a class="el" href="namespaceboost_1_1fairness.html">boost::fairness</a>:</p>
 <table class="markdownTable">
@@ -293,21 +293,21 @@ Configurations</h1>
 <tr class="markdownTableRowOdd">
 <td class="markdownTableBodyNone">BOOST_FAIRNESS_GETREQUEST_SPINS_RELAXED   </td><td class="markdownTableBodyNone">1   </td><td class="markdownTableBodyNone">The number of paused spins performed while performing a getRequest (this is used only if BOOST_FAIRNESS_USE_TATAS is not defined).   </td></tr>
 </table>
-<h1><a class="anchor" id="autotoc_md39"></a>
+<h1><a class="anchor" id="autotoc_md31"></a>
 Contributing</h1>
 <p>If you encounter any issues or would like to suggest new features, please don't hesitate to open an issue or get in touch with me at <a href="#" onclick="location.href='mai'+'lto:'+'fed'+'er'+'ign'+'ol'+'i@h'+'ot'+'mai'+'l.'+'it'; return false;">feder<span class="obfuscator">.nosp@m.</span>igno<span class="obfuscator">.nosp@m.</span>li@ho<span class="obfuscator">.nosp@m.</span>tmai<span class="obfuscator">.nosp@m.</span>l.it</a>.<br  />
  Contributions are also welcome! Feel free to open pull requests to the main repository and assign me as a reviewer – I'll be sure to review them. Your help is greatly appreciated!</p>
-<h1><a class="anchor" id="autotoc_md40"></a>
+<h1><a class="anchor" id="autotoc_md32"></a>
 License</h1>
 <p>Distributed under the Boost Software License - Version 1.0. See <a href="https://github.com/Sernior/fairness/blob/main/LICENSE">LICENSE</a> for more information.</p>
-<h1><a class="anchor" id="autotoc_md41"></a>
+<h1><a class="anchor" id="autotoc_md33"></a>
 Documentation</h1>
 <p>The documentation is available at the following link: <a href="https://sernior.github.io/fairness/">https://sernior.github.io/fairness/</a></p>
-<h1><a class="anchor" id="autotoc_md42"></a>
+<h1><a class="anchor" id="autotoc_md34"></a>
 Contacts</h1>
 <p>Federico Abrignani - <a href="#" onclick="location.href='mai'+'lto:'+'fed'+'er'+'ign'+'ol'+'i@h'+'ot'+'mai'+'l.'+'it'; return false;">feder<span class="obfuscator">.nosp@m.</span>igno<span class="obfuscator">.nosp@m.</span>li@ho<span class="obfuscator">.nosp@m.</span>tmai<span class="obfuscator">.nosp@m.</span>l.it</a><br  />
  Salvatore Martorana - <a href="#" onclick="location.href='mai'+'lto:'+'sal'+'va'+'tor'+'em'+'art'+'or'+'ana'+'@h'+'otm'+'ai'+'l.c'+'om'; return false;">salva<span class="obfuscator">.nosp@m.</span>tore<span class="obfuscator">.nosp@m.</span>marto<span class="obfuscator">.nosp@m.</span>rana<span class="obfuscator">.nosp@m.</span>@hotm<span class="obfuscator">.nosp@m.</span>ail.<span class="obfuscator">.nosp@m.</span>com</a></p>
-<h1><a class="anchor" id="autotoc_md43"></a>
+<h1><a class="anchor" id="autotoc_md35"></a>
 Authors and Contributors</h1>
 <p><a href="https://github.com/Sernior/fairness/graphs/contributors"><img src="https://contrib.rocks/image?repo=Sernior/fairness" alt="" class="inline"/> </a> </p>
 </div></div><!-- PageDoc -->
@@ -321,3 +321,4 @@ Authors and Contributors</h1>
 </div>
 </body>
 </html>
+

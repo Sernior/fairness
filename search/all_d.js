@@ -4,8 +4,7 @@ var searchData=
   ['operator_20priority_5ft_1',['operator Priority_t',['../classboost_1_1fairness_1_1unique__lock.html#a71dd13a20a4546d238ed4e5234cf865c',1,'boost::fairness::unique_lock']]],
   ['operator_3d_2',['operator=',['../classboost_1_1fairness_1_1unique__lock.html#a21249abc6f0b67f58b7a6652dbb13e5a',1,'boost::fairness::unique_lock::operator=(const unique_lock &amp;)=delete'],['../classboost_1_1fairness_1_1unique__lock.html#a124623b502948097f52c4331b6a54717',1,'boost::fairness::unique_lock::operator=(unique_lock &amp;&amp;other) noexcept']]],
   ['operator_5b_5d_3',['operator[]',['../classboost_1_1fairness_1_1detail_1_1_wait_pool.html#a8941513b78b38bdccb153a922e4e2592',1,'boost::fairness::detail::WaitPool']]],
-  ['other_20components_20and_20future_20plans_4',['Other Components and Future Plans',['../md_docs_2implementation-details.html#autotoc_md25',1,'']]],
-  ['owned_5f_5',['owned_',['../structboost_1_1fairness_1_1control__block__64b__simple__t.html#a7702f145f6d9f68c41ba6f2a3bac795b',1,'boost::fairness::control_block_64b_simple_t']]],
-  ['owner_5f_6',['owner_',['../structboost_1_1fairness_1_1detail_1_1_thread.html#a540973d489d9b5117aae34bffb8559b2',1,'boost::fairness::detail::Thread']]],
-  ['owns_5flock_7',['owns_lock',['../classboost_1_1fairness_1_1shared__lock.html#a7c4ef1823eb8cbd09bbab16bf62aabdb',1,'boost::fairness::shared_lock::owns_lock()'],['../classboost_1_1fairness_1_1unique__lock.html#a5fc63a7ce15fe3c0112804c70da9f3f9',1,'boost::fairness::unique_lock::owns_lock()']]]
+  ['owned_5f_4',['owned_',['../structboost_1_1fairness_1_1control__block__64b__simple__t.html#a7702f145f6d9f68c41ba6f2a3bac795b',1,'boost::fairness::control_block_64b_simple_t']]],
+  ['owner_5f_5',['owner_',['../structboost_1_1fairness_1_1detail_1_1_thread.html#a540973d489d9b5117aae34bffb8559b2',1,'boost::fairness::detail::Thread']]],
+  ['owns_5flock_6',['owns_lock',['../classboost_1_1fairness_1_1shared__lock.html#a7c4ef1823eb8cbd09bbab16bf62aabdb',1,'boost::fairness::shared_lock::owns_lock()'],['../classboost_1_1fairness_1_1unique__lock.html#a5fc63a7ce15fe3c0112804c70da9f3f9',1,'boost::fairness::unique_lock::owns_lock()']]]
 ];

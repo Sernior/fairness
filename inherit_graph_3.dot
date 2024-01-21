@@ -1,9 +1,0 @@
-digraph "Graphical Class Hierarchy"
-{
- // LATEX_PDF_SIZE
-  bgcolor="transparent";
-  edge [fontname=Helvetica,fontsize=10,labelfontname=Helvetica,labelfontsize=10];
-  node [fontname=Helvetica,fontsize=10,shape=box,height=0.2,width=0.4];
-  rankdir="LR";
-  Node0 [id="Node000000",label="boost::fairness::shared\l_lock\< Lockable \>",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$classboost_1_1fairness_1_1shared__lock.html",tooltip="The class shared_lock is a general-purpose shared mutex ownership wrapper allowing deferred locking,..."];
-}
