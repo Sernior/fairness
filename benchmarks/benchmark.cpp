@@ -22,9 +22,9 @@
 #include <benchmark/benchmark.h>
 #include "pipeline_benchmark.hpp"
 
-BENCHMARK(utils::waiting::busy_wait_50milli_benchmark);
-BENCHMARK(utils::waiting::busy_wait_50micro_benchmark);
-BENCHMARK(utils::waiting::busy_wait_50nano_benchmark);
+//BENCHMARK(utils::waiting::busy_wait_50milli_benchmark);
+//BENCHMARK(utils::waiting::busy_wait_50micro_benchmark);
+//BENCHMARK(utils::waiting::busy_wait_50nano_benchmark);
 BENCHMARK(____________________________________________________________________________________________);
 BENCHMARK(priority_mutex_benchmark::lock_unlock_benchmark)->Threads(8);
 
