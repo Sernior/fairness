@@ -1,0 +1,20 @@
+<map id="include/boost/fairness/detail/wait_ops_linux.hpp" name="include/boost/fairness/detail/wait_ops_linux.hpp">
+<area shape="rect" id="Node000001" title="This file contains the implementation of the wait operation specific for linux." alt="" coords="448,5,640,45"/>
+<area shape="rect" id="Node000002" href="$config_8hpp.html" title="This file contains configurations about boost and 128bit cpu support. TODO." alt="" coords="183,93,369,119"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="481,48,329,92,327,87,479,43"/>
+<area shape="rect" id="Node000006" title=" " alt="" coords="393,93,468,119"/>
+<area shape="poly" id="edge6_Node000001_Node000006" title=" " alt="" coords="518,48,460,87,457,83,515,43"/>
+<area shape="rect" id="Node000007" title=" " alt="" coords="492,93,596,119"/>
+<area shape="poly" id="edge7_Node000001_Node000007" title=" " alt="" coords="547,46,547,79,541,79,541,46"/>
+<area shape="rect" id="Node000008" title=" " alt="" coords="621,93,726,119"/>
+<area shape="poly" id="edge8_Node000001_Node000008" title=" " alt="" coords="577,43,644,84,641,88,574,48"/>
+<area shape="rect" id="Node000009" title=" " alt="" coords="750,93,821,119"/>
+<area shape="poly" id="edge9_Node000001_Node000009" title=" " alt="" coords="603,43,738,86,736,92,601,48"/>
+<area shape="rect" id="Node000003" href="$pause__ops__linux_8hpp.html" title="This file contains the implementation of the pause operations used by the mutexes on linux." alt="" coords="5,167,168,207"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="249,121,146,164,144,159,247,116"/>
+<area shape="rect" id="Node000004" href="$wait__ops__generic_8hpp.html" title="This file contains the implementation of the wait operation for misc os." alt="" coords="193,167,359,207"/>
+<area shape="poly" id="edge3_Node000002_Node000004" title=" " alt="" coords="272,119,270,153,264,153,267,119"/>
+<area shape="poly" id="edge4_Node000004_Node000002" title=" " alt="" coords="281,166,282,132,287,132,286,167"/>
+<area shape="rect" id="Node000005" title=" " alt="" coords="243,255,309,280"/>
+<area shape="poly" id="edge5_Node000004_Node000005" title=" " alt="" coords="279,207,279,241,273,241,273,207"/>
+</map>

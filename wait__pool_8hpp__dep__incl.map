@@ -1,0 +1,9 @@
+<map id="include/boost/fairness/detail/wait_pool.hpp" name="include/boost/fairness/detail/wait_pool.hpp">
+<area shape="rect" id="Node000001" title="This file contains the implementation of a wait pool." alt="" coords="115,5,280,45"/>
+<area shape="rect" id="Node000002" href="$priority__mutex__cpl_8hpp.html" title=" " alt="" coords="5,93,181,133"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="165,56,118,95,115,91,162,52"/>
+<area shape="rect" id="Node000004" href="$priority__mutex__tatas_8hpp.html" title=" " alt="" coords="206,93,397,133"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="233,52,280,91,277,95,229,56"/>
+<area shape="rect" id="Node000003" href="$priority__mutex_8hpp.html" title="This file contains the implementation of the priority_mutex." alt="" coords="11,181,176,221"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="96,147,96,181,91,181,91,147"/>
+</map>

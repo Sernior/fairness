@@ -1,0 +1,13 @@
+<map id="include/boost/fairness/detail/request_pool.hpp" name="include/boost/fairness/detail/request_pool.hpp">
+<area shape="rect" id="Node000001" title="This file contains the implementation of a static very fast and simple request pool." alt="" coords="5,5,184,45"/>
+<area shape="rect" id="Node000002" title=" " alt="" coords="149,255,216,280"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="84,47,66,79,50,120,45,165,48,186,57,205,73,223,93,237,137,255,135,260,90,242,69,227,52,208,43,187,39,165,45,119,61,77,80,44"/>
+<area shape="rect" id="Node000003" href="$config_8hpp.html" title="This file contains configurations about boost and 128bit cpu support. TODO." alt="" coords="155,93,341,119"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="133,43,215,85,212,89,130,48"/>
+<area shape="rect" id="Node000004" href="$pause__ops__linux_8hpp.html" title="This file contains the implementation of the pause operations used by the mutexes on linux." alt="" coords="67,167,229,207"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="235,121,185,160,181,156,232,117"/>
+<area shape="rect" id="Node000005" href="$wait__ops__generic_8hpp.html" title="This file contains the implementation of the wait operation for misc os." alt="" coords="254,167,421,207"/>
+<area shape="poly" id="edge4_Node000003_Node000005" title=" " alt="" coords="256,117,299,156,296,160,253,121"/>
+<area shape="poly" id="edge6_Node000005_Node000002" title=" " alt="" coords="301,209,219,251,216,246,299,204"/>
+<area shape="poly" id="edge5_Node000005_Node000003" title=" " alt="" coords="322,169,277,129,280,125,325,165"/>
+</map>

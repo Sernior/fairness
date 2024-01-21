@@ -1,0 +1,15 @@
+<map id="include/boost/fairness/unique_lock.hpp" name="include/boost/fairness/unique_lock.hpp">
+<area shape="rect" id="Node000001" title="This file contains the implementation of the unique_lock." alt="" coords="277,5,443,45"/>
+<area shape="rect" id="Node000002" href="$priority__t_8hpp.html" title="Alias the type Priority_t. Priority_t is the type of priorities that are used by the priority_mutexes..." alt="" coords="5,93,171,133"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="301,48,162,92,160,87,300,43"/>
+<area shape="rect" id="Node000004" title=" " alt="" coords="195,101,282,126"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="335,48,268,95,265,90,332,43"/>
+<area shape="rect" id="Node000005" title=" " alt="" coords="306,101,414,126"/>
+<area shape="poly" id="edge4_Node000001_Node000005" title=" " alt="" coords="363,46,363,87,357,87,357,46"/>
+<area shape="rect" id="Node000006" title=" " alt="" coords="439,101,516,126"/>
+<area shape="poly" id="edge5_Node000001_Node000006" title=" " alt="" coords="388,43,452,90,449,95,384,48"/>
+<area shape="rect" id="Node000007" title=" " alt="" coords="540,101,607,126"/>
+<area shape="poly" id="edge6_Node000001_Node000007" title=" " alt="" coords="409,43,529,91,534,93,532,98,527,96,407,48"/>
+<area shape="rect" id="Node000003" title=" " alt="" coords="55,181,121,207"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="91,134,91,167,85,167,85,134"/>
+</map>

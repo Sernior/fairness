@@ -26,6 +26,18 @@ var NAVTREE =
 [
   [ "fairness", "index.html", [
     [ "boost.fairness", "index.html", "index" ],
+    [ "Implementation Details", "md_docs_2implementation-details.html", [
+      [ "Introduction", "md_docs_2implementation-details.html#extension-page-navigation", [
+        [ "spinlock", "md_docs_2implementation-details.html#autotoc_md19", null ],
+        [ "mutex", "md_docs_2implementation-details.html#autotoc_md20", null ]
+      ] ],
+      [ "False Sharing", "md_docs_2implementation-details.html#autotoc_md21", [
+        [ "TATAS", "md_docs_2implementation-details.html#autotoc_md22", null ]
+      ] ],
+      [ "MCS Lock and Craig Algorithm", "md_docs_2implementation-details.html#autotoc_md23", null ],
+      [ "Shared and Recursive Mutex", "md_docs_2implementation-details.html#autotoc_md24", null ],
+      [ "Other Components and Future Plans", "md_docs_2implementation-details.html#autotoc_md25", null ]
+    ] ],
     [ "Namespaces", "namespaces.html", [
       [ "Namespace List", "namespaces.html", "namespaces_dup" ],
       [ "Namespace Members", "namespacemembers.html", [
@@ -60,9 +72,9 @@ var NAVTREEINDEX =
 [
 "_p_m__scenario1_context_8hpp.html",
 "benchmark_8cpp.html#a784fb7b46731b1a7bc2927e9a4687a28",
-"index.html#autotoc_md22",
-"namespaceshared__priority__mutex__benchmark.html#a21c7ad038b38575a006008aff4d1c1c7",
-"structboost_1_1fairness_1_1detail_1_1waiting_flag.html#aebf26f5f41f1bf43a19d18663f34a2ca"
+"index.html#autotoc_md29",
+"namespacepriority__mutex__benchmark.html#ae28be29c9455088378a89a072aa704aa",
+"structboost_1_1fairness_1_1detail_1_1_thread.html#aa31678f1278eddd085dc78c674f5abfd"
 ];
 
 var SYNCONMSG = 'click to disable panel synchronisation';

@@ -1,0 +1,53 @@
+<map id="include/boost/fairness/spinlock_priority_mutex.hpp" name="include/boost/fairness/spinlock_priority_mutex.hpp">
+<area shape="rect" id="Node000001" title="This file contains the implementation of the spinlock_priority_mutex based on a scalable list base al..." alt="" coords="391,5,602,45"/>
+<area shape="rect" id="Node000002" href="$spinlock__priority__mutex__cpl_8hpp.html" title="This file contains the implementation of the spinlock_priority_mutex based on a scalable list base al..." alt="" coords="407,93,586,133"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="499,46,499,79,494,79,494,46"/>
+<area shape="rect" id="Node000003" title=" " alt="" coords="679,695,746,720"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="586,124,713,146,850,180,911,202,960,227,993,255,1003,271,1006,288,1006,548,999,586,979,618,949,644,913,664,873,680,833,691,760,704,759,699,831,686,872,675,911,659,946,640,975,615,994,584,1001,547,1001,288,998,273,989,259,957,231,908,207,848,185,712,151,585,129"/>
+<area shape="rect" id="Node000004" title=" " alt="" coords="454,453,510,478"/>
+<area shape="poly" id="edge3_Node000002_Node000004" title=" " alt="" coords="465,136,436,157,409,183,377,227,358,264,344,305,332,358,328,379,328,387,332,396,348,410,376,424,441,449,439,454,374,429,345,414,328,399,323,388,322,378,327,357,339,303,353,262,373,224,405,180,432,153,462,131"/>
+<area shape="rect" id="Node000005" href="$priority__t_8hpp.html" title="Alias the type Priority_t. Priority_t is the type of priorities that are used by the priority_mutexes..." alt="" coords="801,357,966,397"/>
+<area shape="poly" id="edge4_Node000002_Node000005" title=" " alt="" coords="587,128,653,147,725,176,795,215,826,240,855,268,867,285,875,305,884,343,879,344,870,306,862,288,850,271,823,244,792,219,723,180,651,152,585,134"/>
+<area shape="rect" id="Node000007" href="$wait__ops_8hpp.html" title="This file contains the implementation of the wait operations used by the mutexes." alt="" coords="113,357,267,397"/>
+<area shape="poly" id="edge6_Node000002_Node000007" title=" " alt="" coords="408,129,345,149,315,164,288,183,255,220,230,264,212,307,200,344,195,343,207,305,225,261,250,217,284,179,312,160,343,144,406,124"/>
+<area shape="rect" id="Node000014" href="$pqspinlock_8hpp.html" title="This file contains the implementation of a priority qlock." alt="" coords="419,181,574,221"/>
+<area shape="poly" id="edge17_Node000002_Node000014" title=" " alt="" coords="499,134,499,167,494,167,494,134"/>
+<area shape="rect" id="Node000006" title=" " alt="" coords="850,453,917,478"/>
+<area shape="poly" id="edge5_Node000005_Node000006" title=" " alt="" coords="886,398,886,439,881,439,881,398"/>
+<area shape="poly" id="edge14_Node000007_Node000003" title=" " alt="" coords="113,396,68,411,31,430,18,442,10,454,9,468,15,484,44,526,73,556,104,578,138,594,215,617,311,644,408,670,506,687,595,697,666,702,665,707,595,702,505,692,406,675,309,649,213,622,136,599,101,583,70,560,39,529,10,487,4,469,5,453,14,438,28,426,66,406,111,391"/>
+<area shape="rect" id="Node000008" href="$config_8hpp.html" title="This file contains configurations about boost and 128bit cpu support. TODO." alt="" coords="324,533,509,559"/>
+<area shape="poly" id="edge7_Node000007_Node000008" title=" " alt="" coords="269,394,342,416,373,429,393,443,405,461,413,481,419,519,414,520,408,482,401,464,389,447,370,434,340,421,267,399"/>
+<area shape="rect" id="Node000011" href="$pause__ops_8hpp.html" title="This file contains the implementation of the pause operations used by the mutexes." alt="" coords="225,445,379,485"/>
+<area shape="poly" id="edge12_Node000007_Node000011" title=" " alt="" coords="216,395,268,435,264,439,213,400"/>
+<area shape="rect" id="Node000012" title=" " alt="" coords="137,453,201,478"/>
+<area shape="poly" id="edge15_Node000007_Node000012" title=" " alt="" coords="188,398,177,440,172,439,183,397"/>
+<area shape="rect" id="Node000013" title=" " alt="" coords="25,453,112,478"/>
+<area shape="poly" id="edge16_Node000007_Node000013" title=" " alt="" coords="164,400,98,447,95,442,161,395"/>
+<area shape="rect" id="Node000009" href="$pause__ops__linux_8hpp.html" title="This file contains the implementation of the pause operations used by the mutexes on linux." alt="" coords="513,607,675,647"/>
+<area shape="poly" id="edge8_Node000008_Node000009" title=" " alt="" coords="443,556,540,599,538,604,441,561"/>
+<area shape="rect" id="Node000010" href="$wait__ops__generic_8hpp.html" title="This file contains the implementation of the wait operation for misc os." alt="" coords="321,607,488,647"/>
+<area shape="poly" id="edge9_Node000008_Node000010" title=" " alt="" coords="411,559,403,594,398,592,406,558"/>
+<area shape="poly" id="edge11_Node000010_Node000003" title=" " alt="" coords="479,644,666,692,665,697,478,649"/>
+<area shape="poly" id="edge10_Node000010_Node000008" title=" " alt="" coords="413,606,419,572,424,573,418,607"/>
+<area shape="poly" id="edge13_Node000011_Node000008" title=" " alt="" coords="331,483,390,523,387,528,328,488"/>
+<area shape="poly" id="edge20_Node000014_Node000005" title=" " alt="" coords="574,200,631,204,695,216,759,236,818,267,837,284,852,303,874,343,869,346,848,306,833,287,815,272,757,241,694,221,631,210,574,205"/>
+<area shape="poly" id="edge19_Node000014_Node000008" title=" " alt="" coords="419,214,315,236,256,254,197,278,140,308,89,346,46,392,29,418,15,446,8,467,9,475,15,484,33,498,61,510,136,527,224,537,310,542,310,547,224,543,135,533,59,515,30,503,11,487,4,477,3,466,10,444,24,415,42,389,85,342,137,304,195,273,255,249,314,231,418,209"/>
+<area shape="rect" id="Node000015" title=" " alt="" coords="495,277,581,302"/>
+<area shape="poly" id="edge18_Node000014_Node000015" title=" " alt="" coords="508,220,529,263,524,265,503,223"/>
+<area shape="rect" id="Node000016" href="$coherent__priority__lock_8hpp.html" title="This file contains the implementation of a coherent priority lock." alt="" coords="605,269,804,309"/>
+<area shape="poly" id="edge21_Node000014_Node000016" title=" " alt="" coords="543,219,647,262,645,267,541,224"/>
+<area shape="rect" id="Node000017" href="$request__pool_8hpp.html" title="This file contains the implementation of a static very fast and simple request pool." alt="" coords="521,357,675,397"/>
+<area shape="poly" id="edge32_Node000014_Node000017" title=" " alt="" coords="490,222,479,264,479,287,486,308,505,331,530,349,527,353,501,335,481,311,473,288,473,263,485,221"/>
+<area shape="rect" id="Node000018" href="$thread__pool_8hpp.html" title="This file contains the implementation of a pool of thread structs." alt="" coords="342,357,497,397"/>
+<area shape="poly" id="edge33_Node000014_Node000018" title=" " alt="" coords="477,223,457,245,440,270,428,307,423,343,418,343,423,306,435,268,453,242,473,220"/>
+<area shape="poly" id="edge22_Node000016_Node000003" title=" " alt="" coords="718,309,748,376,761,419,766,464,766,547,762,586,752,623,728,683,723,681,747,621,757,585,761,547,761,464,756,420,743,377,713,311"/>
+<area shape="poly" id="edge25_Node000016_Node000005" title=" " alt="" coords="745,307,833,349,831,354,743,312"/>
+<area shape="poly" id="edge24_Node000016_Node000007" title=" " alt="" coords="605,310,594,312,281,364,280,358,593,307,605,305"/>
+<area shape="poly" id="edge23_Node000016_Node000008" title=" " alt="" coords="708,310,705,352,699,376,690,399,671,425,648,449,594,487,536,514,483,532,481,527,534,509,591,482,644,445,666,422,685,396,694,374,700,351,703,309"/>
+<area shape="poly" id="edge26_Node000016_Node000017" title=" " alt="" coords="683,312,634,351,630,347,679,308"/>
+<area shape="poly" id="edge29_Node000016_Node000018" title=" " alt="" coords="643,312,496,356,494,351,641,307"/>
+<area shape="poly" id="edge27_Node000017_Node000003" title=" " alt="" coords="609,397,646,486,690,606,710,680,704,681,685,607,641,488,604,399"/>
+<area shape="poly" id="edge28_Node000017_Node000008" title=" " alt="" coords="595,399,577,442,563,466,545,487,509,513,471,531,469,526,507,509,541,483,559,463,572,440,590,397"/>
+<area shape="poly" id="edge30_Node000018_Node000004" title=" " alt="" coords="435,396,467,440,463,443,431,399"/>
+<area shape="poly" id="edge31_Node000018_Node000008" title=" " alt="" coords="469,395,500,415,524,444,531,465,524,487,500,513,471,530,468,526,497,509,520,484,526,465,520,447,496,419,466,400"/>
+</map>

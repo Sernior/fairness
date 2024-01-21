@@ -1,0 +1,13 @@
+<map id="include/boost/fairness/spinlock_priority_mutex.hpp" name="include/boost/fairness/spinlock_priority_mutex.hpp">
+<area shape="rect" id="Node000001" title="This file contains the implementation of the spinlock_priority_mutex based on a scalable list base al..." alt="" coords="309,5,520,45"/>
+<area shape="rect" id="Node000002" href="$priority__mutex__cpl_8hpp.html" title=" " alt="" coords="5,93,181,133"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="332,51,164,96,163,91,331,46"/>
+<area shape="rect" id="Node000004" href="$priority__mutex__tatas_8hpp.html" title=" " alt="" coords="206,93,397,133"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="380,56,328,95,325,91,377,52"/>
+<area shape="rect" id="Node000005" href="$recursive__priority__mutex_8hpp.html" title="This file contains the implementation of the recursive_priority_mutex." alt="" coords="421,93,638,133"/>
+<area shape="poly" id="edge4_Node000001_Node000005" title=" " alt="" coords="453,52,506,91,502,95,449,56"/>
+<area shape="rect" id="Node000006" href="$shared__priority__mutex_8hpp.html" title="This file contains the implementation of the shared_priority_mutex." alt="" coords="662,93,863,133"/>
+<area shape="poly" id="edge5_Node000001_Node000006" title=" " alt="" coords="505,46,687,91,686,96,504,51"/>
+<area shape="rect" id="Node000003" href="$priority__mutex_8hpp.html" title="This file contains the implementation of the priority_mutex." alt="" coords="11,181,176,221"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="96,147,96,181,91,181,91,147"/>
+</map>
