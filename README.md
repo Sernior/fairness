@@ -30,7 +30,7 @@ The reason I started this library is that the operating system makes decisions r
 <!-- quando ho iniziato questa lib credevo che sarebbe stato relativamente veloce e' semplice ma non lo e;' -->
 
 When I started this library, I believed it would be relatively easy, but it turned out not to be. Throughout my study and development of this library, I realized that in this field, there are no "silver bullets" and each solution has its own set of pros and cons.
-Unable to find a universal solution for every architecture, I opted to allow users to customize certain critical aspects of the library. I recommend users of this library to read [this page](file:///home/torjack/Documents/GitHub/fairness/docs/html/md_docs_2implementation-details.html).
+Unable to find a universal solution for every architecture, I opted to allow users to customize certain critical aspects of the library. I recommend users of this library to read [this page](https://sernior.github.io/fairness/md_docs_2implementation-details.html).
 
 <!-- ci sono tanti trade off e scelte, nessun silver bullet in questo campo.
 Lo scopo di questa lib, per info riguardo all'implementazione della lib, possibilita' di customizzazione per migliorare le performance in base al (...) del programmatore (il problema che deve andare a risolvere, velocita', spazio di memoria, n core, n processori, n pqnode, ecc...) link -> (...) -->
