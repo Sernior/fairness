@@ -22,26 +22,12 @@
 
 ### Crafting Fairness in Synchronization: A C++ Library Journey
 
-<!-- la ragione per cui e' stata fatta la libreria principalmente perche' il so non ha info che un programmatore possa avere, quindi politiche di fairness, user space...  -->
-
-<!-- The reason why I started this library is that the operating system operates decisions regarding scheduling policies without knowledge of the application layer. Sometimes, a programmer who is optimizing an application may want to give priority to certain threads for various reasons. -->
 The reason I started this library is that the operating system makes decisions regarding scheduling policies without knowledge of the application layer. Sometimes, a programmer optimizing an application may want to prioritize certain threads for various reasons.
 
-<!-- quando ho iniziato questa lib credevo che sarebbe stato relativamente veloce e' semplice ma non lo e;' -->
-
 When I started this library, I believed it would be relatively easy, but it turned out not to be. Throughout my study and development of this library, I realized that in this field, there are no "silver bullets" and each solution has its own set of pros and cons.
-Unable to find a universal solution for every architecture, I opted to allow users to customize certain critical aspects of the library. I recommend users of this library to read [this page](file:///home/torjack/Documents/GitHub/fairness/docs/html/md_docs_2implementation-details.html).
-
-<!-- ci sono tanti trade off e scelte, nessun silver bullet in questo campo.
-Lo scopo di questa lib, per info riguardo all'implementazione della lib, possibilita' di customizzazione per migliorare le performance in base al (...) del programmatore (il problema che deve andare a risolvere, velocita', spazio di memoria, n core, n processori, n pqnode, ecc...) link -> (...) -->
-
-
+Unable to find a universal solution for every architecture, I opted to allow users to customize certain critical aspects of the library. I recommend users of this library to read [this page](https://sernior.github.io/fairness/md_docs_2implementation-details.html).
 
 ## About The Project
-
-<!-- While the standard library offers various tools for managing concurrency, it lacks effective methods for enforcing fairness policies among threads.<br>
-Tweaking such behaviors can be challenging, and mistakes might lead to issues like thread starvation. These tools, if misused, have the potential to cause harm rather than benefit. Careful implementation and understanding are crucial to harness their benefits effectively.<br>
-The advanced syncronization mechanisms in this library do not autonomously adjust priorities, which means there is a risk of thread starvation if new threads are continually created and given high-priority locks. -->
 
 The standard library provides tools for handling concurrency but lacks effective ways to allow programmers to choose fairness policies.<br>
 Modifying these behaviors can be tricky, and mistakes may lead to issues such as thread starvation. If not used carefully, these tools can do more harm than good, emphasizing the importance of cautious usage.<br>
@@ -207,17 +193,19 @@ Thread with priority : 3 is running.
 
 This is a list of macros that can be defined to configure boost::fairness:
 
-| MACRO                                         | Description                                                                                                                                                                                             |
-| --------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| BOOST_FAIRNESS_WAIT_SPINS                     | The total number of spins before a syscall to the OS to yield the cpu through futex on linux or waitOnAdress on windows (this is used only if BOOST_FAIRNESS_USE_EXPERIMENTAL_WAIT_NOTIFY is defined).  |
-| BOOST_FAIRNESS_WAIT_SPINS_RELAXED             | The number of paused spins before a syscall to the OS to yield the cpu through futex on linux or waitOnAdress on windows (this is used only if BOOST_FAIRNESS_USE_EXPERIMENTAL_WAIT_NOTIFY is defined). |
-| BOOST_FAIRNESS_USE_TATAS                      | If defined contention will be solved with a simple tatas-based algorithm witch is faster but doesn't scale.                                                                                             |
-| BOOST_FAIRNESS_SPINWAIT_SPINS                 | The total number of spins performed while spin waiting.                                                                                                                                                 |
-| BOOST_FAIRNESS_SPINWAIT_SPINS_RELAXED         | The number of paused spins performed while spin waiting.                                                                                                                                                |
-| BOOST_FAIRNESS_HARDWARE_DESTRUCTIVE_SIZE      | Hardware destructive size used by this library.                                                                                                                                                         |
-| BOOST_FAIRNESS_MAX_PQNODES                    | The number of requests each priority mutex has available (this is used only if BOOST_FAIRNESS_USE_TATAS is not defined).                                                                                |
-| BOOST_FAIRNESS_MAX_THREADS                    | The total number of thread structs each thread has available (this is used only if BOOST_FAIRNESS_USE_TATAS is not defined).                                                                            |
-| BOOST_FAIRNESS_USE_EXPERIMENTAL_WAIT_NOTIFY   | Use a custom implementation to perform atomic::wait and atomic::notify instead of the standard ones.                                                                                                    |
+| MACRO                                        | Default     | Description                                                                                                                                                                                              |
+| -------------------------------------------- | ----------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| BOOST_FAIRNESS_WAIT_SPINS                    | 16          | The total number of spins before a syscall to the OS to yield the cpu through futex on linux or waitOnAdress on windows (this is used only if BOOST_FAIRNESS_USE_EXPERIMENTAL_WAIT_NOTIFY is defined).   |
+| BOOST_FAIRNESS_WAIT_SPINS_RELAXED            | 12          |  The number of paused spins before a syscall to the OS to yield the cpu through futex on linux or waitOnAdress on windows (this is used only if BOOST_FAIRNESS_USE_EXPERIMENTAL_WAIT_NOTIFY is defined). |
+| BOOST_FAIRNESS_USE_TATAS                     | not defined |  If defined contention will be solved with a simple tatas-based algorithm witch is faster but doesn't scale.                                                                                             |
+| BOOST_FAIRNESS_SPINWAIT_SPINS                | 16          |  The total number of spins performed while spin waiting.                                                                                                                                                 |
+| BOOST_FAIRNESS_SPINWAIT_SPINS_RELAXED        | 12          |  The number of paused spins performed while spin waiting.                                                                                                                                                |
+| BOOST_FAIRNESS_HARDWARE_DESTRUCTIVE_SIZE     | 128         |  Hardware destructive size used by this library.                                                                                                                                                         |
+| BOOST_FAIRNESS_MAX_PQNODES                   | 4           |  The number of requests each priority mutex has available (this is used only if BOOST_FAIRNESS_USE_TATAS is not defined).                                                                                |
+| BOOST_FAIRNESS_MAX_THREADS                   | 4           |  The total number of thread structs each thread has available (this is used only if BOOST_FAIRNESS_USE_TATAS is not defined).                                                                            |
+| BOOST_FAIRNESS_USE_EXPERIMENTAL_WAIT_NOTIFY  | not defined |  Use a custom implementation to perform atomic::wait and atomic::notify instead of the standard ones.                                                                                                    |
+| BOOST_FAIRNESS_GETREQUEST_SPINS              | 1           |  The total number of spins performed while performing a getRequest (this is used only if BOOST_FAIRNESS_USE_TATAS is not defined).                                                                       |
+| BOOST_FAIRNESS_GETREQUEST_SPINS_RELAXED      | 1           |  The number of paused spins performed while performing a getRequest (this is used only if BOOST_FAIRNESS_USE_TATAS is not defined).                                                                      |
 
 ## Contributing
 

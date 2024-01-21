@@ -43,6 +43,7 @@ namespace boost::fairness{
      *
      * @tparam N : represents the number of indexed priorities managed by the priority_mutex, ranging from 1 up to [BOOST_FAIRNESS_MAXIMUM_PRIORITY](https://sernior.github.io/fairness/priority__t_8hpp.html#ab63ed35d4aa8f18cc832fecbf13ba0ae).
      * @note priority_mutex is usually not accessed directly: unique_lock, lock_guard, or scoped_lock manage locking in a more exception-safe manner.
+     * @private
      */
     template<size_t N = 1>
     requires (N >= 1 && N <= BOOST_FAIRNESS_MAXIMUM_PRIORITY)
@@ -108,6 +109,7 @@ namespace boost::fairness{
          * thread with prio : 0
          *
          * \endcode
+         * @private
          */
         void lock(Priority_t const priority = 0){
 
@@ -176,6 +178,7 @@ namespace boost::fairness{
          * mutex unlocked
          *
          * \endcode
+         * @private
          */
         void unlock(){
 
