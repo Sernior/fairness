@@ -1,7 +1,7 @@
 /**
  * @file thread_pool.hpp
  * @author F. Abrignani (federignoli@hotmail.it)
- * @author S. Martorana
+ * @author  (salvatoremartorana@hotmail.com)
  * @brief This file contains the implementation of a pool of thread structs.
  * @version 0.1
  * @date 2023-12-18
