@@ -1,7 +1,7 @@
 /**
  * @file request_pool.hpp
  * @author F. Abrignani (federignoli@hotmail.it)
- * @author S. Martorana
+ * @author S. Martorana (salvatoremartorana@hotmail.com)
  * @brief This file contains the implementation of a static very fast and simple request pool.
  * @version 0.1
  * @date 2023-12-11

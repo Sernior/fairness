@@ -1,7 +1,7 @@
 /**
  * @file coherent_priority_lock.hpp
  * @author F. Abrignani (federignoli@hotmail.it)
- * @author S. Martorana
+ * @author S. Martorana (salvatoremartorana@hotmail.com)
  * @brief This file contains the implementation of a coherent priority lock.
  * @brief Based on the work of Travis S. Craig "Building FIFO and Priority-Queuing Spin Locks from Atomic Swap"
  * @version 0.1

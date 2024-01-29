@@ -1,7 +1,7 @@
 /**
  * @file pqspinlock.hpp
  * @author F. Abrignani (federignoli@hotmail.it)
- * @author S. Martorana
+ * @author S. Martorana (salvatoremartorana@hotmail.com)
  * @brief This file contains the implementation of a priority qspinlock.
  * @version 0.1
  * @date 2023-11-19
