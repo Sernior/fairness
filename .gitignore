@@ -7,3 +7,5 @@ build
 *.ilk
 docs/html
 perf*
+main.cpp
+thread-pool
