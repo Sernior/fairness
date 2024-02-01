@@ -54,7 +54,7 @@ namespace PM_scenario4{
 
         sch.switchContextTo(THREAD0);
         sch.switchContextTo(THREAD1);
-        sch.proceed(THREAD1, THREAD0);// thread 1 here should be stuck on the lock assuming my mutex is a mutex and not a semaphore
+        sch.proceed(THREAD1, THREAD0);// thread 1 here should be stuck on the lock assuming the mutex "m" is a mutex and not a semaphore
         sch.joinAll();
     };
 }

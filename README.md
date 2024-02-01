@@ -22,16 +22,16 @@
 
 ### Crafting Fairness in Synchronization: A C++ Library Journey
 
-The reason I started this library is that the operating system makes decisions regarding scheduling policies without knowledge of the application layer. Sometimes, a programmer optimizing an application may want to prioritize certain threads for various reasons.
+The reason I started Boost.Fairness is that the operating system makes decisions regarding scheduling policies without knowledge of the application layer. Sometimes, a programmer optimizing an application may want to prioritize certain threads for various reasons.
 
-When I started this library, I believed it would be relatively easy, but it turned out not to be. Throughout my study and development of this library, I realized that in this field, there are no "silver bullets" and each solution has its own set of pros and cons.
-Unable to find a universal solution for every architecture, I opted to allow users to customize certain critical aspects of the library. I recommend users of this library to read [this page](https://sernior.github.io/fairness/md_docs_2implementation-details.html).
+When I started Boost.Fairness, I believed it would be relatively easy, but it turned out not to be. Throughout my study and development of Boost.Fairness, I realized that in this field, there are no "silver bullets" and each solution has its own set of pros and cons.
+Unable to find a universal solution for every architecture, I opted to allow users to customize certain critical aspects of the library. I recommend users of Boost.Fairness to read [this page](https://sernior.github.io/fairness/md_docs_2implementation-details.html).
 
 ## About The Project
 
 The standard library provides tools for handling concurrency but lacks effective ways to allow programmers to choose fairness policies.<br>
 Modifying these behaviors can be tricky, and mistakes may lead to issues such as thread starvation. If not used carefully, these tools can do more harm than good, emphasizing the importance of cautious usage.<br>
-Furthermore, the advanced synchronization mechanisms in this library do not automatically adjust priorities. This poses a risk of thread starvation when new threads are consistently created with high-priority locks.
+Furthermore, the advanced synchronization mechanisms in Boost.Fairness do not automatically adjust priorities. This poses a risk of thread starvation when new threads are consistently created with high-priority locks.
 
 ## Use Cases
 
@@ -94,7 +94,7 @@ $ cmake --build build
 ```
 
 ### Installation
-Using cmake you can include this library as follows:
+Using cmake you can include Boost.Fairness as follows:
 
 ```cmake
 include(FetchContent)
@@ -200,7 +200,7 @@ This is a list of macros that can be defined to configure boost::fairness:
 | BOOST_FAIRNESS_USE_TATAS                     | not defined |  If defined contention will be solved with a simple tatas-based algorithm witch is faster but doesn't scale.                                                                                             |
 | BOOST_FAIRNESS_SPINWAIT_SPINS                | 16          |  The total number of spins performed while spin waiting.                                                                                                                                                 |
 | BOOST_FAIRNESS_SPINWAIT_SPINS_RELAXED        | 12          |  The number of paused spins performed while spin waiting.                                                                                                                                                |
-| BOOST_FAIRNESS_HARDWARE_DESTRUCTIVE_SIZE     | 128         |  Hardware destructive size used by this library.                                                                                                                                                         |
+| BOOST_FAIRNESS_HARDWARE_DESTRUCTIVE_SIZE     | 128         |  Hardware destructive size used by Boost.Fairness.                                                                                                                                                         |
 | BOOST_FAIRNESS_MAX_PQNODES                   | 4           |  The number of requests each priority mutex has available (this is used only if BOOST_FAIRNESS_USE_TATAS is not defined).                                                                                |
 | BOOST_FAIRNESS_MAX_THREADS                   | 4           |  The total number of thread structs each thread has available (this is used only if BOOST_FAIRNESS_USE_TATAS is not defined).                                                                            |
 | BOOST_FAIRNESS_USE_EXPERIMENTAL_WAIT_NOTIFY  | not defined |  Use a custom implementation to perform atomic::wait and atomic::notify instead of the standard ones.                                                                                                    |

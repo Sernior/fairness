@@ -2,11 +2,11 @@
 
 [TOC]
 
-A technical overview of the priority mutexes in this library.
+A technical overview of the priority mutexes in Boost.Fairness.
 
 ## Introduction {#extension-page-navigation}
 
-First I want to explain for the context of this document, the difference within this library of *mutex* and *spinlock*. A mutex is different from a spinlock in the sense that they use two different ways of performing the wait;
+First I want to explain for the context of this document, the difference within Boost.Fairness of *mutex* and *spinlock*. A mutex is different from a spinlock in the sense that they use two different ways of performing the wait;
 
 ### spinlock
 
@@ -65,7 +65,7 @@ So from now on when I mention a boost::fairness::spinlock_priority_mutex and a b
 
 ## False Sharing
 
-The main problem I faced when making this library is finding ways to avoid [false sharing](https://www.cs.rochester.edu/u/scott/papers/1993_SEDMS_false_sharing.pdf).
+The main problem I faced when making Boost.Fairness is finding ways to avoid [false sharing](https://www.cs.rochester.edu/u/scott/papers/1993_SEDMS_false_sharing.pdf).
 
 Let`s imagine of writing a simple spinlock:
 
@@ -117,7 +117,7 @@ Now we will at least test the memory which is a simple read operation (and wont 
 
 This approach is known as test and test and set (or TATAS).
 
-Basing a priority mutex on this approach is quite simple and by defining the macro BOOST_FAIRNESS_USE_TATAS_SPINLOCK users of my lib can infact use this approach.
+Basing a priority mutex on this approach is quite simple and by defining the macro BOOST_FAIRNESS_USE_TATAS users of Boost.Fairness can infact use this approach.
 
 This approach is very fast under low contention as the algorithm itself is quite simple but as stated it does not scale.
 
@@ -125,13 +125,13 @@ A more effective approach to address this problem is to implement a list-based l
 
 To completely avoid false sharing, nodes should be aligned to 128 bytes. While the majority of modern architectures have cache lines with a size of 64 bytes, the way L2 updates modified cache lines in most modern architectures occurs two at a time, potentially causing delays even among adjacent cache lines.
 
-For instance this is from the optimization manual of my cpu (AMD zen4 microarchitecture):
+For instance this is from the optimization manual of my CPU (AMD zen4 microarchitecture):
 
 <img class="readme-img" src="https://sernior.github.io/fairness/l2fetch.png" style= "object-fit: cover; object-position: 100% 0; width: 100%;"/>
 
 ## MCS Lock and Craig Algorithm
 
-A well-known approach in the realm of list-based locks is the [MCS lock](https://www.cs.rochester.edu/u/scott/papers/1991_TOCS_synch.pdf). While the MCS lock is notable for providing mostly FIFO fairness, it doesn't align with the specific requirements for the context of this library.
+A well-known approach in the realm of list-based locks is the [MCS lock](https://www.cs.rochester.edu/u/scott/papers/1991_TOCS_synch.pdf). While the MCS lock is notable for providing mostly FIFO fairness, it doesn't align with the specific requirements for the context of Boost.Fairness.
 
 I aimed for a mutex that operates like to a priority queue rather than a simple queue so that users could define their own fairness policies depending on their needs.
 Luckly for me the algorithm I was looking for already existed, created in 1993 from Travis S. Craig.
@@ -178,4 +178,4 @@ Complex mutexes, such as shared and recursive mutexes, can be implemented using 
 
 ## Other Components and Future Plans
 
-As of January 21, 2024, this library includes RAII wrappers boost::fairness::unique_lock and boost::fairness::shared_lock, mirroring the functionality of their std counterparts. Notably, these wrappers accept a priority parameter. Currently, the library lacks priority_convars and lock_guard (low priority). Additionally, more experimentation is required for the requestPool, as there is an ongoing pursuit of improvements in that area.
+As of January 21, 2024, Boost.Fairness includes RAII wrappers boost::fairness::unique_lock and boost::fairness::shared_lock, mirroring the functionality of their std counterparts. Notably, these wrappers accept a priority parameter. Currently, the library lacks priority_convars and lock_guard (low priority). Additionally, more experimentation is required for the requestPool, as there is an ongoing pursuit of improvements in that area.
