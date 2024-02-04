@@ -18,6 +18,8 @@
 #include <boost/fairness/priority_t.hpp>
 #include <boost/fairness/detail/coherent_priority_lock.hpp>
 #include <boost/fairness/detail/request_pool.hpp>
+#include <boost/fairness/detail/request_pool2.hpp> // testing
+#include <boost/fairness/detail/request_pool3.hpp> // testing
 #include <boost/fairness/detail/thread_pool.hpp>
 
 namespace boost::fairness::detail{

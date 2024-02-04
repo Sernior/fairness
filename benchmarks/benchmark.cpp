@@ -11,13 +11,13 @@
  * 
  */
  
-//#define BOOST_FAIRNESS_USE_TATAS
-#define BOOST_FAIRNESS_SPINWAIT_SPINS 16
-#define BOOST_FAIRNESS_SPINWAIT_SPINS_RELAXED 12
-#define BOOST_FAIRNESS_GETREQUEST_SPINS 1
-#define BOOST_FAIRNESS_GETREQUEST_SPINS_RELAXED 0
+#define BOOST_FAIRNESS_USE_TATAS
+#define BOOST_FAIRNESS_SPINWAIT_SPINS 10000
+#define BOOST_FAIRNESS_SPINWAIT_SPINS_RELAXED 0
+//#define BOOST_FAIRNESS_GETREQUEST_SPINS 10
+//#define BOOST_FAIRNESS_GETREQUEST_SPINS_RELAXED 9
 //#define BOOST_FAIRNESS_USE_EXPERIMENTAL_WAIT_NOTIFY
-#define BOOST_FAIRNESS_MAX_PQNODES 4
+//#define BOOST_FAIRNESS_MAX_PQNODES 4
 
 #include <benchmark/benchmark.h>
 #include "pipeline_benchmark.hpp"
@@ -27,11 +27,8 @@
 //BENCHMARK(utils::waiting::busy_wait_50nano_benchmark);
 BENCHMARK(____________________________________________________________________________________________);
 BENCHMARK(priority_mutex_benchmark::lock_unlock_benchmark)->Threads(8);
-
-//BENCHMARK(standard_mutex_benchmark::lock_unlock_benchmark)->Threads(8);
-//BENCHMARK(spinlock_priority_mutex_benchmark::lock_unlock_benchmark)->Threads(8);
-
-
+BENCHMARK(standard_mutex_benchmark::lock_unlock_benchmark)->Threads(8);
+BENCHMARK(spinlock_priority_mutex_benchmark::lock_unlock_benchmark)->Threads(8);
 BENCHMARK(slim_priority_mutex_benchmark::lock_unlock_benchmark)->Threads(8);
 #ifdef BOOST_FAIRNESS_EXPERIMENTAL_MUTEXES
 #endif
@@ -93,4 +90,5 @@ BENCHMARK(shared_priority_mutex_benchmark::pipeline_benchmark_fast)->Threads(8);
 BENCHMARK(standard_shared_mutex_benchmark::pipeline_benchmark_fast)->Threads(8);
 BENCHMARK(shared_priority_mutex_benchmark::shared_pipeline_benchmark_fast)->Threads(8);
 BENCHMARK(standard_shared_mutex_benchmark::shared_pipeline_benchmark_fast)->Threads(8);
+
 BENCHMARK_MAIN();
