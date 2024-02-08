@@ -1,4 +1,4 @@
-# boost.fairness
+# Boost.Fairness
 
 [![GitHub release (latest by date)](https://img.shields.io/github/v/release/Sernior/fairness)](https://github.com/Sernior/fairness/releases/latest)
 [![GitHub](https://img.shields.io/github/license/Sernior/fairness)](https://github.com/Sernior/fairness/blob/main/LICENSE)
@@ -196,16 +196,16 @@ This is a list of macros that can be defined to configure boost::fairness:
 | MACRO                                        | Default     | Description                                                                                                                                                                                              |
 | -------------------------------------------- | ----------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | BOOST_FAIRNESS_WAIT_SPINS                    | 16          | The total number of spins before a syscall to the OS to yield the cpu through futex on linux or waitOnAdress on windows (this is used only if BOOST_FAIRNESS_USE_EXPERIMENTAL_WAIT_NOTIFY is defined).   |
-| BOOST_FAIRNESS_WAIT_SPINS_RELAXED            | 12          |  The number of paused spins before a syscall to the OS to yield the cpu through futex on linux or waitOnAdress on windows (this is used only if BOOST_FAIRNESS_USE_EXPERIMENTAL_WAIT_NOTIFY is defined). |
-| BOOST_FAIRNESS_USE_TATAS                     | not defined |  If defined contention will be solved with a simple tatas-based algorithm witch is faster but doesn't scale.                                                                                             |
-| BOOST_FAIRNESS_SPINWAIT_SPINS                | 16          |  The total number of spins performed while spin waiting.                                                                                                                                                 |
-| BOOST_FAIRNESS_SPINWAIT_SPINS_RELAXED        | 12          |  The number of paused spins performed while spin waiting.                                                                                                                                                |
-| BOOST_FAIRNESS_HARDWARE_DESTRUCTIVE_SIZE     | 128         |  Hardware destructive size used by Boost.Fairness.                                                                                                                                                         |
-| BOOST_FAIRNESS_MAX_PQNODES                   | 4           |  The number of requests each priority mutex has available (this is used only if BOOST_FAIRNESS_USE_TATAS is not defined).                                                                                |
-| BOOST_FAIRNESS_MAX_THREADS                   | 4           |  The total number of thread structs each thread has available (this is used only if BOOST_FAIRNESS_USE_TATAS is not defined).                                                                            |
-| BOOST_FAIRNESS_USE_EXPERIMENTAL_WAIT_NOTIFY  | not defined |  Use a custom implementation to perform atomic::wait and atomic::notify instead of the standard ones.                                                                                                    |
-| BOOST_FAIRNESS_GETREQUEST_SPINS              | 1           |  The total number of spins performed while performing a getRequest (this is used only if BOOST_FAIRNESS_USE_TATAS is not defined).                                                                       |
-| BOOST_FAIRNESS_GETREQUEST_SPINS_RELAXED      | 1           |  The number of paused spins performed while performing a getRequest (this is used only if BOOST_FAIRNESS_USE_TATAS is not defined).                                                                      |
+| BOOST_FAIRNESS_WAIT_SPINS_RELAXED            | 12          | The number of paused spins before a syscall to the OS to yield the cpu through futex on linux or waitOnAdress on windows (this is used only if BOOST_FAIRNESS_USE_EXPERIMENTAL_WAIT_NOTIFY is defined).  |
+| BOOST_FAIRNESS_USE_TATAS                     | not defined | If defined contention will be solved with a simple tatas-based algorithm witch is faster but doesn't scale.                                                                                              |
+| BOOST_FAIRNESS_SPINWAIT_SPINS                | 16          | The total number of spins performed while spin waiting.                                                                                                                                                  |
+| BOOST_FAIRNESS_SPINWAIT_SPINS_RELAXED        | 12          | The number of paused spins performed while spin waiting.                                                                                                                                                 |
+| BOOST_FAIRNESS_HARDWARE_DESTRUCTIVE_SIZE     | 128         | Hardware destructive size used by Boost.Fairness.                                                                                                                                                        |
+| BOOST_FAIRNESS_MAX_PQNODES                   | 4           | The number of requests each priority mutex has available (this is used only if BOOST_FAIRNESS_USE_TATAS is not defined).                                                                                 |
+| BOOST_FAIRNESS_MAX_THREADS                   | 4           | The total number of thread structs each thread has available (this is used only if BOOST_FAIRNESS_USE_TATAS is not defined).                                                                             |
+| BOOST_FAIRNESS_USE_EXPERIMENTAL_WAIT_NOTIFY  | not defined | Use a custom implementation to perform atomic::wait and atomic::notify instead of the standard ones.                                                                                                     |
+| BOOST_FAIRNESS_GETREQUEST_SPINS              | 1           | The total number of spins performed while performing a getRequest (this is used only if BOOST_FAIRNESS_USE_TATAS is not defined).                                                                        |
+| BOOST_FAIRNESS_GETREQUEST_SPINS_RELAXED      | 1           | The number of paused spins performed while performing a getRequest (this is used only if BOOST_FAIRNESS_USE_TATAS is not defined).                                                                       |
 
 ## Contributing
 

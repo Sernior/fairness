@@ -11,6 +11,8 @@ void threadFunction(int p) {
 }
 int main()
 {
-    threadFunction(2);
+    uint8_t priority = 2;
+
+    threadFunction(priority);
     return 0;
 }
