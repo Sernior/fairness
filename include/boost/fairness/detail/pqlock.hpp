@@ -1,5 +1,5 @@
 /**
- * @file pqspinlock.hpp
+ * @file pqlock.hpp
  * @author F. Abrignani (federignoli@hotmail.it)
  * @author S. Martorana (salvatoremartorana@hotmail.com)
  * @brief This file contains the implementation of a priority qlock.
@@ -18,8 +18,6 @@
 #include <boost/fairness/priority_t.hpp>
 #include <boost/fairness/detail/coherent_priority_lock.hpp>
 #include <boost/fairness/detail/request_pool.hpp>
-#include <boost/fairness/detail/request_pool2.hpp> // testing
-#include <boost/fairness/detail/request_pool3.hpp> // testing
 #include <boost/fairness/detail/thread_pool.hpp>
 
 namespace boost::fairness::detail{

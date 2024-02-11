@@ -14,6 +14,7 @@
 #define BOOST_FAIRNESS_REQUEST_POOL_HPP
 
 #include <atomic>
+#include <array>
 #include <boost/fairness/config.hpp>
 
 namespace boost::fairness::detail{

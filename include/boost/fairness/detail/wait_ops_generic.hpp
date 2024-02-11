@@ -14,6 +14,7 @@
 #ifndef BOOST_FAIRNESS_WAIT_OPS_GENERIC_HPP
 #define BOOST_FAIRNESS_WAIT_OPS_GENERIC_HPP
 #include <boost/fairness/config.hpp>
+#include <type_traits>
 #include <atomic>
 
 namespace boost::fairness::detail{
@@ -27,21 +28,17 @@ namespace boost::fairness::detail{
         mem.wait(expected, std::memory_order_relaxed);
     }
 
+    inline void wait_(std::atomic_flag& mem, bool expected){
+        mem.wait(expected, std::memory_order_relaxed);
+    }
+
     template<typename T>
     inline void notify_one_(T& mem){
-        static_assert(
-            T::is_always_lock_free
-            , "Invalid argument size on boost::fairness::detail::notify_one"
-        );
         mem.notify_one();
     }
 
     template<typename T>
     inline void notify_all_(T& mem){
-        static_assert(
-            T::is_always_lock_free
-            , "Invalid argument size on boost::fairness::detail::notify_one"
-        );
         mem.notify_all();
     }
 

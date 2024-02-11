@@ -10,14 +10,15 @@
  * Distributed under the Boost Software License, Version 1.0. (See accompanying file LICENSE_1_0.txt or copy at http://www.boost.org/LICENSE_1_0.txt).
  * 
  */
-#ifndef BOOST_FAIRNESS_REQUEST_POOL2_HPP
-#define BOOST_FAIRNESS_REQUEST_POOL2_HPP
+#ifndef BOOST_FAIRNESS_REQUEST_POOL3_HPP
+#define BOOST_FAIRNESS_REQUEST_POOL3_HPP
 
+#include <thread>
 #include <atomic>
+#include <array>
 #include <boost/fairness/config.hpp>
-#include <boost/lockfree/queue.hpp>
 
-namespace boost::fairness::detail{
+namespace boost::fairness::detail::old{
     #define PENDING 1
     #define GRANTED 0
 /*
@@ -41,31 +42,31 @@ namespace boost::fairness::detail{
     static_assert(sizeof(Request) == BOOST_FAIRNESS_HARDWARE_DESTRUCTIVE_SIZE, "Request size is not BOOST_FAIRNESS_HARDWARE_DESTRUCTIVE_SIZE");
 */
     template<size_t N>
-    class RequestPool2{
+    class RequestPool3{
     public:
 
-        RequestPool2(){
-            for (auto& req : requests_)
-                freePool_.bounded_push(&req);
-        }
-
+        RequestPool3() = default;
 
         Request* getRequest(){
-            Request* req;
-            if (freePool_.pop(req))
-                return req;
+            std::hash<std::thread::id> hasher;
+            size_t hashedIndex = hasher(std::this_thread::get_id());
+            for (uint32_t i = 0; i < N; ++i){
+                size_t currentIndex = (hashedIndex + i) % N;
+                if (!reqs_[currentIndex].inUse_.test(std::memory_order_relaxed) && !reqs_[currentIndex].inUse_.test_and_set(std::memory_order_acquire))
+                    return &reqs_[currentIndex];
+                spin_wait();
+            }
             return nullptr;
         }
 
         void returnRequest(Request* const req){
             req->reset();
-            freePool_.bounded_push(req);
+            req->inUse_.clear(std::memory_order_release);
         }
 
     private:
-        std::array<Request, N> requests_;
-        boost::lockfree::queue<Request*, boost::lockfree::capacity<N>> freePool_;
+        std::array<Request, N> reqs_{};
     };
 
 }
-#endif // BOOST_FAIRNESS_REQUEST_POOL2_HPP
+#endif // BOOST_FAIRNESS_REQUEST_POOL3_HPP
