@@ -81,7 +81,7 @@ namespace boost::fairness::detail{
         private:
 
         coherent_priority_lock<WaitMechanism::Wait> cpl_;
-        RequestPool<BOOST_FAIRNESS_MAX_PQNODES> reqs_;
+        boost::fairness::detail::RequestPool<BOOST_FAIRNESS_MAX_PQNODES> reqs_;
 
     };
 
