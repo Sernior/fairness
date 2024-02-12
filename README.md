@@ -209,7 +209,7 @@ This is a list of macros that can be defined to configure boost::fairness:
 
 ## Contributing
 
-If you encounter any issues or would like to suggest new features, please don't hesitate to open an issue or get in touch with me at federignoli@hotmail.it.<br/>
+If you encounter any issues or would like to suggest new features, please don't hesitate to open an issue or get in touch at federignoli@hotmail.it.<br/>
 Contributions are also welcome! Feel free to open pull requests to the main repository and assign me as a reviewer – I'll be sure to review them. Your help is greatly appreciated!
 
 ## License
