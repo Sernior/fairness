@@ -2,7 +2,7 @@
  * @file config.hpp
  * @author F. Abrignani (federignoli@hotmail.it)
  * @author S. Martorana (salvatoremartorana@hotmail.com)
- * @brief This file contains configurations about boost and 128bit cpu support. TODO
+ * @brief This file contains configurations about the library.
  * @version 0.1
  * @date 2023-08-19
  * @private
@@ -26,7 +26,7 @@
 
 #ifndef BOOST_FAIRNESS_GETREQUEST_SPINS
 /**
- * @brief The total number of spins performed while performing a getRequest (this is used only if BOOST_FAIRNESS_USE_TATAS is not.
+ * @brief The total number of spins performed while performing a getRequest (this is used only if BOOST_FAIRNESS_USE_TATAS is not defined) (unused).
  */
 #define BOOST_FAIRNESS_GETREQUEST_SPINS 1
 #endif // BOOST_FAIRNESS_GETREQUEST_SPINS
@@ -35,7 +35,7 @@
 
 #ifndef BOOST_FAIRNESS_GETREQUEST_SPINS_RELAXED
 /**
- * @brief The number of paused spins performed while performing a getRequest (this is used only if BOOST_FAIRNESS_USE_TATAS is not.
+ * @brief The number of paused spins performed while performing a getRequest (this is used only if BOOST_FAIRNESS_USE_TATAS is not defined) (unused).
  */
 #define BOOST_FAIRNESS_GETREQUEST_SPINS_RELAXED 1
 #endif // BOOST_FAIRNESS_GETREQUEST_SPINS_RELAXED
