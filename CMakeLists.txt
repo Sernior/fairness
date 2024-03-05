@@ -14,12 +14,12 @@ target_include_directories(fairness INTERFACE include)
 find_package(Boost 1.74.0)
 
 if(LIB_FAIRNESS_EXPERIMENTAL)#experimental stuff
-target_include_directories(fairness INTERFACE include/experimental)
-add_compile_definitions(BOOST_FAIRNESS_EXPERIMENTAL_MUTEXES)
+    target_include_directories(fairness INTERFACE include/experimental)
+    add_compile_definitions(BOOST_FAIRNESS_EXPERIMENTAL_MUTEXES)
 endif()
 
 if(Boost_FOUND)#if boost is found for boost atomic
-add_compile_definitions(BOOST_FOUND)
+    add_compile_definitions(BOOST_FOUND)
 endif()
 
 target_compile_features(fairness INTERFACE cxx_std_20)
@@ -29,9 +29,12 @@ if (MSVC)
     set(CMAKE_CXX_STANDARD_REQUIRED ON)
     set(CMAKE_CXX_EXTENSIONS OFF)
 endif ()
+
 option(LIB_FAIRNESS_COMPILE_TESTS "Build the lib-fairnesstests" OFF)
 
 option(LIB_FAIRNESS_COMPILE_BENCHMARKS "Build the lib-fairness tests" OFF)
+
+option(LIB_FAIRNESS_COMPILE_BENCHMARKS_AS_SINGLE_FILE "" OFF)
 
 option(LIB_FAIRNESS_EXPERIMENTAL "add experimental mutexes" OFF)
  
