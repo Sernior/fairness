@@ -134,3 +134,550 @@ target_link_libraries(standard_mutex_benchmark_128 benchmark::benchmark fairness
 target_compile_definitions(standard_mutex_benchmark_128 PUBLIC BENCHMARK_THREADS=128)
 
 
+
+add_executable(priority_mutex_benchmark_pipeline_benchmark_long_8
+        priority_mutex_benchmark_pipeline_benchmark_long.cpp
+        pipeline_benchmark.hpp
+        utils/waiting_utils.hpp
+        utils/thread_utils.hpp)
+target_compile_features(priority_mutex_benchmark_pipeline_benchmark_long_8 PUBLIC cxx_std_20)
+target_link_libraries(priority_mutex_benchmark_pipeline_benchmark_long_8 benchmark::benchmark fairness deterministic_concurrency)
+target_compile_definitions(priority_mutex_benchmark_pipeline_benchmark_long_8 PUBLIC BENCHMARK_THREADS=8)
+        
+add_executable(spinlock_priority_mutex_benchmark_pipeline_benchmark_long_8
+        spinlock_priority_mutex_benchmark_pipeline_benchmark_long.cpp
+        pipeline_benchmark.hpp
+        utils/waiting_utils.hpp
+        utils/thread_utils.hpp)
+target_compile_features(spinlock_priority_mutex_benchmark_pipeline_benchmark_long_8 PUBLIC cxx_std_20)
+target_link_libraries(spinlock_priority_mutex_benchmark_pipeline_benchmark_long_8 benchmark::benchmark fairness deterministic_concurrency)
+target_compile_definitions(spinlock_priority_mutex_benchmark_pipeline_benchmark_long_8 PUBLIC BENCHMARK_THREADS=8)
+        
+add_executable(standard_mutex_benchmark_pipeline_benchmark_long_8
+        standard_mutex_benchmark_pipeline_benchmark_long.cpp
+        pipeline_benchmark.hpp
+        utils/waiting_utils.hpp
+        utils/thread_utils.hpp)
+target_compile_features(standard_mutex_benchmark_pipeline_benchmark_long_8 PUBLIC cxx_std_20)
+target_link_libraries(standard_mutex_benchmark_pipeline_benchmark_long_8 benchmark::benchmark fairness deterministic_concurrency)
+target_compile_definitions(standard_mutex_benchmark_pipeline_benchmark_long_8 PUBLIC BENCHMARK_THREADS=8)
+
+add_executable(priority_mutex_benchmark_pipeline_benchmark_long_16
+        priority_mutex_benchmark_pipeline_benchmark_long.cpp
+        pipeline_benchmark.hpp
+        utils/waiting_utils.hpp
+        utils/thread_utils.hpp)
+target_compile_features(priority_mutex_benchmark_pipeline_benchmark_long_16 PUBLIC cxx_std_20)
+target_link_libraries(priority_mutex_benchmark_pipeline_benchmark_long_16 benchmark::benchmark fairness deterministic_concurrency)
+target_compile_definitions(priority_mutex_benchmark_pipeline_benchmark_long_16 PUBLIC BENCHMARK_THREADS=16)
+        
+add_executable(spinlock_priority_mutex_benchmark_pipeline_benchmark_long_16
+        spinlock_priority_mutex_benchmark_pipeline_benchmark_long.cpp
+        pipeline_benchmark.hpp
+        utils/waiting_utils.hpp
+        utils/thread_utils.hpp)
+target_compile_features(spinlock_priority_mutex_benchmark_pipeline_benchmark_long_16 PUBLIC cxx_std_20)
+target_link_libraries(spinlock_priority_mutex_benchmark_pipeline_benchmark_long_16 benchmark::benchmark fairness deterministic_concurrency)
+target_compile_definitions(spinlock_priority_mutex_benchmark_pipeline_benchmark_long_16 PUBLIC BENCHMARK_THREADS=16)
+        
+add_executable(standard_mutex_benchmark_pipeline_benchmark_long_16
+        standard_mutex_benchmark_pipeline_benchmark_long.cpp
+        pipeline_benchmark.hpp
+        utils/waiting_utils.hpp
+        utils/thread_utils.hpp)
+target_compile_features(standard_mutex_benchmark_pipeline_benchmark_long_16 PUBLIC cxx_std_20)
+target_link_libraries(standard_mutex_benchmark_pipeline_benchmark_long_16 benchmark::benchmark fairness deterministic_concurrency)
+target_compile_definitions(standard_mutex_benchmark_pipeline_benchmark_long_16 PUBLIC BENCHMARK_THREADS=16)
+
+add_executable(priority_mutex_benchmark_pipeline_benchmark_long_32
+        priority_mutex_benchmark_pipeline_benchmark_long.cpp
+        pipeline_benchmark.hpp
+        utils/waiting_utils.hpp
+        utils/thread_utils.hpp)
+target_compile_features(priority_mutex_benchmark_pipeline_benchmark_long_32 PUBLIC cxx_std_20)
+target_link_libraries(priority_mutex_benchmark_pipeline_benchmark_long_32 benchmark::benchmark fairness deterministic_concurrency)
+target_compile_definitions(priority_mutex_benchmark_pipeline_benchmark_long_32 PUBLIC BENCHMARK_THREADS=32)
+        
+add_executable(spinlock_priority_mutex_benchmark_pipeline_benchmark_long_32
+        spinlock_priority_mutex_benchmark_pipeline_benchmark_long.cpp
+        pipeline_benchmark.hpp
+        utils/waiting_utils.hpp
+        utils/thread_utils.hpp)
+target_compile_features(spinlock_priority_mutex_benchmark_pipeline_benchmark_long_32 PUBLIC cxx_std_20)
+target_link_libraries(spinlock_priority_mutex_benchmark_pipeline_benchmark_long_32 benchmark::benchmark fairness deterministic_concurrency)
+target_compile_definitions(spinlock_priority_mutex_benchmark_pipeline_benchmark_long_32 PUBLIC BENCHMARK_THREADS=32)
+        
+add_executable(standard_mutex_benchmark_pipeline_benchmark_long_32
+        standard_mutex_benchmark_pipeline_benchmark_long.cpp
+        pipeline_benchmark.hpp
+        utils/waiting_utils.hpp
+        utils/thread_utils.hpp)
+target_compile_features(standard_mutex_benchmark_pipeline_benchmark_long_32 PUBLIC cxx_std_20)
+target_link_libraries(standard_mutex_benchmark_pipeline_benchmark_long_32 benchmark::benchmark fairness deterministic_concurrency)
+target_compile_definitions(standard_mutex_benchmark_pipeline_benchmark_long_32 PUBLIC BENCHMARK_THREADS=32)
+
+add_executable(priority_mutex_benchmark_pipeline_benchmark_long_64
+        priority_mutex_benchmark_pipeline_benchmark_long.cpp
+        pipeline_benchmark.hpp
+        utils/waiting_utils.hpp
+        utils/thread_utils.hpp)
+target_compile_features(priority_mutex_benchmark_pipeline_benchmark_long_64 PUBLIC cxx_std_20)
+target_link_libraries(priority_mutex_benchmark_pipeline_benchmark_long_64 benchmark::benchmark fairness deterministic_concurrency)
+target_compile_definitions(priority_mutex_benchmark_pipeline_benchmark_long_64 PUBLIC BENCHMARK_THREADS=64)
+        
+add_executable(spinlock_priority_mutex_benchmark_pipeline_benchmark_long_64
+        spinlock_priority_mutex_benchmark_pipeline_benchmark_long.cpp
+        pipeline_benchmark.hpp
+        utils/waiting_utils.hpp
+        utils/thread_utils.hpp)
+target_compile_features(spinlock_priority_mutex_benchmark_pipeline_benchmark_long_64 PUBLIC cxx_std_20)
+target_link_libraries(spinlock_priority_mutex_benchmark_pipeline_benchmark_long_64 benchmark::benchmark fairness deterministic_concurrency)
+target_compile_definitions(spinlock_priority_mutex_benchmark_pipeline_benchmark_long_64 PUBLIC BENCHMARK_THREADS=64)
+        
+add_executable(standard_mutex_benchmark_pipeline_benchmark_long_64
+        standard_mutex_benchmark_pipeline_benchmark_long.cpp
+        pipeline_benchmark.hpp
+        utils/waiting_utils.hpp
+        utils/thread_utils.hpp)
+target_compile_features(standard_mutex_benchmark_pipeline_benchmark_long_64 PUBLIC cxx_std_20)
+target_link_libraries(standard_mutex_benchmark_pipeline_benchmark_long_64 benchmark::benchmark fairness deterministic_concurrency)
+target_compile_definitions(standard_mutex_benchmark_pipeline_benchmark_long_64 PUBLIC BENCHMARK_THREADS=64)
+
+add_executable(priority_mutex_benchmark_pipeline_benchmark_long_128
+        priority_mutex_benchmark_pipeline_benchmark_long.cpp
+        pipeline_benchmark.hpp
+        utils/waiting_utils.hpp
+        utils/thread_utils.hpp)
+target_compile_features(priority_mutex_benchmark_pipeline_benchmark_long_128 PUBLIC cxx_std_20)
+target_link_libraries(priority_mutex_benchmark_pipeline_benchmark_long_128 benchmark::benchmark fairness deterministic_concurrency)
+target_compile_definitions(priority_mutex_benchmark_pipeline_benchmark_long_128 PUBLIC BENCHMARK_THREADS=128)
+        
+add_executable(spinlock_priority_mutex_benchmark_pipeline_benchmark_long_128
+        spinlock_priority_mutex_benchmark_pipeline_benchmark_long.cpp
+        pipeline_benchmark.hpp
+        utils/waiting_utils.hpp
+        utils/thread_utils.hpp)
+target_compile_features(spinlock_priority_mutex_benchmark_pipeline_benchmark_long_128 PUBLIC cxx_std_20)
+target_link_libraries(spinlock_priority_mutex_benchmark_pipeline_benchmark_long_128 benchmark::benchmark fairness deterministic_concurrency)
+target_compile_definitions(spinlock_priority_mutex_benchmark_pipeline_benchmark_long_128 PUBLIC BENCHMARK_THREADS=128)
+        
+add_executable(standard_mutex_benchmark_pipeline_benchmark_long_128
+        standard_mutex_benchmark_pipeline_benchmark_long.cpp
+        pipeline_benchmark.hpp
+        utils/waiting_utils.hpp
+        utils/thread_utils.hpp)
+target_compile_features(standard_mutex_benchmark_pipeline_benchmark_long_128 PUBLIC cxx_std_20)
+target_link_libraries(standard_mutex_benchmark_pipeline_benchmark_long_128 benchmark::benchmark fairness deterministic_concurrency)
+target_compile_definitions(standard_mutex_benchmark_pipeline_benchmark_long_128 PUBLIC BENCHMARK_THREADS=128)
+
+
+
+add_executable(priority_mutex_benchmark_pipeline_benchmark_gaming_8
+        priority_mutex_benchmark_pipeline_benchmark_gaming.cpp
+        pipeline_benchmark.hpp
+        utils/waiting_utils.hpp
+        utils/thread_utils.hpp)
+target_compile_features(priority_mutex_benchmark_pipeline_benchmark_gaming_8 PUBLIC cxx_std_20)
+target_link_libraries(priority_mutex_benchmark_pipeline_benchmark_gaming_8 benchmark::benchmark fairness deterministic_concurrency)
+target_compile_definitions(priority_mutex_benchmark_pipeline_benchmark_gaming_8 PUBLIC BENCHMARK_THREADS=8)
+        
+add_executable(spinlock_priority_mutex_benchmark_pipeline_benchmark_gaming_8
+        spinlock_priority_mutex_benchmark_pipeline_benchmark_gaming.cpp
+        pipeline_benchmark.hpp
+        utils/waiting_utils.hpp
+        utils/thread_utils.hpp)
+target_compile_features(spinlock_priority_mutex_benchmark_pipeline_benchmark_gaming_8 PUBLIC cxx_std_20)
+target_link_libraries(spinlock_priority_mutex_benchmark_pipeline_benchmark_gaming_8 benchmark::benchmark fairness deterministic_concurrency)
+target_compile_definitions(spinlock_priority_mutex_benchmark_pipeline_benchmark_gaming_8 PUBLIC BENCHMARK_THREADS=8)
+        
+add_executable(standard_mutex_benchmark_pipeline_benchmark_gaming_8
+        standard_mutex_benchmark_pipeline_benchmark_gaming.cpp
+        pipeline_benchmark.hpp
+        utils/waiting_utils.hpp
+        utils/thread_utils.hpp)
+target_compile_features(standard_mutex_benchmark_pipeline_benchmark_gaming_8 PUBLIC cxx_std_20)
+target_link_libraries(standard_mutex_benchmark_pipeline_benchmark_gaming_8 benchmark::benchmark fairness deterministic_concurrency)
+target_compile_definitions(standard_mutex_benchmark_pipeline_benchmark_gaming_8 PUBLIC BENCHMARK_THREADS=8)
+
+add_executable(priority_mutex_benchmark_pipeline_benchmark_gaming_16
+        priority_mutex_benchmark_pipeline_benchmark_gaming.cpp
+        pipeline_benchmark.hpp
+        utils/waiting_utils.hpp
+        utils/thread_utils.hpp)
+target_compile_features(priority_mutex_benchmark_pipeline_benchmark_gaming_16 PUBLIC cxx_std_20)
+target_link_libraries(priority_mutex_benchmark_pipeline_benchmark_gaming_16 benchmark::benchmark fairness deterministic_concurrency)
+target_compile_definitions(priority_mutex_benchmark_pipeline_benchmark_gaming_16 PUBLIC BENCHMARK_THREADS=16)
+        
+add_executable(spinlock_priority_mutex_benchmark_pipeline_benchmark_gaming_16
+        spinlock_priority_mutex_benchmark_pipeline_benchmark_gaming.cpp
+        pipeline_benchmark.hpp
+        utils/waiting_utils.hpp
+        utils/thread_utils.hpp)
+target_compile_features(spinlock_priority_mutex_benchmark_pipeline_benchmark_gaming_16 PUBLIC cxx_std_20)
+target_link_libraries(spinlock_priority_mutex_benchmark_pipeline_benchmark_gaming_16 benchmark::benchmark fairness deterministic_concurrency)
+target_compile_definitions(spinlock_priority_mutex_benchmark_pipeline_benchmark_gaming_16 PUBLIC BENCHMARK_THREADS=16)
+        
+add_executable(standard_mutex_benchmark_pipeline_benchmark_gaming_16
+        standard_mutex_benchmark_pipeline_benchmark_gaming.cpp
+        pipeline_benchmark.hpp
+        utils/waiting_utils.hpp
+        utils/thread_utils.hpp)
+target_compile_features(standard_mutex_benchmark_pipeline_benchmark_gaming_16 PUBLIC cxx_std_20)
+target_link_libraries(standard_mutex_benchmark_pipeline_benchmark_gaming_16 benchmark::benchmark fairness deterministic_concurrency)
+target_compile_definitions(standard_mutex_benchmark_pipeline_benchmark_gaming_16 PUBLIC BENCHMARK_THREADS=16)
+
+add_executable(priority_mutex_benchmark_pipeline_benchmark_gaming_32
+        priority_mutex_benchmark_pipeline_benchmark_gaming.cpp
+        pipeline_benchmark.hpp
+        utils/waiting_utils.hpp
+        utils/thread_utils.hpp)
+target_compile_features(priority_mutex_benchmark_pipeline_benchmark_gaming_32 PUBLIC cxx_std_20)
+target_link_libraries(priority_mutex_benchmark_pipeline_benchmark_gaming_32 benchmark::benchmark fairness deterministic_concurrency)
+target_compile_definitions(priority_mutex_benchmark_pipeline_benchmark_gaming_32 PUBLIC BENCHMARK_THREADS=32)
+        
+add_executable(spinlock_priority_mutex_benchmark_pipeline_benchmark_gaming_32
+        spinlock_priority_mutex_benchmark_pipeline_benchmark_gaming.cpp
+        pipeline_benchmark.hpp
+        utils/waiting_utils.hpp
+        utils/thread_utils.hpp)
+target_compile_features(spinlock_priority_mutex_benchmark_pipeline_benchmark_gaming_32 PUBLIC cxx_std_20)
+target_link_libraries(spinlock_priority_mutex_benchmark_pipeline_benchmark_gaming_32 benchmark::benchmark fairness deterministic_concurrency)
+target_compile_definitions(spinlock_priority_mutex_benchmark_pipeline_benchmark_gaming_32 PUBLIC BENCHMARK_THREADS=32)
+        
+add_executable(standard_mutex_benchmark_pipeline_benchmark_gaming_32
+        standard_mutex_benchmark_pipeline_benchmark_gaming.cpp
+        pipeline_benchmark.hpp
+        utils/waiting_utils.hpp
+        utils/thread_utils.hpp)
+target_compile_features(standard_mutex_benchmark_pipeline_benchmark_gaming_32 PUBLIC cxx_std_20)
+target_link_libraries(standard_mutex_benchmark_pipeline_benchmark_gaming_32 benchmark::benchmark fairness deterministic_concurrency)
+target_compile_definitions(standard_mutex_benchmark_pipeline_benchmark_gaming_32 PUBLIC BENCHMARK_THREADS=32)
+
+add_executable(priority_mutex_benchmark_pipeline_benchmark_gaming_64
+        priority_mutex_benchmark_pipeline_benchmark_gaming.cpp
+        pipeline_benchmark.hpp
+        utils/waiting_utils.hpp
+        utils/thread_utils.hpp)
+target_compile_features(priority_mutex_benchmark_pipeline_benchmark_gaming_64 PUBLIC cxx_std_20)
+target_link_libraries(priority_mutex_benchmark_pipeline_benchmark_gaming_64 benchmark::benchmark fairness deterministic_concurrency)
+target_compile_definitions(priority_mutex_benchmark_pipeline_benchmark_gaming_64 PUBLIC BENCHMARK_THREADS=64)
+        
+add_executable(spinlock_priority_mutex_benchmark_pipeline_benchmark_gaming_64
+        spinlock_priority_mutex_benchmark_pipeline_benchmark_gaming.cpp
+        pipeline_benchmark.hpp
+        utils/waiting_utils.hpp
+        utils/thread_utils.hpp)
+target_compile_features(spinlock_priority_mutex_benchmark_pipeline_benchmark_gaming_64 PUBLIC cxx_std_20)
+target_link_libraries(spinlock_priority_mutex_benchmark_pipeline_benchmark_gaming_64 benchmark::benchmark fairness deterministic_concurrency)
+target_compile_definitions(spinlock_priority_mutex_benchmark_pipeline_benchmark_gaming_64 PUBLIC BENCHMARK_THREADS=64)
+        
+add_executable(standard_mutex_benchmark_pipeline_benchmark_gaming_64
+        standard_mutex_benchmark_pipeline_benchmark_gaming.cpp
+        pipeline_benchmark.hpp
+        utils/waiting_utils.hpp
+        utils/thread_utils.hpp)
+target_compile_features(standard_mutex_benchmark_pipeline_benchmark_gaming_64 PUBLIC cxx_std_20)
+target_link_libraries(standard_mutex_benchmark_pipeline_benchmark_gaming_64 benchmark::benchmark fairness deterministic_concurrency)
+target_compile_definitions(standard_mutex_benchmark_pipeline_benchmark_gaming_64 PUBLIC BENCHMARK_THREADS=64)
+
+add_executable(priority_mutex_benchmark_pipeline_benchmark_gaming_128
+        priority_mutex_benchmark_pipeline_benchmark_gaming.cpp
+        pipeline_benchmark.hpp
+        utils/waiting_utils.hpp
+        utils/thread_utils.hpp)
+target_compile_features(priority_mutex_benchmark_pipeline_benchmark_gaming_128 PUBLIC cxx_std_20)
+target_link_libraries(priority_mutex_benchmark_pipeline_benchmark_gaming_128 benchmark::benchmark fairness deterministic_concurrency)
+target_compile_definitions(priority_mutex_benchmark_pipeline_benchmark_gaming_128 PUBLIC BENCHMARK_THREADS=128)
+        
+add_executable(spinlock_priority_mutex_benchmark_pipeline_benchmark_gaming_128
+        spinlock_priority_mutex_benchmark_pipeline_benchmark_gaming.cpp
+        pipeline_benchmark.hpp
+        utils/waiting_utils.hpp
+        utils/thread_utils.hpp)
+target_compile_features(spinlock_priority_mutex_benchmark_pipeline_benchmark_gaming_128 PUBLIC cxx_std_20)
+target_link_libraries(spinlock_priority_mutex_benchmark_pipeline_benchmark_gaming_128 benchmark::benchmark fairness deterministic_concurrency)
+target_compile_definitions(spinlock_priority_mutex_benchmark_pipeline_benchmark_gaming_128 PUBLIC BENCHMARK_THREADS=128)
+        
+add_executable(standard_mutex_benchmark_pipeline_benchmark_gaming_128
+        standard_mutex_benchmark_pipeline_benchmark_gaming.cpp
+        pipeline_benchmark.hpp
+        utils/waiting_utils.hpp
+        utils/thread_utils.hpp)
+target_compile_features(standard_mutex_benchmark_pipeline_benchmark_gaming_128 PUBLIC cxx_std_20)
+target_link_libraries(standard_mutex_benchmark_pipeline_benchmark_gaming_128 benchmark::benchmark fairness deterministic_concurrency)
+target_compile_definitions(standard_mutex_benchmark_pipeline_benchmark_gaming_128 PUBLIC BENCHMARK_THREADS=128)
+
+
+
+add_executable(priority_mutex_benchmark_pipeline_benchmark_audio_8
+        priority_mutex_benchmark_pipeline_benchmark_audio.cpp
+        pipeline_benchmark.hpp
+        utils/waiting_utils.hpp
+        utils/thread_utils.hpp)
+target_compile_features(priority_mutex_benchmark_pipeline_benchmark_audio_8 PUBLIC cxx_std_20)
+target_link_libraries(priority_mutex_benchmark_pipeline_benchmark_audio_8 benchmark::benchmark fairness deterministic_concurrency)
+target_compile_definitions(priority_mutex_benchmark_pipeline_benchmark_audio_8 PUBLIC BENCHMARK_THREADS=8)
+        
+add_executable(spinlock_priority_mutex_benchmark_pipeline_benchmark_audio_8
+        spinlock_priority_mutex_benchmark_pipeline_benchmark_audio.cpp
+        pipeline_benchmark.hpp
+        utils/waiting_utils.hpp
+        utils/thread_utils.hpp)
+target_compile_features(spinlock_priority_mutex_benchmark_pipeline_benchmark_audio_8 PUBLIC cxx_std_20)
+target_link_libraries(spinlock_priority_mutex_benchmark_pipeline_benchmark_audio_8 benchmark::benchmark fairness deterministic_concurrency)
+target_compile_definitions(spinlock_priority_mutex_benchmark_pipeline_benchmark_audio_8 PUBLIC BENCHMARK_THREADS=8)
+        
+add_executable(standard_mutex_benchmark_pipeline_benchmark_audio_8
+        standard_mutex_benchmark_pipeline_benchmark_audio.cpp
+        pipeline_benchmark.hpp
+        utils/waiting_utils.hpp
+        utils/thread_utils.hpp)
+target_compile_features(standard_mutex_benchmark_pipeline_benchmark_audio_8 PUBLIC cxx_std_20)
+target_link_libraries(standard_mutex_benchmark_pipeline_benchmark_audio_8 benchmark::benchmark fairness deterministic_concurrency)
+target_compile_definitions(standard_mutex_benchmark_pipeline_benchmark_audio_8 PUBLIC BENCHMARK_THREADS=8)
+
+add_executable(priority_mutex_benchmark_pipeline_benchmark_audio_16
+        priority_mutex_benchmark_pipeline_benchmark_audio.cpp
+        pipeline_benchmark.hpp
+        utils/waiting_utils.hpp
+        utils/thread_utils.hpp)
+target_compile_features(priority_mutex_benchmark_pipeline_benchmark_audio_16 PUBLIC cxx_std_20)
+target_link_libraries(priority_mutex_benchmark_pipeline_benchmark_audio_16 benchmark::benchmark fairness deterministic_concurrency)
+target_compile_definitions(priority_mutex_benchmark_pipeline_benchmark_audio_16 PUBLIC BENCHMARK_THREADS=16)
+        
+add_executable(spinlock_priority_mutex_benchmark_pipeline_benchmark_audio_16
+        spinlock_priority_mutex_benchmark_pipeline_benchmark_audio.cpp
+        pipeline_benchmark.hpp
+        utils/waiting_utils.hpp
+        utils/thread_utils.hpp)
+target_compile_features(spinlock_priority_mutex_benchmark_pipeline_benchmark_audio_16 PUBLIC cxx_std_20)
+target_link_libraries(spinlock_priority_mutex_benchmark_pipeline_benchmark_audio_16 benchmark::benchmark fairness deterministic_concurrency)
+target_compile_definitions(spinlock_priority_mutex_benchmark_pipeline_benchmark_audio_16 PUBLIC BENCHMARK_THREADS=16)
+        
+add_executable(standard_mutex_benchmark_pipeline_benchmark_audio_16
+        standard_mutex_benchmark_pipeline_benchmark_audio.cpp
+        pipeline_benchmark.hpp
+        utils/waiting_utils.hpp
+        utils/thread_utils.hpp)
+target_compile_features(standard_mutex_benchmark_pipeline_benchmark_audio_16 PUBLIC cxx_std_20)
+target_link_libraries(standard_mutex_benchmark_pipeline_benchmark_audio_16 benchmark::benchmark fairness deterministic_concurrency)
+target_compile_definitions(standard_mutex_benchmark_pipeline_benchmark_audio_16 PUBLIC BENCHMARK_THREADS=16)
+
+add_executable(priority_mutex_benchmark_pipeline_benchmark_audio_32
+        priority_mutex_benchmark_pipeline_benchmark_audio.cpp
+        pipeline_benchmark.hpp
+        utils/waiting_utils.hpp
+        utils/thread_utils.hpp)
+target_compile_features(priority_mutex_benchmark_pipeline_benchmark_audio_32 PUBLIC cxx_std_20)
+target_link_libraries(priority_mutex_benchmark_pipeline_benchmark_audio_32 benchmark::benchmark fairness deterministic_concurrency)
+target_compile_definitions(priority_mutex_benchmark_pipeline_benchmark_audio_32 PUBLIC BENCHMARK_THREADS=32)
+        
+add_executable(spinlock_priority_mutex_benchmark_pipeline_benchmark_audio_32
+        spinlock_priority_mutex_benchmark_pipeline_benchmark_audio.cpp
+        pipeline_benchmark.hpp
+        utils/waiting_utils.hpp
+        utils/thread_utils.hpp)
+target_compile_features(spinlock_priority_mutex_benchmark_pipeline_benchmark_audio_32 PUBLIC cxx_std_20)
+target_link_libraries(spinlock_priority_mutex_benchmark_pipeline_benchmark_audio_32 benchmark::benchmark fairness deterministic_concurrency)
+target_compile_definitions(spinlock_priority_mutex_benchmark_pipeline_benchmark_audio_32 PUBLIC BENCHMARK_THREADS=32)
+        
+add_executable(standard_mutex_benchmark_pipeline_benchmark_audio_32
+        standard_mutex_benchmark_pipeline_benchmark_audio.cpp
+        pipeline_benchmark.hpp
+        utils/waiting_utils.hpp
+        utils/thread_utils.hpp)
+target_compile_features(standard_mutex_benchmark_pipeline_benchmark_audio_32 PUBLIC cxx_std_20)
+target_link_libraries(standard_mutex_benchmark_pipeline_benchmark_audio_32 benchmark::benchmark fairness deterministic_concurrency)
+target_compile_definitions(standard_mutex_benchmark_pipeline_benchmark_audio_32 PUBLIC BENCHMARK_THREADS=32)
+
+add_executable(priority_mutex_benchmark_pipeline_benchmark_audio_64
+        priority_mutex_benchmark_pipeline_benchmark_audio.cpp
+        pipeline_benchmark.hpp
+        utils/waiting_utils.hpp
+        utils/thread_utils.hpp)
+target_compile_features(priority_mutex_benchmark_pipeline_benchmark_audio_64 PUBLIC cxx_std_20)
+target_link_libraries(priority_mutex_benchmark_pipeline_benchmark_audio_64 benchmark::benchmark fairness deterministic_concurrency)
+target_compile_definitions(priority_mutex_benchmark_pipeline_benchmark_audio_64 PUBLIC BENCHMARK_THREADS=64)
+        
+add_executable(spinlock_priority_mutex_benchmark_pipeline_benchmark_audio_64
+        spinlock_priority_mutex_benchmark_pipeline_benchmark_audio.cpp
+        pipeline_benchmark.hpp
+        utils/waiting_utils.hpp
+        utils/thread_utils.hpp)
+target_compile_features(spinlock_priority_mutex_benchmark_pipeline_benchmark_audio_64 PUBLIC cxx_std_20)
+target_link_libraries(spinlock_priority_mutex_benchmark_pipeline_benchmark_audio_64 benchmark::benchmark fairness deterministic_concurrency)
+target_compile_definitions(spinlock_priority_mutex_benchmark_pipeline_benchmark_audio_64 PUBLIC BENCHMARK_THREADS=64)
+        
+add_executable(standard_mutex_benchmark_pipeline_benchmark_audio_64
+        standard_mutex_benchmark_pipeline_benchmark_audio.cpp
+        pipeline_benchmark.hpp
+        utils/waiting_utils.hpp
+        utils/thread_utils.hpp)
+target_compile_features(standard_mutex_benchmark_pipeline_benchmark_audio_64 PUBLIC cxx_std_20)
+target_link_libraries(standard_mutex_benchmark_pipeline_benchmark_audio_64 benchmark::benchmark fairness deterministic_concurrency)
+target_compile_definitions(standard_mutex_benchmark_pipeline_benchmark_audio_64 PUBLIC BENCHMARK_THREADS=64)
+
+add_executable(priority_mutex_benchmark_pipeline_benchmark_audio_128
+        priority_mutex_benchmark_pipeline_benchmark_audio.cpp
+        pipeline_benchmark.hpp
+        utils/waiting_utils.hpp
+        utils/thread_utils.hpp)
+target_compile_features(priority_mutex_benchmark_pipeline_benchmark_audio_128 PUBLIC cxx_std_20)
+target_link_libraries(priority_mutex_benchmark_pipeline_benchmark_audio_128 benchmark::benchmark fairness deterministic_concurrency)
+target_compile_definitions(priority_mutex_benchmark_pipeline_benchmark_audio_128 PUBLIC BENCHMARK_THREADS=128)
+        
+add_executable(spinlock_priority_mutex_benchmark_pipeline_benchmark_audio_128
+        spinlock_priority_mutex_benchmark_pipeline_benchmark_audio.cpp
+        pipeline_benchmark.hpp
+        utils/waiting_utils.hpp
+        utils/thread_utils.hpp)
+target_compile_features(spinlock_priority_mutex_benchmark_pipeline_benchmark_audio_128 PUBLIC cxx_std_20)
+target_link_libraries(spinlock_priority_mutex_benchmark_pipeline_benchmark_audio_128 benchmark::benchmark fairness deterministic_concurrency)
+target_compile_definitions(spinlock_priority_mutex_benchmark_pipeline_benchmark_audio_128 PUBLIC BENCHMARK_THREADS=128)
+        
+add_executable(standard_mutex_benchmark_pipeline_benchmark_audio_128
+        standard_mutex_benchmark_pipeline_benchmark_audio.cpp
+        pipeline_benchmark.hpp
+        utils/waiting_utils.hpp
+        utils/thread_utils.hpp)
+target_compile_features(standard_mutex_benchmark_pipeline_benchmark_audio_128 PUBLIC cxx_std_20)
+target_link_libraries(standard_mutex_benchmark_pipeline_benchmark_audio_128 benchmark::benchmark fairness deterministic_concurrency)
+target_compile_definitions(standard_mutex_benchmark_pipeline_benchmark_audio_128 PUBLIC BENCHMARK_THREADS=128)
+
+
+
+add_executable(priority_mutex_benchmark_pipeline_benchmark_fast_8
+        priority_mutex_benchmark_pipeline_benchmark_fast.cpp
+        pipeline_benchmark.hpp
+        utils/waiting_utils.hpp
+        utils/thread_utils.hpp)
+target_compile_features(priority_mutex_benchmark_pipeline_benchmark_fast_8 PUBLIC cxx_std_20)
+target_link_libraries(priority_mutex_benchmark_pipeline_benchmark_fast_8 benchmark::benchmark fairness deterministic_concurrency)
+target_compile_definitions(priority_mutex_benchmark_pipeline_benchmark_fast_8 PUBLIC BENCHMARK_THREADS=8)
+        
+add_executable(spinlock_priority_mutex_benchmark_pipeline_benchmark_fast_8
+        spinlock_priority_mutex_benchmark_pipeline_benchmark_fast.cpp
+        pipeline_benchmark.hpp
+        utils/waiting_utils.hpp
+        utils/thread_utils.hpp)
+target_compile_features(spinlock_priority_mutex_benchmark_pipeline_benchmark_fast_8 PUBLIC cxx_std_20)
+target_link_libraries(spinlock_priority_mutex_benchmark_pipeline_benchmark_fast_8 benchmark::benchmark fairness deterministic_concurrency)
+target_compile_definitions(spinlock_priority_mutex_benchmark_pipeline_benchmark_fast_8 PUBLIC BENCHMARK_THREADS=8)
+        
+add_executable(standard_mutex_benchmark_pipeline_benchmark_fast_8
+        standard_mutex_benchmark_pipeline_benchmark_fast.cpp
+        pipeline_benchmark.hpp
+        utils/waiting_utils.hpp
+        utils/thread_utils.hpp)
+target_compile_features(standard_mutex_benchmark_pipeline_benchmark_fast_8 PUBLIC cxx_std_20)
+target_link_libraries(standard_mutex_benchmark_pipeline_benchmark_fast_8 benchmark::benchmark fairness deterministic_concurrency)
+target_compile_definitions(standard_mutex_benchmark_pipeline_benchmark_fast_8 PUBLIC BENCHMARK_THREADS=8)
+
+add_executable(priority_mutex_benchmark_pipeline_benchmark_fast_16
+        priority_mutex_benchmark_pipeline_benchmark_fast.cpp
+        pipeline_benchmark.hpp
+        utils/waiting_utils.hpp
+        utils/thread_utils.hpp)
+target_compile_features(priority_mutex_benchmark_pipeline_benchmark_fast_16 PUBLIC cxx_std_20)
+target_link_libraries(priority_mutex_benchmark_pipeline_benchmark_fast_16 benchmark::benchmark fairness deterministic_concurrency)
+target_compile_definitions(priority_mutex_benchmark_pipeline_benchmark_fast_16 PUBLIC BENCHMARK_THREADS=16)
+        
+add_executable(spinlock_priority_mutex_benchmark_pipeline_benchmark_fast_16
+        spinlock_priority_mutex_benchmark_pipeline_benchmark_fast.cpp
+        pipeline_benchmark.hpp
+        utils/waiting_utils.hpp
+        utils/thread_utils.hpp)
+target_compile_features(spinlock_priority_mutex_benchmark_pipeline_benchmark_fast_16 PUBLIC cxx_std_20)
+target_link_libraries(spinlock_priority_mutex_benchmark_pipeline_benchmark_fast_16 benchmark::benchmark fairness deterministic_concurrency)
+target_compile_definitions(spinlock_priority_mutex_benchmark_pipeline_benchmark_fast_16 PUBLIC BENCHMARK_THREADS=16)
+        
+add_executable(standard_mutex_benchmark_pipeline_benchmark_fast_16
+        standard_mutex_benchmark_pipeline_benchmark_fast.cpp
+        pipeline_benchmark.hpp
+        utils/waiting_utils.hpp
+        utils/thread_utils.hpp)
+target_compile_features(standard_mutex_benchmark_pipeline_benchmark_fast_16 PUBLIC cxx_std_20)
+target_link_libraries(standard_mutex_benchmark_pipeline_benchmark_fast_16 benchmark::benchmark fairness deterministic_concurrency)
+target_compile_definitions(standard_mutex_benchmark_pipeline_benchmark_fast_16 PUBLIC BENCHMARK_THREADS=16)
+
+add_executable(priority_mutex_benchmark_pipeline_benchmark_fast_32
+        priority_mutex_benchmark_pipeline_benchmark_fast.cpp
+        pipeline_benchmark.hpp
+        utils/waiting_utils.hpp
+        utils/thread_utils.hpp)
+target_compile_features(priority_mutex_benchmark_pipeline_benchmark_fast_32 PUBLIC cxx_std_20)
+target_link_libraries(priority_mutex_benchmark_pipeline_benchmark_fast_32 benchmark::benchmark fairness deterministic_concurrency)
+target_compile_definitions(priority_mutex_benchmark_pipeline_benchmark_fast_32 PUBLIC BENCHMARK_THREADS=32)
+        
+add_executable(spinlock_priority_mutex_benchmark_pipeline_benchmark_fast_32
+        spinlock_priority_mutex_benchmark_pipeline_benchmark_fast.cpp
+        pipeline_benchmark.hpp
+        utils/waiting_utils.hpp
+        utils/thread_utils.hpp)
+target_compile_features(spinlock_priority_mutex_benchmark_pipeline_benchmark_fast_32 PUBLIC cxx_std_20)
+target_link_libraries(spinlock_priority_mutex_benchmark_pipeline_benchmark_fast_32 benchmark::benchmark fairness deterministic_concurrency)
+target_compile_definitions(spinlock_priority_mutex_benchmark_pipeline_benchmark_fast_32 PUBLIC BENCHMARK_THREADS=32)
+        
+add_executable(standard_mutex_benchmark_pipeline_benchmark_fast_32
+        standard_mutex_benchmark_pipeline_benchmark_fast.cpp
+        pipeline_benchmark.hpp
+        utils/waiting_utils.hpp
+        utils/thread_utils.hpp)
+target_compile_features(standard_mutex_benchmark_pipeline_benchmark_fast_32 PUBLIC cxx_std_20)
+target_link_libraries(standard_mutex_benchmark_pipeline_benchmark_fast_32 benchmark::benchmark fairness deterministic_concurrency)
+target_compile_definitions(standard_mutex_benchmark_pipeline_benchmark_fast_32 PUBLIC BENCHMARK_THREADS=32)
+
+add_executable(priority_mutex_benchmark_pipeline_benchmark_fast_64
+        priority_mutex_benchmark_pipeline_benchmark_fast.cpp
+        pipeline_benchmark.hpp
+        utils/waiting_utils.hpp
+        utils/thread_utils.hpp)
+target_compile_features(priority_mutex_benchmark_pipeline_benchmark_fast_64 PUBLIC cxx_std_20)
+target_link_libraries(priority_mutex_benchmark_pipeline_benchmark_fast_64 benchmark::benchmark fairness deterministic_concurrency)
+target_compile_definitions(priority_mutex_benchmark_pipeline_benchmark_fast_64 PUBLIC BENCHMARK_THREADS=64)
+        
+add_executable(spinlock_priority_mutex_benchmark_pipeline_benchmark_fast_64
+        spinlock_priority_mutex_benchmark_pipeline_benchmark_fast.cpp
+        pipeline_benchmark.hpp
+        utils/waiting_utils.hpp
+        utils/thread_utils.hpp)
+target_compile_features(spinlock_priority_mutex_benchmark_pipeline_benchmark_fast_64 PUBLIC cxx_std_20)
+target_link_libraries(spinlock_priority_mutex_benchmark_pipeline_benchmark_fast_64 benchmark::benchmark fairness deterministic_concurrency)
+target_compile_definitions(spinlock_priority_mutex_benchmark_pipeline_benchmark_fast_64 PUBLIC BENCHMARK_THREADS=64)
+        
+add_executable(standard_mutex_benchmark_pipeline_benchmark_fast_64
+        standard_mutex_benchmark_pipeline_benchmark_fast.cpp
+        pipeline_benchmark.hpp
+        utils/waiting_utils.hpp
+        utils/thread_utils.hpp)
+target_compile_features(standard_mutex_benchmark_pipeline_benchmark_fast_64 PUBLIC cxx_std_20)
+target_link_libraries(standard_mutex_benchmark_pipeline_benchmark_fast_64 benchmark::benchmark fairness deterministic_concurrency)
+target_compile_definitions(standard_mutex_benchmark_pipeline_benchmark_fast_64 PUBLIC BENCHMARK_THREADS=64)
+
+add_executable(priority_mutex_benchmark_pipeline_benchmark_fast_128
+        priority_mutex_benchmark_pipeline_benchmark_fast.cpp
+        pipeline_benchmark.hpp
+        utils/waiting_utils.hpp
+        utils/thread_utils.hpp)
+target_compile_features(priority_mutex_benchmark_pipeline_benchmark_fast_128 PUBLIC cxx_std_20)
+target_link_libraries(priority_mutex_benchmark_pipeline_benchmark_fast_128 benchmark::benchmark fairness deterministic_concurrency)
+target_compile_definitions(priority_mutex_benchmark_pipeline_benchmark_fast_128 PUBLIC BENCHMARK_THREADS=128)
+        
+add_executable(spinlock_priority_mutex_benchmark_pipeline_benchmark_fast_128
+        spinlock_priority_mutex_benchmark_pipeline_benchmark_fast.cpp
+        pipeline_benchmark.hpp
+        utils/waiting_utils.hpp
+        utils/thread_utils.hpp)
+target_compile_features(spinlock_priority_mutex_benchmark_pipeline_benchmark_fast_128 PUBLIC cxx_std_20)
+target_link_libraries(spinlock_priority_mutex_benchmark_pipeline_benchmark_fast_128 benchmark::benchmark fairness deterministic_concurrency)
+target_compile_definitions(spinlock_priority_mutex_benchmark_pipeline_benchmark_fast_128 PUBLIC BENCHMARK_THREADS=128)
+        
+add_executable(standard_mutex_benchmark_pipeline_benchmark_fast_128
+        standard_mutex_benchmark_pipeline_benchmark_fast.cpp
+        pipeline_benchmark.hpp
+        utils/waiting_utils.hpp
+        utils/thread_utils.hpp)
+target_compile_features(standard_mutex_benchmark_pipeline_benchmark_fast_128 PUBLIC cxx_std_20)
+target_link_libraries(standard_mutex_benchmark_pipeline_benchmark_fast_128 benchmark::benchmark fairness deterministic_concurrency)
+target_compile_definitions(standard_mutex_benchmark_pipeline_benchmark_fast_128 PUBLIC BENCHMARK_THREADS=128)
+
