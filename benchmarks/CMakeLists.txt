@@ -8,29 +8,9 @@ add_executable(fairness_benchmark
         utils/thread_utils.hpp)
 
 if(LIB_FAIRNESS_COMPILE_BENCHMARKS_AS_SINGLE_FILE)
-add_executable(priority_mutex_benchmark
-        priority_mutex_benchmark.cpp
-        pipeline_benchmark.hpp
-        utils/waiting_utils.hpp
-        utils/thread_utils.hpp)
-target_compile_features(priority_mutex_benchmark PUBLIC cxx_std_20)
-target_link_libraries(priority_mutex_benchmark benchmark::benchmark fairness deterministic_concurrency)
-        
-add_executable(spinlock_priority_mutex_benchmark
-        spinlock_priority_mutex_benchmark.cpp
-        pipeline_benchmark.hpp
-        utils/waiting_utils.hpp
-        utils/thread_utils.hpp)
-target_compile_features(spinlock_priority_mutex_benchmark PUBLIC cxx_std_20)
-target_link_libraries(spinlock_priority_mutex_benchmark benchmark::benchmark fairness deterministic_concurrency)
-        
-add_executable(standard_mutex_benchmark
-        standard_mutex_benchmark.cpp
-        pipeline_benchmark.hpp
-        utils/waiting_utils.hpp
-        utils/thread_utils.hpp)
-target_compile_features(standard_mutex_benchmark PUBLIC cxx_std_20)
-target_link_libraries(standard_mutex_benchmark benchmark::benchmark fairness deterministic_concurrency)
+
+include("./CmakeGenerateReports.txt")
+
 endif()  
 
 target_compile_features(fairness_benchmark PUBLIC cxx_std_20)
@@ -41,4 +21,3 @@ endif()
 if(Boost_FOUND)
 target_link_libraries(fairness_benchmark LINK_PUBLIC ${Boost_LIBRARIES} )
 endif()
-

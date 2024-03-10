@@ -24,6 +24,6 @@
 #include <benchmark/benchmark.h>
 #include "pipeline_benchmark.hpp"
 
-BENCHMARK(standard_mutex_benchmark::lock_unlock_benchmark)->Threads(8);
+BENCHMARK(standard_mutex_benchmark::lock_unlock_benchmark)->Threads(BENCHMARK_THREADS);
 
 BENCHMARK_MAIN();
