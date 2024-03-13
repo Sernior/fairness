@@ -6,9 +6,9 @@ fi
 
  mkdir -p "reports"
 
-cmake . -B build -G Ninja -DLIB_FAIRNESS_COMPILE_TESTS=ON -DLIB_FAIRNESS_COMPILE_BENCHMARKS=ON -DLIB_FAIRNESS_COMPILE_BENCHMARKS_AS_SINGLE_FILE=ON >> reports/outputs.txt
+cmake . -B build -G Ninja -DLIB_FAIRNESS_COMPILE_TESTS=ON -DLIB_FAIRNESS_COMPILE_BENCHMARKS=ON -DLIB_FAIRNESS_COMPILE_BENCHMARKS_AS_SINGLE_FILE=ON | tee -a reports/outputs.txt
 
-cmake --build build >> reports/outputs.txt
+cmake --build build | tee -a reports/outputs.txt
 
 record_performance() {
 
@@ -52,8 +52,8 @@ record_performance() {
     sudo perf c2c record -o "reports/${threads}threads/standard_mutex_benchmark_pipeline_benchmark_fast_${threads}_c2c.data" ./build/benchmarks/standard_mutex_benchmark_pipeline_benchmark_fast_${threads}
 }
 
-record_performance 8 >> reports/outputs.txt
-record_performance 16 >> reports/outputs.txt
-record_performance 32 >> reports/outputs.txt
-record_performance 64 >> reports/outputs.txt
-record_performance 128 >> reports/outputs.txt
+record_performance 8 | tee -a reports/outputs.txt
+record_performance 16 | tee -a reports/outputs.txt
+record_performance 32 | tee -a reports/outputs.txt
+record_performance 64 | tee -a reports/outputs.txt
+record_performance 128 | tee -a reports/outputs.txt
