@@ -214,8 +214,6 @@ This is a list of macros that can be defined to configure boost::fairness:
 | BOOST_FAIRNESS_MAX_PQNODES                   | 4           | The number of requests each priority mutex has available (this is used only if BOOST_FAIRNESS_USE_TATAS is not defined).                                                                                 |
 | BOOST_FAIRNESS_MAX_THREADS                   | 4           | The total number of thread structs each thread has available (this is used only if BOOST_FAIRNESS_USE_TATAS is not defined).                                                                             |
 | BOOST_FAIRNESS_USE_EXPERIMENTAL_WAIT_NOTIFY  | not defined | Use a custom implementation to perform atomic::wait and atomic::notify instead of the standard ones.                                                                                                     |
-| BOOST_FAIRNESS_GETREQUEST_SPINS              | 1           | The total number of spins performed while performing a getRequest (this is used only if BOOST_FAIRNESS_USE_TATAS is not defined).                                                                        |
-| BOOST_FAIRNESS_GETREQUEST_SPINS_RELAXED      | 1           | The number of paused spins performed while performing a getRequest (this is used only if BOOST_FAIRNESS_USE_TATAS is not defined).                                                                       |
 
 ## Contributing
 
@@ -224,7 +222,7 @@ Contributions are also welcome! Feel free to open pull requests to the main repo
 
 ## License
 
-Distributed under the Boost Software License - Version 1.0. See [LICENSE](https://github.com/Sernior/fairness/blob/main/LICENSE) for more information.
+Distributed under the Boost Software License - Version 1.0. See [LICENSE.txt](https://github.com/Sernior/fairness/blob/main/LICENSE) for more information.
 
 ## Documentation
 The documentation is available at the following link: https://sernior.github.io/fairness/
